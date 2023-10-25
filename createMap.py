@@ -6,23 +6,23 @@ import requests
 import threading
 import random
 import os
-import argparse
-import brotli
-
-parser = argparse.ArgumentParser()
-parser.add_argument("account", help="输入account")
-parser.add_argument("Cookie", help="输入Cookie")      
-options = parser.parse_args()
-
-account = options.account
-Cookie = options.Cookie
+# import argparse
 
 
-# with open("config.json", "r") as file:
-#     data = json.load(file)
-# account = data["account"]
-# Cookie = data["Cookie"]
-# threadsNum = data["threadsNum"]
+# parser = argparse.ArgumentParser()
+# parser.add_argument("account", help="输入account")
+# parser.add_argument("Cookie", help="输入Cookie")      
+# options = parser.parse_args()
+
+# account = options.account
+# Cookie = options.Cookie
+
+
+with open("config.json", "r") as file:
+    data = json.load(file)
+account = data["account"]
+Cookie = data["Cookie"]
+threadsNum = data["threadsNum"]
 
 
 url = f"https://www.postcrossing.com/user/{account}/gallery"  # 替换为您要获取数据的链接

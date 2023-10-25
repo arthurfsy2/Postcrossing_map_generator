@@ -6,31 +6,31 @@ from datetime import datetime
 import json
 import time
 import os
-import argparse
+# import argparse
 
-parser = argparse.ArgumentParser()
-parser.add_argument("account", help="输入account")
-parser.add_argument("nickName", help="输入nickName")  
-parser.add_argument("Cookie", help="输入Cookie")     
-#parser.add_argument("isPrivate", help="输入isPrivate,Y/N")     
-options = parser.parse_args()
+# parser = argparse.ArgumentParser()
+# parser.add_argument("account", help="输入account")
+# parser.add_argument("nickName", help="输入nickName")  
+# parser.add_argument("Cookie", help="输入Cookie")     
+# #parser.add_argument("isPrivate", help="输入isPrivate,Y/N")     
+# options = parser.parse_args()
 
-account = options.account
-nickName = options.nickName
-Cookie = options.Cookie
-#isPrivate = options.isPrivate
-isPrivate = "Y"
-picDriverPath = './picture'
+# account = options.account
+# nickName = options.nickName
+# Cookie = options.Cookie
+# #isPrivate = options.isPrivate
+# isPrivate = "Y"
+# picDriverPath = './picture'
 
 start_time = time.time()
 
-# with open("config.json", "r") as file:
-#     data = json.load(file)
-# account = data["account"]
-# nicName = data["nicName"]
-# Cookie = data["Cookie"]
-# isPrivate = data["isPrivate"]
-# picDriverPath = data["picDriverPath"]
+with open("config.json", "r") as file:
+    data = json.load(file)
+account = data["account"]
+nickName = data["nickName"]
+Cookie = data["Cookie"]
+isPrivate = data["isPrivate"]
+picDriverPath = data["picDriverPath"]
 
 # 获取当前日期
 current_date = datetime.now().date()
