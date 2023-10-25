@@ -14,7 +14,7 @@ parser.add_argument("nickName", help="输入nickName")
 parser.add_argument("Cookie", help="输入Cookie")     
 parser.add_argument("isPrivate", help="输入isPrivate,Y/N")     
 options = parser.parse_args()
-print(parser)
+
 account = options.account
 nickName = options.nickName
 Cookie = options.Cookie
