@@ -98,9 +98,9 @@ def getUpdateID(account,type,Cookie):
         }
     url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
     response = requests.get(url,headers=headers).text
-    with open(f"output/{type}_OnlineList.json", "w",encoding="utf-8") as file:
+    with open(f"./output/{type}_OnlineList.json", "w",encoding="utf-8") as file:
         file.write(response)
-    with open(f"output/{type}_OnlineList.json", "r",encoding="utf-8") as file:
+    with open(f"./output/{type}_OnlineList.json", "r",encoding="utf-8") as file:
         response = json.load(file)
     print("response:",response)
     onlineID = []
