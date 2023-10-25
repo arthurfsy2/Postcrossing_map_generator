@@ -6,13 +6,22 @@ import requests
 import threading
 import random
 import os
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("account", help="输入account")
+parser.add_argument("Cookie", help="输入Cookie")      
+options = parser.parse_args()
+
+account = options.account
+Cookie = options.Cookie
 
 
-with open("config.json", "r") as file:
-    data = json.load(file)
-account = data["account"]
-Cookie = data["Cookie"]
-threadsNum = data["threadsNum"]
+# with open("config.json", "r") as file:
+#     data = json.load(file)
+# account = data["account"]
+# Cookie = data["Cookie"]
+# threadsNum = data["threadsNum"]
 
 
 url = f"https://www.postcrossing.com/user/{account}/gallery"  # 替换为您要获取数据的链接
@@ -100,7 +109,10 @@ def getUpdateID(account,type,Cookie):
             # 如果id不在oldID中，则将其添加到newID中
             if id not in oldID:
                 newID.append(id)
-        print(f"{type}_updated:{newID}")
+        if len(newID) == 0:
+            print(f"{type}_无需更新更新")
+        else:
+            print(f"{type}_等待更新list({len(newID)}个):{newID}\n")
         return newID
     else:
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
@@ -123,22 +135,18 @@ def get_data(postcardID, data_json):
         print(f"{id}_userResults:{userResults}]")
         
         # 使用正则表达式提取链接link
-        link = re.search(r'<meta property="og:image" content="(.*?)" />', response.text).group(1)
-        print(f"link:{link}")   
+        link = re.search(r'<meta property="og:image" content="(.*?)" />', response.text).group(1)  
         if "logo" in link:
             link = "gallery/picture/noPic.png"  #替换图片为空时的logo
         else:
             picFileName = re.search(r"/([^/]+)$", link).group(1)
-            print(f"picFileName:{picFileName}")
-            link = f"picFileName/picture/{picFileName}"
+            #print(f"{id}_picFileName:{picFileName}")
+            link = f"gallery/picture/{picFileName}"
         
-        # 使用正则表达式提取发送者、接受者地址
-        #addrPattern = r'<a itemprop="addressCountry" title="(.*?)" href='
-        #addrResults = re.findall(addrPattern, response.text)
         # 使用正则表达式提取匹配结果
         addrPattern = r'<a itemprop="addressCountry" title="(.*?)" href="/country/(.*?)">(.*?)</a>'
         addrResults = re.findall(addrPattern, response.text)
-        print("addrResults:", addrResults)
+        #print("{id}_addrResults:", addrResults)
         # 检查是否有匹配结果
         sentAddrInfo = addrResults[0]
         receivedInfo = addrResults[1]
@@ -146,14 +154,14 @@ def get_data(postcardID, data_json):
         sentCountry = sentAddrInfo[2]
         receivedAddr = receivedInfo[0]
         receivedCountry = receivedInfo[2]
-        print(f"{id}_sentAddr:", sentAddr)
-        print(f"{id}_sentCountry:", sentCountry)
-        print(f"{id}_receivedAddr:", receivedAddr)
-        print(f"{id}_receivedCountry:", receivedCountry)
+        # print(f"{id}_sentAddr:", sentAddr)
+        # print(f"{id}_sentCountry:", sentCountry)
+        # print(f"{id}_receivedAddr:", receivedAddr)
+        # print(f"{id}_receivedCountry:", receivedCountry)
 
         userPattern = r'<a itemprop="url" href="/user/(.*?)"'
         userResults = re.findall(userPattern, response.text)
-        print(f"{id}_userResults:{userResults}")
+        #print(f"{id}_userResults:{userResults}")
         if len(userResults) == 1:
             user = "account closed"
         elif len(userResults) >= 2 and type == "sent":
@@ -161,9 +169,8 @@ def get_data(postcardID, data_json):
             
         elif len(userResults) >= 2 and type == "received":
             user = userResults[0]
-            
         #print(f"User:{user}")        
-        print(f"{type}_List:已提取{i+1}/{len(postcardID)}\n")
+        print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%\n")
         
 
         for match in matches:
@@ -191,11 +198,22 @@ def get_data(postcardID, data_json):
     
     #return data_all
 
-def multiTask(N, account,type,Cookie):
-    postcardID = getUpdateID(account,type,Cookie)   
+def multiTask(account,type,Cookie):
+    postcardID = getUpdateID(account,type,Cookie)  
+#     if len(postcardID) > 0:
+#         group_size = len(postcardID) // N
+#         print(f"将{type}的postcardID分为{N}个线程并行处理，每个线程处理个数：{group_size}\n") 
+
     if len(postcardID) > 0:
-        group_size = len(postcardID) // N
-        print(f"将{type}的postcardID分为{N}个线程并行处理，每个线程处理个数：{group_size}\n")
+        Num = round(len(postcardID)/20)
+        if Num < 1:
+            realNum = 1
+        elif Num >= 1 and Num <= 10:
+            realNum = Num
+        elif Num >10: # 最大并发数为10
+            realNum = 10
+        group_size = len(postcardID) // realNum
+        print(f"将{type}的postcardID分为{realNum}个线程并行处理，每个线程处理个数：{group_size}\n")
         postcard_groups = [postcardID[i:i+group_size] for i in range(0, len(postcardID), group_size)]
         # 创建线程列表
         threads = []
@@ -214,30 +232,34 @@ def multiTask(N, account,type,Cookie):
         with open(f"./output/{type}_List_update.json", "w") as file:
             json.dump(data_json, file, indent=2)
         print(f"{type}的update List已提取完成！\n")
+
+        # 读取update文件的数组内容
+        with open(f"./output/{type}_List_update.json", "r") as update_file:
+            update_data = json.load(update_file)
+
+        # 读取原有的JSON文件内容
+        file_path = f"./output/{type}_List.json"
+        if os.path.exists(file_path):
+            with open(file_path, "r") as existing_file:
+                existing_data = json.load(existing_file)
+
+        # 将update数据追加到existing数据后面
+                existing_data.extend(update_data)
+                
+        else:
+            existing_data = update_data
+        
+        # 写入合并后的内容到JSON文件
+        with open(f"./output/{type}_List.json", "w") as file:
+            json.dump(existing_data, file, indent=2)
+
+        removePath = f"./output/{type}_List_update.json"
+        if os.path.exists(removePath):  # 检查文件是否存在
+            os.remove(removePath)  
     else:
-        #当待更新列表为空时，填入空白字符串
-        with open(f"./output/{type}_List_update.json", "w") as file:
-            json.dump("", file, indent=2)
-        print(f"{type}的update List为空，无需更新！\n")
+        pass
 
-    # 读取update文件的数组内容
-    with open(f"./output/{type}_List_update.json", "r") as update_file:
-        update_data = json.load(update_file)
 
-    # 读取原有的JSON文件内容
-    file_path = f"./output/{type}_List.json"
-    if os.path.exists(file_path):
-        with open(file_path, "r") as existing_file:
-            existing_data = json.load(existing_file)
-
-    # 将update数据追加到existing数据后面
-            existing_data.extend(update_data)
-    else:
-        existing_data = update_data
-    
-    # 写入合并后的内容到JSON文件
-    with open(f"./output/{type}_List.json", "w") as file:
-        json.dump(existing_data, file, indent=2)
     
 
 def getHomeInfo(received):
@@ -264,10 +286,10 @@ def getHomeInfo(received):
 def createMap(sent, received):
     most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getHomeInfo(received)
 
-    print(f"most_common_homeCoord:\n", most_common_homeCoord)
-    print(f"most_common_homeAddr:\n", most_common_homeAddr)
-    print(f"homeCoords:\n", homeCoords)
-    print(f"homeAddrs:\n", homeAddrs)
+    # print(f"most_common_homeCoord:\n", most_common_homeCoord)
+    # print(f"most_common_homeAddr:\n", most_common_homeAddr)
+    # print(f"homeCoords:\n", homeCoords)
+    # print(f"homeAddrs:\n", homeAddrs)
     
     m = folium.Map(
         location=most_common_homeCoord,
@@ -371,10 +393,10 @@ def createMap(sent, received):
 def createClusterMap(sent, received):
     most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getHomeInfo(received)
 
-    print(f"most_common_homeCoord:\n", most_common_homeCoord)
-    print(f"most_common_homeAddr:\n", most_common_homeAddr)
-    print(f"homeCoords:\n", homeCoords)
-    print(f"homeAddrs:\n", homeAddrs)
+    # print(f"most_common_homeCoord:\n", most_common_homeCoord)
+    # print(f"most_common_homeAddr:\n", most_common_homeAddr)
+    # print(f"homeCoords:\n", homeCoords)
+    # print(f"homeAddrs:\n", homeAddrs)
 
     cluster = folium.Map(
         location=most_common_homeCoord,
@@ -513,7 +535,7 @@ stat,content_raw = getAccountStat(url,headers)
 if stat == 200:
     print(f"用户:{account}的数据可获取！\n")
     for type in types_map:
-        multiTask(threadsNum, account,type,Cookie) 
+        multiTask(account,type,Cookie) 
     with open(f"output/sent_List.json", "r") as file:
         sentData = json.load(file)
     with open(f"output/received_List.json", "r") as file:

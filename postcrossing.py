@@ -6,6 +6,17 @@ from datetime import datetime
 import json
 import time
 import os
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("account", help="输入account")
+parser.add_argument("nickName", help="输入nickName")  
+parser.add_argument("Cookie", help="输入Cookie")       
+options = parser.parse_args()
+
+account = options.account
+nickName = options.nickName
+Cookie = options.Cookie
 
 start_time = time.time()
 
