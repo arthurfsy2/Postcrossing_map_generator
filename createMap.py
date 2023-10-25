@@ -64,21 +64,11 @@ def getLocalID(type):
 
 
 #获取账号状态
-def getAccountStat(url,headers):
-    i = 1
-    url = url 
-    #print(f"{url}")
-    
+def getAccountStat():
     response = requests.get(url,headers=headers)
-    #response = requests.get(url)
     response_status = response.status_code
-    content_i = response.text.replace('"//', '"https://')
-    #filename = f"./output/{account}_{type}({i}).html"
-    """ with open(filename, "w", encoding="utf-8") as file:
-        content_i = response.text.replace('"//', '"https://')
-        file.write(content_i)
-        print(f"\n{type}({i})数据保存成功：{filename}")   """ 
-    return response_status,content_i
+    content = response.text.replace('"//', '"https://')
+    return response_status,content
 
 #读取所有sent、received的列表，获取每个postcardID的详细数据
 def getUpdateID(account,type,Cookie):
@@ -99,7 +89,7 @@ def getUpdateID(account,type,Cookie):
     url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
     response = requests.get(url,headers=headers).content
     #print("response.content:",response)
-    result_str = response.decode('utf-8')
+    result_str = response.decode('gbk')
     # 解析字符串为Python对象
     result = json.loads(result_str)
     # 获取每个子数组的第一个元素
@@ -534,7 +524,7 @@ def replaceJsRef(fileFullName):
 
 
 
-stat,content_raw = getAccountStat(url,headers)
+stat,content_raw = getAccountStat()
     #print(stat
 if stat == 200:
     print(f"用户:{account}的数据可获取！\n")
