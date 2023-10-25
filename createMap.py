@@ -7,6 +7,7 @@ import threading
 import random
 import os
 import argparse
+import brotli
 
 parser = argparse.ArgumentParser()
 parser.add_argument("account", help="输入account")
@@ -77,7 +78,7 @@ def getUpdateID(account,type,Cookie):
     'X-Requested-With': 'XMLHttpRequest',
     'Sec-Fetch-Site': 'same-origin',
     'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-    'Accept-Encoding': 'gzip, deflate, br',
+    'Accept-Encoding': 'gzip, deflate',
     'Sec-Fetch-Mode': 'cors',
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0.1 Mobile/15E148 Safari/604.1',
@@ -87,14 +88,8 @@ def getUpdateID(account,type,Cookie):
     'Sec-Fetch-Dest': 'empty'
         }
     url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
-    response = requests.get(url,headers=headers).content
-    #print("response.content:",response)
-    result_str = response.decode('gbk')
-    # 解析字符串为Python对象
-    result = json.loads(result_str)
-    # 获取每个子数组的第一个元素
-    onlineID = [item[0] for item in result]
-    print("onlineID:",onlineID)
+    response = requests.get(url,headers=headers).json()
+    onlineID = [item[0] for item in response]
     if getLocalID(type) is not None:
         oldID = getLocalID(type)       
         newID = []
