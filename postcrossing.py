@@ -11,12 +11,15 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("account", help="输入account")
 parser.add_argument("nickName", help="输入nickName")  
-parser.add_argument("Cookie", help="输入Cookie")       
+parser.add_argument("Cookie", help="输入Cookie")     
+parser.add_argument("isPrivate", help="输入isPrivate,Y/N")     
 options = parser.parse_args()
-
+print(parser)
 account = options.account
 nickName = options.nickName
 Cookie = options.Cookie
+isPrivate = options.isPrivate
+picDriverPath = './picture'
 
 start_time = time.time()
 
@@ -178,7 +181,7 @@ def galleryInfo(response_status, pageNum ,from_or_to, title):
             
             with open(filename_md, "w", encoding="utf-8") as file:
                 
-                content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nicName}\ntag:\n  - postcrossing\n---\n\n{picurl_all}'
+                content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\n---\n\n{picurl_all}'
                 file.write(content)
                 print(f"{type}_展示墙数据转换为md格式成功：{filename_md}\n")
             i += 1
