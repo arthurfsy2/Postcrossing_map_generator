@@ -20,13 +20,13 @@ Cookie = options.Cookie
 
 start_time = time.time()
 
-with open("config.json", "r") as file:
-    data = json.load(file)
-account = data["account"]
-nicName = data["nicName"]
-Cookie = data["Cookie"]
-isPrivate = data["isPrivate"]
-picDriverPath = data["picDriverPath"]
+# with open("config.json", "r") as file:
+#     data = json.load(file)
+# account = data["account"]
+# nicName = data["nicName"]
+# Cookie = data["Cookie"]
+# isPrivate = data["isPrivate"]
+# picDriverPath = data["picDriverPath"]
 
 # 获取当前日期
 current_date = datetime.now().date()
