@@ -35,7 +35,10 @@ jobs:
       - name: 获取展示墙数据
         run: |
           python postcrossing.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }}
-          python createMap.py ${{ secrets.ACCOUNT }} ${{ secrets.COOKIE }}
+      
+      - name: 生成地图
+        run: |
+          python createMap.py ${{ secrets.ACCOUNT }} ${{ secrets.COOKIE }}    
           
       - name: 检查文件更新
         id: check_changes
