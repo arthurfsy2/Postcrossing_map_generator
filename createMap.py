@@ -191,7 +191,7 @@ def get_data(postcardID, data_json):
             })
 
         # 将列表中的JSON对象写入文件
-        with open(f"./output/{type}_List_update.json", "w") as file:
+        with open(f"output/{type}_List_update.json", "w") as file:
             json.dump(data_json, file, indent=2)
 
         pass
@@ -229,12 +229,12 @@ def multiTask(account,type,Cookie):
             thread.join()
 
         # 将列表中的JSON对象写入文件
-        with open(f"./output/{type}_List_update.json", "w") as file:
+        with open(f"output/{type}_List_update.json", "w") as file:
             json.dump(data_json, file, indent=2)
         print(f"{type}的update List已提取完成！\n")
 
         # 读取update文件的数组内容
-        with open(f"./output/{type}_List_update.json", "r") as update_file:
+        with open(f"output/{type}_List_update.json", "r") as update_file:
             update_data = json.load(update_file)
 
         # 读取原有的JSON文件内容
@@ -250,7 +250,7 @@ def multiTask(account,type,Cookie):
             existing_data = update_data
         
         # 写入合并后的内容到JSON文件
-        with open(f"./output/{type}_List.json", "w") as file:
+        with open(f"output/{type}_List.json", "w") as file:
             json.dump(existing_data, file, indent=2)
 
         removePath = f"./output/{type}_List_update.json"
