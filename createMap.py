@@ -97,17 +97,14 @@ def getUpdateID(account,type,Cookie):
     'Sec-Fetch-Dest': 'empty'
         }
     url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
-    response = requests.get(url,headers=headers)
-    content = response.content.decode('utf-8')
-    #data = json.loads(content)
-    with open(f"output/{type}_OnlineList.json", "w",encoding="utf-8") as file:
-        file.write(content)
-    with open(f"output/{type}_OnlineList.json", "r",encoding="utf-8") as file:
-        response = json.load(file)
-    print("response:",response)
-    onlineID = []
-    for item in response:
-         onlineID.append(item[0])
+    response = requests.get(url,headers=headers).content
+    #print("response.content:",response)
+    result_str = response.decode('utf-8')
+    # 解析字符串为Python对象
+    result = json.loads(result_str)
+    # 获取每个子数组的第一个元素
+    onlineID = [item[0] for item in result]
+    print("onlineID:",onlineID)
     if getLocalID(type) is not None:
         oldID = getLocalID(type)       
         newID = []
@@ -117,7 +114,7 @@ def getUpdateID(account,type,Cookie):
             if id not in oldID:
                 newID.append(id)
         if len(newID) == 0:
-            print(f"{type}_无需更新更新")
+            print(f"{type}_无需更新")
         else:
             print(f"{type}_等待更新list({len(newID)}个):{newID}\n")
         return newID
