@@ -34,7 +34,7 @@ jobs:
 
       - name: 获取展示墙数据
         run: |
-          python postcrossing.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }}
+          python postcrossing.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }} ${{ secrets.ISPRIVATE }}
           python createMap.py ${{ secrets.ACCOUNT }} ${{ secrets.COOKIE }}
           
       - name: 检查文件更新
