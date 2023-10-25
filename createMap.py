@@ -97,9 +97,8 @@ def getUpdateID(account,type,Cookie):
     'Sec-Fetch-Dest': 'empty'
         }
     url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
-    response = requests.get(url,headers=headers).json()
-    response2 = requests.get(url,headers=headers).text
-    print("response2:",response2)
+    result = requests.get(url,headers=headers).content.decode('utf-8')
+    response = json.loads(result)
     onlineID = []
     for item in response:
          onlineID.append(item[0])
