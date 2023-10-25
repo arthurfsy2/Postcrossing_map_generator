@@ -134,7 +134,7 @@ def galleryInfo(response_status, pageNum ,from_or_to, title):
             all_url = f"{url}/{type}/{i}"
             print(f"正在获取/{account}/gallery/{type}/{i}的数据")
             response = requests.get(all_url,headers=headers)
-            filename_md = f"./gallery/{type}.md"
+            filename_md = f"gallery/{type}.md"
             # filename = f"./output/{type}({i}).html"
             # with open(filename, "w", encoding="utf-8") as file:
             #     content_i = response.text.replace('"//', '"https://')
@@ -154,7 +154,7 @@ def galleryInfo(response_status, pageNum ,from_or_to, title):
                     postcardID = figcaption.find("a").text
                     picFileName = re.search(r"/([^/]+)$", href).group(1)
                     #print(f"picFileName:{picFileName}")                   
-                    picDownloadPath = f"./gallery/picture/{picFileName}"  # 替换为你要保存的文件路径和文件名
+                    picDownloadPath = f"gallery/picture/{picFileName}"  # 替换为你要保存的文件路径和文件名
                     if os.path.exists(picDownloadPath):
                         #print(f"已存在{picDownloadPath}")
                         pass
