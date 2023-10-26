@@ -1,8 +1,12 @@
 **一个可以输入account、Cookies即可获取Postcrossing gallery数据、生成个性化地图的脚本。**
 
-demo：
+个人地图展示：
 [收发标记图](https://postcrossing.4a1801.life/ClusterMap.html)
 [聚类图](https://postcrossing.4a1801.life/Map.html)
+
+个人博客效果展示：
+[sent](https://blog.4a1801.life/Arthur/postcrossing/sent.html)
+[received](https://blog.4a1801.life/Arthur/postcrossing/received.html)
 
 # 前言
 
@@ -50,9 +54,11 @@ demo：
 
 # 三.备注
 
-获取Cookie的方法：
+## 获取Cookie的方法：
 
 1. 登陆你的postcrossing账号，并打开你个人的gallery/sent链接。
 2. 按下F12打开调试模式，再F5刷新网页，在“网络/network”下找到“sent”名称的项，点击“标头”，在“请求标头”中找到Cookie开头的内容（红框当中显示的内容）。鼠标选中，复制粘贴到config.json的Cookie对应位置。（开头是类似__的内容，不要漏了）
    ![img](img/20231026155703.png)
 3. 如果Cookies不正确，生成的favourites.md、popular.md文件是空白的。运行对应的文件也会弹出报错而中断。
+
+## 你也可以通过vercel来接入fork的项目，这样可以在本地生成，然后每次push到GitHub后，通过vercel生成新的地图html
