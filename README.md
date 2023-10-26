@@ -61,4 +61,15 @@
    ![img](img/20231026155703.png)
 3. 如果Cookies不正确，生成的favourites.md、popular.md文件是空白的。运行对应的文件也会弹出报错而中断。
 
-## 你也可以通过vercel来接入fork的项目，这样可以在本地生成，然后每次push到GitHub后，通过vercel生成新的地图html
+## vercel
+你也可以通过vercel来接入fork的项目，这样可以在本地生成，然后每次push到GitHub后，通过vercel生成新的地图html
+
+##国旗emoji表情
+2023/10/26新功能：在.md的文件中，新增了国家2位英文代码对应的emoji表情（在不同平台看到的效果可能不一样）
+注：大部分是通过简写代码标注，少部分国家和地区是通过十六进制HTML字符实体标注。如果发现某个国家的国旗emoji表情无法正常显示（如显示:xxx:，则说明这个国家没有简码/设置不正确）
+
+修改步骤：
+1）通过这个网址查询到对应的国家或地区：https://emojidaquan.com/category2-country-flags
+2）找到对应的国家或地区，如香港：https://emojidaquan.com/emoji-flag-for-hong-kong
+3）查询简写代码、或十六进制HTML字符实体，填写到`contryName.json`文件中。（如果是十六进制HTML字符实体，则复制粘贴后需要去除中间的空格。如香港的是"&#x1f1ed\;&#x1f1f0\;"
+4）修改保存后，获取新的Cookie填入config.json，然后重新执行py postcrossing.py

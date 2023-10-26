@@ -113,6 +113,14 @@ def getPostCardPic(type,response_status, counts):
     print(f"{account}'{type}展示墙数量:{Num}\n{account}'{type}展示墙页数:{pageNum}\n")
     galleryInfo(response_status, pageNum ,from_or_to, title)
 
+def getCountryName(flag):
+    # 读取contryName.json文件
+    with open('contryName.json') as file:
+        data = json.load(file)
+    # 获取flag对应的值
+    value = data.get(flag)
+    return value
+
 def galleryInfo(response_status, pageNum ,from_or_to, title):
     i = 1
     picurl_all = ""
@@ -139,6 +147,7 @@ def galleryInfo(response_status, pageNum ,from_or_to, title):
                     href = figure.find("a")["href"]
                     #print(f"href:{href}")
                     postcardID = figcaption.find("a").text
+                    
                     picFileName = re.search(r"/([^/]+)$", href).group(1)
                     #print(f"picFileName:{picFileName}")                   
                     picDownloadPath = f"gallery/picture/{picFileName}"  # 替换为你要保存的文件路径和文件名
@@ -162,7 +171,9 @@ def galleryInfo(response_status, pageNum ,from_or_to, title):
                         userInfo = f"[{user}]({baseUrl}user/{user})"
                         if not user:
                             userInfo = "***该用户已关闭***"
-                        picurl = f"## [{postcardID}]({baseUrl}postcards/{postcardID}) \n >{from_or_to} {userInfo}\n\n![]({picDriverPath}/{picFileName})\n\n"
+                        flag = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
+                        contryName = getCountryName(flag)
+                        picurl = f"## [{postcardID}]({baseUrl}postcards/{postcardID}) \n >{from_or_to} {userInfo} {contryName}\n\n![]({picDriverPath}/{picFileName})\n\n"
                     picurl_page += picurl                
             picurl_all += picurl_page
             
