@@ -1,0 +1,7 @@
+{
+    "account": "youraccount",
+    "nickName": "yournicname",
+    "Cookie": "__stripe_mid=XXX; PostcrossingRemember=xxxx",
+    "isPrivate": "Y",
+    "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium"
+}

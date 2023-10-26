@@ -6,6 +6,7 @@ import requests
 import threading
 import random
 import os
+from datetime import datetime, timedelta
 # import argparse
 
 
@@ -107,6 +108,22 @@ def getUpdateID(account,type,Cookie):
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
         return onlineID
     
+def convert_to_utc(zoneNum,type,time_str):
+    # 使用正则表达式提取时间部分
+    pattern = rf"{type} on (\d{{4}}-\d{{2}}-\d{{2}} \d{{2}}:\d{{2}})"
+    #print("pattern:",pattern)
+    match = re.search(pattern, time_str)
+    if match:
+        time_str = match.group(1)
+    else:
+        return "No match found"
+    # 转换为datetime对象
+    time_utc = datetime.strptime(time_str, "%Y-%m-%d %H:%M")
+    # 转换为UTC-8时间
+    time_utc = time_utc + timedelta(hours=zoneNum)
+    # 格式化为字符串
+    time_utc_str = time_utc.strftime(f"%Y/%m/%d")
+    return time_utc_str
 
 data_json = []  # 存储最终的data_json
 def get_data(postcardID, data_json):
@@ -115,15 +132,20 @@ def get_data(postcardID, data_json):
         response = requests.get(url)       
         pattern = r"var senderLocation\s+=\s+new L.LatLng\(([-\d.]+), ([-\d.]+)\);\s+var receiverLocation\s+=\s+new L.LatLng\(([-\d.]+), ([-\d.]+)\);"
         matches = re.findall(pattern, response.text)  #提取发送、接收的经纬度坐标
+
+        # 提取距离、发送/到达时间、历经天数
         distance = int(re.search(r'traveled (.*?) km', response.text).group(1).replace(',', ''))
-        travel_time = int(re.search(r'in (.*?) days', response.text).group(1))
-        
-        # 使用正则表达式提取发送者/接受者user
+        travel_days = int(re.search(r'in (.*?) days', response.text).group(1))
+        sentDate = convert_to_utc(8,"Sent",response.text)
+        receivedDate = convert_to_utc(8,"Received",response.text)
+        travel_time = f"{travel_days} days [{sentDate}--{receivedDate}]"
+        print(f"{id}_travel_time:{travel_time}")
+        # 提取发送者/接受者user
         userPattern = r'<a itemprop="url" href="/user/(.*?)"'
         userResults = re.findall(userPattern, response.text)
         print(f"{id}_userResults:{userResults}]")
         
-        # 使用正则表达式提取链接link
+        # 提取链接link
         link = re.search(r'<meta property="og:image" content="(.*?)" />', response.text).group(1)  
         if "logo" in link:
             link = "gallery/picture/noPic.png"  #替换图片为空时的logo
@@ -132,11 +154,11 @@ def get_data(postcardID, data_json):
             #print(f"{id}_picFileName:{picFileName}")
             link = f"gallery/picture/{picFileName}"
         
-        # 使用正则表达式提取匹配结果
+        # 提取地址信息
         addrPattern = r'<a itemprop="addressCountry" title="(.*?)" href="/country/(.*?)">(.*?)</a>'
         addrResults = re.findall(addrPattern, response.text)
         #print("{id}_addrResults:", addrResults)
-        # 检查是否有匹配结果
+
         sentAddrInfo = addrResults[0]
         receivedInfo = addrResults[1]
         sentAddr = sentAddrInfo[0]
@@ -148,6 +170,7 @@ def get_data(postcardID, data_json):
         # print(f"{id}_receivedAddr:", receivedAddr)
         # print(f"{id}_receivedCountry:", receivedCountry)
 
+        # 提取发送/接收user
         userPattern = r'<a itemprop="url" href="/user/(.*?)"'
         userResults = re.findall(userPattern, response.text)
         #print(f"{id}_userResults:{userResults}")
@@ -325,7 +348,7 @@ def createMap(sent, received):
         folium.Marker(
             location=[to_coord[0] + generate_random_offset(), to_coord[1] + generate_random_offset()],
             icon=folium.Icon(color='red', icon='stop'),
-            popup=f'To {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} days{linkInfo}'
+            popup=f'To {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} {linkInfo}'
         ).add_to(m)
 
         # 添加航线
@@ -361,7 +384,7 @@ def createMap(sent, received):
         folium.Marker(
             location=[from_coord[0] + generate_random_offset(), from_coord[1] + generate_random_offset()],
             icon=folium.Icon(color='green', icon='play'),
-            popup=f'From {userInfo} <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} days{linkInfo}'
+            popup=f'From {userInfo} <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} {linkInfo}'
         ).add_to(m)
 
         # 添加航线
@@ -437,7 +460,7 @@ def createClusterMap(sent, received):
         folium.Marker(
             location=to_coord,
             icon=folium.Icon(color='red', icon='stop'),
-            popup=f'To {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} days{linkInfo}'
+            popup=f'To {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} {linkInfo}'
         ).add_to(marker_cluster)
         
         
@@ -467,7 +490,7 @@ def createClusterMap(sent, received):
         folium.Marker(
             location=from_coord,
             icon=folium.Icon(color='green', icon='play'),
-            popup=f'From {userInfo} <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} days{linkInfo}'
+            popup=f'From {userInfo} <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} {linkInfo}'
         ).add_to(marker_cluster)
 
         

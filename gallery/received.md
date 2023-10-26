@@ -1,12 +1,27 @@
 ---
-title: 明信片展示墙（收到：48）
+title: 明信片展示墙（收到：52）
 icon: address-card
-date: 2023-10-25
+date: 2023-10-26
 category:
   - Arthur
 tag:
   - postcrossing
 ---
+
+## [FR-1651137](https://www.postcrossing.com/postcards/FR-1651137) 
+ >来自 [yabiz](https://www.postcrossing.com/user/yabiz)
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/iyf9a5cc4yv2dr4acdjyyv4p42olxa37.jpg)
+
+## [US-9761474](https://www.postcrossing.com/postcards/US-9761474) 
+ >来自 [KarlaKM](https://www.postcrossing.com/user/KarlaKM)
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/t9l7z7dtp197o01wzb9r640n7nohvwn3.jpg)
+
+## [US-9761471](https://www.postcrossing.com/postcards/US-9761471) 
+ >来自 [ilysejohnson](https://www.postcrossing.com/user/ilysejohnson)
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/fe4nng7tl273fn4tq36wtar0ykk1n89r.jpg)
 
 ## [AT-696805](https://www.postcrossing.com/postcards/AT-696805) 
  >来自 [Bruno1405](https://www.postcrossing.com/user/Bruno1405)
@@ -237,6 +252,11 @@ tag:
  >来自 [YunHung](https://www.postcrossing.com/user/YunHung)
 
 ![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/sg7kqtzxlhr5m9vrglqx2nm0i9vgtzs5.jpg)
+
+## [CZ-322514](https://www.postcrossing.com/postcards/CZ-322514) 
+ >来自 [TerezkaS](https://www.postcrossing.com/user/TerezkaS)
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/ybl39ka8m4j3eyrbyhxga685zhad5v3c.jpg)
 
 ## [DE-2337903](https://www.postcrossing.com/postcards/DE-2337903) 
  >来自 [Amarosi](https://www.postcrossing.com/user/Amarosi)

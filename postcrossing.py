@@ -6,21 +6,8 @@ from datetime import datetime
 import json
 import time
 import os
-# import argparse
+import sys
 
-# parser = argparse.ArgumentParser()
-# parser.add_argument("account", help="输入account")
-# parser.add_argument("nickName", help="输入nickName")  
-# parser.add_argument("Cookie", help="输入Cookie")     
-# #parser.add_argument("isPrivate", help="输入isPrivate,Y/N")     
-# options = parser.parse_args()
-
-# account = options.account
-# nickName = options.nickName
-# Cookie = options.Cookie
-# #isPrivate = options.isPrivate
-# isPrivate = "Y"
-# picDriverPath = './picture'
 
 start_time = time.time()
 
@@ -199,6 +186,7 @@ if stat == 200:
         
 else:
     print(f"用户:{account}已注销/设置为非公开，无法获取！\n")
+    sys.exit()
 
 end_time = time.time()
 execution_time = round((end_time - start_time),3)
