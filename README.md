@@ -10,14 +10,15 @@
 # 前言
 
 本项目特点：
-1、可以下载gallery对应的图片，并生成包含fronttage的.md文件，以便你放入到vuepress当中使用
-2、可抓取对应账户的收、发明信片的信息，形成2个地图文件，内容是仿官方的map部分的谷歌地图，但是加入了自定义的内容
-3、抓取后的信息会保存到./output/sent_List.json和received_List.json当中，如果以后有更新，只会抓取更新部分，减少对Postcrossing的压力。
+
+1. 可以下载gallery对应的图片，并生成包含fronttage的.md文件，以便你放入到vuepress当中使用
+2. 可抓取对应账户的收、发明信片的信息，形成2个地图文件，内容是仿官方的map部分的谷歌地图，但是加入了自定义的内容
+3. 抓取后的信息会保存到./output/sent_List.json和received_List.json当中，如果以后有更新，只会抓取更新部分，减少对Postcrossing的压力。
 
 # 一.步骤
 
 1. clone本项目到本地
-2. 将config.jsonBAK这个文件修改为config.bak
+2. 将config.jsonBAK这个文件修改为config.json
 
 ```
 {
@@ -63,12 +64,14 @@
 
 你也可以通过vercel来接入fork的项目，这样可以在本地生成，然后每次push到GitHub后，通过vercel生成新的地图html
 
-##国旗emoji表情
+## changelog:
+
 2023/10/26新功能：在.md的文件中，新增了国家2位英文代码对应的emoji表情（在不同平台看到的效果可能不一样）
 注：大部分是通过简写代码标注，少部分国家和地区是通过十六进制HTML字符实体标注。如果发现某个国家的国旗emoji表情无法正常显示（如显示:xxx:，则说明这个国家没有简码/设置不正确）
 
 修改步骤：
-1）通过这个网址查询到对应的国家或地区：https://emojidaquan.com/category2-country-flags
-2）找到对应的国家或地区，如香港：https://emojidaquan.com/emoji-flag-for-hong-kong
-3）查询简写代码、或十六进制HTML字符实体，填写到 `contryName.json`文件中。（如果是十六进制HTML字符实体，则复制粘贴后需要去除中间的空格。如香港的是"&#x1f1ed\;&#x1f1f0\;"
-4）修改保存后，获取新的Cookie填入config.json，然后重新执行py postcrossing.py
+
+1. 通过这个网址查询到对应的国家或地区：https://emojidaquan.com/category2-country-flags
+2. 找到对应的国家或地区，如香港：https://emojidaquan.com/emoji-flag-for-hong-kong
+3. 查询简写代码、或十六进制HTML字符实体，填写到 `contryName.json`文件中。（如果是十六进制HTML字符实体，则复制粘贴后需要去除中间的空格。如香港的是"&#x1f1ed\;&#x1f1f0\;"
+4. 修改保存后，获取新的Cookie填入config.json，然后重新执行py postcrossing.py
