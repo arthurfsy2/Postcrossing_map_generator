@@ -46,7 +46,10 @@ def getUpdateID(account,type,Cookie):
         }
     url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
     response = requests.get(url,headers=headers).json()
+
     onlineID = [item[0] for item in response]
+    hasPicID = [item[0] for item in response if item[-1] == 1]
+    #print(f"hasPicID({len(hasPicID)}):{hasPicID}")
     if getLocalID(type) is not None:
         oldID = getLocalID(type)       
         newID = []
@@ -57,13 +60,14 @@ def getUpdateID(account,type,Cookie):
                 newID.append(id)
         if len(newID) == 0:
             print(f"{type}_List.json无需更新\n")
-            return None
+            updateID = None
         else:
             print(f"{type}_等待更新list({len(newID)}个):{newID}\n")
-            return newID
+            updateID = newID
     else:
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
-        return onlineID
+        updateID = onlineID
+    return updateID,hasPicID
 
 def convert_to_utc(zoneNum,type,time_str):
     # 使用正则表达式提取时间部分
@@ -100,7 +104,7 @@ def get_data(postcardID,type, data_json):
         userPattern = r'<a itemprop="url" href="/user/(.*?)"'
         userResults = re.findall(userPattern, response.text)
         #print(f"{id}_userResults:{userResults}]")
-        
+
         # 提取链接link
         link = re.search(r'<meta property="og:image" content="(.*?)" />', response.text).group(1)  
         if "logo" in link:
@@ -109,11 +113,12 @@ def get_data(postcardID,type, data_json):
             picFileName = re.search(r"/([^/]+)$", link).group(1)
             #print(f"{id}_picFileName:{picFileName}")
             link = f"gallery/picture/{picFileName}"
-        
+
+
         # 提取地址信息
         addrPattern = r'<a itemprop="addressCountry" title="(.*?)" href="/country/(.*?)">(.*?)</a>'
         addrResults = re.findall(addrPattern, response.text)
-        #print("{id}_addrResults:", addrResults)
+        #print(f"{id}_addrResults:", addrResults)
 
         sentAddrInfo = addrResults[0]
         receivedInfo = addrResults[1]
@@ -138,7 +143,7 @@ def get_data(postcardID,type, data_json):
         elif len(userResults) >= 2 and type == "received":
             user = userResults[0]
         #print(f"User:{user}")        
-        print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%")
+        
     
         for match in matches:
             # 将拼接后的坐标字符串转换为浮点数
@@ -161,9 +166,32 @@ def get_data(postcardID,type, data_json):
         with open(f"output/{type}_List_update.json", "w") as file:
             json.dump(data_json, file, indent=2)
 
+def downloadPic(postcardID):
+    for i, id in enumerate(postcardID): 
+        url=f"https://www.postcrossing.com/postcards/{id}"        
+        response = requests.get(url) 
+        # 提取链接link
+        link = re.search(r'<meta property="og:image" content="(.*?)" />', response.text).group(1)  
+        if "logo" in link:
+            pass
+        else:
+            picFileName = re.search(r"/([^/]+)$", link).group(1)
+            picDownloadPath = f"gallery/picture/{picFileName}"  # 替换为你要保存的文件路径和文件名
+            if os.path.exists(picDownloadPath):
+                #print(f"已存在{picDownloadPath}")
+                pass
+            else:
+                picDownloadUrl = f"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/{picFileName}"
+                #print(f"picDownloadUrl:{picDownloadUrl}")
+                response = requests.get(picDownloadUrl)
+                #print(f"正在下载{picFileName}")
+                with open(picDownloadPath, "wb") as file:
+                    file.write(response.content)
+        
+
 
 def multiTask(account,type,Cookie):
-    postcardID = getUpdateID(account,type,Cookie)  
+    postcardID,hasPicID = getUpdateID(account,type,Cookie)  
     if postcardID is not None:
         Num = round(len(postcardID)/20) 
         if Num < 1:
@@ -184,10 +212,11 @@ def multiTask(account,type,Cookie):
             thread = threading.Thread(target=get_data, args=(group, type, data_json))
             thread.start()
             threads.append(thread)
+            print(f"{type}_List:已提取{round((i+1)/(len(postcard_groups))*100,2)}%")
         # 等待所有线程完成
         for thread in threads:
             thread.join()
-
+            
         # 将列表中的JSON对象写入文件
         with open(f"output/{type}_List_update.json", "w") as file:
             json.dump(data_json, file, indent=2)
@@ -215,5 +244,23 @@ def multiTask(account,type,Cookie):
             os.remove(removePath)  
     else:
         pass
+    
+    if hasPicID is not None:
+        Num = round(len(hasPicID)/20) 
+        if Num < 1:
+            realNum = 1
+        elif Num >= 1 and Num <= 10:
+            realNum = Num
+        elif Num >10: # 最大并发数为10
+            realNum = 10
+        group_size = len(hasPicID) // realNum
+        print(f"将{type}的postcardID分为{realNum}个线程并行下载，每个线程下载图片个数：{group_size}\n")
+        picDownload_groups = [hasPicID[i:i+group_size] for i in range(0, len(hasPicID), group_size)]
+        # 创建线程列表
 
+        # 创建并启动线程
+        for i,group in enumerate(picDownload_groups):
+            thread = threading.Thread(target=downloadPic, args=(group,))
+            thread.start()
+            print(f"{type}图片下载进度：{round((i+1)/(len(picDownload_groups))*100,2)}%")
 

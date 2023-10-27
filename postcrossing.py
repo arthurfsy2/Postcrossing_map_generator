@@ -141,24 +141,31 @@ def getMDcontent(pageNum ,from_or_to):
                 href = figure.find("a")["href"]
                 #print(f"href:{href}")
                 postcardID = figcaption.find("a").text                   
-                picFileName = re.search(r"/([^/]+)$", href).group(1)
-                #print(f"picFileName:{picFileName}")                   
-                picDownloadPath = f"gallery/picture/{picFileName}"  # 替换为你要保存的文件路径和文件名
-                if os.path.exists(picDownloadPath):
-                    #print(f"已存在{picDownloadPath}")
-                    pass
-                else:
-                    picDownloadUrl = f"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/{picFileName}"
-                    #print(f"picDownloadurl:{picDownloadurl}")
-                    response = requests.get(picDownloadUrl)
-                    print(f"正在下载{picFileName}")
-                    with open(picDownloadPath, "wb") as file:
-                        file.write(response.content)
                 baseUrl = "https://www.postcrossing.com/"
+                picFileName = re.search(r"/([^/]+)$", href).group(1)
                 if type == "popular":
                     favoritesNum = figcaption.find("div").text
                     num = re.search(r'\d+', favoritesNum).group()
                     picurl = f"## [{postcardID}]({baseUrl}postcards/{postcardID})\n>点赞人数：{num}\n\n![]({href}) \n "
+                elif type == "favourites":                 
+                    picDownloadPath = f"gallery/picture/{picFileName}"  # 替换为你要保存的文件路径和文件名
+                    if os.path.exists(picDownloadPath):
+                        #print(f"已存在{picDownloadPath}")
+                        pass
+                    else:
+                        picDownloadUrl = f"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/{picFileName}"
+                        #print(f"picDownloadurl:{picDownloadurl}")
+                        response = requests.get(picDownloadUrl)
+                        print(f"正在下载{picFileName}")
+                        with open(picDownloadPath, "wb") as file:
+                            file.write(response.content)
+                    user = figcaption.find("div").find("a").text
+                    userInfo = f"[{user}]({baseUrl}user/{user})"
+                    if not user:
+                        userInfo = "***该用户已关闭***"
+                    flag = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
+                    contryName = getCountryName(flag)
+                    picurl = f"## [{postcardID}]({baseUrl}postcards/{postcardID}) \n >{from_or_to} {userInfo} {contryName}\n\n![]({picDriverPath}/{picFileName})\n\n"
                 else:
                     user = figcaption.find("div").find("a").text
                     userInfo = f"[{user}]({baseUrl}user/{user})"
@@ -181,3 +188,6 @@ print(f"postcrossing.py脚本执行时间：{execution_time}秒\n")
 
 command = "py createMap.py"
 subprocess.run(command, shell=True)
+
+# print("请按下任意键退出")
+# input()
