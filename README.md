@@ -5,8 +5,7 @@
 [聚类图](https://postcrossing.4a1801.life/Map.html)
 
 个人博客效果展示：
-[sent](https://blog.4a1801.life/Arthur/postcrossing/sent.html)
-[received](https://blog.4a1801.life/Arthur/postcrossing/received.html)
+[Postcrossing](https://blog.4a1801.life/Arthur/postcrossing)
 
 # 前言
 
@@ -17,22 +16,21 @@
 
 # 一.步骤
 
-1. clone本项目到本地，并在当前路径下运行终端
+1. clone本项目到本地
 2. 将config.jsonBAK这个文件修改为config.bak
 
 ```
 {
     "account": "",//输入你的个人账户,如链接：“https://www.postcrossing.com/user/arthurfsy/gallery”当中的“arthurfsy”
     "nickName": "",//输入你定义的昵称，用于生成.md文件的fronttage内容，生成后的.md文件可作为vuepress项目使用
-    "Cookie": "",//通过浏览器获取的Cookies，具体获取方式见最后的备注，且cookie的有效期可能只有几个小时
-    "isPrivate": "Y",//默认为Y，当Cookies正确且有效时，可以获取到gallery的favorite、popular图片以及对应账号的所有卡片详情。如果设置为N，则只能获取到gallery的sent/received图片（如果该账号隐私设置为“非公开”，则也无法获取到信息）
-    "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium"//默认情况下无需修改，该路径为Postcrossing图片的官方链接前缀。
+    "Cookie": "",//通过浏览器获取的Cookies，具体获取方式见最后的备注，且cookie的有效期可能只有几个小时。如果cookie错误/过期，则只能获取gallery/sent或received的内容
+    "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium"//默认为Postcrossing图片的官方链接前缀。也可以在运行`python postcrossing.py`后改为"./gallery/picture"，进行本地读取
 }
 ```
 
 执行 `pip install -r requirements.txt安装依赖`
 
-3. 运行以下代码获取gallery数据：
+3. 在当前路径下运行终端，运行以下代码获取gallery数据：
 
 `python postcrossing.py`
 
@@ -59,9 +57,10 @@
 1. 登陆你的postcrossing账号，并打开你个人的gallery/sent链接。
 2. 按下F12打开调试模式，再F5刷新网页，在“网络/network”下找到“sent”名称的项，点击“标头”，在“请求标头”中找到Cookie开头的内容（红框当中显示的内容）。鼠标选中，复制粘贴到config.json的Cookie对应位置。（开头是类似__的内容，不要漏了）
    ![img](img/20231026155703.png)
-3. 如果Cookies不正确，生成的favourites.md、popular.md文件是空白的。运行对应的文件也会弹出报错而中断。
+3. 如果cookie错误/过期，则只能获取gallery/sent或received的内容
 
 ## vercel
+
 你也可以通过vercel来接入fork的项目，这样可以在本地生成，然后每次push到GitHub后，通过vercel生成新的地图html
 
 ##国旗emoji表情
@@ -71,5 +70,5 @@
 修改步骤：
 1）通过这个网址查询到对应的国家或地区：https://emojidaquan.com/category2-country-flags
 2）找到对应的国家或地区，如香港：https://emojidaquan.com/emoji-flag-for-hong-kong
-3）查询简写代码、或十六进制HTML字符实体，填写到`contryName.json`文件中。（如果是十六进制HTML字符实体，则复制粘贴后需要去除中间的空格。如香港的是"&#x1f1ed\;&#x1f1f0\;"
+3）查询简写代码、或十六进制HTML字符实体，填写到 `contryName.json`文件中。（如果是十六进制HTML字符实体，则复制粘贴后需要去除中间的空格。如香港的是"&#x1f1ed\;&#x1f1f0\;"
 4）修改保存后，获取新的Cookie填入config.json，然后重新执行py postcrossing.py

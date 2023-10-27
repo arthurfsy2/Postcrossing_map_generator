@@ -1,278 +1,63 @@
 import folium
 from folium.plugins import MarkerCluster
 import json
-import re
+import time
 import requests
-import threading
 import random
 import os
-from datetime import datetime, timedelta
-# import argparse
+import multiDownload as dl
+import sys
 
-
-# parser = argparse.ArgumentParser()
-# parser.add_argument("account", help="输入account")
-# parser.add_argument("Cookie", help="输入Cookie")      
-# options = parser.parse_args()
-
-# account = options.account
-# Cookie = options.Cookie
-
+start_time = time.time()
 
 with open("config.json", "r") as file:
     data = json.load(file)
 account = data["account"]
 Cookie = data["Cookie"]
-threadsNum = data["threadsNum"]
 
 
-url = f"https://www.postcrossing.com/user/{account}/gallery"  # 替换为您要获取数据的链接
+userUrl = f"https://www.postcrossing.com/user/{account}"  
+galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
+dataUrl = f"{userUrl}/data/sent"  
 types_map = ['sent', 'received']  
-
 
 headers = {
     'authority': 'www.postcrossing.com',
     'Cookie': Cookie,
     
     }
-
-# sentID_Local=[]
-# with open(f"output/sent_List.json", "r") as file:
-#         sentData = json.load(file)
-# for item in sentData:
-#     sentID_Local.append(item["id"])
-# print(f"\nsentID_Local({len(sentID_Local)}):",sentID_Local)       
-
-# receiveID_Local=[]
-# with open(f"output/received_List.json", "r") as file:
-#         receivedData = json.load(file)
-# for item in receivedData:
-#     receiveID_Local.append(item["id"])
-# print(f"\nreceiveID_Local({len(receiveID_Local)}):",receiveID_Local)  
-
-def getLocalID(type):
-    ID_Local = []    
-    file_path = f"output/{type}_List.json"
-    if os.path.exists(file_path):
-        with open(file_path, "r") as file:
-            Data = json.load(file)
-        for item in Data:
-            ID_Local.append(item["id"])
-        oldID = ID_Local
-        return oldID
-    else:
-        return None
-   
-
+ 
 
 #获取账号状态
 def getAccountStat():
-    response = requests.get(url,headers=headers)
-    response_status = response.status_code
-    content = response.text.replace('"//', '"https://')
-    return response_status,content
+    galleryResponse = requests.get(galleryUrl,headers=headers)
+    galleryStatus = galleryResponse.status_code
+    galleryContent = galleryResponse.text.replace('"//', '"https://')
 
-#读取所有sent、received的列表，获取每个postcardID的详细数据
-def getUpdateID(account,type,Cookie):
-    headers = {
-    'Host': 'www.postcrossing.com',
-    'X-Requested-With': 'XMLHttpRequest',
-    'Sec-Fetch-Site': 'same-origin',
-    'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-    'Accept-Encoding': 'gzip, deflate',
-    'Sec-Fetch-Mode': 'cors',
-    'Accept': 'application/json, text/javascript, */*; q=0.01',
-    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0.1 Mobile/15E148 Safari/604.1',
-    'Connection': 'keep-alive',
-    'Referer': f'https://www.postcrossing.com/user/{account}/{type}',
-    'Cookie': Cookie,
-    'Sec-Fetch-Dest': 'empty'
-        }
-    url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
-    response = requests.get(url,headers=headers).json()
-    onlineID = [item[0] for item in response]
-    if getLocalID(type) is not None:
-        oldID = getLocalID(type)       
-        newID = []
-        # 遍历onlineID中的元素
-        for id in onlineID:
-            # 如果id不在oldID中，则将其添加到newID中
-            if id not in oldID:
-                newID.append(id)
-        if len(newID) == 0:
-            print(f"{type}_无需更新")
-        else:
-            print(f"{type}_等待更新list({len(newID)}个):{newID}\n")
-        return newID
+    dataResponse = requests.get(dataUrl,headers=headers)
+    dataContent = dataResponse.text
+    if "Log in to see this content" in dataContent:
+        cookieStat = 404
     else:
-        # 当本地文件不存在时，则取online的postcardId作为待下载列表
-        return onlineID
-    
-def convert_to_utc(zoneNum,type,time_str):
-    # 使用正则表达式提取时间部分
-    pattern = rf"{type} on (\d{{4}}-\d{{2}}-\d{{2}} \d{{2}}:\d{{2}})"
-    #print("pattern:",pattern)
-    match = re.search(pattern, time_str)
-    if match:
-        time_str = match.group(1)
-    else:
-        return "No match found"
-    # 转换为datetime对象
-    time_utc = datetime.strptime(time_str, "%Y-%m-%d %H:%M")
-    # 转换为UTC-8时间
-    time_utc = time_utc + timedelta(hours=zoneNum)
-    # 格式化为字符串
-    time_utc_str = time_utc.strftime(f"%Y/%m/%d")
-    return time_utc_str
+        cookieStat = 200
+    if galleryStatus == 200 and cookieStat == 200:
+        totalStat ="getPrivate"
+        types = ['sent', 'received', 'favourites', 'popular']
+        print(f"{account}的Cookies有效，可访问个人账号内容……\n")
+    elif galleryStatus == 200 and cookieStat == 404:
+        totalStat ="getPublic"
+        types = ['sent', 'received'] 
+        print(f"{account}的Cookies无效，只能访问gallery内容")
+    elif galleryStatus != 200:
+        totalStat ="unAccessible"
+        print(f"用户:{account}已注销/设置为非公开，无法获取！\n")
+        sys.exit()
 
-data_json = []  # 存储最终的data_json
-def get_data(postcardID, data_json):
-    for i, id in enumerate(postcardID):        
-        url=f"https://www.postcrossing.com/postcards/{id}"        
-        response = requests.get(url)       
-        pattern = r"var senderLocation\s+=\s+new L.LatLng\(([-\d.]+), ([-\d.]+)\);\s+var receiverLocation\s+=\s+new L.LatLng\(([-\d.]+), ([-\d.]+)\);"
-        matches = re.findall(pattern, response.text)  #提取发送、接收的经纬度坐标
-
-        # 提取距离、发送/到达时间、历经天数
-        distance = int(re.search(r'traveled (.*?) km', response.text).group(1).replace(',', ''))
-        travel_days = int(re.search(r'in (.*?) days', response.text).group(1))
-        sentDate = convert_to_utc(8,"Sent",response.text)
-        receivedDate = convert_to_utc(8,"Received",response.text)
-        travel_time = f"{travel_days} days [{sentDate}--{receivedDate}]"
-        print(f"{id}_travel_time:{travel_time}")
-        # 提取发送者/接受者user
-        userPattern = r'<a itemprop="url" href="/user/(.*?)"'
-        userResults = re.findall(userPattern, response.text)
-        print(f"{id}_userResults:{userResults}]")
-        
-        # 提取链接link
-        link = re.search(r'<meta property="og:image" content="(.*?)" />', response.text).group(1)  
-        if "logo" in link:
-            link = "gallery/picture/noPic.png"  #替换图片为空时的logo
-        else:
-            picFileName = re.search(r"/([^/]+)$", link).group(1)
-            #print(f"{id}_picFileName:{picFileName}")
-            link = f"gallery/picture/{picFileName}"
-        
-        # 提取地址信息
-        addrPattern = r'<a itemprop="addressCountry" title="(.*?)" href="/country/(.*?)">(.*?)</a>'
-        addrResults = re.findall(addrPattern, response.text)
-        #print("{id}_addrResults:", addrResults)
-
-        sentAddrInfo = addrResults[0]
-        receivedInfo = addrResults[1]
-        sentAddr = sentAddrInfo[0]
-        sentCountry = sentAddrInfo[2]
-        receivedAddr = receivedInfo[0]
-        receivedCountry = receivedInfo[2]
-        # print(f"{id}_sentAddr:", sentAddr)
-        # print(f"{id}_sentCountry:", sentCountry)
-        # print(f"{id}_receivedAddr:", receivedAddr)
-        # print(f"{id}_receivedCountry:", receivedCountry)
-
-        # 提取发送/接收user
-        userPattern = r'<a itemprop="url" href="/user/(.*?)"'
-        userResults = re.findall(userPattern, response.text)
-        #print(f"{id}_userResults:{userResults}")
-        if len(userResults) == 1:
-            user = "account closed"
-        elif len(userResults) >= 2 and type == "sent":
-            user = userResults[1]
-            
-        elif len(userResults) >= 2 and type == "received":
-            user = userResults[0]
-        #print(f"User:{user}")        
-        print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%\n")
-        
-
-        for match in matches:
-            # 将拼接后的坐标字符串转换为浮点数
-            from_coord = (float(match[0]), float(match[1]))
-            to_coord = (float(match[2]), float(match[3]))
-            # 将字典对象添加到列表中
-            data_json.append({
-                "id": id,
-                "From":from_coord,
-                "To":to_coord,
-                "distance": distance,
-                "travel_time": travel_time,
-                "link": link,
-                "user": user,
-                "sentAddr":f"{sentAddr}({sentCountry})",
-                "receivedAddr":f"{receivedAddr}({receivedCountry})",
-            })
-
-        # 将列表中的JSON对象写入文件
-        with open(f"output/{type}_List_update.json", "w") as file:
-            json.dump(data_json, file, indent=2)
-
-        pass
-    
-    #return data_all
-
-def multiTask(account,type,Cookie):
-    postcardID = getUpdateID(account,type,Cookie)  
-#     if len(postcardID) > 0:
-#         group_size = len(postcardID) // N
-#         print(f"将{type}的postcardID分为{N}个线程并行处理，每个线程处理个数：{group_size}\n") 
-
-    if len(postcardID) > 0:
-        Num = round(len(postcardID)/20)
-        if Num < 1:
-            realNum = 1
-        elif Num >= 1 and Num <= 10:
-            realNum = Num
-        elif Num >10: # 最大并发数为10
-            realNum = 10
-        group_size = len(postcardID) // realNum
-        print(f"将{type}的postcardID分为{realNum}个线程并行处理，每个线程处理个数：{group_size}\n")
-        postcard_groups = [postcardID[i:i+group_size] for i in range(0, len(postcardID), group_size)]
-        # 创建线程列表
-        threads = []
-        data_json = []  # 存储最终的data_json
-
-        # 创建并启动线程
-        for i,group in enumerate(postcard_groups):
-            thread = threading.Thread(target=get_data, args=(group, data_json))
-            thread.start()
-            threads.append(thread)
-        # 等待所有线程完成
-        for thread in threads:
-            thread.join()
-
-        # 将列表中的JSON对象写入文件
-        with open(f"output/{type}_List_update.json", "w") as file:
-            json.dump(data_json, file, indent=2)
-        print(f"{type}的update List已提取完成！\n")
-
-        # 读取update文件的数组内容
-        with open(f"output/{type}_List_update.json", "r") as update_file:
-            update_data = json.load(update_file)
-
-        # 读取原有的JSON文件内容
-        file_path = f"./output/{type}_List.json"
-        if os.path.exists(file_path):
-            with open(file_path, "r") as existing_file:
-                existing_data = json.load(existing_file)
-
-        # 将update数据追加到existing数据后面
-                existing_data.extend(update_data)
-                
-        else:
-            existing_data = update_data
-        
-        # 写入合并后的内容到JSON文件
-        with open(f"output/{type}_List.json", "w") as file:
-            json.dump(existing_data, file, indent=2)
-
-        removePath = f"./output/{type}_List_update.json"
-        if os.path.exists(removePath):  # 检查文件是否存在
-            os.remove(removePath)  
-    else:
-        pass
+    return totalStat,galleryContent,types
 
 
-    
+stat,content_raw,types = getAccountStat()
+   
 
 def getHomeInfo(received):
     addr_count = {}
@@ -432,7 +217,6 @@ def createClusterMap(sent, received):
 
 
     for coords in sent:
-        
         # 解析postcardID、from坐标、to坐标、distance、days、link、user
         postcardID = coords["id"]
         from_coord = coords["From"]
@@ -464,9 +248,7 @@ def createClusterMap(sent, received):
         ).add_to(marker_cluster)
         
         
-
     for coords in received:
-        
         # 解析postcardID、from坐标、to坐标、distance、days、link、user
         postcardID = coords["id"]
         from_coord = coords["From"]
@@ -540,20 +322,35 @@ def replaceJsRef(fileFullName):
     os.remove(fileFullName)
     os.rename(f"{fileFullName}.bak", fileFullName)
 
+for type in types_map:
+    print("————————————————————")
+    if os.path.exists(f"output/{type}_List.json"):         
+        print(f"已存在output/{type}_List.json") 
+        #dl.multiTask(account,type,Cookie) 
+        if stat != "getPrivate":          
+            print(f"{account}的Cookies无效，无法更新数据。")
+        else:
+            print(f"{account}的Cookies有效，正在比对数据……")    
+            dl.multiTask(account,type,Cookie) 
+        
+    else:
+        if stat != "getPrivate":          
+            print(f"{account}的Cookies无效，且缺少output/{type}_List.json，无法生成地图数据，已退出")
+            sys.exit()
+        else:
+            print(f"{account}的Cookies有效，准备生成output/{type}_List.json……") 
+            dl.multiTask(account,type,Cookie) 
+
+print("——————————正在生成地图——————————")
+with open(f"output/sent_List.json", "r") as file:
+    sentData = json.load(file)
+with open(f"output/received_List.json", "r") as file:
+    receivedData = json.load(file)
+createMap(sentData,receivedData)
+createClusterMap(sentData,receivedData)   
 
 
-stat,content_raw = getAccountStat()
-    #print(stat
-if stat == 200:
-    print(f"用户:{account}的数据可获取！\n")
-    for type in types_map:
-        multiTask(account,type,Cookie) 
-    with open(f"output/sent_List.json", "r") as file:
-        sentData = json.load(file)
-    with open(f"output/received_List.json", "r") as file:
-        receivedData = json.load(file)
-    createMap(sentData,receivedData)
-    createClusterMap(sentData,receivedData)      
-
-else:
-    print(f"用户:{account}已注销/设置为非公开，无法获取！\n")
+end_time = time.time()
+execution_time = round((end_time - start_time),3)
+print("————————————————————") 
+print(f"createMap.py脚本执行时间：{execution_time}秒")

@@ -7,6 +7,8 @@ import json
 import time
 import os
 import sys
+import subprocess
+
 
 
 start_time = time.time()
@@ -27,8 +29,6 @@ date = current_date.strftime("%Y-%m-%d")
 userUrl = f"https://www.postcrossing.com/user/{account}"  
 galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
 dataUrl = f"{userUrl}/data/sent"  
-
-
 
 headers = {
     'authority': 'www.postcrossing.com',
@@ -51,7 +51,7 @@ def getAccountStat():
     if galleryStatus == 200 and cookieStat == 200:
         totalStat ="getPrivate"
         types = ['sent', 'received', 'favourites', 'popular']
-        print(f"{account}的Cookies有效，可访问个人账号内容")
+        print(f"{account}的Cookies有效，可访问个人账号内容\n")
     elif galleryStatus == 200 and cookieStat == 404:
         totalStat ="getPublic"
         types = ['sent', 'received'] 
@@ -104,7 +104,7 @@ def createMD(type, counts):
             }
     value = data.get(type)
     from_or_to, pageNum, Num, title = value
-    print(f"{account}'{type}展示墙数量:{Num}\n{account}'{type}展示墙页数:{pageNum}\n")
+    #print(f"{account}'{type}展示墙数量:{Num}\n{account}'{type}展示墙页数:{pageNum}\n")
     MDcontent_all = getMDcontent(pageNum ,from_or_to)
     filename_md = f"gallery/{type}.md"
     with open(filename_md, "w", encoding="utf-8") as file:
@@ -148,9 +148,9 @@ def getMDcontent(pageNum ,from_or_to):
                     #print(f"已存在{picDownloadPath}")
                     pass
                 else:
-                    picDownloadurl = f"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/{picFileName}"
+                    picDownloadUrl = f"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/{picFileName}"
                     #print(f"picDownloadurl:{picDownloadurl}")
-                    response = requests.get(picDownloadurl)
+                    response = requests.get(picDownloadUrl)
                     print(f"正在下载{picFileName}")
                     with open(picDownloadPath, "wb") as file:
                         file.write(response.content)
@@ -172,17 +172,12 @@ def getMDcontent(pageNum ,from_or_to):
         i += 1
         return MDcontent_all
 
-
-
-# if stat == 200:
-#     print(f"用户:{account}的数据为公开，可获取！\n")
-#     for type in types:
-#         createMD(type, stat, counts) 
 for type in types:
     createMD(type, counts) 
-        
 
+end_time = time.time()
+execution_time = round((end_time - start_time),3)
+print(f"postcrossing.py脚本执行时间：{execution_time}秒\n")
 
-# end_time = time.time()
-# execution_time = round((end_time - start_time),3)
-# print(f"脚本执行时间：{execution_time}秒")
+command = "py createMap.py"
+subprocess.run(command, shell=True)
