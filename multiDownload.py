@@ -165,7 +165,7 @@ def get_data(postcardID,type, data_json):
         # 将列表中的JSON对象写入文件
         with open(f"output/{type}_List_update.json", "w") as file:
             json.dump(data_json, file, indent=2)
-
+        print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%")
 def downloadPic(postcardID):
     for i, id in enumerate(postcardID): 
         url=f"https://www.postcrossing.com/postcards/{id}"        
@@ -187,7 +187,7 @@ def downloadPic(postcardID):
                 #print(f"正在下载{picFileName}")
                 with open(picDownloadPath, "wb") as file:
                     file.write(response.content)
-        
+        print(f"图片下载进度：{round((i+1)/(len(postcardID))*100,2)}%")
 
 
 def multiTask(account,type,Cookie):
@@ -212,7 +212,7 @@ def multiTask(account,type,Cookie):
             thread = threading.Thread(target=get_data, args=(group, type, data_json))
             thread.start()
             threads.append(thread)
-            print(f"{type}_List:已提取{round((i+1)/(len(postcard_groups))*100,2)}%")
+            
         # 等待所有线程完成
         for thread in threads:
             thread.join()
@@ -262,5 +262,5 @@ def multiTask(account,type,Cookie):
         for i,group in enumerate(picDownload_groups):
             thread = threading.Thread(target=downloadPic, args=(group,))
             thread.start()
-            print(f"{type}图片下载进度：{round((i+1)/(len(picDownload_groups))*100,2)}%")
+            
 

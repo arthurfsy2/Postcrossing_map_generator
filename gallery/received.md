@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：52）
+title: 明信片展示墙（收到：55）
 icon: address-card
 date: 2023-10-28
 category:
@@ -7,6 +7,21 @@ category:
 tag:
   - postcrossing
 ---
+
+## [UA-1928471](https://www.postcrossing.com/postcards/UA-1928471) 
+ >来自 [Iwanka](https://www.postcrossing.com/user/Iwanka) :ukraine:
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/4i8m3wd4pcpmirk80czwz1elh8rfouoi.jpg)
+
+## [DE-13430232](https://www.postcrossing.com/postcards/DE-13430232) 
+ >来自 [vic_and_co](https://www.postcrossing.com/user/vic_and_co) :de:
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/r83g6pj7f3c3qv6s0cjsswrgru1u9w7x.jpg)
+
+## [CA-1386650](https://www.postcrossing.com/postcards/CA-1386650) 
+ >来自 [canadaposter](https://www.postcrossing.com/user/canadaposter) :canada:
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/l9a18bl5utrfblm89rdy57pnhioeiegp.jpg)
 
 ## [FR-1651137](https://www.postcrossing.com/postcards/FR-1651137) 
  >来自 [yabiz](https://www.postcrossing.com/user/yabiz) :fr:

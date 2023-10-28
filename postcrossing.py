@@ -189,5 +189,5 @@ print(f"postcrossing.py脚本执行时间：{execution_time}秒\n")
 command = "py createMap.py"
 subprocess.run(command, shell=True)
 
-# print("请按下任意键退出")
-# input()
+print("请按下任意键退出")
+input()
