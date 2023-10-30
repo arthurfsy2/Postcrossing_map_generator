@@ -210,7 +210,7 @@ def getUserStat():
     url=f'https://www.postcrossing.com/user/{account}/feed'    
     a_data = requests.get(url,headers=headers).json()
     with open(f"output/UserStats.json", "w") as file:
-        json.dump(data, file, indent=2)
+        json.dump(a_data, file, indent=2)
    
     # 统计每个国家代码的出现次数
     country_count = {}
@@ -231,7 +231,7 @@ def getUserStat():
         country_name = country_data.get(country_code, "")
         result = {
             "name": country_name,
-            "value": str(count)
+            "value": int(count)
         }
         output.append(result)
 
