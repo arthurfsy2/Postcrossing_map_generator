@@ -236,7 +236,10 @@ def getUserStat():
         output.append(result)
 
 
-    # 将结果输出到stats.json文件
+    # 将结果按照 value 值从大到小进行排序
+    output.sort(key=lambda x: x['value'], reverse=True)
+
+    # 将结果输出到 stats.json 文件
     with open('./output/stats.json', 'w') as f:
         json.dump(output, f, indent=2)
 

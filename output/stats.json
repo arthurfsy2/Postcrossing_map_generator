@@ -1,31 +1,23 @@
 [
   {
-    "name": "U.S.A.",
-    "value": 16
-  },
-  {
     "name": "Germany",
     "value": 23
-  },
-  {
-    "name": "Netherlands",
-    "value": 21
   },
   {
     "name": "Russia",
     "value": 22
   },
   {
-    "name": "Czechia",
-    "value": 5
-  },
-  {
-    "name": "Norway",
-    "value": 2
+    "name": "Netherlands",
+    "value": 21
   },
   {
     "name": "Taiwan",
     "value": 17
+  },
+  {
+    "name": "U.S.A.",
+    "value": 16
   },
   {
     "name": "Belarus",
@@ -40,20 +32,20 @@
     "value": 8
   },
   {
-    "name": "Austria",
-    "value": 3
-  },
-  {
-    "name": "New Zealand",
-    "value": 1
-  },
-  {
-    "name": "Malaysia",
-    "value": 3
+    "name": "Czechia",
+    "value": 5
   },
   {
     "name": "Japan",
     "value": 4
+  },
+  {
+    "name": "Austria",
+    "value": 3
+  },
+  {
+    "name": "Malaysia",
+    "value": 3
   },
   {
     "name": "Korea (South)",
@@ -64,8 +56,28 @@
     "value": 3
   },
   {
+    "name": "France",
+    "value": 3
+  },
+  {
+    "name": "Canada",
+    "value": 3
+  },
+  {
+    "name": "Norway",
+    "value": 2
+  },
+  {
     "name": "Sweden",
     "value": 2
+  },
+  {
+    "name": "Hong Kong",
+    "value": 2
+  },
+  {
+    "name": "New Zealand",
+    "value": 1
   },
   {
     "name": "Denmark",
@@ -82,18 +94,6 @@
   {
     "name": "North Macedonia",
     "value": 1
-  },
-  {
-    "name": "France",
-    "value": 3
-  },
-  {
-    "name": "Canada",
-    "value": 3
-  },
-  {
-    "name": "Hong Kong",
-    "value": 2
   },
   {
     "name": "Thailand",
