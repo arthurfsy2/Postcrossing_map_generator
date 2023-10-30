@@ -114,7 +114,7 @@ def createMD(type, counts):
 
 def getCountryName(flag):
     # 读取contryName.json文件
-    with open('contryName.json') as file:
+    with open('contryNameEmoji.json') as file:
         data = json.load(file)
     # 获取flag对应的值
     value = data.get(flag)

@@ -3,6 +3,9 @@ import re
 import requests
 import threading
 import os
+import json
+from pyecharts import options as opts
+from pyecharts.charts import Pie
 
 from datetime import datetime, timedelta
 
@@ -205,10 +208,40 @@ def getUserStat():
     'Sec-Fetch-Dest': 'empty'
         }
     url=f'https://www.postcrossing.com/user/{account}/feed'    
-    response = requests.get(url,headers=headers).json()
+    a_data = requests.get(url,headers=headers).json()
     with open(f"output/UserStats.json", "w") as file:
-        json.dump(response, file, indent=2)
+        json.dump(data, file, indent=2)
    
+    # 统计每个国家代码的出现次数
+    country_count = {}
+    for item in a_data:
+        country_code = item[-1]
+        if country_code in country_count:
+            country_count[country_code] += 1
+        else:
+            country_count[country_code] = 1
+
+    # 读取contryName.json文件
+    with open('contryName.json', 'r') as f:
+        country_data = json.load(f)
+
+    # 构建输出结果
+    output = []
+    for country_code, count in country_count.items():
+        country_name = country_data.get(country_code, "")
+        result = {
+            "name": country_name,
+            "value": str(count)
+        }
+        output.append(result)
+
+
+    # 将结果输出到stats.json文件
+    with open('./output/stats.json', 'w') as f:
+        json.dump(output, f, indent=2)
+
+
+    
 
 
 def multiTask(account,type,Cookie):
