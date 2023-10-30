@@ -189,6 +189,27 @@ def downloadPic(postcardID):
                     file.write(response.content)
         print(f"图片下载进度：{round((i+1)/(len(postcardID))*100,2)}%")
 
+def getUserStat():
+    headers = {
+    'Host': 'www.postcrossing.com',
+    'X-Requested-With': 'XMLHttpRequest',
+    'Sec-Fetch-Site': 'same-origin',
+    'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
+    'Accept-Encoding': 'gzip, deflate',
+    'Sec-Fetch-Mode': 'cors',
+    'Accept': 'application/json, text/javascript, */*; q=0.01',
+    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0.1 Mobile/15E148 Safari/604.1',
+    'Connection': 'keep-alive',
+    'Referer': f'https://www.postcrossing.com/user/{account}/stats',
+    'Cookie': Cookie,
+    'Sec-Fetch-Dest': 'empty'
+        }
+    url=f'https://www.postcrossing.com/user/{account}/feed'    
+    response = requests.get(url,headers=headers).json()
+    with open(f"output/UserStats.json", "w") as file:
+        json.dump(response, file, indent=2)
+   
+
 
 def multiTask(account,type,Cookie):
     postcardID,hasPicID = getUpdateID(account,type,Cookie)  
@@ -264,3 +285,4 @@ def multiTask(account,type,Cookie):
             thread.start()
             
 
+getUserStat()
