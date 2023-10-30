@@ -169,6 +169,7 @@ def get_data(postcardID,type, data_json):
         with open(f"output/{type}_List_update.json", "w") as file:
             json.dump(data_json, file, indent=2)
         print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%")
+
 def downloadPic(postcardID):
     for i, id in enumerate(postcardID): 
         url=f"https://www.postcrossing.com/postcards/{id}"        
@@ -236,6 +237,7 @@ def getUserStat():
         output.append(result)
 
 
+
     # 将结果按照 value 值从大到小进行排序
     output.sort(key=lambda x: x['value'], reverse=True)
 
@@ -243,7 +245,36 @@ def getUserStat():
     with open('./output/stats.json', 'w') as f:
         json.dump(output, f, indent=2)
 
+    # 创建一个字典用于存储汇总结果
+    summary = {}
 
+    # 遍历数据
+    for item in a_data:
+        # 将时间戳转换为YYYY-MM的格式
+        timestamp = item[0]
+        date = datetime.fromtimestamp(timestamp).strftime('%Y-%m')
+        
+        # 判断sent还是received
+        if item[2] == 's':
+            key = 'sent'
+        elif item[2] == 'r':
+            key = 'received'
+        else:
+            continue
+        
+        # 更新汇总结果
+        if date in summary:
+            summary[date][key] += 1
+        else:
+            summary[date] = {'sent': 0, 'received': 0}
+            summary[date][key] = 1
+
+    # 将汇总结果转换为新的数组
+    result = [{'date': date, 'num': summary[date]} for date in summary]
+
+    # 将结果输出到month.json文件中
+    with open(f"output/month.json", 'w') as f:
+        json.dump(result, f, indent=2)
     
 
 
