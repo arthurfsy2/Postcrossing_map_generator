@@ -275,6 +275,66 @@ def getUserStat():
     # 将结果输出到month.json文件中
     with open(f"output/month.json", 'w') as f:
         json.dump(result, f, indent=2)
+
+
+    # 创建一个空列表用于存储每个国家的统计结果
+    country_stats = []
+
+    # 遍历 a_data 中的每个元素
+    for item in a_data:
+        country_code = item[3]  # 获取国家代码
+        country_type = item[2]  # 获取类型（sent 或 received）
+
+        # 根据国家代码在 countryName.json 中查找对应的英文名
+        if country_code in country_data:
+            country_name = country_data[country_code]
+        else:
+            country_name = "Unknown"
+
+        # 更新国家的统计结果
+        found = False
+        for stats in country_stats:
+            if stats['name'] == country_name:
+                found = True
+                stats['value'] += 1
+                if country_type == 's':
+                    stats['sentNum'] += 1
+                    stats['sentAvg'] += item[1]
+                elif country_type == 'r':
+                    stats['receivedNum'] += 1
+                    stats['receivedAvg'] += item[1]
+                break
+
+        if not found:
+            if country_type == 's':
+                country_stats.append({
+                    'name': country_name,
+                    'value': 1,
+                    'sentNum': 1,
+                    'receivedNum': 0,
+                    'sentAvg': item[1],
+                    'receivedAvg': 0
+                })
+            elif country_type == 'r':
+                country_stats.append({
+                    'name': country_name,
+                    'value': 1,
+                    'sentNum': 0,
+                    'receivedNum': 1,
+                    'sentAvg': 0,
+                    'receivedAvg': item[1]
+                })
+
+    # 计算平均值并保留小数点后一位
+    for stats in country_stats:
+        if stats['sentNum'] > 0:
+            stats['sentAvg'] = round(stats['sentAvg'] / stats['sentNum'], 1)
+        if stats['receivedNum'] > 0:
+            stats['receivedAvg'] = round(stats['receivedAvg'] / stats['receivedNum'], 1)
+
+    # 将统计结果写入 b.json 文件
+    with open('./output/b.json', 'w') as file:
+        json.dump(country_stats, file,indent=2)
     
 
 

@@ -1,130 +1,258 @@
 [
   {
-    "name": "Germany",
-    "value": 23
+    "name": "U.S.A.",
+    "value": 16,
+    "sentNum": 10,
+    "receivedNum": 6,
+    "sentAvg": 29.7,
+    "receivedAvg": 30.7
   },
   {
-    "name": "Russia",
-    "value": 22
+    "name": "Germany",
+    "value": 23,
+    "sentNum": 9,
+    "receivedNum": 14,
+    "sentAvg": 43.3,
+    "receivedAvg": 36.3
   },
   {
     "name": "Netherlands",
-    "value": 21
+    "value": 21,
+    "sentNum": 9,
+    "receivedNum": 12,
+    "sentAvg": 31.8,
+    "receivedAvg": 43.5
   },
   {
-    "name": "Taiwan",
-    "value": 17
-  },
-  {
-    "name": "U.S.A.",
-    "value": 16
-  },
-  {
-    "name": "Belarus",
-    "value": 11
-  },
-  {
-    "name": "Ukraine",
-    "value": 11
-  },
-  {
-    "name": "Finland",
-    "value": 8
+    "name": "Russia",
+    "value": 22,
+    "sentNum": 12,
+    "receivedNum": 10,
+    "sentAvg": 43.1,
+    "receivedAvg": 96.3
   },
   {
     "name": "Czechia",
-    "value": 5
-  },
-  {
-    "name": "Japan",
-    "value": 4
-  },
-  {
-    "name": "Austria",
-    "value": 3
-  },
-  {
-    "name": "Malaysia",
-    "value": 3
-  },
-  {
-    "name": "Korea (South)",
-    "value": 3
-  },
-  {
-    "name": "United Kingdom",
-    "value": 3
-  },
-  {
-    "name": "France",
-    "value": 3
-  },
-  {
-    "name": "Canada",
-    "value": 3
+    "value": 5,
+    "sentNum": 1,
+    "receivedNum": 4,
+    "sentAvg": 39.0,
+    "receivedAvg": 41.0
   },
   {
     "name": "Norway",
-    "value": 2
+    "value": 2,
+    "sentNum": 0,
+    "receivedNum": 2,
+    "sentAvg": 0,
+    "receivedAvg": 40.5
   },
   {
-    "name": "Sweden",
-    "value": 2
+    "name": "Taiwan",
+    "value": 17,
+    "sentNum": 10,
+    "receivedNum": 7,
+    "sentAvg": 57.6,
+    "receivedAvg": 46.9
   },
   {
-    "name": "Hong Kong",
-    "value": 2
+    "name": "Belarus",
+    "value": 11,
+    "sentNum": 5,
+    "receivedNum": 6,
+    "sentAvg": 48.0,
+    "receivedAvg": 41.8
+  },
+  {
+    "name": "Ukraine",
+    "value": 11,
+    "sentNum": 5,
+    "receivedNum": 6,
+    "sentAvg": 39.8,
+    "receivedAvg": 49.3
+  },
+  {
+    "name": "Finland",
+    "value": 8,
+    "sentNum": 5,
+    "receivedNum": 3,
+    "sentAvg": 23.2,
+    "receivedAvg": 20.3
+  },
+  {
+    "name": "Austria",
+    "value": 3,
+    "sentNum": 1,
+    "receivedNum": 2,
+    "sentAvg": 19.0,
+    "receivedAvg": 23.0
   },
   {
     "name": "New Zealand",
-    "value": 1
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 19.0,
+    "receivedAvg": 0
+  },
+  {
+    "name": "Malaysia",
+    "value": 3,
+    "sentNum": 0,
+    "receivedNum": 3,
+    "sentAvg": 0,
+    "receivedAvg": 14.0
+  },
+  {
+    "name": "Japan",
+    "value": 4,
+    "sentNum": 3,
+    "receivedNum": 1,
+    "sentAvg": 22.7,
+    "receivedAvg": 12.0
+  },
+  {
+    "name": "Korea (South)",
+    "value": 3,
+    "sentNum": 1,
+    "receivedNum": 2,
+    "sentAvg": 48.0,
+    "receivedAvg": 27.5
+  },
+  {
+    "name": "United Kingdom",
+    "value": 3,
+    "sentNum": 2,
+    "receivedNum": 1,
+    "sentAvg": 34.0,
+    "receivedAvg": 18.0
+  },
+  {
+    "name": "Sweden",
+    "value": 2,
+    "sentNum": 2,
+    "receivedNum": 0,
+    "sentAvg": 24.5,
+    "receivedAvg": 0
   },
   {
     "name": "Denmark",
-    "value": 1
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 31.0,
+    "receivedAvg": 0
   },
   {
     "name": "Brazil",
-    "value": 1
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": 0,
+    "receivedAvg": 81.0
   },
   {
     "name": "Belgium",
-    "value": 1
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": 0,
+    "receivedAvg": 40.0
   },
   {
     "name": "North Macedonia",
-    "value": 1
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": 0,
+    "receivedAvg": 57.0
+  },
+  {
+    "name": "France",
+    "value": 3,
+    "sentNum": 1,
+    "receivedNum": 2,
+    "sentAvg": 30.0,
+    "receivedAvg": 21.0
+  },
+  {
+    "name": "Canada",
+    "value": 3,
+    "sentNum": 1,
+    "receivedNum": 2,
+    "sentAvg": 30.0,
+    "receivedAvg": 25.5
+  },
+  {
+    "name": "Hong Kong",
+    "value": 2,
+    "sentNum": 1,
+    "receivedNum": 1,
+    "sentAvg": 47.0,
+    "receivedAvg": 21.0
   },
   {
     "name": "Thailand",
-    "value": 1
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": 0,
+    "receivedAvg": 21.0
   },
   {
     "name": "Switzerland",
-    "value": 1
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 41.0,
+    "receivedAvg": 0
   },
   {
     "name": "Spain",
-    "value": 1
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 33.0,
+    "receivedAvg": 0
   },
   {
     "name": "Mexico",
-    "value": 1
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": 0,
+    "receivedAvg": 54.0
   },
   {
     "name": "Italy",
-    "value": 1
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 26.0,
+    "receivedAvg": 0
   },
   {
     "name": "Portugal",
-    "value": 1
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": 0,
+    "receivedAvg": 50.0
   },
   {
     "name": "Latvia",
-    "value": 1
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 59.0,
+    "receivedAvg": 0
   },
   {
     "name": "India",
-    "value": 1
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 36.0,
+    "receivedAvg": 0
   }
 ]
