@@ -1,0 +1,446 @@
+---
+title: 信息汇总
+icon: envelope-open-text
+date: 2023-10-08
+category:
+  - Arthur
+tag:
+  - Postcrossing
+order: 1
+---
+:::info 说明
+postcrossing是我在2013年就了解到的明信片交换的项目，当时玩了一段时间。现在尝试新家地址能否收到海外的明信片，目前看来如果对方是填家里的中文地址是可以正常收到的，暂无收到收件地址是英文的明信片。
+:::
+
+## 一.图片墙
+
+   以下展示的4个部分的内容，均是通过python抓包汇总形成的图片墙。
+
+//请替换明信片墙title
+
+## 二.地图展示
+
+### 个人收发Map
+
+网址：https://postcrossing.4a1801.life/Map.html
+
+<iframe 
+src="https://postcrossing.4a1801.life/Map.html" 
+frameborder=0
+height=500
+width=100%
+seamless=seamless
+scrolling=auto
+></iframe>
+
+### 个人收发ClusterMap
+
+网址：https://postcrossing.4a1801.life/ClusterMap.html
+
+<iframe 
+src="https://postcrossing.4a1801.life/ClusterMap.html" 
+frameborder=0
+height=500
+width=100%
+seamless=seamless
+scrolling=auto
+></iframe>
+
+### 个人收发Map、ClusterMap (Github Page)
+
+网址：https://arthurfsy2.github.io/Postcrossing_map_generator/Map.html
+网址：https://arthurfsy2.github.io/Postcrossing_map_generator/ClusterMap.html
+
+## 三.统计
+
+### 活动（月度）
+
+:::echarts
+
+```js
+const data = await fetch(
+  "https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/month.json"
+).then((res) => res.json());
+
+const data2 = await fetch(
+  "https://raw.gitmirror.com/arthurfsy2/yunmai_weight_extract2json/main/weight_wyf.json"
+).then((res) => res.json());
+
+var date = data.map(function (item) {
+    return item.date
+})
+
+var sent = data.map(function (item) {
+    return item.num.sent
+})
+
+var sentSum = sent.reduce(function(acc, curr) {
+  return acc + curr;
+}, 0);
+
+var received = data.map(function (item) {
+    return item.num.received
+})
+
+var receivedSum = received.reduce(function(acc, curr) {
+  return acc + curr;
+}, 0);
+
+sentName = sentSum + "张已寄出"
+receivedName = receivedSum + "张已收到"
+
+const option = {
+  title: {
+    text: '',
+     left: 'center',
+  },
+    legend: {
+    data: [sentName, receivedName]
+  },
+  tooltip: {
+    trigger: 'axis'
+  },
+  xAxis: {
+    type: 'category',
+    data: date
+  },
+  yAxis: {
+    type: 'value'
+  },
+  dataZoom: [
+  {
+    start: 0
+  },
+  {
+    type: "inside"
+  }
+],
+  series: [
+    {
+      name:sentName,
+      data: sent,
+      type: 'line',
+      smooth: true
+    },
+    {
+      name:receivedName,
+      data: received,
+      type: 'line',
+      smooth: true
+    }
+  ]
+}
+```
+
+:::
+
+### 国家分布
+
+::: echarts
+
+```js
+const data = await fetch(
+  "https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/stats.json"
+).then((res) => res.json());
+
+const option = {
+  title: {
+    text: "",
+    subtext: "",
+    left: "center"
+  },
+  tooltip: {
+    trigger: 'item',
+    formatter: '{a} <br/>{b} : {c} ({d}%)'
+  },
+  series: [
+    {
+      name: "",
+      clockwise: false,
+      type: "pie",
+      radius: "50%",
+      data: data,
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: "rgba(0, 0, 0, 0.5)"
+        }
+      },
+      label: {
+        alignTo: 'none',
+        formatter: '{name|{b}}\n{num|{d}%}',
+        minMargin: 1,
+        fontStyle:'italic',
+        fontWeight: 'bold',
+
+        rich: {
+          num: {
+            fontSize: 10,
+            color: '#999'
+          }
+        }
+      },
+      labelLine: {
+        length: 50,
+
+      }
+
+    }
+  ]
+}
+```
+
+:::
+
+### 各国明信片
+
+//请替换明信片表格
+
+
+## 四.明信片故事
+
+### [UA-1928471](https://www.postcrossing.com/postcards/UA-1928471)
+
+> 来自 [Iwanka](https://www.postcrossing.com/user/Iwanka) 🇺🇦
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/4i8m3wd4pcpmirk80czwz1elh8rfouoi.jpg)
+
+::: info 内容
+Hello Arthur, I’m 18 y.o Ivanka from Ukraine. I’m sending this postcard from the capital of neighbouring Poland which hosted many ukrainians who fled the war unleashed by Russia. My family is also scatted around Europe, and most of my dreams has been decimated. I study biotechnology but it was pretty much complicated to work at the lab under Russian missle attacks. Yours perhaps is the longest address I ever wrote at postcrossing. Cheers, Ivanka
+
+:::
+::: note 翻译
+你好，Arthur，我是来自乌克兰的18岁的伊万卡。我正在从邻国波兰的首都寄出这张明信片，那里曾经接纳了许多逃离俄罗斯引发的战争的乌克兰人。我的家人也散居在欧洲各地，我的许多梦想都被摧毁了。我正在学习生物技术，但在俄罗斯导弹袭击下，在实验室工作非常困难。也许这是我在明信片交换中写过的最长的地址了。祝福你，伊万卡
+:::
+
+:::
+
+### [DE-13430232](https://www.postcrossing.com/postcards/DE-13430232)
+
+> 来自 [vic_and_co](https://www.postcrossing.com/user/vic_and_co) 🇩🇪
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/r83g6pj7f3c3qv6s0cjsswrgru1u9w7x.jpg)
+
+::: info 内容
+Hello siyuan feng and greetings from autumn Germany!
+I like coffee too, esp Cappuccino.There's a German Brand -Dallmayr. They were the supplier of the royal family and till now have a beautiful store in Munich. Another famous Brand is Melitta. All the best and good tastes!
+Victoria 28.09.2023 +24℃
+
+:::
+::: note 翻译
+你好，siyuan fen，来自德国秋天的问候！
+我也喜欢咖啡，尤其是卡布奇诺。有一个德国品牌叫Dallmayr。他们曾经是皇室的供应商，现在在慕尼黑还有一家漂亮的店铺。另一个著名的品牌是Melitta。
+祝一切顺利，品味美好！
+Victoria
+:::
+:::
+
+### [CA-1386650](https://www.postcrossing.com/postcards/CA-1386650)
+
+> 来自 [canadaposter](https://www.postcrossing.com/user/canadaposter) 🇨🇦
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/l9a18bl5utrfblm89rdy57pnhioeiegp.jpg)
+
+::: info 内容
+Dearest Arthur,
+  Canada is now 156 years old, our flag is 58, like me.
+  I like to garden veggies, bake spelf bread, read, and cycle to work. Coffee and chocolate is my weakness. I work in the prison dental clinic.
+Wishing you much joy in your letterbox.
+  Linda
+
+:::
+::: note 翻译
+亲爱的Arthur，
+加拿大现在已经156岁了，我们的国旗也有58岁，就像我一样年轻。我喜欢种植蔬菜，烤制小麦面包，阅读和骑自行车上班。咖啡和巧克力是我的弱点。我在监狱的牙科诊所工作。
+祝愿你的信箱里充满了喜悦。
+Linda
+
+:::
+
+### [FR-1651137](https://www.postcrossing.com/postcards/FR-1651137)
+
+> 来自 [yabiz](https://www.postcrossing.com/user/yabiz) 🇫🇷
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/iyf9a5cc4yv2dr4acdjyyv4p42olxa37.jpg)
+
+::: info 内容
+Hi,
+Greetings from the north west of France. I hope you 'll like this card. Happy postcrossing.
+Aline
+
+:::
+::: note 翻译
+你好，
+来自法国西北部的问候。希望你会喜欢这张明信片。祝你在明信片交换中愉快。
+Aline
+:::
+
+### [US-9761474](https://www.postcrossing.com/postcards/US-9761474)
+
+> 来自 [KarlaKM](https://www.postcrossing.com/user/KarlaKM) 🇺🇸
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/t9l7z7dtp197o01wzb9r640n7nohvwn3.jpg)
+
+::: info 内容
+September 28,2023
+greetings from Socorro, New Mexico, USA.
+Many happy postcrossing lucks for you!
+ karla
+
+:::
+::: note 翻译
+2023年9月28日
+来自美国新墨西哥州索科罗的问候。
+祝你在明信片交换中好运连连！
+Karla
+:::
+
+### [US-9761471](https://www.postcrossing.com/postcards/US-9761471)
+
+> 来自 [ilysejohnson](https://www.postcrossing.com/user/ilysejohnson) 🇺🇸
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/fe4nng7tl273fn4tq36wtar0ykk1n89r.jpg)
+::: info 内容
+So nice to visit with you again. I hope 2023 has been good so far.
+
+My card shows 3 generations of weddingsin my family. Notice that all 3 brides are wearing the same gown. My mom in 1954, Me in 1985 and my daughter in November when she married the love of her life. It's once again set aside for the next bride, ifshe desires to follow suit
+
+Thanks for swapping and here's to a mailbox full of great cards!
+
+Arthur- I sent this Card earlier this year, and thought you might like it.
+your daughter is cute!
+Ilyse
+
+:::
+::: note 翻译
+非常高兴再次与您交流。希望2023年迄今为止一切顺利。
+
+我的明信片展示了我家族三代人的婚礼。请注意，三位新娘都穿着同一件礼服。我妈妈在1954年，我在1985年，而我的女儿在11月份与她生命中的爱人结婚时也穿着同样的礼服。这件礼服现在又被保留下来，以备下一位新娘使用，如果她愿意效仿。
+
+感谢您的交换，祝愿您的信箱里充满了精彩的明信片！
+
+Arthur，我今年早些时候寄给您了这张明信片，希望您会喜欢。您的女儿很可爱！
+
+Ilyse
+:::
+
+### [AT-696805](https://www.postcrossing.com/postcards/AT-696805)
+
+> 来自 [Bruno1405](https://www.postcrossing.com/user/Bruno1405) 🇦🇹
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/kx9gctk1k68qndt7q2dwyieasadwmjen.jpg)
+
+::: info 内容
+eine herzliche Umarmung für deine süße Tochter
+(=a hearty hug for your sweet daughter)
+Today is word-postcard-day, you can colour this card and changes the image when you are ready.
+stay healthy and peace in the world.
+Be (Bruno)
+
+:::
+::: note 翻译
+[eine herzliche Umarmung für deine süße Tochter(德语)]
+给你可爱的女儿一个热情的拥抱。
+今天是明信片日，你可以给这张明信片上色，并在准备好后更换图像。
+保持健康，愿世界和平。
+Be（布鲁诺）
+:::
+
+### [US-9781326](https://www.postcrossing.com/postcards/US-9781326)
+
+> 来自 [mangoqueen24](https://www.postcrossing.com/user/mangoqueen24) 🇺🇸
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/4a7h4utxbydc5j8mlfkcqlvb7hci4qyp.jpg)
+::: info 内容
+Dear Arthur,
+Hi, my name is Sarah and I live in the small city of Auburn in New York State. Fall is my favorite season because the countryside looks like this postcard.
+Happy Postcrossing! -Sarah
+
+:::
+::: note 翻译
+亲爱的Arthur，
+你好，我叫Sarah，我住在纽约州奥本小城。秋天是我最喜欢的季节，因为乡村的景色就像这张明信片一样美丽。
+祝你在明信片交换中愉快！
+Sarah
+:::
+
+### [AT-696806](https://www.postcrossing.com/postcards/AT-696806)
+
+> 来自 [MysticVampire](https://www.postcrossing.com/user/MysticVampire) 🇦🇹
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/7tonrpjcvm0ftsh5v1edteyk3u5nai22.jpg)
+
+::: info 内容
+Dear Arthur,  01.10.2023
+My name is Birgit and I live in Linz, which is located in the north of Austria. It's a bigger city than salzburg, but definitely not that famous.
+ I love reading books, traveling the world, archery, writting letters in the old style (pen and paper) and doing handicraft. Wish you all the best,Birgit.
+
+:::
+::: note 翻译
+亲爱的Arthur，
+我是Birgit，我住在奥地利北部的林茨。林茨是一个比萨尔茨堡大一些的城市，但并不那么有名。
+我喜欢阅读书籍、周游世界、射箭、以及用老式的方式写信（用笔和纸），还喜欢手工艺。祝你一切顺利。
+Birgit
+:::
+
+### [FI-4485079](https://www.postcrossing.com/postcards/FI-4485079)
+
+> 来自 [pikkumyy15](https://www.postcrossing.com/user/pikkumyy15) 🇫🇮
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/ra3h05wn9h19d36d51m8q4inz9la4wqi.jpg)
+
+::: info 内容
+2.10.2023
+Hello Arthur and Xiaoxiao!
+Many autumn greetings from Finland! I love the colors of autumn.
+Sorry I can't recommend you any coffee because I drink only tea. I love tea.
+I wish you all the best and stay happy!
+Bye, SARI
+
+:::
+::: note 翻译
+2.10.2023
+你好，Arthur和Xiaoxiao！
+来自芬兰的秋天问候！我喜欢秋天的色彩。
+很抱歉我不能给你们推荐咖啡，因为我只喝茶。我喜欢茶。
+祝你们一切顺利，保持快乐！
+再见，SARI
+:::
+
+### [CZ-2061495](https://www.postcrossing.com/postcards/CZ-2061495)
+
+> 来自 [Jitka-cz](https://www.postcrossing.com/user/Jitka-cz) &#x1f1e8;&#x1f1ff;
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/z6gmmq6k6pbyc1ki9yxl0nn4y4hcbdso.jpg)
+
+::: info 内容
+OSTRAVA!!
+Lower Vitkovice is a national site of industrial heritage located in the Vitkovice district of Ostrava in the Czech Republic. it includes an extensive industrial area Vitkovice ironworks with a unique collection of industrial architecture. A set of threesuccessive parts - coal mine, coke ovens and blast fumnace operations - also called Ostrava Ostrava Hradcany, after Hradcanythe Castle District of Prague.
+The area is registered in the list of European cultural heritage, and was placed on the Czech Republic's list of tentative UNESCO World Heritage Sites in 2001 under the name The Industrial Complexes at Ostrava.
+
+Hi, I am Jitka from Ostrava, which is the third largest city in the Czech Republic. Have a nice day.
+
+:::
+::: note 翻译
+OSTRAVA！！
+
+下维特科维采是位于捷克共和国奥斯特拉发维特科维采区的国家工业遗产地，包括一个庞大的维特科维采钢铁厂工业区，拥有独特的工业建筑收藏。这个区域由三个连续的部分组成，包括煤矿、焦炉和高炉操作，也被称为奥斯特拉发的哈德查尼（Hradcany），以纪念布拉格的哈德查尼城区。
+
+该地区已被列入欧洲文化遗产名录，并于2001年被列入捷克共和国的潜在联合国教科文组织世界遗产名录，名为奥斯特拉发的工业综合体。
+
+嗨，我是来自奥斯特拉发的Jitka，奥斯特拉发是捷克共和国第三大城市。祝你有美好的一天。
+:::
+
+### [DE-13430236](https://www.postcrossing.com/postcards/DE-13430236)
+
+> 来自 [annegret](https://www.postcrossing.com/user/annegret) 🇩🇪
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/pac25ahehnw47mqqtyrml2khs4q02pyg.jpg)
+
+::: info 内容
+Dear Arthur, best regards from essen in the ruhr-area, Germany. I'm Anne, 66 years old. your daughter is really cute, she looks like a doll. I have 4 grandchildren, but they are all boys, the youngest is only 4 months old.
+
+:::
+::: note 翻译
+亲爱的Arthur，来自德国鲁尔区埃森的最诚挚问候。我是Anne，66岁。你的女儿真可爱，看起来像个洋娃娃。我有4个孙子，但都是男孩，最小的只有4个月大。

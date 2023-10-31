@@ -27,36 +27,6 @@ headers = {
     
     }
  
-
-#获取账号状态
-def getAccountStat():
-    galleryResponse = requests.get(galleryUrl,headers=headers)
-    galleryStatus = galleryResponse.status_code
-    galleryContent = galleryResponse.text.replace('"//', '"https://')
-
-    dataResponse = requests.get(dataUrl,headers=headers)
-    dataContent = dataResponse.text
-    if "Log in to see this content" in dataContent:
-        cookieStat = 404
-    else:
-        cookieStat = 200
-    if galleryStatus == 200 and cookieStat == 200:
-        totalStat ="getPrivate"
-        types = ['sent', 'received', 'favourites', 'popular']
-        print(f"{account}的Cookies有效，可访问个人账号内容……\n")
-    elif galleryStatus == 200 and cookieStat == 404:
-        totalStat ="getPublic"
-        types = ['sent', 'received'] 
-        print(f"{account}的Cookies无效，只能访问gallery内容")
-    elif galleryStatus != 200:
-        totalStat ="unAccessible"
-        print(f"用户:{account}已注销/设置为非公开，无法获取！\n")
-        sys.exit()
-
-    return totalStat,galleryContent,types
-
-
-stat,content_raw,types = getAccountStat()
    
 
 def getHomeInfo(received):
@@ -322,25 +292,7 @@ def replaceJsRef(fileFullName):
     os.remove(fileFullName)
     os.rename(f"{fileFullName}.bak", fileFullName)
 
-for type in types_map:
-    print("————————————————————")
-    if os.path.exists(f"output/{type}_List.json"):         
-        print(f"已存在output/{type}_List.json") 
-        #dl.multiTask(account,type,Cookie) 
-        if stat != "getPrivate":          
-            print(f"{account}的Cookies无效，无法更新数据。")
-        else:
-            print(f"{account}的Cookies有效，正在比对数据……")    
-            dl.multiTask(account,type,Cookie) 
-        
-    else:
-        if stat != "getPrivate":          
-            print(f"{account}的Cookies无效，且缺少output/{type}_List.json，无法生成地图数据，已退出")
-            sys.exit()
-        else:
-            print(f"{account}的Cookies有效，准备生成output/{type}_List.json……") 
-            dl.multiTask(account,type,Cookie) 
-
+dl.MapDataCheck()
 print("——————————正在生成地图——————————")
 with open(f"output/sent_List.json", "r") as file:
     sentData = json.load(file)
