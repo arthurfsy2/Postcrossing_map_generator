@@ -68,9 +68,40 @@ def getAccountStat():
     return totalStat,galleryContent,types
 
 
-
-
-
+def getPageNum(content):
+    counts = ()
+    for type in types:
+        if type =="favourites":
+            pattern = r"Favorites \((\d+)\)"
+        else:
+            pattern = r"{} \((\d+)\)"
+        # 获取数量
+        content_pattern = pattern.format(type.capitalize())
+        content_match = re.search(content_pattern, content)
+        count = int(content_match.group(1)) if content_match else 0
+        # 获取页数
+        page_num = math.ceil(count / 60)
+        counts += (count, page_num)
+    
+    print("counts:",counts)
+    sentNum, sentPageNum, receivedNum, receivedPageNum = counts[:4]
+    if stat == "getPrivate":
+        favouritesNum, favouritesPageNum, popularNum, popularPageNum = counts[4:8]
+    else:
+        favouritesNum = favouritesPageNum = popularNum = popularPageNum = 0
+     
+    data = {
+    "received": ("来自", receivedPageNum, receivedNum, f"明信片展示墙（收到：{receivedNum}）"),
+    "sent": ("寄往", sentPageNum, sentNum, f"明信片展示墙（寄出：{sentNum}）"),
+    "favourites": ("来自", favouritesPageNum, favouritesNum, f"明信片展示墙（我的点赞：{favouritesNum}）"),
+    "popular": ("", popularPageNum, popularNum, f"明信片展示墙（我收到的赞：{popularNum}）")
+            }
+    # value = data.get(type)
+    # from_or_to, pageNum, Num, title = value
+    path = "./output/title.json"
+    with open(path, "w",encoding="utf-8") as file:
+            json.dump(data, file, indent=2)
+    # return from_or_to, pageNum, Num, title
 def getCountryFlagEmoji(flag):
     # 读取contryName.json文件
     with open('contryNameEmoji.json') as file:
@@ -79,7 +110,12 @@ def getCountryFlagEmoji(flag):
     value = data.get(flag)
     return value
 
-def getGalleryInfo(pageNum,type):
+def getGalleryInfo(type):
+    path = "./output/title.json"
+    with open(path, "r",encoding="utf-8") as file:
+        data = json.load(file)
+    value = data.get(type)
+    from_or_to, pageNum, Num, title = value
     i = 1
     content_all=[]
     while i <= pageNum:
@@ -104,26 +140,13 @@ def getGalleryInfo(pageNum,type):
                 picFileName = re.search(r"/([^/]+)$", href).group(1)
                 if type == "popular":
                     favoritesNum = figcaption.find("div").text
+                    num = re.search(r'\d+', favoritesNum).group()
                     userInfo = ""
-                    contryName = ""
-                elif type == "favourites":                 
-                    picDownloadPath = f"gallery/picture/{picFileName}"  # 替换为你要保存的文件路径和文件名
-                    if os.path.exists(picDownloadPath):
-                        #print(f"已存在{picDownloadPath}")
-                        pass
-                    else:
-                        # picDownloadUrl = f"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/{picFileName}"
-                        # #print(f"picDownloadurl:{picDownloadurl}")
-                        # response = requests.get(picDownloadUrl)
-                        print(f"正在下载{picFileName}")
-                        # with open(picDownloadPath, "wb") as file:
-                        #     file.write(response.content)
-                    user = figcaption.find("div").find("a").text
-                    userInfo = f"[{user}]({baseUrl}user/{user})"
-                    if not user:
-                        userInfo = "***该用户已关闭***"
-                    flag = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
-                    contryName = getCountryFlagEmoji(flag)
+                    content_page.append({
+                        'id': postcardID,
+                        'favoritesNum': num,
+                        'picFileName': picFileName,
+                    })
                 else:
                     user = figcaption.find("div").find("a").text
                     userInfo = f"[{user}]({baseUrl}user/{user})"
@@ -131,61 +154,24 @@ def getGalleryInfo(pageNum,type):
                         userInfo = "***该用户已关闭***"
                     flag = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
                     contryName = getCountryFlagEmoji(flag)
-                content_page.append({
-                    'id': postcardID,
-                    'userInfo': userInfo,
-                    'contryNameEmoji': contryName,
-                    'picFileName': picFileName,
-                })
+                    content_page.append({
+                        'id': postcardID,
+                        'userInfo': userInfo,
+                        'contryNameEmoji': contryName,
+                        'picFileName': picFileName,
+                    })
         content_all.extend(content_page)                        
         i += 1
-        with open(f'./gallery/{type}.json', 'w') as file:
+        with open(f'./output/{type}.json', 'w') as file:
             json.dump(content_all, file, indent=2)
-        print(f"已导出:./gallery/{type}.json\n")
+        print(f"已导出:./output/{type}.json\n")
 
-def getCount(type,content):
-    counts = ()
-    for type in types:
-        if type =="favourites":
-            pattern = r"Favorites \((\d+)\)"
-        else:
-            pattern = r"{} \((\d+)\)"
-        # 获取数量
-        content_pattern = pattern.format(type.capitalize())
-        content_match = re.search(content_pattern, content)
-        count = int(content_match.group(1)) if content_match else 0
-        # 获取页数
-        page_num = math.ceil(count / 60)
-        counts += (count, page_num)
-    return counts
-
-def createGalleryJS(type,content):
-    counts=getCount(type,content)
-    #print(f"\n{account}展示墙链接：{galleryUrl}/{type}")      
-    sentNum, sentPageNum, receivedNum, receivedPageNum = counts[:4]
-    if stat == "getPrivate":
-        favouritesNum, favouritesPageNum, popularNum, popularPageNum = counts[4:8]
-    else:
-        favouritesNum = favouritesPageNum = popularNum = popularPageNum = 0
-     
-    data = {
-    "received": ("来自", receivedPageNum, receivedNum, f"明信片展示墙（收到：{receivedNum}）"),
-    "sent": ("寄往", sentPageNum, sentNum, f"明信片展示墙（寄出：{sentNum}）"),
-    "favourites": ("来自", favouritesPageNum, favouritesNum, f"明信片展示墙（我的点赞：{favouritesNum}）"),
-    "popular": ("", popularPageNum, popularNum, f"明信片展示墙（我收到的赞：{popularNum}）")
-            }
-    value = data.get(type)
-    from_or_to, pageNum, Num, title = value
-    getGalleryInfo(pageNum,type)
-    with open(f"./gallery/title.json", "w",encoding="utf-8") as file:
-            json.dump(data, file, indent=2)
-    return data
 
 
 
 def getLocalID(type):
     ID_Local = []    
-    file_path = f"./output/{type}_List.json"
+    file_path = f"./output/{type}_Mapinfo.json"
     if os.path.exists(file_path):
         with open(file_path, "r") as file:
             Data = json.load(file)
@@ -239,10 +225,10 @@ def getUpdateID(account,type,Cookie):
             if id not in oldID:
                 newID.append(id)
         if len(newID) == 0:
-            print(f"{type}_List.json无需更新\n")
+            print(f"{type}_Mapinfo.json无需更新\n")
             updateID = None
         else:
-            print(f"{type}_等待更新list({len(newID)}个):{newID}\n")
+            print(f"{type}_等待更新Mapinfo({len(newID)}个):{newID}\n")
             updateID = newID
     else:
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
@@ -343,7 +329,7 @@ def get_data(postcardID,type, data_json):
             })
 
         # 将列表中的JSON对象写入文件
-        with open(f"./output/{type}_List_update.json", "w") as file:
+        with open(f"./output/{type}_Mapinfo_update.json", "w") as file:
             json.dump(data_json, file, indent=2)
         print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%")
 
@@ -365,7 +351,7 @@ def downloadPic(updatePic,pic_json):
 
 def getUpdatePic(type):
     picFileNameList=[]
-    with open(f'./gallery/{type}.json', 'r') as file:
+    with open(f'./output/{type}.json', 'r') as file:
         data = json.load(file)
 
     # 提取picFileName字段内容
@@ -411,7 +397,7 @@ def getUserStat():
     a_data = requests.get(url,headers=headers).json()
     with open(f"./output/UserStats.json", "w") as file:
         json.dump(a_data, file, indent=2)
-    print(f"已生成output/month.json")
+    print(f"已生成output/UserStats.json")
     # 统计每个国家代码的出现次数
     country_count = {}
     for item in a_data:
@@ -455,8 +441,8 @@ def getUserStat():
             summary[date][key] = 1
 
     # 将汇总结果转换为新的数组
-    result = [{'date': date, 'num': summary[date]} for date in summary]
-
+    #result = [{'date': date, 'num': summary[date]} for date in summary]
+    result = [{'date': date, 'sent': summary[date]['sent'], 'received': summary[date]['received']} for date in summary]
     # 将结果输出到month.json文件中
     with open(f"./output/month.json", 'w') as f:
         json.dump(result, f, indent=2)
@@ -533,48 +519,7 @@ def getUserStat():
         json.dump(country_stats, file, indent=2)
     print(f"./output/stats.json")
     
-def getUserSheet():
-    # 读取 stats.json 文件并将内容存储在 stats_data 变量中
-    with open('./output/stats.json', 'r') as file:
-        stats_data = json.load(file)
 
-    # 按照 name 的 A-Z 字母顺序对 stats_data 进行排序
-    sorted_stats_data = sorted(stats_data, key=lambda x: x['name'])
-    #print("sorted_stats_data",sorted_stats_data)
-    # 创建表头
-    #table_header = "| No. | Country | Sent | Received | Avg travel(Sent) | Avg travel(Received) |\n"
-    table_header1 = "| 序号 | 国家 | 已寄出 | 已收到 | 寄出-平均所需天数 | 收到-平均所需天数 |\n"
-    table_header2 = "| --- | --- | --- | --- | --- | --- |\n"
-
-    # 创建表格内容
-    table_content = ""
-    for i, stats in enumerate(sorted_stats_data, start=1):
-        country = stats['name']
-        flag = stats['flagEmoji']
-        sent = stats['sentNum']
-        received = stats['receivedNum']
-        sent_avg = stats['sentAvg']
-        received_avg = stats['receivedAvg']
-        if sent_avg =="-":
-            sent_avg_days = "-"
-        else:
-            sent_avg_days = f"{sent_avg}天"
-        
-        if received_avg =="-":
-            received_avg_days = "-"
-        else:
-            received_avg_days = f"{received_avg}天"
-
-        
-        table_content += f"| {i} | {country} {flag} | {sent} | {received} | {sent_avg_days} | {received_avg_days} |\n"
-
-    # 将表头和表格内容合并
-    table = table_header1 + table_header2 + table_content
-
-    # 将表格内容写入 mdsheet.md 文件
-    with open('./output/mdsheet.md', 'w' ,encoding="utf-8") as file:
-        file.write(table)
-    return table
 
 
 def multiTask(account,type,Cookie):
@@ -605,16 +550,16 @@ def multiTask(account,type,Cookie):
             thread.join()
             
         # 将列表中的JSON对象写入文件
-        with open(f"./output/{type}_List_update.json", "w") as file:
+        with open(f"./output/{type}_Mapinfo_update.json", "w") as file:
             json.dump(data_json, file, indent=2)
         print(f"{type}的update List已提取完成！\n")
 
         # 读取update文件的数组内容
-        with open(f"./output/{type}_List_update.json", "r") as update_file:
+        with open(f"./output/{type}_Mapinfo_update.json", "r") as update_file:
             update_data = json.load(update_file)
 
         # 读取原有的JSON文件内容
-        file_path = f"./output/{type}_List.json"
+        file_path = f"./output/{type}_Mapinfo.json"
         if os.path.exists(file_path):
             with open(file_path, "r") as existing_file:
                 existing_data = json.load(existing_file)
@@ -623,10 +568,10 @@ def multiTask(account,type,Cookie):
         else:
             existing_data = update_data
         # 写入合并后的内容到JSON文件
-        with open(f"./output/{type}_List.json", "w") as file:
+        with open(f"./output/{type}_Mapinfo.json", "w") as file:
             json.dump(existing_data, file, indent=2)
 
-        removePath = f"./output/{type}_List_update.json"
+        removePath = f"./output/{type}_Mapinfo_update.json"
         if os.path.exists(removePath):  # 更新完后删除List_update.json
             os.remove(removePath)  
     else:
@@ -687,8 +632,8 @@ def multiDownload(type):
 def MapDataCheck():
     for type in types_map:
         print("————————————————————")
-        if os.path.exists(f"output/{type}_List.json"):         
-            print(f"已存在output/{type}_List.json") 
+        if os.path.exists(f"output/{type}_Mapinfo.json"):         
+            print(f"已存在output/{type}_Mapinfo.json") 
             #dl.multiTask(account,type,Cookie) 
             if stat != "getPrivate":          
                 print(f"{account}的Cookies无效，无法更新数据。")
@@ -698,60 +643,29 @@ def MapDataCheck():
             
         else:
             if stat != "getPrivate":          
-                print(f"{account}的Cookies无效，且缺少output/{type}_List.json，无法生成地图数据，已退出")
+                print(f"{account}的Cookies无效，且缺少output/{type}_Mapinfo.json，无法生成地图数据，已退出")
                 sys.exit()
             else:
-                print(f"{account}的Cookies有效，准备生成output/{type}_List.json……") 
+                print(f"{account}的Cookies有效，准备生成output/{type}_Mapinfo.json……") 
                 multiTask(account,type,Cookie) 
 
 stat,content_raw,types = getAccountStat()
 
 def PicDataCheck():  
+    getPageNum(content_raw)
     for type in types:
-        createGalleryJS(type,content_raw) 
+        getGalleryInfo(type) 
     for type in types:
         multiDownload(type)
-    replaceTemplate()
-    
 
     
+
     
-
-
-
-def replateTitle(type):    
     
-    with open(f"./gallery/title.json", "r",encoding="utf-8") as f:
-        title = json.load(f)
-    value = title.get(type)
-    from_or_to, pageNum, Num, title = value
-    return title
-
-def replaceTemplate():
-          
+def replaceTemplateCheck():  
+    getPageNum(content_raw)
     getUserStat()
-    #getUserSheet()       
-    title_all=""
     for type in types:
-        
-        title = replateTitle(type)
-        #print("title:",title)
-        title_all += f"#### [{title}]({nickName}/postcrossing/{type})\n\n"
-    #print("title_all:\n",title_all)
-    sheet = getUserSheet()
-    with open(f"./信息汇总_template.md", "r",encoding="utf-8") as f:
-        data = f.read()  
-        dataNew = data.replace('//请替换明信片墙title',title_all)
-        dataNew = dataNew.replace('//请替换明信片表格',sheet)
-
-    with open(f"./信息汇总.md", "w",encoding="utf-8") as f:
-        f.write(dataNew)  
+        getGalleryInfo(type) 
 
 
-#### [明信片展示墙（寄出）](/Arthur/postcrossing/sent)
-
-#### [明信片展示墙（收到）](/Arthur/postcrossing/received)
-
-#### [明信片展示墙（我收到的赞）](/Arthur/postcrossing/popular)
-
-#### [明信片展示墙（我的点赞）](/Arthur/postcrossing/favourites)

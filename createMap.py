@@ -294,9 +294,9 @@ def replaceJsRef(fileFullName):
 
 dl.MapDataCheck()
 print("——————————正在生成地图——————————")
-with open(f"output/sent_List.json", "r") as file:
+with open(f"output/sent_Mapinfo.json", "r") as file:
     sentData = json.load(file)
-with open(f"output/received_List.json", "r") as file:
+with open(f"output/received_Mapinfo.json", "r") as file:
     receivedData = json.load(file)
 createMap(sentData,receivedData)
 createClusterMap(sentData,receivedData)   
