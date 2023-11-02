@@ -112,62 +112,6 @@ def getCountryFlagEmoji(flag):
     value = data.get(flag)
     return value
 
-# def getGalleryInfo(type):
-#     path = "./output/title.json"
-#     with open(path, "r",encoding="utf-8") as file:
-#         data = json.load(file)
-#     value = data.get(type)
-#     from_or_to, pageNum, Num, title = value
-#     i = 1
-#     content_all=[]
-#     while i <= pageNum:
-#         all_url = f"{galleryUrl}/{type}/{i}"
-#         print(f"正在获取/{account}/gallery/{type}/{i}的数据")
-#         response = requests.get(all_url,headers=headers)
-        
-#         content_i = response.text.replace('"//', '"https://')
-#         soup = BeautifulSoup(content_i, "html.parser")
-#         lis = soup.find_all("li")
-#         content_page=[]
-#         # 获取每个postcard信息
-#         for li in lis:
-            
-#             figure = li.find("figure")
-#             figcaption = li.find("figcaption")
-#             if figure:
-#                 href = figure.find("a")["href"]
-#                 #print(f"href:{href}")
-#                 postcardID = figcaption.find("a").text                   
-#                 baseUrl = "https://www.postcrossing.com/"
-#                 picFileName = re.search(r"/([^/]+)$", href).group(1)
-#                 if type == "popular":
-#                     favoritesNum = figcaption.find("div").text
-#                     num = re.search(r'\d+', favoritesNum).group()
-#                     userInfo = ""
-#                     content_page.append({
-#                         'id': postcardID,
-#                         'favoritesNum': num,
-#                         'picFileName': picFileName,
-#                     })
-#                 else:
-#                     user = figcaption.find("div").find("a").text
-#                     userInfo = f"[{user}]({baseUrl}user/{user})"
-#                     if not user:
-#                         userInfo = "***该用户已关闭***"
-#                     flag = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
-#                     contryName = getCountryFlagEmoji(flag)
-#                     content_page.append({
-#                         'id': postcardID,
-#                         'userInfo': userInfo,
-#                         'contryNameEmoji': contryName,
-#                         'picFileName': picFileName,
-#                     })
-#         content_all.extend(content_page)                        
-#         i += 1
-#         with open(f'./output/{type}.json', 'w') as file:
-#             json.dump(content_all, file, indent=2)
-#         print(f"已导出:./output/{type}.json\n")
-
 def getGalleryInfo(type):
     path = "./output/title.json"
     with open(path, "r",encoding="utf-8") as file:
@@ -592,6 +536,7 @@ def getUserStat():
             if country_type == 's':
                 country_stats.append({
                     'name': country_name,
+                    'countryCode': country_code,
                     'flagEmoji': country_flag,
                     'value': 1,
                     'sentNum': 1,
@@ -602,6 +547,7 @@ def getUserStat():
             elif country_type == 'r':
                 country_stats.append({
                     'name': country_name,
+                    'countryCode': country_code,
                     'flagEmoji': country_flag,
                     'value': 1,
                     'sentNum': 0,
@@ -632,10 +578,11 @@ def getUserStat():
     cursor = conn.cursor()
     tablename = "CountryStats"
     cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                        (name TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER)''')
+                        (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER)''')
     for item in country_stats:
         
         name = item['name']
+        countryCode = item['countryCode']
         flagEmoji = item['flagEmoji']
         value = item['value']
         sentNum = item['sentNum']
@@ -644,8 +591,8 @@ def getUserStat():
         receivedAvg = item['receivedAvg']
 
         
-        cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?)",
-                    (name, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg))
+        cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg))
     print(f'已更新CountryStats：数据库{dbpath}')
     # 将列表中的JSON对象写入文件
     conn.commit()
@@ -756,12 +703,13 @@ def readDB(dbpath, type,tablename):
                 elif tablename == 'CountryStats':
                     data={
                         "name": row[0],
-                        "flagEmoji": row[1],
-                        "value": row[2],
-                        "sentNum": row[3],
-                        "receivedNum":row[4],
-                        "sentAvg": row[5],
-                        "receivedAvg": row[6],
+                        "countryCode": row[1],
+                        "flagEmoji": row[2],
+                        "value": row[3],
+                        "sentNum": row[4],
+                        "receivedNum":row[5],
+                        "sentAvg": row[6],
+                        "receivedAvg": row[7],
                     }
                 data_all.append(data)
         conn.close()
@@ -799,9 +747,10 @@ def MapDataCheck():
                 print(f"{account}的Cookies有效，准备生成数据库{dbpath}：Mapinfo_{type}") 
                 multiTask(account,type,Cookie) 
     
-stat,content_raw,types = getAccountStat()
 
+stat,content_raw,types = getAccountStat()
 def PicDataCheck():  
+    
     getPageNum(content_raw)
     for type in types:
         getGalleryInfo(type) 

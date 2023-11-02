@@ -24,6 +24,7 @@ def getUserSheet():
     # with open('./output/stats.json', 'r') as file:
     #     stats_data = json.load(file)
     stats_data=dl.readDB(dbpath, "", "CountryStats")
+    print("stats_data:\n",stats_data)
     # 按照 name 的 A-Z 字母顺序对 stats_data 进行排序
     sorted_stats_data = sorted(stats_data, key=lambda x: x['name'])
     #print("sorted_stats_data",sorted_stats_data)
@@ -128,15 +129,9 @@ def getCardStoryList():
           f'  <img src="{storypicLink}/{row[0]}.webp" /></div>' \
           f'\n\n' \
           f'::: info 内容\n{row[2]}\n:::\n\n' \
-          f'::: tip 翻译\n{row[1]}\n:::\n\n' \
-
-        
-        list_all +=list
-    print("已导出明信片故事list")
+          f'::: tip 翻译\n{row[1]}\n:::\n\n'       
+        list_all +=list   
     return list_all
-    # 输出查询结果
-    # for row in content:
-        # print(f"ID: {row[0]}, Content: {row[1]}, PicFileName: {row[2]}")
 
 dl.replaceTemplateCheck()
 excel_file="./template/postcardStory.xlsx"
