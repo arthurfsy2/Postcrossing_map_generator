@@ -109,14 +109,39 @@ def getCountryStats(tablename):
     conn.close()
 
 
-types_map = ['sent', 'received']
+def getActivityByMonth(tablename):
+    # 读取sent_Mapinfo.json文件
+    with open(f'./output/month.json', 'r') as f:
+        data = json.load(f)
 
-for type in types_map:
-    getMapinfo(type, "Mapinfo")
+    # 连接到数据库test.db
+    conn = sqlite3.connect(dbpath)
+    cursor = conn.cursor()
 
-types = ['sent', 'received', 'favourites', 'popular']
-for type in types:
-    getGalleryinfo(type, "Galleryinfo")
+    # 创建新的Mapinfo表（如果不存在）
+    cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+                    (date TEXT, sent INTEGER, received INTEGER)''')
 
-getCountryStats("CountryStats")
+    # 将sent_Mapinfo.json中的内容写入Mapinfo表
+    for item in data:
+        date = item['date']
+        sent = item['sent']
+        received = item['received']
+        
+        cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?)",
+                    (date, sent, received))
+    print(f'已将./output/month.json写入数据库')
+    conn.commit()
+    conn.close()
 
+# types_map = ['sent', 'received']
+
+# for type in types_map:
+#     getMapinfo(type, "Mapinfo")
+
+# types = ['sent', 'received', 'favourites', 'popular']
+# for type in types:
+#     getGalleryinfo(type, "Galleryinfo")
+
+# getCountryStats("CountryStats")
+# getActivityByMonth("ActivityByMonth")

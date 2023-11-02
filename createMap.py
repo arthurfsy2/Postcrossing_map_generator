@@ -2,7 +2,7 @@ import folium
 from folium.plugins import MarkerCluster
 import json
 import time
-import requests
+import sqlite3
 import random
 import os
 import multiDownload as dl
@@ -14,7 +14,7 @@ with open("config.json", "r") as file:
     data = json.load(file)
 account = data["account"]
 Cookie = data["Cookie"]
-
+dbpath = data["dbpath"]
 
 userUrl = f"https://www.postcrossing.com/user/{account}"  
 galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
@@ -27,7 +27,6 @@ headers = {
     
     }
  
-   
 
 def getHomeInfo(received):
     addr_count = {}
@@ -39,7 +38,7 @@ def getHomeInfo(received):
             addr_count[addr] += 1
         else:
             addr_count[addr] = 1       
-        coord = tuple(item["To"])
+        coord = tuple(item["ToCoor"])
         if coord not in home_coords:
             home_coords.append(coord)
             home_addrs.append(addr)
@@ -81,8 +80,8 @@ def createMap(sent, received):
     for coords in sent:
         # 解析postcardID、from坐标、to坐标、distance、days、link、user
         postcardID = coords["id"]
-        from_coord = coords["From"]
-        to_coord = coords["To"]
+        from_coord = coords["FromCoor"] #FromCoor = json.dumps(item['FromCoor'])
+        to_coord = coords["ToCoor"]
         distance = coords["distance"]
         days = coords["travel_time"]
         link = coords["link"]
@@ -118,8 +117,8 @@ def createMap(sent, received):
     for coords in received:
         # 解析postcardID、from坐标、to坐标、distance、days、link、user
         postcardID = coords["id"]
-        from_coord = coords["From"]
-        to_coord = coords["To"]
+        from_coord = coords["FromCoor"]
+        to_coord = coords["ToCoor"]
         distance = coords["distance"]
         days = coords["travel_time"]
         link = coords["link"]
@@ -189,8 +188,8 @@ def createClusterMap(sent, received):
     for coords in sent:
         # 解析postcardID、from坐标、to坐标、distance、days、link、user
         postcardID = coords["id"]
-        from_coord = coords["From"]
-        to_coord = coords["To"]
+        from_coord = coords["FromCoor"]
+        to_coord = coords["ToCoor"]
         distance = coords["distance"]
         days = coords["travel_time"]
         link = coords["link"]
@@ -221,8 +220,8 @@ def createClusterMap(sent, received):
     for coords in received:
         # 解析postcardID、from坐标、to坐标、distance、days、link、user
         postcardID = coords["id"]
-        from_coord = coords["From"]
-        to_coord = coords["To"]
+        from_coord = coords["FromCoor"]
+        to_coord = coords["ToCoor"]
         distance = coords["distance"]
         days = coords["travel_time"]
         link = coords["link"]
@@ -294,13 +293,10 @@ def replaceJsRef(fileFullName):
 
 dl.MapDataCheck()
 print("——————————正在生成地图——————————")
-with open(f"output/sent_Mapinfo.json", "r") as file:
-    sentData = json.load(file)
-with open(f"output/received_Mapinfo.json", "r") as file:
-    receivedData = json.load(file)
+sentData =dl.readDB(dbpath, "sent", "Mapinfo")
+receivedData =dl.readDB(dbpath, "received", "Mapinfo")
 createMap(sentData,receivedData)
-createClusterMap(sentData,receivedData)   
-
+createClusterMap(sentData,receivedData)  
 
 end_time = time.time()
 execution_time = round((end_time - start_time),3)

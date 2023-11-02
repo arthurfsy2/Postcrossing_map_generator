@@ -10,6 +10,7 @@ import pandas as pd
 import math
 from datetime import datetime, timedelta
 import sys
+import sqlite3
 
 
 
@@ -20,6 +21,7 @@ account = data["account"]
 nickName = data["nickName"]
 Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
+dbpath = data["dbpath"]
 
 # 获取当前日期
 current_date = datetime.now().date()
@@ -110,6 +112,62 @@ def getCountryFlagEmoji(flag):
     value = data.get(flag)
     return value
 
+# def getGalleryInfo(type):
+#     path = "./output/title.json"
+#     with open(path, "r",encoding="utf-8") as file:
+#         data = json.load(file)
+#     value = data.get(type)
+#     from_or_to, pageNum, Num, title = value
+#     i = 1
+#     content_all=[]
+#     while i <= pageNum:
+#         all_url = f"{galleryUrl}/{type}/{i}"
+#         print(f"正在获取/{account}/gallery/{type}/{i}的数据")
+#         response = requests.get(all_url,headers=headers)
+        
+#         content_i = response.text.replace('"//', '"https://')
+#         soup = BeautifulSoup(content_i, "html.parser")
+#         lis = soup.find_all("li")
+#         content_page=[]
+#         # 获取每个postcard信息
+#         for li in lis:
+            
+#             figure = li.find("figure")
+#             figcaption = li.find("figcaption")
+#             if figure:
+#                 href = figure.find("a")["href"]
+#                 #print(f"href:{href}")
+#                 postcardID = figcaption.find("a").text                   
+#                 baseUrl = "https://www.postcrossing.com/"
+#                 picFileName = re.search(r"/([^/]+)$", href).group(1)
+#                 if type == "popular":
+#                     favoritesNum = figcaption.find("div").text
+#                     num = re.search(r'\d+', favoritesNum).group()
+#                     userInfo = ""
+#                     content_page.append({
+#                         'id': postcardID,
+#                         'favoritesNum': num,
+#                         'picFileName': picFileName,
+#                     })
+#                 else:
+#                     user = figcaption.find("div").find("a").text
+#                     userInfo = f"[{user}]({baseUrl}user/{user})"
+#                     if not user:
+#                         userInfo = "***该用户已关闭***"
+#                     flag = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
+#                     contryName = getCountryFlagEmoji(flag)
+#                     content_page.append({
+#                         'id': postcardID,
+#                         'userInfo': userInfo,
+#                         'contryNameEmoji': contryName,
+#                         'picFileName': picFileName,
+#                     })
+#         content_all.extend(content_page)                        
+#         i += 1
+#         with open(f'./output/{type}.json', 'w') as file:
+#             json.dump(content_all, file, indent=2)
+#         print(f"已导出:./output/{type}.json\n")
+
 def getGalleryInfo(type):
     path = "./output/title.json"
     with open(path, "r",encoding="utf-8") as file:
@@ -126,10 +184,8 @@ def getGalleryInfo(type):
         content_i = response.text.replace('"//', '"https://')
         soup = BeautifulSoup(content_i, "html.parser")
         lis = soup.find_all("li")
-        content_page=[]
         # 获取每个postcard信息
         for li in lis:
-            
             figure = li.find("figure")
             figcaption = li.find("figcaption")
             if figure:
@@ -142,46 +198,78 @@ def getGalleryInfo(type):
                     favoritesNum = figcaption.find("div").text
                     num = re.search(r'\d+', favoritesNum).group()
                     userInfo = ""
-                    content_page.append({
-                        'id': postcardID,
-                        'favoritesNum': num,
-                        'picFileName': picFileName,
-                    })
+                    contryNameEmoji = ""
                 else:
                     user = figcaption.find("div").find("a").text
                     userInfo = f"[{user}]({baseUrl}user/{user})"
                     if not user:
                         userInfo = "***该用户已关闭***"
                     flag = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
-                    contryName = getCountryFlagEmoji(flag)
-                    content_page.append({
-                        'id': postcardID,
-                        'userInfo': userInfo,
-                        'contryNameEmoji': contryName,
-                        'picFileName': picFileName,
-                    })
-        content_all.extend(content_page)                        
+                    contryNameEmoji = getCountryFlagEmoji(flag)
+                    num = ""
+                item={
+                    'id': postcardID,
+                    'userInfo': userInfo,
+                    'contryNameEmoji': contryNameEmoji,
+                    'picFileName': picFileName,
+                    'favoritesNum': num,
+                    'type': type
+                        }
+                id = item['id']
+                userInfo = item['userInfo']
+                contryNameEmoji = item['contryNameEmoji']
+                picFileName = item['picFileName']
+                favoritesNum = item['favoritesNum']
+                type = item['type']
+                # 连接到数据库test.db
+                conn = sqlite3.connect(dbpath)
+                cursor = conn.cursor()
+                tablename = "Galleryinfo"
+                cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+                                (id TEXT, userInfo TEXT, contryNameEmoji TEXT, picFileName TEXT, favoritesNum TEXT, type TEXT)''')
+                # 检查是否已存在相同的id和type
+                cursor.execute(f"SELECT * FROM {tablename} WHERE id=? AND type=?", (id, type))
+                existing_data = cursor.fetchone()
+
+                if existing_data:
+                    # 更新已存在的行的其他列数据
+                    cursor.execute(f"UPDATE {tablename} SET userInfo=?, contryNameEmoji=?, picFileName=?, favoritesNum=? WHERE id=? AND type=?",
+                                    (id, userInfo, contryNameEmoji, picFileName, favoritesNum,  type))
+                else:
+                    # 插入新的行
+                    cursor.execute(f"INSERT INTO {tablename} VALUES (?, ?, ?, ?, ?, ?)",
+                                    (id, userInfo, contryNameEmoji, picFileName, favoritesNum, type))
+                conn.commit()
+                conn.close()
+
         i += 1
-        with open(f'./output/{type}.json', 'w') as file:
-            json.dump(content_all, file, indent=2)
-        print(f"已导出:./output/{type}.json\n")
 
+        print(f"已更新Galleryinfo_{type}：数据库{dbpath}\n")
 
+def getLocalID(type,dbpath):
+    oldID = None
 
+    if os.path.exists(dbpath):
+        conn = sqlite3.connect(dbpath)
+        cursor = conn.cursor()
 
-def getLocalID(type):
-    ID_Local = []    
-    file_path = f"./output/{type}_Mapinfo.json"
-    if os.path.exists(file_path):
-        with open(file_path, "r") as file:
-            Data = json.load(file)
-        for item in Data:
-            ID_Local.append(item["id"])
-        oldID = ID_Local
-        
-    else:
-        oldID = None
+        # 检查表是否存在
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Mapinfo'")
+        table_exists = cursor.fetchone()
+
+        if table_exists:
+            # 从Mapinfo表中获取id
+            cursor.execute("SELECT id FROM Mapinfo WHERE type=?", (type,))
+            rows = cursor.fetchall()
+            oldID = [row[0] for row in rows]
+
+        conn.close()
+    #print("oldID:\n",oldID)
     return oldID
+
+# getLocalID("sent",dbpath)
+
+# getLocalID("received",dbpath)
 
 def getLocalPic():
     localPicList = []
@@ -216,8 +304,8 @@ def getUpdateID(account,type,Cookie):
     onlineID = [item[0] for item in response]
     hasPicID = [item[0] for item in response if item[-1] == 1]
     #print(f"hasPicID({len(hasPicID)}):{hasPicID}")
-    if getLocalID(type) is not None:
-        oldID = getLocalID(type)       
+    if getLocalID(type,dbpath) is not None:
+        oldID = getLocalID(type,dbpath)    
         newID = []
         # 遍历onlineID中的元素
         for id in onlineID:
@@ -225,7 +313,7 @@ def getUpdateID(account,type,Cookie):
             if id not in oldID:
                 newID.append(id)
         if len(newID) == 0:
-            print(f"{type}_Mapinfo.json无需更新\n")
+            print(f"数据库{dbpath}：Mapinfo_{type}暂无更新内容\n")
             updateID = None
         else:
             print(f"{type}_等待更新Mapinfo({len(newID)}个):{newID}\n")
@@ -252,8 +340,11 @@ def convert_to_utc(zoneNum,type,time_str):
     time_utc_str = time_utc.strftime(f"%Y/%m/%d")
     return time_utc_str
 
-def get_data(postcardID,type, data_json):
-    for i, id in enumerate(postcardID):        
+def get_data(postcardID,type):
+    
+    
+    for i, id in enumerate(postcardID): 
+             
         url=f"https://www.postcrossing.com/postcards/{id}"        
         response = requests.get(url)       
         pattern = r"var senderLocation\s+=\s+new L.LatLng\(([-\d.]+), ([-\d.]+)\);\s+var receiverLocation\s+=\s+new L.LatLng\(([-\d.]+), ([-\d.]+)\);"
@@ -312,25 +403,44 @@ def get_data(postcardID,type, data_json):
         
     
         for match in matches:
+            
             # 将拼接后的坐标字符串转换为浮点数
             from_coord = (float(match[0]), float(match[1]))
             to_coord = (float(match[2]), float(match[3]))
-            # 将字典对象添加到列表中
-            data_json.append({
+        conn = sqlite3.connect(dbpath)
+        cursor = conn.cursor()
+        tablename = "Mapinfo"
+        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+                        (id TEXT PRIMARY KEY, FromCoor TEXT, ToCoor TEXT, distance INTEGER, travel_time TEXT, link TEXT, user TEXT, sentAddr TEXT, receivedAddr TEXT, type TEXT)''')
+        item = {
                 "id": id,
-                "From":from_coord,
-                "To":to_coord,
+                "FromCoor":from_coord,
+                "ToCoor":to_coord,
                 "distance": distance,
                 "travel_time": travel_time,
                 "link": link,
                 "user": user,
                 "sentAddr":f"{sentAddr}({sentCountry})",
                 "receivedAddr":f"{receivedAddr}({receivedCountry})",
-            })
-
+                "type":type
+            }
+        #print("item:\n",item)
+        id = item['id']
+        FromCoor = json.dumps(item['FromCoor'])
+        ToCoor = json.dumps(item['ToCoor'])
+        distance = item['distance']
+        travel_time = item['travel_time']
+        link = item['link']
+        user = item['user']
+        sentAddr = item['sentAddr']
+        receivedAddr = item['receivedAddr']
+        type = item['type']
+        
+        cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    (id, FromCoor, ToCoor, distance, travel_time, link, user, sentAddr, receivedAddr, type))
         # 将列表中的JSON对象写入文件
-        with open(f"./output/{type}_Mapinfo_update.json", "w") as file:
-            json.dump(data_json, file, indent=2)
+        conn.commit()
+        conn.close()
         print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%")
 
 def downloadPic(updatePic,pic_json):
@@ -395,9 +505,9 @@ def getUserStat():
         }
     url=f'https://www.postcrossing.com/user/{account}/feed'    
     a_data = requests.get(url,headers=headers).json()
-    with open(f"./output/UserStats.json", "w") as file:
-        json.dump(a_data, file, indent=2)
-    print(f"已生成output/UserStats.json")
+    # with open(f"./output/UserStats.json", "w") as file:
+    #     json.dump(a_data, file, indent=2)
+    # print(f"已生成output/UserStats.json")
     # 统计每个国家代码的出现次数
     country_count = {}
     for item in a_data:
@@ -514,11 +624,32 @@ def getUserStat():
     # 将结果按照 value 值从大到小进行排序
     country_stats.sort(key=lambda x: x['value'], reverse=True)
 
-    # 将统计结果写入 b.json 文件
-    with open('./output/stats.json', 'w') as file:
-        json.dump(country_stats, file, indent=2)
-    print(f"./output/stats.json")
-    
+    # # 将统计结果写入 b.json 文件
+    # with open('./output/stats.json', 'w') as file:
+    #     json.dump(country_stats, file, indent=2)
+    # print(f"./output/stats.json")
+    conn = sqlite3.connect(dbpath)
+    cursor = conn.cursor()
+    tablename = "CountryStats"
+    cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+                        (name TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER)''')
+    for item in country_stats:
+        
+        name = item['name']
+        flagEmoji = item['flagEmoji']
+        value = item['value']
+        sentNum = item['sentNum']
+        receivedNum = item['receivedNum']
+        sentAvg = item['sentAvg']
+        receivedAvg = item['receivedAvg']
+
+        
+        cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?)",
+                    (name, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg))
+    print(f'已更新CountryStats：数据库{dbpath}')
+    # 将列表中的JSON对象写入文件
+    conn.commit()
+    conn.close()
 
 
 
@@ -537,11 +668,10 @@ def multiTask(account,type,Cookie):
         postcard_groups = [postcardID[i:i+group_size] for i in range(0, len(postcardID), group_size)]
         # 创建线程列表
         threads = []
-        data_json = []  # 存储最终的data_json
 
         # 创建并启动线程
         for i,group in enumerate(postcard_groups):
-            thread = threading.Thread(target=get_data, args=(group, type, data_json))
+            thread = threading.Thread(target=get_data, args=(group, type))
             thread.start()
             threads.append(thread)
             
@@ -549,31 +679,7 @@ def multiTask(account,type,Cookie):
         for thread in threads:
             thread.join()
             
-        # 将列表中的JSON对象写入文件
-        with open(f"./output/{type}_Mapinfo_update.json", "w") as file:
-            json.dump(data_json, file, indent=2)
         print(f"{type}的update List已提取完成！\n")
-
-        # 读取update文件的数组内容
-        with open(f"./output/{type}_Mapinfo_update.json", "r") as update_file:
-            update_data = json.load(update_file)
-
-        # 读取原有的JSON文件内容
-        file_path = f"./output/{type}_Mapinfo.json"
-        if os.path.exists(file_path):
-            with open(file_path, "r") as existing_file:
-                existing_data = json.load(existing_file)
-                # 将update数据追加到existing数据后面
-                existing_data.extend(update_data)           
-        else:
-            existing_data = update_data
-        # 写入合并后的内容到JSON文件
-        with open(f"./output/{type}_Mapinfo.json", "w") as file:
-            json.dump(existing_data, file, indent=2)
-
-        removePath = f"./output/{type}_Mapinfo_update.json"
-        if os.path.exists(removePath):  # 更新完后删除List_update.json
-            os.remove(removePath)  
     else:
         pass
     
@@ -604,51 +710,95 @@ def multiDownload(type):
         # 等待所有线程完成
         for thread in threads:
             thread.join()
-            
-        # # 将列表中的JSON对象写入文件
-        # with open(f"./output/{type}_PicList_update.json", "w") as file:
-        #     json.dump(pic_json, file, indent=2)
-        # if getLocalPic() is not None:
-        #     oldPic = getLocalPic()       
-        #     newPic = []
-        #     # 遍历onlineID中的元素
-        #     for pic in pic_json:
-        #         # 如果id不在oldID中，则将其添加到newID中
-        #         if pic not in oldPic:
-        #             newPic.append(pic)
-        #     if len(newPic) == 0:
-        #         print(f"{type}_PicList.json无需更新\n")
-        #         updatePic = None
-        #     else:
-        #         print(f"{type}_等待更新list({len(newPic)}个):{newPic}\n")
-        #         updatePic = newPic
-        # else:
-        #     # 当本地文件不存在时，则取online的postcardId作为待下载列表
-        #     updatePic = pic_json 
-        # print(f"updatePic：{updatePic}")
+        
     else:
         print(f"{type}_图库无需更新")
+
+def readDB(dbpath, type,tablename):
+    data_all = []
+
+    if os.path.exists(dbpath):
+        conn = sqlite3.connect(dbpath)
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name=?",(tablename,))
+        table_exists = cursor.fetchone()
+
+        if table_exists:
+            if tablename == 'Galleryinfo' or tablename == 'Mapinfo':
+            # 从Mapinfo表中获取指定type值的内容
+                cursor.execute(f"SELECT * FROM {tablename} WHERE type=?", (type,))
+            else:
+                cursor.execute(f"SELECT * FROM {tablename}")
+            rows = cursor.fetchall()
+            #print("rows",rows)
+            for row in rows:
+                if tablename == 'Galleryinfo':
+                    data={
+                        "id": row[0],
+                        "userInfo": row[1],
+                        "contryNameEmoji": row[2],
+                        "picFileName": row[3],
+                        "favoritesNum": row[4],
+                        "type": row[5]
+                        }
+                elif tablename == 'Mapinfo':
+                    data={
+                        "id": row[0],
+                        "FromCoor": json.loads(row[1]),
+                        "ToCoor": json.loads(row[2]),
+                        "distance": row[3],
+                        "travel_time": row[4],
+                        "link": row[5],
+                        "user":row[6],
+                        "sentAddr": row[7],
+                        "receivedAddr": row[8],
+                    }
+                elif tablename == 'CountryStats':
+                    data={
+                        "name": row[0],
+                        "flagEmoji": row[1],
+                        "value": row[2],
+                        "sentNum": row[3],
+                        "receivedNum":row[4],
+                        "sentAvg": row[5],
+                        "receivedAvg": row[6],
+                    }
+                data_all.append(data)
+        conn.close()
+
+
+
+
+    return data_all
 
 def MapDataCheck():
     for type in types_map:
         print("————————————————————")
-        if os.path.exists(f"output/{type}_Mapinfo.json"):         
-            print(f"已存在output/{type}_Mapinfo.json") 
-            #dl.multiTask(account,type,Cookie) 
+
+        conn = sqlite3.connect(dbpath)
+        cursor = conn.cursor()
+
+        # 检查表是否存在
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Mapinfo'")
+        table_exists = cursor.fetchone()
+
+        if table_exists:        
+            print(f"已存在数据库{dbpath}：Mapinfo_{type}") 
+        #dl.multiTask(account,type,Cookie) 
             if stat != "getPrivate":          
                 print(f"{account}的Cookies无效，无法更新数据。")
             else:
                 print(f"{account}的Cookies有效，正在比对数据……")    
                 multiTask(account,type,Cookie) 
-            
+        
         else:
             if stat != "getPrivate":          
-                print(f"{account}的Cookies无效，且缺少output/{type}_Mapinfo.json，无法生成地图数据，已退出")
+                print(f"{account}的Cookies无效，且缺少数据库{dbpath}：Mapinfo_{type}，无法生成地图数据，已退出")
                 sys.exit()
             else:
-                print(f"{account}的Cookies有效，准备生成output/{type}_Mapinfo.json……") 
+                print(f"{account}的Cookies有效，准备生成数据库{dbpath}：Mapinfo_{type}") 
                 multiTask(account,type,Cookie) 
-
+    
 stat,content_raw,types = getAccountStat()
 
 def PicDataCheck():  
@@ -657,9 +807,6 @@ def PicDataCheck():
         getGalleryInfo(type) 
     for type in types:
         multiDownload(type)
-
-    
-
     
     
 def replaceTemplateCheck():  

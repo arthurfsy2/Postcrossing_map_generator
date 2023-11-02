@@ -14,6 +14,7 @@ account = data["account"]
 nickName = data["nickName"]
 Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
+dbpath = data["dbpath"]
 
 # 获取当前日期
 current_date = datetime.now().date()
@@ -28,10 +29,7 @@ def createMD(type):
         data = json.load(file)
     value = data.get(type)
     from_or_to, pageNum, Num, title = value
-
-    # 读取对应的配置文件，形成.md
-    with open(f"./output/{type}.json", "r") as file:
-        content = json.load(file)
+    content =dl.readDB(dbpath, type,"Galleryinfo")
     MDcontent_all =""
     for id in content:
         baseUrl = "https://www.postcrossing.com/"
