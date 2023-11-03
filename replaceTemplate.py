@@ -20,18 +20,14 @@ def replateTitle(type):
     return title
 
 def getUserSheet():
-    # 读取 stats.json 文件并将内容存储在 stats_data 变量中
-    # with open('./output/stats.json', 'r') as file:
-    #     stats_data = json.load(file)
     stats_data=dl.readDB(dbpath, "", "CountryStats")
-    print("stats_data:\n",stats_data)
     # 按照 name 的 A-Z 字母顺序对 stats_data 进行排序
     sorted_stats_data = sorted(stats_data, key=lambda x: x['name'])
     #print("sorted_stats_data",sorted_stats_data)
     # 创建表头
     #table_header = "| No. | Country | Sent | Received | Avg travel(Sent) | Avg travel(Received) |\n"
-    table_header1 = "| 序号 | 国家 | 已寄出 | 已收到 | 寄出-平均所需天数 | 收到-平均所需天数 |\n"
-    table_header2 = "| --- | --- | --- | --- | --- | --- |\n"
+    table_header1 = "| 序号 | 国家 | 已寄出 | 已收到 | 寄出天数-平均 | 收到天数-平均 | 寄出天数-中间值 | 收到天数-中间值 \n"
+    table_header2 = "| --- | --- | --- | --- | --- | --- | --- | --- \n"
 
     # 创建表格内容
     table_content = ""
@@ -40,27 +36,29 @@ def getUserSheet():
         flag = stats['flagEmoji']
         sent = stats['sentNum']
         received = stats['receivedNum']
-        sent_avg = stats['sentAvg']
-        received_avg = stats['receivedAvg']
-        if sent_avg =="-":
-            sent_avg_days = "-"
+        sentAvg = stats['sentAvg']
+        receivedAvg = stats['receivedAvg']
+        sentMedian = stats['sentMedian']
+        receivedMedian = stats['receivedMedian']
+        if sent ==0:
+            sentAvgDays = "-"
+            sentMedianDays = "-"
         else:
-            sent_avg_days = f"{sent_avg}天"
-        
-        if received_avg =="-":
-            received_avg_days = "-"
+            sentAvgDays = f"{sentAvg}天"
+            sentMedianDays = f"{sentMedian}天"
+
+        if received ==0:
+            receivedAvgDays = "-"
+            receivedMedianDays = "-"
         else:
-            received_avg_days = f"{received_avg}天"
+            receivedAvgDays = f"{receivedAvg}天"
+            receivedMedianDays = f"{receivedMedian}天"
 
         
-        table_content += f"| {i} | {country} {flag} | {sent} | {received} | {sent_avg_days} | {received_avg_days} |\n"
+        table_content += f"| {i} | {country} {flag} | {sent} | {received} | {sentAvgDays} | {receivedAvgDays} | {sentMedianDays} | {receivedMedianDays} \n"
 
     # 将表头和表格内容合并
     table = table_header1 + table_header2 + table_content
-
-    # 将表格内容写入 mdsheet.md 文件
-    with open('./output/mdsheet.md', 'w' ,encoding="utf-8") as file:
-        file.write(table)
     return table
 
 def replaceTemplate():

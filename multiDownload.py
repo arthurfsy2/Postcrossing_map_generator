@@ -11,6 +11,7 @@ import math
 from datetime import datetime, timedelta
 import sys
 import sqlite3
+import statistics
 
 
 
@@ -431,6 +432,60 @@ def getUpdatePic(type):
     return updatePic
 
 
+def calculateAVGandMedian(a_data):
+    with open('contryName.json', 'r') as f:
+        countryName = json.load(f)
+
+    # 读取contryName.json文件
+    with open('contryNameEmoji.json', 'r') as f:
+        countryNameEmoji = json.load(f)
+    
+    name_dict = {}
+    
+    for item in a_data:
+        code = item[3]
+        country = countryName[code]
+        flagEmoji = countryNameEmoji[code]
+        r_or_s = item[2]
+        travel_days = item[1]
+        
+        if code not in name_dict:
+            name_dict[code] = {'name': country, 'countryCode': code, 'flagEmoji': flagEmoji, 'sent': [], 'received': []}
+        
+        if r_or_s == 's':
+            name_dict[code]['sent'].append(travel_days)
+        elif r_or_s == 'r':
+            name_dict[code]['received'].append(travel_days)
+    
+    country_stats = []
+    
+    for code, data in name_dict.items():
+        sent_median = None
+        received_median = None
+        
+        if data['sent']:
+            sent_avg = round(statistics.mean(data['sent']),1)
+            sent_median = round(statistics.median(data['sent']),1)
+        
+        if data['received']:
+            received_avg = round(statistics.mean(data['received']),1)
+            received_median = round(statistics.median(data['received']),1)
+        
+        country_stats.append({
+            'name': data['name'],
+            'countryCode': data['countryCode'],
+            'flagEmoji': data['flagEmoji'],
+            'value':len(data['sent']) + len(data['received']),
+            'sentNum':len(data['sent']),
+            'receivedNum':len(data['received']),
+            'sentAvg': sent_avg,
+            'receivedAvg': received_avg,
+            'sentMedian': sent_median,
+            'receivedMedian': received_median,
+        })
+    country_stats.sort(key=lambda x: x['value'], reverse=True)
+    return country_stats
+
 
 def getUserStat():
     headers = {
@@ -449,8 +504,8 @@ def getUserStat():
         }
     url=f'https://www.postcrossing.com/user/{account}/feed'    
     a_data = requests.get(url,headers=headers).json()
-    # with open(f"./output/UserStats.json", "w") as file:
-    #     json.dump(a_data, file, indent=2)
+    with open(f"./output/UserStats.json", "w") as file:
+        json.dump(a_data, file, indent=2)
     # print(f"已生成output/UserStats.json")
     # 统计每个国家代码的出现次数
     country_count = {}
@@ -460,15 +515,6 @@ def getUserStat():
             country_count[country_code] += 1
         else:
             country_count[country_code] = 1
-
-    # 读取contryName.json文件
-    with open('contryName.json', 'r') as f:
-        country_data = json.load(f)
-
-    # 读取contryName.json文件
-    with open('contryNameEmoji.json', 'r') as f:
-        country_data_emoji = json.load(f)
-
 
     # 创建一个字典用于存储汇总结果
     summary = {}
@@ -502,83 +548,23 @@ def getUserStat():
         json.dump(result, f, indent=2)
 
     print(f"已生成output/month.json")
-    # 创建一个空列表用于存储每个国家的统计结果
-    country_stats = []
 
-    # 遍历 a_data 中的每个元素
-    for item in a_data:
-        country_code = item[3]  # 获取国家代码
-        country_type = item[2]  # 获取类型（sent 或 received）
-
-        # 根据国家代码在 countryName.json 中查找对应的英文名
-        if country_code in country_data:
-            country_name = country_data[country_code]
-            country_flag = country_data_emoji[country_code]
-        else:
-            country_name = "Unknown"
-
-        # 判断是否已存在相同国家名称的统计项
-        found = False
-        for stats in country_stats:
-            if stats['name'] == country_name:
-                found = True
-                stats['value'] += 1
-                if country_type == 's':
-                    stats['sentNum'] += 1
-                    stats['sentAvg'] += item[1]
-                elif country_type == 'r':
-                    stats['receivedNum'] += 1
-                    stats['receivedAvg'] += item[1]
-                break
-
-        # 如果不存在相同国家名称的统计项，则添加新的统计项
-        if not found:
-            if country_type == 's':
-                country_stats.append({
-                    'name': country_name,
-                    'countryCode': country_code,
-                    'flagEmoji': country_flag,
-                    'value': 1,
-                    'sentNum': 1,
-                    'receivedNum': 0,
-                    'sentAvg': item[1],
-                    'receivedAvg': 0
-                })
-            elif country_type == 'r':
-                country_stats.append({
-                    'name': country_name,
-                    'countryCode': country_code,
-                    'flagEmoji': country_flag,
-                    'value': 1,
-                    'sentNum': 0,
-                    'receivedNum': 1,
-                    'sentAvg': 0,
-                    'receivedAvg': item[1]
-                })
-
-    # 计算平均值并保留小数点后一位
-    for stats in country_stats:
-        if stats['sentNum'] > 0:
-            stats['sentAvg'] = round(stats['sentAvg'] / stats['sentNum'], 1)
-        else:
-            stats['sentAvg'] = '-'
-        if stats['receivedNum'] > 0:
-            stats['receivedAvg'] = round(stats['receivedAvg'] / stats['receivedNum'], 1)
-        else:
-            stats['receivedAvg'] = '-'
-
-    # 将结果按照 value 值从大到小进行排序
-    country_stats.sort(key=lambda x: x['value'], reverse=True)
-
+    country_stats = calculateAVGandMedian(a_data)
+    #print("country_stats:\n",country_stats)
     # # 将统计结果写入 b.json 文件
-    # with open('./output/stats.json', 'w') as file:
-    #     json.dump(country_stats, file, indent=2)
-    # print(f"./output/stats.json")
+    with open('./output/stats.json', 'w') as file:
+        json.dump(country_stats, file, indent=2)
+    print(f"./output/stats.json")
     conn = sqlite3.connect(dbpath)
     cursor = conn.cursor()
     tablename = "CountryStats"
     cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                        (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER)''')
+                (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER, sentMedian INTEGER, receivedMedian INTEGER,
+                PRIMARY KEY (name))''')
+
+    # cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+    #                 (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER,
+    #                 PRIMARY KEY (name))''')
     for item in country_stats:
         
         name = item['name']
@@ -589,10 +575,14 @@ def getUserStat():
         receivedNum = item['receivedNum']
         sentAvg = item['sentAvg']
         receivedAvg = item['receivedAvg']
+        sentMedian = item['sentMedian']
+        receivedMedian = item['receivedMedian']
 
         
-        cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                    (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg))
+        cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian))
+        # cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        #             (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg))
     print(f'已更新CountryStats：数据库{dbpath}')
     # 将列表中的JSON对象写入文件
     conn.commit()
@@ -710,6 +700,8 @@ def readDB(dbpath, type,tablename):
                         "receivedNum":row[5],
                         "sentAvg": row[6],
                         "receivedAvg": row[7],
+                        "sentMedian": row[8],
+                        "receivedMedian": row[9],
                     }
                 data_all.append(data)
         conn.close()
