@@ -56,8 +56,8 @@
 ## 获取Cookie的方法：
 
 1. 登陆你的postcrossing账号，并打开你个人的gallery/sent链接。
-2. 按下F12打开调试模式，再F5刷新网页，在“网络/network”下找到“sent”名称的项，点击“标头”，在“请求标头”中找到Cookie开头的内容（红框当中显示的内容）。鼠标选中，复制粘贴到config.json的Cookie对应位置。（开头是类似__的内容，不要漏了）
-   ![img](img/20231026155703.png)
+2. 按下F12打开调试模式，再F5刷新网页，在“网络/network”下找到“sent”名称的项，点击“标头”，在“请求标头”中找到Cookie开头的内容（红框当中显示的内容）。鼠标选中，复制粘贴到config.json的Cookie对应位置。
+   找到__Host-postcrossing=XXX，复制XXX这一串内容粘贴到你的config.json的"Cookie"当中
 3. 如果cookie错误/过期，则只能获取gallery/sent或received的内容
 
 ## vercel

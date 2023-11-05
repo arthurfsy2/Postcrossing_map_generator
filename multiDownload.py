@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import threading
 import os
-import time
+import multiDownload as dl
 import json
 import pandas as pd
 import math
@@ -20,7 +20,8 @@ with open("config.json", "r") as file:
 account = data["account"]
 account = data["account"]
 nickName = data["nickName"]
-Cookie = data["Cookie"]
+Cookie_raw = data["Cookie"]
+Cookie=f"__Host-postcrossing={Cookie_raw}"
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
 
@@ -406,11 +407,10 @@ def downloadPic(updatePic,pic_json):
 
 def getUpdatePic(type):
     picFileNameList=[]
-    with open(f'./output/{type}.json', 'r') as file:
-        data = json.load(file)
+    content =dl.readDB(dbpath, type,"Galleryinfo")
 
     # 提取picFileName字段内容
-    picFileNameList = [item['picFileName'] for item in data]
+    picFileNameList = [item['picFileName'] for item in content]
     #print("picFileNameList:",picFileNameList)
     if getLocalPic() is not None:
         oldPic = getLocalPic()       
@@ -745,14 +745,14 @@ def PicDataCheck():
     
     getPageNum(content_raw)
     for type in types:
-        getGalleryInfo(type) 
+        getGalleryInfo(type) # 获取图库信息
     for type in types:
-        multiDownload(type)
+        multiDownload(type) # 批量下载图片
     
     
 def replaceTemplateCheck():  
     getPageNum(content_raw)
-    getUserStat()
+    # getUserStat()
     for type in types:
         getGalleryInfo(type) 
 

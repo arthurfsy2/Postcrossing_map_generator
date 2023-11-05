@@ -2,6 +2,8 @@ import multiDownload as dl
 import pandas as pd
 import sqlite3
 import json
+from translate import Translator
+from urllib import parse,request
 
 with open("config.json", "r") as file:
     data = json.load(file)
@@ -10,6 +12,21 @@ nickName = data["nickName"]
 Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
+
+
+def translate(sentence, src_lan, tgt_lan):
+    apikey="da3f6df96672f9693e76ed14dd54f884"
+    url = 'http://api.niutrans.com/NiuTransServer/translation?'
+    data = {"from": src_lan, "to": tgt_lan, "apikey": apikey, "src_text": sentence}
+    data_en = parse.urlencode(data)
+    req = url + "&" + data_en
+    res = request.urlopen(req)
+    res_dict = json.loads(res.read())
+    if "tgt_text" in res_dict:
+        result = res_dict['tgt_text']
+    else:
+        result = res
+    return result
 
 def replateTitle(type):    
     
@@ -101,15 +118,22 @@ def getCardStoryList():
     cursor = conn.cursor()
 
     # 查询postcardStory表和Galleryinfo表，并通过id字段进行连接查询
-    cursor.execute('''SELECT postcardStory.id, 
-                   postcardStory.content_cn, 
-                   postcardStory.content_en,
-                   Galleryinfo.userInfo,
-                   Galleryinfo.picFileName,
-                   Galleryinfo.contryNameEmoji,
-                   Galleryinfo.type
-                   FROM postcardStory
-                   INNER JOIN Galleryinfo ON postcardStory.id = Galleryinfo.id''')
+    cursor.execute('''SELECT
+	p.id,
+	p.content_cn,
+	p.content_en,
+	g.userInfo,
+	g.picFileName,
+	g.contryNameEmoji,
+	g.type,
+	m.travel_time,
+	date( REPLACE ( SUBSTR( m.travel_time, 22, 10 ), '/', '-' ) ) AS receivedDate
+	
+FROM
+	postcardStory p
+	INNER JOIN Galleryinfo g ON p.id = g.id
+	INNER JOIN Mapinfo m ON p.id = m.id
+	ORDER BY receivedDate DESC''')
 
     # 将查询结果存储到content列表中
     content = cursor.fetchall()
@@ -120,14 +144,16 @@ def getCardStoryList():
     for row in content:
         onlinelink ="https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium"
         storypicLink = "https://pan.4a1801.life/d/Onedrive-4A1801/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99/public/Postcrossing/content"
-
+        #translator = Translator(to_lang="zh")
+        translation = translate(row[2], 'auto', 'zh')
+        #translation = translator.translate(row[2])
         list = f'### [{row[0]}](https://www.postcrossing.com/postcards/{row[0]})\n\n' \
           f'> 来自 {row[3]} {row[5]}\n\n' \
           f'<div class="image-preview">  <img src="{onlinelink}/{row[4]}" />' \
           f'  <img src="{storypicLink}/{row[0]}.webp" /></div>' \
           f'\n\n' \
           f'::: info 内容\n{row[2]}\n:::\n\n' \
-          f'::: tip 翻译\n{row[1]}\n:::\n\n'       
+          f'::: tip 翻译\n{translation}\n:::\n\n'       
         list_all +=list   
     return list_all
 

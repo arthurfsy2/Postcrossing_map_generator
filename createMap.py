@@ -87,7 +87,7 @@ def createMap():
         attr='map',
     )
     geojson(m)    
-    def generate_random_offset():
+    def generate_random_offset(): 
             return random.uniform(-0.0001, 0.0001)
     for i,coord in enumerate(homeCoords):
         #生成home标记(ClusterMap)
@@ -161,7 +161,7 @@ def createClusterMap():
         location=most_common_homeCoord,
         zoom_start=2,
         tiles='https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}',       
-        #tiles='https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+        #tiles='https://mt.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
         attr='map',
     )
     geojson(cluster)
