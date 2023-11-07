@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import threading
 import os
-import multiDownload as dl
+#import multiDownload as dl
 import json
 import pandas as pd
 import math
@@ -103,6 +103,8 @@ def getPageNum(content):
     # value = data.get(type)
     # from_or_to, pageNum, Num, title = value
     path = "./output/title.json"
+
+
     with open(path, "w",encoding="utf-8") as file:
             json.dump(data, file, indent=2)
     # return from_or_to, pageNum, Num, title
@@ -286,9 +288,18 @@ def convert_to_utc(zoneNum,type,time_str):
     time_utc_str = time_utc.strftime(f"%Y/%m/%d")
     return time_utc_str
 
+def getUserHomeInfo(type):
+    distance_all = []
+    content = readDB(dbpath,type,"Mapinfo")
+    #print("content:",content)
+    for item in content:
+        distance_all.append(int(item["distance"]))
+    total = sum(distance_all)
+    return total,len(content)
+
 def get_data(postcardID,type):
     
-    
+    distance_all=[]
     for i, id in enumerate(postcardID): 
              
         url=f"https://www.postcrossing.com/postcards/{id}"        
@@ -329,10 +340,6 @@ def get_data(postcardID,type):
         sentCountry = sentAddrInfo[2]
         receivedAddr = receivedInfo[0]
         receivedCountry = receivedInfo[2]
-        # print(f"{id}_sentAddr:", sentAddr)
-        # print(f"{id}_sentCountry:", sentCountry)
-        # print(f"{id}_receivedAddr:", receivedAddr)
-        # print(f"{id}_receivedCountry:", receivedCountry)
 
         # 提取发送/接收user
         userPattern = r'<a itemprop="url" href="/user/(.*?)"'
@@ -353,11 +360,14 @@ def get_data(postcardID,type):
             # 将拼接后的坐标字符串转换为浮点数
             from_coord = (float(match[0]), float(match[1]))
             to_coord = (float(match[2]), float(match[3]))
+        
+        
         conn = sqlite3.connect(dbpath)
         cursor = conn.cursor()
         tablename = "Mapinfo"
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
                         (id TEXT PRIMARY KEY, FromCoor TEXT, ToCoor TEXT, distance INTEGER, travel_time TEXT, link TEXT, user TEXT, sentAddr TEXT, receivedAddr TEXT, type TEXT)''')
+        
         item = {
                 "id": id,
                 "FromCoor":from_coord,
@@ -407,7 +417,7 @@ def downloadPic(updatePic,pic_json):
 
 def getUpdatePic(type):
     picFileNameList=[]
-    content =dl.readDB(dbpath, type,"Galleryinfo")
+    content =readDB(dbpath, type,"Galleryinfo")
 
     # 提取picFileName字段内容
     picFileNameList = [item['picFileName'] for item in content]
@@ -653,7 +663,6 @@ def multiDownload(type):
 
 def readDB(dbpath, type,tablename):
     data_all = []
-
     if os.path.exists(dbpath):
         conn = sqlite3.connect(dbpath)
         cursor = conn.cursor()
@@ -703,8 +712,9 @@ def readDB(dbpath, type,tablename):
                         "sentMedian": row[8],
                         "receivedMedian": row[9],
                     }
-                data_all.append(data)
+                data_all.append(data)       
         conn.close()
+        return data_all
 
 
 
@@ -757,3 +767,6 @@ def replaceTemplateCheck():
         getGalleryInfo(type) 
 
 
+getUserHomeInfo("sent")
+
+getUserHomeInfo("received")

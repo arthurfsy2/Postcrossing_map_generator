@@ -43,7 +43,7 @@ def getUserSheet():
     #print("sorted_stats_data",sorted_stats_data)
     # 创建表头
     #table_header = "| No. | Country | Sent | Received | Avg travel(Sent) | Avg travel(Received) |\n"
-    table_header1 = "| 序号 | 国家 | 已寄出 | 已收到 | 寄出天数-平均 | 收到天数-平均 | 寄出天数-中间值 | 收到天数-中间值 \n"
+    table_header1 = "| 序号 | 国家 | 已寄出 | 已收到 | 寄出-平均 | 收到-平均 | 寄出-中间值 | 收到-中间值 \n"
     table_header2 = "| --- | --- | --- | --- | --- | --- | --- | --- \n"
 
     # 创建表格内容
@@ -79,19 +79,30 @@ def getUserSheet():
     return table
 
 def replaceTemplate():
-    stat,content_raw,types = dl.getAccountStat()     
-    #getUserSheet()       
+    stat,content_raw,types = dl.getAccountStat()  
     title_all=""
+    desc_all=""      
+    
+    for type in types: 
+        distance_all,num = dl.getUserHomeInfo(type)
+        if type == "sent":
+            desc = f"寄出总数：**{num}**  寄出总距离：**{distance_all}** km\n"
+        elif type == "received":
+            desc = f"收到总数：**{num}**  收到总距离：**{distance_all}** km\n"
+        else:
+            desc =""
+        desc_all += desc
+    print("desc_all：",desc_all)
     for type in types:        
         title = replateTitle(type)
-        #print("title:",title)
         title_all += f"#### [{title}]({nickName}/postcrossing/{type})\n\n"
+        title_final = f"{desc_all}\n{title_all}"
     #print("title_all:\n",title_all)
     sheet = getUserSheet()
     list = getCardStoryList()
     with open(f"./template/信息汇总_template.md", "r",encoding="utf-8") as f:
         data = f.read()  
-        dataNew = data.replace('//请替换明信片墙title',title_all)
+        dataNew = data.replace('//请替换明信片墙title',title_final)
         print("已替换明信片墙title")
         dataNew = dataNew.replace('//请替换明信片表格',sheet)
         print("已替换明信片表格")
@@ -127,35 +138,35 @@ def getCardStoryList():
 	g.contryNameEmoji,
 	g.type,
 	m.travel_time,
-	date( REPLACE ( SUBSTR( m.travel_time, 22, 10 ), '/', '-' ) ) AS receivedDate
-	
+	date( REPLACE ( SUBSTR( m.travel_time, 22, 10 ), '/', '-' ) ) AS receivedDate,
+	m.distance 
 FROM
 	postcardStory p
 	INNER JOIN Galleryinfo g ON p.id = g.id
-	INNER JOIN Mapinfo m ON p.id = m.id
-	ORDER BY receivedDate DESC''')
+	INNER JOIN Mapinfo m ON p.id = m.id 
+ORDER BY
+	receivedDate DESC''')
 
     # 将查询结果存储到content列表中
     content = cursor.fetchall()
-    #print(f"content:\n",content)
     # 关闭数据库连接
     conn.close()
     list_all = ""
     for row in content:
         onlinelink ="https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium"
         storypicLink = "https://pan.4a1801.life/d/Onedrive-4A1801/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99/public/Postcrossing/content"
-        #translator = Translator(to_lang="zh")
-        translation = translate(row[2], 'auto', 'zh')
-        #translation = translator.translate(row[2])
+        #translation = translate(row[2], 'auto', 'zh')
         list = f'### [{row[0]}](https://www.postcrossing.com/postcards/{row[0]})\n\n' \
           f'> 来自 {row[3]} {row[5]}\n\n' \
           f'<div class="image-preview">  <img src="{onlinelink}/{row[4]}" />' \
           f'  <img src="{storypicLink}/{row[0]}.webp" /></div>' \
           f'\n\n' \
           f'::: info 内容\n{row[2]}\n:::\n\n' \
-          f'::: tip 翻译\n{translation}\n:::\n\n'       
-        list_all +=list   
+          f'::: tip 翻译\n{row[1]}\n:::\n\n'       
+        list_all +=list
     return list_all
+
+
 
 dl.replaceTemplateCheck()
 excel_file="./template/postcardStory.xlsx"
