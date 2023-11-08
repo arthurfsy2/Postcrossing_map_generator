@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：46）
+title: 明信片展示墙（寄出：47）
 icon: address-card
-date: 2023-11-05
+date: 2023-11-08
 category:
   - Arthur
 tag:
@@ -237,4 +237,9 @@ tag:
  >寄往 [laurelr](https://www.postcrossing.com/user/laurelr) :us:
 
 ![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/023065f841be8fc2ef00308ae793a107.jpg)
+
+## [CN-3610303](https://www.postcrossing.com/postcards/CN-3610303) 
+ >寄往 [niku-niku](https://www.postcrossing.com/user/niku-niku) :jp:
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/1owavt13j40taanl62523g6qef9d8iwc.jpg)
 
