@@ -751,9 +751,9 @@ def MapDataCheck():
     
 
 stat,content_raw,types = getAccountStat()
-def PicDataCheck():  
-    
+def PicDataCheck():     
     getPageNum(content_raw)
+    getUserStat()
     for type in types:
         getGalleryInfo(type) # 获取图库信息
     for type in types:
@@ -762,7 +762,7 @@ def PicDataCheck():
     
 def replaceTemplateCheck():  
     getPageNum(content_raw)
-    # getUserStat()
+    getUserStat()
     for type in types:
         getGalleryInfo(type) 
 
