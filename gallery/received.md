@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：55）
+title: 明信片展示墙（收到：57）
 icon: address-card
-date: 2023-11-15
+date: 2023-11-19
 category:
   - Arthur
 tag:
@@ -282,4 +282,14 @@ tag:
  >来自 [airsnowmiss](https://www.postcrossing.com/user/airsnowmiss) :netherlands:
 
 ![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/f034894d687e190e2552bb2b6946be17.jpg)
+
+## [RU-9830214](https://www.postcrossing.com/postcards/RU-9830214) 
+ >来自 [EvaS18](https://www.postcrossing.com/user/EvaS18) :ru:
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/21jpthdiz1z0yuvkwglmmpa43ebcp892.jpg)
+
+## [NL-5593570](https://www.postcrossing.com/postcards/NL-5593570) 
+ >来自 [essie1109](https://www.postcrossing.com/user/essie1109) :netherlands:
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/1fgbz23qvpbsc89bxala10k47jc6a05u.jpg)
 

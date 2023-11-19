@@ -15,25 +15,25 @@
     "name": "Russia",
     "countryCode": "RU",
     "flagEmoji": ":ru:",
-    "value": 22,
-    "sentNum": 12,
-    "receivedNum": 10,
-    "sentAvg": 43.1,
-    "receivedAvg": 96.3,
-    "sentMedian": 41.5,
-    "receivedMedian": 81.5
+    "value": 24,
+    "sentNum": 13,
+    "receivedNum": 11,
+    "sentAvg": 45.8,
+    "receivedAvg": 92,
+    "sentMedian": 43,
+    "receivedMedian": 81
   },
   {
     "name": "Netherlands",
     "countryCode": "NL",
     "flagEmoji": ":netherlands:",
-    "value": 21,
+    "value": 22,
     "sentNum": 9,
-    "receivedNum": 12,
+    "receivedNum": 13,
     "sentAvg": 31.8,
-    "receivedAvg": 43.5,
+    "receivedAvg": 42.7,
     "sentMedian": 28,
-    "receivedMedian": 32.0
+    "receivedMedian": 33
   },
   {
     "name": "Taiwan",
@@ -120,6 +120,18 @@
     "receivedMedian": 12
   },
   {
+    "name": "Canada",
+    "countryCode": "CA",
+    "flagEmoji": ":canada:",
+    "value": 4,
+    "sentNum": 2,
+    "receivedNum": 2,
+    "sentAvg": 30,
+    "receivedAvg": 25.5,
+    "sentMedian": 30.0,
+    "receivedMedian": 25.5
+  },
+  {
     "name": "Austria",
     "countryCode": "AT",
     "flagEmoji": ":austria:",
@@ -178,18 +190,6 @@
     "receivedAvg": 21,
     "sentMedian": 30,
     "receivedMedian": 21.0
-  },
-  {
-    "name": "Canada",
-    "countryCode": "CA",
-    "flagEmoji": ":canada:",
-    "value": 3,
-    "sentNum": 1,
-    "receivedNum": 2,
-    "sentAvg": 30,
-    "receivedAvg": 25.5,
-    "sentMedian": 30,
-    "receivedMedian": 25.5
   },
   {
     "name": "Norway",
