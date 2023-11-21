@@ -98,7 +98,7 @@ def getPageNum(content):
     "received": ("来自", receivedPageNum, receivedNum, f"明信片展示墙（收到：{receivedNum}）"),
     "sent": ("寄往", sentPageNum, sentNum, f"明信片展示墙（寄出：{sentNum}）"),
     "favourites": ("来自", favouritesPageNum, favouritesNum, f"明信片展示墙（我的点赞：{favouritesNum}）"),
-    "popular": ("", popularPageNum, popularNum, f"明信片展示墙（我收到的赞：{popularNum}）")
+    "popular": ("寄往", popularPageNum, popularNum, f"明信片展示墙（我收到的赞：{popularNum}）")
             }
     # value = data.get(type)
     # from_or_to, pageNum, Num, title = value
@@ -670,9 +670,47 @@ def readDB(dbpath, type,tablename):
         table_exists = cursor.fetchone()
 
         if table_exists:
-            if tablename == 'Galleryinfo' or tablename == 'Mapinfo':
-            # 从Mapinfo表中获取指定type值的内容
-                cursor.execute(f"SELECT * FROM {tablename} WHERE type=?", (type,))
+            if tablename == 'Galleryinfo':
+                cursor.execute('''SELECT
+                                    g.id,
+                                    (SELECT user FROM Mapinfo WHERE id = m.id AND (type = 'sent' or type = 'received')) AS userInfo2,
+                                    (SELECT contryNameEmoji FROM Galleryinfo WHERE id = g.id AND (type = 'sent' or type = 'received')) AS contryNameEmoji,
+                                    g.picFileName,
+                                    g.favoritesNum,
+                                    g.type,
+                                    m.travel_time,
+                                    date(REPLACE(SUBSTR(m.travel_time, 22, 10), '/', '-')) AS receivedDate,
+                                    m.distance 
+                                FROM
+                                    Galleryinfo g
+                                    LEFT JOIN Mapinfo m ON g.id = m.id 
+                                WHERE
+                                    g.type = ?
+                                ORDER BY
+                                    receivedDate DESC
+                ''', (type,))
+            elif tablename == 'Mapinfo':
+                cursor.execute(f"SELECT * FROM {tablename} WHERE type=? ORDER BY SUBSTR(id, 1, 2), CAST(SUBSTR(id, INSTR(id, '-') + 1) AS INTEGER) DESC", (type,))
+            elif tablename == 'postcardStory':
+                cursor.execute('''SELECT
+                    p.id,
+                    p.content_cn,
+                    p.content_en,
+                    g.userInfo,
+                    g.picFileName,
+                    g.contryNameEmoji,
+                    g.type,
+                    m.travel_time,
+                    date( REPLACE ( SUBSTR( m.travel_time, 22, 10 ), '/', '-' ) ) AS receivedDate,
+                    m.distance 
+                FROM
+                    postcardStory p
+                    INNER JOIN Galleryinfo g ON p.id = g.id
+                    INNER JOIN Mapinfo m ON p.id = m.id 
+                WHERE
+                    g.type = 'received'
+                ORDER BY
+                    receivedDate DESC''')
             else:
                 cursor.execute(f"SELECT * FROM {tablename}")
             rows = cursor.fetchall()
@@ -685,7 +723,9 @@ def readDB(dbpath, type,tablename):
                         "contryNameEmoji": row[2],
                         "picFileName": row[3],
                         "favoritesNum": row[4],
-                        "type": row[5]
+                        "type": row[5],
+                        "travel_time": row[6],
+                        "distance": row[8]
                         }
                 elif tablename == 'Mapinfo':
                     data={
@@ -711,6 +751,17 @@ def readDB(dbpath, type,tablename):
                         "receivedAvg": row[7],
                         "sentMedian": row[8],
                         "receivedMedian": row[9],
+                    }
+                elif tablename == 'postcardStory':
+                    data={
+                        "id": row[0],
+                        "content_cn": row[1],
+                        "content_en": row[2],
+                        "userInfo": row[3],
+                        "picFileName": row[4],
+                        "contryNameEmoji":row[5],
+                        "travel_time": row[7],
+                        "distance": row[9],
                     }
                 data_all.append(data)       
         conn.close()

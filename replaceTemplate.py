@@ -95,7 +95,7 @@ def replaceTemplate():
     print("desc_all：",desc_all)
     for type in types:        
         title = replateTitle(type)
-        title_all += f"#### [{title}]({nickName}/postcrossing/{type})\n\n"
+        title_all += f"#### [{title}](/{nickName}/postcrossing/{type})\n\n"
         title_final = f"{desc_all}\n{title_all}"
     #print("title_all:\n",title_all)
     sheet = getUserSheet()
@@ -112,6 +112,9 @@ def replaceTemplate():
     with open(f"./output/信息汇总.md", "w",encoding="utf-8") as f:
         f.write(dataNew)  
 
+    with open(r"D:\web\Blog2\src\Arthur\Postcrossing\信息汇总.md", "w",encoding="utf-8") as f:
+        f.write(dataNew)  
+
 def getStoryContent(excel_file):
     # 读取Excel文件
     df = pd.read_excel(excel_file)
@@ -125,52 +128,65 @@ def getStoryContent(excel_file):
 
 def getCardStoryList():
     # 连接到test.db数据库
-    conn = sqlite3.connect(dbpath)
-    cursor = conn.cursor()
+    # conn = sqlite3.connect(dbpath)
+    # cursor = conn.cursor()
 
-    # 查询postcardStory表和Galleryinfo表，并通过id字段进行连接查询
-    cursor.execute('''SELECT
-	p.id,
-	p.content_cn,
-	p.content_en,
-	g.userInfo,
-	g.picFileName,
-	g.contryNameEmoji,
-	g.type,
-	m.travel_time,
-	date( REPLACE ( SUBSTR( m.travel_time, 22, 10 ), '/', '-' ) ) AS receivedDate,
-	m.distance 
-FROM
-	postcardStory p
-	INNER JOIN Galleryinfo g ON p.id = g.id
-	INNER JOIN Mapinfo m ON p.id = m.id 
-ORDER BY
-	receivedDate DESC''')
+    # # 查询postcardStory表和Galleryinfo表，并通过id字段进行连接查询
+    # cursor.execute('''SELECT
+    #                 p.id,
+    #                 p.content_cn,
+    #                 p.content_en,
+    #                 g.userInfo,
+    #                 g.picFileName,
+    #                 g.contryNameEmoji,
+    #                 g.type,
+    #                 m.travel_time,
+    #                 date( REPLACE ( SUBSTR( m.travel_time, 22, 10 ), '/', '-' ) ) AS receivedDate,
+    #                 m.distance 
+    #             FROM
+    #                 postcardStory p
+    #                 INNER JOIN Galleryinfo g ON p.id = g.id
+    #                 INNER JOIN Mapinfo m ON p.id = m.id 
+    #             WHERE
+    #                 g.type = 'received'
+    #             ORDER BY
+    #                 receivedDate DESC''')
 
-    # 将查询结果存储到content列表中
-    content = cursor.fetchall()
-    # 关闭数据库连接
-    conn.close()
+    # # 将查询结果存储到content列表中
+    # content = cursor.fetchall()
+    # # 关闭数据库连接
+    # conn.close()
+    content =dl.readDB(dbpath, "","postcardStory")
+    print("content:\n",content)
     list_all = ""
-    for row in content:
+    for id in content:
+        postcardID = id["id"]  
+        content_cn = id["content_cn"]
+        content_en = id["content_en"]
+        userInfo = id["userInfo"]
+        picFileName = id["picFileName"]
+        contryNameEmoji = id["contryNameEmoji"] if id["contryNameEmoji"] is not None else ""
+        travel_time = id["travel_time"]
+        distance = id["distance"]
         onlinelink ="https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium"
         storypicLink = "https://pan.4a1801.life/d/Onedrive-4A1801/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99/public/Postcrossing/content"
-        #translation = translate(row[2], 'auto', 'zh')
-        list = f'### [{row[0]}](https://www.postcrossing.com/postcards/{row[0]})\n\n' \
-          f'> 来自 {row[3]} {row[5]}\n\n' \
-          f'<div class="image-preview">  <img src="{onlinelink}/{row[4]}" />' \
-          f'  <img src="{storypicLink}/{row[0]}.webp" /></div>' \
+
+        list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
+          f'> 来自 {userInfo} {contryNameEmoji}\n' \
+          f'> 📏{distance}km ⏱{travel_time}\n\n' \
+          f'<div class="image-preview">  <img src="{onlinelink}/{picFileName}" />' \
+          f'  <img src="{storypicLink}/{postcardID}.webp" /></div>' \
           f'\n\n' \
-          f'::: info 内容\n{row[2]}\n:::\n\n' \
-          f'::: tip 翻译\n{row[1]}\n:::\n\n'       
+          f'::: info 内容\n{content_en}\n:::\n\n' \
+          f'::: tip 翻译\n{content_cn}\n:::\n\n'       
         list_all +=list
     return list_all
 
 
 
-dl.replaceTemplateCheck()
-excel_file="./template/postcardStory.xlsx"
-getStoryContent(excel_file)
+# dl.replaceTemplateCheck()
+# excel_file="./template/postcardStory.xlsx"
+# getStoryContent(excel_file)
 replaceTemplate()
 
 # getCardStoryList()

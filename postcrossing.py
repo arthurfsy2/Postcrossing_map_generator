@@ -35,23 +35,39 @@ def createMD(type):
         baseUrl = "https://www.postcrossing.com/"
         postcardID = id["id"]  
         picFileName = id["picFileName"]
+        distance = id["distance"]
+        travel_time = id["travel_time"]
+        userInfo = id["userInfo"]
+        contryNameEmoji = id["contryNameEmoji"] if id["contryNameEmoji"] is not None else ""
+        
+        if distance is None and travel_time is None:
+            travel_info = ""
+        else:
+            travel_info = f"> 📏{distance} km \n⏱{travel_time}"
+        pattern=f"## [{postcardID}]({baseUrl}postcards/{postcardID}) \n >{from_or_to} [{userInfo}]({baseUrl}/user/{userInfo}) {contryNameEmoji}\n{travel_info}\n"
         if type == "popular":
             num = id["favoritesNum"]
-            picurl = f"## [{postcardID}]({baseUrl}postcards/{postcardID})\n>点赞人数：{num}\n\n![]({picDriverPath}/{picFileName}) \n "
+            picurl = f"{pattern}>点赞人数：**{num}**\n\n![]({picDriverPath}/{picFileName}) \n "
         else:
             contryNameEmoji = id["contryNameEmoji"]
             userInfo = id["userInfo"]
-            picurl = f"## [{postcardID}]({baseUrl}postcards/{postcardID}) \n >{from_or_to} {userInfo} {contryNameEmoji}\n\n![]({picDriverPath}/{picFileName})\n\n"
+            picurl = f"{pattern}\n\n![]({picDriverPath}/{picFileName})\n\n"
         MDcontent_all += picurl
     #print(f"{account}'{type}展示墙数量:{Num}\n{account}'{type}展示墙页数:{pageNum}\n")
     
 
     filename_md = f"gallery/{type}.md"
-    with open(filename_md, "w", encoding="utf-8") as file:
-            content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\n---\n\n{MDcontent_all}'
-            file.write(content)
-            print(f"\n{type}_展示墙数据转换为md格式成功：{filename_md}")
-
+    filename_md2 = rf"D:\web\Blog2\src\Arthur\Postcrossing\{type}.md"
+    if type in types:
+        num = types.index(type) + 2
+    link = f"### [{account}'s {type}]({baseUrl}user/{account}/gallery/{type})"
+    content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
+    with open(filename_md, "w", encoding="utf-8") as f:    
+        f.write(content)
+        
+    with open(filename_md2, "w",encoding="utf-8") as f:
+        f.write(content) 
+    print(f"\n{type}_展示墙数据转换为md格式成功：{filename_md}")
 
 dl.PicDataCheck()
 for type in types:
