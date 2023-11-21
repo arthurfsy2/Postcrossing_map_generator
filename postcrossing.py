@@ -16,6 +16,7 @@ Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
 
+
 # 获取当前日期
 current_date = datetime.now().date()
 
@@ -57,16 +58,19 @@ def createMD(type):
     
 
     filename_md = f"gallery/{type}.md"
-    filename_md2 = rf"D:\web\Blog2\src\Arthur\Postcrossing\{type}.md"
+    
     if type in types:
         num = types.index(type) + 2
     link = f"### [{account}'s {type}]({baseUrl}user/{account}/gallery/{type})"
     content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
     with open(filename_md, "w", encoding="utf-8") as f:    
         f.write(content)
-        
-    with open(filename_md2, "w",encoding="utf-8") as f:
-        f.write(content) 
+    
+    # 换为你的blog的本地链接，可自动同步过去
+    blog_path = rf"D:\web\Blog2\src\Arthur\Postcrossing\{type}.md"
+    if os.path.exists(blog_path):  
+        with open(blog_path, "w",encoding="utf-8") as f:
+            f.write(content) 
     print(f"\n{type}_展示墙数据转换为md格式成功：{filename_md}")
 
 dl.PicDataCheck()

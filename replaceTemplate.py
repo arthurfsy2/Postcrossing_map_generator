@@ -2,7 +2,7 @@ import multiDownload as dl
 import pandas as pd
 import sqlite3
 import json
-from translate import Translator
+import os
 from urllib import parse,request
 
 with open("config.json", "r") as file:
@@ -112,8 +112,13 @@ def replaceTemplate():
     with open(f"./output/信息汇总.md", "w",encoding="utf-8") as f:
         f.write(dataNew)  
 
-    with open(r"D:\web\Blog2\src\Arthur\Postcrossing\信息汇总.md", "w",encoding="utf-8") as f:
-        f.write(dataNew)  
+    blog_path = r"D:\web\Blog2\src\Arthur\Postcrossing\信息汇总.md"
+    
+    # 换为你的blog的本地链接，可自动同步过去
+    if os.path.exists(blog_path):
+        print("路径状态：",os.path.exists(blog_path))
+        with open(blog_path, "w", encoding="utf-8") as f:
+            f.write(dataNew)
 
 def getStoryContent(excel_file):
     # 读取Excel文件
