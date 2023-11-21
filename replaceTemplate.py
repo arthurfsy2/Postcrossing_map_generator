@@ -127,37 +127,7 @@ def getStoryContent(excel_file):
 
 
 def getCardStoryList():
-    # 连接到test.db数据库
-    # conn = sqlite3.connect(dbpath)
-    # cursor = conn.cursor()
-
-    # # 查询postcardStory表和Galleryinfo表，并通过id字段进行连接查询
-    # cursor.execute('''SELECT
-    #                 p.id,
-    #                 p.content_cn,
-    #                 p.content_en,
-    #                 g.userInfo,
-    #                 g.picFileName,
-    #                 g.contryNameEmoji,
-    #                 g.type,
-    #                 m.travel_time,
-    #                 date( REPLACE ( SUBSTR( m.travel_time, 22, 10 ), '/', '-' ) ) AS receivedDate,
-    #                 m.distance 
-    #             FROM
-    #                 postcardStory p
-    #                 INNER JOIN Galleryinfo g ON p.id = g.id
-    #                 INNER JOIN Mapinfo m ON p.id = m.id 
-    #             WHERE
-    #                 g.type = 'received'
-    #             ORDER BY
-    #                 receivedDate DESC''')
-
-    # # 将查询结果存储到content列表中
-    # content = cursor.fetchall()
-    # # 关闭数据库连接
-    # conn.close()
     content =dl.readDB(dbpath, "","postcardStory")
-    print("content:\n",content)
     list_all = ""
     for id in content:
         postcardID = id["id"]  
@@ -173,7 +143,7 @@ def getCardStoryList():
 
         list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
           f'> 来自 {userInfo} {contryNameEmoji}\n' \
-          f'> 📏{distance}km ⏱{travel_time}\n\n' \
+          f'> 📏{distance} km\n⏱{travel_time}\n\n' \
           f'<div class="image-preview">  <img src="{onlinelink}/{picFileName}" />' \
           f'  <img src="{storypicLink}/{postcardID}.webp" /></div>' \
           f'\n\n' \
@@ -184,9 +154,9 @@ def getCardStoryList():
 
 
 
-# dl.replaceTemplateCheck()
-# excel_file="./template/postcardStory.xlsx"
-# getStoryContent(excel_file)
+dl.replaceTemplateCheck()
+excel_file="./template/postcardStory.xlsx"
+getStoryContent(excel_file)
 replaceTemplate()
 
 # getCardStoryList()
