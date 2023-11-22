@@ -4,7 +4,6 @@ import requests
 from bs4 import BeautifulSoup
 import threading
 import os
-#import multiDownload as dl
 import json
 import pandas as pd
 import math
@@ -15,13 +14,13 @@ import statistics
 
 
 
+
 with open("config.json", "r") as file:
     data = json.load(file)
 account = data["account"]
 account = data["account"]
 nickName = data["nickName"]
-Cookie_raw = data["Cookie"]
-Cookie=f"__Host-postcrossing={Cookie_raw}"
+Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
 

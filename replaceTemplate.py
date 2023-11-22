@@ -116,7 +116,6 @@ def replaceTemplate():
     
     # 换为你的blog的本地链接，可自动同步过去
     if os.path.exists(blog_path):
-        print("路径状态：",os.path.exists(blog_path))
         with open(blog_path, "w", encoding="utf-8") as f:
             f.write(dataNew)
 
