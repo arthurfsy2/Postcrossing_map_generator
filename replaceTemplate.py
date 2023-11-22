@@ -3,7 +3,7 @@ import pandas as pd
 import sqlite3
 import json
 import os
-from urllib import parse,request
+
 
 with open("config.json", "r") as file:
     data = json.load(file)

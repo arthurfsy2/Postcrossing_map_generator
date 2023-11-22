@@ -92,7 +92,8 @@ with open('config.json', 'r') as file:
 
 # 更新Cookie变量的值
 config_data['Cookie'] = Cookie
-
+config_data['account'] = account
+config_data['Cookie'] = Cookie
 # 将更新后的内容写入config.json文件
 with open('config.json', 'w') as file:
     json.dump(config_data, file, indent=4)
