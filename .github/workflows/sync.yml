@@ -31,6 +31,10 @@ jobs:
       - name: 安装依赖
         run: |
           pip install -r requirements.txt
+    
+      - name: Install openpyxl
+        run: |
+            pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com
 
       - name: 获取展示墙数据
         run: |
