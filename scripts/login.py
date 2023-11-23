@@ -88,15 +88,15 @@ else:
 
 Cookie=f"__Host-postcrossing={extracted_host}; PostcrossingRemember={extracted_remember}"
 
-# 读取config.json文件内容
-with open('config.json', 'r') as file:
+# 读取scripts/config.json文件内容
+with open('scripts/config.json', 'r') as file:
     config_data = json.load(file)
 
 # 更新Cookie变量的值
 config_data['Cookie'] = Cookie
 config_data['account'] = account
 config_data['nickName'] = nickName
-# 将更新后的内容写入config.json文件
-with open('config.json', 'w') as file:
+# 将更新后的内容写入scripts/config.json文件
+with open('scripts/config.json', 'w') as file:
     json.dump(config_data, file, indent=4)
 os.remove("log.txt")  

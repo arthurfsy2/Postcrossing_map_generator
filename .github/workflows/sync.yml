@@ -39,15 +39,15 @@ jobs:
       - name: 获取展示墙数据
         run: |
           python login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} 
-          python createGallery.py
-          python createMap.py
-          python createPersonalPage.py
-          python init.py
+          python scripts/createMap.py
+          python scripts/createGallery.py
+          python scripts/createPersonalPage.py
+          python scripts/init.py
           
       - name: 检查文件更新
         id: check_changes
         run: |
-          git diff --quiet || echo "::changes=true" >> $GITHUB_OUTPUT
+          git diff --quiet || echo "changes=true" >> $GITHUB_OUTPUT
 
       - name: 提交
         run: |

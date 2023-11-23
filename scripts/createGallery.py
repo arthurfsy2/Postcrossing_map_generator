@@ -8,7 +8,7 @@ import os
 
 start_time = time.time()
 
-with open("config.json", "r") as file:
+with open("scripts/config.json", "r") as file:
     data = json.load(file)
 account = data["account"]
 nickName = data["nickName"]
@@ -45,6 +45,7 @@ def createMD(type):
             travel_info = ""
         else:
             travel_info = f"> 📏{distance} km \n⏱{travel_time}"
+        
         pattern=f"## [{postcardID}]({baseUrl}postcards/{postcardID}) \n >{from_or_to} [{userInfo}]({baseUrl}/user/{userInfo}) {contryNameEmoji}\n{travel_info}\n"
         if type == "popular":
             num = id["favoritesNum"]
@@ -63,29 +64,34 @@ def createMD(type):
         num = types.index(type) + 2
     link = f"### [{account}'s {type}]({baseUrl}user/{account}/gallery/{type})"
     content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
-    with open(filename_md, "w", encoding="utf-8") as f:    
-        f.write(content)
+    
+    with open('scripts/galleryupdatestats.json', 'r') as file:
+        config_data = json.load(file)
+    
+    if os.path.exists(filename_md): 
+        if config_data[type] == "1":
+            with open(filename_md, "w", encoding="utf-8") as f:    
+                f.write(content)
+            print(f"\n{type}.md已成功更新")
+        else:
+            print(f"\n{type}.md无更新")
+    else:
+        with open(filename_md, "w", encoding="utf-8") as f:    
+                f.write(content)
+        print(f"\n{type}.md文件已生成")
     
     # 换为你的blog的本地链接，可自动同步过去
     blog_path = rf"D:\web\Blog2\src\Arthur\Postcrossing\{type}.md"
     if os.path.exists(blog_path):  
         with open(blog_path, "w",encoding="utf-8") as f:
             f.write(content) 
-    print(f"\n{type}_展示墙数据转换为md格式成功：{filename_md}")
+    
 
 dl.PicDataCheck()
 for type in types:
     createMD(type) 
-    # removePath = f"./output/{type}.json"
-    # if os.path.exists(removePath):  # 更新完后删除List_update.json
-    #     os.remove(removePath)  
+
 
 end_time = time.time()
 execution_time = round((end_time - start_time),3)
 print(f"postcrossing.py脚本执行时间：{execution_time}秒\n")
-
-# command = "py createMap.py"
-# subprocess.run(command, shell=True)
-
-# print("请按下任意键退出")
-# input()

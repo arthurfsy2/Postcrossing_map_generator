@@ -10,7 +10,7 @@ import sys
 
 start_time = time.time()
 
-with open("config.json", "r") as file:
+with open("scripts/config.json", "r") as file:
     data = json.load(file)
 account = data["account"]
 Cookie = data["Cookie"]
@@ -149,8 +149,7 @@ def createMap():
     m.save("Map.html")
     replaceJsRef("./Map.html")
 
-    print((f"\nMap.html已生成!"))
-    # 保存地图为HTML文件
+    
 
 def createClusterMap():
     sentData =dl.readDB(dbpath, "sent", "Mapinfo")
@@ -222,7 +221,7 @@ def createClusterMap():
     # 保存地图为HTML文件
     cluster.save("ClusterMap.html")
     replaceJsRef("./ClusterMap.html")
-    print((f"\nClusterMap.html已生成!"))
+
 
 
 
@@ -268,12 +267,31 @@ def replaceJsRef(fileFullName):
     os.rename(f"{fileFullName}.bak", fileFullName)
 
 dl.MapDataCheck()
-print("——————————正在生成地图——————————")
-sentData =dl.readDB(dbpath, "sent", "Mapinfo")
-receivedData =dl.readDB(dbpath, "received", "Mapinfo")
-createMap()
-createClusterMap()  
+
+def pathCheck(path):
+    if os.path.exists(path): 
+        with open('scripts/mapUpdatestats.json', 'r') as file:
+            config_data = json.load(file)
+        SentResultStat = config_data["sent"]
+        ReceivedResult= config_data["received"]
+        if SentResultStat =="1" or ReceivedResult =="1":
+            if path =="./Map.html":   
+                createMap()
+            elif path == "./ClusterMap.html":
+                createClusterMap() 
+            print(f"{path}已成功更新")
+        else:
+            print(f"{path}无更新")
+    else:
+        if path =="./Map.html":   
+            createMap()
+        elif path == "./ClusterMap.html":
+            createClusterMap() 
+        print((f"\n{path}已生成!"))
+        
+pathCheck("./Map.html")
+pathCheck("./ClusterMap.html")
 end_time = time.time()
 execution_time = round((end_time - start_time),3)
 print("————————————————————") 
-print(f"createMap.py脚本执行时间：{execution_time}秒")
+print(f"scripts/contryNameEmoji.json脚本执行时间：{execution_time}秒")

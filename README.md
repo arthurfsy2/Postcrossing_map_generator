@@ -18,7 +18,7 @@
 # 一.步骤
 
 1. clone本项目到本地
-2. 将config.jsonBAK这个文件修改为config.json
+2. 将scripts/config.jsonBAK这个文件修改为scripts/config.json
 
 ```
 {
@@ -38,14 +38,14 @@
 注：如果account、Cookie无误的话，即可在./gallery路径下生成4个.md格式的文件，分别对应gallery当中的sent、received、favourites、popular的内容,并自动在./gallery/picture路径下保存对应的图片。
 
 4. 运行以下代码生成地图：
-   `python createMap.py`
+   `python scripts/contryNameEmoji.json`
    注：如果account、Cookie无误的话，即可在./路径下生成2个.html格式的文件，分别是ClusterMap.html和Map.html。
 
 # 二. Github Page在线展示
 
 **如果你想通过Github Page来在线展示地图数据，可进行以下步骤**
 
-1. fork本项目到你自己的仓库，clone到本地后修改fork仓库内的config.jsonBAK文件名称、内容
+1. fork本项目到你自己的仓库，clone到本地后修改fork仓库内的scripts/config.jsonBAK文件名称、内容
 2. 参考上述的步骤1-4，在本地生成2个地图html文件
 3. 将HTML文件push到你fork的仓库当中
 4. 参考以下截图开通Github Page,即可访问(需要手动在链接后面增加ClusterMap.html或Map.html)
@@ -56,8 +56,8 @@
 ## 获取Cookie的方法：
 
 1. 登陆你的postcrossing账号，并打开你个人的gallery/sent链接。
-2. 按下F12打开调试模式，再F5刷新网页，在“网络/network”下找到“sent”名称的项，点击“标头”，在“请求标头”中找到Cookie开头的内容（红框当中显示的内容）。鼠标选中，复制粘贴到config.json的Cookie对应位置。
-   找到__Host-postcrossing=XXX，复制XXX这一串内容粘贴到你的config.json的"Cookie"当中
+2. 按下F12打开调试模式，再F5刷新网页，在“网络/network”下找到“sent”名称的项，点击“标头”，在“请求标头”中找到Cookie开头的内容（红框当中显示的内容）。鼠标选中，复制粘贴到scripts/config.json的Cookie对应位置。
+   找到__Host-postcrossing=XXX，复制XXX这一串内容粘贴到你的scripts/config.json的"Cookie"当中
 3. 如果cookie错误/过期，则只能获取gallery/sent或received的内容
 
 ## vercel
@@ -73,5 +73,5 @@
 
 1. 通过这个网址查询到对应的国家或地区：https://emojidaquan.com/category2-country-flags
 2. 找到对应的国家或地区，如香港：https://emojidaquan.com/emoji-flag-for-hong-kong
-3. 查询简写代码、或十六进制HTML字符实体，填写到 `contryName.json`文件中。（如果是十六进制HTML字符实体，则复制粘贴后需要去除中间的空格。如香港的是"&#x1f1ed\;&#x1f1f0\;"
-4. 修改保存后，获取新的Cookie填入config.json，然后重新执行py postcrossing.py
+3. 查询简写代码、或十六进制HTML字符实体，填写到 `scripts/contryName.json`文件中。（如果是十六进制HTML字符实体，则复制粘贴后需要去除中间的空格。如香港的是"&#x1f1ed\;&#x1f1f0\;"
+4. 修改保存后，获取新的Cookie填入scripts/config.json，然后重新执行py postcrossing.py

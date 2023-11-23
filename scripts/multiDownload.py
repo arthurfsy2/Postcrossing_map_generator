@@ -15,7 +15,7 @@ import statistics
 
 
 
-with open("config.json", "r") as file:
+with open("scripts/config.json", "r") as file:
     data = json.load(file)
 account = data["account"]
 account = data["account"]
@@ -108,8 +108,8 @@ def getPageNum(content):
             json.dump(data, file, indent=2)
     # return from_or_to, pageNum, Num, title
 def getCountryFlagEmoji(flag):
-    # 读取contryName.json文件
-    with open('contryNameEmoji.json') as file:
+    # 读取scripts/contryName.json文件
+    with open('scripts/contryNameEmoji.json') as file:
         data = json.load(file)
     # 获取flag对应的值
     value = data.get(flag)
@@ -262,12 +262,22 @@ def getUpdateID(account,type,Cookie):
         if len(newID) == 0:
             print(f"数据库{dbpath}：Mapinfo_{type}暂无更新内容\n")
             updateID = None
+            updateStat="0"
         else:
             print(f"{type}_等待更新Mapinfo({len(newID)}个):{newID}\n")
             updateID = newID
+            updateStat="1"
     else:
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
-        updateID = onlineID    
+        updateID = onlineID
+        updateStat="1"
+    with open('scripts/mapUpdateStats.json', 'r') as file:
+        config_data = json.load(file)
+    config_data[type] = updateStat
+    # 将更新后的内容写入scripts/config.json文件
+    with open('scripts/mapUpdateStats.json', 'w') as file:
+        json.dump(config_data, file, indent=4)
+
     return updateID,hasPicID
 
 def convert_to_utc(zoneNum,type,time_str):
@@ -287,14 +297,14 @@ def convert_to_utc(zoneNum,type,time_str):
     time_utc_str = time_utc.strftime(f"%Y/%m/%d")
     return time_utc_str
 
-def getUserHomeInfo(type):
-    distance_all = []
-    content = readDB(dbpath,type,"Mapinfo")
-    #print("content:",content)
-    for item in content:
-        distance_all.append(int(item["distance"]))
-    total = sum(distance_all)
-    return total,len(content)
+# def getUserHomeInfo(type):
+#     distance_all = []
+#     content = readDB(dbpath,type,"Mapinfo")
+#     #print("content:",content)
+#     for item in content:
+#         distance_all.append(int(item["distance"]))
+#     total = sum(distance_all)
+#     return total,len(content)
 
 def get_data(postcardID,type):
     
@@ -431,22 +441,33 @@ def getUpdatePic(type):
                 newPic.append(pic)
         if len(newPic) == 0:
             updatePic = None
+            updateStat ="0"
         else:
             
             updatePic = newPic
+            updateStat ="1"
     else:
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
         updatePic = picFileNameList 
+        updateStat ="1"
     #print(f"{type}_updatePic:{updatePic}\n")
+
+        # 读取scripts/config.json文件内容
+    with open('scripts/galleryUpdateStats.json', 'r') as file:
+        config_data = json.load(file)
+    config_data[type] = updateStat
+    # 将更新后的内容写入scripts/config.json文件
+    with open('scripts/galleryUpdateStats.json', 'w') as file:
+        json.dump(config_data, file, indent=4)
     return updatePic
 
 
 def calculateAVGandMedian(a_data):
-    with open('contryName.json', 'r') as f:
+    with open('scripts/contryName.json', 'r') as f:
         countryName = json.load(f)
 
-    # 读取contryName.json文件
-    with open('contryNameEmoji.json', 'r') as f:
+    # 读取scripts/contryName.json文件
+    with open('scripts/contryNameEmoji.json', 'r') as f:
         countryNameEmoji = json.load(f)
     
     name_dict = {}
@@ -623,7 +644,8 @@ def getUserStat():
 
 
 def multiTask(account,type,Cookie):
-    postcardID,hasPicID = getUpdateID(account,type,Cookie)  
+    result = getUpdateID(account,type,Cookie)
+    postcardID = result[0]
     if postcardID is not None:
         Num = round(len(postcardID)/20) 
         if Num < 1:
@@ -821,7 +843,8 @@ def MapDataCheck():
             else:
                 print(f"{account}的Cookies有效，准备生成数据库{dbpath}：Mapinfo_{type}") 
                 multiTask(account,type,Cookie) 
-    
+
+
 
 stat,content_raw,types = getAccountStat()
 def PicDataCheck():     
@@ -840,6 +863,6 @@ def replaceTemplateCheck():
         getGalleryInfo(type) 
 
 
-getUserHomeInfo("sent")
+# getUserHomeInfo("sent")
 
-getUserHomeInfo("received")
+# getUserHomeInfo("received")

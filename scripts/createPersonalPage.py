@@ -5,7 +5,7 @@ import json
 import os
 
 
-with open("config.json", "r") as file:
+with open("scripts/config.json", "r") as file:
     data = json.load(file)
 account = data["account"]
 nickName = data["nickName"]

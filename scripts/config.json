@@ -3,5 +3,6 @@
     "nickName": "your Markdown Name",
     "Cookie": "auto create",
     "picDriverPath": "https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",
-    "dbpath": "./template/data.db"
+    "dbpath": "./template/data.db",
+    "updateStat": ""
 }
