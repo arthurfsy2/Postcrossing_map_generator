@@ -55,4 +55,9 @@ jobs:
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
           git diff --cached --quiet || git commit -m "Move updated file to root directory"
-          if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then git push; else echo "No changes to push."; fi
+          if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
+            git push
+          else
+            echo "No changes to push."
+            git reset --hard HEAD  # 取消已经提交的文件变动
+          fi
