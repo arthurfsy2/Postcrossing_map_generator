@@ -558,6 +558,29 @@ def getUserStat():
 
     print(f"已生成output/month.json")
 
+
+    # 创建一个列表用于存储结果
+    
+    calendar = {}
+    # 遍历数据列表
+    for data in a_data:
+        # 将时间戳转换为YYYY-MM-DD格式
+        timestamp = data[0]
+        date = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
+
+        # 统计每天的总数
+        if date in calendar:
+            calendar[date] += 1
+        else:
+            calendar[date] = 1
+
+    # 将结果转换为列表格式
+    result = [[date, total] for date, total in calendar.items()]
+
+    # 将结果输出到calendar.json文件
+    with open('./output/calendar.json', 'w') as file:
+        json.dump(result, file,indent=2)
+
     country_stats = calculateAVGandMedian(a_data)
     #print("country_stats:\n",country_stats)
     # # 将统计结果写入 b.json 文件

@@ -61,7 +61,7 @@ def geojson(m):
             footprint.append({'countryCode': countryCode, 'type': 1})
         else:
             footprint.append({'countryCode': countryCode, 'type': 0})
-    with open('./world.zh.json', 'r', encoding='utf-8') as f:
+    with open('./src/geojson/world.zh.json', 'r', encoding='utf-8') as f:
         geojson_data = json.load(f)
     geojson = folium.GeoJson(
         geojson_data,
