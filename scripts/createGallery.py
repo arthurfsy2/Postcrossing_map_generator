@@ -65,7 +65,7 @@ def createMD(type):
     link = f"### [{account}'s {type}]({baseUrl}user/{account}/gallery/{type})"
     content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
     
-    with open('scripts/galleryupdatestats.json', 'r') as file:
+    with open('scripts/galleryUpdateStats.json', 'r') as file:
         config_data = json.load(file)
     
     if os.path.exists(filename_md): 
@@ -94,4 +94,4 @@ for type in types:
 
 end_time = time.time()
 execution_time = round((end_time - start_time),3)
-print(f"postcrossing.py脚本执行时间：{execution_time}秒\n")
+print(f"createGallery.py脚本执行时间：{execution_time}秒\n")
