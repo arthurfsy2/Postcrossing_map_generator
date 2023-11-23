@@ -270,7 +270,7 @@ dl.MapDataCheck()
 
 def pathCheck(path):
     if os.path.exists(path): 
-        with open('scripts/mapUpdatestats.json', 'r') as file:
+        with open('scripts/mapUpdateStats.json', 'r') as file:
             config_data = json.load(file)
         SentResultStat = config_data["sent"]
         ReceivedResult= config_data["received"]
