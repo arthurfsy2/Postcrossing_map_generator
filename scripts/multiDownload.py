@@ -528,24 +528,25 @@ def createCalendar(year, data):
             tooltip_opts=opts.TooltipOpts(),
             visualmap_opts=opts.VisualMapOpts(
                 is_show=False,
-                min_=0,
-                max_=5,
-                range_color=["#c6e48b", "#7bc96f", "#239a3b", "#196127", "#196127"],
-            ),
+                min_=1,
+                max_=10,
+                range_color=["#7bc96f", "#239a3b", "#196127", "#196127"],
+            )            
         )
         .add(
             series_name="",
             yaxis_data=data,
             calendar_opts=opts.CalendarOpts(
+                width="600px",
                 pos_top="10%",
-                cell_size=["auto", 15],
+                cell_size=["auto", 12],
                 range_= year,
                 itemstyle_opts=opts.ItemStyleOpts(
                     color="#ccc",
                     border_width=3,
                     border_color="#fff",
                 ),
-                splitline_opts=opts.SplitLineOpts(is_show=True),
+                splitline_opts=opts.SplitLineOpts(is_show=False),
                 yearlabel_opts=opts.CalendarYearLabelOpts(is_show=True),
                 daylabel_opts=opts.CalendarDayLabelOpts(
                     first_day=1,
