@@ -3,7 +3,7 @@ title: 明信片展示墙（寄出：51）
 icon: address-card
 date: 2023-11-23
 category:
-  - Arthurfsy
+  - Arthur
 tag:
   - postcrossing
 order: 2
