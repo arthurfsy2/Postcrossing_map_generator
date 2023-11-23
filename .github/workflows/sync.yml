@@ -38,10 +38,11 @@ jobs:
 
       - name: 获取展示墙数据
         run: |
-          python login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} 
-          python postcrossing.py
+          python login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} 
+          python createGallery.py
           python createMap.py
-          python replaceTemplate.py
+          python createPersonalPage.py
+          python init.py
           
       - name: 检查文件更新
         id: check_changes

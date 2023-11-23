@@ -14,20 +14,6 @@ picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
 
 
-def translate(sentence, src_lan, tgt_lan):
-    apikey="da3f6df96672f9693e76ed14dd54f884"
-    url = 'http://api.niutrans.com/NiuTransServer/translation?'
-    data = {"from": src_lan, "to": tgt_lan, "apikey": apikey, "src_text": sentence}
-    data_en = parse.urlencode(data)
-    req = url + "&" + data_en
-    res = request.urlopen(req)
-    res_dict = json.loads(res.read())
-    if "tgt_text" in res_dict:
-        result = res_dict['tgt_text']
-    else:
-        result = res
-    return result
-
 def replateTitle(type):    
     
     with open(f"./output/title.json", "r",encoding="utf-8") as f:

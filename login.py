@@ -11,10 +11,12 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("account", help="输入account")
 parser.add_argument("password", help="输入password")      
+parser.add_argument("nickName", help="输入nickName")    
 options = parser.parse_args()
 
 account = options.account
 password = options.password
+nickName = options.nickName
 
 
   
@@ -93,7 +95,7 @@ with open('config.json', 'r') as file:
 # 更新Cookie变量的值
 config_data['Cookie'] = Cookie
 config_data['account'] = account
-config_data['Cookie'] = Cookie
+config_data['nickName'] = nickName
 # 将更新后的内容写入config.json文件
 with open('config.json', 'w') as file:
     json.dump(config_data, file, indent=4)

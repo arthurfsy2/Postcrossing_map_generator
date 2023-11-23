@@ -1,7 +1,0 @@
-{
-    "account": "youraccount",
-    "nickName": "yournicname",
-    "Cookie": "XXX",
-    "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",
-    "dbpath": "./template/data.db"
-}

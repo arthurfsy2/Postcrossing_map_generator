@@ -1,9 +1,9 @@
 ---
 title: 明信片展示墙（我收到的赞：24）
 icon: address-card
-date: 2023-11-22
+date: 2023-11-23
 category:
-  - Arthur
+  - Arthurfsy
 tag:
   - postcrossing
 order: 5
