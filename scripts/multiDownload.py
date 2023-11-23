@@ -297,14 +297,16 @@ def convert_to_utc(zoneNum,type,time_str):
     time_utc_str = time_utc.strftime(f"%Y/%m/%d")
     return time_utc_str
 
-# def getUserHomeInfo(type):
-#     distance_all = []
-#     content = readDB(dbpath,type,"Mapinfo")
-#     #print("content:",content)
-#     for item in content:
-#         distance_all.append(int(item["distance"]))
-#     total = sum(distance_all)
-#     return total,len(content)
+
+# 获取收发总距离
+def getUserHomeInfo(type):
+    distance_all = []
+    content = readDB(dbpath,type,"Mapinfo")
+    #print("content:",content)
+    for item in content:
+        distance_all.append(int(item["distance"]))
+    total = sum(distance_all)
+    return total,len(content)
 
 def get_data(postcardID,type):
     
