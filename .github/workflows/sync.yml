@@ -47,7 +47,7 @@ jobs:
       - name: 检查文件更新
         id: check_changes
         run: |
-          git diff --quiet || echo "::set-output name=changes::true"
+          git diff --quiet || echo "::changes=true" >> $GITHUB_OUTPUT
 
       - name: 提交
         run: |
