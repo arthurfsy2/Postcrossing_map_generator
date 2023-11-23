@@ -134,11 +134,16 @@ def getCardStoryList():
         list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
           f'> 来自 {userInfo} {contryNameEmoji}\n' \
           f'> 📏{distance} km\n⏱{travel_time}\n\n' \
+          f':::tabs\n' \
+          f'@tab 图片\n' \
           f'<div class="image-preview">  <img src="{onlinelink}/{picFileName}" />' \
           f'  <img src="{storypicLink}/{postcardID}.webp" /></div>' \
           f'\n\n' \
-          f'::: info 内容\n{content_en}\n:::\n\n' \
-          f'::: tip 翻译\n{content_cn}\n:::\n\n'       
+          f'@tab 内容\n' \
+          f'::: info 内容\n{content_en}\n\n\n' \
+          f'@tab 翻译\n' \
+          f'::: tip 翻译\n{content_cn}\n:::\n\n' \
+          f'---\n'   
         list_all +=list
     return list_all
 

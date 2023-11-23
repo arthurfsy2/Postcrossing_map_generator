@@ -25,6 +25,8 @@ postcrossing是我在2013年就了解到的明信片交换的项目，当时玩�
 灰色：收发均无的国家
 :::
 
+:::tabs
+@tab Map
 ### 个人收发Map
 
 网址：https://postcrossing.4a1801.life/Map.html
@@ -38,6 +40,7 @@ seamless=seamless
 scrolling=auto
 ></iframe>
 
+@tab ClusterMap
 ### 个人收发ClusterMap
 
 网址：https://postcrossing.4a1801.life/ClusterMap.html
@@ -51,10 +54,12 @@ seamless=seamless
 scrolling=auto
 ></iframe>
 
+@tab 网址备份
 ### 个人收发Map、ClusterMap (Github Page)
 
 网址：https://arthurfsy2.github.io/Postcrossing_map_generator/Map.html
 网址：https://arthurfsy2.github.io/Postcrossing_map_generator/ClusterMap.html
+:::
 
 ## 三.统计
 
@@ -80,9 +85,10 @@ const option = {
         color: [ '#c6e48b', '#7bc96f', '#239a3b', '#196127', '#196127']
       }
   },
-  calendar: {
+  calendar: [
+    {
     cellSize: ["auto", "15"],
-    range: year,
+    range: '2023',
     itemStyle: {
         color: '#ccc',
         borderWidth: 3,
@@ -96,12 +102,40 @@ const option = {
       firstDay: 1,
     }
   },
-  series: {
+  {
+    top: 260,
+    cellSize: ["auto", "15"],
+    range: '2013',
+    itemStyle: {
+        color: '#ccc',
+        borderWidth: 3,
+        borderColor: '#fff'
+      },
+    splitLine: true,
+    yearLabel: {
+      show: true
+    },
+    dayLabel: {
+      firstDay: 1,
+    }
+  }
+  ],
+  series: [
+    {
     type: "heatmap",
     coordinateSystem: "calendar",
+    calendarIndex: 0,
+    data: data
+  },
+  {
+    type: "heatmap",
+    coordinateSystem: "calendar",
+    calendarIndex: 1,
     data: data
   }
-}
+  ]
+};
+
 ```
 
 :::
@@ -184,7 +218,8 @@ const option = {
 
 :::
 
-### 国家分布
+:::tabs
+@tab 国家分布
 
 ::: echarts
 
@@ -241,12 +276,13 @@ const option = {
 }
 ```
 
-:::
 
-### 各国明信片
+
+@tab 各国明信片
 
 //请替换明信片表格
 
+:::
 
 ## 四.明信片故事
 

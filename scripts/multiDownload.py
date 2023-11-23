@@ -11,6 +11,8 @@ from datetime import datetime, timedelta
 import sys
 import sqlite3
 import statistics
+from pyecharts import options as opts
+from pyecharts.charts import Calendar
 
 
 
@@ -518,6 +520,45 @@ def calculateAVGandMedian(a_data):
     country_stats.sort(key=lambda x: x['value'], reverse=True)
     return country_stats
 
+def createCalendar(year, data):
+    # Create Calendar chart object
+    calendar = (
+        Calendar()
+        .set_global_opts(
+            tooltip_opts=opts.TooltipOpts(),
+            visualmap_opts=opts.VisualMapOpts(
+                is_show=False,
+                min_=0,
+                max_=5,
+                range_color=["#c6e48b", "#7bc96f", "#239a3b", "#196127", "#196127"],
+            ),
+        )
+        .add(
+            series_name="",
+            yaxis_data=data,
+            calendar_opts=opts.CalendarOpts(
+                pos_top="10%",
+                cell_size=["auto", 15],
+                range_= year,
+                itemstyle_opts=opts.ItemStyleOpts(
+                    color="#ccc",
+                    border_width=3,
+                    border_color="#fff",
+                ),
+                splitline_opts=opts.SplitLineOpts(is_show=True),
+                yearlabel_opts=opts.CalendarYearLabelOpts(is_show=True),
+                daylabel_opts=opts.CalendarDayLabelOpts(
+                    first_day=1,
+                    name_map=["","Mon", "", "Wed", "", "Fri", "" ]
+                    ),
+            ),
+        )
+    )
+
+
+
+    # Render the Calendar chart and save it as an SVG file
+    calendar.render(f"./output/calendar/{year}.html")
 
 def getUserStat():
     headers = {
@@ -575,7 +616,8 @@ def getUserStat():
     # 将汇总结果转换为新的数组
     #result = [{'date': date, 'num': summary[date]} for date in summary]
     result = [{'date': date, 'sent': summary[date]['sent'], 'received': summary[date]['received']} for date in summary]
-    # 将结果输出到month.json文件中
+    
+    # 将结果输出到month.json文件中，以供“信息汇总.md"的收发记录（月度）模块使用
     with open(f"./output/month.json", 'w') as f:
         json.dump(result, f, indent=2)
 
@@ -598,12 +640,25 @@ def getUserStat():
             calendar[date] = 1
 
     # 将结果转换为列表格式
-    result = [[date, total] for date, total in calendar.items()]
+    calendar_result = [[date, total] for date, total in calendar.items()]
 
     # 将结果输出到calendar.json文件
     with open('./output/calendar.json', 'w') as file:
-        json.dump(result, file,indent=2)
+        json.dump(calendar_result, file,indent=2)
 
+    year_list = []
+
+    for data in a_data:
+        timestamp = data[0]  # 获取时间戳
+        date = datetime.fromtimestamp(timestamp)  # 将时间戳转换为日期格式
+        year = date.strftime("%Y")  # 提取年份（YYYY）
+        if year not in year_list:
+            year_list.append(year)
+
+    print(year_list)
+    
+    for year in year_list:
+        createCalendar(year, calendar_result)
     country_stats = calculateAVGandMedian(a_data)
     #print("country_stats:\n",country_stats)
     # # 将统计结果写入 b.json 文件
