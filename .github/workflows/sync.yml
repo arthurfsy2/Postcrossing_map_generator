@@ -20,25 +20,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: 设置Python版本
+        - name: 设置Python版本
         id: setup_python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
           cache: pip
           cache-dependency-path: 'requirements.txt'
-
+      
       - name: 安装依赖
         run: |
           pip install -r requirements.txt
-    
-      - name: Install openpyxl
+      
+      - name: 缓存openpyxl库
+        id: cache_openpyxl
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-openpyxl-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-openpyxl-
+      
+      - name: 安装openpyxl
+        if: steps.cache_openpyxl.outputs.cache-hit != 'true'
         run: |
-            pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com
+          pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com
 
       - name: 获取展示墙数据
         run: |
-          python login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} 
+          python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} 
           python scripts/createMap.py
           python scripts/createGallery.py
           python scripts/createPersonalPage.py
