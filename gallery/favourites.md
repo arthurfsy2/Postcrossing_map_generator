@@ -3,7 +3,7 @@ title: 明信片展示墙（我的点赞：13）
 icon: address-card
 date: 2023-11-23
 category:
-  - Arthurfsy
+  - Arthur
 tag:
   - postcrossing
 order: 4
