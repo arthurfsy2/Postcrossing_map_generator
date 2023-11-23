@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-        - name: 设置Python版本
+      - name: 设置Python版本
         id: setup_python
         uses: actions/setup-python@v4
         with:
