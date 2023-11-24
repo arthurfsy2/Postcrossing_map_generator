@@ -1,7 +1,7 @@
 {
-    "account": "arthurfsy",
-    "nickName": "Arthur",
-    "Cookie": "__Host-postcrossing=uddofhiktv2k33icvl7e6rsfja; PostcrossingRemember=TcJAeeGahO5CKWAAnDij2FnizIECt25q",
+    "account": "your account",
+    "nickName": "your Markdown Name",
+    "Cookie": "auto create",
     "picDriverPath": "https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",
     "dbpath": "./template/data.db"
 }
