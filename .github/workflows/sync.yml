@@ -62,17 +62,3 @@ jobs:
             echo "No changes to push."
             git reset --hard HEAD  # 取消已经提交的文件变动
           fi
-      
-      - name: Copy files to temporary directory
-        run: |
-          ls *.md
-          cp *.md temp/
-      
-      - name: Checkout repository B
-        uses: actions/checkout@v2
-        with:
-          repository: arthurfsy2/arthurfsy2.github.io
-          path: arthurfsy2.github.io
-      - name: Copy files to repository B
-        run: |
-          cp -r temp/* arthurfsy2.github.io/src/Arthur/postcrossing
