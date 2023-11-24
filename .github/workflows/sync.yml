@@ -32,17 +32,8 @@ jobs:
         run: |
           pip install -r requirements.txt
       
-      - name: 缓存openpyxl库
-        id: cache_openpyxl
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-openpyxl-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-openpyxl-
       
       - name: 安装openpyxl
-        if: steps.cache_openpyxl.outputs.cache-hit != 'true'
         run: |
           pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com
 
