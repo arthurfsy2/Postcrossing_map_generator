@@ -93,7 +93,7 @@ def replaceTemplate():
         data = f.read()  
         dataNew = data.replace('$repo',repo)
         print(f"已替换仓库名:{repo}")
-        dataNew = data.replace('$title',title_final)
+        dataNew = dataNew.replace('$title',title_final)
         print("已替换明信片墙title")
         dataNew = dataNew.replace('$sheet',sheet)
         print("已替换明信片表格")
