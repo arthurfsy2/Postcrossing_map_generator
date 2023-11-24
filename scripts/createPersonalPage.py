@@ -13,6 +13,7 @@ nickName = data["nickName"]
 Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
+repo = data["repo"]
 
 
 def replateTitle(type):    
@@ -90,11 +91,13 @@ def replaceTemplate():
     calendar,series,height = createCalendar()
     with open(f"./template/信息汇总_template.md", "r",encoding="utf-8") as f:
         data = f.read()  
-        dataNew = data.replace('//请替换明信片墙title',title_final)
+        dataNew = data.replace('$repo',repo)
+        print(f"已替换仓库名:{repo}")
+        dataNew = data.replace('$title',title_final)
         print("已替换明信片墙title")
-        dataNew = dataNew.replace('//请替换明信片表格',sheet)
+        dataNew = dataNew.replace('$sheet',sheet)
         print("已替换明信片表格")
-        dataNew = dataNew.replace('//请替换明信片故事list',list)
+        dataNew = dataNew.replace('$list',list)
         print("已替换明信片故事list")
 
         dataNew = dataNew.replace('$calendar',calendar)
@@ -105,12 +108,12 @@ def replaceTemplate():
     with open(f"./output/信息汇总.md", "w",encoding="utf-8") as f:
         f.write(dataNew)  
 
-    blog_path = r"D:\web\Blog2\src\Arthur\Postcrossing\信息汇总.md"
+    # blog_path = r"D:\web\Blog2\src\Arthur\Postcrossing\信息汇总.md"
     
-    # 换为你的blog的本地链接，可自动同步过去
-    if os.path.exists(blog_path):
-        with open(blog_path, "w", encoding="utf-8") as f:
-            f.write(dataNew)
+    # # 换为你的blog的本地链接，可自动同步过去
+    # if os.path.exists(blog_path):
+    #     with open(blog_path, "w", encoding="utf-8") as f:
+    #         f.write(dataNew)
 
 def getStoryContent(excel_file):
     # 读取Excel文件

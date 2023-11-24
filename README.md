@@ -5,7 +5,7 @@
 [聚类图](https://postcrossing.4a1801.life/Map.html)
 
 个人博客效果展示：
-[Postcrossing](https://blog.4a1801.life/Arthur/postcrossing)
+[Postcrossing](https://blog.4a1801.life/Arthur/postcrossing/信息汇总.html)
 
 # 前言
 
@@ -13,29 +13,50 @@
 
 1. 可以下载gallery对应的图片，并生成包含fronttage的.md文件，以便你放入到vuepress当中使用
 2. 可抓取对应账户的收、发明信片的信息，形成2个地图文件，内容是仿官方的map部分的谷歌地图，但是加入了自定义的内容
-3. 抓取后的信息会保存到./output/sent_List.json和received_List.json当中，如果以后有更新，只会抓取更新部分，减少对Postcrossing的压力。
+3. 可通过模板生成你个人的“信息汇总”页面
+4. 抓取后的信息会保存到./output/sent_List.json和received_List.json当中，如果以后有更新，只会抓取更新部分，减少对Postcrossing的压力。
 
-# 一.步骤
+# 环境要求
+python版本 >=3.11.2
+
+# 一.步骤（本地模式）
 
 1. clone本项目到本地
-2. 将scripts/config.jsonBAK这个文件修改为scripts/config.json
+2. 按需修改scripts/config.json
 
 ```
 {
-    "account": "",//输入你的个人账户,如链接：“https://www.postcrossing.com/user/arthurfsy/gallery”当中的“arthurfsy”
+    "account": "your account",//你的账户，通过scripts/login.py来自动赋值 “https://www.postcrossing.com/user/arthurfsy/gallery”当中的“arthurfsy”
     "nickName": "",//输入你定义的昵称，用于生成.md文件的fronttage内容，生成后的.md文件可作为vuepress项目使用
-    "Cookie": "",//通过浏览器获取的Cookies，具体获取方式见最后的备注，且cookie的有效期可能只有几个小时。如果cookie错误/过期，则只能获取gallery/sent或received的内容
-    "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium"//默认为Postcrossing图片的官方链接前缀。也可以在运行`python postcrossing.py`后改为"./gallery/picture"，进行本地读取
-}
+    "Cookie": "auto create",//你的账户，通过scripts/login.py来自动赋值 
+    "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",//默认为Postcrossing图片的官方链接前缀。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取
+    "dbpath": "./template/data.db", //默认的数据库存放路径
+    "repo":"arthurfsy2/Postcrossing_map_generator" //更改为你自己的仓库名。用于“信息汇总”的echarts表格取值。
 ```
 
-执行 `pip install -r requirements.txt安装依赖`
+3. 进入项目目录
 
-3. 在当前路径下运行终端，运行以下代码获取gallery数据：
+   执行 `pip install -r requirements.txt安装依赖`
 
-`python postcrossing.py`
+   执行`pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com` 安装openpyxl （如果你需要自行填写明信片背面文字内容，则需要安装）
 
-注：如果account、Cookie无误的话，即可在./gallery路径下生成4个.md格式的文件，分别对应gallery当中的sent、received、favourites、popular的内容,并自动在./gallery/picture路径下保存对应的图片。
+4. 数据获取：
+
+   依次执行以下内容：
+
+   ```
+   python scripts/login.py "账号" "密码" "昵称" //输入账号密码获取cookies，如：python scripts/login.py "youraccount" "yourpassword" "yournickname"
+   
+   python scripts/createMap.py  //生成地图文件
+   python scripts/createGallery.py  //生成展示墙
+   python scripts/createPersonalPage.py  //生成“信息汇总”页面
+   ```
+
+   
+
+
+
+gallery当中的sent、received、favourites、popular的内容,并自动在./gallery/picture路径下保存对应的图片。
 
 4. 运行以下代码生成地图：
    `python scripts/contryNameEmoji.json`

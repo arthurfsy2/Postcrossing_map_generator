@@ -16,7 +16,7 @@ postcrossing是我在2013年就了解到的明信片交换的项目，当时玩�
 
    以下展示的4个部分的内容。
 
-//请替换明信片墙title
+$title
 
 ## 二.地图展示
 :::tip 地图颜色
@@ -69,7 +69,7 @@ scrolling=auto
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/calendar.json"
+  "https://raw.gitmirror.com/$repo/main/output/calendar.json"
 ).then((res) => res.json());
 
 const date = new Date();
@@ -104,7 +104,7 @@ const height = $height;
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/month.json"
+  "https://raw.gitmirror.com/$repo/main/output/month.json"
 ).then((res) => res.json());
 
 
@@ -183,7 +183,7 @@ const option = {
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/stats.json"
+  "https://raw.gitmirror.com/$repo/main/output/stats.json"
 ).then((res) => res.json());
 
 const option = {
@@ -238,13 +238,13 @@ const option = {
 
 @tab 各国明信片
 
-//请替换明信片表格
+$sheet
 
 :::
 
 ## 四.明信片故事
 
-//请替换明信片故事list
+$list
 
 <style>
   .image-preview {
