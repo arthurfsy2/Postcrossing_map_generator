@@ -11,8 +11,6 @@ from datetime import datetime, timedelta
 import sys
 import sqlite3
 import statistics
-from pyecharts import options as opts
-from pyecharts.charts import Calendar
 
 
 
@@ -520,46 +518,52 @@ def calculateAVGandMedian(a_data):
     country_stats.sort(key=lambda x: x['value'], reverse=True)
     return country_stats
 
-def createCalendar(year, data):
-    # Create Calendar chart object
-    calendar = (
-        Calendar()
-        .set_global_opts(
-            tooltip_opts=opts.TooltipOpts(),
-            visualmap_opts=opts.VisualMapOpts(
-                is_show=False,
-                min_=1,
-                max_=10,
-                range_color=["#7bc96f", "#239a3b", "#196127", "#196127"],
-            )            
-        )
-        .add(
-            series_name="",
-            yaxis_data=data,
-            calendar_opts=opts.CalendarOpts(
-                width="600px",
-                pos_top="10%",
-                cell_size=["auto", 12],
-                range_= year,
-                itemstyle_opts=opts.ItemStyleOpts(
-                    color="#ccc",
-                    border_width=3,
-                    border_color="#fff",
-                ),
-                splitline_opts=opts.SplitLineOpts(is_show=False),
-                yearlabel_opts=opts.CalendarYearLabelOpts(is_show=True),
-                daylabel_opts=opts.CalendarDayLabelOpts(
-                    first_day=1,
-                    name_map=["","Mon", "", "Wed", "", "Fri", "" ]
-                    ),
-            ),
-        )
-    )
+# def createCalendar(year, data):
+#     # Create Calendar chart object
+#     calendar = (
+#         Calendar()
+#         .set_global_opts(
+#             tooltip_opts=opts.TooltipOpts(),
+#             visualmap_opts=opts.VisualMapOpts(
+#                 is_show=False,
+#                 min_=1,
+#                 max_=10,
+#                 range_color=["#7bc96f", "#239a3b", "#196127", "#196127"],
+#             )            
+#         )
+#         .add(
+#             series_name="",
+#             yaxis_data=data,
+#             calendar_opts=opts.CalendarOpts(
+#                 width="600px",
+#                 pos_top="10%",
+#                 cell_size=["auto", 12],
+#                 range_= year,
+#                 itemstyle_opts=opts.ItemStyleOpts(
+#                     color="#ccc",
+#                     border_width=3,
+#                     border_color="#fff",
+#                 ),
+#                 splitline_opts=opts.SplitLineOpts(is_show=False),
+#                 yearlabel_opts=opts.CalendarYearLabelOpts(is_show=True),
+#                 daylabel_opts=opts.CalendarDayLabelOpts(
+#                     first_day=1,
+#                     name_map=["","Mon", "", "Wed", "", "Fri", "" ]
+#                     ),
+#             ),
+#         )
+#     )
 
 
 
-    # Render the Calendar chart and save it as an SVG file
-    calendar.render(f"./output/calendar/{year}.html")
+#     # Render the Calendar chart and save it as an SVG file
+#     calendar.render(f"./output/calendar/{year}.html")
+#     # make_snapshot(snapshot, calendar.render(f"./output/calendar/{year}.html"), f"./output/calendar/{year}.png")
+
+
+
+
+
 
 def getUserStat():
     headers = {
@@ -647,19 +651,19 @@ def getUserStat():
     with open('./output/calendar.json', 'w') as file:
         json.dump(calendar_result, file,indent=2)
 
-    year_list = []
+    # year_list = []
 
-    for data in a_data:
-        timestamp = data[0]  # 获取时间戳
-        date = datetime.fromtimestamp(timestamp)  # 将时间戳转换为日期格式
-        year = date.strftime("%Y")  # 提取年份（YYYY）
-        if year not in year_list:
-            year_list.append(year)
+    # for data in a_data:
+    #     timestamp = data[0]  # 获取时间戳
+    #     date = datetime.fromtimestamp(timestamp)  # 将时间戳转换为日期格式
+    #     year = date.strftime("%Y")  # 提取年份（YYYY）
+    #     if year not in year_list:
+    #         year_list.append(year)
 
-    print(year_list)
+    # print(year_list)
     
-    for year in year_list:
-        createCalendar(year, calendar_result)
+    
+    # calendar_all, series_all, height = createCalendar(year_list, calendar_result)
     country_stats = calculateAVGandMedian(a_data)
     #print("country_stats:\n",country_stats)
     # # 将统计结果写入 b.json 文件

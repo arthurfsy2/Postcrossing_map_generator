@@ -3,6 +3,7 @@ import pandas as pd
 import sqlite3
 import json
 import os
+from datetime import datetime, timedelta
 
 
 with open("scripts/config.json", "r") as file:
@@ -86,7 +87,7 @@ def replaceTemplate():
     #print("title_all:\n",title_all)
     sheet = getUserSheet()
     list = getCardStoryList()
-    calendar = getCalendarList()
+    calendar,series,height = createCalendar()
     with open(f"./template/信息汇总_template.md", "r",encoding="utf-8") as f:
         data = f.read()  
         dataNew = data.replace('//请替换明信片墙title',title_final)
@@ -96,7 +97,9 @@ def replaceTemplate():
         dataNew = dataNew.replace('//请替换明信片故事list',list)
         print("已替换明信片故事list")
 
-        dataNew = dataNew.replace('//请替换明信片日历list',calendar)
+        dataNew = dataNew.replace('$calendar',calendar)
+        dataNew = dataNew.replace('$series',series)
+        dataNew = dataNew.replace('$height',str(height))
         print("已替换明信片日历list")
 
     with open(f"./output/信息汇总.md", "w",encoding="utf-8") as f:
@@ -151,28 +154,53 @@ def getCardStoryList():
         list_all +=list
     return list_all
 
-def getCalendarList():
-    # 指定文件夹路径
-    folder_path = "./output/calendar"
+def createCalendar():
+    with open("output/UserStats.json", "r") as file:
+        a_data = json.load(file)
+    year_list = []
 
-    # 获取文件夹下所有文件和文件夹的名称列表
-    file_names = os.listdir(folder_path)
+    for data in a_data:
+        timestamp = data[0]  # 获取时间戳
+        date = datetime.fromtimestamp(timestamp)  # 将时间戳转换为日期格式
+        year = date.strftime("%Y")  # 提取年份（YYYY）
+        if year not in year_list:
+            year_list.append(year)
+    calendar_all=""
+    series_all=""
 
-    # 筛选出以.html结尾的文件名，并去除后缀，导出到year_list中
-    year_list = [os.path.splitext(file_name)[0] for file_name in file_names if file_name.endswith(".html")]
+    for i,year in enumerate(year_list,start=1):
+        calendar = f"""
+        {{
+            top: {i*150},
+            cellSize: ["auto", "15"],
+            range: {year},
+            itemStyle: {{
+                color: '#ccc',
+                borderWidth: 3,
+                borderColor: '#fff'
+            }},
+            splitLine: true,
+            yearLabel: {{
+                show: true
+            }},
+            dayLabel: {{
+                firstDay: 1,
+            }}
+        }},
+        """
+        calendar_all+=calendar
 
-    # 打印year_list
-    print(year_list)
-    list_all = ""
-    for year in year_list:
-        list = f'@tab {year}\n' \
-          f'<iframe\n' \
-          f'src="https://postcrossing.4a1801.life/output/calendar/{year}.html" \n' \
-          f'frameborder=0\nheight=200\nwidth=100%\nseamless=seamless\nscrolling=auto\n></iframe>\n' \
-           
-        list_all +=list
-    list_all =f":::tabs\n{list_all}\n:::"
-    return list_all
+        series = f"""
+        {{
+        type: "heatmap",
+        coordinateSystem: "calendar",
+        calendarIndex: {i-1},
+        data: data
+        }},
+        """
+        series_all+=series
+        height = (i+1)*150
+    return calendar_all, series_all, height
 
 
 dl.replaceTemplateCheck()

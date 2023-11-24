@@ -65,7 +65,38 @@ scrolling=auto
 
 ### 收发记录（年度）
 
-//请替换明信片日历list
+:::echarts
+
+```js
+const data = await fetch(
+  "https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/calendar.json"
+).then((res) => res.json());
+
+const date = new Date();
+const year = date.getFullYear().toString().padStart(4, '0');
+
+const option = {
+  tooltip: {},
+  visualMap: {
+    show: false,
+      min: 1,
+      max: 10,
+      inRange: {
+        color: [ "#7bc96f", "#239a3b", "#196127", "#196127"]
+      }
+  },
+  calendar: [
+    $calendar
+  ],
+  series: [
+    $series
+  ]
+};
+const height = $height;
+
+```
+
+:::
 
 ### 收发记录（月度）
 
