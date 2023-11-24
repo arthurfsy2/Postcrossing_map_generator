@@ -4,5 +4,5 @@
     "Cookie": "auto create",
     "picDriverPath": "https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",
     "dbpath": "./template/data.db",
-    "repo":"arthurfsy2/Postcrossing_map_generator"
+    "repo": "arthurfsy2/Postcrossing_map_generator"
 }
