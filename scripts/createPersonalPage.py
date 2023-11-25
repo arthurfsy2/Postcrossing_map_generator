@@ -171,7 +171,7 @@ def createCalendar():
     calendar_all=""
     series_all=""
 
-    for i,year in enumerate(year_list,start=1):
+    for i,year in enumerate(year_list):
         calendar = f"""
         {{
             top: {i*150},
@@ -197,12 +197,12 @@ def createCalendar():
         {{
         type: "heatmap",
         coordinateSystem: "calendar",
-        calendarIndex: {i-1},
+        calendarIndex: {i},
         data: data
         }},
         """
         series_all+=series
-        height = (i+1)*150
+    height = len(year_list)*150
     return calendar_all, series_all, height
 
 
