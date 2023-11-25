@@ -74,9 +74,9 @@ def replaceTemplate():
     for type in types: 
         distance_all,num = dl.getUserHomeInfo(type)
         if type == "sent":
-            desc = f"寄出总数：**{num}**  寄出总距离：**{distance_all}** km\n"
+            desc = f"> 寄出[📤**{num}** 📏**{distance_all}** km]\n\n"
         elif type == "received":
-            desc = f"收到总数：**{num}**  收到总距离：**{distance_all}** km\n"
+            desc = f"> 收到[📥**{num}**  📏**{distance_all}** km]\n\n"
         else:
             desc =""
         desc_all += desc
@@ -143,7 +143,7 @@ def getCardStoryList():
 
         list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
           f'> 来自 {userInfo} {contryNameEmoji}\n' \
-          f'> 📏{distance} km\n⏱{travel_time}\n\n' \
+          f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
           f':::tabs\n' \
           f'@tab 图片\n' \
           f'<div class="image-preview">  <img src="{onlinelink}/{picFileName}" />' \
