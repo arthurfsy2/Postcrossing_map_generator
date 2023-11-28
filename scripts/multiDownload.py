@@ -12,10 +12,7 @@ import sys
 import sqlite3
 import statistics
 import hashlib
-# import xlwt
-import xlrd
 
-# import shutil
 
 
 

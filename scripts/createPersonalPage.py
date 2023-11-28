@@ -120,7 +120,7 @@ def replaceTemplate():
     #         f.write(dataNew)
 
 def getStoryContent(excel_file):
-    contentStory = readSheet2(excel_file)
+    contentStory = readSheet(excel_file)
     tablename = "postcardStory"
     dl.writeDB(dbpath, contentStory,tablename)
 
@@ -206,22 +206,9 @@ def createCalendar():
     height = len(year_list)*150
     return calendar_all, series_all, height
 
-def readSheet(filename):
-    workbook = openpyxl.load_workbook(filename)
-    sheet = workbook.active
 
-    data = []
-    for row in islice(sheet.iter_rows(values_only=True), 1, None):
-        row_data = {
-            "id": row[0],
-            "content_cn": row[1],
-            "content_en": row[2]
-        }
-        data.append(row_data)
-    print("data:\n",data)
-    return data
 
-def readSheet2(excel_file):
+def readSheet(excel_file):
     df = pd.read_excel(excel_file)
     content_all = []
 
