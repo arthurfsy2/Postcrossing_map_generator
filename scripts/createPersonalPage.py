@@ -4,7 +4,9 @@ import sqlite3
 import json
 import os
 from datetime import datetime, timedelta
-
+import shutil
+import openpyxl
+from itertools import islice
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -15,6 +17,8 @@ picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
 repo = data["repo"]
 
+if os.path.exists(dbpath):
+    shutil.copyfile(dbpath, f"{dbpath}BAK")
 
 def replateTitle(type):    
     
@@ -116,12 +120,9 @@ def replaceTemplate():
     #         f.write(dataNew)
 
 def getStoryContent(excel_file):
-    # 读取Excel文件
-    df = pd.read_excel(excel_file)
-    # 连接到数据库
-    conn = sqlite3.connect(dbpath)
-    # 将数据写入数据库
-    df.to_sql('postcardStory', conn, if_exists='replace', index=False)
+    contentStory = readSheet2(excel_file)
+    tablename = "postcardStory"
+    dl.writeDB(dbpath, contentStory,tablename)
 
 
 
@@ -154,7 +155,7 @@ def getCardStoryList():
           f'@tab 翻译\n' \
           f'::: tip 翻译\n{content_cn}\n:::\n\n' \
           f'---\n'   
-        list_all +=list
+        list_all += list
     return list_all
 
 def createCalendar():
@@ -205,10 +206,50 @@ def createCalendar():
     height = len(year_list)*150
     return calendar_all, series_all, height
 
+def readSheet(filename):
+    workbook = openpyxl.load_workbook(filename)
+    sheet = workbook.active
+
+    data = []
+    for row in islice(sheet.iter_rows(values_only=True), 1, None):
+        row_data = {
+            "id": row[0],
+            "content_cn": row[1],
+            "content_en": row[2]
+        }
+        data.append(row_data)
+    print("data:\n",data)
+    return data
+
+def readSheet2(excel_file):
+    df = pd.read_excel(excel_file)
+    content_all = []
+
+    for index, row in df.iterrows():
+        data = {
+            "id": row[0],
+            "content_cn": row[1],
+            "content_en": row[2]
+        }
+        content_all.append(data)
+    
+    return content_all
 
 dl.replaceTemplateCheck()
 excel_file="./template/postcardStory.xlsx"
 getStoryContent(excel_file)
+
+
 replaceTemplate()
 
 getCardStoryList()
+
+if os.path.exists(f"{dbpath}BAK"):
+    dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
+    if dbStat == "1":
+        print(f"{dbpath} 有更新") 
+        os.remove(f"{dbpath}BAK")
+    else:
+        print(f"{dbpath} 暂无更新") 
+    
+        os.remove(f"{dbpath}BAK")

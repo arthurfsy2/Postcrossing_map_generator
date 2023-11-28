@@ -11,7 +11,11 @@ from datetime import datetime, timedelta
 import sys
 import sqlite3
 import statistics
+import hashlib
+# import xlwt
+import xlrd
 
+# import shutil
 
 
 
@@ -162,33 +166,10 @@ def getGalleryInfo(type):
                     'favoritesNum': num,
                     'type': type
                         }
-                id = item['id']
-                userInfo = item['userInfo']
-                contryNameEmoji = item['contryNameEmoji']
-                picFileName = item['picFileName']
-                favoritesNum = item['favoritesNum']
-                type = item['type']
-                # 连接到数据库test.db
-                conn = sqlite3.connect(dbpath)
-                cursor = conn.cursor()
-                tablename = "Galleryinfo"
-                cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                                (id TEXT, userInfo TEXT, contryNameEmoji TEXT, picFileName TEXT, favoritesNum TEXT, type TEXT)''')
-                # 检查是否已存在相同的id和type
-                cursor.execute(f"SELECT * FROM {tablename} WHERE id=? AND type=?", (id, type))
-                existing_data = cursor.fetchone()
-
-                if existing_data:
-                    # 更新已存在的行的其他列数据
-                    cursor.execute(f"UPDATE {tablename} SET userInfo=?, contryNameEmoji=?, picFileName=?, favoritesNum=? WHERE id=? AND type=?",
-                                    (id, userInfo, contryNameEmoji, picFileName, favoritesNum,  type))
-                else:
-                    # 插入新的行
-                    cursor.execute(f"INSERT INTO {tablename} VALUES (?, ?, ?, ?, ?, ?)",
-                                    (id, userInfo, contryNameEmoji, picFileName, favoritesNum, type))
-                conn.commit()
-                conn.close()
-
+                content_all.append(item)
+        # 连接到数据库test.db
+        tablename = "Galleryinfo"
+        writeDB(dbpath, content_all,tablename)
         i += 1
 
         print(f"已更新Galleryinfo_{type}：数据库{dbpath}\n")
@@ -310,7 +291,7 @@ def getUserHomeInfo(type):
 
 def get_data(postcardID,type):
     
-    distance_all=[]
+    content_all=[]
     for i, id in enumerate(postcardID): 
              
         url=f"https://www.postcrossing.com/postcards/{id}"        
@@ -373,11 +354,12 @@ def get_data(postcardID,type):
             to_coord = (float(match[2]), float(match[3]))
         
         
-        conn = sqlite3.connect(dbpath)
-        cursor = conn.cursor()
+        
         tablename = "Mapinfo"
-        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                        (id TEXT PRIMARY KEY, FromCoor TEXT, ToCoor TEXT, distance INTEGER, travel_time TEXT, link TEXT, user TEXT, sentAddr TEXT, receivedAddr TEXT, type TEXT)''')
+        # conn = sqlite3.connect(dbpath)
+        # cursor = conn.cursor()
+        # cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+        #                 (id TEXT PRIMARY KEY, FromCoor TEXT, ToCoor TEXT, distance INTEGER, travel_time TEXT, link TEXT, user TEXT, sentAddr TEXT, receivedAddr TEXT, type TEXT)''')
         
         item = {
                 "id": id,
@@ -391,24 +373,9 @@ def get_data(postcardID,type):
                 "receivedAddr":f"{receivedAddr}({receivedCountry})",
                 "type":type
             }
-        #print("item:\n",item)
-        id = item['id']
-        FromCoor = json.dumps(item['FromCoor'])
-        ToCoor = json.dumps(item['ToCoor'])
-        distance = item['distance']
-        travel_time = item['travel_time']
-        link = item['link']
-        user = item['user']
-        sentAddr = item['sentAddr']
-        receivedAddr = item['receivedAddr']
-        type = item['type']
-        
-        cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                    (id, FromCoor, ToCoor, distance, travel_time, link, user, sentAddr, receivedAddr, type))
-        # 将列表中的JSON对象写入文件
-        conn.commit()
-        conn.close()
+        content_all.append(item)
         print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%")
+    writeDB(dbpath, content_all,tablename)
 
 def downloadPic(updatePic,pic_json):
     picFileNameList=[]
@@ -626,10 +593,7 @@ def getUserStat():
     with open(f"./output/month.json", 'w') as f:
         json.dump(result, f, indent=2)
 
-    print(f"已生成output/month.json")
-
-
-    # 创建一个列表用于存储结果
+    print(f"已生成output/month.json\n")
     
     calendar = {}
     # 遍历数据列表
@@ -651,57 +615,15 @@ def getUserStat():
     with open('./output/calendar.json', 'w') as file:
         json.dump(calendar_result, file,indent=2)
 
-    # year_list = []
-
-    # for data in a_data:
-    #     timestamp = data[0]  # 获取时间戳
-    #     date = datetime.fromtimestamp(timestamp)  # 将时间戳转换为日期格式
-    #     year = date.strftime("%Y")  # 提取年份（YYYY）
-    #     if year not in year_list:
-    #         year_list.append(year)
-
-    # print(year_list)
-    
-    
-    # calendar_all, series_all, height = createCalendar(year_list, calendar_result)
     country_stats = calculateAVGandMedian(a_data)
     #print("country_stats:\n",country_stats)
     # # 将统计结果写入 b.json 文件
     with open('./output/stats.json', 'w') as file:
         json.dump(country_stats, file, indent=2)
     print(f"./output/stats.json")
-    conn = sqlite3.connect(dbpath)
-    cursor = conn.cursor()
     tablename = "CountryStats"
-    cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER, sentMedian INTEGER, receivedMedian INTEGER,
-                PRIMARY KEY (name))''')
-
-    # cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-    #                 (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER,
-    #                 PRIMARY KEY (name))''')
-    for item in country_stats:
-        
-        name = item['name']
-        countryCode = item['countryCode']
-        flagEmoji = item['flagEmoji']
-        value = item['value']
-        sentNum = item['sentNum']
-        receivedNum = item['receivedNum']
-        sentAvg = item['sentAvg']
-        receivedAvg = item['receivedAvg']
-        sentMedian = item['sentMedian']
-        receivedMedian = item['receivedMedian']
-
-        
-        cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                    (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian))
-        # cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-        #             (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg))
-    print(f'已更新CountryStats：数据库{dbpath}')
-    # 将列表中的JSON对象写入文件
-    conn.commit()
-    conn.close()
+    writeDB(dbpath, country_stats,tablename)
+    
 
 
 
@@ -878,6 +800,98 @@ def readDB(dbpath, type,tablename):
 
     return data_all
 
+def writeDB(dbpath, content,tablename):
+    
+    conn = sqlite3.connect(dbpath)
+    cursor = conn.cursor()
+
+    if tablename == 'Galleryinfo':
+        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+                    (id TEXT, userInfo TEXT, contryNameEmoji TEXT, picFileName TEXT, favoritesNum TEXT, type TEXT)''')
+        for item in content:
+            id = item['id']
+            userInfo = item['userInfo']
+            contryNameEmoji = item['contryNameEmoji']
+            picFileName = item['picFileName']
+            favoritesNum = item['favoritesNum']
+            type = item['type']
+            cursor.execute(f"SELECT * FROM {tablename} WHERE id=? AND type=?", (id, type))
+            existing_data = cursor.fetchone()
+            if existing_data:
+                # 更新已存在的行的其他列数据
+                cursor.execute(f"UPDATE {tablename} SET userInfo=?, contryNameEmoji=?, picFileName=?, favoritesNum=? WHERE id=? AND type=?",
+                                (userInfo, contryNameEmoji, picFileName, favoritesNum,  id, type))
+            else:
+                # 插入新的行
+                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?)",
+                                (id, userInfo, contryNameEmoji, picFileName, favoritesNum, type))
+    elif tablename == 'Mapinfo':
+        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+                    (id TEXT PRIMARY KEY, FromCoor TEXT, ToCoor TEXT, distance INTEGER, travel_time TEXT, link TEXT, user TEXT, sentAddr TEXT, receivedAddr TEXT, type TEXT)''')
+        for item in content:
+            id = item['id']
+            FromCoor = json.dumps(item['FromCoor'])
+            ToCoor = json.dumps(item['ToCoor'])
+            distance = item['distance']
+            travel_time = item['travel_time']
+            link = item['link']
+            user = item['user']
+            sentAddr = item['sentAddr']
+            receivedAddr = item['receivedAddr']
+            type = item['type']    
+
+            cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (id, FromCoor, ToCoor, distance, travel_time, link, user, sentAddr, receivedAddr, type))
+    # 将列表中的JSON对象写入文件      
+    elif tablename == 'postcardStory':
+        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+                    (id TEXT, content_cn TEXT, content_en TEXT)''')
+        for item in content:
+            id = item['id']
+            content_cn = item['content_cn']
+            content_en = item['content_en']
+            cursor.execute(f"SELECT * FROM {tablename} WHERE id=? ", (id, ))
+            existing_data = cursor.fetchone()
+            if existing_data:
+                # 更新已存在的行的其他列数据
+                cursor.execute(f"UPDATE {tablename} SET content_cn=?, content_en=?  WHERE id=?",
+                                (content_cn, content_en, id))
+            else:
+                # 插入新的行
+                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?)",
+                                (id, content_cn, content_en))
+    elif tablename == 'CountryStats':
+        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+            (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER, sentMedian INTEGER, receivedMedian INTEGER,
+            PRIMARY KEY (name))''')
+        for item in content:
+    
+            name = item['name']
+            countryCode = item['countryCode']
+            flagEmoji = item['flagEmoji']
+            value = item['value']
+            sentNum = item['sentNum']
+            receivedNum = item['receivedNum']
+            sentAvg = item['sentAvg']
+            receivedAvg = item['receivedAvg']
+            sentMedian = item['sentMedian']
+            receivedMedian = item['receivedMedian']
+            cursor.execute(f"SELECT * FROM {tablename} WHERE name=?", (name,))
+            existing_data = cursor.fetchone()
+            if existing_data:
+                # 更新已存在的行的其他列数据
+                cursor.execute(f"UPDATE {tablename} SET countryCode=?, flagEmoji=?, value=?, sentNum=?, receivedNum=?, sentMedian=?, receivedMedian=? WHERE name=?", (countryCode, flagEmoji, value, sentNum, receivedNum, sentMedian, receivedMedian, name))
+            else:
+                # 插入新的行
+                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian))
+    print(f'已更新{tablename}：数据库{dbpath}')
+    conn.commit()
+    conn.close()
+
+
+
+
 def MapDataCheck():
     for type in types_map:
         print("————————————————————")
@@ -924,7 +938,19 @@ def replaceTemplateCheck():
     for type in types:
         getGalleryInfo(type) 
 
+def md5(file_path):
+    with open(file_path, 'rb') as file:
+        data = file.read()
+        md5_hash = hashlib.md5(data).hexdigest()
+    return md5_hash
 
-# getUserHomeInfo("sent")
+def compareMD5(pathA,pathB):
 
-# getUserHomeInfo("received")
+    A_md5 = md5(pathA)
+    B_md5 = md5(pathB)
+    if B_md5 == A_md5:
+        stat = "0"
+    else:
+        stat = "1"
+    print(f"\n{pathA}:{A_md5}\n{pathB}:{B_md5}")
+    return stat

@@ -3,7 +3,7 @@ import json
 import time
 import multiDownload as dl
 import os
-
+import shutil
 
 
 start_time = time.time()
@@ -16,6 +16,8 @@ Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
 
+if os.path.exists(dbpath):
+    shutil.copyfile(dbpath, f"{dbpath}BAK")
 
 # 获取当前日期
 current_date = datetime.now().date()
@@ -91,7 +93,15 @@ dl.PicDataCheck()
 for type in types:
     createMD(type) 
 
-
+if os.path.exists(f"{dbpath}BAK"):
+    dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
+    if dbStat == "1":
+        print(f"{dbpath} 有更新") 
+        os.remove(f"{dbpath}BAK")
+    else:
+        print(f"{dbpath} 暂无更新") 
+    
+        os.remove(f"{dbpath}BAK")
 end_time = time.time()
 execution_time = round((end_time - start_time),3)
 print(f"createGallery.py脚本执行时间：{execution_time}秒\n")

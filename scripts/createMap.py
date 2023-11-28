@@ -7,6 +7,7 @@ import random
 import os
 import multiDownload as dl
 import sys
+import shutil
 
 start_time = time.time()
 
@@ -26,7 +27,9 @@ headers = {
     'Cookie': Cookie,
     
     }
- 
+
+if os.path.exists(dbpath):
+    shutil.copyfile(dbpath, f"{dbpath}BAK")
 
 def getHomeInfo(received):
     addr_count = {}
@@ -51,8 +54,8 @@ def geojson(m):
     footprint = []
     stats_data=dl.readDB(dbpath, "", "CountryStats")
     for data in stats_data:
-        sentNum = data['sentNum']
-        receivedNum = data['receivedNum']
+        sentNum = float(data['sentNum'])
+        receivedNum = float(data['receivedNum'])
         countryCode = data['countryCode']
         
         if sentNum > 0 and receivedNum > 0:
@@ -266,7 +269,7 @@ def replaceJsRef(fileFullName):
     os.remove(fileFullName)
     os.rename(f"{fileFullName}.bak", fileFullName)
 
-dl.MapDataCheck()
+
 
 def pathCheck(path):
     if os.path.exists(path): 
@@ -288,9 +291,20 @@ def pathCheck(path):
         elif path == "./ClusterMap.html":
             createClusterMap() 
         print((f"\n{path}已生成!"))
-        
+
+dl.MapDataCheck()  
 pathCheck("./Map.html")
 pathCheck("./ClusterMap.html")
+
+if os.path.exists(f"{dbpath}BAK"):
+    dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
+    if dbStat == "1":
+        print(f"{dbpath} 有更新") 
+        os.remove(f"{dbpath}BAK")
+    else:
+        print(f"{dbpath} 暂无更新") 
+    
+        os.remove(f"{dbpath}BAK")
 end_time = time.time()
 execution_time = round((end_time - start_time),3)
 print("————————————————————") 
