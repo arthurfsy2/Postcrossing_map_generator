@@ -5,8 +5,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import shutil
-import openpyxl
-from itertools import islice
+
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
