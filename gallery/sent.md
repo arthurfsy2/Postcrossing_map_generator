@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：51）
+title: 明信片展示墙（寄出：52）
 icon: address-card
-date: 2023-11-23
+date: 2023-11-28
 category:
   - Arthur
 tag:
@@ -10,6 +10,14 @@ order: 2
 ---
 
 ### [arthurfsy's sent](https://www.postcrossing.com/user/arthurfsy/gallery/sent)
+
+## [CN-3610298](https://www.postcrossing.com/postcards/CN-3610298) 
+ >寄往 [Akaka](https://www.postcrossing.com//user/Akaka) &#x1f1f9;&#x1f1fc;
+> 📏792 km 
+⏱41 days [2023/10/17--2023/11/27]
+
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/agm365cpsijgun9rrcn7twaw2e3c48hk.jpg)
 
 ## [CN-3610301](https://www.postcrossing.com/postcards/CN-3610301) 
  >寄往 [mcbuchanan](https://www.postcrossing.com//user/mcbuchanan) :canada:
