@@ -1,5 +1,3 @@
-
-#导入模块##  
 import mechanize  
 import http.cookiejar 
 import sys
@@ -78,13 +76,14 @@ if match_host:
     extracted_host = match_host.group(1)
     print("Host-postcrossing:", extracted_host)
 else:
-    print("No match found for Host-postcrossing.")
+    extracted_host = None
+    print("账号/密码错误，已退出")
+    os.remove("log.txt")  
+    sys.exit()
 
 if match_remember:
     extracted_remember = match_remember.group(1)
     print("PostcrossingRemember:", extracted_remember)
-else:
-    print("No match found for PostcrossingRemember.")
 
 Cookie=f"__Host-postcrossing={extracted_host}; PostcrossingRemember={extracted_remember}"
 

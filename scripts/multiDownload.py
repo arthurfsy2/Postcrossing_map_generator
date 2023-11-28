@@ -100,22 +100,21 @@ def getPageNum(content):
     "favourites": ("来自", favouritesPageNum, favouritesNum, f"明信片展示墙（我的点赞：{favouritesNum}）"),
     "popular": ("寄往", popularPageNum, popularNum, f"明信片展示墙（我收到的赞：{popularNum}）")
             }
-    # value = data.get(type)
-    # from_or_to, pageNum, Num, title = value
     path = "./output/title.json"
 
 
     with open(path, "w",encoding="utf-8") as file:
             json.dump(data, file, indent=2)
-    # return from_or_to, pageNum, Num, title
+
+# 获取对应国家的Emoji旗帜简写代码 
 def getCountryFlagEmoji(flag):
-    # 读取scripts/contryName.json文件
     with open('scripts/contryNameEmoji.json') as file:
         data = json.load(file)
     # 获取flag对应的值
     value = data.get(flag)
     return value
 
+# 获取不同类型的展示墙的详细信息，并组装数据
 def getGalleryInfo(type):
     path = "./output/title.json"
     with open(path, "r",encoding="utf-8") as file:
@@ -168,46 +167,38 @@ def getGalleryInfo(type):
         tablename = "Galleryinfo"
         writeDB(dbpath, content_all,tablename)
         i += 1
-
         print(f"已更新Galleryinfo_{type}：数据库{dbpath}\n")
+        print("————————————————————")
 
+
+# 读取本地数据库的明信片ID
 def getLocalID(type,dbpath):
     oldID = None
-
     if os.path.exists(dbpath):
         conn = sqlite3.connect(dbpath)
         cursor = conn.cursor()
-
-        # 检查表是否存在
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Mapinfo'")
         table_exists = cursor.fetchone()
-
         if table_exists:
             # 从Mapinfo表中获取id
             cursor.execute("SELECT id FROM Mapinfo WHERE type=?", (type,))
             rows = cursor.fetchall()
             oldID = [row[0] for row in rows]
-
         conn.close()
-    #print("oldID:\n",oldID)
     return oldID
 
-# getLocalID("sent",dbpath)
-
-# getLocalID("received",dbpath)
-
+# 读取本地已下载图片的文件名列表
 def getLocalPic():
     localPicList = []
     picPath = "./gallery/picture"
     for root, dirs,files in os.walk(picPath):
         for file in files:
             localPicList.append(file)
-    #print(f"localPicList({len(localPicList)}):\n{localPicList}")
     return localPicList
 
 
 
-#读取所有sent、received的列表，获取每个postcardID的详细数据
+# 实时获取该账号所有sent、received的明信片列表，获取每个postcardID的详细数据
 def getUpdateID(account,type,Cookie):
     headers = {
     'Host': 'www.postcrossing.com',
@@ -249,6 +240,7 @@ def getUpdateID(account,type,Cookie):
 
     return updateID,hasPicID
 
+# 获取日期
 def convert_to_utc(zoneNum,type,time_str):
     # 使用正则表达式提取时间部分
     pattern = rf"{type} on (\d{{4}}-\d{{2}}-\d{{2}} \d{{2}}:\d{{2}})"
@@ -308,6 +300,7 @@ def get_data(postcardID,type):
 
         sentAddrInfo = addrResults[0]
         receivedInfo = addrResults[1]
+
         sentAddr = sentAddrInfo[0]
         sentCountry = sentAddrInfo[2]
         receivedAddr = receivedInfo[0]
@@ -332,14 +325,8 @@ def get_data(postcardID,type):
             # 将拼接后的坐标字符串转换为浮点数
             from_coord = (float(match[0]), float(match[1]))
             to_coord = (float(match[2]), float(match[3]))
-        
-        
-        
+
         tablename = "Mapinfo"
-        # conn = sqlite3.connect(dbpath)
-        # cursor = conn.cursor()
-        # cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-        #                 (id TEXT PRIMARY KEY, FromCoor TEXT, ToCoor TEXT, distance INTEGER, travel_time TEXT, link TEXT, user TEXT, sentAddr TEXT, receivedAddr TEXT, type TEXT)''')
         
         item = {
                 "id": id,
@@ -357,6 +344,7 @@ def get_data(postcardID,type):
         print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%")
     writeDB(dbpath, content_all,tablename)
 
+# 下载展示墙的图片  
 def downloadPic(updatePic,pic_json):
     picFileNameList=[]
     for i, picFileName in enumerate(updatePic):         
@@ -520,7 +508,7 @@ def getUserStat():
     a_data = requests.get(url,headers=headers).json()
     with open(f"./output/UserStats.json", "w") as file:
         json.dump(a_data, file, indent=2)
-    # print(f"已生成output/UserStats.json")
+
     # 统计每个国家代码的出现次数
     country_count = {}
     for item in a_data:
@@ -589,7 +577,7 @@ def getUserStat():
     # # 将统计结果写入 b.json 文件
     with open('./output/stats.json', 'w') as file:
         json.dump(country_stats, file, indent=2)
-    print(f"./output/stats.json")
+    print(f"已生成./output/stats.json\n")
     tablename = "CountryStats"
     writeDB(dbpath, country_stats,tablename)
     
@@ -627,10 +615,10 @@ def multiTask(account,type,Cookie):
     else:
         pass
     
-
+# 设置多线程下载图片
 def multiDownload(type):
     updatePic = getUpdatePic(type)
-    print("————————————————————")
+    
     if updatePic is not None:
         Num = round(len(updatePic)/20) 
         if Num < 1:
@@ -657,7 +645,9 @@ def multiDownload(type):
         
     else:
         print(f"{type}_图库无需更新")
+        print("————————————————————")
 
+# 设置读取数据库的统一入口函数
 def readDB(dbpath, type,tablename):
     data_all = []
     if os.path.exists(dbpath):
@@ -763,14 +753,10 @@ def readDB(dbpath, type,tablename):
                 data_all.append(data)       
         conn.close()
         return data_all
-
-
-
-
     return data_all
 
-def writeDB(dbpath, content,tablename):
-    
+# 设置写入数据库的统一入口函数
+def writeDB(dbpath, content,tablename):   
     conn = sqlite3.connect(dbpath)
     cursor = conn.cursor()
 
@@ -854,45 +840,21 @@ def writeDB(dbpath, content,tablename):
                 # 插入新的行
                 cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian))
-    print(f'已更新{tablename}：数据库{dbpath}')
+    print(f'已更新数据库{dbpath}的{tablename}\n')
     conn.commit()
     conn.close()
 
 
 
-
+# 定义createMap.py的前置检查条件
 def MapDataCheck():
+    print("————————————————————")
     for type in types_map:
-        print("————————————————————")
-
-        conn = sqlite3.connect(dbpath)
-        cursor = conn.cursor()
-
-        # 检查表是否存在
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Mapinfo'")
-        table_exists = cursor.fetchone()
-
-        if table_exists:        
-            print(f"已存在数据库{dbpath}：Mapinfo_{type}") 
-        #dl.multiTask(account,type,Cookie) 
-            if stat != "getPrivate":          
-                print(f"{account}的Cookies无效，无法更新数据。")
-            else:
-                print(f"{account}的Cookies有效，正在比对数据……")    
-                multiTask(account,type,Cookie) 
-        
-        else:
-            if stat != "getPrivate":          
-                print(f"{account}的Cookies无效，且缺少数据库{dbpath}：Mapinfo_{type}，无法生成地图数据，已退出")
-                sys.exit()
-            else:
-                print(f"{account}的Cookies有效，准备生成数据库{dbpath}：Mapinfo_{type}") 
-                multiTask(account,type,Cookie) 
-
-
-
-stat,content_raw,types = getAccountStat()
-def PicDataCheck():     
+         multiTask(account,type,Cookie)
+    
+# 定义createGallery.py的前置检查条件
+def PicDataCheck():    
+    print("————————————————————") 
     getPageNum(content_raw)
     getUserStat()
     for type in types:
@@ -900,8 +862,9 @@ def PicDataCheck():
     for type in types:
         multiDownload(type) # 批量下载图片
     
-    
+# 定义createPersonalPage.py的前置检查条件    
 def replaceTemplateCheck():  
+    print("————————————————————")
     getPageNum(content_raw)
     getUserStat()
     for type in types:
@@ -923,3 +886,5 @@ def compareMD5(pathA,pathB):
         stat = "1"
     print(f"\n{pathA}:{A_md5}\n{pathB}:{B_md5}")
     return stat
+
+stat,content_raw,types = getAccountStat()

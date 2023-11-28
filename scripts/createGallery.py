@@ -73,13 +73,14 @@ def createMD(type):
         if updatePic is not None:
             with open(filename_md, "w", encoding="utf-8") as f:    
                 f.write(content)
-            print(f"\n{type}.md已成功更新")
+            print(f"{type}.md已成功更新")
         else:
-            print(f"\n{type}.md无更新")
+            print(f"{type}.md无更新")       
     else:
         with open(filename_md, "w", encoding="utf-8") as f:    
                 f.write(content)
-        print(f"\n{type}.md文件已生成")
+        print(f"{type}.md文件已生成")
+    print("————————————————————")
     
     # 换为你的blog的本地链接，可自动同步过去
     blog_path = rf"D:\web\Blog2\src\Arthur\Postcrossing\{type}.md"

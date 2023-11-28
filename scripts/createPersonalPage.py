@@ -93,7 +93,7 @@ def replaceTemplate():
         else:
             desc =""
         desc_all += desc
-    print("desc_all：",desc_all)
+
     for type in types:        
         title = replateTitle(type)
         title_all += f"#### [{title}](/{nickName}/postcrossing/{type})\n\n"
@@ -128,11 +128,19 @@ def replaceTemplate():
     #     with open(blog_path, "w", encoding="utf-8") as f:
     #         f.write(dataNew)
 
-def getStoryContent(excel_file):
-    contentStory = readSheet(excel_file)
-    tablename = "postcardStory"
-    dl.writeDB(dbpath, contentStory,tablename)
+def StoryXLS2DB(excel_file):
+    df = pd.read_excel(excel_file)
+    content_all = []
 
+    for index, row in df.iterrows():
+        data = {
+            "id": row[0],
+            "content_cn": row[1],
+            "content_en": row[2]
+        }
+        content_all.append(data)
+    tablename = "postcardStory"
+    dl.writeDB(dbpath, content_all,tablename)
 
 
 
@@ -215,30 +223,10 @@ def createCalendar():
     height = len(year_list)*150
     return calendar_all, series_all, height
 
-
-
-def readSheet(excel_file):
-    df = pd.read_excel(excel_file)
-    content_all = []
-
-    for index, row in df.iterrows():
-        data = {
-            "id": row[0],
-            "content_cn": row[1],
-            "content_en": row[2]
-        }
-        content_all.append(data)
-    
-    return content_all
-
 dl.replaceTemplateCheck()
 excel_file="./template/postcardStory.xlsx"
-getStoryContent(excel_file)
-
-
+StoryXLS2DB(excel_file)
 replaceTemplate()
-
-getCardStoryList()
 
 if os.path.exists(f"{dbpath}BAK"):
     dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
