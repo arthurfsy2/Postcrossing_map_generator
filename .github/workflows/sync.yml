@@ -44,7 +44,9 @@ jobs:
           python scripts/createGallery.py
           python scripts/createPersonalPage.py
           python scripts/init.py
-          
+      - name: 删除缓存文件
+        run: rm -rf scripts/__pycache__/    
+
       - name: 检查文件更新
         id: check_changes
         run: |
