@@ -270,40 +270,20 @@ def replaceJsRef(fileFullName):
     os.rename(f"{fileFullName}.bak", fileFullName)
 
 
-
-def pathCheck(path):
-    if os.path.exists(path): 
-        with open('scripts/mapUpdateStats.json', 'r') as file:
-            config_data = json.load(file)
-        SentResultStat = config_data["sent"]
-        ReceivedResult= config_data["received"]
-        if SentResultStat =="1" or ReceivedResult =="1":
-            if path =="./Map.html":   
-                createMap()
-            elif path == "./ClusterMap.html":
-                createClusterMap() 
-            print(f"{path}已成功更新")
-        else:
-            print(f"{path}无更新")
-    else:
-        if path =="./Map.html":   
-            createMap()
-        elif path == "./ClusterMap.html":
-            createClusterMap() 
-        print((f"\n{path}已生成!"))
-
 dl.MapDataCheck()  
-pathCheck("./Map.html")
-pathCheck("./ClusterMap.html")
-
 if os.path.exists(f"{dbpath}BAK"):
     dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
     if dbStat == "1":
         print(f"{dbpath} 有更新") 
+        createMap()
+        print("Map.html已生成!")
+        createClusterMap() 
+        print("ClusterMap.html已生成!")
         os.remove(f"{dbpath}BAK")
     else:
         print(f"{dbpath} 暂无更新") 
-    
+        print("Map.html 暂无更新")
+        print("ClusterMap.html 暂无更新")
         os.remove(f"{dbpath}BAK")
 end_time = time.time()
 execution_time = round((end_time - start_time),3)

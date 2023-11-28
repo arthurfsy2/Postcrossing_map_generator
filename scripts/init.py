@@ -1,6 +1,6 @@
 import json
 
-filenames = ['config','galleryUpdateStats','mapUpdateStats']
+filenames = ['config']
 def initialize(filename):
     path=f"scripts/{filename}.json"
     # 读取scripts/config.json文件内容
@@ -12,15 +12,6 @@ def initialize(filename):
         data['nickName'] = "your Markdown Name"
         data['Cookie'] = "auto create"
     # 将更新后的内容写入scripts/config.json文件
-    elif filename =="galleryUpdateStats":
-        data['sent'] = ""
-        data['received'] = ""
-        data['favourites'] = ""
-        data['popular'] = ""
-    elif filename =="mapUpdateStats":
-        data['sent'] = ""
-        data['received'] = ""
-
     with open(path, 'w') as file:
         json.dump(data, file, indent=4)
 

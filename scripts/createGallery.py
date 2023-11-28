@@ -66,12 +66,11 @@ def createMD(type):
         num = types.index(type) + 2
     link = f"### [{account}'s {type}]({baseUrl}user/{account}/gallery/{type})"
     content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
-    
-    with open('scripts/galleryUpdateStats.json', 'r') as file:
-        config_data = json.load(file)
+       
+    updatePic = dl.getUpdatePic(type)
     
     if os.path.exists(filename_md): 
-        if config_data[type] == "1":
+        if updatePic is not None:
             with open(filename_md, "w", encoding="utf-8") as f:    
                 f.write(content)
             print(f"\n{type}.md已成功更新")

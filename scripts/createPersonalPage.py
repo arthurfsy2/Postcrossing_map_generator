@@ -27,6 +27,16 @@ def replateTitle(type):
     from_or_to, pageNum, Num, title = value
     return title
 
+# 获取收发总距离
+def getUserHomeInfo(type):
+    distance_all = []
+    content = dl.readDB(dbpath,type,"Mapinfo")
+    #print("content:",content)
+    for item in content:
+        distance_all.append(int(item["distance"]))
+    total = sum(distance_all)
+    return total,len(content)
+
 def getUserSheet():
     stats_data=dl.readDB(dbpath, "", "CountryStats")
     # 按照 name 的 A-Z 字母顺序对 stats_data 进行排序
@@ -75,7 +85,7 @@ def replaceTemplate():
     desc_all=""      
     
     for type in types: 
-        distance_all,num = dl.getUserHomeInfo(type)
+        distance_all,num = getUserHomeInfo(type)
         if type == "sent":
             desc = f"> 寄出[📤**{num}** 📏**{distance_all}** km]\n\n"
         elif type == "received":
@@ -236,6 +246,5 @@ if os.path.exists(f"{dbpath}BAK"):
         print(f"{dbpath} 有更新") 
         os.remove(f"{dbpath}BAK")
     else:
-        print(f"{dbpath} 暂无更新") 
-    
+        print(f"{dbpath} 暂无更新")    
         os.remove(f"{dbpath}BAK")

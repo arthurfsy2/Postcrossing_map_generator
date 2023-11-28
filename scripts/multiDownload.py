@@ -240,21 +240,12 @@ def getUpdateID(account,type,Cookie):
         if len(newID) == 0:
             print(f"数据库{dbpath}：Mapinfo_{type}暂无更新内容\n")
             updateID = None
-            updateStat="0"
         else:
             print(f"{type}_等待更新Mapinfo({len(newID)}个):{newID}\n")
             updateID = newID
-            updateStat="1"
     else:
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
         updateID = onlineID
-        updateStat="1"
-    with open('scripts/mapUpdateStats.json', 'r') as file:
-        config_data = json.load(file)
-    config_data[type] = updateStat
-    # 将更新后的内容写入scripts/config.json文件
-    with open('scripts/mapUpdateStats.json', 'w') as file:
-        json.dump(config_data, file, indent=4)
 
     return updateID,hasPicID
 
@@ -276,15 +267,7 @@ def convert_to_utc(zoneNum,type,time_str):
     return time_utc_str
 
 
-# 获取收发总距离
-def getUserHomeInfo(type):
-    distance_all = []
-    content = readDB(dbpath,type,"Mapinfo")
-    #print("content:",content)
-    for item in content:
-        distance_all.append(int(item["distance"]))
-    total = sum(distance_all)
-    return total,len(content)
+
 
 def get_data(postcardID,type):
     
@@ -407,24 +390,13 @@ def getUpdatePic(type):
                 newPic.append(pic)
         if len(newPic) == 0:
             updatePic = None
-            updateStat ="0"
         else:
             
             updatePic = newPic
-            updateStat ="1"
     else:
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
         updatePic = picFileNameList 
-        updateStat ="1"
-    #print(f"{type}_updatePic:{updatePic}\n")
 
-        # 读取scripts/config.json文件内容
-    with open('scripts/galleryUpdateStats.json', 'r') as file:
-        config_data = json.load(file)
-    config_data[type] = updateStat
-    # 将更新后的内容写入scripts/config.json文件
-    with open('scripts/galleryUpdateStats.json', 'w') as file:
-        json.dump(config_data, file, indent=4)
     return updatePic
 
 
