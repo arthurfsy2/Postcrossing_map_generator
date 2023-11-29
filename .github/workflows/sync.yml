@@ -45,7 +45,11 @@ jobs:
       #     python scripts/createPersonalPage.py
       - name: 获取展示墙数据
         run: |
-          Cookie=$(python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }} $GITHUB_REPOSITORY | grep -oP 'Cookie_new: \K.*')
+          Cookie=$(python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }} $GITHUB_REPOSITORY | grep -oP 'Cookie_new: \K.*')
+          
+          python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }} $GITHUB_REPOSITORY
+    
+
           echo "secret.Cookie=$Cookie" >> $GITHUB_ENV
           # 将输出设置为环境变量
           echo "Cookie=$Cookie" >> $GITHUB_ENV
@@ -63,7 +67,7 @@ jobs:
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
-          git diff --cached --quiet || git commit -m "Move updated file to root directory"
+          git diff --cached --quiet || git commit -m "保存已修改文件"
           if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
             git push
           else
