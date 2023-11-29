@@ -1,5 +1,5 @@
 {
-    "Cookie": "",
+    "Cookie": "__Host-postcrossing=rlqjd6oqj72ce9j5aghh1hs2gh; PostcrossingRemember=EdTgnehTsTodErB8eE79RfulBAdWA2Qd",
     "picDriverPath": "https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",
     "dbpath": "./template/data.db"
 }
