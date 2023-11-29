@@ -4,17 +4,31 @@ import time
 import multiDownload as dl
 import os
 import shutil
-
+import argparse
 
 start_time = time.time()
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
-account = data["account"]
-nickName = data["nickName"]
-Cookie = data["Cookie"]
+# account = data["account"]
+# nickName = data["nickName"]
+# Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
+
+parser = argparse.ArgumentParser()
+parser.add_argument("account", help="输入account")
+parser.add_argument("password", help="输入password")      
+parser.add_argument("nickName", help="输入nickName")    
+parser.add_argument("Cookie", help="输入Cookie") 
+parser.add_argument("repo", help="输入repo")    
+options = parser.parse_args()
+
+account = options.account
+password = options.password
+nickName = options.nickName
+Cookie = options.Cookie
+repo = options.repo
 
 if os.path.exists(dbpath):
     shutil.copyfile(dbpath, f"{dbpath}BAK")

@@ -8,14 +8,30 @@ import os
 import multiDownload as dl
 import sys
 import shutil
+import argparse
 
 start_time = time.time()
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
-account = data["account"]
-Cookie = data["Cookie"]
+# account = data["account"]
+# Cookie = data["Cookie"]
 dbpath = data["dbpath"]
+
+parser = argparse.ArgumentParser()
+parser.add_argument("account", help="输入account")
+parser.add_argument("password", help="输入password")      
+parser.add_argument("nickName", help="输入nickName")    
+parser.add_argument("Cookie", help="输入Cookie") 
+parser.add_argument("repo", help="输入repo")    
+options = parser.parse_args()
+
+account = options.account
+password = options.password
+nickName = options.nickName
+Cookie = options.Cookie
+repo = options.repo
+
 
 userUrl = f"https://www.postcrossing.com/user/{account}"  
 galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙

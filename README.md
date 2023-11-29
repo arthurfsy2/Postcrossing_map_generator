@@ -17,6 +17,7 @@
 4. 抓取后的信息会保存到./output/sent_List.json和received_List.json当中，如果以后有更新，只会抓取更新部分，减少对Postcrossing的压力。
 
 # 环境要求
+
 python版本 >=3.11.2
 
 # 一. 步骤（本地模式）
@@ -27,43 +28,34 @@ python版本 >=3.11.2
 ```
 {
     "account": "your account",//你的账户，通过scripts/login.py来自动赋值 “https://www.postcrossing.com/user/arthurfsy/gallery”当中的“arthurfsy”
-    "nickName": "",//输入你定义的昵称，用于生成.md文件的fronttage内容，生成后的.md文件可作为vuepress项目使用
+    "nickName": "your Markdown Name",//输入你定义的昵称，用于生成.md文件的fronttage内容，生成后的.md文件可作为vuepress项目使用
     "Cookie": "auto create",//你的账户，通过scripts/login.py来自动赋值 
     "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",//默认为Postcrossing图片的官方链接前缀。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取
     "dbpath": "./template/data.db", //默认的数据库存放路径
-    "repo":"arthurfsy2/Postcrossing_map_generator" //更改为你自己的仓库名。用于“信息汇总”的echarts表格取值。
+    "repo":"arthurfsy2/Postcrossing_map_generator" //更改为你自己的仓库名。用于“信息汇总”的echarts图标取值。
 ```
 
 3. 进入项目目录
 
+   * **删除/output、/gallery目录下的所有文件（使用你自己的账号，会自动生成数据）**
+   * **删除/template目录下的data.db文件（postcardStory.xlsx、信息汇总_template.md可修改为你喜欢的文字描述）**
+
    执行 `pip install -r requirements.txt安装依赖`
 
-   执行`pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com` 安装openpyxl （如果你需要自行填写明信片背面文字内容，则需要安装）
-
+   执行 `pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com` 安装openpyxl （如果你需要填写/template/postcardStory.xlsx 当中的明信片背面文字内容，则需要安装）
 4. 数据获取：
 
    依次执行以下内容：
 
    ```
    python scripts/login.py "账号" "密码" "昵称" //输入账号密码获取cookies，如：python scripts/login.py "youraccount" "yourpassword" "yournickname"
-   
-   python scripts/createMap.py  //生成地图文件
-   python scripts/createGallery.py  //生成展示墙
-   python scripts/createPersonalPage.py  //生成“信息汇总”页面
+   python scripts/createMap.py  //在./生成ClusterMap.html和Map.html文件(还包含其他结果文件)
+   python scripts/createGallery.py  //在./gallery生成4个不同类型的展示墙、已下载的图片(还包含其他结果文件)
+   python scripts/createPersonalPage.py  //在./output生成“信息汇总”页面(还包含其他结果文件)
+   （可选）python scripts/init.py  //初始化config.json的信息
    ```
 
-   
-
-
-
-gallery当中的sent、received、favourites、popular的内容,并自动在./gallery/picture路径下保存对应的图片。
-
-4. 运行以下代码生成地图：
-   `python scripts/contryNameEmoji.json`
-   注：如果account、Cookie无误的话，即可在./路径下生成2个.html格式的文件，分别是ClusterMap.html和Map.html。
-
 # 二. Github Action
-
 
 如果你想通过Github Action来实现定时获取数据，可进行以下步骤
 
@@ -97,27 +89,29 @@ on:
    nickname：你的vuepress的fronttage的category:- XXX 对应的名称
 
    > 添加好后的变量如下图所示
-   
-   ![img](/img/20231125012751.png) 
+   >
+
+   ![img](/img/20231125012751.png)
 
 # 三. Github Page在线展示
 
 **如果你想通过Github Page来在线展示地图数据，可进行以下步骤**
+
 1. fork本项目到你自己的仓库，clone到本地后按需修改fork后仓库内的scripts/config.json内容
-2. 参考上述的步骤1-4，在本地生成2个地图html文件/通过Github Action生成文件
+2. 参考**一. 步骤（本地模式）**的步骤1-4（注意要删除掉我的数据），在本地/通过Github Action生成文件
 3. 将HTML文件push到你fork的仓库当中/等待Github Action自动生成文件
 4. 参考以下截图开通Github Page，即可访问(需要手动在链接后面增加ClusterMap.html或Map.html)
+
 > 如：https://arthurfsy2.github.io/Postcrossing_map_generator/Map.html
 > 也可通过vercel生成：https://postcrossingfsy.vercel.app/Map.html
 
    ![](img/20231026155131.png)
 
-
 # 四. 文件使用方法
 
 ## 1.CDN
 
-1、成功获取output路径下的的json文件，如果希望国内网络流畅访问，且对数据更新没那么敏感的话，可考虑通过CDN加速一下。
+1、成功在github仓库上获取output路径下的的json文件后，如果希望国内网络流畅访问，且对数据更新没那么敏感的话，可考虑通过CDN加速一下。
 
 ### 推荐1.jsdelivr
 
@@ -133,6 +127,7 @@ https://cdn.jsdelivr.net/gh/arthurfsy2/Postcrossing_map_generator@main/output/ca
 ### 推荐2.gitmirror
 
 可直接将 `raw.githubusercontent.com/XXX`换成 `raw.gitmirror.com/XXX`，即可实现免费CDN
+
 ```
 https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/calendar.json
 
@@ -144,6 +139,40 @@ https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/mont
 上述2种方法获取的json文件为直链，可以通过python或javascript直接http的get请求，直接获取到数据。
 
 > 本项目的“信息汇总.md"关于echarts图表部分，则用到了几个json文件的CDN链接。
+
+
+
+## 2.自动将.md同步到vuepress仓库
+
+
+
+步骤：
+
+1、在你的vuepress仓库的src/.vuepress/public/scripts/路径下新建updatePostcrossing.py，脚本内容可参考：[updatePostcrossing.py](https://github.com/arthurfsy2/arthurfsy2.github.io/blob/main/src/.vuepress/public/scripts/updatePostcrossing.py)
+
+修改以下代码的`arthurfsy2/Postcrossing_map_generator`为你自己的仓库名称（地址已采用了jsdelivr的CDN链接）：
+
+```
+def downloadMD(type):
+    if type != '信息汇总':
+        url = f"https://cdn.jsdelivr.net/gh/arthurfsy2/Postcrossing_map_generator@main/gallery/{type}.md"
+    else:
+        url = f"https://cdn.jsdelivr.net/gh/arthurfsy2/Postcrossing_map_generator@main/output/{type}.md"
+```
+
+
+
+2、在你的vuepress仓库的workflows路径下新建updatePostcrossing.yml，脚本内容可参考：[updatePostcrossing.yml](https://github.com/arthurfsy2/arthurfsy2.github.io/blob/main/.github/workflows/updatePostcrossing.yml)
+
+以下内容改为你自己的github信息。
+
+这样就可以将你的Postcrossing脚本仓库生成的文件，在固定的时间段通过Github Action下载到你的vuepress仓库当中（如果有更新的话）
+
+```
+env:
+  GITHUB_NAME: arthurfsy2 （修改成你的github名称）
+  GITHUB_EMAIL: fsyflh@gmail.com （修改为你的github账号邮箱）
+```
 
 # 五. 其他说明
 

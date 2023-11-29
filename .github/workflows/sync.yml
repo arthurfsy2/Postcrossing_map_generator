@@ -37,16 +37,22 @@ jobs:
         run: |
           pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com
 
+      # - name: 获取展示墙数据
+      #   run: |
+      #     python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} 
+      #     python scripts/createMap.py
+      #     python scripts/createGallery.py
+      #     python scripts/createPersonalPage.py
       - name: 获取展示墙数据
         run: |
-          python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} 
-          python scripts/createMap.py
-          python scripts/createGallery.py
-          python scripts/createPersonalPage.py
-          python scripts/init.py
+          Cookie=$(python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }} $GITHUB_REPOSITORY | grep -oP 'Cookie_new: \K.*')
+          echo "secret.Cookie=$Cookie" >> $GITHUB_ENV
+          # 将输出设置为环境变量
+          echo "Cookie=$Cookie" >> $GITHUB_ENV
+      
       - name: 删除缓存文件
         run: rm -rf scripts/__pycache__/    
-
+      
       - name: 检查文件更新
         id: check_changes
         run: |
