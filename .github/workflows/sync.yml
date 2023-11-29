@@ -52,17 +52,13 @@ jobs:
         run: |
           python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }} $GITHUB_REPOSITORY
     
-
-          
-          
-      
       - name: 删除缓存文件
         run: rm -rf scripts/__pycache__/    
       
       - name: 检查文件更新
         id: check_changes
         run: |
-          git diff --quiet || echo "changes=true" >> $GITHUB_OUTPUT
+          git diff --quiet || echo "changes=true" >> $GITHUB_ENV
 
       - name: 提交
         run: |
@@ -70,7 +66,7 @@ jobs:
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
           git diff --cached --quiet || git commit -m "保存已修改文件"
-          if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
+          if [[ "${{ env.changes }}" == "true" ]]; then
             git push
           else
             echo "No changes to push."
