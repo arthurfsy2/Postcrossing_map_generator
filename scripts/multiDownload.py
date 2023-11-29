@@ -20,7 +20,7 @@ with open("scripts/config.json", "r") as file:
     data = json.load(file)
 # account = data["account"]
 # nickName = data["nickName"]
-# Cookie = data["Cookie"]
+Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
 
@@ -28,14 +28,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument("account", help="输入account")
 parser.add_argument("password", help="输入password")      
 parser.add_argument("nickName", help="输入nickName")    
-parser.add_argument("Cookie", help="输入Cookie") 
+# parser.add_argument("Cookie", help="输入Cookie") 
 parser.add_argument("repo", help="输入repo")    
 options = parser.parse_args()
 
 account = options.account
 password = options.password
 nickName = options.nickName
-Cookie = options.Cookie
+# Cookie = options.Cookie
 repo = options.repo
 
 # 获取当前日期
@@ -82,7 +82,7 @@ def getAccountStat(Cookie):
     elif galleryStatus == 200 and cookieStat == 404:
         totalStat ="getPublic"
         types = ['sent', 'received'] 
-        print(f"{account}的Cookies无效，正在尝试重新登陆……")
+        print(f"{account}的Cookies无效，正在尝试重新登陆……\n")
     elif galleryStatus != 200:
         totalStat ="unAccessible"
         print(f"用户:{account}已注销/设置为非公开，无法获取！\n")

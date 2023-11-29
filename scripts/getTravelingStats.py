@@ -6,7 +6,7 @@ with open("scripts/config.json", "r") as file:
     data = json.load(file)
 # account = data["account"]
 # nickName = data["nickName"]
-# Cookie = data["Cookie"]
+Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
 # repo = data["repo"]
@@ -15,14 +15,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument("account", help="输入account")
 parser.add_argument("password", help="输入password")      
 parser.add_argument("nickName", help="输入nickName")    
-parser.add_argument("Cookie", help="输入Cookie") 
+# parser.add_argument("Cookie", help="输入Cookie") 
 parser.add_argument("repo", help="输入repo")    
 options = parser.parse_args()
 
 account = options.account
 password = options.password
 nickName = options.nickName
-Cookie = options.Cookie
+# Cookie = options.Cookie
 repo = options.repo
 
 

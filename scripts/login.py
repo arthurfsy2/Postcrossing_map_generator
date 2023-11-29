@@ -7,19 +7,24 @@ import os
 import argparse
 import multiDownload as dl
 
+with open("scripts/config.json", "r") as file:
+    data = json.load(file)
+# account = data["account"]
+Cookie = data["Cookie"]
+dbpath = data["dbpath"]
 
 parser = argparse.ArgumentParser()
 parser.add_argument("account", help="输入account")
 parser.add_argument("password", help="输入password")      
 parser.add_argument("nickName", help="输入nickName")    
-parser.add_argument("Cookie", help="输入Cookie") 
+# parser.add_argument("Cookie", help="输入Cookie") 
 parser.add_argument("repo", help="输入repo")    
 options = parser.parse_args()
 
 account = options.account
 password = options.password
 nickName = options.nickName
-Cookie = options.Cookie
+# Cookie = options.Cookie
 repo = options.repo
 
 
@@ -85,17 +90,17 @@ def login(account,password):
 
     Cookie=f"__Host-postcrossing={extracted_host}; PostcrossingRemember={extracted_remember}"
     print("Cookie_new:",Cookie)
-    # # 读取scripts/config.json文件内容
-    # with open('scripts/config.json', 'r') as file:
-    #     config_data = json.load(file)
+    # 读取scripts/config.json文件内容
+    with open('scripts/config.json', 'r') as file:
+        config_data = json.load(file)
 
-    # # 更新Cookie变量的值
-    # config_data['Cookie'] = Cookie
+    # 更新Cookie变量的值
+    config_data['Cookie'] = Cookie
     # config_data['account'] = account
     # config_data['nickName'] = nickName
-    # # 将更新后的内容写入scripts/config.json文件
-    # with open('scripts/config.json', 'w') as file:
-    #     json.dump(config_data, file, indent=4)
+    # 将更新后的内容写入scripts/config.json文件
+    with open('scripts/config.json', 'w') as file:
+        json.dump(config_data, file, indent=4)
     os.remove("log.txt")  
     return Cookie
     
