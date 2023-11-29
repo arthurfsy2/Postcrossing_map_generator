@@ -43,16 +43,17 @@ jobs:
       #     python scripts/createMap.py
       #     python scripts/createGallery.py
       #     python scripts/createPersonalPage.py
-      - name: 获取展示墙数据
+      - name: 检查Cookie
         run: |
           Cookie=$(python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }} $GITHUB_REPOSITORY | grep -oP 'Cookie_new: \K.*')
-          
-          python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }} $GITHUB_REPOSITORY
+          echo "secret.Cookie=$Cookie" >> $GITHUB_ENV > /dev/null
+      
+      - name: 运行startTask.py脚本
+        run: python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} ${{ secrets.COOKIE }} $GITHUB_REPOSITORY
     
 
-          echo "secret.Cookie=$Cookie" >> $GITHUB_ENV
-          # 将输出设置为环境变量
-          echo "Cookie=$Cookie" >> $GITHUB_ENV
+          
+          
       
       - name: 删除缓存文件
         run: rm -rf scripts/__pycache__/    
