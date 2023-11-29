@@ -28,7 +28,9 @@ jobs:
           cache: pip
           cache-dependency-path: 'requirements.txt'
       
-
+      - name: 安装依赖
+        run: |
+          pip install -r requirements.txt
       
       - name: 检查Cookies
         run: |
