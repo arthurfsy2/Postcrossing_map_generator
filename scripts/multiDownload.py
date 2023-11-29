@@ -702,6 +702,7 @@ def readDB(dbpath, type,tablename):
                     p.id,
                     p.content_cn,
                     p.content_en,
+                    p.comment,
                     g.userInfo,
                     g.picFileName,
                     g.contryNameEmoji,
@@ -714,9 +715,9 @@ def readDB(dbpath, type,tablename):
                     INNER JOIN Galleryinfo g ON p.id = g.id
                     INNER JOIN Mapinfo m ON p.id = m.id 
                 WHERE
-                    g.type = 'received'
+                    g.type = ?
                 ORDER BY
-                    receivedDate DESC''')
+                    receivedDate DESC''', (type,))
             else:
                 cursor.execute(f"SELECT * FROM {tablename}")
             rows = cursor.fetchall()
@@ -763,11 +764,12 @@ def readDB(dbpath, type,tablename):
                         "id": row[0],
                         "content_cn": row[1],
                         "content_en": row[2],
-                        "userInfo": row[3],
-                        "picFileName": row[4],
-                        "contryNameEmoji":row[5],
-                        "travel_time": row[7],
-                        "distance": row[9],
+                        "comment": row[3],
+                        "userInfo": row[4],
+                        "picFileName": row[5],
+                        "contryNameEmoji":row[6],
+                        "travel_time": row[8],
+                        "distance": row[10],
                     }
                 data_all.append(data)       
         conn.close()
@@ -819,21 +821,22 @@ def writeDB(dbpath, content,tablename):
     # 将列表中的JSON对象写入文件      
     elif tablename == 'postcardStory':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                    (id TEXT, content_cn TEXT, content_en TEXT)''')
+                    (id TEXT, content_cn TEXT, content_en TEXT, comment TEXT)''')
         for item in content:
             id = item['id']
             content_cn = item['content_cn']
             content_en = item['content_en']
+            comment = item['comment']
             cursor.execute(f"SELECT * FROM {tablename} WHERE id=? ", (id, ))
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET content_cn=?, content_en=?  WHERE id=?",
-                                (content_cn, content_en, id))
+                cursor.execute(f"UPDATE {tablename} SET content_cn=?, content_en=?,comment=?  WHERE id=?",
+                                (content_cn, content_en,comment, id))
             else:
                 # 插入新的行
-                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?)",
-                                (id, content_cn, content_en))
+                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?)",
+                                (id, content_cn, content_en, comment))
     elif tablename == 'CountryStats':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
             (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER, sentMedian INTEGER, receivedMedian INTEGER,

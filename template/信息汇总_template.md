@@ -244,7 +244,11 @@ $sheet
 
 ## 四.明信片故事
 
-$list
+$storylist
+
+## 五.已寄片收到回复
+
+$commentlist
 
 <style>
   .image-preview {

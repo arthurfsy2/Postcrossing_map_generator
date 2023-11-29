@@ -116,7 +116,8 @@ def replaceTemplate():
         title_final = f"{desc_all}\n{title_all}"
     #print("title_all:\n",title_all)
     sheet = getUserSheet()
-    list = getCardStoryList()
+    storylist = getCardStoryList("received")
+    commentlist = getCardStoryList("sent")
     calendar,series,height = createCalendar()
     with open(f"./template/信息汇总_template.md", "r",encoding="utf-8") as f:
         data = f.read()  
@@ -126,9 +127,10 @@ def replaceTemplate():
         print("已替换明信片墙title")
         dataNew = dataNew.replace('$sheet',sheet)
         print("已替换明信片表格")
-        dataNew = dataNew.replace('$list',list)
+        dataNew = dataNew.replace('$storylist',storylist)
         print("已替换明信片故事list")
-
+        dataNew = dataNew.replace('$commentlist',commentlist)
+        print("已替换明信片评论list")
         dataNew = dataNew.replace('$calendar',calendar)
         dataNew = dataNew.replace('$series',series)
         dataNew = dataNew.replace('$height',str(height))
@@ -137,12 +139,12 @@ def replaceTemplate():
     with open(f"./output/信息汇总.md", "w",encoding="utf-8") as f:
         f.write(dataNew)  
 
-    # blog_path = r"D:\web\Blog2\src\Arthur\Postcrossing\信息汇总.md"
+    blog_path = r"D:\web\Blog2\src\Arthur\Postcrossing\信息汇总.md"
     
-    # # 换为你的blog的本地链接，可自动同步过去
-    # if os.path.exists(blog_path):
-    #     with open(blog_path, "w", encoding="utf-8") as f:
-    #         f.write(dataNew)
+    # 换为你的blog的本地链接，可自动同步过去
+    if os.path.exists(blog_path):
+        with open(blog_path, "w", encoding="utf-8") as f:
+            f.write(dataNew)
 
 def StoryXLS2DB(excel_file):
     df = pd.read_excel(excel_file)
@@ -152,7 +154,8 @@ def StoryXLS2DB(excel_file):
         data = {
             "id": row[0],
             "content_cn": row[1],
-            "content_en": row[2]
+            "content_en": row[2],
+            "comment": row[3]
         }
         content_all.append(data)
     tablename = "postcardStory"
@@ -160,13 +163,20 @@ def StoryXLS2DB(excel_file):
 
 
 
-def getCardStoryList():
-    content =dl.readDB(dbpath, "","postcardStory")
+def getCardStoryList(type):
     list_all = ""
+    content =dl.readDB(dbpath, type,"postcardStory")
     for id in content:
         postcardID = id["id"]  
         content_cn = id["content_cn"]
         content_en = id["content_en"]
+        comment = id["comment"] 
+        if comment:
+            comment = f'@tab 评论\n' \
+                    f'::: note 评论\n{comment}\n:::\n\n' 
+        else:
+            comment = ":::"      
+        #print("comment:",comment)
         userInfo = id["userInfo"]
         picFileName = id["picFileName"]
         contryNameEmoji = id["contryNameEmoji"] if id["contryNameEmoji"] is not None else ""
@@ -174,22 +184,32 @@ def getCardStoryList():
         distance = id["distance"]
         onlinelink ="https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium"
         storypicLink = "https://pan.4a1801.life/d/Onedrive-4A1801/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99/public/Postcrossing/content"
-
-        list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
-          f'> 来自 {userInfo} {contryNameEmoji}\n' \
-          f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
-          f':::tabs\n' \
-          f'@tab 图片\n' \
-          f'<div class="image-preview">  <img src="{onlinelink}/{picFileName}" />' \
-          f'  <img src="{storypicLink}/{postcardID}.webp" /></div>' \
-          f'\n\n' \
-          f'@tab 内容\n' \
-          f'::: info 内容\n{content_en}\n\n\n' \
-          f'@tab 翻译\n' \
-          f'::: tip 翻译\n{content_cn}\n:::\n\n' \
-          f'---\n'   
+        if type == "received":
+            list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
+            f'> 来自 {userInfo} {contryNameEmoji}\n' \
+            f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
+            f':::tabs\n' \
+            f'@tab 图片\n' \
+            f'<div class="image-preview">  <img src="{onlinelink}/{picFileName}" />' \
+            f'  <img src="{storypicLink}/{postcardID}.webp" /></div>' \
+            f'\n\n' \
+            f'@tab 内容\n' \
+            f'::: info 内容\n{content_en}\n\n\n' \
+            f'@tab 翻译\n' \
+            f'::: tip 翻译\n{content_cn}\n{comment}\n\n' \
+            f'---\n'   
+        else:
+            list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
+            f'> 来自 {userInfo} {contryNameEmoji}\n' \
+            f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
+            f':::tabs\n' \
+            f'@tab 图片\n' \
+            f'![]({onlinelink}/{picFileName})' \
+            f'\n\n' \
+            f'{comment}'
         list_all += list
     return list_all
+    
 
 def createCalendar():
     with open("output/UserStats.json", "r") as file:

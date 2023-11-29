@@ -1,4 +1,4 @@
-name: Run Data Sync
+name: Refresh Cookie
 
 on:
   workflow_dispatch:
