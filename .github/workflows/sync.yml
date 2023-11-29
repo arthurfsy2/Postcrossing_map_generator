@@ -66,10 +66,19 @@ jobs:
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
           git diff --cached --quiet || git commit -m "保存已修改文件"
-          if ${{ env.changes }}; then
-            git push
-          else
-            echo "No changes to push."
-            git reset --hard HEAD  # 取消已经提交的文件变动
-          fi
+          git push
+          
       
+      
+          # - name: 提交
+          # run: |
+          #   git config --local user.email "${{ env.GITHUB_EMAIL }}"
+          #   git config --local user.name "${{ env.GITHUB_NAME }}"
+          #   git add .
+          #   git diff --cached --quiet || git commit -m "保存已修改文件"
+          #   if ${{ env.changes }}; then
+          #     git push
+          #   else
+          #     echo "No changes to push."
+          #     git reset --hard HEAD  # 取消已经提交的文件变动
+          #   fi
