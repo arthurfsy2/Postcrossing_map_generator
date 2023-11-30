@@ -81,22 +81,20 @@ def createMD(type):
         num = types.index(type) + 2
     link = f"### [{account}'s {type}]({baseUrl}user/{account}/gallery/{type})"
     content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
-       
-    updatePic = dl.getUpdatePic(type)
     
-    if os.path.exists(filename_md): 
-        if updatePic is not None:
+    if os.path.exists(f"{dbpath}BAK"):
+        dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
+        if dbStat == "1":
+            print(f"{dbpath} 有更新") 
             with open(filename_md, "w", encoding="utf-8") as f:    
                 f.write(content)
-            print(f"{type}.md已成功更新")
+            print(f"\n{type}.md已成功更新")
+            #os.remove(f"{dbpath}BAK")
         else:
-            print(f"{type}.md无更新")       
-    else:
-        with open(filename_md, "w", encoding="utf-8") as f:    
-                f.write(content)
-        print(f"{type}.md文件已生成")
-    print("————————————————————")
-    
+            print(f"{dbpath} 暂无更新") 
+            print(f"\n{type}.md无更新")
+            #os.remove(f"{dbpath}BAK")        
+
     # 换为你的blog的本地链接，可自动同步过去
     blog_path = rf"D:\web\Blog2\src\Arthur\Postcrossing\{type}.md"
     if os.path.exists(blog_path):  
@@ -108,15 +106,7 @@ dl.PicDataCheck()
 for type in types:
     createMD(type) 
 
-if os.path.exists(f"{dbpath}BAK"):
-    dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
-    if dbStat == "1":
-        print(f"{dbpath} 有更新") 
-        os.remove(f"{dbpath}BAK")
-    else:
-        print(f"{dbpath} 暂无更新") 
-    
-        os.remove(f"{dbpath}BAK")
+os.remove(f"{dbpath}BAK")
 end_time = time.time()
 execution_time = round((end_time - start_time),3)
 print(f"createGallery.py脚本执行时间：{execution_time}秒\n")
