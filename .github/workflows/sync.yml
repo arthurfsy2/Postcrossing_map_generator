@@ -1,9 +1,9 @@
-name: Run Data Sync
+name: 定时检测更新
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '00 1 * * *'
+    - cron: '0 */1 * * *'
   push:
     branches:
       - main
