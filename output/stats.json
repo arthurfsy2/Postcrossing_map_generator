@@ -51,12 +51,12 @@
     "name": "U.S.A.",
     "countryCode": "US",
     "flagEmoji": ":us:",
-    "value": 16,
-    "sentNum": 10,
+    "value": 17,
+    "sentNum": 11,
     "receivedNum": 6,
-    "sentAvg": 29.7,
+    "sentAvg": 31,
     "receivedAvg": 30.7,
-    "sentMedian": 27.5,
+    "sentMedian": 30,
     "receivedMedian": 28.0
   },
   {
@@ -382,5 +382,17 @@
     "receivedAvg": 50,
     "sentMedian": 36,
     "receivedMedian": null
+  },
+  {
+    "name": "Lithuania",
+    "countryCode": "LT",
+    "flagEmoji": ":lithuania:",
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": 36,
+    "receivedAvg": 44,
+    "sentMedian": null,
+    "receivedMedian": 44
   }
 ]
