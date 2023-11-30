@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（我的点赞：13）
+title: 明信片展示墙（我的点赞：14）
 icon: address-card
-date: 2023-11-23
+date: 2023-11-30
 category:
   - Arthur
 tag:
@@ -10,6 +10,14 @@ order: 4
 ---
 
 ### [arthurfsy's favourites](https://www.postcrossing.com/user/arthurfsy/gallery/favourites)
+
+## [LT-913966](https://www.postcrossing.com/postcards/LT-913966) 
+ >来自 [valras](https://www.postcrossing.com//user/valras) :lithuania:
+> 📏7928 km 
+⏱44 days [2023/10/17--2023/11/30]
+
+
+![](https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/dfsgfv5r49yok2quiwxlxh25edsrjl37.jpg)
 
 ## [RU-9830214](https://www.postcrossing.com/postcards/RU-9830214) 
  >来自 [EvaS18](https://www.postcrossing.com//user/EvaS18) :ru:
