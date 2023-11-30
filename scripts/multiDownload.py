@@ -397,24 +397,12 @@ def getUpdatePic(type):
                 newPic.append(pic)
         if len(newPic) == 0:
             updatePic = None
-            updateStat ="0"
         else:
             
             updatePic = newPic
-            updateStat ="1"
     else:
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
         updatePic = picFileNameList 
-        updateStat ="1"
-    #print(f"{type}_updatePic:{updatePic}\n")
-
-        # 读取scripts/config.json文件内容
-    with open('scripts/galleryUpdateStats.json', 'r') as file:
-        config_data = json.load(file)
-    config_data[type] = updateStat
-    # 将更新后的内容写入scripts/config.json文件
-    with open('scripts/galleryUpdateStats.json', 'w') as file:
-        json.dump(config_data, file, indent=4)
     return updatePic
 
 
