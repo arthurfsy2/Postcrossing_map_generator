@@ -153,9 +153,10 @@ def StoryXLS2DB(excel_file):
     for index, row in df.iterrows():
         data = {
             "id": row[0],
-            "content_cn": row[1],
-            "content_en": row[2],
-            "comment": row[3]
+            "content_en": row[1],
+            "content_cn": row[2],
+            "comment_en": row[3],
+            "comment_cn": row[4],
         }
         content_all.append(data)
     tablename = "postcardStory"
@@ -168,12 +169,25 @@ def getCardStoryList(type):
     content =dl.readDB(dbpath, type,"postcardStory")
     for id in content:
         postcardID = id["id"]  
-        content_cn = id["content_cn"]
         content_en = id["content_en"]
-        comment = id["comment"] 
-        if comment:
-            comment = f'@tab 评论\n' \
-                    f'::: note 评论\n{comment}\n:::\n\n' 
+        content_cn = id["content_cn"]
+        comment_en = id["comment_en"] 
+        comment_cn = id["comment_cn"] 
+        def remove_blank_lines(text):
+            if text:
+                return "\n".join(line for line in text.splitlines() if line.strip())
+            return text
+
+        # 去掉空白行
+        content_en = remove_blank_lines(content_en)
+        content_cn = remove_blank_lines(content_cn)
+        comment_en = remove_blank_lines(comment_en)
+        comment_cn = remove_blank_lines(comment_cn)
+
+        if comment_en:
+            comment = f'@tab 回复\n' \
+                    f'* 回复原文\n\n> {comment_en}\n\n* 翻译：\n\n> {comment_cn}\n\n:::' 
+            
         else:
             comment = ":::"      
         #print("comment:",comment)
@@ -194,9 +208,8 @@ def getCardStoryList(type):
             f'  <img src="{storypicLink}/{postcardID}.webp" /></div>' \
             f'\n\n' \
             f'@tab 内容\n' \
-            f'::: info 内容\n{content_en}\n\n\n' \
-            f'@tab 翻译\n' \
-            f'::: tip 翻译\n{content_cn}\n{comment}\n\n' \
+            f'* 卡片文字\n\n> {content_en}\n\n* 翻译：\n\n> {content_cn}\n\n' \
+            f'{comment}\n\n' \
             f'---\n'   
         else:
             list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
@@ -204,9 +217,10 @@ def getCardStoryList(type):
             f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
             f':::tabs\n' \
             f'@tab 图片\n' \
-            f'![]({onlinelink}/{picFileName})' \
-            f'\n\n' \
-            f'{comment}'
+            f'![]({onlinelink}/{picFileName})\n\n' \
+            f'' \
+            f'{comment}\n\n' \
+            f'---\n'
         list_all += list
     return list_all
     

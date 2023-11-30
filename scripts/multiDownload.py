@@ -461,53 +461,6 @@ def calculateAVGandMedian(a_data):
     country_stats.sort(key=lambda x: x['value'], reverse=True)
     return country_stats
 
-# def createCalendar(year, data):
-#     # Create Calendar chart object
-#     calendar = (
-#         Calendar()
-#         .set_global_opts(
-#             tooltip_opts=opts.TooltipOpts(),
-#             visualmap_opts=opts.VisualMapOpts(
-#                 is_show=False,
-#                 min_=1,
-#                 max_=10,
-#                 range_color=["#7bc96f", "#239a3b", "#196127", "#196127"],
-#             )            
-#         )
-#         .add(
-#             series_name="",
-#             yaxis_data=data,
-#             calendar_opts=opts.CalendarOpts(
-#                 width="600px",
-#                 pos_top="10%",
-#                 cell_size=["auto", 12],
-#                 range_= year,
-#                 itemstyle_opts=opts.ItemStyleOpts(
-#                     color="#ccc",
-#                     border_width=3,
-#                     border_color="#fff",
-#                 ),
-#                 splitline_opts=opts.SplitLineOpts(is_show=False),
-#                 yearlabel_opts=opts.CalendarYearLabelOpts(is_show=True),
-#                 daylabel_opts=opts.CalendarDayLabelOpts(
-#                     first_day=1,
-#                     name_map=["","Mon", "", "Wed", "", "Fri", "" ]
-#                     ),
-#             ),
-#         )
-#     )
-
-
-
-#     # Render the Calendar chart and save it as an SVG file
-#     calendar.render(f"./output/calendar/{year}.html")
-#     # make_snapshot(snapshot, calendar.render(f"./output/calendar/{year}.html"), f"./output/calendar/{year}.png")
-
-
-
-
-
-
 def getUserStat():
     headers = {
     'Host': 'www.postcrossing.com',
@@ -700,9 +653,10 @@ def readDB(dbpath, type,tablename):
             elif tablename == 'postcardStory':
                 cursor.execute('''SELECT
                     p.id,
-                    p.content_cn,
                     p.content_en,
-                    p.comment,
+                    p.content_cn,
+                    p.comment_en,
+                    p.comment_cn,
                     g.userInfo,
                     g.picFileName,
                     g.contryNameEmoji,
@@ -762,14 +716,15 @@ def readDB(dbpath, type,tablename):
                 elif tablename == 'postcardStory':
                     data={
                         "id": row[0],
-                        "content_cn": row[1],
-                        "content_en": row[2],
-                        "comment": row[3],
-                        "userInfo": row[4],
-                        "picFileName": row[5],
-                        "contryNameEmoji":row[6],
-                        "travel_time": row[8],
-                        "distance": row[10],
+                        "content_en": row[1],
+                        "content_cn": row[2],
+                        "comment_en": row[3],
+                        "comment_cn": row[4],
+                        "userInfo": row[5],
+                        "picFileName": row[6],
+                        "contryNameEmoji":row[7],
+                        "travel_time": row[9],
+                        "distance": row[11],
                     }
                 data_all.append(data)       
         conn.close()
@@ -821,22 +776,23 @@ def writeDB(dbpath, content,tablename):
     # 将列表中的JSON对象写入文件      
     elif tablename == 'postcardStory':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                    (id TEXT, content_cn TEXT, content_en TEXT, comment TEXT)''')
+                    (id TEXT, content_en TEXT, content_cn TEXT, comment_en TEXT, comment_cn TEXT)''')
         for item in content:
             id = item['id']
-            content_cn = item['content_cn']
             content_en = item['content_en']
-            comment = item['comment']
+            content_cn = item['content_cn']
+            comment_en = item['comment_en']
+            comment_cn = item['comment_cn']
             cursor.execute(f"SELECT * FROM {tablename} WHERE id=? ", (id, ))
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET content_cn=?, content_en=?,comment=?  WHERE id=?",
-                                (content_cn, content_en,comment, id))
+                cursor.execute(f"UPDATE {tablename} SET content_en=?, content_cn=?,comment_en=?, comment_cn=?  WHERE id=?",
+                                (content_en, content_cn,comment_en, comment_cn, id))
             else:
                 # 插入新的行
-                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?)",
-                                (id, content_cn, content_en, comment))
+                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?)",
+                                (id, content_cn, content_en, comment_en, comment_cn ))
     elif tablename == 'CountryStats':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
             (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER, sentMedian INTEGER, receivedMedian INTEGER,
