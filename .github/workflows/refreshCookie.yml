@@ -49,7 +49,7 @@ jobs:
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
-          git diff --cached --quiet || git commit -m "Move updated file to root directory"
+          git diff --cached --quiet || git commit -m "已更新Cookie"
           if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
             git push
           else
