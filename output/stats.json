@@ -228,6 +228,18 @@
     "receivedMedian": 21
   },
   {
+    "name": "Spain",
+    "countryCode": "ES",
+    "flagEmoji": ":es:",
+    "value": 2,
+    "sentNum": 2,
+    "receivedNum": 0,
+    "sentAvg": 39.5,
+    "receivedAvg": 21,
+    "sentMedian": 39.5,
+    "receivedMedian": null
+  },
+  {
     "name": "New Zealand",
     "countryCode": "NZ",
     "flagEmoji": "&#x1f1f3;&#x1f1ff;",
@@ -312,25 +324,13 @@
     "receivedMedian": null
   },
   {
-    "name": "Spain",
-    "countryCode": "ES",
-    "flagEmoji": ":es:",
-    "value": 1,
-    "sentNum": 1,
-    "receivedNum": 0,
-    "sentAvg": 33,
-    "receivedAvg": 21,
-    "sentMedian": 33,
-    "receivedMedian": null
-  },
-  {
     "name": "Mexico",
     "countryCode": "MX",
     "flagEmoji": ":mexico:",
     "value": 1,
     "sentNum": 0,
     "receivedNum": 1,
-    "sentAvg": 33,
+    "sentAvg": 39.5,
     "receivedAvg": 54,
     "sentMedian": null,
     "receivedMedian": 54
