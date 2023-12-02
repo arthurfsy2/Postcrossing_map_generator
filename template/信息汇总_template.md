@@ -243,6 +243,12 @@ $sheet
 :::
 
 ## 四.明信片故事
+::: tabs
+@tab 中文词云
+![](https://raw.gitmirror.com/$repo/main/output/postcrossing_cn.svg)
+@tab 英文词云
+![](https://raw.gitmirror.com/$repo/main/output/postcrossing_en.svg)
+:::
 
 $storylist
 

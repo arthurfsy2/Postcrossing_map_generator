@@ -6,6 +6,10 @@ import os
 from datetime import datetime, timedelta
 import shutil
 import argparse
+import jieba
+from jieba import analyse
+from wordcloud import WordCloud
+from opencc import OpenCC
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -31,6 +35,10 @@ nickName = options.nickName
 # Cookie = options.Cookie
 repo = options.repo
 
+font_path = "./scripts/font.otf"
+cn_path_svg = "./output/postcrossing_cn.svg"
+en_path_svg = "./output/postcrossing_en.svg"
+excel_file = "./template/postcardStory.xlsx"
 
 if os.path.exists(dbpath):
     shutil.copyfile(dbpath, f"{dbpath}BAK")
@@ -278,10 +286,76 @@ excel_file="./template/postcardStory.xlsx"
 StoryXLS2DB(excel_file)
 replaceTemplate()
 
+
+
+
+
+
+def createWordCloud(type, contents):
+    contents = contents.replace("nan","")
+    # 转换为svg格式输出
+    if type == "cn":
+        path = cn_path_svg
+        # 使用jieba的textrank功能提取关键词
+        keywords = jieba.analyse.textrank(contents, topK=100, withWeight=False, allowPOS=('ns', 'n', 'vn', 'v'))
+        #print(f"keywords={keywords}")
+        # 创建 OpenCC 对象，指定转换方式为简体字转繁体字
+        converter = OpenCC('s2t.json')
+        # 统计每个关键词出现的次数
+        keyword_counts = {}
+        for keyword in keywords:
+            count = contents.count(keyword)
+            keyword = converter.convert(keyword) #简体转繁体
+            keyword_counts[keyword] = count
+        print(keyword_counts)
+        # 创建一个WordCloud对象，并设置字体文件路径和轮廓图像
+        wordcloud = WordCloud(width=1600, height=800, background_color="white", font_path=font_path)
+        # 生成词云
+        wordcloud.generate_from_frequencies(keyword_counts)
+    else:
+        path = en_path_svg
+        wordcloud = WordCloud(width=1600, height=800, background_color="white", font_path=font_path, max_words=100).generate(contents)
+        keywords = wordcloud.words_
+        
+        print(keywords)
+    svg_image = wordcloud.to_svg(embed_font=True)
+
+    with open(path, "w+", encoding='UTF8') as f:
+        f.write(svg_image)
+        print(f"已保存至{path}")
+
+def StoryXLS2DB(excel_file):
+    df = pd.read_excel(excel_file)
+    result_cn = ""
+    result_en = ""
+
+    for index, row in df.iterrows():
+        if row[1]:
+            content_en = str(row[1])
+            content_cn = str(row[2])
+        if row[3]:
+            comment_en = str(row[3])
+            comment_cn = str(row[4])
+        data_en = f"{content_en}\n{comment_en}\n"
+        data_cn = f"{content_cn}\n{comment_cn}\n"
+
+        result_en += data_en
+        result_cn += data_cn
+    
+    return result_cn,result_en
+    
+
+result_cn,result_en = StoryXLS2DB(excel_file)
+  
+
+
 if os.path.exists(f"{dbpath}BAK"):
     dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
     if dbStat == "1":
         print(f"{dbpath} 有更新") 
+        print(f"正在生成中、英文词库") 
+        createWordCloud("cn",result_cn)
+        createWordCloud("en",result_en)
         os.remove(f"{dbpath}BAK")
     else:
         print(f"{dbpath} 暂无更新")    
