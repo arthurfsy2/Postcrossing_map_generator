@@ -65,8 +65,6 @@ python版本 >=3.11.2
 
    **参数填写注意事项：**
 
-   - 参数格式：不同组的配置用英文逗号隔开，组内的不同参数则通过‘//’分隔，QQ邮箱、谷歌邮箱的host可以参考以下内容，其他邮箱的host需要自行查询和调试。
-
    - QQ邮箱、谷歌邮箱的密码需要申请专用的app密码
 
      参考：
@@ -76,6 +74,9 @@ python版本 >=3.11.2
      [谷歌邮箱（@gmail.com）：两步验证+应用专用密码登录 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/483277240)
 
    - 参数说明：
+        
+        不同组的配置用英文逗号隔开，组内的不同参数则通过‘//’分隔，QQ邮箱、谷歌邮箱的host可以参考以下内容，其他邮箱的host需要自行查询和调试。
+        
         邮件对应的目录一般默认为“**INBOX**"，如果之前你已经将邮件挪到其他文件夹，则需要修改以下./scripts/mailTrack.py的内容，将注释去掉，然后运行`"imap.qq.com//254XXXX40@qq.com//hyiXXXXccaaa//INBOX`先查询自己账号的邮箱有哪些文件夹，然后在运行参数中修改正确为的文件夹：`"imap.qq.com//254XXXX40@qq.com//hyiXXXXccaaa//其他文件夹/postcrossing`
 
    ```
@@ -83,6 +84,8 @@ python版本 >=3.11.2
            # for f in mailbox.folder.list():
            #     print(f) #查看当前账号的文件夹列表
    ```
+
+   - 小牛翻译API：用于翻译回复邮件的内容，官网：niutrans.com，注册登陆后，可通过[小牛翻译控制台 (niutrans.com)](https://niutrans.com/cloud/account_info/info)右边的**API-KEY**即可
 
    - 如果抓取数据时，发现无法获取邮件，请检查：是否有开通收取所有邮件的选项。
 
@@ -149,6 +152,8 @@ on:
 - account：你的postcrossing账号名称
 - password：你的postcrossing账号密码
 - nickname：你的vuepress的fronttage的category:- XXX 对应的名称
+- parm：邮件参数，如："imap.qq.com//254XXXX40@qq.com//hyiXXXXccaaa//其他文件夹/Postcrossing,imap.gmail.com//fsXXXX@gmail.com//ltjorXXXXmore//postcrossing" （说明详见步骤一）
+- apikey：小牛翻译的api
 
 > 添加好后的变量如下图所示
 >

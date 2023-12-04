@@ -240,6 +240,12 @@ const option = {
 
 $sheet
 
+
+
+@tab 还在漂泊的明信片
+
+$traveling
+
 :::
 
 ## 四.明信片故事

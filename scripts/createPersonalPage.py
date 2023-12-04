@@ -10,6 +10,7 @@ import jieba
 from jieba import analyse
 from wordcloud import WordCloud
 from opencc import OpenCC
+import requests
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -39,17 +40,6 @@ font_path = "./scripts/font.otf"
 cn_path_svg = "./output/postcrossing_cn.svg"
 en_path_svg = "./output/postcrossing_en.svg"
 excel_file = "./template/postcardStory.xlsx"
-
-host = 'imap.qq.com'
-user = '254904240@qq.com'
-passwd = 'hyiutupnljhccaaa'
-filename = '其他文件夹/Postcrossing' ##QQ邮箱
-
-host2 = 'imap.gmail.com'
-user2 = 'fsyflh@gmail.com'
-passwd2 = 'ltjorchxhkkymore'
-filename2 = 'INBOX' ##gmail邮箱
-
 
 if os.path.exists(dbpath):
     shutil.copyfile(dbpath, f"{dbpath}BAK")
@@ -135,6 +125,7 @@ def replaceTemplate():
         title_final = f"{desc_all}\n{title_all}"
     #print("title_all:\n",title_all)
     sheet = getUserSheet()
+    traveling = getTravelingID(account,"traveling",Cookie)
     storylist = getCardStoryList("received")
     commentlist = getCardStoryList("sent")
     calendar,series,height = createCalendar()
@@ -145,7 +136,9 @@ def replaceTemplate():
         dataNew = dataNew.replace('$title',title_final)
         print("已替换明信片墙title")
         dataNew = dataNew.replace('$sheet',sheet)
-        print("已替换明信片表格")
+        print("已替换明信片统计")
+        dataNew = dataNew.replace('$traveling',traveling)
+        print("已替换待登记list")
         dataNew = dataNew.replace('$storylist',storylist)
         print("已替换明信片故事list")
         dataNew = dataNew.replace('$commentlist',commentlist)
@@ -292,15 +285,6 @@ def createCalendar():
     height = len(year_list)*150
     return calendar_all, series_all, height
 
-dl.replaceTemplateCheck()
-excel_file="./template/postcardStory.xlsx"
-StoryXLS2DB(excel_file)
-replaceTemplate()
-
-
-
-
-
 
 def createWordCloud(type, contents):
     contents = contents.replace("nan","")
@@ -351,7 +335,50 @@ def readStoryDB(dbpath):
         result_cn += data_cn
     return result_cn,result_en
 
+# 实时获取该账号所有sent、received的明信片列表，获取每个postcardID的详细数据
+def getTravelingID(account,type,Cookie):
+    headers = {
+    'Host': 'www.postcrossing.com',
+    'X-Requested-With': 'XMLHttpRequest',
+    'Sec-Fetch-Site': 'same-origin',
+    'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
+    'Accept-Encoding': 'gzip, deflate',
+    'Sec-Fetch-Mode': 'cors',
+    'Accept': 'application/json, text/javascript, */*; q=0.01',
+    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0.1 Mobile/15E148 Safari/604.1',
+    'Connection': 'keep-alive',
+    'Referer': f'https://www.postcrossing.com/user/{account}/{type}',
+    'Cookie': Cookie,
+    'Sec-Fetch-Dest': 'empty'
+        }
+    url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
+    response = requests.get(url,headers=headers).json()
+    stats_data = sorted(response, key=lambda x: x[7])
+    
+    table_header1 = "| 序号 | ID号 | 收件人 | 国家 | 寄出时间 | 距离 | 天数  \n"
+    table_header2 = "| --- | --- | --- | --- | --- | --- | ---  \n"
+
+    # 创建表格内容
+    table_content = ""
+    for i, stats in enumerate(stats_data, start=1):
+        id = stats[0]
+        toMember = stats[1]
+        
+        toCountry = stats[3]
+        sentDate = datetime.fromtimestamp(stats[4]).strftime('%Y/%m/%d')
+        distance = f"{stats[6]} km"
+        traveledDay = stats[7]
+        table_content += f"| {i} | {id} | {toMember} | {toCountry} | {sentDate} | {distance} | {traveledDay} \n"
+
+    # 将表头和表格内容合并
+    table = table_header1 + table_header2 + table_content
+    return table
+
+
   
+
+
+
 dl.replaceTemplateCheck()
 excel_file="./template/postcardStory.xlsx"
 StoryXLS2DB(excel_file)

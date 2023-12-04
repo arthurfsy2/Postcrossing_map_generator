@@ -11,7 +11,7 @@ Cookie = data["Cookie"]
 dbpath = data["dbpath"]
 
 #tasks = ['login']
-tasks = ['login','createMap', 'createGallery', 'createPersonalPage','getTravelingStats']
+tasks = ['login','createMap', 'createGallery', 'createPersonalPage']
 
 # 创建 ArgumentParser 对象
 parser = argparse.ArgumentParser()
