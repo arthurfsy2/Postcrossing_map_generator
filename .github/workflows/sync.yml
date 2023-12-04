@@ -37,12 +37,9 @@ jobs:
         run: |
           pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com
 
-      # - name: 获取展示墙数据
-      #   run: |
-      #     python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} 
-      #     python scripts/createMap.py
-      #     python scripts/createGallery.py
-      #     python scripts/createPersonalPage.py
+      - name: 更新邮件回复
+        run: |
+          python scripts/mailTrack.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
       
       - name: 运行startTask.py脚本
         run: |

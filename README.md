@@ -14,7 +14,8 @@
 1. 可以下载gallery对应的图片，并生成包含fronttage的.md文件，以便你放入到vuepress当中使用
 2. 可抓取对应账户的收、发明信片的信息，形成2个地图文件，内容是仿官方的map部分的谷歌地图，但是加入了自定义的内容
 3. 可通过模板生成你个人的“信息汇总”页面
-4. 抓取后的信息会保存到./output/sent_List.json和received_List.json当中，如果以后有更新，只会抓取更新部分，减少对Postcrossing的压力。
+4. 当你寄出的邮件被登记后，可抓取你账号postcrossing账号的回复邮件（"Hurray! Your postcard CN-XXX to XXXX"的邮件）
+5. 抓取后的信息会保存到./template/data/db数据库当中，如果以后有更新，只会抓取更新部分，减少对Postcrossing的压力。
 
 # 环境要求
 
@@ -35,31 +36,90 @@ python版本 >=3.11.2
     "repo":"arthurfsy2/Postcrossing_map_generator" //更改为你自己的仓库名。用于“信息汇总”的echarts图标取值。
 ```
 
-3. 进入项目目录
+进入项目目录
 
-   * **删除/output、/gallery目录下的所有文件（使用你自己的账号，会自动生成数据）**
-   * **删除/template目录下的data.db文件（postcardStory.xlsx、信息汇总_template.md可修改为你喜欢的文字描述）**
+* **删除/output、/gallery目录下的所有文件（使用你自己的账号，会自动生成数据）**
+* **删除/template目录下的data.db文件（postcardStory.xlsx、信息汇总_template.md可修改为你喜欢的文字描述）**
 
-   执行 `pip install -r requirements.txt安装依赖`
+执行 `pip install -r requirements.txt安装依赖`
 
-   执行 `pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com` 安装openpyxl （如果你需要填写/template/postcardStory.xlsx 当中的明信片背面文字内容，则需要安装）
-4. 数据获取：
+执行 `pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com` 安装openpyxl （如果你需要填写/template/postcardStory.xlsx 当中的明信片背面文字内容，则需要安装）
 
-   依次执行以下内容：
+数据获取：
+
+依次执行以下内容：
+
+1. 登陆账号
+
+   `python scripts/login.py "账号" "密码" "昵称" "仓库地址"` 
+
+   输入账号密码获取cookies，如：`python scripts/login.py "youraccount" "yourpassword" "yournickname" "yourReponame"`
+
+2. 登陆邮箱，抓取数据（可选）
+
+   `python scripts/mailTrack.py "邮箱host//邮箱账号//邮箱app密码//邮件对应的目录" "小牛翻译apikey" `
+
+   抓取邮箱回复，如果你曾经有用过多个邮箱，则配置多组参数。
+
+   如：`python scripts/mailTrack.py "imap.qq.com//254XXXX40@qq.com//hyiXXXXccaaa//其他文件夹/Postcrossing,imap.gmail.com//fsXXXX@gmail.com//ltjorXXXXmore//postcrossing" "6666XX6666"`
+
+   **参数填写注意事项：**
+
+   - 参数格式：不同组的配置用英文逗号隔开，组内的不同参数则通过‘//’分隔，QQ邮箱、谷歌邮箱的host可以参考以下内容，其他邮箱的host需要自行查询和调试。
+
+   - QQ邮箱、谷歌邮箱的密码需要申请专用的app密码
+
+     参考：
+
+     [QQ 开启 IMAP 服务，获取 IMAP 密码（授权码） - 个人博客 (qweree.cn)](https://qweree.cn/index.php/162/)
+
+     [谷歌邮箱（@gmail.com）：两步验证+应用专用密码登录 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/483277240)
+
+   - 参数说明：
+        邮件对应的目录一般默认为“**INBOX**"，如果之前你已经将邮件挪到其他文件夹，则需要修改以下./scripts/mailTrack.py的内容，将注释去掉，然后运行`"imap.qq.com//254XXXX40@qq.com//hyiXXXXccaaa//INBOX`先查询自己账号的邮箱有哪些文件夹，然后在运行参数中修改正确为的文件夹：`"imap.qq.com//254XXXX40@qq.com//hyiXXXXccaaa//其他文件夹/postcrossing`
 
    ```
-   python scripts/login.py "账号" "密码" "昵称" //输入账号密码获取cookies，如：python scripts/login.py "youraccount" "yourpassword" "yournickname"
-   python scripts/createMap.py  //在./生成ClusterMap.html和Map.html文件(还包含其他结果文件)
-   python scripts/createGallery.py  //在./gallery生成4个不同类型的展示墙、已下载的图片(还包含其他结果文件)
-   python scripts/createPersonalPage.py  //在./output生成“信息汇总”页面(还包含其他结果文件)
-   （可选）python scripts/init.py  //初始化config.json的信息
+       with MailBox(host).login(user, passwd) as mailbox:        
+           # for f in mailbox.folder.list():
+           #     print(f) #查看当前账号的文件夹列表
    ```
+
+   - 如果抓取数据时，发现无法获取邮件，请检查：是否有开通收取所有邮件的选项。
+
+     QQ邮箱：首页设置-账号-**POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务**-收取选项
+
+     收取选项：**全部**
+
+     GMAIL：设置-查看所有设置-转发和 POP/IMAP-**IMAP 访问**
+
+     启用IMAP
+
+     **文件夹大小限制**：不限制
+
+3. 开始postcrossing数据抓取
+
+   `python scripts/startTask.py "账号" "密码" "昵称" "仓库地址"` 
+
+   如：`python scripts/login.py "youraccount" "yourpassword" "yournickname" "yourReponame"`
+
+   运行后将会自动获取数据
+
+
+
+重要脚本说明：
+
+```
+scripts/createMap.py  //在./生成ClusterMap.html和Map.html文件(还包含其他结果文件)
+scripts/createGallery.py  //在./gallery生成4个不同类型的展示墙、已下载的图片(还包含其他结果文件)
+scripts/createPersonalPage.py  //在./output生成“信息汇总”页面(还包含其他结果文件)
+（可选）python scripts/init.py  //初始化config.json的信息
+```
 
 # 二. Github Action
 
 如果你想通过Github Action来实现定时获取数据，可进行以下步骤
 
-1. fork本项目到你自己的仓库，然后修改fork仓库内的 `.github/workflows/sync.yml`文件，以下内容改为你自己的github信息。
+1. fork本项目到你自己的仓库，然后修改fork仓库内的 `.github/workflows/sync.yml`和`refreshCookie.yml`文件，以下内容改为你自己的github信息。
 
 ```
 env:
@@ -81,17 +141,19 @@ on:
       - main
 ```
 
-2. 为 GitHub Actions 添加代码提交权限 访问repo  Settings > Actions > General页面，找到Workflow permissions的设置项，将选项配置为Read and write permissions，支持 CI 将运动数据更新后提交到仓库中。
-   **不设置允许的话，会导致workflows无法写入文件**
-3. 在 repo Settings > Security > Secrets > secrets and variables > Actions  > New repository secret > 增加以下变量:
-   account：你的postcrossing账号名称
-   password：你的postcrossing账号密码
-   nickname：你的vuepress的fronttage的category:- XXX 对应的名称
+为 GitHub Actions 添加代码提交权限 访问repo  Settings > Actions > General页面，找到Workflow permissions的设置项，将选项配置为Read and write permissions，支持 CI 将运动数据更新后提交到仓库中。
+**不设置允许的话，会导致workflows无法写入文件**
 
-   > 添加好后的变量如下图所示
-   >
+在 repo Settings > Security > Secrets > secrets and variables > Actions  > New repository secret > 增加以下变量:
 
-   ![img](/img/20231125012751.png)
+- account：你的postcrossing账号名称
+- password：你的postcrossing账号密码
+- nickname：你的vuepress的fronttage的category:- XXX 对应的名称
+
+> 添加好后的变量如下图所示
+>
+
+![img](./img/20231125012751.png)
 
 # 三. Github Page在线展示
 

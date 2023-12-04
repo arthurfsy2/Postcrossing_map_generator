@@ -1,4 +1,4 @@
-name: 刷新 Cookie和邮件回复数据
+name: 刷新 Cookie
 
 on:
   workflow_dispatch:
@@ -35,7 +35,6 @@ jobs:
       - name: 检查Cookies
         run: |
           python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
-          python scripts/mailTrack.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
     
       - name: 删除缓存文件
         run: rm -rf scripts/__pycache__/    

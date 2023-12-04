@@ -137,6 +137,6 @@ def parse_string(input_string):
 
 if __name__ == "__main__":
     parms = parse_string(input_string)
-    print(parms)
+    #print(parms)
     for parm in parms:
         getMailReply(parm['host'],parm['user'],parm['passwd'],parm['filename'])
