@@ -40,6 +40,17 @@ cn_path_svg = "./output/postcrossing_cn.svg"
 en_path_svg = "./output/postcrossing_en.svg"
 excel_file = "./template/postcardStory.xlsx"
 
+host = 'imap.qq.com'
+user = '254904240@qq.com'
+passwd = 'hyiutupnljhccaaa'
+filename = '其他文件夹/Postcrossing' ##QQ邮箱
+
+host2 = 'imap.gmail.com'
+user2 = 'fsyflh@gmail.com'
+passwd2 = 'ltjorchxhkkymore'
+filename2 = 'INBOX' ##gmail邮箱
+
+
 if os.path.exists(dbpath):
     shutil.copyfile(dbpath, f"{dbpath}BAK")
 
@@ -324,36 +335,33 @@ def createWordCloud(type, contents):
         f.write(svg_image)
         print(f"已保存至{path}")
 
-def StoryXLS2DB(excel_file):
-    df = pd.read_excel(excel_file)
+def readStoryDB(dbpath):
     result_cn = ""
     result_en = ""
-
-    for index, row in df.iterrows():
-        if row[1]:
-            content_en = str(row[1])
-            content_cn = str(row[2])
-        if row[3]:
-            comment_en = str(row[3])
-            comment_cn = str(row[4])
+    content =dl.readDB(dbpath, "sent","postcardStory")
+    for id in content:
+        postcardID = id["id"]  
+        content_en = id["content_en"]
+        content_cn = id["content_cn"]
+        comment_en = id["comment_en"] 
+        comment_cn = id["comment_cn"] 
         data_en = f"{content_en}\n{comment_en}\n"
         data_cn = f"{content_cn}\n{comment_cn}\n"
-
         result_en += data_en
         result_cn += data_cn
-    
     return result_cn,result_en
-    
 
-result_cn,result_en = StoryXLS2DB(excel_file)
   
-
-
+dl.replaceTemplateCheck()
+excel_file="./template/postcardStory.xlsx"
+StoryXLS2DB(excel_file)
+replaceTemplate()
 if os.path.exists(f"{dbpath}BAK"):
     dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
     if dbStat == "1":
         print(f"{dbpath} 有更新") 
         print(f"正在生成中、英文词库") 
+        result_cn,result_en = readStoryDB(dbpath)
         createWordCloud("cn",result_cn)
         createWordCloud("en",result_en)
         os.remove(f"{dbpath}BAK")

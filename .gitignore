@@ -2,3 +2,4 @@ run.sh
 a.py
 .vscode
 scripts/__pycache__/*
+output/html
