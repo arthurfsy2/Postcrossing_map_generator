@@ -32,16 +32,19 @@ python版本 >=3.11.2
 ```
 {
     "Cookie": "auto create",//你的账户，通过scripts/login.py或startTask.py来自动赋值 
-    "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",//默认为Postcrossing图片的官方链接前缀。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取
+    "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",//展示墙图片默认为Github仓库的文件直链。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取
+    "storyPicLink": "https://raw.gitmirror.com/$repo/main/template/content", //存放明信片背面图片的路径
+    "storyPicType": "webp", //存放明信片背面图片的格式
     "dbpath": "./template/data.db", //默认的数据库存放路径
 }
 ```
 
 3. 进入项目目录
 
-* **删除/output、/gallery目录下的所有文件（使用你自己的账号，会自动生成数据）**
-* **删除/template目录下的data.db文件**
-* **（可选）修改：postcardStory.xlsx中填入已收到明信片的文字、信息汇总_template.md可修改为你喜欢的文字描述）**
+* **删除./output、./gallery目录下的所有文件（使用你自己的账号，会自动生成数据）**
+* **删除./template目录下的data.db文件**
+* **（可选）修改：在./template/postcardStory.xlsx中填入已收到明信片的文字、信息汇总_template.md可修改为你喜欢的文字描述）**
+* **（可选）修改：在./template/content/目录下删除我的数据，然后拍照上传已收到明信片的文字面图片。并将图片名称命名为ID名称，如：CN-XXXXXXX。（本项目图片已转换为webp格式，如果需要修改为其他格式，需要修改./scripts/config.json文件中的“storycontentPicType"的值，改为你需要的格式**
 
 4. 执行 `pip install -r requirements.txt安装依赖`
 

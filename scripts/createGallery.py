@@ -82,7 +82,7 @@ def createMD(type):
         num = types.index(type) + 2
     link = f"### [{account}'s {type}]({baseUrl}user/{account}/gallery/{type})"
     content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
-    
+    content = content.replace('$repo',repo)
     if os.path.exists(f"{dbpath}BAK"):
         dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
         if dbStat == "1":

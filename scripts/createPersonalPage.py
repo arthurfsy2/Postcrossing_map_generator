@@ -19,7 +19,8 @@ with open("scripts/config.json", "r") as file:
 Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
-# repo = data["repo"]
+storyPicLink = data["storyPicLink"]
+storyPicType = data["storyPicType"]
 
 # 创建 ArgumentParser 对象
 parser = argparse.ArgumentParser()
@@ -140,9 +141,7 @@ def replaceTemplate():
     with open(f"./template/信息汇总_template.md", "r",encoding="utf-8") as f:
         data = f.read()  
         dataNew = data.replace('$account',account)
-        print(f"已替换account:{account}")
-        dataNew = dataNew.replace('$repo',repo)
-        print(f"已替换仓库名:{repo}")
+        print(f"已替换account:{account}")        
         dataNew = dataNew.replace('$title',title_final)
         print("已替换明信片墙title")
         dataNew = dataNew.replace('$sheet',sheet)
@@ -157,6 +156,8 @@ def replaceTemplate():
         dataNew = dataNew.replace('$series',series)
         dataNew = dataNew.replace('$height',str(height))
         print("已替换明信片日历list")
+        dataNew = dataNew.replace('$repo',repo)
+        print(f"已替换仓库名:{repo}")
 
     with open(f"./output/信息汇总.md", "w",encoding="utf-8") as f:
         f.write(dataNew)  
@@ -220,16 +221,15 @@ def getCardStoryList(type):
         travel_time = id["travel_time"]
         distanceNum = id["distance"]
         distance = format(distanceNum, ",")
-        onlinelink ="https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium"
-        storypicLink = "https://pan.4a1801.life/d/Onedrive-4A1801/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99/public/Postcrossing/content"
+        
         if type == "received":
             list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
             f'> 来自 {userInfo} {contryNameEmoji}\n' \
             f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
             f':::tabs\n' \
             f'@tab 图片\n' \
-            f'<div class="image-preview">  <img src="{onlinelink}/{picFileName}" />' \
-            f'  <img src="{storypicLink}/{postcardID}.webp" /></div>' \
+            f'<div class="image-preview">  <img src="{picDriverPath}/{picFileName}" />' \
+            f'  <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>' \
             f'\n\n' \
             f'@tab 内容\n' \
             f'* 卡片文字\n\n> {content_en}\n\n* 翻译：\n\n> {content_cn}\n\n' \
@@ -237,11 +237,11 @@ def getCardStoryList(type):
             f'---\n'   
         else:
             list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
-            f'> 来自 {userInfo} {contryNameEmoji}\n' \
+            f'> 寄往 {userInfo} {contryNameEmoji}\n' \
             f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
             f':::tabs\n' \
             f'@tab 图片\n' \
-            f'![]({onlinelink}/{picFileName})\n\n' \
+            f'![]({picDriverPath}/{picFileName})\n\n' \
             f'' \
             f'{comment}\n\n' \
             f'---\n'
@@ -374,8 +374,9 @@ def getTravelingID(account,type,Cookie):
     # 创建表格内容
     table_content = ""
     for i, stats in enumerate(stats_data, start=1):
-        id = stats[0]
-        toMember = stats[1]
+        baseurl = "https://www.postcrossing.com"
+        id = f"[{stats[0]}]({baseurl}/travelingpostcard/{stats[0]})"
+        toMember = f"[{stats[1]}]({baseurl}/user/{stats[1]})"
         
         toCountry = stats[3]
         sentDate = datetime.fromtimestamp(stats[4]).strftime('%Y/%m/%d')
