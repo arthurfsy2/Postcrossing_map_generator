@@ -87,12 +87,12 @@
     "name": "Finland",
     "countryCode": "FI",
     "flagEmoji": ":finland:",
-    "value": 8,
-    "sentNum": 5,
+    "value": 9,
+    "sentNum": 6,
     "receivedNum": 3,
-    "sentAvg": 23.2,
+    "sentAvg": 27.5,
     "receivedAvg": 20.3,
-    "sentMedian": 19,
+    "sentMedian": 25.5,
     "receivedMedian": 19
   },
   {
