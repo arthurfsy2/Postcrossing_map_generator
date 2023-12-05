@@ -60,10 +60,12 @@ def getUserHomeInfo(type):
     for item in content:
         distance_all.append(int(item["distance"]))
     total = sum(distance_all)
-    return total,len(content)
+    rounds = round((total/40076),2)
+    return total,len(content),rounds
 
 def getUserSheet():
     stats_data=dl.readDB(dbpath, "", "CountryStats")
+    countryCount = len(stats_data)
     # 按照 name 的 A-Z 字母顺序对 stats_data 进行排序
     sorted_stats_data = sorted(stats_data, key=lambda x: x['name'])
     #print("sorted_stats_data",sorted_stats_data)
@@ -102,36 +104,44 @@ def getUserSheet():
 
     # 将表头和表格内容合并
     table = table_header1 + table_header2 + table_content
-    return table
+    return table,countryCount
 
-def replaceTemplate():
+def replaceTemplate():   
     stat,content_raw,types = dl.getAccountStat(Cookie)  
     title_all=""
     desc_all=""      
+    sheet,countryNum = getUserSheet()
     
+    traveling,travelingNum = getTravelingID(account,"traveling",Cookie)
+
+    countryCount = f"> 涉及国家[🗺️**{countryNum}**]\n\n"
+    travelingCount = f"> 待签收[📨**{travelingNum}**]\n\n"
     for type in types: 
-        distance_all,num = getUserHomeInfo(type)
+        distance,num,rounds = getUserHomeInfo(type)
+        distance_all = format(distance, ",")
+        summary = f"[📤**{num}** 📏**{distance_all}** km 🌏**{rounds}** 圈]\n\n"
         if type == "sent":
-            desc = f"> 寄出[📤**{num}** 📏**{distance_all}** km]\n\n"
+            desc = f"> 寄出{summary}"
         elif type == "received":
-            desc = f"> 收到[📥**{num}**  📏**{distance_all}** km]\n\n"
+            desc = f"> 收到{summary}"
         else:
             desc =""
         desc_all += desc
-
     for type in types:        
         title = replateTitle(type)
         title_all += f"#### [{title}](/{nickName}/postcrossing/{type})\n\n"
-        title_final = f"{desc_all}\n{title_all}"
+        title_final = f"{desc_all}\n{countryCount}\n{travelingCount}\n{title_all}"
     #print("title_all:\n",title_all)
-    sheet = getUserSheet()
-    traveling = getTravelingID(account,"traveling",Cookie)
+    
+    
     storylist = getCardStoryList("received")
     commentlist = getCardStoryList("sent")
     calendar,series,height = createCalendar()
     with open(f"./template/信息汇总_template.md", "r",encoding="utf-8") as f:
         data = f.read()  
-        dataNew = data.replace('$repo',repo)
+        dataNew = data.replace('$account',account)
+        print(f"已替换account:{account}")
+        dataNew = dataNew.replace('$repo',repo)
         print(f"已替换仓库名:{repo}")
         dataNew = dataNew.replace('$title',title_final)
         print("已替换明信片墙title")
@@ -207,7 +217,8 @@ def getCardStoryList(type):
         picFileName = id["picFileName"]
         contryNameEmoji = id["contryNameEmoji"] if id["contryNameEmoji"] is not None else ""
         travel_time = id["travel_time"]
-        distance = id["distance"]
+        distanceNum = id["distance"]
+        distance = format(distanceNum, ",")
         onlinelink ="https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium"
         storypicLink = "https://pan.4a1801.life/d/Onedrive-4A1801/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99/public/Postcrossing/content"
         if type == "received":
@@ -353,6 +364,7 @@ def getTravelingID(account,type,Cookie):
         }
     url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
     response = requests.get(url,headers=headers).json()
+    travelingCount = len(response)
     stats_data = sorted(response, key=lambda x: x[7])
     
     table_header1 = "| 序号 | ID号 | 收件人 | 国家 | 寄出时间 | 距离 | 天数  \n"
@@ -366,13 +378,14 @@ def getTravelingID(account,type,Cookie):
         
         toCountry = stats[3]
         sentDate = datetime.fromtimestamp(stats[4]).strftime('%Y/%m/%d')
-        distance = f"{stats[6]} km"
+        distanceNum = format(stats[6], ",")
+        distance = f"{distanceNum} km"
         traveledDay = stats[7]
         table_content += f"| {i} | {id} | {toMember} | {toCountry} | {sentDate} | {distance} | {traveledDay} \n"
 
     # 将表头和表格内容合并
     table = table_header1 + table_header2 + table_content
-    return table
+    return table,travelingCount
 
 
   

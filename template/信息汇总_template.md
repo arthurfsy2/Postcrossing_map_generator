@@ -9,12 +9,13 @@ tag:
 order: 1
 ---
 :::info 说明
-postcrossing是我在2013年就了解到的明信片交换的项目，当时玩了一段时间。现在尝试新家地址能否收到海外的明信片，目前看来家里的中英文地址都是可以收到的。
+Postcrossing是我在2013年就了解到的明信片交换的项目，当时玩了一段时间，后来毕业工作了就停了，直到2023年才回归。
+
+[我的Postcrossing主页](https://www.postcrossing.com/user/$account)
+
 :::
 
 ## 一.图片墙
-
-   以下展示的4个部分的内容。
 
 $title
 
@@ -240,11 +241,11 @@ const option = {
 
 $sheet
 
-
-
 @tab 还在漂泊的明信片
 
 $traveling
+
+
 
 :::
 

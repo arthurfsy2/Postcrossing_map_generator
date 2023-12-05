@@ -53,14 +53,15 @@ def createMD(type):
         baseUrl = "https://www.postcrossing.com/"
         postcardID = id["id"]  
         picFileName = id["picFileName"]
-        distance = id["distance"]
+        distanceNum = id["distance"]
         travel_time = id["travel_time"]
         userInfo = id["userInfo"]
         contryNameEmoji = id["contryNameEmoji"] if id["contryNameEmoji"] is not None else ""
         
-        if distance is None and travel_time is None:
+        if distanceNum is None and travel_time is None:
             travel_info = ""
         else:
+            distance = format(distanceNum, ",")
             travel_info = f"> 📏{distance} km \n⏱{travel_time}"
         
         pattern=f"## [{postcardID}]({baseUrl}postcards/{postcardID}) \n >{from_or_to} [{userInfo}]({baseUrl}/user/{userInfo}) {contryNameEmoji}\n{travel_info}\n"
