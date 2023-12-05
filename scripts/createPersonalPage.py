@@ -134,8 +134,8 @@ def replaceTemplate():
     #print("title_all:\n",title_all)
     
     
-    storylist = getCardStoryList("received")
-    commentlist = getCardStoryList("sent")
+    storylist,storyNum = getCardStoryList("received")
+    commentlist,commentNum = getCardStoryList("sent")
     calendar,series,height = createCalendar()
     with open(f"./template/信息汇总_template.md", "r",encoding="utf-8") as f:
         data = f.read()  
@@ -149,9 +149,9 @@ def replaceTemplate():
         print("已替换明信片统计")
         dataNew = dataNew.replace('$traveling',traveling)
         print("已替换待登记list")
-        dataNew = dataNew.replace('$storylist',storylist)
+        dataNew = dataNew.replace('$storylist',storylist).replace('$storyNum',storyNum)
         print("已替换明信片故事list")
-        dataNew = dataNew.replace('$commentlist',commentlist)
+        dataNew = dataNew.replace('$commentlist',commentlist).replace('$commentNum',commentNum)
         print("已替换明信片评论list")
         dataNew = dataNew.replace('$calendar',calendar)
         dataNew = dataNew.replace('$series',series)
@@ -189,6 +189,7 @@ def StoryXLS2DB(excel_file):
 def getCardStoryList(type):
     list_all = ""
     content =dl.readDB(dbpath, type,"postcardStory")
+    num = str(len(content))
     for id in content:
         postcardID = id["id"]  
         content_en = id["content_en"]
@@ -245,7 +246,7 @@ def getCardStoryList(type):
             f'{comment}\n\n' \
             f'---\n'
         list_all += list
-    return list_all
+    return list_all,num
     
 
 def createCalendar():
@@ -386,11 +387,6 @@ def getTravelingID(account,type,Cookie):
     # 将表头和表格内容合并
     table = table_header1 + table_header2 + table_content
     return table,travelingCount
-
-
-  
-
-
 
 dl.replaceTemplateCheck()
 excel_file="./template/postcardStory.xlsx"

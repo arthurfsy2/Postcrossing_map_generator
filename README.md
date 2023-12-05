@@ -11,11 +11,12 @@
 
 本项目特点：
 
-1. 可以下载gallery对应的图片，并生成包含fronttage的.md文件，以便你放入到vuepress当中使用
-2. 可抓取对应账户的收、发明信片的信息，形成2个地图文件，内容是仿官方的map部分的谷歌地图，但是加入了自定义的内容
+1. 可以下载gallery对应的图片，并生成包含fronttage的.md文件，以便你放入到**vuepress**当中使用
+2. 可抓取对应账户的收、发明信片的信息，形成**2个地图文件**，内容是仿官方的map部分的谷歌地图，但是加入了自定义的内容
 3. 可通过模板生成你个人的“信息汇总”页面
-4. 当你寄出的邮件被登记后，可抓取你账号postcrossing账号的回复邮件（"Hurray! Your postcard CN-XXX to XXXX"的邮件）
-5. 抓取后的信息会保存到./template/data/db数据库当中，如果以后有更新，只会抓取更新部分，减少对Postcrossing的压力。
+4. 当你寄出的邮件被登记后，可抓取你账号postcrossing账号的**回复邮件内容**（"Hurray! Your postcard CN-XXX to XXXX"的邮件）
+5. 可生成明信片故事的**词云**
+6. 抓取后的信息会保存到./template/data/db数据库当中，如果以后有更新，只会抓取更新部分，减少对Postcrossing的压力。
 
 # 环境要求
 
@@ -23,37 +24,50 @@ python版本 >=3.11.2
 
 # 一. 步骤（本地模式）
 
+## 初始化
+
 1. clone本项目到本地
 2. 按需修改scripts/config.json
 
 ```
 {
-    "account": "your account",//你的账户，通过scripts/login.py来自动赋值 “https://www.postcrossing.com/user/arthurfsy/gallery”当中的“arthurfsy”
-    "nickName": "your Markdown Name",//输入你定义的昵称，用于生成.md文件的fronttage内容，生成后的.md文件可作为vuepress项目使用
-    "Cookie": "auto create",//你的账户，通过scripts/login.py来自动赋值 
+    "Cookie": "auto create",//你的账户，通过scripts/login.py或startTask.py来自动赋值 
     "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",//默认为Postcrossing图片的官方链接前缀。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取
     "dbpath": "./template/data.db", //默认的数据库存放路径
-    "repo":"arthurfsy2/Postcrossing_map_generator" //更改为你自己的仓库名。用于“信息汇总”的echarts图标取值。
+}
 ```
 
-进入项目目录
+3. 进入项目目录
 
 * **删除/output、/gallery目录下的所有文件（使用你自己的账号，会自动生成数据）**
-* **删除/template目录下的data.db文件（postcardStory.xlsx、信息汇总_template.md可修改为你喜欢的文字描述）**
+* **删除/template目录下的data.db文件**
+* **（可选）修改：postcardStory.xlsx中填入已收到明信片的文字、信息汇总_template.md可修改为你喜欢的文字描述）**
 
-执行 `pip install -r requirements.txt安装依赖`
+4. 执行 `pip install -r requirements.txt安装依赖`
 
-执行 `pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com` 安装openpyxl （如果你需要填写/template/postcardStory.xlsx 当中的明信片背面文字内容，则需要安装）
+5. 执行 `pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com` 安装openpyxl （如果你需要填写/template/postcardStory.xlsx 当中的明信片背面文字内容，则需要安装）
 
-数据获取：
+
+
+## 数据获取
+
+重要脚本说明：
+
+```
+scripts/login.py  //登陆账号获取cookie，可单独使用（配合Github Action定时刷新Cookie），也可以整合到startTask.py中使用
+scripts/createMap.py  //在根目录生成ClusterMap.html和Map.html文件(还包含其他结果文件)
+scripts/createGallery.py  //在./gallery生成4个不同类型的展示墙、已下载的图片(还包含其他结果文件)
+scripts/createPersonalPage.py  //在./template/data.db数据库中插入已抓取到的回复信息
+scripts/mailTrack.py  //在./output生成“信息汇总”页面(还包含其他结果文件)
+```
 
 依次执行以下内容：
 
 1. 登陆账号
 
-   `python scripts/login.py "账号" "密码" "昵称" "仓库地址"` 
+   `python scripts/login.py "postcrossing账号" "postcrossing密码" "你想要在vuepress中展示的昵称" "仓库地址"` 
 
-   输入账号密码获取cookies，如：`python scripts/login.py "youraccount" "yourpassword" "yournickname" "yourReponame"`
+   输入postcrossing账号密码获取cookies，如：`python scripts/login.py "youraccount" "yourpassword" "yournickname" "yourReponame"`
 
 2. 登陆邮箱，抓取数据（可选）
 
@@ -74,10 +88,10 @@ python版本 >=3.11.2
      [谷歌邮箱（@gmail.com）：两步验证+应用专用密码登录 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/483277240)
 
    - 参数说明：
-        
+     
         不同组的配置用英文逗号隔开，组内的不同参数则通过‘//’分隔，QQ邮箱、谷歌邮箱的host可以参考以下内容，其他邮箱的host需要自行查询和调试。
         
-        邮件对应的目录一般默认为“**INBOX**"，如果之前你已经将邮件挪到其他文件夹，则需要修改以下./scripts/mailTrack.py的内容，将注释去掉，然后运行`"imap.qq.com//254XXXX40@qq.com//hyiXXXXccaaa//INBOX`先查询自己账号的邮箱有哪些文件夹，然后在运行参数中修改正确为的文件夹：`"imap.qq.com//254XXXX40@qq.com//hyiXXXXccaaa//其他文件夹/postcrossing`
+        邮件对应的目录一般默认为“**INBOX**"，如果之前你已经将邮件挪到其他文件夹，则需要修改以下./scripts/mailTrack.py的内容，将注释去掉，然后使用邮箱参数`"imap.qq.com//254XXXX40@qq.com//hyiXXXXccaaa//INBOX`先查询自己账号的邮箱有哪些文件夹，然后在运行参数中修改正确为的文件夹：`"imap.qq.com//254XXXX40@qq.com//hyiXXXXccaaa//其他文件夹/postcrossing`
 
    ```
        with MailBox(host).login(user, passwd) as mailbox:        
@@ -89,11 +103,11 @@ python版本 >=3.11.2
 
    - 如果抓取数据时，发现无法获取邮件，请检查：是否有开通收取所有邮件的选项。
 
-     QQ邮箱：首页设置-账号-**POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务**-收取选项
+     **QQ邮箱**：首页设置-账号-**POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务**-收取选项
 
      收取选项：**全部**
 
-     GMAIL：设置-查看所有设置-转发和 POP/IMAP-**IMAP 访问**
+     **GMAIL**：设置-查看所有设置-转发和 POP/IMAP-**IMAP 访问**
 
      启用IMAP
 
@@ -101,22 +115,17 @@ python版本 >=3.11.2
 
 3. 开始postcrossing数据抓取
 
-   `python scripts/startTask.py "账号" "密码" "昵称" "仓库地址"` 
+   `python scripts/startTask.py "postcrossing账号" "postcrossing密码" "你想要在vuepress中展示的昵称" "仓库地址"` 
 
    如：`python scripts/login.py "youraccount" "yourpassword" "yournickname" "yourReponame"`
 
-   运行后将会自动获取数据
+   运行后将会自动依次运行以下4个脚本，进行数据获取。
+   
+   `tasks = ['login','createMap', 'createGallery', 'createPersonalPage']`
 
 
 
-重要脚本说明：
 
-```
-scripts/createMap.py  //在./生成ClusterMap.html和Map.html文件(还包含其他结果文件)
-scripts/createGallery.py  //在./gallery生成4个不同类型的展示墙、已下载的图片(还包含其他结果文件)
-scripts/createPersonalPage.py  //在./output生成“信息汇总”页面(还包含其他结果文件)
-（可选）python scripts/init.py  //初始化config.json的信息
-```
 
 # 二. Github Action
 
@@ -144,10 +153,10 @@ on:
       - main
 ```
 
-为 GitHub Actions 添加代码提交权限 访问repo  Settings > Actions > General页面，找到Workflow permissions的设置项，将选项配置为Read and write permissions，支持 CI 将运动数据更新后提交到仓库中。
-**不设置允许的话，会导致workflows无法写入文件**
+2. 为 GitHub Actions 添加代码提交权限 访问repo  Settings > Actions > General页面，找到Workflow permissions的设置项，将选项配置为Read and write permissions，支持 CI 将运动数据更新后提交到仓库中。
+   **不设置允许的话，会导致workflows无法写入文件**
 
-在 repo Settings > Security > Secrets > secrets and variables > Actions  > New repository secret > 增加以下变量:
+3. 在 repo Settings > Security > Secrets > secrets and variables > Actions  > New repository secret > 增加以下变量:
 
 - account：你的postcrossing账号名称
 - password：你的postcrossing账号密码
@@ -159,6 +168,18 @@ on:
 >
 
 ![img](./img/20231125012751.png)
+
+​	注意：
+
+​	如果不需要登陆账号搜集回复内容，请将`.github/workflows/sync.yml`中的以下内容注释掉，或者删除。
+
+```
+- name: 更新邮件回复
+        run: |
+          python scripts/mailTrack.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
+```
+
+4. 将修改后的内容上传/push到Github当中
 
 # 三. Github Page在线展示
 
@@ -217,14 +238,17 @@ https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/mont
 
 1、在你的vuepress仓库的src/.vuepress/public/scripts/路径下新建updatePostcrossing.py，脚本内容可参考：[updatePostcrossing.py](https://github.com/arthurfsy2/arthurfsy2.github.io/blob/main/src/.vuepress/public/scripts/updatePostcrossing.py)
 
-修改以下代码的`arthurfsy2/Postcrossing_map_generator`为你自己的仓库名称（地址已采用了jsdelivr的CDN链接）：
+修改以下代码的`arthurfsy2/Postcrossing_map_generator`为你自己的仓库名称
+
+> 经实测，Github之间的仓库进行request.get()时，还是用github自己的githubusercontent比较好，其他国内CDN会出现更新不及时的情况。
 
 ```
 def downloadMD(type):
+    baseurl="https://raw.githubusercontent.com/arthurfsy2/Postcrossing_map_generator/main"
     if type != '信息汇总':
-        url = f"https://cdn.jsdelivr.net/gh/arthurfsy2/Postcrossing_map_generator@main/gallery/{type}.md"
+        url = f"{baseurl}/gallery/{type}.md"
     else:
-        url = f"https://cdn.jsdelivr.net/gh/arthurfsy2/Postcrossing_map_generator@main/output/{type}.md"
+        url = f"{baseurl}/output/{type}.md"
 ```
 
 
@@ -240,6 +264,33 @@ env:
   GITHUB_NAME: arthurfsy2 （修改成你的github名称）
   GITHUB_EMAIL: fsyflh@gmail.com （修改为你的github账号邮箱）
 ```
+注意：
+
+1. 依赖文件requirements
+
+   在`src/.vuepress/public/scripts/`下新增requirements.txt，内容为如下，可参考：[requirements](https://github.com/arthurfsy2/arthurfsy2.github.io/blob/main/src/.vuepress/public/scripts/requirements.txt) （我自己还新增了词云同步，依赖比较多，实际只需要添加Requests这个库就可以
+
+   ```
+   Requests==2.31.0
+   ```
+
+   
+
+1. 本人的updatePostcrossing.py是放在了Github仓库的`src/.vuepress/public/scripts/`下，需要根据实际情况修改对应的vuepress项目脚本存放地址
+
+```
+ - name: 安装python依赖
+        run: |
+          pip install -r src/.vuepress/public/scripts/requirements.txt
+
+      - name: 下载markdown
+        run: |
+          python src/.vuepress/public/scripts/updatePostcrossing.py
+```
+
+
+
+
 
 # 五. 其他说明
 

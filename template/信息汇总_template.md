@@ -249,7 +249,7 @@ $traveling
 
 :::
 
-## 四.明信片故事
+## 四.明信片故事（$storyNum）
 ::: tabs
 @tab 中文词云
 ![](https://raw.gitmirror.com/$repo/main/output/postcrossing_cn.svg)
@@ -259,7 +259,7 @@ $traveling
 
 $storylist
 
-## 五.已寄片收到回复
+## 五.被注册时收到的回复（$commentNum）
 
 $commentlist
 
