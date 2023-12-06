@@ -11,18 +11,62 @@
 
 本项目特点：
 
-1. 可以下载gallery对应的图片，并生成包含fronttage的.md文件，以便你放入到**vuepress**当中使用
-2. 可抓取对应账户的收、发明信片的信息，形成**2个地图文件**，内容是仿官方的map部分的谷歌地图，但是加入了自定义的内容
-3. 可通过模板生成你个人的“信息汇总”页面
-4. 当你寄出的邮件被登记后，可抓取你账号postcrossing账号的**回复邮件内容**（"Hurray! Your postcard CN-XXX to XXXX"的邮件）
-5. 可生成明信片故事的**词云**
-6. 抓取后的信息会保存到./template/data/db数据库当中，如果以后有更新，只会抓取更新部分，减少对Postcrossing的压力。
+1. 展示墙
+		抓取官网的`/gallery`下的4个模块，下载gallery对应的图片，并生成包含fronttage的.md文件，以便你放入到**vuepress**当中使用
+
+2. 地图
+		参考官网的`/map`的样式，通过ClusterMap、Map这2个地图分别展示了聚合效果、散点展示效果，且每个地图都通过Geojson来标记收发国家的“足迹”。
+
+3. **信息汇总**：
+
+   汇总以下模块的内容
+
+   - 图片墙：统计个人收发数据、对应4个展示墙的超链接
+     ![](./img/summary01.png)
+
+   - 地图展示：集成`map.html、clusterMap.html`这2个地图的内容
+
+     ![](./img/summary02.png)
+
+     
+
+   - 统计
+
+     ​		抓取官网的`/stats`下的3个模块，分别展示`收发记录（年、月）`、`国家分布（饼图）`、`各国明信片（表格）`、`还在漂泊的明信片（表格）`
+
+     >  图形是通过echarts插件显示，表格是通过markdown的表格实现。）
+
+     ![](./img/summary03-1.png)
+
+     ![](./img/summary03-2.png)
+
+   - 明信片故事：读取人工填写的`./temnplate/postcardStory`生成明信片故事的**词云**，并为每个已填写“故事”的明信片展示图片、内容
+
+     ![](./img/summary04-1.png)
+     
+     ![](./img/summary04-2.png)
+     
+     
+
+   
+
+   - 被注册时收到的回复
+
+     ​		当你寄出的邮件被登记后，可定时抓取你账号postcrossing账号关联邮箱的**回复邮件内容**（"Hurray! Your postcard CN-XXX to XXXX"的邮件）
+
+     ![](./img/summary05.png)
+     
+   - 增量更新
+
+     ​		抓取后的信息会保存到./template/data/db数据库当中，如果以后有更新，只会抓取更新部分并存入到数据库，减少对Postcrossing的压力。
+
+
 
 # 环境要求
 
 python版本 >=3.11.2
 
-# 一. 步骤（本地模式）
+# 一. 部署步骤（本地模式）
 
 ## 初始化
 
@@ -31,9 +75,9 @@ python版本 >=3.11.2
 
 ```
 {
-    "Cookie": "auto create",//你的账户，通过scripts/login.py或startTask.py来自动赋值 
-    "picDriverPath":"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium",//展示墙图片默认为Github仓库的文件直链。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取
-    "storyPicLink": "https://raw.gitmirror.com/$repo/main/template/content", //存放明信片背面图片的路径
+    "Cookie": "auto create",//正常情况下无需修改。通过scripts/login.py或startTask.py来自动赋值 
+    "picDriverPath":"https://raw.gitmirror.com/$repo/main/gallery/picture",//展示墙图片默认为Github仓库的文件直链。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取。如果是本地使用，需要改为./gallery/picture
+    "storyPicLink": "https://raw.gitmirror.com/$repo/main/template/content", //存放明信片背面图片的路径。如果是本地使用，需要改为./template/content
     "storyPicType": "webp", //存放明信片背面图片的格式
     "dbpath": "./template/data.db", //默认的数据库存放路径
 }
@@ -43,8 +87,8 @@ python版本 >=3.11.2
 
 * **删除./output、./gallery目录下的所有文件（使用你自己的账号，会自动生成数据）**
 * **删除./template目录下的data.db文件**
-* **（可选）修改：在./template/postcardStory.xlsx中填入已收到明信片的文字、信息汇总_template.md可修改为你喜欢的文字描述）**
-* **（可选）修改：在./template/content/目录下删除我的数据，然后拍照上传已收到明信片的文字面图片。并将图片名称命名为ID名称，如：CN-XXXXXXX。（本项目图片已转换为webp格式，如果需要修改为其他格式，需要修改./scripts/config.json文件中的“storycontentPicType"的值，改为你需要的格式**
+* **（可选）修改**：在./template/postcardStory.xlsx中填入已收到明信片的文字、信息汇总_template.md可修改为你喜欢的文字描述）
+* **（可选）修改**：在`./template/content/`目录下删除我的数据，然后拍照上传已收到明信片的文字面图片。并将图片名称命名为ID名称，如：`CN-XXXXXXX.webp`。（本项目图片已转换为webp格式，如果需要修改为其他格式，需要修改./scripts/config.json文件中的“storycontentPicType"的值，改为你需要的格式
 
 4. 执行 `pip install -r requirements.txt安装依赖`
 
