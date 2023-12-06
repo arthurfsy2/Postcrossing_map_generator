@@ -120,11 +120,11 @@ def replaceTemplate():
     for type in types: 
         distance,num,rounds = getUserHomeInfo(type)
         distance_all = format(distance, ",")
-        summary = f"[📤**{num}** 📏**{distance_all}** km 🌏**{rounds}** 圈]\n\n"
+        summary = f"**{num}** 📏**{distance_all}** km 🌏**{rounds}** 圈]\n\n"
         if type == "sent":
-            desc = f"> 寄出{summary}"
+            desc = f"> 寄出{summary}[📤"
         elif type == "received":
-            desc = f"> 收到{summary}"
+            desc = f"> 收到{summary}[📥"
         else:
             desc =""
         desc_all += desc

@@ -67,7 +67,7 @@ def getMailReply(host,user,passwd,filename):
 
 def translate(sentence, src_lan, tgt_lan):
     url = 'http://api.niutrans.com/NiuTransServer/translation?'
-    data = {"from": src_lan, "to": tgt_lan, "apikey": apikey, "src_text": sentence}
+    data = {"from": src_lan, "to": tgt_lan, "apikey": apikey, "src_text": sentence.encode("utf-8")}
     data_en = parse.urlencode(data)
     req = url + "&" + data_en
     res = request.urlopen(req)
