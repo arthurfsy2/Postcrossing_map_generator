@@ -39,20 +39,10 @@ jobs:
       - name: 删除缓存文件
         run: rm -rf scripts/__pycache__/    
       
-      - name: 检查文件更新
-        id: check_changes
-        run: |
-          git diff --quiet || echo "changes=true" >> $GITHUB_OUTPUT
-
       - name: 提交
         run: |
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
-          git diff --cached --quiet || git commit -m "已更新Cookie"
-          if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
-            git push
-          else
-            echo "No changes to push."
-            git reset --hard HEAD  # 取消已经提交的文件变动
-          fi
+          git commit -m '已更新数据' || echo "nothing to commit"
+          git push || echo "nothing to push"
