@@ -63,12 +63,12 @@
     "name": "Belarus",
     "countryCode": "BY",
     "flagEmoji": ":belarus:",
-    "value": 11,
-    "sentNum": 5,
+    "value": 12,
+    "sentNum": 6,
     "receivedNum": 6,
-    "sentAvg": 48,
+    "sentAvg": 49.3,
     "receivedAvg": 41.8,
-    "sentMedian": 51,
+    "sentMedian": 53.5,
     "receivedMedian": 43.0
   },
   {
