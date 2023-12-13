@@ -99,13 +99,13 @@ jobs:
           
 
         
-      - name: 推送到博客仓库
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: ${{ env.blog_repo }}
-          BRANCH: main
-          FOLDER: ${{ env.blog_path }}
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+      # - name: 推送到博客仓库
+      #   uses: s0/git-publish-subdir-action@develop
+      #   env:
+      #     REPO: ${{ env.blog_repo }}
+      #     BRANCH: main
+      #     FOLDER: ${{ env.blog_path }}
+      #     SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
       
-      - name: 删除缓存文件
-        run: rm -rf ${{ env.blog_path }}
+      # - name: 删除缓存文件
+      #   run: rm -rf ${{ env.blog_path }}
