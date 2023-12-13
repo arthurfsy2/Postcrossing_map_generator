@@ -58,54 +58,54 @@ jobs:
           git commit -m '已更新数据' || echo "nothing to commit"
           git push || echo "nothing to push"
 
-      - name: 推送到博客仓库
+      - name: 复制文件
         run: |
-          git config --global user.name "${{ env.GITHUB_EMAIL }}"
-          git config --global user.email "${{ env.GITHUB_NAME }}"
-          git remote add destination ${{ env.blog_repo }}
-          git fetch origin
-          git fetch destination
-          git checkout -b main
           mkdir -p "${{ env.blog_path }}"
           chmod 755 "${{ env.blog_path }}"
           if [ -f output/信息汇总.md ]; then
             cp output/信息汇总.md "${{ env.blog_path }}/信息汇总.md"
-            git add "${{ env.blog_path }}/信息汇总.md"  
+            echo '信息汇总.md 已更新'  
           else
             echo '信息汇总.md 无更新'
           fi
       
           if [ -f gallery/sent.md ]; then
             cp gallery/sent.md "${{ env.blog_path }}/sent.md" 
-            git add "${{ env.blog_path }}/sent.md"  
+            echo 'sent.md 已更新'  
           else
             echo 'sent.md 无更新'
           fi
       
           if [ -f gallery/received.md ]; then
-            cp gallery/received.md "${{ env.blog_path }}/received.md" 
-            git add "${{ env.blog_path }}/received.md"  
+            cp gallery/received.md "${{ env.blog_path }}/received.md"
+            echo 'received.md 已更新'  
           else
             echo 'received.md 无更新'
           fi
       
           if [ -f gallery/popular.md ]; then
             cp gallery/popular.md "${{ env.blog_path }}/popular.md" 
-            git add "${{ env.blog_path }}/popular.md"  
+            echo 'popular.md 已更新'
           else
             echo 'popular.md 无更新'
           fi
       
           if [ -f gallery/favourites.md ]; then
             cp gallery/favourites.md "${{ env.blog_path }}/favourites.md" 
-            git add "${{ env.blog_path }}/favourites.md"  
+            echo 'favourites.md 已更新'
           else
             echo 'favourites.md 无更新'
           fi
-      
-          git commit -m '已push到博客仓库' || echo 'nothing to commit'
-          git push destination main  || echo 'nothing to push' # 推送修改到目标仓库
-          rm -rf ${{ env.blog_path }}
-        env:
-          TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          
+
         
+      - name: 推送到博客仓库
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: ${{ env.blog_repo }}
+          BRANCH: main
+          FOLDER: ${{ env.blog_path }}
+          SSH_PRIVATE_KEY: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      
+      - name: 删除缓存文件
+        run: rm -rf ${{ env.blog_path }}
