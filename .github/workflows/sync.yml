@@ -109,7 +109,7 @@ jobs:
           TARGET_DIR: ${{ env.blog_path }}
           MESSAGE: "已更新/src/Arthur/Postcrossing文件"
           SKIP_EMPTY_COMMITS: true
-          CLEAR_GLOBS_FILE: ".scripts/.clear-target-files"
+          CLEAR_GLOBS_FILE: "scripts/.clear-target-files"
 
       
       - name: 删除缓存文件
