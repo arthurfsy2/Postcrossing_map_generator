@@ -1,6 +1,0 @@
-run.sh
-a.py
-.vscode
-scripts/__pycache__/*
-scripts/init*
-output/html
