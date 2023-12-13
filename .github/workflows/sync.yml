@@ -11,7 +11,8 @@ on:
 env:
   GITHUB_NAME: arthurfsy2
   GITHUB_EMAIL: fsyflh@gmail.com
-  changes: false
+  blog_path: "src/Arthur/postcrossing/"
+
 jobs:
   sync:
     name: 同步
@@ -55,3 +56,54 @@ jobs:
           git add .
           git commit -m '已更新数据' || echo "nothing to commit"
           git push || echo "nothing to push"
+
+      - name: 推送到博客仓库
+        run: |
+          git config --global user.name "${{ env.GITHUB_EMAIL }}"
+          git config --global user.email "${{ env.GITHUB_NAME }}"
+          git remote add destination git@github.com:arthurfsy2/Postcrossing_map_generator.git
+          git checkout -b main
+          git fetch destination main
+          git merge --allow-unrelated-histories destination/main
+
+          if [ -f output/信息汇总.md ]; then
+            cp output/信息汇总.md "${{ env.blog_path }}"信息汇总.md
+            git add "${{ env.blog_path }}"信息汇总.md  
+          else
+            echo '信息汇总.md 无更新'
+          fi
+
+          if [ -f gallery/sent.md ]; then
+          cp gallery/sent.md "${{ env.blog_path }}"sent.md 
+            git add "${{ env.blog_path }}"信息汇总.md  # 将复制后的文件添加到 Git 
+          else
+            echo 'sent.md 无更新'
+          fi
+
+          if [ -f gallery/received.md ]; then
+          cp gallery/received.md "${{ env.blog_path }}"received.md 
+            git add "${{ env.blog_path }}"信息汇总.md  
+          else
+            echo 'received.md 无更新'
+          fi
+
+          if [ -f gallery/popular.md ]; then
+          cp gallery/popular.md "${{ env.blog_path }}"popular.md 
+            git add "${{ env.blog_path }}"信息汇总.md  
+          else
+            echo 'popular.md 无更新'
+          fi
+
+          if [ -f gallery/favourites.md ]; then
+          cp gallery/favourites.md "${{ env.blog_path }}"favourites.md 
+            git add "${{ env.blog_path }}"信息汇总.md  
+          else
+            echo 'favourites.md 无更新'
+          fi
+
+          git commit -m '已push到博客仓库' || echo 'nothing to commit'
+          git push destination HEAD:main  || echo 'nothing to push' # 推送修改到目标仓库
+          rm -rf output  
+          rm -rf gallery  
+        env:
+          TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
