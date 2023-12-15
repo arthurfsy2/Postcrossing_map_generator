@@ -239,9 +239,8 @@ const option = {
 
 @tab 各国明信片
 
-// $sheet
 <iframe 
-src="https://raw.gitmirror.com/$repo/main/output/sheet.html" 
+src="https://postcrossing.4a1801.life/output/sheet.html" 
 frameborder=0
 height=500
 width=100%
