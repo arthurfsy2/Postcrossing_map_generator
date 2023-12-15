@@ -11,6 +11,7 @@ from jieba import analyse
 from wordcloud import WordCloud
 from opencc import OpenCC
 import requests
+import emoji
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -74,7 +75,7 @@ def getUserSheet():
     #table_header = "| No. | Country | Sent | Received | Avg travel(Sent) | Avg travel(Received) |\n"
     table_header1 = "| 序号 | 国家 | 已寄出 | 已收到 | 寄出-平均 | 收到-平均 | 寄出-中间值 | 收到-中间值 \n"
     table_header2 = "| --- | --- | --- | --- | --- | --- | --- | --- \n"
-
+    print("sorted_stats_data:\n",sorted_stats_data)
     # 创建表格内容
     table_content = ""
     for i, stats in enumerate(sorted_stats_data, start=1):
@@ -107,12 +108,51 @@ def getUserSheet():
     table = table_header1 + table_header2 + table_content
     return table,countryCount
 
+def getUserSheet2():
+    data=dl.readDB(dbpath, "", "CountryStats")
+    countryCount = len(data)
+    new_data = []
+    for i, item in enumerate(data):
+        item['序号'] = i + 1
+        emojiName = item['flagEmoji']
+
+        item['国家'] = f"{item.pop('name')} {emoji.emojize(emojiName,language='alias')}"
+        item['已寄出'] = item.pop('sentNum')
+        item['已收到'] = item.pop('receivedNum')
+        item['寄出-平均'] = f"{item.pop('sentAvg')}天"
+        item['收到-平均'] = f"{item.pop('receivedAvg')}天"
+        item['寄出-中间值'] = f"{item.pop('sentMedian')}天"
+        item['收到-中间值'] = f"{item.pop('receivedMedian')}天"
+        del item['countryCode']
+        del item['flagEmoji']
+        del item['value']
+        new_data.append(item)
+
+    # 将数据数组转换为DataFrame
+    df = pd.DataFrame(new_data)
+
+    # 修改索引从1开始
+    df.index = df.index + 1
+
+    # 删除序号列
+    df = df.drop(columns=['序号'])
+
+    # 将DataFrame转换为HTML表格
+    html_table = df.to_html(escape=False)
+
+    # 添加CSS样式
+    html_table = '<style>th, td {text-align: center;}</style>' + html_table
+    # 保存HTML表格为网页文件
+    with open('./output/sheet.html', 'w',encoding="utf-8") as file:
+        file.write(html_table)
+
+    return countryCount
 def replaceTemplate():   
     stat,content_raw,types = dl.getAccountStat(Cookie)  
     title_all=""
     desc_all=""      
     sheet,countryNum = getUserSheet()
-    
+    getUserSheet2()
     traveling,travelingNum = getTravelingID(account,"traveling",Cookie)
 
     countryCount = f"> 涉及国家[🗺️**{countryNum}**]\n\n"
@@ -144,8 +184,8 @@ def replaceTemplate():
         print(f"已替换account:{account}")        
         dataNew = dataNew.replace('$title',title_final)
         print("已替换明信片墙title")
-        dataNew = dataNew.replace('$sheet',sheet)
-        print("已替换明信片统计")
+        # dataNew = dataNew.replace('$sheet',sheet)
+        # print("已替换明信片统计")
         dataNew = dataNew.replace('$traveling',traveling)
         print("已替换待登记list")
         dataNew = dataNew.replace('$storylist',storylist).replace('$storyNum',storyNum)

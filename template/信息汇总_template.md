@@ -239,7 +239,15 @@ const option = {
 
 @tab 各国明信片
 
-$sheet
+// $sheet
+<iframe 
+src="https://raw.gitmirror.com/$repo/main/output/sheet.html" 
+frameborder=0
+height=500
+width=100%
+seamless=seamless
+scrolling=auto
+></iframe>
 
 @tab 还在漂泊的明信片
 
