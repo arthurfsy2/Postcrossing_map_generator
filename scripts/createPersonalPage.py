@@ -104,10 +104,18 @@ def getUserSheet(tableName):
     <head>
         <title>{tableName}</title>
         <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
+        <style>
+            .table-responsive {{
+                width: 100%;
+                overflow-x: auto;
+            }}
+        </style>
     </head>
     <body>
         <div class="container">
-            {html_table}
+            <div class="table-responsive">
+                {html_table}
+            </div>
         </div>
     </body>
     </html>
@@ -403,10 +411,18 @@ def getTravelingID(account,type,Cookie):
     <head>
         <title>还在漂泊的明信片</title>
         <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
+        <style>
+            .table-responsive {{
+                width: 100%;
+                overflow-x: auto;
+            }}
+        </style>
     </head>
     <body>
         <div class="container">
-            {html_table}
+            <div class="table-responsive">
+                {html_table}
+            </div>
         </div>
     </body>
     </html>
