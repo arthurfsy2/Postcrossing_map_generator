@@ -1,4 +1,5 @@
 beautifulsoup4==4.12.2
+emoji==2.9.0
 folium==0.14.0
 imap_tools==1.5.0
 jieba==0.42.1
