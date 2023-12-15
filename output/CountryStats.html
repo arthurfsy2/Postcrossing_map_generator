@@ -4,10 +4,17 @@
     <head>
         <title>CountryStats</title>
         <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
+        <style>
+            .table-responsive {
+                width: 100%;
+                overflow-x: auto;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
-            <table border="1" class="dataframe table table-striped table-bordered">
+            <div class="table-responsive">
+                <table border="1" class="dataframe table table-striped table-bordered">
   <thead>
     <tr style="text-align: right;">
       <th class="text-center"></th>
@@ -353,6 +360,7 @@
     </tr>
   </tbody>
 </table>
+            </div>
         </div>
     </body>
     </html>
