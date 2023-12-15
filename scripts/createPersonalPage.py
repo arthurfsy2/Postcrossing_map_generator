@@ -65,95 +65,65 @@ def getUserHomeInfo(type):
     rounds = round((total/40076),2)
     return total,len(content),rounds
 
-def getUserSheet():
-    stats_data=dl.readDB(dbpath, "", "CountryStats")
-    countryCount = len(stats_data)
-    # 按照 name 的 A-Z 字母顺序对 stats_data 进行排序
-    sorted_stats_data = sorted(stats_data, key=lambda x: x['name'])
-    #print("sorted_stats_data",sorted_stats_data)
-    # 创建表头
-    #table_header = "| No. | Country | Sent | Received | Avg travel(Sent) | Avg travel(Received) |\n"
-    table_header1 = "| 序号 | 国家 | 已寄出 | 已收到 | 寄出-平均 | 收到-平均 | 寄出-中间值 | 收到-中间值 \n"
-    table_header2 = "| --- | --- | --- | --- | --- | --- | --- | --- \n"
-    print("sorted_stats_data:\n",sorted_stats_data)
-    # 创建表格内容
-    table_content = ""
-    for i, stats in enumerate(sorted_stats_data, start=1):
-        country = stats['name']
-        flag = stats['flagEmoji']
-        sent = stats['sentNum']
-        received = stats['receivedNum']
-        sentAvg = stats['sentAvg']
-        receivedAvg = stats['receivedAvg']
-        sentMedian = stats['sentMedian']
-        receivedMedian = stats['receivedMedian']
-        if sent ==0:
-            sentAvgDays = "-"
-            sentMedianDays = "-"
-        else:
-            sentAvgDays = f"{sentAvg}天"
-            sentMedianDays = f"{sentMedian}天"
-
-        if received ==0:
-            receivedAvgDays = "-"
-            receivedMedianDays = "-"
-        else:
-            receivedAvgDays = f"{receivedAvg}天"
-            receivedMedianDays = f"{receivedMedian}天"
-
-        
-        table_content += f"| {i} | {country} {flag} | {sent} | {received} | {sentAvgDays} | {receivedAvgDays} | {sentMedianDays} | {receivedMedianDays} \n"
-
-    # 将表头和表格内容合并
-    table = table_header1 + table_header2 + table_content
-    return table,countryCount
-
-def getUserSheet2():
-    data=dl.readDB(dbpath, "", "CountryStats")
+def getUserSheet(tableName):
+    data = dl.readDB(dbpath, "", tableName)
     countryCount = len(data)
     new_data = []
     for i, item in enumerate(data):
-        item['序号'] = i + 1
-        emojiName = item['flagEmoji']
-
-        item['国家'] = f"{item.pop('name')} {emoji.emojize(emojiName,language='alias')}"
-        item['已寄出'] = item.pop('sentNum')
-        item['已收到'] = item.pop('receivedNum')
-        item['寄出-平均'] = f"{item.pop('sentAvg')}天"
-        item['收到-平均'] = f"{item.pop('receivedAvg')}天"
-        item['寄出-中间值'] = f"{item.pop('sentMedian')}天"
-        item['收到-中间值'] = f"{item.pop('receivedMedian')}天"
-        del item['countryCode']
-        del item['flagEmoji']
-        del item['value']
-        new_data.append(item)
-
+        if item['sentMedian']:
+            sentMedian = f"{item['sentMedian']}天"
+        else:
+            sentMedian = "-"
+        if item['receivedMedian']:
+            receivedMedian = f"{item['receivedMedian']}天"
+        else:
+           receivedMedian = "-"
+        formatted_item = {
+            '国家': f"{item['name']} {emoji.emojize(item['flagEmoji'],language='alias')}",
+            '已寄出': item['sentNum'],
+            '已收到': item['receivedNum'],
+            '寄出-平均': f"{item['sentAvg']}天",
+            '收到-平均': f"{item['receivedAvg']}天",
+            '寄出-中间值': sentMedian,
+            '收到-中间值': receivedMedian,
+        }
+        new_data.append(formatted_item)
     # 将数据数组转换为DataFrame
     df = pd.DataFrame(new_data)
-
     # 修改索引从1开始
     df.index = df.index + 1
+    # 将DataFrame转换为HTML表格，并添加Bootstrap的CSS类和居中对齐的属性
+    html_table = df.to_html(classes="table table-striped table-bordered", escape=False)
+    html_table = html_table.replace('<th>', '<th class="text-center">')
+    html_table = html_table.replace('<td>', '<td class="text-center">')
 
-    # 删除序号列
-    df = df.drop(columns=['序号'])
-
-    # 将DataFrame转换为HTML表格
-    html_table = df.to_html(escape=False)
-
-    # 添加CSS样式
-    html_table = '<style>th, td {text-align: center;}</style>' + html_table
+    # 生成完整的HTML文件
+    html_content = f'''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{tableName}</title>
+        <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            {html_table}
+        </div>
+    </body>
+    </html>
+    '''
     # 保存HTML表格为网页文件
-    with open('./output/sheet.html', 'w',encoding="utf-8") as file:
-        file.write(html_table)
+    with open(f'./output/{tableName}.html', 'w', encoding="utf-8") as file:
+        file.write(html_content)
 
     return countryCount
+
 def replaceTemplate():   
     stat,content_raw,types = dl.getAccountStat(Cookie)  
     title_all=""
     desc_all=""      
-    sheet,countryNum = getUserSheet()
-    getUserSheet2()
-    traveling,travelingNum = getTravelingID(account,"traveling",Cookie)
+    countryNum = getUserSheet("CountryStats")
+    travelingNum = getTravelingID(account,"traveling",Cookie)
 
     countryCount = f"> 涉及国家[🗺️**{countryNum}**]\n\n"
     travelingCount = f"> 待签收[📨**{travelingNum}**]\n\n"
@@ -184,10 +154,6 @@ def replaceTemplate():
         print(f"已替换account:{account}")        
         dataNew = dataNew.replace('$title',title_final)
         print("已替换明信片墙title")
-        # dataNew = dataNew.replace('$sheet',sheet)
-        # print("已替换明信片统计")
-        dataNew = dataNew.replace('$traveling',traveling)
-        print("已替换待登记list")
         dataNew = dataNew.replace('$storylist',storylist).replace('$storyNum',storyNum)
         print("已替换明信片故事list")
         dataNew = dataNew.replace('$commentlist',commentlist).replace('$commentNum',commentNum)
@@ -406,28 +372,49 @@ def getTravelingID(account,type,Cookie):
     url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
     response = requests.get(url,headers=headers).json()
     travelingCount = len(response)
-    stats_data = sorted(response, key=lambda x: x[7])
-    
-    table_header1 = "| 序号 | ID号 | 收件人 | 国家 | 寄出时间 | 距离 | 天数  \n"
-    table_header2 = "| --- | --- | --- | --- | --- | --- | ---  \n"
-
-    # 创建表格内容
-    table_content = ""
-    for i, stats in enumerate(stats_data, start=1):
+    data = sorted(response, key=lambda x: x[7])
+    #print(data)
+    new_data = []
+    for i,stats in enumerate(data):
         baseurl = "https://www.postcrossing.com"
-        id = f"[{stats[0]}]({baseurl}/travelingpostcard/{stats[0]})"
-        toMember = f"[{stats[1]}]({baseurl}/user/{stats[1]})"
-        
-        toCountry = stats[3]
-        sentDate = datetime.fromtimestamp(stats[4]).strftime('%Y/%m/%d')
-        distanceNum = format(stats[6], ",")
-        distance = f"{distanceNum} km"
-        traveledDay = stats[7]
-        table_content += f"| {i} | {id} | {toMember} | {toCountry} | {sentDate} | {distance} | {traveledDay} \n"
+        formatted_item = {
+            'ID号': f"<a href='{baseurl}/travelingpostcard/{stats[0]}'>{stats[0]}</a>",
+            '收件人': f"<a href='{baseurl}/user/{stats[1]}'>{stats[1]}</a>",
+            '国家': stats[3],
+            '寄出时间': datetime.fromtimestamp(stats[4]).strftime('%Y/%m/%d'),
+            '距离': f'{format(stats[6], ",")} km',
+            '天数': stats[7]
+        }
+        new_data.append(formatted_item)
+    df = pd.DataFrame(new_data)
+    # 修改索引从1开始
+    df.index = df.index + 1
+    # 删除序号列
+    #df = df.drop(columns=['序号'])
+    # 将DataFrame转换为HTML表格，并添加Bootstrap的CSS类和居中对齐的属性
+    html_table = df.to_html(classes="table table-striped table-bordered", escape=False)
+    html_table = html_table.replace('<th>', '<th class="text-center">')
+    html_table = html_table.replace('<td>', '<td class="text-center">')
 
-    # 将表头和表格内容合并
-    table = table_header1 + table_header2 + table_content
-    return table,travelingCount
+    # 生成完整的HTML文件
+    html_content = f'''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>还在漂泊的明信片</title>
+        <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            {html_table}
+        </div>
+    </body>
+    </html>
+    '''
+    # 保存HTML表格为网页文件
+    with open(f'./output/{type}.html', 'w', encoding="utf-8") as file:
+        file.write(html_content)
+    return travelingCount
 
 dl.replaceTemplateCheck()
 excel_file="./template/postcardStory.xlsx"

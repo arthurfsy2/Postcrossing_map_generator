@@ -240,7 +240,7 @@ const option = {
 @tab 各国明信片
 
 <iframe 
-src="https://postcrossing.4a1801.life/output/sheet.html" 
+src="https://postcrossing.4a1801.life/output/CountryStats.html" 
 frameborder=0
 height=500
 width=100%
@@ -250,7 +250,14 @@ scrolling=auto
 
 @tab 还在漂泊的明信片
 
-$traveling
+<iframe 
+src="https://postcrossing.4a1801.life/output/traveling.html" 
+frameborder=0
+height=500
+width=100%
+seamless=seamless
+scrolling=auto
+></iframe>
 
 
 
