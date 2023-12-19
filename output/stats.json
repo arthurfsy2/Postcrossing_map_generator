@@ -36,6 +36,18 @@
     "receivedMedian": 33
   },
   {
+    "name": "U.S.A.",
+    "countryCode": "US",
+    "flagEmoji": ":us:",
+    "value": 18,
+    "sentNum": 12,
+    "receivedNum": 6,
+    "sentAvg": 33.7,
+    "receivedAvg": 30.7,
+    "sentMedian": 30.5,
+    "receivedMedian": 28.0
+  },
+  {
     "name": "Taiwan",
     "countryCode": "TW",
     "flagEmoji": "&#x1f1f9;&#x1f1fc;",
@@ -46,18 +58,6 @@
     "receivedAvg": 46.9,
     "sentMedian": 34,
     "receivedMedian": 19
-  },
-  {
-    "name": "U.S.A.",
-    "countryCode": "US",
-    "flagEmoji": ":us:",
-    "value": 17,
-    "sentNum": 11,
-    "receivedNum": 6,
-    "sentAvg": 31,
-    "receivedAvg": 30.7,
-    "sentMedian": 30,
-    "receivedMedian": 28.0
   },
   {
     "name": "Belarus",
