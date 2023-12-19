@@ -112,7 +112,7 @@ def getUserSheet(tableName):
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="table-responsive">
                 {html_table}
             </div>
@@ -419,7 +419,7 @@ def getTravelingID(account,type,Cookie):
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="table-responsive">
                 {html_table}
             </div>
