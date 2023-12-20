@@ -15,12 +15,12 @@
     "name": "Russia",
     "countryCode": "RU",
     "flagEmoji": ":ru:",
-    "value": 24,
-    "sentNum": 13,
+    "value": 25,
+    "sentNum": 14,
     "receivedNum": 11,
-    "sentAvg": 45.8,
+    "sentAvg": 45.4,
     "receivedAvg": 92,
-    "sentMedian": 43,
+    "sentMedian": 42.0,
     "receivedMedian": 81
   },
   {
