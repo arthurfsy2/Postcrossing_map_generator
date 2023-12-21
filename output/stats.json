@@ -192,6 +192,18 @@
     "receivedMedian": 21.0
   },
   {
+    "name": "Hong Kong",
+    "countryCode": "HK",
+    "flagEmoji": "&#x1f1ed;&#x1f1f0;",
+    "value": 3,
+    "sentNum": 1,
+    "receivedNum": 2,
+    "sentAvg": 47,
+    "receivedAvg": 18.5,
+    "sentMedian": 47,
+    "receivedMedian": 18.5
+  },
+  {
     "name": "Norway",
     "countryCode": "NO",
     "flagEmoji": ":norway:",
@@ -214,18 +226,6 @@
     "receivedAvg": 18,
     "sentMedian": 24.5,
     "receivedMedian": null
-  },
-  {
-    "name": "Hong Kong",
-    "countryCode": "HK",
-    "flagEmoji": "&#x1f1ed;&#x1f1f0;",
-    "value": 2,
-    "sentNum": 1,
-    "receivedNum": 1,
-    "sentAvg": 47,
-    "receivedAvg": 21,
-    "sentMedian": 47,
-    "receivedMedian": 21
   },
   {
     "name": "Spain",
