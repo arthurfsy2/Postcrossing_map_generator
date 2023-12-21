@@ -119,11 +119,8 @@ def getPageNum(stat,content,types):
     "favourites": ("来自", favouritesPageNum, favouritesNum, f"明信片展示墙（我的点赞：{favouritesNum}）"),
     "popular": ("寄往", popularPageNum, popularNum, f"明信片展示墙（我收到的赞：{popularNum}）")
             }
-    path = "./output/title.json"
-
-
-    with open(path, "w",encoding="utf-8") as file:
-            json.dump(data, file, indent=2)
+    with open("./output/title.json", "w",encoding="utf-8") as file:
+            json.dump(data, file, indent=2, ensure_ascii=False)
 
 # 获取对应国家的Emoji旗帜简写代码 
 def getCountryFlagEmoji(flag):
@@ -135,8 +132,7 @@ def getCountryFlagEmoji(flag):
 
 # 获取不同类型的展示墙的详细信息，并组装数据
 def getGalleryInfo(type):
-    path = "./output/title.json"
-    with open(path, "r",encoding="utf-8") as file:
+    with open("./output/title.json", "r",encoding="utf-8") as file:
         data = json.load(file)
     value = data.get(type)
     from_or_to, pageNum, Num, title = value
