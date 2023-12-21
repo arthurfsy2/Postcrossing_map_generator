@@ -649,9 +649,9 @@ def readDB(dbpath, type,tablename):
             elif tablename == 'postcardStory':
                 cursor.execute('''SELECT
                     p.id,
-                    p.content_en,
+                    p.content_original,
                     p.content_cn,
-                    p.comment_en,
+                    p.comment_original,
                     p.comment_cn,
                     g.userInfo,
                     g.picFileName,
@@ -712,9 +712,9 @@ def readDB(dbpath, type,tablename):
                 elif tablename == 'postcardStory':
                     data={
                         "id": row[0],
-                        "content_en": row[1],
+                        "content_original": row[1],
                         "content_cn": row[2],
-                        "comment_en": row[3],
+                        "comment_original": row[3],
                         "comment_cn": row[4],
                         "userInfo": row[5],
                         "picFileName": row[6],
@@ -772,23 +772,23 @@ def writeDB(dbpath, content,tablename):
     # 将列表中的JSON对象写入文件      
     elif tablename == 'postcardStory':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                    (id TEXT, content_en TEXT, content_cn TEXT, comment_en TEXT, comment_cn TEXT)''')
+                    (id TEXT, content_original TEXT, content_cn TEXT, comment_original TEXT, comment_cn TEXT)''')
         for item in content:
             id = item['id']
-            content_en = item['content_en']
+            content_original = item['content_original']
             content_cn = item['content_cn']
-            comment_en = item['comment_en']
+            comment_original = item['comment_original']
             comment_cn = item['comment_cn']
             cursor.execute(f"SELECT * FROM {tablename} WHERE id=? ", (id, ))
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET content_en=?, content_cn=?,comment_en=?, comment_cn=?  WHERE id=?",
-                                (content_en, content_cn,comment_en, comment_cn, id))
+                cursor.execute(f"UPDATE {tablename} SET content_original=?, content_cn=?,comment_original=?, comment_cn=?  WHERE id=?",
+                                (content_original, content_cn,comment_original, comment_cn, id))
             else:
                 # 插入新的行
                 cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?)",
-                                (id, content_cn, content_en, comment_en, comment_cn ))
+                                (id, content_original, content_cn, comment_original, comment_cn ))
     elif tablename == 'CountryStats':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
             (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER, sentMedian INTEGER, receivedMedian INTEGER,
@@ -860,7 +860,7 @@ def compareMD5(pathA,pathB):
         stat = "0"
     else:
         stat = "1"
-    print(f"\n{pathA}:{A_md5}\n{pathB}:{B_md5}")
+    #print(f"\n{pathA}:{A_md5}\n{pathB}:{B_md5}")
     return stat
 
 if __name__ == "__main__":

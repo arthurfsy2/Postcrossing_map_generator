@@ -58,7 +58,6 @@ def replateTitle(type):
 def getUserHomeInfo(type):
     distance_all = []
     content = dl.readDB(dbpath,type,"Mapinfo")
-    #print("content:",content)
     for item in content:
         distance_all.append(int(item["distance"]))
     total = sum(distance_all)
@@ -150,8 +149,6 @@ def replaceTemplate():
         title = replateTitle(type)
         title_all += f"#### [{title}](/{nickName}/postcrossing/{type})\n\n"
         title_final = f"{desc_all}\n{countryCount}\n{travelingCount}\n{title_all}"
-    #print("title_all:\n",title_all)
-    
     
     storylist,storyNum = getCardStoryList("received")
     commentlist,commentNum = getCardStoryList("sent")
@@ -172,6 +169,8 @@ def replaceTemplate():
         print("已替换明信片日历list")
         dataNew = dataNew.replace('$repo',repo)
         print(f"已替换仓库名:{repo}")
+        print(f"————————————————————")
+
 
     with open(f"./output/信息汇总.md", "w",encoding="utf-8") as f:
         f.write(dataNew)  
@@ -190,9 +189,9 @@ def StoryXLS2DB(excel_file):
     for index, row in df.iterrows():
         data = {
             "id": row[0],
-            "content_en": row[1],
+            "content_original": row[1],
             "content_cn": row[2],
-            "comment_en": row[3],
+            "comment_original": row[3],
             "comment_cn": row[4],
         }
         content_all.append(data)
@@ -207,9 +206,9 @@ def getCardStoryList(type):
     num = str(len(content))
     for id in content:
         postcardID = id["id"]  
-        content_en = id["content_en"]
+        content_original = id["content_original"]
         content_cn = id["content_cn"]
-        comment_en = id["comment_en"] 
+        comment_original = id["comment_original"] 
         comment_cn = id["comment_cn"] 
         def remove_blank_lines(text):
             if text:
@@ -217,18 +216,17 @@ def getCardStoryList(type):
             return text
 
         # 去掉空白行
-        content_en = remove_blank_lines(content_en)
+        content_original = remove_blank_lines(content_original)
         content_cn = remove_blank_lines(content_cn)
-        comment_en = remove_blank_lines(comment_en)
+        comment_original = remove_blank_lines(comment_original)
         comment_cn = remove_blank_lines(comment_cn)
 
-        if comment_en:
+        if comment_original:
             comment = f'@tab 回复\n' \
-                    f'* 回复原文\n\n> {comment_en}\n\n* 翻译：\n\n> {comment_cn}\n\n:::' 
+                    f'* 回复原文\n\n> {comment_original}\n\n* 翻译：\n\n> {comment_cn}\n\n:::' 
             
         else:
             comment = ":::"      
-        #print("comment:",comment)
         userInfo = id["userInfo"]
         picFileName = id["picFileName"]
         contryNameEmoji = id["contryNameEmoji"] if id["contryNameEmoji"] is not None else ""
@@ -246,7 +244,7 @@ def getCardStoryList(type):
             f'  <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>' \
             f'\n\n' \
             f'@tab 内容\n' \
-            f'* 卡片文字\n\n> {content_en}\n\n* 翻译：\n\n> {content_cn}\n\n' \
+            f'* 卡片文字\n\n> {content_original}\n\n* 翻译：\n\n> {content_cn}\n\n' \
             f'{comment}\n\n' \
             f'---\n'   
         else:
@@ -319,7 +317,6 @@ def createWordCloud(type, contents):
         path = cn_path_svg
         # 使用jieba的textrank功能提取关键词
         keywords = jieba.analyse.textrank(contents, topK=100, withWeight=False, allowPOS=('ns', 'n', 'vn', 'v'))
-        #print(f"keywords={keywords}")
         # 创建 OpenCC 对象，指定转换方式为简体字转繁体字
         converter = OpenCC('s2t.json')
         # 统计每个关键词出现的次数
@@ -328,7 +325,6 @@ def createWordCloud(type, contents):
             count = contents.count(keyword)
             keyword = converter.convert(keyword) #简体转繁体
             keyword_counts[keyword] = count
-        print(keyword_counts)
         # 创建一个WordCloud对象，并设置字体文件路径和轮廓图像
         wordcloud = WordCloud(width=1600, height=800, background_color="white", font_path=font_path)
         # 生成词云
@@ -337,8 +333,6 @@ def createWordCloud(type, contents):
         path = en_path_svg
         wordcloud = WordCloud(width=1600, height=800, background_color="white", font_path=font_path, max_words=100).generate(contents)
         keywords = wordcloud.words_
-        
-        print(keywords)
     svg_image = wordcloud.to_svg(embed_font=True)
 
     with open(path, "w+", encoding='UTF8') as f:
@@ -351,11 +345,11 @@ def readStoryDB(dbpath):
     content =dl.readDB(dbpath, "sent","postcardStory")
     for id in content:
         postcardID = id["id"]  
-        content_en = id["content_en"]
+        content_original = id["content_original"]
         content_cn = id["content_cn"]
-        comment_en = id["comment_en"] 
+        comment_original = id["comment_original"] 
         comment_cn = id["comment_cn"] 
-        data_en = f"{content_en}\n{comment_en}\n"
+        data_en = f"{content_original}\n{comment_original}\n"
         data_cn = f"{content_cn}\n{comment_cn}\n"
         result_en += data_en
         result_cn += data_cn
@@ -381,7 +375,6 @@ def getTravelingID(account,type,Cookie):
     response = requests.get(url,headers=headers).json()
     travelingCount = len(response)
     data = sorted(response, key=lambda x: x[7])
-    #print(data)
     new_data = []
     for i,stats in enumerate(data):
         baseurl = "https://www.postcrossing.com"
@@ -440,7 +433,7 @@ if os.path.exists(f"{dbpath}BAK"):
     dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
     if dbStat == "1":
         print(f"{dbpath} 有更新") 
-        print(f"正在生成中、英文词库") 
+        print(f"正在生成明信片故事中、英文词云") 
         result_cn,result_en = readStoryDB(dbpath)
         createWordCloud("cn",result_cn)
         createWordCloud("en",result_en)

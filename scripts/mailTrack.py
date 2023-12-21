@@ -49,13 +49,13 @@ def getMailReply(host,user,passwd,filename):
                 match = match.group(1)
                 if id not in oldReplyID: #只翻译新的内容
                     print("idNEW:",id)
-                    comment_en = remove_blank_lines(match)
-                    comment_cn = translate(comment_en, 'auto', 'zh')
+                    comment_original = remove_blank_lines(match)
+                    comment_cn = translate(comment_original, 'auto', 'zh')
                     data = {
                         "id": id,
-                        "content_en": "",
+                        "content_original": "",
                         "content_cn": "",
-                        "comment_en": f"“{comment_en}”",
+                        "comment_original": f"“{comment_original}”",
                         "comment_cn": f"“{comment_cn}”",
                     }
                     content.append(data)       
@@ -100,23 +100,23 @@ def writeDB(dbpath, content,tablename):
 
     if tablename == 'postcardStory':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                    (id TEXT, content_en TEXT, content_cn TEXT, comment_en TEXT, comment_cn TEXT)''')
+                    (id TEXT, content_original TEXT, content_cn TEXT, comment_original TEXT, comment_cn TEXT)''')
         for item in content:
             id = item['id']
-            content_en = item['content_en']
+            content_original = item['content_original']
             content_cn = item['content_cn']
-            comment_en = item['comment_en']
+            comment_original = item['comment_original']
             comment_cn = item['comment_cn']
             cursor.execute(f"SELECT * FROM {tablename} WHERE id=? ", (id, ))
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET content_en=?, content_cn=?,comment_en=?, comment_cn=?  WHERE id=?",
-                                (content_en, content_cn,comment_en, comment_cn, id))
+                cursor.execute(f"UPDATE {tablename} SET content_original=?, content_cn=?,comment_original=?, comment_cn=?  WHERE id=?",
+                                (content_original, content_cn,comment_original, comment_cn, id))
             else:
                 # 插入新的行
                 cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?)",
-                                (id, content_cn, content_en, comment_en, comment_cn ))
+                                (id, content_cn, content_original, comment_original, comment_cn ))
     
     print(f'已更新数据库{dbpath}的{tablename}\n')
     conn.commit()
