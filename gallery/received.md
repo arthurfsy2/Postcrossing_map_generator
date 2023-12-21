@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：58）
+title: 明信片展示墙（收到：59）
 icon: address-card
 date: 2023-12-21
 category:
@@ -10,6 +10,14 @@ order: 3
 ---
 
 ### [arthurfsy's received](https://www.postcrossing.com/user/arthurfsy/gallery/received)
+
+## [HK-846298](https://www.postcrossing.com/postcards/HK-846298) 
+ >来自 [jojo2023](https://www.postcrossing.com//user/jojo2023) &#x1f1ed;&#x1f1f0;
+> 📏32 km 
+⏱16 days [2023/12/06--2023/12/21]
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/fjddvjjax3f1mgnr4slc328duxqr96wl.jpg)
 
 ## [LT-913966](https://www.postcrossing.com/postcards/LT-913966) 
  >来自 [valras](https://www.postcrossing.com//user/valras) :lithuania:
