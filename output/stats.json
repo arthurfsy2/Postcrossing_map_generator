@@ -15,12 +15,12 @@
     "name": "Russia",
     "countryCode": "RU",
     "flagEmoji": ":ru:",
-    "value": 24,
-    "sentNum": 13,
+    "value": 25,
+    "sentNum": 14,
     "receivedNum": 11,
-    "sentAvg": 45.8,
+    "sentAvg": 45.4,
     "receivedAvg": 92,
-    "sentMedian": 43,
+    "sentMedian": 42.0,
     "receivedMedian": 81
   },
   {
@@ -36,6 +36,18 @@
     "receivedMedian": 33
   },
   {
+    "name": "U.S.A.",
+    "countryCode": "US",
+    "flagEmoji": ":us:",
+    "value": 18,
+    "sentNum": 12,
+    "receivedNum": 6,
+    "sentAvg": 33.7,
+    "receivedAvg": 30.7,
+    "sentMedian": 30.5,
+    "receivedMedian": 28.0
+  },
+  {
     "name": "Taiwan",
     "countryCode": "TW",
     "flagEmoji": "&#x1f1f9;&#x1f1fc;",
@@ -46,18 +58,6 @@
     "receivedAvg": 46.9,
     "sentMedian": 34,
     "receivedMedian": 19
-  },
-  {
-    "name": "U.S.A.",
-    "countryCode": "US",
-    "flagEmoji": ":us:",
-    "value": 17,
-    "sentNum": 11,
-    "receivedNum": 6,
-    "sentAvg": 31,
-    "receivedAvg": 30.7,
-    "sentMedian": 30,
-    "receivedMedian": 28.0
   },
   {
     "name": "Belarus",
@@ -192,6 +192,18 @@
     "receivedMedian": 21.0
   },
   {
+    "name": "Hong Kong",
+    "countryCode": "HK",
+    "flagEmoji": "&#x1f1ed;&#x1f1f0;",
+    "value": 3,
+    "sentNum": 1,
+    "receivedNum": 2,
+    "sentAvg": 47,
+    "receivedAvg": 18.5,
+    "sentMedian": 47,
+    "receivedMedian": 18.5
+  },
+  {
     "name": "Norway",
     "countryCode": "NO",
     "flagEmoji": ":norway:",
@@ -214,18 +226,6 @@
     "receivedAvg": 18,
     "sentMedian": 24.5,
     "receivedMedian": null
-  },
-  {
-    "name": "Hong Kong",
-    "countryCode": "HK",
-    "flagEmoji": "&#x1f1ed;&#x1f1f0;",
-    "value": 2,
-    "sentNum": 1,
-    "receivedNum": 1,
-    "sentAvg": 47,
-    "receivedAvg": 21,
-    "sentMedian": 47,
-    "receivedMedian": 21
   },
   {
     "name": "Spain",
