@@ -103,7 +103,13 @@ def getUserSheet(tableName):
         <title>{tableName}</title>
         <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
         <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
+        <script src="../src/tablesorter-2.31.3/js/jquery.tablesorter.js"></script>
         <script>
+            $(document).ready(function() {{
+                $("#dataTable").tablesorter();
+            }});
+            
             function searchTable() {{
                 var input = document.getElementById("searchInput");
                 var filter = input.value.toUpperCase();
@@ -126,7 +132,22 @@ def getUserSheet(tableName):
                     }}
                 }}
             }}
-            </script>
+        </script>
+    <style>
+    .search-input {{
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 200px;
+    }}
+
+    .search-input:focus {{
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }}
+    </style>
     </head>
     <body>
         <div class="container-fluid">
@@ -146,33 +167,6 @@ def getUserSheet(tableName):
     </body>
     </html>
     '''
-    # 在<head>标签中添加以下CSS样式
-    css_style = '''
-    <style>
-    .search-input {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 14px;
-        width: 200px;
-    }
-
-    .search-input:focus {
-        outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
-    </style>
-    '''
-
-    # 将css_style插入到html_content中的<head>标签中
-    head_index = html_content.index('</head>')
-    html_content = html_content[:head_index] + css_style + html_content[head_index:]
-
-    # 修改搜索框的HTML代码，添加CSS类名
-    search_input_html = '<input type="text" id="searchInput" class="search-input" onkeyup="searchTable()" placeholder="搜索国家">'
-    html_content = html_content.replace('<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">', search_input_html)
-    # 生成完整的 HTML 文件
     # 保存HTML表格为网页文件
     with open(f'./output/{tableName}.html', 'w', encoding="utf-8") as file:
         file.write(html_content)
@@ -458,7 +452,13 @@ def getTravelingID(account,type,Cookie):
         <title>还在漂泊的明信片</title>
         <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
         <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
+        <script src="../src/tablesorter-2.31.3/js/jquery.tablesorter.js"></script>
         <script>
+            $(document).ready(function() {{
+                $("#dataTable").tablesorter();
+            }});
+            
             function searchTable() {{
                 var input = document.getElementById("searchInput");
                 var filter = input.value.toUpperCase();
@@ -482,6 +482,21 @@ def getTravelingID(account,type,Cookie):
                 }}
             }}
             </script>
+    <style>
+    .search-input {{
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 200px;
+    }}
+
+    .search-input:focus {{
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }}
+    </style>
     </head>
     <body>
         <div class="container-fluid">
@@ -501,33 +516,6 @@ def getTravelingID(account,type,Cookie):
     </body>
     </html>
     '''
-    # 在<head>标签中添加以下CSS样式
-    css_style = '''
-    <style>
-    .search-input {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 14px;
-        width: 200px;
-    }
-
-    .search-input:focus {
-        outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
-    </style>
-    '''
-
-    # 将css_style插入到html_content中的<head>标签中
-    head_index = html_content.index('</head>')
-    html_content = html_content[:head_index] + css_style + html_content[head_index:]
-
-    # 修改搜索框的HTML代码，添加CSS类名
-    search_input_html = '<input type="text" id="searchInput" class="search-input" onkeyup="searchTable()" placeholder="搜索国家">'
-    html_content = html_content.replace('<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">', search_input_html)
-    # 生成完整的 HTML 文件
     # 保存HTML表格为网页文件
     with open(f'./output/{type}.html', 'w', encoding="utf-8") as file:
         file.write(html_content)

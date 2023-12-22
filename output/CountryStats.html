@@ -5,7 +5,13 @@
         <title>CountryStats</title>
         <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
         <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
+        <script src="../src/tablesorter-2.31.3/js/jquery.tablesorter.js"></script>
         <script>
+            $(document).ready(function() {
+                $("#dataTable").tablesorter();
+            });
+            
             function searchTable() {
                 var input = document.getElementById("searchInput");
                 var filter = input.value.toUpperCase();
@@ -28,8 +34,7 @@
                     }
                 }
             }
-            </script>
-    
+        </script>
     <style>
     .search-input {
         padding: 8px;
@@ -49,7 +54,7 @@
     <body>
         <div class="container-fluid">
             <div class="mb-3">
-                <input type="text" id="searchInput" class="search-input" onkeyup="searchTable()" placeholder="搜索国家">
+                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">
             </div>
             <div class="table-responsive">
                 <table border="1" class="dataframe table table-striped table-bordered" id="dataTable">
