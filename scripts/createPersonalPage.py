@@ -469,11 +469,6 @@ def htmlFormat(title, data):
         border-color: #007bff;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }}
-    
-    /* 设置表格透明度 */
-    .table-transparent {{
-        background-color: transparent;
-    }}
     </style>
     </head>
     <body>
@@ -482,9 +477,7 @@ def htmlFormat(title, data):
                 <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">
             </div>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-transparent" id="dataTable">
-                    {html_table}
-                </table>
+                {html_table}
             </div>
         </div>
         <script>
