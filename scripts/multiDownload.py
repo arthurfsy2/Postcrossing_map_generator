@@ -351,8 +351,8 @@ def get_data(postcardID,type):
                 "travel_time": travel_time,
                 "link": link,
                 "user": user,
-                "sentAddr":f"{sentAddr}({sentCountry})",
-                "receivedAddr":f"{receivedAddr}({receivedCountry})",
+                "sentAddr":f"{sentAddr}[{sentCountry}]",
+                "receivedAddr":f"{receivedAddr}[{receivedCountry}]",
                 "type":type
             }
         content_all.append(item)
@@ -645,7 +645,28 @@ def readDB(dbpath, type,tablename):
                                     receivedDate DESC
                 ''', (type,))
             elif tablename == 'Mapinfo':
-                cursor.execute(f"SELECT * FROM {tablename} WHERE type=? ORDER BY SUBSTR(id, 1, 2), CAST(SUBSTR(id, INSTR(id, '-') + 1) AS INTEGER) DESC", (type,))
+                if type =="sent":
+                    select_type ="received"
+                elif type =="received":
+                    select_type ="sent"
+                cursor.execute(f'''
+                SELECT
+                    m.*,
+                    SUBSTR(
+                        m.{select_type}Addr,
+                        INSTR ( m.{select_type}Addr, '[' ) + 1,
+                        INSTR ( m.{select_type}Addr, ']' ) - INSTR ( m.{select_type}Addr, '[' ) - 1 
+                    ) AS country,
+                    c.flagEmoji 
+                FROM
+                    Mapinfo m
+                    INNER JOIN CountryStats c ON c.name = country 
+                WHERE
+                    m.type = ?
+                ORDER BY
+                    SUBSTR( id, 1, 2 ),
+                    CAST ( SUBSTR( id, INSTR ( id, '-' ) + 1 ) AS INTEGER ) DESC
+                ''', (type,))
             elif tablename == 'postcardStory':
                 cursor.execute('''SELECT
                     p.id,
@@ -697,6 +718,8 @@ def readDB(dbpath, type,tablename):
                         "user":row[6],
                         "sentAddr": row[7],
                         "receivedAddr": row[8],
+                        "country": row[10],
+                        "flagEmoji": row[11],
                     }
                 elif tablename == 'CountryStats':
                     data={

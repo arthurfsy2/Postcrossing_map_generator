@@ -43,7 +43,7 @@ date = current_date.strftime("%Y-%m-%d")
 types = ['sent', 'received', 'favourites', 'popular']
 
 def createMD(type):
-    with open(f"./output/title.json", "r") as file:
+    with open(f"./output/title.json", "r",encoding="utf-8") as file:
         data = json.load(file)
     value = data.get(type)
     from_or_to, pageNum, Num, title = value

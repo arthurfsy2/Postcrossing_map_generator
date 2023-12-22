@@ -12,6 +12,9 @@ from wordcloud import WordCloud
 from opencc import OpenCC
 import requests
 import emoji
+from multiDownload import readDB
+from multiDownload import writeDB
+import re
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -57,7 +60,7 @@ def replateTitle(type):
 # 获取收发总距离
 def getUserHomeInfo(type):
     distance_all = []
-    content = dl.readDB(dbpath,type,"Mapinfo")
+    content = readDB(dbpath,type,"Mapinfo")
     for item in content:
         distance_all.append(int(item["distance"]))
     total = sum(distance_all)
@@ -65,7 +68,7 @@ def getUserHomeInfo(type):
     return total,len(content),rounds
 
 def getUserSheet(tableName):
-    data = dl.readDB(dbpath, "", tableName)
+    data = readDB(dbpath, "", tableName)
     countryCount = len(data)
     new_data = []
     for i, item in enumerate(data):
@@ -86,87 +89,8 @@ def getUserSheet(tableName):
             '寄出-中间值': sentMedian,
             '收到-中间值': receivedMedian,
         }
-        new_data.append(formatted_item)
-    # 将数据数组转换为 DataFrame
-    df = pd.DataFrame(new_data)
-    # 修改索引从1开始
-    df.index = df.index + 1
-    # 将 DataFrame 转换为 HTML 表格，并添加 Bootstrap 的 CSS 类和居中对齐的属性
-    html_table = df.to_html(classes="table table-striped table-bordered", escape=False, table_id="dataTable", header=True)
-    html_table = html_table.replace('<th>', '<th class="text-center">')
-    html_table = html_table.replace('<td>', '<td class="text-center">')
-    
-    html_content = f'''
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>{tableName}</title>
-        <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
-        <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
-        <script src="../src/tablesorter-2.31.3/js/jquery.tablesorter.js"></script>
-        <script>
-            $(document).ready(function() {{
-                $("#dataTable").tablesorter();
-            }});
-            
-            function searchTable() {{
-                var input = document.getElementById("searchInput");
-                var filter = input.value.toUpperCase();
-                var table = document.getElementById("dataTable");
-                var tr = table.getElementsByTagName("tr");
-                for (var i = 1; i < tr.length; i++) {{  // Start from index 1 to exclude the table header row
-                    var td = tr[i].getElementsByTagName("td");
-                    var found = false;
-                    for (var j = 0; j < td.length; j++) {{
-                        var txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {{
-                            found = true;
-                            break;
-                        }}
-                    }}
-                    if (found) {{
-                        tr[i].style.display = "";
-                    }} else {{
-                        tr[i].style.display = "none";
-                    }}
-                }}
-            }}
-        </script>
-    <style>
-    .search-input {{
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 14px;
-        width: 200px;
-    }}
-
-    .search-input:focus {{
-        outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }}
-    </style>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="mb-3">
-                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">
-            </div>
-            <div class="table-responsive">
-                {html_table}
-            </div>
-        </div>
-        <script>
-            // 在页面加载完成后执行搜索表格的函数
-            window.onload = function() {{
-                searchTable();
-            }};
-        </script>
-    </body>
-    </html>
-    '''
+        new_data.append(formatted_item)    
+    html_content = htmlFormat(tableName, new_data)
     # 保存HTML表格为网页文件
     with open(f'./output/{tableName}.html', 'w', encoding="utf-8") as file:
         file.write(html_content)
@@ -184,7 +108,8 @@ def replaceTemplate():
     countryCount = f"> 涉及国家[🗺️**{countryNum}**]\n\n"
     travelingCount = f"> 待签收[📨**{travelingNum}**]\n\n"
     for type in types: 
-        distance,num,rounds = getUserHomeInfo(type)
+        if type =="sent" or  type =="received":
+            distance,num,rounds = getUserHomeInfo(type)
         distance_all = format(distance, ",")
         summary = f"**{num}** 📏**{distance_all}** km 🌏**{rounds}** 圈]\n\n"
         if type == "sent":
@@ -245,13 +170,13 @@ def StoryXLS2DB(excel_file):
         }
         content_all.append(data)
     tablename = "postcardStory"
-    dl.writeDB(dbpath, content_all,tablename)
+    writeDB(dbpath, content_all,tablename)
 
 
 
 def getCardStoryList(type):
     list_all = ""
-    content =dl.readDB(dbpath, type,"postcardStory")
+    content =readDB(dbpath, type,"postcardStory")
     num = str(len(content))
     for id in content:
         postcardID = id["id"]  
@@ -391,7 +316,7 @@ def createWordCloud(type, contents):
 def readStoryDB(dbpath):
     result_cn = ""
     result_en = ""
-    content =dl.readDB(dbpath, "sent","postcardStory")
+    content =readDB(dbpath, "sent","postcardStory")
     for id in content:
         postcardID = id["id"]  
         content_original = id["content_original"]
@@ -439,17 +364,65 @@ def getTravelingID(account,type,Cookie):
     df = pd.DataFrame(new_data)
     # 修改索引从1开始
     df.index = df.index + 1
+    html_content = htmlFormat("还在漂泊的明信片", new_data)
+    # 保存HTML表格为网页文件
+    with open(f'./output/{type}.html', 'w', encoding="utf-8") as file:
+        file.write(html_content)
+    return travelingCount
+
+def get_HTML_table(type, tableName):
+    content =readDB(dbpath, type,tableName)
+    #print(content)
+    new_data = []
+    for i,stats in enumerate(content):
+        # 提取travel_days
+        travel_days = stats['travel_time'].split()[0]
+        # 提取sent_time和received_time
+        date_range = stats['travel_time'].split()[2]
+        sent_time = date_range[1:11]
+        received_time = date_range[13:-1]
+        distance = stats['distance']
+        baseurl = "https://www.postcrossing.com"
+        
+        if type =="sent":
+            formatted_item = {
+                'ID号': f"<a href='{baseurl}/travelingpostcard/{stats['id']}'>{stats['id']}</a>",
+                '收件人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
+                '寄往地区': f"{stats['country']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
+                '寄出时间': sent_time,
+                '收到时间': received_time,
+                '距离': f'{format(distance, ",")} km',
+                '天数': travel_days
+            }
+        elif type =="received":
+            formatted_item = {
+                'ID号': f"<a href='{baseurl}/travelingpostcard/{stats['id']}'>{stats['id']}</a>",
+                '发件人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
+                '来自地区': f"{stats['country']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
+                '寄出时间': sent_time,
+                '收到时间': received_time,
+                '距离': f'{format(distance, ",")} km',
+                '天数': travel_days
+            }
+        new_data.append(formatted_item)  
+        new_data = sorted(new_data, key=lambda x: x['收到时间'], reverse=True)
+    html_content = htmlFormat(type, new_data)
+    with open(f'./output/{type}.html', 'w', encoding="utf-8") as file:
+        file.write(html_content)
+
+def htmlFormat(title, data):
+    df = pd.DataFrame(data)
+    # 修改索引从1开始
+    df.index = df.index + 1
     # 将 DataFrame 转换为 HTML 表格，并添加 Bootstrap 的 CSS 类和居中对齐的属性
     html_table = df.to_html(classes="table table-striped table-bordered", escape=False, table_id="dataTable", header=True)
     html_table = html_table.replace('<th>', '<th class="text-center">')
     html_table = html_table.replace('<td>', '<td class="text-center">')
-
-    # 生成完整的HTML文件
     html_content = f'''
     <!DOCTYPE html>
     <html>
     <head>
-        <title>还在漂泊的明信片</title>
+        <title>{title}</title>
         <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
         <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
@@ -516,14 +489,13 @@ def getTravelingID(account,type,Cookie):
     </body>
     </html>
     '''
-    # 保存HTML表格为网页文件
-    with open(f'./output/{type}.html', 'w', encoding="utf-8") as file:
-        file.write(html_content)
-    return travelingCount
+    return html_content
 
 dl.replaceTemplateCheck()
 excel_file="./template/postcardStory.xlsx"
 StoryXLS2DB(excel_file)
+get_HTML_table("sent","Mapinfo")
+get_HTML_table("received","Mapinfo")
 replaceTemplate()
 if os.path.exists(f"{dbpath}BAK"):
     dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
