@@ -87,43 +87,98 @@ def getUserSheet(tableName):
             '收到-中间值': receivedMedian,
         }
         new_data.append(formatted_item)
-    # 将数据数组转换为DataFrame
+    # 将数据数组转换为 DataFrame
     df = pd.DataFrame(new_data)
     # 修改索引从1开始
     df.index = df.index + 1
-    # 将DataFrame转换为HTML表格，并添加Bootstrap的CSS类和居中对齐的属性
-    html_table = df.to_html(classes="table table-striped table-bordered", escape=False)
+    # 将 DataFrame 转换为 HTML 表格，并添加 Bootstrap 的 CSS 类和居中对齐的属性
+    html_table = df.to_html(classes="table table-striped table-bordered", escape=False, table_id="dataTable", header=True)
     html_table = html_table.replace('<th>', '<th class="text-center">')
     html_table = html_table.replace('<td>', '<td class="text-center">')
-
-    # 生成完整的HTML文件
+    
     html_content = f'''
     <!DOCTYPE html>
     <html>
     <head>
         <title>{tableName}</title>
         <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
-        <style>
-            .table-responsive {{
-                width: 100%;
-                overflow-x: auto;
+        <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function searchTable() {{
+                var input = document.getElementById("searchInput");
+                var filter = input.value.toUpperCase();
+                var table = document.getElementById("dataTable");
+                var tr = table.getElementsByTagName("tr");
+                for (var i = 1; i < tr.length; i++) {{  // Start from index 1 to exclude the table header row
+                    var td = tr[i].getElementsByTagName("td");
+                    var found = false;
+                    for (var j = 0; j < td.length; j++) {{
+                        var txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {{
+                            found = true;
+                            break;
+                        }}
+                    }}
+                    if (found) {{
+                        tr[i].style.display = "";
+                    }} else {{
+                        tr[i].style.display = "none";
+                    }}
+                }}
             }}
-        </style>
+            </script>
     </head>
     <body>
         <div class="container-fluid">
+            <div class="mb-3">
+                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">
+            </div>
             <div class="table-responsive">
                 {html_table}
             </div>
         </div>
+        <script>
+            // 在页面加载完成后执行搜索表格的函数
+            window.onload = function() {{
+                searchTable();
+            }};
+        </script>
     </body>
     </html>
     '''
+    # 在<head>标签中添加以下CSS样式
+    css_style = '''
+    <style>
+    .search-input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 200px;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    </style>
+    '''
+
+    # 将css_style插入到html_content中的<head>标签中
+    head_index = html_content.index('</head>')
+    html_content = html_content[:head_index] + css_style + html_content[head_index:]
+
+    # 修改搜索框的HTML代码，添加CSS类名
+    search_input_html = '<input type="text" id="searchInput" class="search-input" onkeyup="searchTable()" placeholder="搜索国家">'
+    html_content = html_content.replace('<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">', search_input_html)
+    # 生成完整的 HTML 文件
     # 保存HTML表格为网页文件
     with open(f'./output/{tableName}.html', 'w', encoding="utf-8") as file:
         file.write(html_content)
 
     return countryCount
+
 
 def replaceTemplate():   
     stat,content_raw,types = dl.getAccountStat(Cookie)  
@@ -390,10 +445,8 @@ def getTravelingID(account,type,Cookie):
     df = pd.DataFrame(new_data)
     # 修改索引从1开始
     df.index = df.index + 1
-    # 删除序号列
-    #df = df.drop(columns=['序号'])
-    # 将DataFrame转换为HTML表格，并添加Bootstrap的CSS类和居中对齐的属性
-    html_table = df.to_html(classes="table table-striped table-bordered", escape=False)
+    # 将 DataFrame 转换为 HTML 表格，并添加 Bootstrap 的 CSS 类和居中对齐的属性
+    html_table = df.to_html(classes="table table-striped table-bordered", escape=False, table_id="dataTable", header=True)
     html_table = html_table.replace('<th>', '<th class="text-center">')
     html_table = html_table.replace('<td>', '<td class="text-center">')
 
@@ -404,22 +457,77 @@ def getTravelingID(account,type,Cookie):
     <head>
         <title>还在漂泊的明信片</title>
         <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
-        <style>
-            .table-responsive {{
-                width: 100%;
-                overflow-x: auto;
+        <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function searchTable() {{
+                var input = document.getElementById("searchInput");
+                var filter = input.value.toUpperCase();
+                var table = document.getElementById("dataTable");
+                var tr = table.getElementsByTagName("tr");
+                for (var i = 1; i < tr.length; i++) {{  // Start from index 1 to exclude the table header row
+                    var td = tr[i].getElementsByTagName("td");
+                    var found = false;
+                    for (var j = 0; j < td.length; j++) {{
+                        var txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {{
+                            found = true;
+                            break;
+                        }}
+                    }}
+                    if (found) {{
+                        tr[i].style.display = "";
+                    }} else {{
+                        tr[i].style.display = "none";
+                    }}
+                }}
             }}
-        </style>
+            </script>
     </head>
     <body>
         <div class="container-fluid">
+            <div class="mb-3">
+                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">
+            </div>
             <div class="table-responsive">
                 {html_table}
             </div>
         </div>
+        <script>
+            // 在页面加载完成后执行搜索表格的函数
+            window.onload = function() {{
+                searchTable();
+            }};
+        </script>
     </body>
     </html>
     '''
+    # 在<head>标签中添加以下CSS样式
+    css_style = '''
+    <style>
+    .search-input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 200px;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    </style>
+    '''
+
+    # 将css_style插入到html_content中的<head>标签中
+    head_index = html_content.index('</head>')
+    html_content = html_content[:head_index] + css_style + html_content[head_index:]
+
+    # 修改搜索框的HTML代码，添加CSS类名
+    search_input_html = '<input type="text" id="searchInput" class="search-input" onkeyup="searchTable()" placeholder="搜索国家">'
+    html_content = html_content.replace('<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">', search_input_html)
+    # 生成完整的 HTML 文件
     # 保存HTML表格为网页文件
     with open(f'./output/{type}.html', 'w', encoding="utf-8") as file:
         file.write(html_content)
