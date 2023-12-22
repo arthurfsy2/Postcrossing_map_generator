@@ -469,6 +469,11 @@ def htmlFormat(title, data):
         border-color: #007bff;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }}
+    
+    /* 设置表格透明度 */
+    .table-transparent {{
+        background-color: transparent;
+    }}
     </style>
     </head>
     <body>
@@ -477,7 +482,9 @@ def htmlFormat(title, data):
                 <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">
             </div>
             <div class="table-responsive">
-                {html_table}
+                <table class="table table-striped table-bordered table-transparent" id="dataTable">
+                    {html_table}
+                </table>
             </div>
         </div>
         <script>
@@ -490,6 +497,7 @@ def htmlFormat(title, data):
     </html>
     '''
     return html_content
+
 
 dl.replaceTemplateCheck()
 excel_file="./template/postcardStory.xlsx"
