@@ -668,6 +668,8 @@ def readDB(dbpath, type,tablename):
                     g.type = ?
                 ORDER BY
                     receivedDate DESC''', (type,))
+            elif tablename == 'CountryStats':
+                cursor.execute(f"SELECT * FROM {tablename} ORDER BY name")
             else:
                 cursor.execute(f"SELECT * FROM {tablename}")
             rows = cursor.fetchall()
