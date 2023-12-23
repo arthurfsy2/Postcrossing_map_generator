@@ -354,7 +354,7 @@ def getTravelingID(account,type,Cookie):
         baseurl = "https://www.postcrossing.com"
         formatted_item = {
             'ID号': f"<a href='{baseurl}/travelingpostcard/{stats[0]}'>{stats[0]}</a>",
-            '收件人': f"<a href='{baseurl}/user/{stats[1]}'>{stats[1]}</a>",
+            '收信人': f"<a href='{baseurl}/user/{stats[1]}'>{stats[1]}</a>",
             '国家': stats[3],
             '寄出时间': datetime.fromtimestamp(stats[4]).strftime('%Y/%m/%d'),
             '距离': f'{format(stats[6], ",")} km',
@@ -387,7 +387,7 @@ def get_HTML_table(type, tableName):
         if type =="sent":
             formatted_item = {
                 'ID号': f"<a href='{baseurl}/travelingpostcard/{stats['id']}'>{stats['id']}</a>",
-                '收件人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
+                '收信人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
                 '寄往地区': f"{stats['country']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
                 '寄出时间': sent_time,
                 '收到时间': received_time,
@@ -397,7 +397,7 @@ def get_HTML_table(type, tableName):
         elif type =="received":
             formatted_item = {
                 'ID号': f"<a href='{baseurl}/travelingpostcard/{stats['id']}'>{stats['id']}</a>",
-                '发件人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
+                '发信人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
                 '来自地区': f"{stats['country']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
                 '寄出时间': sent_time,
                 '收到时间': received_time,
