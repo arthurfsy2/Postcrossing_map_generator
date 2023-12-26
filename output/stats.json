@@ -27,13 +27,13 @@
     "name": "Netherlands",
     "countryCode": "NL",
     "flagEmoji": ":netherlands:",
-    "value": 22,
+    "value": 23,
     "sentNum": 9,
-    "receivedNum": 13,
+    "receivedNum": 14,
     "sentAvg": 31.8,
-    "receivedAvg": 42.7,
+    "receivedAvg": 41.1,
     "sentMedian": 28,
-    "receivedMedian": 33
+    "receivedMedian": 32.0
   },
   {
     "name": "U.S.A.",

@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：59）
+title: 明信片展示墙（收到：60）
 icon: address-card
-date: 2023-12-21
+date: 2023-12-26
 category:
   - Arthur
 tag:
@@ -10,6 +10,14 @@ order: 3
 ---
 
 ### [arthurfsy's received](https://www.postcrossing.com/user/arthurfsy/gallery/received)
+
+## [NL-5628599](https://www.postcrossing.com/postcards/NL-5628599) 
+ >来自 [hippoos](https://www.postcrossing.com//user/hippoos) :netherlands:
+> 📏9,335 km 
+⏱20 days [2023/12/06--2023/12/26]
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/h8mhntqyo4432gvgbyz5ia883s1sr9sz.jpg)
 
 ## [HK-846298](https://www.postcrossing.com/postcards/HK-846298) 
  >来自 [jojo2023](https://www.postcrossing.com//user/jojo2023) &#x1f1ed;&#x1f1f0;
