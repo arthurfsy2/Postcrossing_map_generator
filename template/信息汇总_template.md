@@ -213,6 +213,8 @@ const option = {
 
 :::
 
+### 数据统计
+
 :::tabs
 @tab 国家分布
 

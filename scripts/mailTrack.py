@@ -4,7 +4,7 @@ import json
 from urllib import parse,request
 import sqlite3
 import os 
-#import multiDownload as dl 
+from common_tools import translate
 import argparse
 
 with open("scripts/config.json", "r") as file:
@@ -50,7 +50,7 @@ def getMailReply(host,user,passwd,filename):
                 if id not in oldReplyID: #只翻译新的内容
                     print("idNEW:",id)
                     comment_original = remove_blank_lines(match)
-                    comment_cn = translate(comment_original, 'auto', 'zh')
+                    comment_cn = translate(apikey, comment_original, 'auto', 'zh')
                     data = {
                         "id": id,
                         "content_original": "",
@@ -65,18 +65,7 @@ def getMailReply(host,user,passwd,filename):
         else:
             print("无更新内容")
 
-def translate(sentence, src_lan, tgt_lan):
-    url = 'http://api.niutrans.com/NiuTransServer/translation?'
-    data = {"from": src_lan, "to": tgt_lan, "apikey": apikey, "src_text": sentence.encode("utf-8")}
-    data_en = parse.urlencode(data)
-    req = url + "&" + data_en
-    res = request.urlopen(req)
-    res_dict = json.loads(res.read())
-    if "tgt_text" in res_dict:
-        result = res_dict['tgt_text']
-    else:
-        result = res
-    return result
+
 
 def getLocalReplyID(dbpath,tablename):
     oldID = None

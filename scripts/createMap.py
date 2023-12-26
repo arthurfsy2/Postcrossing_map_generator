@@ -6,6 +6,7 @@ import sqlite3
 import random
 import os
 import multiDownload as dl
+from common_tools import readDB,writeDB,compareMD5
 import sys
 import shutil
 import argparse
@@ -21,17 +22,17 @@ dbpath = data["dbpath"]
 # 创建 ArgumentParser 对象
 parser = argparse.ArgumentParser()
 parser.add_argument("account", help="输入account")
-parser.add_argument("password", help="输入password")      
-parser.add_argument("nickName", help="输入nickName")    
+#parser.add_argument("password", help="输入password")      
+#parser.add_argument("nickName", help="输入nickName")    
 # parser.add_argument("Cookie", help="输入Cookie") 
-parser.add_argument("repo", help="输入repo")    
+#parser.add_argument("repo", help="输入repo")    
 options = parser.parse_args()
 
 account = options.account
-password = options.password
-nickName = options.nickName
+#password = options.password
+#nickName = options.nickName
 # Cookie = options.Cookie
-repo = options.repo
+#repo = options.repo
 
 
 userUrl = f"https://www.postcrossing.com/user/{account}"  
@@ -69,7 +70,7 @@ def getHomeInfo(received):
 
 def geojson(m):
     footprint = []
-    stats_data=dl.readDB(dbpath, "", "CountryStats")
+    stats_data=readDB(dbpath, "", "CountryStats")
     for data in stats_data:
         sentNum = float(data['sentNum'])
         receivedNum = float(data['receivedNum'])
@@ -95,8 +96,8 @@ def geojson(m):
 
 #读取已获取数据生成地图
 def createMap():
-    sentData =dl.readDB(dbpath, "sent", "Mapinfo")
-    receivedData =dl.readDB(dbpath, "received", "Mapinfo")
+    sentData =readDB(dbpath, "sent", "Mapinfo")
+    receivedData =readDB(dbpath, "received", "Mapinfo")
     allData = [sentData,receivedData]
     most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getHomeInfo(receivedData)
     m = folium.Map(
@@ -172,8 +173,8 @@ def createMap():
     
 
 def createClusterMap():
-    sentData =dl.readDB(dbpath, "sent", "Mapinfo")
-    receivedData =dl.readDB(dbpath, "received", "Mapinfo")
+    sentData =readDB(dbpath, "sent", "Mapinfo")
+    receivedData =readDB(dbpath, "received", "Mapinfo")
     allData = [sentData,receivedData]
     most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getHomeInfo(receivedData)
     cluster = folium.Map(
@@ -287,9 +288,9 @@ def replaceJsRef(fileFullName):
     os.rename(f"{fileFullName}.bak", fileFullName)
 
 
-dl.MapDataCheck()  
+dl.MapDataCheck(account,Cookie,types_map)  
 if os.path.exists(f"{dbpath}BAK"):
-    dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
+    dbStat = compareMD5(dbpath, f"{dbpath}BAK")
     if dbStat == "1":
         print(f"{dbpath} 有更新") 
         createMap()

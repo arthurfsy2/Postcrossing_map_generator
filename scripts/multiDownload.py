@@ -13,6 +13,7 @@ import sqlite3
 import statistics
 import hashlib
 import argparse
+from common_tools import readDB,writeDB
 
 
 
@@ -24,47 +25,18 @@ Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
 
-parser = argparse.ArgumentParser()
-parser.add_argument("account", help="输入account")
-parser.add_argument("password", help="输入password")      
-parser.add_argument("nickName", help="输入nickName")    
-# parser.add_argument("Cookie", help="输入Cookie") 
-parser.add_argument("repo", help="输入repo")    
-options = parser.parse_args()
 
-account = options.account
-password = options.password
-nickName = options.nickName
-# Cookie = options.Cookie
-repo = options.repo
-
-# 获取当前日期
-current_date = datetime.now().date()
- 
-# 将日期格式化为指定格式
-date = current_date.strftime("%Y-%m-%d")
-
-url = f"https://www.postcrossing.com/user/{account}/gallery"  # 替换为您要获取数据的链接
-userUrl = f"https://www.postcrossing.com/user/{account}"  
-galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
-dataUrl = f"{userUrl}/data/sent"  
-types_map = ['sent', 'received']  
-
-
-
-headers = {
-    'authority': 'www.postcrossing.com',
-    'Cookie': Cookie,
-    
-    }
 
 #获取账号状态
-def getAccountStat(Cookie):
+def getAccountStat(account, Cookie):
     headers = {
     'authority': 'www.postcrossing.com',
     'Cookie': Cookie,
     
     }
+    userUrl = f"https://www.postcrossing.com/user/{account}"  
+    galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
+    dataUrl = f"{userUrl}/data/sent"  
     galleryResponse = requests.get(galleryUrl,headers=headers)
     galleryStatus = galleryResponse.status_code
     galleryContent = galleryResponse.text.replace('"//', '"https://')
@@ -124,14 +96,22 @@ def getPageNum(stat,content,types):
 
 # 获取对应国家的Emoji旗帜简写代码 
 def getCountryFlagEmoji(flag):
-    with open('scripts/contryNameEmoji.json') as file:
+    with open('scripts/countryNameEmoji.json') as file:
         data = json.load(file)
     # 获取flag对应的值
     value = data.get(flag)
     return value
 
 # 获取不同类型的展示墙的详细信息，并组装数据
-def getGalleryInfo(type):
+def getGalleryInfo(type ,account ,Cookie):
+    headers = {
+        'authority': 'www.postcrossing.com',
+        'Cookie': Cookie,
+        
+        }
+    userUrl = f"https://www.postcrossing.com/user/{account}"  
+    galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
+    dataUrl = f"{userUrl}/data/sent"  
     with open("./output/title.json", "r",encoding="utf-8") as file:
         data = json.load(file)
     value = data.get(type)
@@ -160,19 +140,19 @@ def getGalleryInfo(type):
                     favoritesNum = figcaption.find("div").text
                     num = re.search(r'\d+', favoritesNum).group()
                     userInfo = ""
-                    contryNameEmoji = ""
+                    countryNameEmoji = ""
                 else:
                     user = figcaption.find("div").find("a").text
                     userInfo = f"[{user}]({baseUrl}user/{user})"
                     if not user:
                         userInfo = "***该用户已关闭***"
                     flag = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
-                    contryNameEmoji = getCountryFlagEmoji(flag)
+                    countryNameEmoji = getCountryFlagEmoji(flag)
                     num = ""
                 item={
                     'id': postcardID,
                     'userInfo': userInfo,
-                    'contryNameEmoji': contryNameEmoji,
+                    'countryNameEmoji': countryNameEmoji,
                     'picFileName': picFileName,
                     'favoritesNum': num,
                     'type': type
@@ -270,7 +250,7 @@ def convert_to_utc(zoneNum,type,time_str):
     # 转换为UTC-8时间
     time_utc = time_utc + timedelta(hours=zoneNum)
     # 格式化为字符串
-    time_utc_str = time_utc.strftime(f"%Y/%m/%d")
+    time_utc_str = time_utc.strftime(f"%Y/%m/%d %H:%M")
     return time_utc_str
 
 
@@ -289,8 +269,8 @@ def get_data(postcardID,type):
         # 提取距离、发送/到达时间、历经天数
         distance = int(re.search(r'traveled (.*?) km', response.text).group(1).replace(',', ''))
         travel_days = int(re.search(r'in (.*?) days', response.text).group(1))
-        sentDate = convert_to_utc(8,"Sent",response.text)
-        receivedDate = convert_to_utc(8,"Received",response.text)
+        sentDate = convert_to_utc(0,"Sent",response.text)
+        receivedDate = convert_to_utc(0,"Received",response.text)
         travel_time = f"{travel_days} days [{sentDate}--{receivedDate}]"
         #print(f"{id}_travel_time:{travel_time}")
         # 提取发送者/接受者user
@@ -404,11 +384,11 @@ def getUpdatePic(type):
 
 
 def calculateAVGandMedian(a_data):
-    with open('scripts/contryName.json', 'r') as f:
+    with open('scripts/countryName.json', 'r') as f:
         countryName = json.load(f)
 
-    # 读取scripts/contryName.json文件
-    with open('scripts/contryNameEmoji.json', 'r') as f:
+    # 读取scripts/countryName.json文件
+    with open('scripts/countryNameEmoji.json', 'r') as f:
         countryNameEmoji = json.load(f)
     
     name_dict = {}
@@ -457,7 +437,7 @@ def calculateAVGandMedian(a_data):
     country_stats.sort(key=lambda x: x['value'], reverse=True)
     return country_stats
 
-def getUserStat():
+def getUserStat(account):
     headers = {
     'Host': 'www.postcrossing.com',
     'X-Requested-With': 'XMLHttpRequest',
@@ -615,279 +595,61 @@ def multiDownload(type):
         print(f"{type}_图库无需更新")
         print("————————————————————")
 
-# 设置读取数据库的统一入口函数
-def readDB(dbpath, type,tablename):
-    data_all = []
-    if os.path.exists(dbpath):
-        conn = sqlite3.connect(dbpath)
-        cursor = conn.cursor()
-        cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name=?",(tablename,))
-        table_exists = cursor.fetchone()
-
-        if table_exists:
-            if tablename == 'Galleryinfo':
-                cursor.execute('''SELECT
-                                    g.id,
-                                    (SELECT user FROM Mapinfo WHERE id = m.id AND (type = 'sent' or type = 'received')) AS userInfo2,
-                                    (SELECT contryNameEmoji FROM Galleryinfo WHERE id = g.id AND (type = 'sent' or type = 'received')) AS contryNameEmoji,
-                                    g.picFileName,
-                                    g.favoritesNum,
-                                    g.type,
-                                    m.travel_time,
-                                    date(REPLACE(SUBSTR(m.travel_time, 22, 10), '/', '-')) AS receivedDate,
-                                    m.distance 
-                                FROM
-                                    Galleryinfo g
-                                    LEFT JOIN Mapinfo m ON g.id = m.id 
-                                WHERE
-                                    g.type = ?
-                                ORDER BY
-                                    receivedDate DESC
-                ''', (type,))
-            elif tablename == 'Mapinfo':
-                if type =="sent":
-                    select_type ="received"
-                elif type =="received":
-                    select_type ="sent"
-                cursor.execute(f'''
-                SELECT
-                    m.*,
-                    SUBSTR(
-                        m.{select_type}Addr,
-                        INSTR ( m.{select_type}Addr, '[' ) + 1,
-                        INSTR ( m.{select_type}Addr, ']' ) - INSTR ( m.{select_type}Addr, '[' ) - 1 
-                    ) AS country,
-                    c.flagEmoji 
-                FROM
-                    Mapinfo m
-                    INNER JOIN CountryStats c ON c.name = country 
-                WHERE
-                    m.type = ?
-                ORDER BY
-                    SUBSTR( id, 1, 2 ),
-                    CAST ( SUBSTR( id, INSTR ( id, '-' ) + 1 ) AS INTEGER ) DESC
-                ''', (type,))
-            elif tablename == 'postcardStory':
-                cursor.execute('''SELECT
-                    p.id,
-                    p.content_original,
-                    p.content_cn,
-                    p.comment_original,
-                    p.comment_cn,
-                    g.userInfo,
-                    g.picFileName,
-                    g.contryNameEmoji,
-                    g.type,
-                    m.travel_time,
-                    date( REPLACE ( SUBSTR( m.travel_time, 22, 10 ), '/', '-' ) ) AS receivedDate,
-                    m.distance 
-                FROM
-                    postcardStory p
-                    INNER JOIN Galleryinfo g ON p.id = g.id
-                    INNER JOIN Mapinfo m ON p.id = m.id 
-                WHERE
-                    g.type = ?
-                ORDER BY
-                    receivedDate DESC''', (type,))
-            elif tablename == 'CountryStats':
-                cursor.execute(f"SELECT * FROM {tablename} ORDER BY name")
-            else:
-                cursor.execute(f"SELECT * FROM {tablename}")
-            rows = cursor.fetchall()
-            #print("rows",rows)
-            for row in rows:
-                if tablename == 'Galleryinfo':
-                    data={
-                        "id": row[0],
-                        "userInfo": row[1],
-                        "contryNameEmoji": row[2],
-                        "picFileName": row[3],
-                        "favoritesNum": row[4],
-                        "type": row[5],
-                        "travel_time": row[6],
-                        "distance": row[8]
-                        }
-                elif tablename == 'Mapinfo':
-                    data={
-                        "id": row[0],
-                        "FromCoor": json.loads(row[1]),
-                        "ToCoor": json.loads(row[2]),
-                        "distance": row[3],
-                        "travel_time": row[4],
-                        "link": row[5],
-                        "user":row[6],
-                        "sentAddr": row[7],
-                        "receivedAddr": row[8],
-                        "country": row[10],
-                        "flagEmoji": row[11],
-                    }
-                elif tablename == 'CountryStats':
-                    data={
-                        "name": row[0],
-                        "countryCode": row[1],
-                        "flagEmoji": row[2],
-                        "value": row[3],
-                        "sentNum": row[4],
-                        "receivedNum":row[5],
-                        "sentAvg": row[6],
-                        "receivedAvg": row[7],
-                        "sentMedian": row[8],
-                        "receivedMedian": row[9],
-                    }
-                elif tablename == 'postcardStory':
-                    data={
-                        "id": row[0],
-                        "content_original": row[1],
-                        "content_cn": row[2],
-                        "comment_original": row[3],
-                        "comment_cn": row[4],
-                        "userInfo": row[5],
-                        "picFileName": row[6],
-                        "contryNameEmoji":row[7],
-                        "travel_time": row[9],
-                        "distance": row[11],
-                    }
-                data_all.append(data)       
-        conn.close()
-        return data_all
-    return data_all
-
-# 设置写入数据库的统一入口函数
-def writeDB(dbpath, content,tablename):   
-    conn = sqlite3.connect(dbpath)
-    cursor = conn.cursor()
-
-    if tablename == 'Galleryinfo':
-        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                    (id TEXT, userInfo TEXT, contryNameEmoji TEXT, picFileName TEXT, favoritesNum TEXT, type TEXT)''')
-        for item in content:
-            id = item['id']
-            userInfo = item['userInfo']
-            contryNameEmoji = item['contryNameEmoji']
-            picFileName = item['picFileName']
-            favoritesNum = item['favoritesNum']
-            type = item['type']
-            cursor.execute(f"SELECT * FROM {tablename} WHERE id=? AND type=?", (id, type))
-            existing_data = cursor.fetchone()
-            if existing_data:
-                # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET userInfo=?, contryNameEmoji=?, picFileName=?, favoritesNum=? WHERE id=? AND type=?",
-                                (userInfo, contryNameEmoji, picFileName, favoritesNum,  id, type))
-            else:
-                # 插入新的行
-                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?)",
-                                (id, userInfo, contryNameEmoji, picFileName, favoritesNum, type))
-    elif tablename == 'Mapinfo':
-        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                    (id TEXT PRIMARY KEY, FromCoor TEXT, ToCoor TEXT, distance INTEGER, travel_time TEXT, link TEXT, user TEXT, sentAddr TEXT, receivedAddr TEXT, type TEXT)''')
-        for item in content:
-            id = item['id']
-            FromCoor = json.dumps(item['FromCoor'])
-            ToCoor = json.dumps(item['ToCoor'])
-            distance = item['distance']
-            travel_time = item['travel_time']
-            link = item['link']
-            user = item['user']
-            sentAddr = item['sentAddr']
-            receivedAddr = item['receivedAddr']
-            type = item['type']    
-
-            cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                (id, FromCoor, ToCoor, distance, travel_time, link, user, sentAddr, receivedAddr, type))
-    # 将列表中的JSON对象写入文件      
-    elif tablename == 'postcardStory':
-        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                    (id TEXT, content_original TEXT, content_cn TEXT, comment_original TEXT, comment_cn TEXT)''')
-        for item in content:
-            id = item['id']
-            content_original = item['content_original']
-            content_cn = item['content_cn']
-            comment_original = item['comment_original']
-            comment_cn = item['comment_cn']
-            cursor.execute(f"SELECT * FROM {tablename} WHERE id=? ", (id, ))
-            existing_data = cursor.fetchone()
-            if existing_data:
-                # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET content_original=?, content_cn=?,comment_original=?, comment_cn=?  WHERE id=?",
-                                (content_original, content_cn,comment_original, comment_cn, id))
-            else:
-                # 插入新的行
-                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?)",
-                                (id, content_original, content_cn, comment_original, comment_cn ))
-    elif tablename == 'CountryStats':
-        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-            (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER, sentMedian INTEGER, receivedMedian INTEGER,
-            PRIMARY KEY (name))''')
-        for item in content:
-    
-            name = item['name']
-            countryCode = item['countryCode']
-            flagEmoji = item['flagEmoji']
-            value = item['value']
-            sentNum = item['sentNum']
-            receivedNum = item['receivedNum']
-            sentAvg = item['sentAvg']
-            receivedAvg = item['receivedAvg']
-            sentMedian = item['sentMedian']
-            receivedMedian = item['receivedMedian']
-            cursor.execute(f"SELECT * FROM {tablename} WHERE name=?", (name,))
-            existing_data = cursor.fetchone()
-            if existing_data:
-                # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET countryCode=?, flagEmoji=?, value=?, sentNum=?, receivedNum=?, sentMedian=?, receivedMedian=? WHERE name=?", (countryCode, flagEmoji, value, sentNum, receivedNum, sentMedian, receivedMedian, name))
-            else:
-                # 插入新的行
-                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                        (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian))
-    print(f'已更新数据库{dbpath}的{tablename}\n')
-    conn.commit()
-    conn.close()
-
-
 
 # 定义createMap.py的前置检查条件
-def MapDataCheck():
+def MapDataCheck(account,Cookie,types_map):
     print("————————————————————")
     for type in types_map:
          multiTask(account,type,Cookie)
     
 # 定义createGallery.py的前置检查条件
-def PicDataCheck():    
+def PicDataCheck(account, Cookie):    
     print("————————————————————") 
-    stat,content_raw,types = getAccountStat(Cookie)
+    stat,content_raw,types = getAccountStat(account, Cookie)
     getPageNum(stat,content_raw,types)
-    getUserStat()
+    getUserStat(account)
     for type in types:
-        getGalleryInfo(type) # 获取图库信息
+        getGalleryInfo(type ,account ,Cookie) # 获取图库信息
     for type in types:
         multiDownload(type) # 批量下载图片
     
 # 定义createPersonalPage.py的前置检查条件    
-def replaceTemplateCheck():  
+def replaceTemplateCheck(account, Cookie):  
     print("————————————————————")
-    stat,content_raw,types = getAccountStat(Cookie)
+    stat,content_raw,types = getAccountStat(account, Cookie)
     getPageNum(stat,content_raw,types)
-    getUserStat()
+    getUserStat(account)
     for type in types:
-        getGalleryInfo(type) 
+        getGalleryInfo(type ,account ,Cookie) 
 
-def md5(file_path):
-    with open(file_path, 'rb') as file:
-        data = file.read()
-        md5_hash = hashlib.md5(data).hexdigest()
-    return md5_hash
-
-def compareMD5(pathA,pathB):
-
-    A_md5 = md5(pathA)
-    B_md5 = md5(pathB)
-    if B_md5 == A_md5:
-        stat = "0"
-    else:
-        stat = "1"
-    #print(f"\n{pathA}:{A_md5}\n{pathB}:{B_md5}")
-    return stat
 
 if __name__ == "__main__":
-   
-    stat,content_raw,types = getAccountStat(Cookie)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("account", help="输入account")
+    parser.add_argument("password", help="输入password")      
+    parser.add_argument("nickName", help="输入nickName")    
+    # parser.add_argument("Cookie", help="输入Cookie") 
+    parser.add_argument("repo", help="输入repo")    
+    options = parser.parse_args()
+
+    account = options.account
+    password = options.password
+    nickName = options.nickName
+    # Cookie = options.Cookie
+    repo = options.repo
+
+    # 获取当前日期
+    current_date = datetime.now().date()
+    
+    # 将日期格式化为指定格式
+    date = current_date.strftime("%Y-%m-%d")
+
+    url = f"https://www.postcrossing.com/user/{account}/gallery"  # 替换为您要获取数据的链接
+    
+    
+    types_map = ['sent', 'received']  
+
+
+
+    
+    stat,content_raw,types = getAccountStat(account, Cookie)

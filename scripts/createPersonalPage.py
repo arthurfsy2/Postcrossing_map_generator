@@ -1,4 +1,3 @@
-import multiDownload as dl
 import pandas as pd
 import sqlite3
 import json
@@ -12,8 +11,11 @@ from wordcloud import WordCloud
 from opencc import OpenCC
 import requests
 import emoji
-from multiDownload import readDB
-from multiDownload import writeDB
+from multiDownload import replaceTemplateCheck,getAccountStat
+from common_tools import readDB,writeDB,compareMD5,translate
+# 
+# from mailTrack import translate
+
 import re
 
 with open("scripts/config.json", "r") as file:
@@ -28,18 +30,16 @@ storyPicType = data["storyPicType"]
 
 # 创建 ArgumentParser 对象
 parser = argparse.ArgumentParser()
-parser.add_argument("account", help="输入account")
-parser.add_argument("password", help="输入password")      
+parser.add_argument("account", help="输入account")     
 parser.add_argument("nickName", help="输入nickName")    
-# parser.add_argument("Cookie", help="输入Cookie") 
-parser.add_argument("repo", help="输入repo")    
+parser.add_argument("repo", help="输入repo1")  
+parser.add_argument("apikey", help="输入小牛翻译apikey")     
 options = parser.parse_args()
 
 account = options.account
-password = options.password
 nickName = options.nickName
-# Cookie = options.Cookie
 repo = options.repo
+apikey = options.apikey
 
 font_path = "./scripts/font.otf"
 cn_path_svg = "./output/postcrossing_cn.svg"
@@ -99,8 +99,7 @@ def getUserSheet(tableName):
 
 
 def replaceTemplate():   
-    stat,content_raw,types = dl.getAccountStat(Cookie)  
-    title_all=""
+    stat,content_raw,types = getAccountStat(account, Cookie)
     desc_all=""      
     countryNum = getUserSheet("CountryStats")
     travelingNum = getTravelingID(account,"traveling",Cookie)
@@ -119,9 +118,11 @@ def replaceTemplate():
         else:
             desc =""
         desc_all += desc
+    title_all =""
     for type in types:        
         title = replateTitle(type)
         title_all += f"#### [{title}](/{nickName}/postcrossing/{type})\n\n"
+        
         title_final = f"{desc_all}\n{countryCount}\n{travelingCount}\n{title_all}"
     
     storylist,storyNum = getCardStoryList("received")
@@ -149,9 +150,9 @@ def replaceTemplate():
     with open(f"./output/信息汇总.md", "w",encoding="utf-8") as f:
         f.write(dataNew)  
 
-    blog_path = r"D:\web\Blog2\src\Arthur\Postcrossing\信息汇总.md"
+    blog_path = r"D:\web\Blog\src\Arthur\Postcrossing\信息汇总.md"
     
-    # 换为你的blog的本地链接，可自动同步过去
+    # 换为你的blog的本地链接，可自动同步过去，方便测试
     if os.path.exists(blog_path):
         with open(blog_path, "w", encoding="utf-8") as f:
             f.write(dataNew)
@@ -201,34 +202,34 @@ def getCardStoryList(type):
             
         else:
             comment = ":::"      
-        userInfo = id["userInfo"]
+        userInfo = f'[{id["userInfo"]}](https://www.postcrossing.com/user/{id["userInfo"]})'
+
         picFileName = id["picFileName"]
-        contryNameEmoji = id["contryNameEmoji"] if id["contryNameEmoji"] is not None else ""
+        countryNameEmoji = id["countryNameEmoji"] if id["countryNameEmoji"] is not None else ""
         travel_time = id["travel_time"]
         distanceNum = id["distance"]
         distance = format(distanceNum, ",")
-        
+                          
         if type == "received":
+            picList = f'<div class="image-preview">  <img src="{picDriverPath}/{picFileName}" />  <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>' if picFileName !='noPic.png' else f'<div class="image-preview"> <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>'
             list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
-            f'> 来自 {userInfo} {contryNameEmoji}\n' \
+            f'> 来自 {userInfo} {countryNameEmoji}\n' \
             f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
             f':::tabs\n' \
             f'@tab 图片\n' \
-            f'<div class="image-preview">  <img src="{picDriverPath}/{picFileName}" />' \
-            f'  <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>' \
+            f'{picList}' \
             f'\n\n' \
             f'@tab 内容\n' \
             f'* 卡片文字\n\n> {content_original}\n\n* 翻译：\n\n> {content_cn}\n\n' \
             f'{comment}\n\n' \
             f'---\n'   
         else:
+            picList = f'@tab 图片\n![]({picDriverPath}/{picFileName})\n\n' if picFileName !='noPic.png' else ''
             list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
-            f'> 寄往 {userInfo} {contryNameEmoji}\n' \
+            f'> 寄往 {userInfo} {countryNameEmoji}\n' \
             f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
             f':::tabs\n' \
-            f'@tab 图片\n' \
-            f'![]({picDriverPath}/{picFileName})\n\n' \
-            f'' \
+            f'{picList}' \
             f'{comment}\n\n' \
             f'---\n'
         list_all += list
@@ -378,9 +379,8 @@ def get_HTML_table(type, tableName):
         # 提取travel_days
         travel_days = stats['travel_time'].split()[0]
         # 提取sent_time和received_time
-        date_range = stats['travel_time'].split()[2]
-        sent_time = date_range[1:11]
-        received_time = date_range[13:-1]
+        sent_time = stats['travel_time'].split()[2][1:11]
+        received_time = stats['travel_time'].split()[3][7:]
         distance = stats['distance']
         baseurl = "https://www.postcrossing.com"
         
@@ -492,14 +492,14 @@ def htmlFormat(title, data):
     return html_content
 
 
-dl.replaceTemplateCheck()
+replaceTemplateCheck(account, Cookie)
 excel_file="./template/postcardStory.xlsx"
 StoryXLS2DB(excel_file)
 get_HTML_table("sent","Mapinfo")
 get_HTML_table("received","Mapinfo")
 replaceTemplate()
 if os.path.exists(f"{dbpath}BAK"):
-    dbStat = dl.compareMD5(dbpath, f"{dbpath}BAK")
+    dbStat = compareMD5(dbpath, f"{dbpath}BAK")
     if dbStat == "1":
         print(f"{dbpath} 有更新") 
         print(f"正在生成明信片故事中、英文词云") 

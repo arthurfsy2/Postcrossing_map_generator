@@ -5,7 +5,7 @@ import re
 import json
 import os
 import argparse
-import multiDownload as dl
+from multiDownload import getAccountStat
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -13,19 +13,6 @@ with open("scripts/config.json", "r") as file:
 Cookie = data["Cookie"]
 dbpath = data["dbpath"]
 
-parser = argparse.ArgumentParser()
-parser.add_argument("account", help="输入account")
-parser.add_argument("password", help="输入password")      
-parser.add_argument("nickName", help="输入nickName")    
-# parser.add_argument("Cookie", help="输入Cookie") 
-parser.add_argument("repo", help="输入repo")    
-options = parser.parse_args()
-
-account = options.account
-password = options.password
-nickName = options.nickName
-# Cookie = options.Cookie
-repo = options.repo
 
 
 
@@ -96,8 +83,6 @@ def login(account,password):
 
     # 更新Cookie变量的值
     config_data['Cookie'] = Cookie
-    # config_data['account'] = account
-    # config_data['nickName'] = nickName
     # 将更新后的内容写入scripts/config.json文件
     with open('scripts/config.json', 'w') as file:
         json.dump(config_data, file, indent=4)
@@ -106,7 +91,21 @@ def login(account,password):
     
 
 if __name__ == "__main__":
-    stat,content_raw,types = dl.getAccountStat(Cookie) 
+    parser = argparse.ArgumentParser()
+    parser.add_argument("account", help="输入account")
+    parser.add_argument("password", help="输入password")      
+    #parser.add_argument("nickName", help="输入nickName")    
+    # parser.add_argument("Cookie", help="输入Cookie") 
+    #parser.add_argument("repo", help="输入repo")    
+    options = parser.parse_args()
+
+    account = options.account
+    password = options.password
+    #nickName = options.nickName
+    # Cookie = options.Cookie
+    #repo = options.repo
+
+    stat,content_raw,types = getAccountStat(account, Cookie)
     if stat != "getPrivate": 
         login(account,password)
 

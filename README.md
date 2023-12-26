@@ -322,5 +322,5 @@ env:
 
 1. 通过这个网址查询到对应的国家或地区：https://emojidaquan.com/category2-country-flags
 2. 找到对应的国家或地区，如香港：https://emojidaquan.com/emoji-flag-for-hong-kong
-3. 查询简写代码、或十六进制HTML字符实体，填写到 `scripts/contryNameEmoji.json`文件中。（如果是十六进制HTML字符实体，则复制粘贴后需要去除中间的空格。如香港的是"&#x1f1ed\;&#x1f1f0\;"
+3. 查询简写代码、或十六进制HTML字符实体，填写到 `scripts/countryNameEmoji.json`文件中。（如果是十六进制HTML字符实体，则复制粘贴后需要去除中间的空格。如香港的是"&#x1f1ed\;&#x1f1f0\;"
 4. 修改保存后，获取新的Cookie填入scripts/config.json，然后重新执行py postcrossing.py

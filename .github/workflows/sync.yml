@@ -45,7 +45,7 @@ jobs:
       
       - name: 运行startTask.py脚本
         run: |
-          python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
+          python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY ${{ secrets.APIKEY }}
     
       - name: 删除缓存文件
         run: rm -rf scripts/__pycache__/    
