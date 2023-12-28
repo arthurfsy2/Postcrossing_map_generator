@@ -185,6 +185,22 @@ def getCardStoryList(type):
         content_cn = id["content_cn"]
         comment_original = id["comment_original"] 
         comment_cn = id["comment_cn"] 
+        travel_days = id["travel_days"] 
+        sentAddr = id["sentAddr"] 
+        sentCountry = id["sentCountry"]
+        receivedAddr = id["receivedAddr"] 
+        receivedCountry = id["receivedCountry"] 
+        sentDate = id["sentDate"]
+        receivedDate= id["receivedDate"]
+        sentDate_local = id["sentDate_local"]
+        receivedDate= id["receivedDate"]
+        receivedDate_local= id["receivedDate_local"]
+        
+        FromCoor= json.loads(id["FromCoor"]) if id["FromCoor"] else ""
+        ToCoor= json.loads(id["ToCoor"]) if id["ToCoor"] else ""
+        travel_time_local = f'> 📤[{sentCountry}](https://www.bing.com/maps/?cp={FromCoor[0]}~{FromCoor[1]}&lvl=12.0&setlang=zh-Hans) {sentDate_local} (当地)\n' \
+                            f'> 📥 [{receivedCountry}](https://www.bing.com/maps/?cp={ToCoor[0]}~{ToCoor[1]}&lvl=12.0&setlang=zh-Hans) {receivedDate_local} (当地)\n' if id["FromCoor"] else ""
+
         def remove_blank_lines(text):
             if text:
                 return "\n".join(line for line in text.splitlines() if line.strip())
@@ -206,7 +222,7 @@ def getCardStoryList(type):
 
         picFileName = id["picFileName"]
         countryNameEmoji = id["countryNameEmoji"] if id["countryNameEmoji"] is not None else ""
-        travel_time = id["travel_time"]
+
         distanceNum = id["distance"]
         distance = format(distanceNum, ",")
                           
@@ -214,7 +230,7 @@ def getCardStoryList(type):
             picList = f'<div class="image-preview">  <img src="{picDriverPath}/{picFileName}" />  <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>' if picFileName !='noPic.png' else f'<div class="image-preview"> <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>'
             list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
             f'> 来自 {userInfo} {countryNameEmoji}\n' \
-            f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
+            f'{travel_time_local} 📏 {distance} | ⏱ {travel_days}\n\n' \
             f':::tabs\n' \
             f'@tab 图片\n' \
             f'{picList}' \
@@ -227,7 +243,7 @@ def getCardStoryList(type):
             picList = f'@tab 图片\n![]({picDriverPath}/{picFileName})\n\n' if picFileName !='noPic.png' else ''
             list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
             f'> 寄往 {userInfo} {countryNameEmoji}\n' \
-            f'> 📏 {distance} km\n⏱ {travel_time}\n\n' \
+            f'> 📏 {distance} km\n⏱ {travel_time_local}\n\n' \
             f':::tabs\n' \
             f'{picList}' \
             f'{comment}\n\n' \
@@ -377,10 +393,10 @@ def get_HTML_table(type, tableName):
     new_data = []
     for i,stats in enumerate(content):
         # 提取travel_days
-        travel_days = stats['travel_time'].split()[0]
+        travel_days = stats['travel_days']
         # 提取sent_time和received_time
-        sent_time = stats['travel_time'].split()[2][1:11]
-        received_time = stats['travel_time'].split()[3][7:]
+        sent_time = stats['sentDate']
+        received_time = stats['receivedDate']
         distance = stats['distance']
         baseurl = "https://www.postcrossing.com"
         
@@ -388,7 +404,7 @@ def get_HTML_table(type, tableName):
             formatted_item = {
                 'ID号': f"<a href='{baseurl}/travelingpostcard/{stats['id']}'>{stats['id']}</a>",
                 '收信人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
-                '寄往地区': f"{stats['country']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
+                '寄往地区': f"{stats['receivedCountry']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
                 '寄出时间': sent_time,
                 '收到时间': received_time,
                 '距离': f'{format(distance, ",")} km',
@@ -398,7 +414,7 @@ def get_HTML_table(type, tableName):
             formatted_item = {
                 'ID号': f"<a href='{baseurl}/travelingpostcard/{stats['id']}'>{stats['id']}</a>",
                 '发信人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
-                '来自地区': f"{stats['country']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
+                '来自地区': f"{stats['sentCountry']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
                 '寄出时间': sent_time,
                 '收到时间': received_time,
                 '距离': f'{format(distance, ",")} km',
@@ -474,7 +490,7 @@ def htmlFormat(title, data):
     <body>
         <div class="container-fluid">
             <div class="mb-3">
-                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索国家">
+                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索……">
             </div>
             <div class="table-responsive">
                 {html_table}

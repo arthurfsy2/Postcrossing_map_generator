@@ -49,23 +49,37 @@ def createMD(type):
     value = data.get(type)
     from_or_to, pageNum, Num, title = value
     content = readDB(dbpath, type,"Galleryinfo")
+    # print(content)
     MDcontent_all =""
     for id in content:
         baseUrl = "https://www.postcrossing.com/"
         postcardID = id["id"]  
+        travel_days = id["travel_days"] 
+        sentAddr = id["sentAddr"] 
+        sentCountry = id["sentCountry"]
+        receivedAddr = id["receivedAddr"] 
+        receivedCountry = id["receivedCountry"] 
         picFileName = id["picFileName"]
         distanceNum = id["distance"]
-        travel_time = id["travel_time"]
-        userInfo = id["userInfo"]
-        countryNameEmoji = id["countryNameEmoji"] if id["countryNameEmoji"] is not None else ""
+        sentDate_local = id["sentDate_local"]
+        receivedDate_local= id["receivedDate_local"]
         
-        if distanceNum is None and travel_time is None:
-            travel_info = ""
+        FromCoor= json.loads(id["FromCoor"]) if id["FromCoor"] else ""
+        ToCoor= json.loads(id["ToCoor"]) if id["ToCoor"] else ""
+
+        travel_time_local = f'> 📤[{sentCountry}](https://www.bing.com/maps/?cp={FromCoor[0]}~{FromCoor[1]}&lvl=12.0&setlang=zh-Hans) {sentDate_local} (当地)\n' \
+                            f'> 📥 [{receivedCountry}](https://www.bing.com/maps/?cp={ToCoor[0]}~{ToCoor[1]}&lvl=12.0&setlang=zh-Hans) {receivedDate_local} (当地)\n' if id["FromCoor"] else ""
+        userInfo = f'{from_or_to} {id["userInfo"]}' if id["userInfo"] is not None else ""
+        #userInfo}]({baseUrl}/user/{userInfo}
+        countryNameEmoji = id["countryNameEmoji"] if id["countryNameEmoji"] else ""
+        
+        if distanceNum is None:
+            travel_info = ">"
         else:
             distance = format(distanceNum, ",")
-            travel_info = f"> 📏{distance} km \n⏱{travel_time}"
+            travel_info = f"{travel_time_local} 📏 {distance} | ⏱ {travel_days}"
         
-        pattern=f"## [{postcardID}]({baseUrl}postcards/{postcardID}) \n >{from_or_to} [{userInfo}]({baseUrl}/user/{userInfo}) {countryNameEmoji}\n{travel_info}\n"
+        pattern=f"## [{postcardID}]({baseUrl}postcards/{postcardID}) \n >{userInfo} {countryNameEmoji}\n{travel_info}\n"
         if type == "popular":
             num = id["favoritesNum"]
             picurl = f"{pattern}>点赞人数：**{num}**\n\n![]({picDriverPath}/{picFileName}) \n "

@@ -5,7 +5,7 @@ import time
 import sqlite3
 import random
 import os
-import multiDownload as dl
+from multiDownload import MapDataCheck
 from common_tools import readDB,writeDB,compareMD5
 import sys
 import shutil
@@ -49,12 +49,12 @@ headers = {
 if os.path.exists(dbpath):
     shutil.copyfile(dbpath, f"{dbpath}BAK")
 
-def getHomeInfo(received):
+def getMapHomeInfo(receivedData):
     addr_count = {}
     home_coords = []
     home_addrs = []
-    for item in received:
-        addr = item["receivedAddr"]
+    for item in receivedData:
+        addr = f'{item["receivedAddr"]} [{item["receivedCountry"]}]'
         if addr in addr_count:
             addr_count[addr] += 1
         else:
@@ -99,7 +99,7 @@ def createMap():
     sentData =readDB(dbpath, "sent", "Mapinfo")
     receivedData =readDB(dbpath, "received", "Mapinfo")
     allData = [sentData,receivedData]
-    most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getHomeInfo(receivedData)
+    most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getMapHomeInfo(receivedData)
     m = folium.Map(
         location=most_common_homeCoord,
         zoom_start=2,
@@ -126,11 +126,11 @@ def createMap():
             from_coord = coords["FromCoor"]
             to_coord = coords["ToCoor"]
             distance = coords["distance"]
-            days = coords["travel_time"]
+            days = coords["travel_days"]
             link = coords["link"]
             user = coords["user"]
-            sentAddr = coords["sentAddr"]
-            receivedAddr = coords["receivedAddr"]
+            sentAddr = f'{coords["sentAddr"]} [{coords["sentCountry"]}]'
+            receivedAddr = f'{coords["receivedAddr"]} [{coords["receivedCountry"]}]'
             if user =='account closed':
                 userInfo ='<b><i>account closed</b></i>'
             else:
@@ -176,7 +176,7 @@ def createClusterMap():
     sentData =readDB(dbpath, "sent", "Mapinfo")
     receivedData =readDB(dbpath, "received", "Mapinfo")
     allData = [sentData,receivedData]
-    most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getHomeInfo(receivedData)
+    most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getMapHomeInfo(receivedData)
     cluster = folium.Map(
         location=most_common_homeCoord,
         zoom_start=2,
@@ -205,11 +205,11 @@ def createClusterMap():
             from_coord = coords["FromCoor"]
             to_coord = coords["ToCoor"]
             distance = coords["distance"]
-            days = coords["travel_time"]
+            days = coords["travel_days"]
             link = coords["link"]
             user = coords["user"]
-            sentAddr = coords["sentAddr"]
-            receivedAddr = coords["receivedAddr"]
+            sentAddr = f'{coords["sentAddr"]} [{coords["sentCountry"]}]'
+            receivedAddr = f'{coords["receivedAddr"]} [{coords["receivedCountry"]}]'
             if user =='account closed':
                 userInfo ='<b><i>account closed</b></i>'
             else:
@@ -288,7 +288,7 @@ def replaceJsRef(fileFullName):
     os.rename(f"{fileFullName}.bak", fileFullName)
 
 
-dl.MapDataCheck(account,Cookie,types_map)  
+MapDataCheck(account,Cookie,types_map)  
 if os.path.exists(f"{dbpath}BAK"):
     dbStat = compareMD5(dbpath, f"{dbpath}BAK")
     if dbStat == "1":

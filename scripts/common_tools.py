@@ -6,6 +6,9 @@ import hashlib
 import sys
 import argparse
 from urllib import parse,request
+import pytz
+from datetime import datetime, timedelta
+from geopy.geocoders import Nominatim
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -28,19 +31,30 @@ def readDB(dbpath, type,tablename):
 
         if table_exists:
             if tablename == 'Galleryinfo':
-                cursor.execute('''SELECT
+                select_type = "received" if type == "sent" else "sent"
+                cursor.execute(f'''SELECT
                                     g.id,
-                                    (SELECT user FROM Mapinfo WHERE id = m.id AND (type = 'sent' or type = 'received')) AS userInfo2,
+                                    g.userInfo,
                                     (SELECT countryNameEmoji FROM Galleryinfo WHERE id = g.id AND (type = 'sent' or type = 'received')) AS countryNameEmoji,
                                     g.picFileName,
                                     g.favoritesNum,
                                     g.type,
-                                    m.travel_time,
-                                    date(REPLACE(SUBSTR(m.travel_time, 28, 16), '/', '-')) AS receivedDate,
-                                    m.distance 
+                                    m.travel_days,
+                                    m.sentDate,
+                                    m.sentAddr,
+                                    m.sentCountry,
+                                    m.sentDate_local,
+                                    m.receivedAddr,
+                                    m.receivedCountry,
+                                    m.receivedDate,
+                                    m.receivedDate_local,
+                                    m.distance,
+                                    m.FromCoor,
+                                    m.ToCoor 
                                 FROM
                                     Galleryinfo g
-                                    LEFT JOIN Mapinfo m ON g.id = m.id 
+                                    LEFT JOIN Mapinfo m ON g.id = m.id
+                                    
                                 WHERE
                                     g.type = ?
                                 ORDER BY
@@ -51,15 +65,10 @@ def readDB(dbpath, type,tablename):
                 cursor.execute(f'''
                 SELECT
                     m.*,
-                    SUBSTR(
-                        m.{select_type}Addr,
-                        INSTR ( m.{select_type}Addr, '[' ) + 1,
-                        INSTR ( m.{select_type}Addr, ']' ) - INSTR ( m.{select_type}Addr, '[' ) - 1 
-                    ) AS country,
                     c.flagEmoji 
                 FROM
                     Mapinfo m
-                    INNER JOIN CountryStats c ON c.name = country 
+                    INNER JOIN CountryStats c ON c.name = m.{select_type}Country 
                 WHERE
                     m.type = ?
                 ORDER BY
@@ -78,18 +87,23 @@ def readDB(dbpath, type,tablename):
                     REPLACE(m.link, 'gallery/picture/', '') AS picFileName,
                     c.flagEmoji AS countryNameEmoji,
                     m.type,
-                    m.travel_time,
-                    datetime( REPLACE ( SUBSTR( m.travel_time, 28, 16 ), '/', '-' ) ) AS receivedDate,           
+                    m.travel_days,
+                    m.sentDate,
+                    m.sentAddr,
+                    m.sentCountry,
+                    m.sentDate_local,
+                    m.receivedAddr,
+                    m.receivedCountry,
+                    m.receivedDate,
+                    m.receivedDate_local,
                     m.distance,
-                    SUBSTR(
-                        m.{select_type}Addr,
-                        INSTR ( m.{select_type}Addr, '[' ) + 1,
-                        INSTR ( m.{select_type}Addr, ']' ) - INSTR ( m.{select_type}Addr, '[' ) - 1 
-                    ) AS country 
+                    m.FromCoor,
+                    m.ToCoor
+                    
                 FROM
                     postcardStory p
                     LEFT JOIN Mapinfo m ON p.id = m.id
-                    LEFT JOIN CountryStats c ON c.name = country 
+                    LEFT JOIN CountryStats c ON c.name = m.{select_type}Country 
                 WHERE
                     m.type = ?         
                 ORDER BY
@@ -110,8 +124,18 @@ def readDB(dbpath, type,tablename):
                         "picFileName": row[3],
                         "favoritesNum": row[4],
                         "type": row[5],
-                        "travel_time": row[6],
-                        "distance": row[8]
+                        "travel_days": row[6],
+                        "sentDate": row[7],
+                        "sentAddr": row[8],
+                        "sentCountry": row[9],
+                        "sentDate_local": row[10],
+                        "receivedAddr": row[11],
+                        "receivedCountry": row[12],
+                        "receivedDate": row[13],
+                        "receivedDate_local": row[14],
+                        "distance": row[15],
+                        "FromCoor": row[16],
+                        "ToCoor": row[17],
                         }
                 elif tablename == 'Mapinfo':
                     data={
@@ -119,13 +143,19 @@ def readDB(dbpath, type,tablename):
                         "FromCoor": json.loads(row[1]),
                         "ToCoor": json.loads(row[2]),
                         "distance": row[3],
-                        "travel_time": row[4],
-                        "link": row[5],
-                        "user":row[6],
-                        "sentAddr": row[7],
-                        "receivedAddr": row[8],
-                        "country": row[10],
-                        "flagEmoji": row[11],
+                        "travel_days": row[4],
+                        "sentDate": row[5],
+                        "receivedDate": row[6],
+                        "link": row[7],
+                        "user":row[8],
+                        "sentAddr": row[9],
+                        "sentCountry": row[10],
+                        "receivedAddr": row[11],
+                        "receivedCountry": row[12],
+                        "sentDate_local": row[13],
+                        "receivedDate_local": row[14],
+                        "type": row[15],
+                        "flagEmoji": row[16],
                     }
                 elif tablename == 'CountryStats':
                     data={
@@ -150,8 +180,19 @@ def readDB(dbpath, type,tablename):
                         "userInfo": row[5],
                         "picFileName": row[6],
                         "countryNameEmoji":row[7],
-                        "travel_time": row[9],
-                        "distance": row[11],
+                        "travel_days": row[9],
+                        "sentDate": row[10],
+                        "sentAddr": row[11],
+                        "sentCountry": row[12],
+                        "sentDate_local": row[13],
+                        "receivedAddr": row[14],
+                        "receivedCountry": row[15],
+                        "receivedDate": row[16],
+                        "receivedDate_local": row[17],
+                        "distance": row[18],
+                        "FromCoor": row[19],
+                        "ToCoor": row[20],
+
                     }
                 data_all.append(data)       
         conn.close()
@@ -185,21 +226,27 @@ def writeDB(dbpath, content,tablename):
                                 (id, userInfo, countryNameEmoji, picFileName, favoritesNum, type))
     elif tablename == 'Mapinfo':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                    (id TEXT PRIMARY KEY, FromCoor TEXT, ToCoor TEXT, distance INTEGER, travel_time TEXT, link TEXT, user TEXT, sentAddr TEXT, receivedAddr TEXT, type TEXT)''')
+                    (id TEXT PRIMARY KEY, FromCoor TEXT, ToCoor TEXT, distance INTEGER, travel_days TEXT, sentDate TEXT, receivedDate TEXT, link TEXT, user TEXT, sentAddr TEXT, sentCountry TEXT, receivedAddr TEXT, receivedCountry TEXT, sentDate_local TEXT, receivedDate_local TEXT, type TEXT)''')
         for item in content:
             id = item['id']
             FromCoor = json.dumps(item['FromCoor'])
             ToCoor = json.dumps(item['ToCoor'])
             distance = item['distance']
-            travel_time = item['travel_time']
+            travel_days = item['travel_days']
+            sentDate = item['sentDate']
+            receivedDate = item['receivedDate']
             link = item['link']
             user = item['user']
             sentAddr = item['sentAddr']
+            sentCountry = item['sentCountry'] 
             receivedAddr = item['receivedAddr']
+            receivedCountry = item['receivedCountry']
+            sentDate_local = item['sentDate_local']
+            receivedDate_local = item['receivedDate_local']
             type = item['type']    
 
-            cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                (id, FromCoor, ToCoor, distance, travel_time, link, user, sentAddr, receivedAddr, type))
+            cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (id, FromCoor, ToCoor, distance, travel_days, sentDate, receivedDate, link, user, sentAddr, sentCountry, receivedAddr, receivedCountry, sentDate_local, receivedDate_local, type))
     # 将列表中的JSON对象写入文件      
     elif tablename == 'postcardStory':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
@@ -279,6 +326,43 @@ def translate(apikey, sentence, src_lan, tgt_lan):
     else:
         result = res
     return result
+
+def get_country_city(latitude, longitude, timestamp):
+    
+    url=f"https://timezones.datasette.io/timezones/by_point.json?longitude={longitude}&latitude={latitude}"
+    response = requests.get(url = url)
+    if response:
+        country_city = response.json()['rows'][0][0]
+    return country_city
+    
+
+def get_local_date(coors, utc_date):
+    latitude = coors[0]
+    longitude = coors[1]
+    time_utc = datetime.strptime(utc_date, "%Y/%m/%d %H:%M")
+    timestamp = int(time_utc.timestamp())
+    country_city = get_country_city(latitude, longitude, timestamp)
+    # 根据国家城市英文名称获取对应的时区
+    try:
+        timezone = pytz.timezone(country_city)
+    except pytz.UnknownTimeZoneError:
+        return "Invalid country city"
+
+    # 将输入的UTC日期转换为datetime对象
+    input_format = "%Y/%m/%d %H:%M"
+    utc_datetime = datetime.strptime(utc_date, input_format)
+
+    # 将UTC时间转换为指定时区的本地时间
+    local_datetime = pytz.utc.localize(utc_datetime).astimezone(timezone)
+
+    # 提取本地日期
+    local_date = local_datetime.date()
+    # 格式化本地日期和时间
+    output_format = "%Y/%m/%d %H:%M"
+    local_datetime_str = local_datetime.strftime(output_format)
+
+    return local_datetime_str
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

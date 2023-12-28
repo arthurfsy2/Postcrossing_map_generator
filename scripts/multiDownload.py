@@ -13,7 +13,7 @@ import sqlite3
 import statistics
 import hashlib
 import argparse
-from common_tools import readDB,writeDB
+from common_tools import readDB,writeDB,get_local_date
 
 
 
@@ -328,12 +328,18 @@ def get_data(postcardID,type):
                 "FromCoor":from_coord,
                 "ToCoor":to_coord,
                 "distance": distance,
-                "travel_time": travel_time,
+                "travel_days": travel_days,
+                "sentDate": sentDate,
+                "receivedDate": receivedDate,
                 "link": link,
                 "user": user,
-                "sentAddr":f"{sentAddr}[{sentCountry}]",
-                "receivedAddr":f"{receivedAddr}[{receivedCountry}]",
-                "type":type
+                "sentAddr":sentAddr,
+                "sentCountry":sentCountry,
+                "receivedAddr":receivedAddr,
+                "receivedCountry":receivedCountry,
+                "type":type,
+                "sentDate_local":get_local_date(from_coord, sentDate),
+                "receivedDate_local":get_local_date(to_coord, receivedDate),
             }
         content_all.append(item)
         print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%")
