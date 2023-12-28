@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：58）
+title: 明信片展示墙（寄出：59）
 icon: address-card
 date: 2023-12-28
 category:
@@ -532,4 +532,11 @@ order: 2
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/023065f841be8fc2ef00308ae793a107.jpg)
+
+## [CN-3637489](https://www.postcrossing.com/postcards/CN-3637489) 
+ >寄往 [Engel76](https://www.postcrossing.com/user/Engel76) :de:
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/82moz0oyr8vks6tnx6v63j34i0p8wj68.jpg)
 
