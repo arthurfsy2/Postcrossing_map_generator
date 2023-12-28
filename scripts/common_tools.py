@@ -8,7 +8,6 @@ import argparse
 from urllib import parse,request
 import pytz
 from datetime import datetime, timedelta
-from geopy.geocoders import Nominatim
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
