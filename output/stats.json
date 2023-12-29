@@ -228,6 +228,18 @@
     "receivedMedian": null
   },
   {
+    "name": "Belgium",
+    "countryCode": "BE",
+    "flagEmoji": ":belgium:",
+    "value": 2,
+    "sentNum": 1,
+    "receivedNum": 1,
+    "sentAvg": 23,
+    "receivedAvg": 40,
+    "sentMedian": 23,
+    "receivedMedian": 40
+  },
+  {
     "name": "Spain",
     "countryCode": "ES",
     "flagEmoji": ":es:",
@@ -276,25 +288,13 @@
     "receivedMedian": 81
   },
   {
-    "name": "Belgium",
-    "countryCode": "BE",
-    "flagEmoji": ":belgium:",
-    "value": 1,
-    "sentNum": 0,
-    "receivedNum": 1,
-    "sentAvg": 31,
-    "receivedAvg": 40,
-    "sentMedian": null,
-    "receivedMedian": 40
-  },
-  {
     "name": "North Macedonia",
     "countryCode": "MK",
     "flagEmoji": "&#x1f1f2;&#x1f1f0;",
     "value": 1,
     "sentNum": 0,
     "receivedNum": 1,
-    "sentAvg": 31,
+    "sentAvg": 23,
     "receivedAvg": 57,
     "sentMedian": null,
     "receivedMedian": 57
