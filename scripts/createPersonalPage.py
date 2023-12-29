@@ -13,8 +13,7 @@ import requests
 import emoji
 from multiDownload import replaceTemplateCheck,getAccountStat
 from common_tools import readDB,writeDB,compareMD5,translate
-# 
-# from mailTrack import translate
+import pytz
 
 import re
 
@@ -367,14 +366,32 @@ def getTravelingID(account,type,Cookie):
     travelingCount = len(response)
     data = sorted(response, key=lambda x: x[7])
     new_data = []
+    def get_local_date(country_code, timestamp):
+        # 根据国家二简码获取时区
+        timezone = pytz.country_timezones.get(country_code)
+        if timezone:
+            timezone = pytz.timezone(timezone[0])
+        else:
+            return "Invalid country code"
+        # 将时间戳转换为datetime对象
+        dt = datetime.fromtimestamp(timestamp)
+        # 将datetime对象转换为当地时区的时间
+        local_dt = dt.astimezone(timezone)
+        # 格式化日期为"%Y/%m/%d %H:%M"的字符串
+        formatted_date = local_dt.strftime("%Y/%m/%d %H:%M")
+        return formatted_date
+    with open("scripts/countryName.json", "r") as file:
+        countryList = json.load(file)
+    with open("scripts/countryNameEmoji.json", "r") as file:
+        countryEmojiList = json.load(file)
     for i,stats in enumerate(data):
         baseurl = "https://www.postcrossing.com"
         formatted_item = {
             'ID号': f"<a href='{baseurl}/travelingpostcard/{stats[0]}'>{stats[0]}</a>",
             '收信人': f"<a href='{baseurl}/user/{stats[1]}'>{stats[1]}</a>",
-            '国家': stats[3],
-            '寄出时间': datetime.fromtimestamp(stats[4]).strftime('%Y/%m/%d'),
-            '距离': f'{format(stats[6], ",")} km',
+            '国家': f"{countryList[stats[3]]} {emoji.emojize(countryEmojiList[stats[3]],language='alias')}",
+            '寄出时间(当地)': get_local_date(stats[0][0:2],stats[4]),
+            '距离(km)': f'{format(stats[6], ",")} km',
             '天数': stats[7]
         }
         new_data.append(formatted_item)
@@ -395,8 +412,8 @@ def get_HTML_table(type, tableName):
         # 提取travel_days
         travel_days = stats['travel_days']
         # 提取sent_time和received_time
-        sent_time = stats['sentDate']
-        received_time = stats['receivedDate']
+        sent_time = stats['sentDate_local']
+        received_time = stats['receivedDate_local']
         distance = stats['distance']
         baseurl = "https://www.postcrossing.com"
         
@@ -405,9 +422,9 @@ def get_HTML_table(type, tableName):
                 'ID号': f"<a href='{baseurl}/postcards/{stats['id']}'>{stats['id']}</a>",
                 '收信人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
                 '寄往地区': f"{stats['receivedCountry']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
-                '寄出时间': sent_time,
-                '收到时间': received_time,
-                '距离': f'{format(distance, ",")} km',
+                '寄出时间(当地)': sent_time,
+                '收到时间(当地)': received_time,
+                '距离(km)': f'{format(distance, ",")}',
                 '天数': travel_days
             }
         elif type =="received":
@@ -415,13 +432,13 @@ def get_HTML_table(type, tableName):
                 'ID号': f"<a href='{baseurl}/postcards/{stats['id']}'>{stats['id']}</a>",
                 '发信人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
                 '来自地区': f"{stats['sentCountry']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
-                '寄出时间': sent_time,
-                '收到时间': received_time,
-                '距离': f'{format(distance, ",")} km',
+                '寄出时间(当地)': sent_time,
+                '收到时间(当地)': received_time,
+                '距离(km)': f'{format(distance, ",")} km',
                 '天数': travel_days
             }
         new_data.append(formatted_item)  
-        new_data = sorted(new_data, key=lambda x: x['收到时间'], reverse=True)
+        new_data = sorted(new_data, key=lambda x: x['收到时间(当地)'], reverse=True)
     html_content = htmlFormat(type, new_data)
     with open(f'./output/{type}.html', 'w', encoding="utf-8") as file:
         file.write(html_content)
