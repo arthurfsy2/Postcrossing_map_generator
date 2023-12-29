@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：60）
+title: 明信片展示墙（收到：64）
 icon: address-card
 date: 2023-12-29
 category:
@@ -550,4 +550,32 @@ order: 3
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/f034894d687e190e2552bb2b6946be17.jpg)
+
+## [CA-1412998](https://www.postcrossing.com/postcards/CA-1412998) 
+ >来自 [yuliavolosevych](https://www.postcrossing.com/user/yuliavolosevych) :canada:
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/87xk4heemaugky0k4ekus8hs5m6g8k5r.jpg)
+
+## [RU-9911406](https://www.postcrossing.com/postcards/RU-9911406) 
+ >来自 [Reymas](https://www.postcrossing.com/user/Reymas) :ru:
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/eqylfu3vj74g38w0a6258ya0spo2ohh9.jpg)
+
+## [BY-3083966](https://www.postcrossing.com/postcards/BY-3083966) 
+ >来自 [gallinka](https://www.postcrossing.com/user/gallinka) :belarus:
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ue5f37htbbdaeriqqkse6fvn8imnfyt1.jpg)
+
+## [RU-9847210](https://www.postcrossing.com/postcards/RU-9847210) 
+ >来自 [Di_Purple](https://www.postcrossing.com/user/Di_Purple) :ru:
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ecsxuv0c10jn33u29cdrn7dk90cwtmh4.jpg)
 

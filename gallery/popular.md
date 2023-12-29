@@ -11,7 +11,15 @@ order: 5
 
 ### [arthurfsy's popular](https://www.postcrossing.com/user/arthurfsy/gallery/popular)
 
-## [CN-3637489](https://www.postcrossing.com/postcards/CN-3637489) 
+## [CN-3641753](https://www.postcrossing.com/postcards/CN-3641753) 
+ >寄往  :belgium:
+> 📤[China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/12/06 14:56 (当地)
+> 📥 [Belgium](https://www.bing.com/maps/?cp=51.32254~4.94471&lvl=12.0&setlang=zh-Hans) 2023/12/29 11:35 (当地)
+ 📏 9,312 | ⏱ 23
+>点赞人数：**1**
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/acy5i7qaiin0x199jacwdn8spxzg6pz8.jpg) 
+ ## [CN-3637489](https://www.postcrossing.com/postcards/CN-3637489) 
  >寄往  :de:
 > 📤[China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/11/29 17:41 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=51.75912~11.35306&lvl=12.0&setlang=zh-Hans) 2023/12/28 17:39 (当地)
@@ -211,10 +219,4 @@ order: 5
 >点赞人数：**4**
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/023065f841be8fc2ef00308ae793a107.jpg) 
- ## [CN-3641753](https://www.postcrossing.com/postcards/CN-3641753) 
- >寄往  :belgium:
->
->点赞人数：**1**
-
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/acy5i7qaiin0x199jacwdn8spxzg6pz8.jpg) 
  
