@@ -243,7 +243,7 @@ def getCardStoryList(type):
             picList = f'@tab 图片\n![]({picDriverPath}/{picFileName})\n\n' if picFileName !='noPic.png' else ''
             list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
             f'> 寄往 {userInfo} {countryNameEmoji}\n' \
-            f'> 📏 {distance} km\n⏱ {travel_time_local}\n\n' \
+            f'{travel_time_local} 📏 {distance} | ⏱ {travel_days}\n\n' \
             f':::tabs\n' \
             f'{picList}' \
             f'{comment}\n\n' \
@@ -402,7 +402,7 @@ def get_HTML_table(type, tableName):
         
         if type =="sent":
             formatted_item = {
-                'ID号': f"<a href='{baseurl}/travelingpostcard/{stats['id']}'>{stats['id']}</a>",
+                'ID号': f"<a href='{baseurl}/postcards/{stats['id']}'>{stats['id']}</a>",
                 '收信人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
                 '寄往地区': f"{stats['receivedCountry']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
                 '寄出时间': sent_time,
@@ -412,7 +412,7 @@ def get_HTML_table(type, tableName):
             }
         elif type =="received":
             formatted_item = {
-                'ID号': f"<a href='{baseurl}/travelingpostcard/{stats['id']}'>{stats['id']}</a>",
+                'ID号': f"<a href='{baseurl}/postcards/{stats['id']}'>{stats['id']}</a>",
                 '发信人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
                 '来自地区': f"{stats['sentCountry']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
                 '寄出时间': sent_time,

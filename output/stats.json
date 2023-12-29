@@ -3,12 +3,12 @@
     "name": "Germany",
     "countryCode": "DE",
     "flagEmoji": ":de:",
-    "value": 25,
-    "sentNum": 11,
+    "value": 26,
+    "sentNum": 12,
     "receivedNum": 14,
-    "sentAvg": 38.5,
+    "sentAvg": 37.7,
     "receivedAvg": 36.3,
-    "sentMedian": 37,
+    "sentMedian": 35.0,
     "receivedMedian": 28.5
   },
   {
