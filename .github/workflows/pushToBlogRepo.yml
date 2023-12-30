@@ -20,6 +20,8 @@ jobs:
         run: |
           mkdir -p "${{ env.blog_path }}"
           chmod 755 "${{ env.blog_path }}"
+          chmod 755 "./output"
+          chmod 755 "./gallery"
           cp ./output/信息汇总.md "${{ env.blog_path }}/信息汇总.md"
           echo '信息汇总.md 已复制到${{ env.blog_path }}'  
           
