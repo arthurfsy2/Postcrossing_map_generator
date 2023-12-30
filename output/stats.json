@@ -1,5 +1,17 @@
 [
   {
+    "name": "Germany",
+    "countryCode": "DE",
+    "flagEmoji": ":de:",
+    "value": 27,
+    "sentNum": 13,
+    "receivedNum": 14,
+    "sentAvg": 36.8,
+    "receivedAvg": 36.3,
+    "sentMedian": 33,
+    "receivedMedian": 28.5
+  },
+  {
     "name": "Russia",
     "countryCode": "RU",
     "flagEmoji": ":ru:",
@@ -10,18 +22,6 @@
     "receivedAvg": 85.3,
     "sentMedian": 42.0,
     "receivedMedian": 73
-  },
-  {
-    "name": "Germany",
-    "countryCode": "DE",
-    "flagEmoji": ":de:",
-    "value": 26,
-    "sentNum": 12,
-    "receivedNum": 14,
-    "sentAvg": 37.7,
-    "receivedAvg": 36.3,
-    "sentMedian": 35.0,
-    "receivedMedian": 28.5
   },
   {
     "name": "Netherlands",

@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（我收到的赞：26）
+title: 明信片展示墙（我收到的赞：27）
 icon: address-card
 date: 2023-12-30
 category:
@@ -219,4 +219,10 @@ order: 5
 >点赞人数：**4**
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/023065f841be8fc2ef00308ae793a107.jpg) 
+ ## [CN-3640692](https://www.postcrossing.com/postcards/CN-3640692) 
+ >寄往  :de:
+>
+>点赞人数：**1**
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/46hy3aa8nvjf50qinzh36mpbb132twu5.jpg) 
  
