@@ -3,6 +3,9 @@ name: 推送到Blog仓库
 on:
   workflow_dispatch:
   workflow_call:
+  push:
+    branches:
+      - main
 
 env:
   blog_path: "src/Arthur/postcrossing"
@@ -13,6 +16,9 @@ jobs:
     name: 同步
     runs-on: ubuntu-latest
     steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+        
       - name: 复制文件
         run: |
           mkdir -p "${{ env.blog_path }}"
