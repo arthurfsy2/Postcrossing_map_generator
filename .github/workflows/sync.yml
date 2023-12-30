@@ -63,16 +63,6 @@ jobs:
           git push || echo "nothing to push"
           echo "PUSH_TO_GITHUB=$PUSH_TO_GITHUB"
 
-  publish_github_pages:
-    if: needs.sync.outputs.PUSH_TO_GITHUB != 'false'
-    name: 推送文件到Blog仓库
-    runs-on: ubuntu-latest
-    needs:
-      - sync
-    steps:
-      - name: Checkout最新版本
-        uses: actions/checkout@v3
-      
       - name: 复制文件
         run: |
           mkdir -p "${{ env.blog_path }}"
