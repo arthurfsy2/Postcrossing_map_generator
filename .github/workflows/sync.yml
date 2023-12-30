@@ -11,13 +11,14 @@ on:
 env:
   GITHUB_NAME: arthurfsy2
   GITHUB_EMAIL: fsyflh@gmail.com
-  blog_path: "src/Arthur/postcrossing"
-  blog_repo: "git@github.com:arthurfsy2/arthurfsy2.github.io.git"
+  PUSH_TO_GITHUB: true
 
 jobs:
   sync:
     name: 同步
     runs-on: ubuntu-latest
+    outputs:
+      PUSH_TO_GITHUB: ${{ steps.push.outputs.PUSH_TO_GITHUB }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -51,13 +52,22 @@ jobs:
         run: rm -rf scripts/__pycache__/    
       
       - name: 提交
+        id: push
         run: |
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
-          git commit -m '已更新数据' || echo "nothing to commit"
+          git commit -m '已更新数据' || (echo "nothing to commit" && echo "PUSH_TO_GITHUB=false" >> "$GITHUB_OUTPUT")
           git push || echo "nothing to push"
+          echo "PUSH_TO_GITHUB=$PUSH_TO_GITHUB"
 
+  publish_github_pages:
+    if: needs.sync.outputs.PUSH_TO_GITHUB != 'false'
+    name: 推送文件到Blog仓库
+    uses: arthurfsy2/Postcrossing_map_generator/.github/workflows/pushToBlogRepo.yml@main
+    needs:
+      - sync
+                      
       # - name: 复制文件
       #   run: |
       #     mkdir -p "${{ env.blog_path }}"
@@ -91,5 +101,4 @@ jobs:
       #     CLEAR_GLOBS_FILE: "scripts/.clear-target-files"
 
       
-      - name: 删除缓存文件
-        run: rm -rf ${{ env.blog_path }}
+      
