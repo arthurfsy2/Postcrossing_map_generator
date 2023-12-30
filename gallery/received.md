@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（收到：64）
 icon: address-card
-date: 2023-12-29
+date: 2023-12-30
 category:
   - Arthur
 tag:
@@ -10,6 +10,42 @@ order: 3
 ---
 
 ### [arthurfsy's received](https://www.postcrossing.com/user/arthurfsy/gallery/received)
+
+## [CA-1412998](https://www.postcrossing.com/postcards/CA-1412998) 
+ >来自 [yuliavolosevych](https://www.postcrossing.com/user/yuliavolosevych) :canada:
+> 📤[Canada](https://www.bing.com/maps/?cp=45.50884~-73.58781&lvl=12.0&setlang=zh-Hans) 2023/12/05 11:41 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/12/29 21:09 (当地)
+ 📏 12,404 | ⏱ 24
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/87xk4heemaugky0k4ekus8hs5m6g8k5r.jpg)
+
+## [RU-9911406](https://www.postcrossing.com/postcards/RU-9911406) 
+ >来自 [Reymas](https://www.postcrossing.com/user/Reymas) :ru:
+> 📤[Russia](https://www.bing.com/maps/?cp=55.75222~37.61556&lvl=12.0&setlang=zh-Hans) 2023/12/05 19:41 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/12/29 21:06 (当地)
+ 📏 7,123 | ⏱ 24
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/eqylfu3vj74g38w0a6258ya0spo2ohh9.jpg)
+
+## [BY-3083966](https://www.postcrossing.com/postcards/BY-3083966) 
+ >来自 [gallinka](https://www.postcrossing.com/user/gallinka) :belarus:
+> 📤[Belarus](https://www.bing.com/maps/?cp=52.4345~30.9754&lvl=12.0&setlang=zh-Hans) 2023/12/05 19:41 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/12/29 21:05 (当地)
+ 📏 7,591 | ⏱ 24
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ue5f37htbbdaeriqqkse6fvn8imnfyt1.jpg)
+
+## [RU-9847210](https://www.postcrossing.com/postcards/RU-9847210) 
+ >来自 [Di_Purple](https://www.postcrossing.com/user/Di_Purple) :ru:
+> 📤[Russia](https://www.bing.com/maps/?cp=44.89497~37.31623&lvl=12.0&setlang=zh-Hans) 2023/10/17 09:56 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/12/29 21:00 (当地)
+ 📏 7,254 | ⏱ 73
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ecsxuv0c10jn33u29cdrn7dk90cwtmh4.jpg)
 
 ## [NL-5628599](https://www.postcrossing.com/postcards/NL-5628599) 
  >来自 [hippoos](https://www.postcrossing.com/user/hippoos) :netherlands:
@@ -550,32 +586,4 @@ order: 3
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/f034894d687e190e2552bb2b6946be17.jpg)
-
-## [CA-1412998](https://www.postcrossing.com/postcards/CA-1412998) 
- >来自 [yuliavolosevych](https://www.postcrossing.com/user/yuliavolosevych) :canada:
->
-
-
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/87xk4heemaugky0k4ekus8hs5m6g8k5r.jpg)
-
-## [RU-9911406](https://www.postcrossing.com/postcards/RU-9911406) 
- >来自 [Reymas](https://www.postcrossing.com/user/Reymas) :ru:
->
-
-
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/eqylfu3vj74g38w0a6258ya0spo2ohh9.jpg)
-
-## [BY-3083966](https://www.postcrossing.com/postcards/BY-3083966) 
- >来自 [gallinka](https://www.postcrossing.com/user/gallinka) :belarus:
->
-
-
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ue5f37htbbdaeriqqkse6fvn8imnfyt1.jpg)
-
-## [RU-9847210](https://www.postcrossing.com/postcards/RU-9847210) 
- >来自 [Di_Purple](https://www.postcrossing.com/user/Di_Purple) :ru:
->
-
-
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ecsxuv0c10jn33u29cdrn7dk90cwtmh4.jpg)
 
