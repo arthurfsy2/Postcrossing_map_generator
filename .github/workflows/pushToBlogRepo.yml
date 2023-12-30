@@ -5,7 +5,7 @@ on:
   workflow_call:
 
 env:
-  blog_path: "./gallery"
+  blog_path: "./src/Arthur/postcrossing"
   blog_repo: "git@github.com:arthurfsy2/arthurfsy2.github.io.git"
 
 jobs:
@@ -20,7 +20,6 @@ jobs:
         run: |
           mkdir -p "${{ env.blog_path }}"
           chmod 755 "${{ env.blog_path }}"
-          
           chmod 755 "./gallery/信息汇总.md"
           cp ./gallery/信息汇总.md "${{ env.blog_path }}/信息汇总.md"
           echo '信息汇总.md 已复制到${{ env.blog_path }}'  
