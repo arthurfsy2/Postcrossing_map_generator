@@ -5,7 +5,7 @@ on:
   workflow_call:
 
 env:
-  blog_path: "./src/Arthur/postcrossing"
+  blog_path: "./gallery"
   blog_repo: "git@github.com:arthurfsy2/arthurfsy2.github.io.git"
 
 jobs:
@@ -14,26 +14,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         
       - name: 复制文件
         run: |
           mkdir -p "${{ env.blog_path }}"
           chmod 755 "${{ env.blog_path }}"
-          chmod 755 "./output"
-          chmod 755 "./gallery"
-          cp ./output/信息汇总.md "${{ env.blog_path }}/信息汇总.md"
+          
+          chmod 755 "./gallery/信息汇总.md"
+          cp ./gallery/信息汇总.md "${{ env.blog_path }}/信息汇总.md"
           echo '信息汇总.md 已复制到${{ env.blog_path }}'  
           
+          chmod 755 "./gallery/sent.md"
           cp ./gallery/sent.md "${{ env.blog_path }}/sent.md" 
           echo 'sent.md 已复制到${{ env.blog_path }}'  
-        
+         
+          chmod 755 "./gallery/received.md"
           cp ./gallery/received.md "${{ env.blog_path }}/received.md"
           echo 'received.md 已复制到${{ env.blog_path }}'  
           
+          chmod 755 "./gallery/popular.md"
           cp ./gallery/popular.md "${{ env.blog_path }}/popular.md" 
           echo 'popular.md 已复制到${{ env.blog_path }}'
          
+          chmod 755 "./gallery/favourites.md"
           cp ./gallery/favourites.md "${{ env.blog_path }}/favourites.md" 
           echo 'favourites.md 已复制到${{ env.blog_path }}'
           

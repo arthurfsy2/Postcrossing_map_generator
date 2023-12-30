@@ -146,7 +146,7 @@ def replaceTemplate():
         print(f"————————————————————")
 
 
-    with open(f"./output/信息汇总.md", "w",encoding="utf-8") as f:
+    with open(f"./gallery/信息汇总.md", "w",encoding="utf-8") as f:
         f.write(dataNew)  
 
     blog_path = r"D:\web\Blog\src\Arthur\Postcrossing\信息汇总.md"
