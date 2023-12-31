@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：64）
+title: 明信片展示墙（收到：65）
 icon: address-card
-date: 2023-12-30
+date: 2023-12-31
 category:
   - Arthur
 tag:
@@ -586,4 +586,11 @@ order: 3
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/f034894d687e190e2552bb2b6946be17.jpg)
+
+## [FI-4527706](https://www.postcrossing.com/postcards/FI-4527706) 
+ >来自 [Salladeemus](https://www.postcrossing.com/user/Salladeemus) :finland:
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/3e4hr6a3so631dpg9nb8n568vz0vgdul.jpg)
 
