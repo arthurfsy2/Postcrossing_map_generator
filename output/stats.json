@@ -87,13 +87,13 @@
     "name": "Finland",
     "countryCode": "FI",
     "flagEmoji": ":finland:",
-    "value": 9,
+    "value": 10,
     "sentNum": 6,
-    "receivedNum": 3,
+    "receivedNum": 4,
     "sentAvg": 27.5,
-    "receivedAvg": 20.3,
+    "receivedAvg": 21.8,
     "sentMedian": 25.5,
-    "receivedMedian": 19
+    "receivedMedian": 22.5
   },
   {
     "name": "Czechia",
