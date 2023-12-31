@@ -105,11 +105,11 @@ def createMD(type):
             with open(filename_md, "w", encoding="utf-8") as f:    
                 f.write(content)
             print(f"\n{type}.md已成功更新")
-            #os.remove(f"{dbpath}BAK")
         else:
             print(f"{dbpath} 暂无更新") 
             print(f"\n{type}.md无更新")
-            #os.remove(f"{dbpath}BAK")        
+            print("————————————————————")
+    
 
     # 换为你的blog的本地链接，可自动同步过去
     blog_path = rf"D:\web\Blog\src\Arthur\Postcrossing\{type}.md"
@@ -117,8 +117,6 @@ def createMD(type):
         with open(blog_path, "w",encoding="utf-8") as f:
             f.write(content) 
     
-
-PicDataCheck(account,Cookie)
 for type in types:
     createMD(type) 
 

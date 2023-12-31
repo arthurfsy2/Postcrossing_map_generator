@@ -287,8 +287,6 @@ def replaceJsRef(fileFullName):
     os.remove(fileFullName)
     os.rename(f"{fileFullName}.bak", fileFullName)
 
-
-MapDataCheck(account,Cookie,types_map)  
 if os.path.exists(f"{dbpath}BAK"):
     dbStat = compareMD5(dbpath, f"{dbpath}BAK")
     if dbStat == "1":

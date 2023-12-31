@@ -10,7 +10,7 @@ from wordcloud import WordCloud
 from opencc import OpenCC
 import requests
 import emoji
-from multiDownload import replaceTemplateCheck,getAccountStat
+from multiDownload import getAccountStat
 from common_tools import readDB,writeDB,compareMD5,translate
 import pytz
 import shutil
@@ -548,7 +548,6 @@ def picTowebp(input_dir, output_dir):
             print(f"文件 {file_name} 不需要转换")
             
 
-replaceTemplateCheck(account, Cookie)
 picTowebp("./template/rawPic","./template/content")
 excel_file="./template/postcardStory.xlsx"
 StoryXLS2DB(excel_file)

@@ -29,6 +29,8 @@ apikey = options.apikey
 command = f'python scripts/login.py "{account}" "{password}"'
 subprocess.run(command, shell=True)
 
+command = f'python scripts/multiDownload.py "{account}" "{password}" "{nickName}" "{repo}"'
+subprocess.run(command, shell=True)
 
 command = f'python scripts/createGallery.py "{account}" "{nickName}" "{repo}"'
 subprocess.run(command, shell=True)

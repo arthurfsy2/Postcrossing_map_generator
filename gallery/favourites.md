@@ -13,7 +13,7 @@ order: 4
 
 ## [LT-913966](https://www.postcrossing.com/postcards/LT-913966) 
  >来自 [valras](https://www.postcrossing.com/user/valras) :lithuania:
-> 📤[Lithuania](https://www.bing.com/maps/?cp=54.64364~25.05162&lvl=12.0&setlang=zh-Hans) 2023/10/17 09:57 (当地)
+> 📤 [Lithuania](https://www.bing.com/maps/?cp=54.64364~25.05162&lvl=12.0&setlang=zh-Hans) 2023/10/17 09:57 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/11/30 13:00 (当地)
  📏 7,928 | ⏱ 44
 
@@ -22,7 +22,7 @@ order: 4
 
 ## [RU-9830214](https://www.postcrossing.com/postcards/RU-9830214) 
  >来自 [EvaS18](https://www.postcrossing.com/user/EvaS18) :ru:
-> 📤[Russia](https://www.bing.com/maps/?cp=55.38752~36.73307&lvl=12.0&setlang=zh-Hans) 2023/10/01 21:36 (当地)
+> 📤 [Russia](https://www.bing.com/maps/?cp=55.38752~36.73307&lvl=12.0&setlang=zh-Hans) 2023/10/01 21:36 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/11/19 18:39 (当地)
  📏 7,180 | ⏱ 49
 
@@ -31,7 +31,7 @@ order: 4
 
 ## [NL-5593570](https://www.postcrossing.com/postcards/NL-5593570) 
  >来自 [essie1109](https://www.postcrossing.com/user/essie1109) :netherlands:
-> 📤[Netherlands](https://www.bing.com/maps/?cp=51.84917~5.43333&lvl=12.0&setlang=zh-Hans) 2023/10/17 08:56 (当地)
+> 📤 [Netherlands](https://www.bing.com/maps/?cp=51.84917~5.43333&lvl=12.0&setlang=zh-Hans) 2023/10/17 08:56 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/11/19 18:37 (当地)
  📏 9,255 | ⏱ 33
 
@@ -40,7 +40,7 @@ order: 4
 
 ## [US-9761471](https://www.postcrossing.com/postcards/US-9761471) 
  >来自 [ilysejohnson](https://www.postcrossing.com/user/ilysejohnson) :us:
-> 📤[U.S.A.](https://www.bing.com/maps/?cp=37.55376~-77.46026&lvl=12.0&setlang=zh-Hans) 2023/09/28 10:00 (当地)
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=37.55376~-77.46026&lvl=12.0&setlang=zh-Hans) 2023/09/28 10:00 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/10/26 13:53 (当地)
  📏 13,219 | ⏱ 28
 
@@ -49,7 +49,7 @@ order: 4
 
 ## [DE-13430236](https://www.postcrossing.com/postcards/DE-13430236) 
  >来自 [annegret](https://www.postcrossing.com/user/annegret) :de:
-> 📤[Germany](https://www.bing.com/maps/?cp=51.45657~7.01228&lvl=12.0&setlang=zh-Hans) 2023/09/28 16:00 (当地)
+> 📤 [Germany](https://www.bing.com/maps/?cp=51.45657~7.01228&lvl=12.0&setlang=zh-Hans) 2023/09/28 16:00 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/10/11 13:57 (当地)
  📏 9,178 | ⏱ 13
 
@@ -58,7 +58,7 @@ order: 4
 
 ## [BY-1456970](https://www.postcrossing.com/postcards/BY-1456970) 
  >来自 [olive_chemistry](https://www.postcrossing.com/user/olive_chemistry) :belarus:
-> 📤[Belarus](https://www.bing.com/maps/?cp=53.9~27.56667&lvl=12.0&setlang=zh-Hans) 2014/11/19 09:11 (当地)
+> 📤 [Belarus](https://www.bing.com/maps/?cp=53.9~27.56667&lvl=12.0&setlang=zh-Hans) 2014/11/19 09:11 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2015/01/04 13:04 (当地)
  📏 6,668 | ⏱ 46
 
@@ -67,7 +67,7 @@ order: 4
 
 ## [UA-1140480](https://www.postcrossing.com/postcards/UA-1140480) 
  >来自 [Shvets-Jane](https://www.postcrossing.com/user/Shvets-Jane) :ukraine:
-> 📤[Ukraine](https://www.bing.com/maps/?cp=50.45466~30.5238&lvl=12.0&setlang=zh-Hans) 2014/09/01 11:08 (当地)
+> 📤 [Ukraine](https://www.bing.com/maps/?cp=50.45466~30.5238&lvl=12.0&setlang=zh-Hans) 2014/09/01 11:08 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/12/30 11:24 (当地)
  📏 6,539 | ⏱ 120
 
@@ -76,7 +76,7 @@ order: 4
 
 ## [KR-112465](https://www.postcrossing.com/postcards/KR-112465) 
  >来自 [minjeomi89](https://www.postcrossing.com/user/minjeomi89) :kr:
-> 📤[Korea (South)](https://www.bing.com/maps/?cp=35.10168~129.03004&lvl=12.0&setlang=zh-Hans) 2014/11/19 15:07 (当地)
+> 📤 [Korea (South)](https://www.bing.com/maps/?cp=35.10168~129.03004&lvl=12.0&setlang=zh-Hans) 2014/11/19 15:07 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/12/24 17:32 (当地)
  📏 2,193 | ⏱ 35
 
@@ -85,7 +85,7 @@ order: 4
 
 ## [FI-2219730](https://www.postcrossing.com/postcards/FI-2219730) 
  >来自 [Holappa](https://www.postcrossing.com/user/Holappa) :finland:
-> 📤[Finland](https://www.bing.com/maps/?cp=60.29414~25.04099&lvl=12.0&setlang=zh-Hans) 2014/10/02 12:15 (当地)
+> 📤 [Finland](https://www.bing.com/maps/?cp=60.29414~25.04099&lvl=12.0&setlang=zh-Hans) 2014/10/02 12:15 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/10/21 16:12 (当地)
  📏 6,698 | ⏱ 19
 
@@ -94,7 +94,7 @@ order: 4
 
 ## [CZ-524596](https://www.postcrossing.com/postcards/CZ-524596) 
  >来自 [Shalila](https://www.postcrossing.com/user/Shalila) &#x1f1e8;&#x1f1ff;
-> 📤[Czechia](https://www.bing.com/maps/?cp=50.23271~12.87117&lvl=12.0&setlang=zh-Hans) 2014/10/02 11:48 (当地)
+> 📤 [Czechia](https://www.bing.com/maps/?cp=50.23271~12.87117&lvl=12.0&setlang=zh-Hans) 2014/10/02 11:48 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/10/20 18:45 (当地)
  📏 7,744 | ⏱ 18
 
@@ -103,7 +103,7 @@ order: 4
 
 ## [JP-546807](https://www.postcrossing.com/postcards/JP-546807) 
  >来自 [khitomi](https://www.postcrossing.com/user/khitomi) :jp:
-> 📤[Japan](https://www.bing.com/maps/?cp=34.4~132.45&lvl=12.0&setlang=zh-Hans) 2014/06/04 17:12 (当地)
+> 📤 [Japan](https://www.bing.com/maps/?cp=34.4~132.45&lvl=12.0&setlang=zh-Hans) 2014/06/04 17:12 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/06/16 16:08 (当地)
  📏 2,493 | ⏱ 12
 
@@ -112,7 +112,7 @@ order: 4
 
 ## [RU-1876931](https://www.postcrossing.com/postcards/RU-1876931) 
  >来自 [Krasovskii](https://www.postcrossing.com/user/Krasovskii) :ru:
-> 📤[Russia](https://www.bing.com/maps/?cp=60.70763~28.75283&lvl=12.0&setlang=zh-Hans) 2013/07/22 20:14 (当地)
+> 📤 [Russia](https://www.bing.com/maps/?cp=60.70763~28.75283&lvl=12.0&setlang=zh-Hans) 2013/07/22 20:14 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/05/12 12:14 (当地)
  📏 6,503 | ⏱ 294
 
@@ -121,7 +121,7 @@ order: 4
 
 ## [NL-2374423](https://www.postcrossing.com/postcards/NL-2374423) 
  >来自 [Anoushka](https://www.postcrossing.com/user/Anoushka) :netherlands:
-> 📤[Netherlands](https://www.bing.com/maps/?cp=52.2375~4.82639&lvl=12.0&setlang=zh-Hans) 2014/03/02 13:22 (当地)
+> 📤 [Netherlands](https://www.bing.com/maps/?cp=52.2375~4.82639&lvl=12.0&setlang=zh-Hans) 2014/03/02 13:22 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/03/24 12:14 (当地)
  📏 8,157 | ⏱ 22
 

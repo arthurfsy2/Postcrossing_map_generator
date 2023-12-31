@@ -120,7 +120,7 @@ def getGalleryInfo(type ,account ,Cookie):
     content_all=[]
     while i <= pageNum:
         all_url = f"{galleryUrl}/{type}/{i}"
-        print(f"正在获取/{account}/gallery/{type}/{i}的数据")
+        print(f"正在获取/gallery/{type}({i}/{pageNum})")
         response = requests.get(all_url,headers=headers)
         
         content_i = response.text.replace('"//', '"https://')
@@ -162,8 +162,7 @@ def getGalleryInfo(type ,account ,Cookie):
         tablename = "Galleryinfo"
         writeDB(dbpath, content_all,tablename)
         i += 1
-        print(f"已更新Galleryinfo_{type}：数据库{dbpath}\n")
-        print("————————————————————")
+    print("————————————————————")
 
 
 # 读取本地数据库的明信片ID
@@ -611,7 +610,6 @@ def MapDataCheck(account,Cookie,types_map):
 # 定义createGallery.py的前置检查条件
 def PicDataCheck(account, Cookie):    
     print("————————————————————") 
-    stat,content_raw,types = getAccountStat(account, Cookie)
     getPageNum(stat,content_raw,types)
     getUserStat(account)
     for type in types:
@@ -619,15 +617,6 @@ def PicDataCheck(account, Cookie):
     for type in types:
         multiDownload(type) # 批量下载图片
     
-# 定义createPersonalPage.py的前置检查条件    
-def replaceTemplateCheck(account, Cookie):  
-    print("————————————————————")
-    stat,content_raw,types = getAccountStat(account, Cookie)
-    getPageNum(stat,content_raw,types)
-    getUserStat(account)
-    for type in types:
-        getGalleryInfo(type ,account ,Cookie) 
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -645,17 +634,11 @@ if __name__ == "__main__":
     repo = options.repo
 
     # 获取当前日期
-    current_date = datetime.now().date()
-    
+    current_date = datetime.now().date() 
     # 将日期格式化为指定格式
     date = current_date.strftime("%Y-%m-%d")
-
     url = f"https://www.postcrossing.com/user/{account}/gallery"  # 替换为您要获取数据的链接
-    
-    
     types_map = ['sent', 'received']  
-
-
-
-    
     stat,content_raw,types = getAccountStat(account, Cookie)
+    MapDataCheck(account,Cookie,types_map)
+    PicDataCheck(account, Cookie)
