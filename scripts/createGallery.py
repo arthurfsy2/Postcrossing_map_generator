@@ -67,7 +67,7 @@ def createMD(type):
         FromCoor= json.loads(id["FromCoor"]) if id["FromCoor"] else ""
         ToCoor= json.loads(id["ToCoor"]) if id["ToCoor"] else ""
 
-        travel_time_local = f'> 📤[{sentCountry}](https://www.bing.com/maps/?cp={FromCoor[0]}~{FromCoor[1]}&lvl=12.0&setlang=zh-Hans) {sentDate_local} (当地)\n' \
+        travel_time_local = f'> 📤 [{sentCountry}](https://www.bing.com/maps/?cp={FromCoor[0]}~{FromCoor[1]}&lvl=12.0&setlang=zh-Hans) {sentDate_local} (当地)\n' \
                             f'> 📥 [{receivedCountry}](https://www.bing.com/maps/?cp={ToCoor[0]}~{ToCoor[1]}&lvl=12.0&setlang=zh-Hans) {receivedDate_local} (当地)\n' if id["FromCoor"] else ""
         userInfo = f'{from_or_to} {id["userInfo"]}' if id["userInfo"] is not None else ""
         #userInfo}]({baseUrl}/user/{userInfo}

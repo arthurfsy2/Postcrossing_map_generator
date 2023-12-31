@@ -86,12 +86,12 @@
   },
   {
     "date": "2015-01",
-    "sent": 6,
+    "sent": 5,
     "received": 1
   },
   {
     "date": "2015-02",
-    "sent": 2,
+    "sent": 3,
     "received": 0
   },
   {
@@ -127,6 +127,6 @@
   {
     "date": "2023-12",
     "sent": 8,
-    "received": 6
+    "received": 7
   }
 ]

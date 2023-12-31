@@ -1,5 +1,4 @@
 import pandas as pd
-import sqlite3
 import json
 import os
 from datetime import datetime, timedelta
@@ -14,7 +13,8 @@ import emoji
 from multiDownload import replaceTemplateCheck,getAccountStat
 from common_tools import readDB,writeDB,compareMD5,translate
 import pytz
-
+import shutil
+from PIL import Image
 import re
 
 with open("scripts/config.json", "r") as file:
@@ -197,7 +197,7 @@ def getCardStoryList(type):
         
         FromCoor= json.loads(id["FromCoor"]) if id["FromCoor"] else ""
         ToCoor= json.loads(id["ToCoor"]) if id["ToCoor"] else ""
-        travel_time_local = f'> 📤[{sentCountry}](https://www.bing.com/maps/?cp={FromCoor[0]}~{FromCoor[1]}&lvl=12.0&setlang=zh-Hans) {sentDate_local} (当地)\n' \
+        travel_time_local = f'> 📤 [{sentCountry}](https://www.bing.com/maps/?cp={FromCoor[0]}~{FromCoor[1]}&lvl=12.0&setlang=zh-Hans) {sentDate_local} (当地)\n' \
                             f'> 📥 [{receivedCountry}](https://www.bing.com/maps/?cp={ToCoor[0]}~{ToCoor[1]}&lvl=12.0&setlang=zh-Hans) {receivedDate_local} (当地)\n' if id["FromCoor"] else ""
 
         def remove_blank_lines(text):
@@ -524,8 +524,32 @@ def htmlFormat(title, data):
     '''
     return html_content
 
+def picTowebp(input_dir, output_dir):
+    # 获取input_dir目录下的所有文件名
+    file_names = os.listdir(input_dir)
+    for file_name in file_names:
+        # 获取文件的完整路径
+        file_path = os.path.join(input_dir, file_name)
+        # 检查文件后缀名是否为.jpg、.jpeg或.png
+        if file_name.lower().endswith(('.jpg', '.jpeg', '.png')):
+            try:
+                # 打开图片文件
+                image = Image.open(file_path)
+                # 构建输出文件的路径和文件名
+                output_file_path = os.path.join(output_dir, os.path.splitext(file_name)[0] + '.webp')
+                # 转换为webp格式并保存
+                image.save(output_file_path, 'webp')
+                # 删除原有文件
+                os.remove(file_path)
+                print(f"文件 {file_name} 转换成功并已删除原有文件")
+            except Exception as e:
+                print(f"文件 {file_name} 转换失败: {str(e)}")
+        else:
+            print(f"文件 {file_name} 不需要转换")
+            
 
 replaceTemplateCheck(account, Cookie)
+picTowebp("./template/rawPic","./template/content")
 excel_file="./template/postcardStory.xlsx"
 StoryXLS2DB(excel_file)
 get_HTML_table("sent","Mapinfo")
