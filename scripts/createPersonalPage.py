@@ -172,83 +172,106 @@ def StoryXLS2DB(excel_file):
     tablename = "postcardStory"
     writeDB(dbpath, content_all,tablename)
 
-
+def getCardStoryListBYyear(type):
+    list_all = ""
+    content = readDB(dbpath, type, "postcardStory")
+    total_num = str(len(content))
+    content_years = {}
+    for item in content:
+        received_year = item['receivedDate'].split('/')[0]
+        if received_year not in content_years:
+            content_years[received_year] = []
+        content_years[received_year].append(item)
+    for year in content_years:
+        content_years[year] = sorted(content_years[year], key=lambda x: x['receivedDate'], reverse=True)
+    return content_years,total_num
+    # 其他代码
 
 def getCardStoryList(type):
-    list_all = ""
-    content =readDB(dbpath, type,"postcardStory")
-    num = str(len(content))
-    for id in content:
-        postcardID = id["id"]  
-        content_original = id["content_original"]
-        content_cn = id["content_cn"]
-        comment_original = id["comment_original"] 
-        comment_cn = id["comment_cn"] 
-        travel_days = id["travel_days"] 
-        sentAddr = id["sentAddr"] 
-        sentCountry = id["sentCountry"]
-        receivedAddr = id["receivedAddr"] 
-        receivedCountry = id["receivedCountry"] 
-        sentDate = id["sentDate"]
-        receivedDate= id["receivedDate"]
-        sentDate_local = id["sentDate_local"]
-        receivedDate= id["receivedDate"]
-        receivedDate_local= id["receivedDate_local"]
-        
-        FromCoor= json.loads(id["FromCoor"]) if id["FromCoor"] else ""
-        ToCoor= json.loads(id["ToCoor"]) if id["ToCoor"] else ""
-        travel_time_local = f'> 📤 [{sentCountry}](https://www.bing.com/maps/?cp={FromCoor[0]}~{FromCoor[1]}&lvl=12.0&setlang=zh-Hans) {sentDate_local} (当地)\n' \
-                            f'> 📥 [{receivedCountry}](https://www.bing.com/maps/?cp={ToCoor[0]}~{ToCoor[1]}&lvl=12.0&setlang=zh-Hans) {receivedDate_local} (当地)\n' if id["FromCoor"] else ""
-
-        def remove_blank_lines(text):
-            if text:
-                return "\n".join(line for line in text.splitlines() if line.strip())
-            return text
-
-        # 去掉空白行
-        content_original = remove_blank_lines(content_original)
-        content_cn = remove_blank_lines(content_cn)
-        comment_original = remove_blank_lines(comment_original)
-        comment_cn = remove_blank_lines(comment_cn)
-
-        if comment_original:
-            comment = f'@tab 回复\n' \
-                    f'* 回复原文\n\n> {comment_original}\n\n* 翻译：\n\n> {comment_cn}\n\n:::' 
+    content_all = ""
+    year_all = ""
+    content_years,total_num = getCardStoryListBYyear(type)
+    for year in content_years:
+        content = content_years.get(year)
+        list_all = ""
+        num = str(len(content))
+        for id in content:
+            postcardID = id["id"]  
+            content_original = id["content_original"]
+            content_cn = id["content_cn"]
+            comment_original = id["comment_original"] 
+            comment_cn = id["comment_cn"] 
+            travel_days = id["travel_days"] 
+            sentAddr = id["sentAddr"] 
+            sentCountry = id["sentCountry"]
+            receivedAddr = id["receivedAddr"] 
+            receivedCountry = id["receivedCountry"] 
+            sentDate = id["sentDate"]
+            receivedDate= id["receivedDate"]
+            sentDate_local = id["sentDate_local"]
+            receivedDate= id["receivedDate"]
+            receivedDate_local= id["receivedDate_local"]
             
-        else:
-            comment = ":::"      
-        userInfo = f'[{id["userInfo"]}](https://www.postcrossing.com/user/{id["userInfo"]})'
+            FromCoor= json.loads(id["FromCoor"]) if id["FromCoor"] else ""
+            ToCoor= json.loads(id["ToCoor"]) if id["ToCoor"] else ""
+            travel_time_local = f'> 📤 [{sentCountry}](https://www.bing.com/maps/?cp={FromCoor[0]}~{FromCoor[1]}&lvl=12.0&setlang=zh-Hans) {sentDate_local} (当地)\n' \
+                                f'> 📥 [{receivedCountry}](https://www.bing.com/maps/?cp={ToCoor[0]}~{ToCoor[1]}&lvl=12.0&setlang=zh-Hans) {receivedDate_local} (当地)\n' if id["FromCoor"] else ""
 
-        picFileName = id["picFileName"]
-        countryNameEmoji = id["countryNameEmoji"] if id["countryNameEmoji"] is not None else ""
+            def remove_blank_lines(text):
+                if text:
+                    return "\n".join(line for line in text.splitlines() if line.strip())
+                return text
 
-        distanceNum = id["distance"]
-        distance = format(distanceNum, ",")
-                          
-        if type == "received":
-            picList = f'<div class="image-preview">  <img src="{picDriverPath}/{picFileName}" />  <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>' if picFileName !='noPic.png' else f'<div class="image-preview"> <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>'
-            list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
-            f'> 来自 {userInfo} {countryNameEmoji}\n' \
-            f'{travel_time_local} 📏 {distance} | ⏱ {travel_days}\n\n' \
-            f':::tabs\n' \
-            f'@tab 图片\n' \
-            f'{picList}' \
-            f'\n\n' \
-            f'@tab 内容\n' \
-            f'* 卡片文字\n\n> {content_original}\n\n* 翻译：\n\n> {content_cn}\n\n' \
-            f'{comment}\n\n' \
-            f'---\n'   
-        else:
-            picList = f'@tab 图片\n![]({picDriverPath}/{picFileName})\n\n' if picFileName !='noPic.png' else ''
-            list = f'### [{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
-            f'> 寄往 {userInfo} {countryNameEmoji}\n' \
-            f'{travel_time_local} 📏 {distance} | ⏱ {travel_days}\n\n' \
-            f':::tabs\n' \
-            f'{picList}' \
-            f'{comment}\n\n' \
-            f'---\n'
-        list_all += list
-    return list_all,num
+            # 去掉空白行
+            content_original = remove_blank_lines(content_original)
+            content_cn = remove_blank_lines(content_cn)
+            comment_original = remove_blank_lines(comment_original)
+            comment_cn = remove_blank_lines(comment_cn)
+
+            if comment_original:
+                comment = f'@tab 回复\n' \
+                        f'* 回复原文\n\n> {comment_original}\n\n* 翻译：\n\n> {comment_cn}\n\n:::' 
+                
+            else:
+                comment = ":::"      
+            userInfo = f'[{id["userInfo"]}](https://www.postcrossing.com/user/{id["userInfo"]})'
+
+            picFileName = id["picFileName"]
+            countryNameEmoji = id["countryNameEmoji"] if id["countryNameEmoji"] is not None else ""
+
+            distanceNum = id["distance"]
+            distance = format(distanceNum, ",")
+                            
+            if type == "received":
+                picList = f'<div class="image-preview">  <img src="{picDriverPath}/{picFileName}" />  <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>' if picFileName !='noPic.png' else f'<div class="image-preview"> <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>'
+                
+                list = f'[{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
+                f'> 来自 {userInfo} {countryNameEmoji}\n' \
+                f'{travel_time_local} 📏 {distance} | ⏱ {travel_days}\n\n' \
+                f':::tabs\n' \
+                f'@tab 图片\n' \
+                f'{picList}' \
+                f'\n\n' \
+                f'@tab 内容\n' \
+                f'* 卡片文字\n\n> {content_original}\n\n* 翻译：\n\n> {content_cn}\n\n' \
+                f'{comment}\n\n' \
+                f'---\n'   
+            else:
+                picList = f'@tab 图片\n![]({picDriverPath}/{picFileName})\n\n' if picFileName !='noPic.png' else ''
+
+                list = f'[{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
+                f'> 寄往 {userInfo} {countryNameEmoji}\n' \
+                f'{travel_time_local} 📏 {distance} | ⏱ {travel_days}\n\n' \
+                f':::tabs\n' \
+                f'{picList}' \
+                f'{comment}\n\n' \
+                f'---\n'
+            list_all += list
+            year_all = f"### {year}({num})\n\n{list_all}"
+        # print("year_all:\n",year_all)
+        # print("————————————————————")
+        content_all += year_all    
+    return content_all,total_num
     
 
 def createCalendar():
@@ -387,8 +410,8 @@ def getTravelingID(account,type,Cookie):
     for i,stats in enumerate(data):
         baseurl = "https://www.postcrossing.com"
         formatted_item = {
-            'ID号': f"<a href='{baseurl}/travelingpostcard/{stats[0]}'>{stats[0]}</a>",
-            '收信人': f"<a href='{baseurl}/user/{stats[1]}'>{stats[1]}</a>",
+            'ID号': f"<a href='{baseurl}/travelingpostcard/{stats[0]}' target='_blank'>{stats[0]}</a>",
+            '收信人': f"<a href='{baseurl}/user/{stats[1]}' target='_blank'>{stats[1]}</a>",
             '国家': f"{countryList[stats[3]]} {emoji.emojize(countryEmojiList[stats[3]],language='alias')}",
             '寄出时间(当地)': get_local_date(stats[0][0:2],stats[4]),
             '距离(km)': f'{format(stats[6], ",")} km',
@@ -417,20 +440,20 @@ def get_HTML_table(type, tableName):
         distance = stats['distance']
         baseurl = "https://www.postcrossing.com"
         
-        if type =="sent":
+        if type == "sent":
             formatted_item = {
-                'ID号': f"<a href='{baseurl}/postcards/{stats['id']}'>{stats['id']}</a>",
-                '收信人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
+                'ID号': f"<a href='{baseurl}/postcards/{stats['id']}' target='_blank'>{stats['id']}</a>",
+                '收信人': f"<a href='{baseurl}/user/{stats['user']}' target='_blank'>{stats['user']}</a>",
                 '寄往地区': f"{stats['receivedCountry']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
                 '寄出时间(当地)': sent_time,
                 '收到时间(当地)': received_time,
                 '距离(km)': f'{format(distance, ",")}',
                 '天数': travel_days
             }
-        elif type =="received":
+        elif type == "received":
             formatted_item = {
-                'ID号': f"<a href='{baseurl}/postcards/{stats['id']}'>{stats['id']}</a>",
-                '发信人': f"<a href='{baseurl}/user/{stats['user']}'>{stats['user']}</a>",
+                'ID号': f"<a href='{baseurl}/postcards/{stats['id']}' target='_blank'>{stats['id']}</a>",
+                '发信人': f"<a href='{baseurl}/user/{stats['user']}' target='_blank'>{stats['user']}</a>",
                 '来自地区': f"{stats['sentCountry']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
                 '寄出时间(当地)': sent_time,
                 '收到时间(当地)': received_time,
@@ -544,8 +567,7 @@ def picTowebp(input_dir, output_dir):
                 print(f"文件 {file_name} 转换成功并已删除原有文件")
             except Exception as e:
                 print(f"文件 {file_name} 转换失败: {str(e)}")
-        else:
-            print(f"文件 {file_name} 不需要转换")
+
             
 
 picTowebp("./template/rawPic","./template/content")
