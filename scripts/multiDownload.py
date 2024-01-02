@@ -473,13 +473,13 @@ def getUserStat(account):
 
     # 创建一个字典用于存储汇总结果
     summary = {}
-
+    year_summary = {}
     # 遍历数据
     for item in a_data:
         # 将时间戳转换为YYYY-MM的格式
         timestamp = item[0]
         date = datetime.fromtimestamp(timestamp).strftime('%Y-%m')
-        
+        year = datetime.fromtimestamp(timestamp).strftime('%Y')
         # 判断sent还是received
         if item[2] == 's':
             key = 'sent'
@@ -487,17 +487,23 @@ def getUserStat(account):
             key = 'received'
         else:
             continue
-        
         # 更新汇总结果
         if date in summary:
             summary[date][key] += 1
         else:
             summary[date] = {'sent': 0, 'received': 0}
             summary[date][key] = 1
+        
+        if year in year_summary:
+            year_summary[year][key] += 1
+        else:
+            year_summary[year] = {'sent': 0, 'received': 0}
+            year_summary[year][key] = 1
 
     # 将汇总结果转换为新的数组
     #result = [{'date': date, 'num': summary[date]} for date in summary]
     result = [{'date': date, 'sent': summary[date]['sent'], 'received': summary[date]['received']} for date in summary]
+    result_year = [{'year': year, 'sent': year_summary[year]['sent'], 'received': year_summary[year]['received']} for year in year_summary]
     
     # 将结果输出到month.json文件中，以供“信息汇总.md"的收发记录（月度）模块使用
     with open(f"./output/month.json", 'w') as f:
@@ -505,6 +511,11 @@ def getUserStat(account):
 
     print(f"已生成output/month.json\n")
     
+    # 将结果输出到year.json文件中，以供“sent/received.md"的收发记录（年度）模块使用
+    with open(f"./output/year.json", 'w') as f:
+        json.dump(result_year, f, indent=2)
+
+    print(f"已生成output/year.json\n")
     calendar = {}
     # 遍历数据列表
     for data in a_data:
