@@ -3,13 +3,13 @@
     "name": "Germany",
     "countryCode": "DE",
     "flagEmoji": ":de:",
-    "value": 28,
+    "value": 29,
     "sentNum": 14,
-    "receivedNum": 14,
+    "receivedNum": 15,
     "sentAvg": 37.9,
-    "receivedAvg": 36.3,
+    "receivedAvg": 34.8,
     "sentMedian": 35.0,
-    "receivedMedian": 28.5
+    "receivedMedian": 27
   },
   {
     "name": "Russia",
@@ -27,13 +27,13 @@
     "name": "Netherlands",
     "countryCode": "NL",
     "flagEmoji": ":netherlands:",
-    "value": 23,
+    "value": 24,
     "sentNum": 9,
-    "receivedNum": 14,
+    "receivedNum": 15,
     "sentAvg": 31.8,
-    "receivedAvg": 41.1,
+    "receivedAvg": 39.7,
     "sentMedian": 28,
-    "receivedMedian": 32.0
+    "receivedMedian": 31
   },
   {
     "name": "U.S.A.",
@@ -132,6 +132,18 @@
     "receivedMedian": 24
   },
   {
+    "name": "United Kingdom",
+    "countryCode": "GB",
+    "flagEmoji": ":gb:",
+    "value": 4,
+    "sentNum": 2,
+    "receivedNum": 2,
+    "sentAvg": 34,
+    "receivedAvg": 23,
+    "sentMedian": 34.0,
+    "receivedMedian": 23.0
+  },
+  {
     "name": "Austria",
     "countryCode": "AT",
     "flagEmoji": ":austria:",
@@ -166,18 +178,6 @@
     "receivedAvg": 27.5,
     "sentMedian": 48,
     "receivedMedian": 27.5
-  },
-  {
-    "name": "United Kingdom",
-    "countryCode": "GB",
-    "flagEmoji": ":gb:",
-    "value": 3,
-    "sentNum": 2,
-    "receivedNum": 1,
-    "sentAvg": 34,
-    "receivedAvg": 18,
-    "sentMedian": 34.0,
-    "receivedMedian": 18
   },
   {
     "name": "France",
@@ -223,7 +223,7 @@
     "sentNum": 2,
     "receivedNum": 0,
     "sentAvg": 24.5,
-    "receivedAvg": 18,
+    "receivedAvg": 23,
     "sentMedian": 24.5,
     "receivedMedian": null
   },
@@ -271,7 +271,7 @@
     "sentNum": 1,
     "receivedNum": 0,
     "sentAvg": 31,
-    "receivedAvg": 18,
+    "receivedAvg": 23,
     "sentMedian": 31,
     "receivedMedian": null
   },
