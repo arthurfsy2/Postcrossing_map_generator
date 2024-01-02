@@ -115,7 +115,7 @@ def createMD(type):
             pattern=f"[{postcardID}]({baseUrl}postcards/{postcardID}) \n >{userInfo} {countryNameEmoji}\n{travel_info}\n"
             if type == "popular":
                 num = id["favoritesNum"]
-                picurl = f"{pattern}>点赞人数：**{num}**\n\n![]({picDriverPath}/{picFileName}) \n "
+                picurl = f"{pattern}>点赞人数：**{num}**\n\n![]({picDriverPath}/{picFileName}) \n\n "
             else:
                 countryNameEmoji = id["countryNameEmoji"]
                 userInfo = id["userInfo"]
@@ -131,27 +131,50 @@ def createMD(type):
     if type in types:
         num = types.index(type) + 2
     link = f"## [{account}'s {type}]({baseUrl}user/{account}/gallery/{type})"
-    content = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
-    content = content.replace('$repo',repo)
     if os.path.exists(f"{dbpath}BAK"):
         dbStat = compareMD5(dbpath, f"{dbpath}BAK")
         if dbStat == "1":
             print(f"{dbpath} 有更新") 
-            with open(filename_md, "w", encoding="utf-8") as f:    
-                f.write(content)
+            replaceTemplate(type,date,num,title,MDcontent_all,repo)
             print(f"\n{type}.md已成功更新")
         else:
             print(f"{dbpath} 暂无更新") 
             print(f"\n{type}.md无更新")
             print("————————————————————")
     
+    # replaceTemplate(type,date,num,title,MDcontent_all,repo)
 
+def replaceTemplate(type,date,num,title,MDcontent_all,repo): 
+    baseUrl = "https://www.postcrossing.com/"
+    link = f"## [{account}'s {type}]({baseUrl}user/{account}/gallery/{type})"
+    filename_md = f"gallery/{type}.md"
+    if type == "sent" or type == "received":
+        with open(f"./template/type_template.md", "r",encoding="utf-8") as f:
+            data = f.read()  
+            dataNew = data.replace('$type',type)
+            print(f"已替换type:{type}")  
+            dataNew = dataNew.replace('$date',date)
+            print("已替换明信片墙date")      
+            dataNew = dataNew.replace('$num',str(num))
+            print("已替换明信片墙order")
+            dataNew = dataNew.replace('$title',title)
+            print("已替换明信片墙title")
+            dataNew = dataNew.replace('$content',MDcontent_all)
+            print("已替换明信片内容")
+            dataNew = dataNew.replace('$repo',repo)
+            print("已替换明信片内容")
+    else:
+        
+        dataNew = f'---\ntitle: {title}\nicon: address-card\ndate: {date}\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
+        dataNew = dataNew.replace('$repo',repo)
     # 换为你的blog的本地链接，可自动同步过去
     blog_path = rf"D:\web\Blog\src\Arthur\Postcrossing\{type}.md"
     if os.path.exists(blog_path):  
         with open(blog_path, "w",encoding="utf-8") as f:
-            f.write(content) 
-    
+            f.write(dataNew) 
+    with open(filename_md, "w", encoding="utf-8") as f:    
+                f.write(dataNew)
+
 for type in types:
     createMD(type) 
 
