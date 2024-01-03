@@ -191,7 +191,21 @@ def readDB(dbpath, type,tablename):
                         "distance": row[18],
                         "FromCoor": row[19],
                         "ToCoor": row[20],
-
+                    }
+                elif tablename == 'userSummary':
+                    data={
+                        "about": row[0],
+                        "coors": row[1],
+                        "sentDistance": row[2],
+                        "sentLaps": row[3],
+                        "sentPostcardNum": row[4],
+                        "receivedDistance": row[5],
+                        "receivedLaps": row[6],
+                        "receivedPostcardNum":row[7],
+                        "registerd_years": row[8],
+                        "registerd_days": row[9],
+                        "register_date": row[10],
+                        
                     }
                 data_all.append(data)       
         conn.close()
@@ -291,6 +305,32 @@ def writeDB(dbpath, content,tablename):
                 # 插入新的行
                 cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian))
+    elif tablename == 'userSummary':
+        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
+    (about TEXT, coors TEXT, sentDistance TEXT, sentLaps TEXT, sentPostcardNum TEXT, receivedDistance TEXT, receivedLaps TEXT, receivedPostcardNum TEXT, registerd_years TEXT, registerd_days TEXT, register_date TEXT)''')
+        for item in content:
+            about = item['about']
+            coors = item['coors']
+            sentDistance = item['sentDistance']
+            sentLaps = item['sentLaps']
+            sentPostcardNum = item['sentPostcardNum']
+            receivedDistance = item['receivedDistance']
+            receivedLaps = item['receivedLaps']
+            receivedPostcardNum = item['receivedPostcardNum']
+            registerd_years = item['registerd_years']
+            registerd_days = item['registerd_days']
+            register_date = item['register_date']
+            cursor.execute(f"SELECT * FROM {tablename} ")
+            existing_data = cursor.fetchone()
+            if existing_data:
+                # 更新已存在的行的其他列数据
+                cursor.execute(f"UPDATE {tablename} SET about=?, coors=?, sentDistance=?, sentLaps=?, sentPostcardNum=?, receivedDistance=?, receivedLaps=?, receivedPostcardNum=?, registerd_years=?, registerd_days=?, register_date=? ", (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum,registerd_years ,registerd_days, register_date))
+            else:
+                # 插入新的行
+                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum,registerd_years ,registerd_days, register_date))
+
+
     print(f'已更新数据库{dbpath}的{tablename}\n')
     conn.commit()
     conn.close()
@@ -377,7 +417,7 @@ if __name__ == "__main__":
     nickName = options.nickName
     # Cookie = options.Cookie
     repo = options.repo
-    url = f"https://www.postcrossing.com/user/{account}/gallery"  # 替换为您要获取数据的链接
+    url = f"https://www.postcrossing.com/user/{account}/gallery"  
     userUrl = f"https://www.postcrossing.com/user/{account}"  
     galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
     dataUrl = f"{userUrl}/data/sent"  

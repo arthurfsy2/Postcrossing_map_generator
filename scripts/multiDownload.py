@@ -111,9 +111,8 @@ def getGalleryInfo(type ,account ,Cookie):
         }
     userUrl = f"https://www.postcrossing.com/user/{account}"  
     galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
-    dataUrl = f"{userUrl}/data/sent"  
-    with open("./output/title.json", "r",encoding="utf-8") as file:
-        data = json.load(file)
+    with open("./output/title.json", "r",encoding="utf-8") as f:
+        data = json.load(f)
     value = data.get(type)
     from_or_to, pageNum, Num, title = value
     i = 1
@@ -627,7 +626,92 @@ def PicDataCheck(account, Cookie):
         getGalleryInfo(type ,account ,Cookie) # 获取图库信息
     for type in types:
         multiDownload(type) # 批量下载图片
+
+def getUserSummary(account, Cookie):
     
+    headers = {
+        'authority': 'www.postcrossing.com',
+        'Cookie': Cookie,
+        }
+    userUrl = f"https://www.postcrossing.com/user/{account}"  
+    userAboutInfo = requests.get(userUrl,headers=headers)
+    html_content= userAboutInfo.text
+    soup = BeautifulSoup(html_content, 'html.parser')
+    title = soup.find('title')
+    if title.get_text() =="Log in":
+        print(f"用户:{account}已注销/设置为非公开，无法获取！\n")
+        sys.exit()
+        
+    # 提取about信息
+    div_about = soup.find('div', class_='about-text')
+    if div_about:
+        about = div_about.get_text()
+
+    # 提取经纬度信息
+    pattern = r"new L.LatLng\(([-\d.]+), ([-\d.]+)\)"
+    match = re.search(pattern, html_content)
+    if match:
+        latitude = match.group(1)
+        longitude = match.group(2)
+        coors = json.dumps((float(latitude), float(longitude)))
+
+    def getDistanceAndLaps(type):
+        # 正则表达式匹配数字和小数
+        number_pattern = rf'<a title="(.*?) km \(or (.*?) laps around the world!\)" href="/user/{account}/{type}">(.*?)</a>'
+
+        # 提取数字和小数
+        match = re.search(number_pattern, html_content)
+
+        if match:
+            distance = match.group(1).replace(',', '')
+            laps = match.group(2)
+            postcardnum = match.group(3)
+
+        else:
+            print("未找到数字和小数")
+        return distance,laps,postcardnum
+    
+    sentDistance,sentLaps,sentPostcardNum = getDistanceAndLaps("sent")
+    receivedDistance,receivedLaps,receivedPostcardNum = getDistanceAndLaps("received")
+    logo_link_pattern = r'src="https://s3.amazonaws.com/static2.postcrossing.com/avatars/140x140/(.*?)"'
+    match = re.search(logo_link_pattern, html_content)
+    if match:
+        number = match.group(1)
+
+    # 获取注册日期
+    registerinfo_pattern = r'title="Member for over (.*?) years \((.*?) days\)"'
+    matchs = re.search(registerinfo_pattern, html_content)
+    
+    registerd_years = matchs.group(1)
+    registerd_days = matchs.group(2).replace(',', '')
+    # 获取注册日期
+    abbr_tag = soup.select('abbr[title^="Member for"]')
+
+    for tag in abbr_tag:
+        content = tag.get_text(strip=True)
+    def parse_date_with_suffix(content):
+        suffix = re.findall(r'\d+(st|nd|rd|th)', content)[0]  # 提取日期中的后缀部分
+        format_string = f"%d{suffix} %b., %Y"  # 提取日期中的数字部分作为后缀
+        date_object = datetime.strptime(content, format_string)
+        register_date = date_object.strftime("%Y/%m/%d")
+        return register_date
+    register_date = parse_date_with_suffix(content)
+    content_all=[]
+    item={
+        'about': str(about),
+        'coors': coors,
+        'sentDistance': sentDistance,
+        'sentLaps': sentLaps,
+        'sentPostcardNum': sentPostcardNum,
+        'receivedDistance': receivedDistance,
+        'receivedLaps': receivedLaps,
+        'receivedPostcardNum': receivedPostcardNum,
+        'registerd_years': registerd_years,
+        'registerd_days': registerd_days,
+        'register_date': register_date,
+            }
+    content_all.append(item)
+    writeDB(dbpath, content_all,"userSummary")    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -651,5 +735,6 @@ if __name__ == "__main__":
     url = f"https://www.postcrossing.com/user/{account}/gallery"  # 替换为您要获取数据的链接
     types_map = ['sent', 'received']  
     stat,content_raw,types = getAccountStat(account, Cookie)
+    getUserSummary(account, Cookie)
     MapDataCheck(account,Cookie,types_map)
     PicDataCheck(account, Cookie)

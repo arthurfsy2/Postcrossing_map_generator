@@ -59,12 +59,24 @@ def replateTitle(type):
 # 获取收发总距离
 def getUserHomeInfo(type):
     distance_all = []
-    content = readDB(dbpath,type,"Mapinfo")
-    for item in content:
-        distance_all.append(int(item["distance"]))
-    total = sum(distance_all)
-    rounds = round((total/40076),2)
-    return total,len(content),rounds
+    content =readDB(dbpath, "","userSummary")
+    # about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum,registerd_years ,registerd_days, register_date
+    for id in content:
+        about = id["about"]  
+        coors = id["coors"]
+        sentDistance = int(id["sentDistance"])
+        sentLaps = id["sentLaps"] 
+        sentPostcardNum = id["sentPostcardNum"] 
+        receivedDistance = int(id["receivedDistance"])
+        receivedLaps = id["receivedLaps"] 
+        receivedPostcardNum = id["receivedPostcardNum"] 
+        registerd_years = id["registerd_years"] 
+        registerd_days = id["registerd_days"] 
+        register_date = id["register_date"] 
+        if type == "sent":
+            return sentDistance,sentPostcardNum,sentLaps,registerd_years,registerd_days,register_date,about
+        if type == "received":
+            return receivedDistance,receivedPostcardNum,receivedLaps,registerd_years,registerd_days,register_date,about
 
 def getUserSheet(tableName):
     data = readDB(dbpath, "", tableName)
@@ -107,7 +119,8 @@ def replaceTemplate():
     travelingCount = f"> 待签收[📨**{travelingNum}**]\n\n"
     for type in types: 
         if type =="sent" or  type =="received":
-            distance,num,rounds = getUserHomeInfo(type)
+            distance,num,rounds,registerd_years,registerd_days,register_date, about = getUserHomeInfo(type)
+            registerInfo = f"加入时间：{register_date} [至今{registerd_years}年（{registerd_days}天）]"
         distance_all = format(distance, ",")
         summary = f"**{num}** 📏**{distance_all}** km 🌏**{rounds}** 圈]\n\n"
         if type == "sent":
@@ -130,7 +143,9 @@ def replaceTemplate():
     with open(f"./template/信息汇总_template.md", "r",encoding="utf-8") as f:
         data = f.read()  
         dataNew = data.replace('$account',account)
-        print(f"已替换account:{account}")        
+        print(f"已替换account:{account}")
+        dataNew = dataNew.replace('$registerInfo',registerInfo).replace('$about',about)
+        print("已替换个人汇总信息")        
         dataNew = dataNew.replace('$title',title_final)
         print("已替换明信片墙title")
         dataNew = dataNew.replace('$storylist',storylist).replace('$storyNum',storyNum)

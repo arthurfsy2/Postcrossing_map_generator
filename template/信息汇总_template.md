@@ -8,12 +8,18 @@ tag:
   - Postcrossing
 order: 1
 ---
-:::info 说明
-Postcrossing是我在2013年就了解到的明信片交换的项目，当时玩了一段时间，后来毕业工作了就停了，直到2023年才回归。
+:::tabs 
+@tab 加入时间
+$registerInfo
+
+
+@tab 关于我
+$about
+:::
 
 [我的Postcrossing主页](https://www.postcrossing.com/user/$account)
 
-:::
+
 
 ## 一.图片墙
 
