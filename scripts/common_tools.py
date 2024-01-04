@@ -205,6 +205,7 @@ def readDB(dbpath, type,tablename):
                         "registerd_years": row[8],
                         "registerd_days": row[9],
                         "register_date": row[10],
+                        "logo": row[11],
                         
                     }
                 data_all.append(data)       
@@ -320,15 +321,16 @@ def writeDB(dbpath, content,tablename):
             registerd_years = item['registerd_years']
             registerd_days = item['registerd_days']
             register_date = item['register_date']
+            logo = item['logo']
             cursor.execute(f"SELECT * FROM {tablename} ")
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET about=?, coors=?, sentDistance=?, sentLaps=?, sentPostcardNum=?, receivedDistance=?, receivedLaps=?, receivedPostcardNum=?, registerd_years=?, registerd_days=?, register_date=? ", (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum,registerd_years ,registerd_days, register_date))
+                cursor.execute(f"UPDATE {tablename} SET about=?, coors=?, sentDistance=?, sentLaps=?, sentPostcardNum=?, receivedDistance=?, receivedLaps=?, receivedPostcardNum=?, registerd_years=?, registerd_days=?, register_date=?, logo=? ", (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum,registerd_years ,registerd_days, register_date,logo))
             else:
                 # 插入新的行
-                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                        (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum,registerd_years ,registerd_days, register_date))
+                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum,registerd_years ,registerd_days, register_date,logo))
 
 
     print(f'已更新数据库{dbpath}的{tablename}\n')

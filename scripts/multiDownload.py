@@ -655,7 +655,7 @@ def getUserSummary(account, Cookie):
         longitude = match.group(2)
         coors = json.dumps((float(latitude), float(longitude)))
 
-    def getDistanceAndLaps(type):
+    def getUserSummaryInfo(type):
         # 正则表达式匹配数字和小数
         number_pattern = rf'<a title="(.*?) km \(or (.*?) laps around the world!\)" href="/user/{account}/{type}">(.*?)</a>'
 
@@ -671,12 +671,11 @@ def getUserSummary(account, Cookie):
             print("未找到数字和小数")
         return distance,laps,postcardnum
     
-    sentDistance,sentLaps,sentPostcardNum = getDistanceAndLaps("sent")
-    receivedDistance,receivedLaps,receivedPostcardNum = getDistanceAndLaps("received")
-    logo_link_pattern = r'src="https://s3.amazonaws.com/static2.postcrossing.com/avatars/140x140/(.*?)"'
+    sentDistance,sentLaps,sentPostcardNum = getUserSummaryInfo("sent")
+    receivedDistance,receivedLaps,receivedPostcardNum = getUserSummaryInfo("received")
+    logo_link_pattern = r's3.amazonaws.com/static2.postcrossing.com/avatars/140x140/(.*?).jpg'
     match = re.search(logo_link_pattern, html_content)
-    if match:
-        number = match.group(1)
+    logo = match.group(1)
 
     # 获取注册日期
     registerinfo_pattern = r'title="Member for over (.*?) years \((.*?) days\)"'
@@ -709,6 +708,7 @@ def getUserSummary(account, Cookie):
         'registerd_years': registerd_years,
         'registerd_days': registerd_days,
         'register_date': register_date,
+        'logo': logo,
             }
     content_all.append(item)
     writeDB(dbpath, content_all,"userSummary")    

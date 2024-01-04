@@ -287,6 +287,22 @@ def replaceJsRef(fileFullName):
     os.remove(fileFullName)
     os.rename(f"{fileFullName}.bak", fileFullName)
 
+def createUserLocationMap():
+    content =readDB(dbpath, "","userSummary")
+    for id in content:
+        coors = json.loads(id["coors"]  )
+    # 创建地图对象
+    map = folium.Map(location=coors, zoom_start=7)
+    # 创建标记对象
+    marker = folium.Marker(location=coors, icon=folium.Icon(icon='home'))
+    # 将标记添加到地图上
+    marker.add_to(map)
+    # 保存地图为HTML文件
+    map.save("LocationMap.html")
+    replaceJsRef("./LocationMap.html")
+
+if not os.path.exists("./LocationMap.html"):
+    createUserLocationMap()
 if os.path.exists(f"{dbpath}BAK"):
     dbStat = compareMD5(dbpath, f"{dbpath}BAK")
     if dbStat == "1":

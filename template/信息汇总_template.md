@@ -9,12 +9,23 @@ tag:
 order: 1
 ---
 :::tabs 
-@tab 加入时间
+@tab 基本信息
 $registerInfo
 
 
 @tab 关于我
 $about
+
+@tab 我的位置
+
+<iframe 
+src="https://postcrossing.4a1801.life/LocationMap.html" 
+frameborder=0
+height=500
+width=100%
+seamless=seamless
+scrolling=auto
+></iframe>
 :::
 
 [我的Postcrossing主页](https://www.postcrossing.com/user/$account)

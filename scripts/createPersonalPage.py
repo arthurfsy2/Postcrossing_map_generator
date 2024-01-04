@@ -58,9 +58,7 @@ def replateTitle(type):
 
 # 获取收发总距离
 def getUserHomeInfo(type):
-    distance_all = []
     content =readDB(dbpath, "","userSummary")
-    # about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum,registerd_years ,registerd_days, register_date
     for id in content:
         about = id["about"]  
         coors = id["coors"]
@@ -73,10 +71,11 @@ def getUserHomeInfo(type):
         registerd_years = id["registerd_years"] 
         registerd_days = id["registerd_days"] 
         register_date = id["register_date"] 
+        logo = id["logo"] 
         if type == "sent":
-            return sentDistance,sentPostcardNum,sentLaps,registerd_years,registerd_days,register_date,about
+            return sentDistance,sentPostcardNum,sentLaps,registerd_years,registerd_days,register_date,about,coors,logo
         if type == "received":
-            return receivedDistance,receivedPostcardNum,receivedLaps,registerd_years,registerd_days,register_date,about
+            return receivedDistance,receivedPostcardNum,receivedLaps,registerd_years,registerd_days,register_date,about,coors,logo
 
 def getUserSheet(tableName):
     data = readDB(dbpath, "", tableName)
@@ -119,8 +118,8 @@ def replaceTemplate():
     travelingCount = f"> 待签收[📨**{travelingNum}**]\n\n"
     for type in types: 
         if type =="sent" or  type =="received":
-            distance,num,rounds,registerd_years,registerd_days,register_date, about = getUserHomeInfo(type)
-            registerInfo = f"加入时间：{register_date} [至今{registerd_years}年（{registerd_days}天）]"
+            distance,num,rounds,registerd_years,registerd_days,register_date, about, coors, logo = getUserHomeInfo(type)
+            registerDate = f"> 注册时间：{register_date} [至今{registerd_years}年（{registerd_days}天）]"
         distance_all = format(distance, ",")
         summary = f"**{num}** 📏**{distance_all}** km 🌏**{rounds}** 圈]\n\n"
         if type == "sent":
@@ -130,12 +129,18 @@ def replaceTemplate():
         else:
             desc =""
         desc_all += desc
+    coors = json.loads(coors)
+    coorLink = f"{coors[0]}~{coors[1]}"
+    logoLink = f"![](https://s3.amazonaws.com/static2.postcrossing.com/avatars/140x140/{logo}.jpg)"
+    about = f"{logoLink}\n\n{about}"
+    desc_all = f"{desc_all}\n{countryCount}\n{travelingCount}\n"
+    registerInfo = f"{registerDate}\n\n{desc_all} "
     title_all =""
     for type in types:        
         title = replateTitle(type)
         title_all += f"#### [{title}](/{nickName}/postcrossing/{type})\n\n"
         
-        title_final = f"{desc_all}\n{countryCount}\n{travelingCount}\n{title_all}"
+        title_final = f"{title_all}"
     
     storylist,storyNum = getCardStoryList("received")
     commentlist,commentNum = getCardStoryList("sent")
@@ -144,7 +149,7 @@ def replaceTemplate():
         data = f.read()  
         dataNew = data.replace('$account',account)
         print(f"已替换account:{account}")
-        dataNew = dataNew.replace('$registerInfo',registerInfo).replace('$about',about)
+        dataNew = dataNew.replace('$registerInfo',registerInfo).replace('$about',about).replace('$coors',coorLink)
         print("已替换个人汇总信息")        
         dataNew = dataNew.replace('$title',title_final)
         print("已替换明信片墙title")
