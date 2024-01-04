@@ -292,7 +292,13 @@ def createUserLocationMap():
     for id in content:
         coors = json.loads(id["coors"]  )
     # 创建地图对象
-    map = folium.Map(location=coors, zoom_start=7)
+    map = folium.Map(
+        location=coors,
+        zoom_start=7,
+        tiles='https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}',       
+        #tiles='https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+        attr='map',
+    )
     # 创建标记对象
     marker = folium.Marker(location=coors, icon=folium.Icon(icon='home'))
     # 将标记添加到地图上
