@@ -15,13 +15,13 @@
     "name": "Russia",
     "countryCode": "RU",
     "flagEmoji": ":ru:",
-    "value": 28,
+    "value": 29,
     "sentNum": 15,
-    "receivedNum": 13,
+    "receivedNum": 14,
     "sentAvg": 44.7,
-    "receivedAvg": 85.3,
+    "receivedAvg": 81.4,
     "sentMedian": 41,
-    "receivedMedian": 73
+    "receivedMedian": 72.5
   },
   {
     "name": "Netherlands",
