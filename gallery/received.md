@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：69）
+title: 明信片展示墙（收到：70）
 icon: address-card
-date: 2024-01-04
+date: 2024-01-05
 category:
   - Arthur
 tag:
@@ -460,7 +460,7 @@ const option = {
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/2b1ce703735b60462dbd22a0c62b7020.jpg)
 
-### 2014(32)
+### 2014(33)
 
 [UA-1140480](https://www.postcrossing.com/postcards/UA-1140480) 
  >来自 [Shvets-Jane](https://www.postcrossing.com/user/Shvets-Jane) :ukraine:
@@ -695,6 +695,15 @@ const option = {
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/4wxbm70ou30tc5ylp4ylkvqyhr9hskmg.jpg)
+
+[TW-1213069](https://www.postcrossing.com/postcards/TW-1213069) 
+ >来自 [Viola-Pan](https://www.postcrossing.com/user/Viola-Pan) &#x1f1f9;&#x1f1fc;
+> 📤 [Taiwan](https://www.bing.com/maps/?cp=25.04776~121.53185&lvl=12.0&setlang=zh-Hans) 2014/03/26 01:35 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/04/04 20:20 (当地)
+ 📏 1,573 | ⏱ 10
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/4ju868hwkvsljxqh8jz4051n7rmmoc5t.jpg)
 
 [NL-2374423](https://www.postcrossing.com/postcards/NL-2374423) 
  >来自 [Anoushka](https://www.postcrossing.com/user/Anoushka) :netherlands:
