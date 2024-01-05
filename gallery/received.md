@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：70）
+title: 明信片展示墙（收到：73）
 icon: address-card
 date: 2024-01-05
 category:
@@ -460,7 +460,7 @@ const option = {
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/2b1ce703735b60462dbd22a0c62b7020.jpg)
 
-### 2014(33)
+### 2014(34)
 
 [UA-1140480](https://www.postcrossing.com/postcards/UA-1140480) 
  >来自 [Shvets-Jane](https://www.postcrossing.com/user/Shvets-Jane) :ukraine:
@@ -669,6 +669,15 @@ const option = {
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/56a617562753c57021112273b8354ad5.jpg)
 
+[DE-2941052](https://www.postcrossing.com/postcards/DE-2941052) 
+ >来自 [bluebutterfly222](https://www.postcrossing.com/user/bluebutterfly222) :de:
+> 📤 [Germany](https://www.bing.com/maps/?cp=49.71754~11.05877&lvl=12.0&setlang=zh-Hans) 2014/02/24 01:03 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/04/16 12:36 (当地)
+ 📏 7,885 | ⏱ 51
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/0mc10wez9rlow90hnqkmstdgb4y304iw.jpg)
+
 [UA-982846](https://www.postcrossing.com/postcards/UA-982846) 
  >来自 [lerolero](https://www.postcrossing.com/user/lerolero) :ukraine:
 > 📤 [Ukraine](https://www.bing.com/maps/?cp=50.45466~30.5238&lvl=12.0&setlang=zh-Hans) 2014/03/04 23:36 (当地)
@@ -759,7 +768,25 @@ const option = {
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/sg7kqtzxlhr5m9vrglqx2nm0i9vgtzs5.jpg)
 
-### 2013(3)
+### 2013(5)
+
+[RU-2144539](https://www.postcrossing.com/postcards/RU-2144539) 
+ >来自 [fulun](https://www.postcrossing.com/user/fulun) :ru:
+> 📤 [Russia](https://www.bing.com/maps/?cp=53.20007~50.15&lvl=12.0&setlang=zh-Hans) 2013/11/03 18:40 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2013/12/09 19:27 (当地)
+ 📏 5,192 | ⏱ 36
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/x5us9epjm1k0rzun7wy5mqo4duh0q8mc.jpg)
+
+[BY-1066085](https://www.postcrossing.com/postcards/BY-1066085) 
+ >来自 [poliakos](https://www.postcrossing.com/user/poliakos) :belarus:
+> 📤 [Belarus](https://www.bing.com/maps/?cp=52.4345~30.9754&lvl=12.0&setlang=zh-Hans) 2013/10/26 17:38 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2013/12/09 19:21 (当地)
+ 📏 6,480 | ⏱ 44
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/47jtvrurpcy8h4ppd4fuj25btx4d64s3.jpg)
 
 [CZ-322514](https://www.postcrossing.com/postcards/CZ-322514) 
  >来自 [TerezkaS](https://www.postcrossing.com/user/TerezkaS) &#x1f1e8;&#x1f1ff;
