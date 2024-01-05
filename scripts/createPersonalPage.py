@@ -386,7 +386,7 @@ def readStoryDB(dbpath):
         data_cn = f"{content_cn}\n{comment_cn}\n"
         result_en += data_en
         result_cn += data_cn
-    return result_cn,result_en
+    return result_cn.replace("None",""),result_en.replace("None","")
 
 # 实时获取该账号所有sent、received的明信片列表，获取每个postcardID的详细数据
 def getTravelingID(account,type,Cookie):
