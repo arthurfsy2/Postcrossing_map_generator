@@ -18,15 +18,15 @@
 3. **信息汇总**：
 
    汇总以下模块的内容
-
-   - 图片墙：统计个人收发数据、对应4个展示墙的超链接
+   - 基本信息：统计个人收发数据、自我介绍、定位地图
+     ![](./img/summary00.png)
+   - 图片墙：对应4个展示墙的超链接、收/发/traveling列表
      ![](./img/summary01.png)
    - 地图展示：集成 `map.html、clusterMap.html`这2个地图的内容
-
      ![](./img/summary02.png)
    - 统计
 
-     抓取官网的 `/stats`下的3个模块，分别展示 `收发记录（年、月）`、`国家分布（饼图）`、`各国明信片（表格）`、`还在漂泊的明信片（表格）`
+     抓取官网的 `/stats`下的3个模块，分别展示 `收发记录（年、月）`、`国家分布（饼图）`、`各国明信片（表格）`
 
      > 图形是通过echarts插件显示，表格是通过markdown的表格实现。）
      >
@@ -66,6 +66,8 @@ python版本 >=3.11.2
     "storyPicLink": "https://raw.gitmirror.com/$repo/main/template/content", //存放明信片背面图片的路径。如果是本地使用，需要改为./template/content
     "storyPicType": "webp", //存放明信片背面图片的格式
     "dbpath": "./template/data.db", //默认的数据库存放路径
+    "personalPageLink":"https://XXXX" //信息汇总页用途，填写你的github page 路径，如“https://XXX/output/sent.html”，则取地址的前半截
+    
 }
 ```
 
@@ -74,7 +76,9 @@ python版本 >=3.11.2
 * **删除./output、./gallery目录下的所有文件（使用你自己的账号，会自动生成数据）**
 * **删除./template目录下的data.db文件**
 * **（可选）修改**：在./template/postcardStory.xlsx中填入已收到明信片的文字、信息汇总_template.md可修改为你喜欢的文字描述）
-* **（可选）修改**：在 `./template/content/`目录下删除我的数据，然后拍照上传已收到明信片的文字面图片。并将图片名称命名为ID名称，如：`CN-XXXXXXX.webp`。（本项目图片已转换为webp格式，如果需要修改为其他格式，需要修改./scripts/config.json文件中的“storycontentPicType"的值，改为你需要的格式
+* **（可选）修改**：在 `./template/content/`目录下删除我的数据，然后拍照复制（建议扫描全能王自动切边+自动高清）已收到明信片的文字面图片到`./template/content/rawPic`目录下，可以自动转换为webp格式。并将图片名称命名为ID名称，如：`CN-XXXXXXX.webp`。
+（本项目图片默认读取webp格式，如果需要修改为其他格式，需要修改./scripts/config.json文件中的“storycontentPicType"的值，改为你需要的格式
+* **（可选）修改/删除**：在 `./template/信息汇总_template.md/`文件的“网址备份”内容，改为你自己生成的文件链接
 
 4. 执行 `pip install -r requirements.txt安装依赖`
 5. 执行 `pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com` 安装openpyxl （如果你需要填写/template/postcardStory.xlsx 当中的明信片背面文字内容，则需要安装）
@@ -84,20 +88,29 @@ python版本 >=3.11.2
 重要脚本说明：
 
 ```
-scripts/login.py  //登陆账号获取cookie，可单独使用（配合Github Action定时刷新Cookie），也可以整合到startTask.py中使用
-scripts/createMap.py  //在根目录生成ClusterMap.html和Map.html文件(还包含其他结果文件)
-scripts/createGallery.py  //在./gallery生成4个不同类型的展示墙、已下载的图片(还包含其他结果文件)
-scripts/createPersonalPage.py  //在./template/data.db数据库中插入已抓取到的回复信息
-scripts/mailTrack.py  //在./output生成“信息汇总”页面(还包含其他结果文件)
+（1）一键脚本：
+scripts/startTask.py //本脚本已整合了所有需要运行的文件，运行后可一键生成项目所有文件
+```
+执行`python scripts/startTask.py "postcrossing账号" "postcrossing密码" "你想要在vuepress中展示的昵称" "仓库地址" "小牛翻译apikey"`
+
+
+```
+（2）各步骤脚本
+1) scripts/login.py  //登陆账号获取cookie，可单独使用（配合Github Action定时刷新Cookie），也可以整合到startTask.py中使用
+2) scripts/multiDownload.py //下载/更新内容到数据库
+3) scripts/createMap.py  //在根目录生成ClusterMap.html、Map.html、Location.html文件
+4) scripts/createGallery.py  //在`./gallery`生成4个不同类型的展示墙、已下载的图片
+5) scripts/createPersonalPage.py  //在`./gallery`生成“信息汇总”页面(还包含其他结果文件)
+6) scripts/mailTrack.py  //在`./template/data.db`数据库中插入已抓取到的邮件回复信息
 ```
 
-依次执行以下内容：
+如果你需要人工进行数据获取/单独调试某模块内容，可参考以下执行顺序：
 
 1. 登陆账号
 
-   `python scripts/login.py "postcrossing账号" "postcrossing密码" "你想要在vuepress中展示的昵称" "仓库地址"`
+   `python scripts/login.py "postcrossing账号" "postcrossing密码"`
 
-   输入postcrossing账号密码获取cookies，如：`python scripts/login.py "youraccount" "yourpassword" "yournickname" "yourReponame"`
+   输入postcrossing账号密码获取cookies，如：`python scripts/login.py "youraccount" "yourpassword"`
 2. 登陆邮箱，抓取数据（可选）
 
    `python scripts/mailTrack.py "邮箱host//邮箱账号//邮箱app密码//邮件对应的目录" "小牛翻译apikey" `
@@ -139,15 +152,28 @@ scripts/mailTrack.py  //在./output生成“信息汇总”页面(还包含其�
      启用IMAP
 
      **文件夹大小限制**：不限制
-3. 开始postcrossing数据抓取
+3. 更新/下载数据，集成到数据库
+    `python scripts/multiDownload.py "postcrossing账号" "postcrossing密码" "你想要在vuepress中展示的昵称" "仓库地址"`
 
-   `python scripts/startTask.py "postcrossing账号" "postcrossing密码" "你想要在vuepress中展示的昵称" "仓库地址"`
+   如：`python scripts/multiDownload.py "youraccount" "yourpassword" "yournickname" "yourReponame"`
 
-   如：`python scripts/login.py "youraccount" "yourpassword" "yournickname" "yourReponame"`
+4. 生成展示墙
 
-   运行后将会自动依次运行以下4个脚本，进行数据获取。
+   `python scripts/createGallery.py "postcrossing账号" "你想要在vuepress中展示的昵称" "仓库地址"`
 
-   `tasks = ['login','createMap', 'createGallery', 'createPersonalPage']`
+   如：`python scripts/createGallery.py "youraccount" "yournickname" "yourReponame"`
+
+5. 生成地图
+
+   `python scripts/createMap.py "postcrossing账号"`
+
+   如：`python scripts/createMap.py "youraccount"`
+
+6. 生成信息汇总页
+"postcrossing账号" "postcrossing密码" "你想要在vuepress中展示的昵称" "仓库地址" "小牛翻译apikey"
+   `python scripts/createPersonalPage.py "postcrossing账号" "你想要在vuepress中展示的昵称" "仓库地址" "小牛翻译apikey"`
+
+   如：`python scripts/createPersonalPage.py "youraccount" "yournickname" "yourReponame" "apikey"`
 
 # 二. Github Action
 

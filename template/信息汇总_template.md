@@ -19,7 +19,7 @@ $about
 @tab 我的位置
 
 <iframe 
-src="https://postcrossing.4a1801.life/LocationMap.html" 
+src="$personalPageLink/LocationMap.html" 
 frameborder=0
 height=500
 width=100%
@@ -40,7 +40,7 @@ $title
 @tab 发送列表
 
 <iframe 
-src="https://postcrossing.4a1801.life/output/sent.html" 
+src="$personalPageLink/output/sent.html" 
 frameborder=0
 height=500
 width=100%
@@ -51,7 +51,7 @@ scrolling=auto
 @tab 接收列表
 
 <iframe 
-src="https://postcrossing.4a1801.life/output/received.html" 
+src="$personalPageLink/output/received.html" 
 frameborder=0
 height=500
 width=100%
@@ -62,7 +62,7 @@ scrolling=auto
 @tab 还在漂泊的明信片
 
 <iframe 
-src="https://postcrossing.4a1801.life/output/traveling.html" 
+src="$personalPageLink/output/traveling.html" 
 frameborder=0
 height=500
 width=100%
@@ -83,10 +83,10 @@ scrolling=auto
 @tab Map
 ### 个人收发Map
 
-网址：https://postcrossing.4a1801.life/Map.html
+网址：$personalPageLink/Map.html
 
 <iframe 
-src="https://postcrossing.4a1801.life/Map.html" 
+src="$personalPageLink/Map.html" 
 frameborder=0
 height=500
 width=100%
@@ -97,10 +97,10 @@ scrolling=auto
 @tab ClusterMap
 ### 个人收发ClusterMap
 
-网址：https://postcrossing.4a1801.life/ClusterMap.html
+网址：$personalPageLink/ClusterMap.html
 
 <iframe 
-src="https://postcrossing.4a1801.life/ClusterMap.html" 
+src="$personalPageLink/ClusterMap.html" 
 frameborder=0
 height=500
 width=100%
@@ -295,7 +295,7 @@ const option = {
 @tab 各国明信片
 
 <iframe 
-src="https://postcrossing.4a1801.life/output/CountryStats.html" 
+src="$personalPageLink/output/CountryStats.html" 
 frameborder=0
 height=500
 width=100%

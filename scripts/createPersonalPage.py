@@ -19,7 +19,7 @@ import re
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
-# account = data["account"]
+personalPageLink = data["personalPageLink"]
 # nickName = data["nickName"]
 Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
@@ -149,7 +149,7 @@ def replaceTemplate():
         data = f.read()  
         dataNew = data.replace('$account',account)
         print(f"已替换account:{account}")
-        dataNew = dataNew.replace('$registerInfo',registerInfo).replace('$about',about).replace('$coors',coorLink)
+        dataNew = dataNew.replace('$registerInfo',registerInfo).replace('$about',about).replace('$coors',coorLink).replace('$personalPageLink',personalPageLink)
         print("已替换个人汇总信息")        
         dataNew = dataNew.replace('$title',title_final)
         print("已替换明信片墙title")
@@ -254,7 +254,7 @@ def getCardStoryList(type):
                 
             else:
                 comment = ":::"      
-            userInfo = f'[{id["userInfo"]}](https://www.postcrossing.com/user/{id["userInfo"]})'
+            userInfo = f'[{id["userInfo"]}](https://www.postcrossing.com/user/{id["userInfo"]})' if id["userInfo"] !="account closed" else "*用户已注销*"
 
             picFileName = id["picFileName"]
             countryNameEmoji = id["countryNameEmoji"] if id["countryNameEmoji"] is not None else ""
