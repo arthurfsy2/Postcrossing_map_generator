@@ -119,16 +119,16 @@ def replaceTemplate():
     for type in types: 
         if type =="sent" or  type =="received":
             distance,num,rounds,registerd_years,registerd_days,register_date, about, coors, logo = getUserHomeInfo(type)
-            registerDate = f"> 注册时间：{register_date} [至今{registerd_years}年（{registerd_days}天）]"
+            registerDate = f"{register_date} [至今{registerd_years}年（{registerd_days}天）]"
         distance_all = format(distance, ",")
-        summary = f"**{num}** 📏**{distance_all}** km 🌏**{rounds}** 圈]\n\n"
+        summary = f"{num} 📏{distance_all} km 🌏{rounds} 圈]\n\n"
         if type == "sent":
-            desc = f"> 寄出[📤{summary}"
+            sent_info = f"[📤{summary}"
         elif type == "received":
-            desc = f"> 收到[📥{summary}"
+            received_info = f"[📥{summary}"
         else:
             desc =""
-        desc_all += desc
+      
     coors = json.loads(coors)
     coorLink = f"{coors[0]}~{coors[1]}"
     logoLink = f"![](https://s3.amazonaws.com/static2.postcrossing.com/avatars/140x140/{logo}.jpg)"
@@ -141,7 +141,7 @@ def replaceTemplate():
         title_all += f"#### [{title}](/{nickName}/postcrossing/{type})\n\n"
         
         title_final = f"{title_all}"
-    
+    createRegisterInfo(registerDate, sent_info, received_info, countryNum, travelingNum)
     storylist,storyNum = getCardStoryList("received")
     commentlist,commentNum = getCardStoryList("sent")
     calendar,series,height = createCalendar()
@@ -149,7 +149,7 @@ def replaceTemplate():
         data = f.read()  
         dataNew = data.replace('$account',account)
         print(f"已替换account:{account}")
-        dataNew = dataNew.replace('$registerInfo',registerInfo).replace('$about',about).replace('$coors',coorLink).replace('$personalPageLink',personalPageLink)
+        dataNew = dataNew.replace('$about',about).replace('$coors',coorLink).replace('$personalPageLink',personalPageLink)
         print("已替换个人汇总信息")        
         dataNew = dataNew.replace('$title',title_final)
         print("已替换明信片墙title")
@@ -588,7 +588,40 @@ def picTowebp(input_dir, output_dir):
             except Exception as e:
                 print(f"文件 {file_name} 转换失败: {str(e)}")
 
-            
+def createRegisterInfo(register_date, sent_info, received_info, countries, traveling):   
+    # 创建HTML内容
+    html_content = f"""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Postcrossing Stats</title>
+        <!-- 引入Bootstrap CSS -->
+        <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 class="text-center mb-4"></h1>
+            <ul class="list-group">
+                <li class="list-group-item">注册时间：<b>{register_date}</b></li>
+                <li class="list-group-item">寄出：<b>{sent_info}</b></li>
+                <li class="list-group-item">收到：<b>{received_info}</b></li>
+                <li class="list-group-item">涉及国家：<b>{countries}</b></li>
+                <li class="list-group-item">待签收：<b>{traveling}</b></li>
+            </ul>
+        </div>
+        <!-- 引入Bootstrap JS 和依赖 -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.1/dist/umd/popper.min.js"></script>
+        <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.min.js"></script>
+    </body>
+    </html>
+    """
+    
+    # 写入HTML文件
+    with open('./output/registerInfo.html', 'w', encoding='utf-8') as file:
+        file.write(html_content)          
 
 picTowebp("./template/rawPic","./template/content")
 excel_file="./template/postcardStory.xlsx"

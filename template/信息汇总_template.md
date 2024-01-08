@@ -11,7 +11,7 @@ order: 1
 :::tabs 
 @tab 基本信息
 <iframe 
-src="$personalPageLink/registerInfo.html" 
+src="$personalPageLink/output/registerInfo.html" 
 frameborder=0
 height=500
 width=100%
