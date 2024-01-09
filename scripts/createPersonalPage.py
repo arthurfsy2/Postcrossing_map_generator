@@ -84,18 +84,22 @@ def getUserSheet(tableName):
     for i, item in enumerate(data):
         if item['sentMedian']:
             sentMedian = f"{item['sentMedian']}天"
+            sentAvg = f"{item['sentAvg']}天"
         else:
             sentMedian = "-"
+            sentAvg = "-"
         if item['receivedMedian']:
             receivedMedian = f"{item['receivedMedian']}天"
+            receivedAvg = f"{item['receivedAvg']}天"
         else:
            receivedMedian = "-"
+           receivedAvg = "-"
         formatted_item = {
             '国家': f"{item['name']} {emoji.emojize(item['flagEmoji'],language='alias')}",
             '已寄出': item['sentNum'],
             '已收到': item['receivedNum'],
-            '寄出-平均': f"{item['sentAvg']}天",
-            '收到-平均': f"{item['receivedAvg']}天",
+            '寄出-平均': sentAvg,
+            '收到-平均': receivedAvg,
             '寄出-中间值': sentMedian,
             '收到-中间值': receivedMedian,
         }
@@ -113,9 +117,6 @@ def replaceTemplate():
     desc_all=""      
     countryNum = getUserSheet("CountryStats")
     travelingNum = getTravelingID(account,"traveling",Cookie)
-
-    countryCount = f"> 涉及国家[🗺️**{countryNum}**]\n\n"
-    travelingCount = f"> 待签收[📨**{travelingNum}**]\n\n"
     for type in types: 
         if type =="sent" or  type =="received":
             distance,num,rounds,registerd_years,registerd_days,register_date, about, coors, logo = getUserHomeInfo(type)
@@ -133,8 +134,7 @@ def replaceTemplate():
     coorLink = f"{coors[0]}~{coors[1]}"
     logoLink = f"![](https://s3.amazonaws.com/static2.postcrossing.com/avatars/140x140/{logo}.jpg)"
     about = f"{logoLink}\n\n{about}"
-    desc_all = f"{desc_all}\n{countryCount}\n{travelingCount}\n"
-    registerInfo = f"{registerDate}\n\n{desc_all} "
+    
     title_all =""
     for type in types:        
         title = replateTitle(type)
@@ -429,13 +429,18 @@ def getTravelingID(account,type,Cookie):
         countryEmojiList = json.load(file)
     for i,stats in enumerate(data):
         baseurl = "https://www.postcrossing.com"
+        print("countryCode:\n",stats[3])
+        sentHistory=json.loads(readDB(dbpath, stats[3], "CountryStats")[0]['sentHistory'])
+        sentAvg=readDB(dbpath, stats[3], "CountryStats")[0]['sentAvg']
+        print("sentHistory:\n",sentHistory)
         formatted_item = {
             'ID号': f"<a href='{baseurl}/travelingpostcard/{stats[0]}' target='_blank'>{stats[0]}</a>",
             '收信人': f"<a href='{baseurl}/user/{stats[1]}' target='_blank'>{stats[1]}</a>",
             '国家': f"{countryList[stats[3]]} {emoji.emojize(countryEmojiList[stats[3]],language='alias')}",
             '寄出时间(当地)': get_local_date(stats[0][0:2],stats[4]),
-            '距离(km)': f'{format(stats[6], ",")} km',
-            '天数': stats[7]
+            '距离(km)': f'{format(stats[6], ",")}',
+            '天数': stats[7],
+            '历史平均到达(天)': f"{sentAvg}",
         }
         new_data.append(formatted_item)
     df = pd.DataFrame(new_data)
@@ -601,7 +606,7 @@ def createRegisterInfo(register_date, sent_info, received_info, countries, trave
         <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
     </head>
     <body>
-        <div class="container mt-5">
+        <div class="container-fluid">
             <h1 class="text-center mb-4"></h1>
             <ul class="list-group">
                 <li class="list-group-item">注册时间：<b>{register_date}</b></li>

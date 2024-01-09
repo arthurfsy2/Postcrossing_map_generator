@@ -109,7 +109,7 @@ def readDB(dbpath, type,tablename):
                     receivedDate DESC
             ''', (type,))
             elif tablename == 'CountryStats':
-                cursor.execute(f"SELECT * FROM {tablename} ORDER BY name")
+                cursor.execute(f"SELECT * FROM {tablename} ORDER BY name") if type =="" else cursor.execute(f"SELECT * FROM {tablename} where countryCode =?", (type,))
             else:
                 cursor.execute(f"SELECT * FROM {tablename}")
             rows = cursor.fetchall()
@@ -168,6 +168,8 @@ def readDB(dbpath, type,tablename):
                         "receivedAvg": row[7],
                         "sentMedian": row[8],
                         "receivedMedian": row[9],
+                        "sentHistory": row[10],
+                        "receivedHistory": row[11],
                     }
                 elif tablename == 'postcardStory':
                     data={
@@ -283,7 +285,7 @@ def writeDB(dbpath, content,tablename):
                                 (id, content_original, content_cn, comment_original, comment_cn ))
     elif tablename == 'CountryStats':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-            (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER, sentMedian INTEGER, receivedMedian INTEGER,
+            (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER, sentMedian INTEGER, receivedMedian INTEGER, sentHistory TEXT, receivedHistory TEXT,
             PRIMARY KEY (name))''')
         for item in content:
     
@@ -297,15 +299,17 @@ def writeDB(dbpath, content,tablename):
             receivedAvg = item['receivedAvg']
             sentMedian = item['sentMedian']
             receivedMedian = item['receivedMedian']
+            sentHistory = item['sentHistory']
+            receivedHistory = item['receivedHistory']
             cursor.execute(f"SELECT * FROM {tablename} WHERE name=?", (name,))
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET countryCode=?, flagEmoji=?, value=?, sentNum=?, receivedNum=?, sentMedian=?, receivedMedian=? WHERE name=?", (countryCode, flagEmoji, value, sentNum, receivedNum, sentMedian, receivedMedian, name))
+                cursor.execute(f"UPDATE {tablename} SET countryCode=?, flagEmoji=?, value=?, sentNum=?, receivedNum=?, sentAvg=?, receivedAvg=?, sentMedian=?, receivedMedian=?, sentHistory=?, receivedHistory=? WHERE name=?", (countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian, sentHistory, receivedHistory, name))
             else:
                 # 插入新的行
-                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                        (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian))
+                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian, sentHistory, receivedHistory))
     elif tablename == 'userSummary':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
     (about TEXT, coors TEXT, sentDistance TEXT, sentLaps TEXT, sentPostcardNum TEXT, receivedDistance TEXT, receivedLaps TEXT, receivedPostcardNum TEXT, registerd_years TEXT, registerd_days TEXT, register_date TEXT)''')

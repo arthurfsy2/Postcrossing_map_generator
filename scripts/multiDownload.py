@@ -413,19 +413,19 @@ def calculateAVGandMedian(a_data):
             name_dict[code]['received'].append(travel_days)
     
     country_stats = []
-    
     for code, data in name_dict.items():
-        sent_median = None
-        received_median = None
-        
         if data['sent']:
-            sent_avg = round(statistics.mean(data['sent']),1)
-            sent_median = round(statistics.median(data['sent']),1)
-        
+            sent_avg = int(statistics.mean(data['sent']))
+            sent_median = int(statistics.median(data['sent']))
+        else:
+            sent_avg = None
+            sent_median = None
         if data['received']:
-            received_avg = round(statistics.mean(data['received']),1)
-            received_median = round(statistics.median(data['received']),1)
-        
+            received_avg = int(statistics.mean(data['received']))
+            received_median = int(statistics.median(data['received']))
+        else:
+            received_avg = None
+            received_median = None
         country_stats.append({
             'name': data['name'],
             'countryCode': data['countryCode'],
@@ -437,6 +437,8 @@ def calculateAVGandMedian(a_data):
             'receivedAvg': received_avg,
             'sentMedian': sent_median,
             'receivedMedian': received_median,
+            'sentHistory': json.dumps(name_dict[code]['sent']),
+            'receivedHistory': json.dumps(name_dict[code]['received']),
         })
     country_stats.sort(key=lambda x: x['value'], reverse=True)
     return country_stats

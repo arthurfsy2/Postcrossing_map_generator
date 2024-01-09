@@ -6,10 +6,12 @@
     "value": 30,
     "sentNum": 15,
     "receivedNum": 15,
-    "sentAvg": 36.9,
-    "receivedAvg": 34.8,
+    "sentAvg": 36,
+    "receivedAvg": 34,
     "sentMedian": 33,
-    "receivedMedian": 27
+    "receivedMedian": 27,
+    "sentHistory": "[68, 49, 65, 26, 20, 37, 33, 53, 39, 23, 10, 29, 26, 53, 23]",
+    "receivedHistory": "[39, 60, 37, 51, 25, 12, 23, 18, 25, 27, 75, 73, 13, 30, 14]"
   },
   {
     "name": "Russia",
@@ -18,10 +20,12 @@
     "value": 29,
     "sentNum": 15,
     "receivedNum": 14,
-    "sentAvg": 44.7,
-    "receivedAvg": 81.4,
+    "sentAvg": 44,
+    "receivedAvg": 81,
     "sentMedian": 41,
-    "receivedMedian": 72.5
+    "receivedMedian": 72,
+    "sentHistory": "[83, 45, 32, 34, 29, 31, 51, 48, 28, 40, 53, 43, 78, 41, 34]",
+    "receivedHistory": "[36, 72, 294, 81, 82, 44, 109, 88, 89, 68, 49, 73, 24, 30]"
   },
   {
     "name": "Netherlands",
@@ -30,10 +34,12 @@
     "value": 24,
     "sentNum": 9,
     "receivedNum": 15,
-    "sentAvg": 31.8,
-    "receivedAvg": 39.7,
+    "sentAvg": 31,
+    "receivedAvg": 39,
     "sentMedian": 28,
-    "receivedMedian": 31
+    "receivedMedian": 31,
+    "sentHistory": "[69, 19, 26, 26, 19, 30, 31, 28, 38]",
+    "receivedHistory": "[36, 33, 22, 28, 20, 25, 19, 31, 91, 74, 78, 65, 33, 20, 21]"
   },
   {
     "name": "U.S.A.",
@@ -42,10 +48,12 @@
     "value": 18,
     "sentNum": 12,
     "receivedNum": 6,
-    "sentAvg": 33.7,
-    "receivedAvg": 30.7,
-    "sentMedian": 30.5,
-    "receivedMedian": 28.0
+    "sentAvg": 33,
+    "receivedAvg": 30,
+    "sentMedian": 30,
+    "receivedMedian": 28,
+    "sentHistory": "[64, 25, 31, 16, 30, 17, 21, 19, 39, 35, 44, 63]",
+    "receivedHistory": "[53, 21, 32, 22, 28, 28]"
   },
   {
     "name": "Taiwan",
@@ -54,10 +62,12 @@
     "value": 18,
     "sentNum": 11,
     "receivedNum": 7,
-    "sentAvg": 56.1,
-    "receivedAvg": 46.9,
+    "sentAvg": 56,
+    "receivedAvg": 46,
     "sentMedian": 34,
-    "receivedMedian": 19
+    "receivedMedian": 19,
+    "sentHistory": "[33, 14, 55, 45, 24, 21, 26, 34, 285, 39, 41]",
+    "receivedHistory": "[16, 10, 19, 49, 16, 20, 198]"
   },
   {
     "name": "Belarus",
@@ -66,10 +76,12 @@
     "value": 13,
     "sentNum": 6,
     "receivedNum": 7,
-    "sentAvg": 49.3,
-    "receivedAvg": 39.3,
-    "sentMedian": 53.5,
-    "receivedMedian": 42
+    "sentAvg": 49,
+    "receivedAvg": 39,
+    "sentMedian": 53,
+    "receivedMedian": 42,
+    "sentHistory": "[34, 38, 51, 60, 57, 56]",
+    "receivedHistory": "[44, 72, 22, 42, 25, 46, 24]"
   },
   {
     "name": "Ukraine",
@@ -78,10 +90,12 @@
     "value": 11,
     "sentNum": 5,
     "receivedNum": 6,
-    "sentAvg": 39.8,
-    "receivedAvg": 49.3,
+    "sentAvg": 39,
+    "receivedAvg": 49,
     "sentMedian": 36,
-    "receivedMedian": 37.5
+    "receivedMedian": 37,
+    "sentHistory": "[36, 62, 34, 30, 37]",
+    "receivedHistory": "[42, 45, 26, 33, 120, 30]"
   },
   {
     "name": "Finland",
@@ -90,10 +104,12 @@
     "value": 10,
     "sentNum": 6,
     "receivedNum": 4,
-    "sentAvg": 27.5,
-    "receivedAvg": 21.8,
-    "sentMedian": 25.5,
-    "receivedMedian": 22.5
+    "sentAvg": 27,
+    "receivedAvg": 21,
+    "sentMedian": 25,
+    "receivedMedian": 22,
+    "sentHistory": "[18, 19, 14, 32, 33, 49]",
+    "receivedHistory": "[16, 19, 26, 26]"
   },
   {
     "name": "Czechia",
@@ -105,7 +121,9 @@
     "sentAvg": 39,
     "receivedAvg": 41,
     "sentMedian": 39,
-    "receivedMedian": 40.0
+    "receivedMedian": 40,
+    "sentHistory": "[39]",
+    "receivedHistory": "[54, 66, 18, 26]"
   },
   {
     "name": "Japan",
@@ -114,10 +132,12 @@
     "value": 5,
     "sentNum": 4,
     "receivedNum": 1,
-    "sentAvg": 22.5,
+    "sentAvg": 22,
     "receivedAvg": 12,
-    "sentMedian": 23.5,
-    "receivedMedian": 12
+    "sentMedian": 23,
+    "receivedMedian": 12,
+    "sentHistory": "[13, 30, 25, 22]",
+    "receivedHistory": "[12]"
   },
   {
     "name": "Canada",
@@ -128,8 +148,10 @@
     "receivedNum": 3,
     "sentAvg": 30,
     "receivedAvg": 25,
-    "sentMedian": 30.0,
-    "receivedMedian": 24
+    "sentMedian": 30,
+    "receivedMedian": 24,
+    "sentHistory": "[30, 30]",
+    "receivedHistory": "[21, 30, 24]"
   },
   {
     "name": "United Kingdom",
@@ -140,8 +162,10 @@
     "receivedNum": 2,
     "sentAvg": 34,
     "receivedAvg": 23,
-    "sentMedian": 34.0,
-    "receivedMedian": 23.0
+    "sentMedian": 34,
+    "receivedMedian": 23,
+    "sentHistory": "[31, 37]",
+    "receivedHistory": "[18, 28]"
   },
   {
     "name": "Austria",
@@ -153,7 +177,9 @@
     "sentAvg": 19,
     "receivedAvg": 23,
     "sentMedian": 19,
-    "receivedMedian": 23.0
+    "receivedMedian": 23,
+    "sentHistory": "[19]",
+    "receivedHistory": "[23, 23]"
   },
   {
     "name": "Malaysia",
@@ -162,10 +188,12 @@
     "value": 3,
     "sentNum": 0,
     "receivedNum": 3,
-    "sentAvg": 19,
+    "sentAvg": null,
     "receivedAvg": 14,
     "sentMedian": null,
-    "receivedMedian": 14
+    "receivedMedian": 14,
+    "sentHistory": "[]",
+    "receivedHistory": "[14, 12, 16]"
   },
   {
     "name": "Korea (South)",
@@ -175,9 +203,11 @@
     "sentNum": 1,
     "receivedNum": 2,
     "sentAvg": 48,
-    "receivedAvg": 27.5,
+    "receivedAvg": 27,
     "sentMedian": 48,
-    "receivedMedian": 27.5
+    "receivedMedian": 27,
+    "sentHistory": "[48]",
+    "receivedHistory": "[20, 35]"
   },
   {
     "name": "France",
@@ -189,7 +219,9 @@
     "sentAvg": 30,
     "receivedAvg": 21,
     "sentMedian": 30,
-    "receivedMedian": 21.0
+    "receivedMedian": 21,
+    "sentHistory": "[30]",
+    "receivedHistory": "[14, 28]"
   },
   {
     "name": "Hong Kong",
@@ -199,9 +231,11 @@
     "sentNum": 1,
     "receivedNum": 2,
     "sentAvg": 47,
-    "receivedAvg": 18.5,
+    "receivedAvg": 18,
     "sentMedian": 47,
-    "receivedMedian": 18.5
+    "receivedMedian": 18,
+    "sentHistory": "[47]",
+    "receivedHistory": "[21, 16]"
   },
   {
     "name": "Norway",
@@ -210,10 +244,12 @@
     "value": 2,
     "sentNum": 0,
     "receivedNum": 2,
-    "sentAvg": 39,
-    "receivedAvg": 40.5,
+    "sentAvg": null,
+    "receivedAvg": 40,
     "sentMedian": null,
-    "receivedMedian": 40.5
+    "receivedMedian": 40,
+    "sentHistory": "[]",
+    "receivedHistory": "[60, 21]"
   },
   {
     "name": "Sweden",
@@ -222,10 +258,12 @@
     "value": 2,
     "sentNum": 2,
     "receivedNum": 0,
-    "sentAvg": 24.5,
-    "receivedAvg": 23,
-    "sentMedian": 24.5,
-    "receivedMedian": null
+    "sentAvg": 24,
+    "receivedAvg": null,
+    "sentMedian": 24,
+    "receivedMedian": null,
+    "sentHistory": "[29, 20]",
+    "receivedHistory": "[]"
   },
   {
     "name": "Belgium",
@@ -237,7 +275,9 @@
     "sentAvg": 23,
     "receivedAvg": 40,
     "sentMedian": 23,
-    "receivedMedian": 40
+    "receivedMedian": 40,
+    "sentHistory": "[23]",
+    "receivedHistory": "[40]"
   },
   {
     "name": "Spain",
@@ -246,10 +286,12 @@
     "value": 2,
     "sentNum": 2,
     "receivedNum": 0,
-    "sentAvg": 39.5,
-    "receivedAvg": 21,
-    "sentMedian": 39.5,
-    "receivedMedian": null
+    "sentAvg": 39,
+    "receivedAvg": null,
+    "sentMedian": 39,
+    "receivedMedian": null,
+    "sentHistory": "[33, 46]",
+    "receivedHistory": "[]"
   },
   {
     "name": "New Zealand",
@@ -259,9 +301,11 @@
     "sentNum": 1,
     "receivedNum": 0,
     "sentAvg": 19,
-    "receivedAvg": 23,
+    "receivedAvg": null,
     "sentMedian": 19,
-    "receivedMedian": null
+    "receivedMedian": null,
+    "sentHistory": "[19]",
+    "receivedHistory": "[]"
   },
   {
     "name": "Denmark",
@@ -271,9 +315,11 @@
     "sentNum": 1,
     "receivedNum": 0,
     "sentAvg": 31,
-    "receivedAvg": 23,
+    "receivedAvg": null,
     "sentMedian": 31,
-    "receivedMedian": null
+    "receivedMedian": null,
+    "sentHistory": "[31]",
+    "receivedHistory": "[]"
   },
   {
     "name": "Brazil",
@@ -282,10 +328,12 @@
     "value": 1,
     "sentNum": 0,
     "receivedNum": 1,
-    "sentAvg": 31,
+    "sentAvg": null,
     "receivedAvg": 81,
     "sentMedian": null,
-    "receivedMedian": 81
+    "receivedMedian": 81,
+    "sentHistory": "[]",
+    "receivedHistory": "[81]"
   },
   {
     "name": "North Macedonia",
@@ -294,10 +342,12 @@
     "value": 1,
     "sentNum": 0,
     "receivedNum": 1,
-    "sentAvg": 23,
+    "sentAvg": null,
     "receivedAvg": 57,
     "sentMedian": null,
-    "receivedMedian": 57
+    "receivedMedian": 57,
+    "sentHistory": "[]",
+    "receivedHistory": "[57]"
   },
   {
     "name": "Thailand",
@@ -306,10 +356,12 @@
     "value": 1,
     "sentNum": 0,
     "receivedNum": 1,
-    "sentAvg": 47,
+    "sentAvg": null,
     "receivedAvg": 21,
     "sentMedian": null,
-    "receivedMedian": 21
+    "receivedMedian": 21,
+    "sentHistory": "[]",
+    "receivedHistory": "[21]"
   },
   {
     "name": "Switzerland",
@@ -319,9 +371,11 @@
     "sentNum": 1,
     "receivedNum": 0,
     "sentAvg": 41,
-    "receivedAvg": 21,
+    "receivedAvg": null,
     "sentMedian": 41,
-    "receivedMedian": null
+    "receivedMedian": null,
+    "sentHistory": "[41]",
+    "receivedHistory": "[]"
   },
   {
     "name": "Mexico",
@@ -330,10 +384,12 @@
     "value": 1,
     "sentNum": 0,
     "receivedNum": 1,
-    "sentAvg": 39.5,
+    "sentAvg": null,
     "receivedAvg": 54,
     "sentMedian": null,
-    "receivedMedian": 54
+    "receivedMedian": 54,
+    "sentHistory": "[]",
+    "receivedHistory": "[54]"
   },
   {
     "name": "Italy",
@@ -343,9 +399,11 @@
     "sentNum": 1,
     "receivedNum": 0,
     "sentAvg": 26,
-    "receivedAvg": 54,
+    "receivedAvg": null,
     "sentMedian": 26,
-    "receivedMedian": null
+    "receivedMedian": null,
+    "sentHistory": "[26]",
+    "receivedHistory": "[]"
   },
   {
     "name": "Portugal",
@@ -354,10 +412,12 @@
     "value": 1,
     "sentNum": 0,
     "receivedNum": 1,
-    "sentAvg": 26,
+    "sentAvg": null,
     "receivedAvg": 50,
     "sentMedian": null,
-    "receivedMedian": 50
+    "receivedMedian": 50,
+    "sentHistory": "[]",
+    "receivedHistory": "[50]"
   },
   {
     "name": "Latvia",
@@ -367,9 +427,11 @@
     "sentNum": 1,
     "receivedNum": 0,
     "sentAvg": 59,
-    "receivedAvg": 50,
+    "receivedAvg": null,
     "sentMedian": 59,
-    "receivedMedian": null
+    "receivedMedian": null,
+    "sentHistory": "[59]",
+    "receivedHistory": "[]"
   },
   {
     "name": "India",
@@ -379,9 +441,11 @@
     "sentNum": 1,
     "receivedNum": 0,
     "sentAvg": 36,
-    "receivedAvg": 50,
+    "receivedAvg": null,
     "sentMedian": 36,
-    "receivedMedian": null
+    "receivedMedian": null,
+    "sentHistory": "[36]",
+    "receivedHistory": "[]"
   },
   {
     "name": "Lithuania",
@@ -390,9 +454,11 @@
     "value": 1,
     "sentNum": 0,
     "receivedNum": 1,
-    "sentAvg": 36,
+    "sentAvg": null,
     "receivedAvg": 44,
     "sentMedian": null,
-    "receivedMedian": 44
+    "receivedMedian": 44,
+    "sentHistory": "[]",
+    "receivedHistory": "[44]"
   }
 ]

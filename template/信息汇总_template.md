@@ -13,7 +13,7 @@ order: 1
 <iframe 
 src="$personalPageLink/output/registerInfo.html" 
 frameborder=0
-height=500
+height=350
 width=100%
 seamless=seamless
 scrolling=auto
