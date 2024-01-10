@@ -40,3 +40,6 @@ subprocess.run(command, shell=True)
 
 command = f'python scripts/createPersonalPage.py "{account}" "{nickName}" "{repo}" "{apikey}"'
 subprocess.run(command, shell=True)    
+
+command = f'python scripts/postcrossingrecap.py'
+subprocess.run(command, shell=True)    

@@ -203,7 +203,8 @@ def getUpdateID(account,type,Cookie):
         }
     url=f'https://www.postcrossing.com/user/{account}/data/{type}'    
     response = requests.get(url,headers=headers).json()
-
+    with open(f"./data/{type}.json", 'w') as f:
+        json.dump(response, f, indent=2)
     onlineID = [item[0] for item in response]
     hasPicID = [item[0] for item in response if item[-1] == 1]
     #print(f"hasPicID({len(hasPicID)}):{hasPicID}")
