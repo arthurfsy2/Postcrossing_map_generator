@@ -87,8 +87,6 @@ def createMD(type):
         data = json.load(file)
     value = data.get(type)
     from_or_to, pageNum, Num, title = value
-    # content = readDB(dbpath, type,"Galleryinfo")
-    # print(content)
     MDcontent_all =""
     for year in content_years:
         content = content_years.get(year)

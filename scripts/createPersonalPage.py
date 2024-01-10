@@ -425,13 +425,15 @@ def getTravelingID(account,type,Cookie):
         # 格式化日期为"%Y/%m/%d %H:%M"的字符串
         formatted_date = local_dt.strftime("%Y/%m/%d %H:%M")
         return formatted_date
+    with open("scripts/countryName.json", "r") as file:
+        countryList = json.load(file)
     for i,stats in enumerate(data):
         baseurl = "https://www.postcrossing.com"
         sentAvg=readDB(dbpath, stats[3], "CountryStats")[0]['sentAvg']
         formatted_item = {
             'ID号': f"<a href='{baseurl}/travelingpostcard/{stats[0]}' target='_blank'>{stats[0]}</a>",
             '收信人': f"<a href='{baseurl}/user/{stats[1]}' target='_blank'>{stats[1]}</a>",
-            '国家': f"{pycountry.countries.get(alpha_2=stats[3]).name.title()} {flag(stats[3])}",
+            '国家': f"{countryList[stats[3]]} {flag(stats[3])}",
             '寄出时间(当地)': get_local_date(stats[0][0:2],stats[4]),
             '距离(km)': f'{format(stats[6], ",")}',
             '天数': stats[7],

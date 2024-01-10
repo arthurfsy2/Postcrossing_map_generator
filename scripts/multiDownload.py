@@ -382,11 +382,13 @@ def getUpdatePic(type):
 
 
 def calculateAVGandMedian(a_data):
+    with open('scripts/countryName.json', 'r') as f:
+        countryName = json.load(f)
     name_dict = {}
     
     for item in a_data:
         code = item[3]
-        country = pycountry.countries.get(alpha_2=code).name.title()
+        country = countryName[code]
         flagEmoji = flag(code)
         r_or_s = item[2]
         travel_days = item[1]

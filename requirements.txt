@@ -4,12 +4,10 @@ folium==0.14.0
 imap_tools==1.5.0
 jieba==0.42.1
 mechanize==0.4.9
-numpy==1.26.3
 OpenCC==1.1.1
 pandas==1.5.3
 Pillow==10.2.0
 pycountry==23.12.11
 pytz==2023.3
 Requests==2.31.0
-scipy==1.11.4
 wordcloud==1.9.2
