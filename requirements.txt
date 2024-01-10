@@ -7,7 +7,6 @@ mechanize==0.4.9
 numpy==1.26.3
 OpenCC==1.1.1
 pandas==1.5.3
-Pillow==10.0.0
 Pillow==10.2.0
 pycountry==23.12.11
 pytz==2023.3
