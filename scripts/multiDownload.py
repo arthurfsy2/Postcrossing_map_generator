@@ -11,6 +11,8 @@ from datetime import datetime, timedelta
 import sys
 import sqlite3
 import statistics
+import pycountry
+from emojiflags.lookup import lookup as flag
 import hashlib
 import argparse
 from common_tools import readDB,writeDB,get_local_date
@@ -94,14 +96,6 @@ def getPageNum(stat,content,types):
     with open("./output/title.json", "w",encoding="utf-8") as file:
             json.dump(data, file, indent=2, ensure_ascii=False)
 
-# 获取对应国家的Emoji旗帜简写代码 
-def getCountryFlagEmoji(flag):
-    with open('scripts/countryNameEmoji.json') as file:
-        data = json.load(file)
-    # 获取flag对应的值
-    value = data.get(flag)
-    return value
-
 # 获取不同类型的展示墙的详细信息，并组装数据
 def getGalleryInfo(type ,account ,Cookie):
     headers = {
@@ -145,8 +139,8 @@ def getGalleryInfo(type ,account ,Cookie):
                     userInfo = f"[{user}]({baseUrl}user/{user})"
                     if not user:
                         userInfo = "***该用户已关闭***"
-                    flag = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
-                    countryNameEmoji = getCountryFlagEmoji(flag)
+                    code = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
+                    countryNameEmoji = flag(code)
                     num = ""
                 item={
                     'id': postcardID,
@@ -388,19 +382,12 @@ def getUpdatePic(type):
 
 
 def calculateAVGandMedian(a_data):
-    with open('scripts/countryName.json', 'r') as f:
-        countryName = json.load(f)
-
-    # 读取scripts/countryName.json文件
-    with open('scripts/countryNameEmoji.json', 'r') as f:
-        countryNameEmoji = json.load(f)
-    
     name_dict = {}
     
     for item in a_data:
         code = item[3]
-        country = countryName[code]
-        flagEmoji = countryNameEmoji[code]
+        country = pycountry.countries.get(alpha_2=code).name.title()
+        flagEmoji = flag(code)
         r_or_s = item[2]
         travel_days = item[1]
         
@@ -429,7 +416,7 @@ def calculateAVGandMedian(a_data):
         country_stats.append({
             'name': data['name'],
             'countryCode': data['countryCode'],
-            'flagEmoji': data['flagEmoji'],
+            'flagEmoji': flag(data['countryCode']),
             'value':len(data['sent']) + len(data['received']),
             'sentNum':len(data['sent']),
             'receivedNum':len(data['received']),
@@ -540,8 +527,8 @@ def getUserStat(account):
     country_stats = calculateAVGandMedian(a_data)
     #print("country_stats:\n",country_stats)
     # # 将统计结果写入 b.json 文件
-    with open('./output/stats.json', 'w') as file:
-        json.dump(country_stats, file, indent=2)
+    with open('./output/stats.json', 'w', encoding="utf-8") as file:
+        json.dump(country_stats, file, indent=2, ensure_ascii=False)
     print(f"已生成./output/stats.json\n")
     tablename = "CountryStats"
     writeDB(dbpath, country_stats,tablename)

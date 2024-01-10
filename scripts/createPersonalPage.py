@@ -9,7 +9,9 @@ from jieba import analyse
 from wordcloud import WordCloud
 from opencc import OpenCC
 import requests
-import emoji
+# import emoji
+import pycountry
+from emojiflags.lookup import lookup as flag
 from multiDownload import getAccountStat
 from common_tools import readDB,writeDB,compareMD5,translate
 import pytz
@@ -95,7 +97,7 @@ def getUserSheet(tableName):
            receivedMedian = "-"
            receivedAvg = "-"
         formatted_item = {
-            '国家': f"{item['name']} {emoji.emojize(item['flagEmoji'],language='alias')}",
+            '国家': f"{item['name']} {flag(item['countryCode'])}",
             '已寄出': item['sentNum'],
             '已收到': item['receivedNum'],
             '寄出-平均': sentAvg,
@@ -423,26 +425,19 @@ def getTravelingID(account,type,Cookie):
         # 格式化日期为"%Y/%m/%d %H:%M"的字符串
         formatted_date = local_dt.strftime("%Y/%m/%d %H:%M")
         return formatted_date
-    with open("scripts/countryName.json", "r") as file:
-        countryList = json.load(file)
-    with open("scripts/countryNameEmoji.json", "r") as file:
-        countryEmojiList = json.load(file)
     for i,stats in enumerate(data):
         baseurl = "https://www.postcrossing.com"
-        print("countryCode:\n",stats[3])
-        sentHistory=json.loads(readDB(dbpath, stats[3], "CountryStats")[0]['sentHistory'])
         sentAvg=readDB(dbpath, stats[3], "CountryStats")[0]['sentAvg']
-        print("sentHistory:\n",sentHistory)
         formatted_item = {
             'ID号': f"<a href='{baseurl}/travelingpostcard/{stats[0]}' target='_blank'>{stats[0]}</a>",
             '收信人': f"<a href='{baseurl}/user/{stats[1]}' target='_blank'>{stats[1]}</a>",
-            '国家': f"{countryList[stats[3]]} {emoji.emojize(countryEmojiList[stats[3]],language='alias')}",
+            '国家': f"{pycountry.countries.get(alpha_2=stats[3]).name.title()} {flag(stats[3])}",
             '寄出时间(当地)': get_local_date(stats[0][0:2],stats[4]),
             '距离(km)': f'{format(stats[6], ",")}',
             '天数': stats[7],
             '历史平均到达(天)': f"{sentAvg}",
         }
-        new_data.append(formatted_item)
+        new_data.append(formatted_item)  
     df = pd.DataFrame(new_data)
     # 修改索引从1开始
     df.index = df.index + 1
@@ -464,12 +459,11 @@ def get_HTML_table(type, tableName):
         received_time = stats['receivedDate_local']
         distance = stats['distance']
         baseurl = "https://www.postcrossing.com"
-        
         if type == "sent":
             formatted_item = {
                 'ID号': f"<a href='{baseurl}/postcards/{stats['id']}' target='_blank'>{stats['id']}</a>",
                 '收信人': f"<a href='{baseurl}/user/{stats['user']}' target='_blank'>{stats['user']}</a>",
-                '寄往地区': f"{stats['receivedCountry']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
+                '寄往地区': f"{stats['receivedCountry']} {stats['flagEmoji']}",
                 '寄出时间(当地)': sent_time,
                 '收到时间(当地)': received_time,
                 '距离(km)': f'{format(distance, ",")}',
@@ -479,7 +473,7 @@ def get_HTML_table(type, tableName):
             formatted_item = {
                 'ID号': f"<a href='{baseurl}/postcards/{stats['id']}' target='_blank'>{stats['id']}</a>",
                 '发信人': f"<a href='{baseurl}/user/{stats['user']}' target='_blank'>{stats['user']}</a>",
-                '来自地区': f"{stats['sentCountry']} {emoji.emojize(stats['flagEmoji'],language='alias')}",
+                '来自地区': f"{stats['sentCountry']} {stats['flagEmoji']}",
                 '寄出时间(当地)': sent_time,
                 '收到时间(当地)': received_time,
                 '距离(km)': f'{format(distance, ",")} km',
