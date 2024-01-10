@@ -81,6 +81,9 @@ jobs:
          
           cp ./gallery/favourites.md "${{ env.blog_path }}/favourites.md" 
           echo 'favourites.md 已复制到${{ env.blog_path }}'
+
+          cp ./gallery/年度报告.md "${{ env.blog_path }}/年度报告.md" 
+          echo '年度报告.md 已复制到${{ env.blog_path }}'
           
 
       - name: 推送到博客仓库
