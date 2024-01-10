@@ -6,6 +6,9 @@ import time
 import os
 from collections import Counter
 
+with open("scripts/config.json", "r") as file:
+    data = json.load(file)
+personalPageLink = data["personalPageLink"]
 
 def getYearList(type):
     # 读取received.json文件
@@ -154,18 +157,7 @@ def createYearRecap(year,lang):
     html = html.replace("$$YEAR$$", year)
     with open(f"./recap/{year}_recap_{lang}.html", 'w',encoding="utf-8") as recap:
         recap.write(html)
-    print(f"Generated ./recap/{year}_recap_{lang}.html")
-
-types = ['received','sent']
-
-
-
-for type in types:
-    yearlist = getYearList(type)
-    for year in yearlist:
-        getYearData(type,year)
-    print(f"————————————————————")
-    
+    print(f"已生成 ./recap/{year}_recap_{lang}.html")
 
 
 
@@ -179,6 +171,34 @@ def remove_other_files(directory, keep_files):
             os.remove(file_path)
             # print(f"Deleted: {file_path}")
 
+def replaceTemplate(yearlist):
+    yearlist = sorted(yearlist, reverse=True)
+    link_all = ""
+    for year in yearlist:
+        link = f"""@tab {year}\n\n<iframe src="$personalPageLink/recap/{year}_recap_cn.html" frameborder=0 height=500 width=100% seamless=seamless scrolling=auto></iframe>\n\n"""
+        link_all += link.replace('$personalPageLink',personalPageLink)
+    with open(f"./template/年度报告_template.md", "r",encoding="utf-8") as f:
+        data = f.read()  
+        dataNew = data.replace('$link',link_all)
+
+    with open(f"./gallery/年度报告.md", "w",encoding="utf-8") as f:
+        f.write(dataNew)
+    print(f"./gallery/年度报告.md")
+    blog_path = r"D:\web\Blog\src\Arthur\Postcrossing\年度报告.md"
+    
+    # 换为你的blog的本地链接，可自动同步过去，方便测试
+    if os.path.exists(blog_path):
+        with open(blog_path, "w", encoding="utf-8") as f:
+            f.write(dataNew)
+    
+
+types = ['received','sent']
+for type in types:
+    yearlist = getYearList(type)
+    for year in yearlist:
+        getYearData(type,year)
+    print(f"————————————————————")
+    
 # 示例调用
 directory_to_clean = './data'
 files_to_keep = ['sent.json', 'received.json','.gitkeep']
@@ -187,3 +207,4 @@ yearlist = getYearList("sent")
 for year in yearlist:
     createYearRecap(year,"cn")
 remove_other_files(directory_to_clean, files_to_keep)
+replaceTemplate(yearlist)
