@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（我收到的赞：28）
 icon: address-card
-date: 2024-01-04
+date: 2024-01-10
 category:
   - Arthur
 tag:
@@ -14,7 +14,7 @@ order: 5
 ### 2024(1)
 
 [CN-3645301](https://www.postcrossing.com/postcards/CN-3645301) 
- >寄往  :de:
+ >寄往  🇩🇪
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/12/12 17:31 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=53.59337~9.47629&lvl=12.0&setlang=zh-Hans) 2024/01/04 15:46 (当地)
  📏 8,924 | ⏱ 23
@@ -25,7 +25,7 @@ order: 5
  ### 2023(7)
 
 [CN-3640692](https://www.postcrossing.com/postcards/CN-3640692) 
- >寄往  :de:
+ >寄往  🇩🇪
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/12/04 18:30 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=51.88333~8.51667&lvl=12.0&setlang=zh-Hans) 2023/12/30 15:51 (当地)
  📏 9,064 | ⏱ 26
@@ -34,7 +34,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/46hy3aa8nvjf50qinzh36mpbb132twu5.jpg) 
 
  [CN-3641753](https://www.postcrossing.com/postcards/CN-3641753) 
- >寄往  :belgium:
+ >寄往  🇧🇪
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/12/06 14:56 (当地)
 > 📥 [Belgium](https://www.bing.com/maps/?cp=51.32254~4.94471&lvl=12.0&setlang=zh-Hans) 2023/12/29 11:35 (当地)
  📏 9,312 | ⏱ 23
@@ -43,7 +43,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/acy5i7qaiin0x199jacwdn8spxzg6pz8.jpg) 
 
  [CN-3637489](https://www.postcrossing.com/postcards/CN-3637489) 
- >寄往  :de:
+ >寄往  🇩🇪
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/11/29 17:41 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=51.75912~11.35306&lvl=12.0&setlang=zh-Hans) 2023/12/28 17:39 (当地)
  📏 8,894 | ⏱ 29
@@ -52,7 +52,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/82moz0oyr8vks6tnx6v63j34i0p8wj68.jpg) 
 
  [CN-3621313](https://www.postcrossing.com/postcards/CN-3621313) 
- >寄往  :de:
+ >寄往  🇩🇪
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/11/04 16:04 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=50.06906~8.48632&lvl=12.0&setlang=zh-Hans) 2023/11/13 23:54 (当地)
  📏 9,155 | ⏱ 10
@@ -61,7 +61,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/i09vi7tqj1k2rvmxe9sjpyvd07xzdhjg.jpg) 
 
  [CN-3610296](https://www.postcrossing.com/postcards/CN-3610296) 
- >寄往  :de:
+ >寄往  🇩🇪
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/10/17 14:55 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=54.01667~9.0&lvl=12.0&setlang=zh-Hans) 2023/11/09 14:57 (当地)
  📏 8,932 | ⏱ 23
@@ -70,7 +70,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/c49bj2bvagsfwve94liksgrrfwikz1hb.jpg) 
 
  [CN-3578753](https://www.postcrossing.com/postcards/CN-3578753) 
- >寄往  :ru:
+ >寄往  🇷🇺
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/08/29 10:37 (当地)
 > 📥 [Russia](https://www.bing.com/maps/?cp=55.80945~37.95806&lvl=12.0&setlang=zh-Hans) 2023/10/10 19:04 (当地)
  📏 7,101 | ⏱ 43
@@ -79,7 +79,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/yoj61d8x1s9puup4jkncrgvtsttbq6k4.jpg) 
 
  [CN-3578752](https://www.postcrossing.com/postcards/CN-3578752) 
- >寄往  :canada:
+ >寄往  🇨🇦
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2023/08/29 10:37 (当地)
 > 📥 [Canada](https://www.bing.com/maps/?cp=50.40005~-105.53445&lvl=12.0&setlang=zh-Hans) 2023/09/28 07:57 (当地)
  📏 11,010 | ⏱ 30
@@ -90,7 +90,7 @@ order: 5
  ### 2015(2)
 
 [CN-1509464](https://www.postcrossing.com/postcards/CN-1509464) 
- >寄往  &#x1f1f9;&#x1f1fc;
+ >寄往  🇹🇼
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/12/24 17:41 (当地)
 > 📥 [Taiwan](https://www.bing.com/maps/?cp=24.1469~120.6839&lvl=12.0&setlang=zh-Hans) 2015/01/27 21:31 (当地)
  📏 1,544 | ⏱ 34
@@ -99,7 +99,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/2b99f06a551404ccc649291f5ebbbd27.jpg) 
 
  [CN-1480161](https://www.postcrossing.com/postcards/CN-1480161) 
- >寄往  :latvia:
+ >寄往  🇱🇻
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/11/19 14:07 (当地)
 > 📥 [Latvia](https://www.bing.com/maps/?cp=56.40794~24.19443&lvl=12.0&setlang=zh-Hans) 2015/01/17 07:52 (当地)
  📏 6,825 | ⏱ 59
@@ -110,7 +110,7 @@ order: 5
  ### 2014(15)
 
 [CN-1480158](https://www.postcrossing.com/postcards/CN-1480158) 
- >寄往  :jp:
+ >寄往  🇯🇵
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/11/19 14:07 (当地)
 > 📥 [Japan](https://www.bing.com/maps/?cp=35.32785~139.33735&lvl=12.0&setlang=zh-Hans) 2014/12/19 15:56 (当地)
  📏 3,128 | ⏱ 30
@@ -119,7 +119,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/dc03f1af18ef4d10d59648891b82a8d3.jpg) 
 
  [CN-1410993](https://www.postcrossing.com/postcards/CN-1410993) 
- >寄往  :de:
+ >寄往  🇩🇪
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/09/01 16:03 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=48.76508~11.42372&lvl=12.0&setlang=zh-Hans) 2014/10/04 11:44 (当地)
  📏 7,904 | ⏱ 33
@@ -128,7 +128,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/84a82eca7cc181df54e65265ccb47771.jpg) 
 
  [CN-1411001](https://www.postcrossing.com/postcards/CN-1411001) 
- >寄往  :netherlands:
+ >寄往  🇳🇱
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/09/01 16:05 (当地)
 > 📥 [Netherlands](https://www.bing.com/maps/?cp=52.255~6.16389&lvl=12.0&setlang=zh-Hans) 2014/10/02 09:48 (当地)
  📏 8,075 | ⏱ 31
@@ -137,7 +137,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/869460af40add2292917a00565e9d693.jpg) 
 
  [CN-1410996](https://www.postcrossing.com/postcards/CN-1410996) 
- >寄往  :us:
+ >寄往  🇺🇸
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/09/01 16:04 (当地)
 > 📥 [U.S.A.](https://www.bing.com/maps/?cp=43.54997~-96.70033&lvl=12.0&setlang=zh-Hans) 2014/09/20 05:08 (当地)
  📏 11,521 | ⏱ 19
@@ -146,7 +146,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6d622a4a49783ff352aea9bdb49992b5.jpg) 
 
  [CN-1345019](https://www.postcrossing.com/postcards/CN-1345019) 
- >寄往  :de:
+ >寄往  🇩🇪
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/06/24 10:09 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=51.16158~13.4737&lvl=12.0&setlang=zh-Hans) 2014/07/31 07:57 (当地)
  📏 7,665 | ⏱ 37
@@ -155,7 +155,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/12eb4e76d57d8e3cf67c97b6c0007aa1.jpg) 
 
  [CN-1360087](https://www.postcrossing.com/postcards/CN-1360087) 
- >寄往  :jp:
+ >寄往  🇯🇵
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/07/09 15:46 (当地)
 > 📥 [Japan](https://www.bing.com/maps/?cp=37.45~138.85&lvl=12.0&setlang=zh-Hans) 2014/07/22 14:58 (当地)
  📏 3,100 | ⏱ 13
@@ -164,7 +164,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/571d90dafdd3975ab4a4a15f56474e58.jpg) 
 
  [CN-1333452](https://www.postcrossing.com/postcards/CN-1333452) 
- >寄往  :us:
+ >寄往  🇺🇸
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/06/12 09:38 (当地)
 > 📥 [U.S.A.](https://www.bing.com/maps/?cp=38.64123~-75.61104&lvl=12.0&setlang=zh-Hans) 2014/07/02 15:59 (当地)
  📏 12,397 | ⏱ 21
@@ -173,7 +173,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/2ab07266398d1b503cb21df76556e0f8.jpg) 
 
  [CN-1318207](https://www.postcrossing.com/postcards/CN-1318207) 
- >寄往  :netherlands:
+ >寄往  🇳🇱
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/05/26 10:38 (当地)
 > 📥 [Netherlands](https://www.bing.com/maps/?cp=51.83167~4.6875&lvl=12.0&setlang=zh-Hans) 2014/06/13 18:24 (当地)
  📏 8,187 | ⏱ 19
@@ -182,7 +182,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/f6a5fca4cedc75d9a9fa3224311b3fce.jpg) 
 
  [CN-1302233](https://www.postcrossing.com/postcards/CN-1302233) 
- >寄往  &#x1f1f9;&#x1f1fc;
+ >寄往  🇹🇼
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/05/09 12:44 (当地)
 > 📥 [Taiwan](https://www.bing.com/maps/?cp=25.13089~121.74094&lvl=12.0&setlang=zh-Hans) 2014/06/02 23:20 (当地)
  📏 1,594 | ⏱ 24
@@ -191,7 +191,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7ba2448ba687920f15db8667c088dc2f.jpg) 
 
  [CN-1282652](https://www.postcrossing.com/postcards/CN-1282652) 
- >寄往  :ru:
+ >寄往  🇷🇺
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/04/18 21:25 (当地)
 > 📥 [Russia](https://www.bing.com/maps/?cp=55.75222~37.61556&lvl=12.0&setlang=zh-Hans) 2014/05/22 18:43 (当地)
  📏 6,006 | ⏱ 34
@@ -200,7 +200,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/c8aeeadb907773e90ad2b17b509604db.jpg) 
 
  [CN-1282656](https://www.postcrossing.com/postcards/CN-1282656) 
- >寄往  :finland:
+ >寄往  🇫🇮
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/04/18 21:25 (当地)
 > 📥 [Finland](https://www.bing.com/maps/?cp=60.46407~24.8073&lvl=12.0&setlang=zh-Hans) 2014/05/02 17:55 (当地)
  📏 6,709 | ⏱ 14
@@ -209,7 +209,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7c25c5df87d9ceae35563a8aa99bd6ba.jpg) 
 
  [CN-1241226](https://www.postcrossing.com/postcards/CN-1241226) 
- >寄往  :netherlands:
+ >寄往  🇳🇱
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/03/09 22:55 (当地)
 > 📥 [Netherlands](https://www.bing.com/maps/?cp=51.38667~5.44444&lvl=12.0&setlang=zh-Hans) 2014/04/04 16:33 (当地)
  📏 8,163 | ⏱ 26
@@ -218,7 +218,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/b23f5bb79a266ae4b0a9b7fe47983a1b.jpg) 
 
  [CN-1170641](https://www.postcrossing.com/postcards/CN-1170641) 
- >寄往  :ukraine:
+ >寄往  🇺🇦
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2013/12/30 16:31 (当地)
 > 📥 [Ukraine](https://www.bing.com/maps/?cp=45.83861~29.61123&lvl=12.0&setlang=zh-Hans) 2014/03/02 14:20 (当地)
  📏 6,721 | ⏱ 62
@@ -227,7 +227,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/0da3add01dfb4e47f788478419aee3af.jpg) 
 
  [CN-1152857](https://www.postcrossing.com/postcards/CN-1152857) 
- >寄往  :ru:
+ >寄往  🇷🇺
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2013/12/09 19:44 (当地)
 > 📥 [Russia](https://www.bing.com/maps/?cp=56.49771~84.97437&lvl=12.0&setlang=zh-Hans) 2014/01/23 16:41 (当地)
  📏 3,409 | ⏱ 45
@@ -236,7 +236,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6e4756e769b039889c5a89cef233a167.jpg) 
 
  [CN-1152859](https://www.postcrossing.com/postcards/CN-1152859) 
- >寄往  :us:
+ >寄往  🇺🇸
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2013/12/09 19:45 (当地)
 > 📥 [U.S.A.](https://www.bing.com/maps/?cp=38.58157~-121.4944&lvl=12.0&setlang=zh-Hans) 2014/01/09 14:03 (当地)
  📏 10,952 | ⏱ 31
@@ -247,7 +247,7 @@ order: 5
  ### 2013(3)
 
 [CN-1152862](https://www.postcrossing.com/postcards/CN-1152862) 
- >寄往  :austria:
+ >寄往  🇦🇹
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2013/12/09 19:45 (当地)
 > 📥 [Austria](https://www.bing.com/maps/?cp=47.26266~11.39454&lvl=12.0&setlang=zh-Hans) 2013/12/28 12:13 (当地)
  📏 7,987 | ⏱ 19
@@ -256,7 +256,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9b5a2768220eb28163645fbe35e6b079.jpg) 
 
  [CN-1152864](https://www.postcrossing.com/postcards/CN-1152864) 
- >寄往  :finland:
+ >寄往  🇫🇮
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2013/12/09 19:45 (当地)
 > 📥 [Finland](https://www.bing.com/maps/?cp=60.99596~24.46434&lvl=12.0&setlang=zh-Hans) 2013/12/27 12:35 (当地)
  📏 6,730 | ⏱ 18
@@ -265,7 +265,7 @@ order: 5
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/c709974037cd3ec3380edd88bb2e99f4.jpg) 
 
  [CN-949489](https://www.postcrossing.com/postcards/CN-949489) 
- >寄往  :us:
+ >寄往  🇺🇸
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2013/05/18 09:28 (当地)
 > 📥 [U.S.A.](https://www.bing.com/maps/?cp=37.38605~-122.08385&lvl=12.0&setlang=zh-Hans) 2013/07/20 14:29 (当地)
  📏 11,016 | ⏱ 64
