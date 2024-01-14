@@ -633,7 +633,7 @@ def createRegisterInfo(register_date, sent_info, received_info, countries, trave
                 <li class="list-group-item">注册时间：<b>{register_date}</b></li>
                 <li class="list-group-item">寄出：<b>{sent_info}</b></li>
                 <li class="list-group-item">收到：<b>{received_info}</b></li>
-                <li class="list-group-item">涉及国家：<b>{countries}</b></li>
+                <li class="list-group-item">涉及国家：<b>{countries}/248 ({round(countries/248*100,2)}%)</b></li>
                 <li class="list-group-item">待签收：<b>{traveling}</b></li>
             </ul>
         </div>
