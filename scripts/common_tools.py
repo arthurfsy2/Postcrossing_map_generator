@@ -5,7 +5,7 @@ import os
 import hashlib
 import sys
 import argparse
-from urllib import parse,request
+from urllib import parse, request
 import pytz
 from datetime import datetime, timedelta
 
@@ -18,14 +18,14 @@ picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
 
 
-
 # 设置读取数据库的统一入口函数
-def readDB(dbpath, type,tablename):
+def readDB(dbpath, type, tablename):
     data_all = []
     if os.path.exists(dbpath):
         conn = sqlite3.connect(dbpath)
         cursor = conn.cursor()
-        cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name=?",(tablename,))
+        cursor.execute(
+            f"SELECT name FROM sqlite_master WHERE type='table' AND name=?", (tablename,))
         table_exists = cursor.fetchone()
 
         if table_exists:
@@ -109,14 +109,15 @@ def readDB(dbpath, type,tablename):
                     receivedDate DESC
             ''', (type,))
             elif tablename == 'CountryStats':
-                cursor.execute(f"SELECT * FROM {tablename} ORDER BY name") if type =="" else cursor.execute(f"SELECT * FROM {tablename} where countryCode =?", (type,))
+                cursor.execute(f"SELECT * FROM {tablename} ORDER BY name") if type == "" else cursor.execute(
+                    f"SELECT * FROM {tablename} where countryCode =?", (type,))
             else:
                 cursor.execute(f"SELECT * FROM {tablename}")
             rows = cursor.fetchall()
-            #print("rows",rows)
+            # print("rows",rows)
             for row in rows:
                 if tablename == 'Galleryinfo':
-                    data={
+                    data = {
                         "id": row[0],
                         "userInfo": row[1],
                         "countryNameEmoji": row[2],
@@ -135,9 +136,9 @@ def readDB(dbpath, type,tablename):
                         "distance": row[15],
                         "FromCoor": row[16],
                         "ToCoor": row[17],
-                        }
+                    }
                 elif tablename == 'Mapinfo':
-                    data={
+                    data = {
                         "id": row[0],
                         "FromCoor": json.loads(row[1]),
                         "ToCoor": json.loads(row[2]),
@@ -146,7 +147,7 @@ def readDB(dbpath, type,tablename):
                         "sentDate": row[5],
                         "receivedDate": row[6],
                         "link": row[7],
-                        "user":row[8],
+                        "user": row[8],
                         "sentAddr": row[9],
                         "sentCountry": row[10],
                         "receivedAddr": row[11],
@@ -157,13 +158,13 @@ def readDB(dbpath, type,tablename):
                         "flagEmoji": row[16],
                     }
                 elif tablename == 'CountryStats':
-                    data={
+                    data = {
                         "name": row[0],
                         "countryCode": row[1],
                         "flagEmoji": row[2],
                         "value": row[3],
                         "sentNum": row[4],
-                        "receivedNum":row[5],
+                        "receivedNum": row[5],
                         "sentAvg": row[6],
                         "receivedAvg": row[7],
                         "sentMedian": row[8],
@@ -172,7 +173,7 @@ def readDB(dbpath, type,tablename):
                         "receivedHistory": row[11],
                     }
                 elif tablename == 'postcardStory':
-                    data={
+                    data = {
                         "id": row[0],
                         "content_original": row[1],
                         "content_cn": row[2],
@@ -180,7 +181,7 @@ def readDB(dbpath, type,tablename):
                         "comment_cn": row[4],
                         "userInfo": row[5],
                         "picFileName": row[6],
-                        "countryNameEmoji":row[7],
+                        "countryNameEmoji": row[7],
                         "travel_days": row[9],
                         "sentDate": row[10],
                         "sentAddr": row[11],
@@ -195,7 +196,7 @@ def readDB(dbpath, type,tablename):
                         "ToCoor": row[20],
                     }
                 elif tablename == 'userSummary':
-                    data={
+                    data = {
                         "about": row[0],
                         "coors": row[1],
                         "sentDistance": row[2],
@@ -203,20 +204,22 @@ def readDB(dbpath, type,tablename):
                         "sentPostcardNum": row[4],
                         "receivedDistance": row[5],
                         "receivedLaps": row[6],
-                        "receivedPostcardNum":row[7],
+                        "receivedPostcardNum": row[7],
                         "registerd_years": row[8],
                         "registerd_days": row[9],
                         "register_date": row[10],
                         "logo": row[11],
-                        
+
                     }
-                data_all.append(data)       
+                data_all.append(data)
         conn.close()
         return data_all
     return data_all
 
 # 设置写入数据库的统一入口函数
-def writeDB(dbpath, content,tablename):   
+
+
+def writeDB(dbpath, content, tablename):
     conn = sqlite3.connect(dbpath)
     cursor = conn.cursor()
 
@@ -230,16 +233,17 @@ def writeDB(dbpath, content,tablename):
             picFileName = item['picFileName']
             favoritesNum = item['favoritesNum']
             type = item['type']
-            cursor.execute(f"SELECT * FROM {tablename} WHERE id=? AND type=?", (id, type))
+            cursor.execute(
+                f"SELECT * FROM {tablename} WHERE id=? AND type=?", (id, type))
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
                 cursor.execute(f"UPDATE {tablename} SET userInfo=?, countryNameEmoji=?, picFileName=?, favoritesNum=? WHERE id=? AND type=?",
-                                (userInfo, countryNameEmoji, picFileName, favoritesNum,  id, type))
+                               (userInfo, countryNameEmoji, picFileName, favoritesNum,  id, type))
             else:
                 # 插入新的行
                 cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?)",
-                                (id, userInfo, countryNameEmoji, picFileName, favoritesNum, type))
+                               (id, userInfo, countryNameEmoji, picFileName, favoritesNum, type))
     elif tablename == 'Mapinfo':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
                     (id TEXT PRIMARY KEY, FromCoor TEXT, ToCoor TEXT, distance INTEGER, travel_days TEXT, sentDate TEXT, receivedDate TEXT, link TEXT, user TEXT, sentAddr TEXT, sentCountry TEXT, receivedAddr TEXT, receivedCountry TEXT, sentDate_local TEXT, receivedDate_local TEXT, type TEXT)''')
@@ -254,16 +258,16 @@ def writeDB(dbpath, content,tablename):
             link = item['link']
             user = item['user']
             sentAddr = item['sentAddr']
-            sentCountry = item['sentCountry'] 
+            sentCountry = item['sentCountry']
             receivedAddr = item['receivedAddr']
             receivedCountry = item['receivedCountry']
             sentDate_local = item['sentDate_local']
             receivedDate_local = item['receivedDate_local']
-            type = item['type']    
+            type = item['type']
 
             cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                (id, FromCoor, ToCoor, distance, travel_days, sentDate, receivedDate, link, user, sentAddr, sentCountry, receivedAddr, receivedCountry, sentDate_local, receivedDate_local, type))
-    # 将列表中的JSON对象写入文件      
+                           (id, FromCoor, ToCoor, distance, travel_days, sentDate, receivedDate, link, user, sentAddr, sentCountry, receivedAddr, receivedCountry, sentDate_local, receivedDate_local, type))
+    # 将列表中的JSON对象写入文件
     elif tablename == 'postcardStory':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
                     (id TEXT, content_original TEXT, content_cn TEXT, comment_original TEXT, comment_cn TEXT)''')
@@ -278,17 +282,17 @@ def writeDB(dbpath, content,tablename):
             if existing_data:
                 # 更新已存在的行的其他列数据
                 cursor.execute(f"UPDATE {tablename} SET content_original=?, content_cn=?,comment_original=?, comment_cn=?  WHERE id=?",
-                                (content_original, content_cn,comment_original, comment_cn, id))
+                               (content_original, content_cn, comment_original, comment_cn, id))
             else:
                 # 插入新的行
                 cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?)",
-                                (id, content_original, content_cn, comment_original, comment_cn ))
+                               (id, content_original, content_cn, comment_original, comment_cn))
     elif tablename == 'CountryStats':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
             (name TEXT, countryCode TEXT, flagEmoji TEXT, value INTEGER, sentNum INTEGER, receivedNum INTEGER, sentAvg INTEGER, receivedAvg INTEGER, sentMedian INTEGER, receivedMedian INTEGER, sentHistory TEXT, receivedHistory TEXT,
             PRIMARY KEY (name))''')
         for item in content:
-    
+
             name = item['name']
             countryCode = item['countryCode']
             flagEmoji = item['flagEmoji']
@@ -305,11 +309,12 @@ def writeDB(dbpath, content,tablename):
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET countryCode=?, flagEmoji=?, value=?, sentNum=?, receivedNum=?, sentAvg=?, receivedAvg=?, sentMedian=?, receivedMedian=?, sentHistory=?, receivedHistory=? WHERE name=?", (countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian, sentHistory, receivedHistory, name))
+                cursor.execute(f"UPDATE {tablename} SET countryCode=?, flagEmoji=?, value=?, sentNum=?, receivedNum=?, sentAvg=?, receivedAvg=?, sentMedian=?, receivedMedian=?, sentHistory=?, receivedHistory=? WHERE name=?", (
+                    countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian, sentHistory, receivedHistory, name))
             else:
                 # 插入新的行
                 cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                        (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian, sentHistory, receivedHistory))
+                               (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian, sentHistory, receivedHistory))
     elif tablename == 'userSummary':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
     (about TEXT, coors TEXT, sentDistance TEXT, sentLaps TEXT, sentPostcardNum TEXT, receivedDistance TEXT, receivedLaps TEXT, receivedPostcardNum TEXT, registerd_years TEXT, registerd_days TEXT, register_date TEXT)''')
@@ -330,16 +335,17 @@ def writeDB(dbpath, content,tablename):
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET about=?, coors=?, sentDistance=?, sentLaps=?, sentPostcardNum=?, receivedDistance=?, receivedLaps=?, receivedPostcardNum=?, registerd_years=?, registerd_days=?, register_date=?, logo=? ", (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum,registerd_years ,registerd_days, register_date,logo))
+                cursor.execute(f"UPDATE {tablename} SET about=?, coors=?, sentDistance=?, sentLaps=?, sentPostcardNum=?, receivedDistance=?, receivedLaps=?, receivedPostcardNum=?, registerd_years=?, registerd_days=?, register_date=?, logo=? ", (
+                    about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum, registerd_years, registerd_days, register_date, logo))
             else:
                 # 插入新的行
                 cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                        (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum,registerd_years ,registerd_days, register_date,logo))
-
+                               (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum, registerd_years, registerd_days, register_date, logo))
 
     print(f'已更新数据库{dbpath}的{tablename}\n')
     conn.commit()
     conn.close()
+
 
 def md5(file_path):
     with open(file_path, 'rb') as file:
@@ -347,7 +353,8 @@ def md5(file_path):
         md5_hash = hashlib.md5(data).hexdigest()
     return md5_hash
 
-def compareMD5(pathA,pathB):
+
+def compareMD5(pathA, pathB):
 
     A_md5 = md5(pathA)
     B_md5 = md5(pathB)
@@ -355,13 +362,14 @@ def compareMD5(pathA,pathB):
         stat = "0"
     else:
         stat = "1"
-    #print(f"\n{pathA}:{A_md5}\n{pathB}:{B_md5}")
+    # print(f"\n{pathA}:{A_md5}\n{pathB}:{B_md5}")
     return stat
 
 
 def translate(apikey, sentence, src_lan, tgt_lan):
     url = 'http://api.niutrans.com/NiuTransServer/translation?'
-    data = {"from": src_lan, "to": tgt_lan, "apikey": apikey, "src_text": sentence.encode("utf-8")}
+    data = {"from": src_lan, "to": tgt_lan, "apikey": apikey,
+            "src_text": sentence.encode("utf-8")}
     data_en = parse.urlencode(data)
     req = url + "&" + data_en
     res = request.urlopen(req)
@@ -372,14 +380,15 @@ def translate(apikey, sentence, src_lan, tgt_lan):
         result = res
     return result
 
+
 def get_country_city(latitude, longitude, timestamp):
-    
-    url=f"https://timezones.datasette.io/timezones/by_point.json?longitude={longitude}&latitude={latitude}"
-    response = requests.get(url = url)
+
+    url = f"https://timezones.datasette.io/timezones/by_point.json?longitude={longitude}&latitude={latitude}"
+    response = requests.get(url=url)
     if response:
         country_city = response.json()['rows'][0][0]
     return country_city
-    
+
 
 def get_local_date(coors, utc_date):
     latitude = coors[0]
@@ -412,10 +421,10 @@ def get_local_date(coors, utc_date):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("account", help="输入account")
-    parser.add_argument("password", help="输入password")      
-    parser.add_argument("nickName", help="输入nickName")    
-    # parser.add_argument("Cookie", help="输入Cookie") 
-    parser.add_argument("repo", help="输入repo")    
+    parser.add_argument("password", help="输入password")
+    parser.add_argument("nickName", help="输入nickName")
+    # parser.add_argument("Cookie", help="输入Cookie")
+    parser.add_argument("repo", help="输入repo")
     options = parser.parse_args()
 
     account = options.account
@@ -423,16 +432,14 @@ if __name__ == "__main__":
     nickName = options.nickName
     # Cookie = options.Cookie
     repo = options.repo
-    url = f"https://www.postcrossing.com/user/{account}/gallery"  
-    userUrl = f"https://www.postcrossing.com/user/{account}"  
+    url = f"https://www.postcrossing.com/user/{account}/gallery"
+    userUrl = f"https://www.postcrossing.com/user/{account}"
     galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
-    dataUrl = f"{userUrl}/data/sent"  
-    types_map = ['sent', 'received']  
-
-
+    dataUrl = f"{userUrl}/data/sent"
+    types_map = ['sent', 'received']
 
     headers = {
         'authority': 'www.postcrossing.com',
         'Cookie': Cookie,
-        
-        }
+
+    }

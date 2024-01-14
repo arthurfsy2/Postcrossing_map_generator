@@ -1,9 +1,9 @@
 from imap_tools import MailBox, AND
 import re
 import json
-from urllib import parse,request
+from urllib import parse, request
 import sqlite3
-import os 
+import os
 from common_tools import translate
 import argparse
 
@@ -19,38 +19,43 @@ dbpath = data["dbpath"]
 parser = argparse.ArgumentParser()
 
 
-parser.add_argument("input_string", help="输入host//user//passwd//filename,以英文逗号‘,’隔开")   
-parser.add_argument("apikey", help="输入小牛翻译apikey")         
+parser.add_argument(
+    "input_string", help="输入host//user//passwd//filename,以英文逗号‘,’隔开")
+parser.add_argument("apikey", help="输入小牛翻译apikey")
 options = parser.parse_args()
 
 
 input_string = options.input_string
 apikey = options.apikey
 
+
 def remove_blank_lines(text):
     if text:
         return "\n".join(line for line in text.splitlines() if line.strip())
     return text
 
-def getMailReply(host,user,passwd,filename):
+
+def getMailReply(host, user, passwd, filename):
     tablename = "postcardStory"
-    oldReplyID=getLocalReplyID(dbpath,tablename) #获取本地数据库已保存的ID 
-    #print("oldReplyID:\n",oldReplyID)
+    oldReplyID = getLocalReplyID(dbpath, tablename)  # 获取本地数据库已保存的ID
+    # print("oldReplyID:\n",oldReplyID)
     content = []
-    with MailBox(host).login(user, passwd) as mailbox:        
+    with MailBox(host).login(user, passwd) as mailbox:
         # for f in mailbox.folder.list():
         #     print(f) #查看当前账号的文件夹列表
-        mailbox.folder.set(filename) 
+        mailbox.folder.set(filename)
         for msg in mailbox.fetch(AND(subject="Hurray! Your postcard")):
-            #print("msg:\n",msg.date, msg.subject, len(msg.text or msg.html))
-            id = re.search(r'Hurray! Your postcard (.*?) to', msg.subject).group(1)
+            # print("msg:\n",msg.date, msg.subject, len(msg.text or msg.html))
+            id = re.search(r'Hurray! Your postcard (.*?) to',
+                           msg.subject).group(1)
             match = re.search(r'“([\s\S]*?)”', msg.text)
             if match:
                 match = match.group(1)
-                if id not in oldReplyID: #只翻译新的内容
-                    print("idNEW:",id)
+                if id not in oldReplyID:  # 只翻译新的内容
+                    print("idNEW:", id)
                     comment_original = remove_blank_lines(match)
-                    comment_cn = translate(apikey, comment_original, 'auto', 'zh')
+                    comment_cn = translate(
+                        apikey, comment_original, 'auto', 'zh')
                     data = {
                         "id": id,
                         "content_original": "",
@@ -58,21 +63,21 @@ def getMailReply(host,user,passwd,filename):
                         "comment_original": f"“{comment_original}”",
                         "comment_cn": f"“{comment_cn}”",
                     }
-                    content.append(data)       
-        if len(content)>0:
-            writeDB(dbpath, content,tablename)    
-            print("已发现更新内容:",content)
+                    content.append(data)
+        if len(content) > 0:
+            writeDB(dbpath, content, tablename)
+            print("已发现更新内容:", content)
         else:
             print("无更新内容")
 
 
-
-def getLocalReplyID(dbpath,tablename):
+def getLocalReplyID(dbpath, tablename):
     oldID = None
     if os.path.exists(dbpath):
         conn = sqlite3.connect(dbpath)
         cursor = conn.cursor()
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?",(tablename,))
+        cursor.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name=?", (tablename,))
         table_exists = cursor.fetchone()
         if table_exists:
             # 从Mapinfo表中获取id
@@ -83,7 +88,7 @@ def getLocalReplyID(dbpath,tablename):
     return oldID
 
 
-def writeDB(dbpath, content,tablename):   
+def writeDB(dbpath, content, tablename):
     conn = sqlite3.connect(dbpath)
     cursor = conn.cursor()
 
@@ -101,31 +106,35 @@ def writeDB(dbpath, content,tablename):
             if existing_data:
                 # 更新已存在的行的其他列数据
                 cursor.execute(f"UPDATE {tablename} SET content_original=?, content_cn=?,comment_original=?, comment_cn=?  WHERE id=?",
-                                (content_original, content_cn,comment_original, comment_cn, id))
+                               (content_original, content_cn, comment_original, comment_cn, id))
             else:
                 # 插入新的行
                 cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?)",
-                                (id, content_cn, content_original, comment_original, comment_cn ))
-    
+                               (id, content_cn, content_original, comment_original, comment_cn))
+
     print(f'已更新数据库{dbpath}的{tablename}\n')
     conn.commit()
     conn.close()
+
 
 def parse_string(input_string):
     arr = []
     groups = input_string.split(',')
     for group in groups:
-        host, user,passwd,filename = group.split('//')
-        
+        host, user, passwd, filename = group.split('//')
+
         host = host.strip()
         user = user.strip()
         passwd = passwd.strip()
         filename = filename.strip()
-        arr.append({'host': host, 'user': user, 'passwd': passwd, 'filename': filename})
+        arr.append({'host': host, 'user': user,
+                   'passwd': passwd, 'filename': filename})
     return arr
+
 
 if __name__ == "__main__":
     parms = parse_string(input_string)
-    #print(parms)
+    # print(parms)
     for parm in parms:
-        getMailReply(parm['host'],parm['user'],parm['passwd'],parm['filename'])
+        getMailReply(parm['host'], parm['user'],
+                     parm['passwd'], parm['filename'])

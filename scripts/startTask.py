@@ -11,11 +11,11 @@ dbpath = data["dbpath"]
 # 创建 ArgumentParser 对象
 parser = argparse.ArgumentParser()
 parser.add_argument("account", help="输入account")
-parser.add_argument("password", help="输入password")      
-parser.add_argument("nickName", help="输入nickName")    
-# parser.add_argument("Cookie", help="输入Cookie") 
-parser.add_argument("repo", help="输入repo")  
-parser.add_argument("apikey", help="输入小牛翻译apikey")     
+parser.add_argument("password", help="输入password")
+parser.add_argument("nickName", help="输入nickName")
+# parser.add_argument("Cookie", help="输入Cookie")
+parser.add_argument("repo", help="输入repo")
+parser.add_argument("apikey", help="输入小牛翻译apikey")
 options = parser.parse_args()
 
 account = options.account
@@ -36,10 +36,10 @@ command = f'python scripts/createGallery.py "{account}" "{nickName}" "{repo}"'
 subprocess.run(command, shell=True)
 
 command = f'python scripts/createMap.py "{account}"'
-subprocess.run(command, shell=True)    
+subprocess.run(command, shell=True)
 
 command = f'python scripts/createPersonalPage.py "{account}" "{nickName}" "{repo}" "{apikey}"'
-subprocess.run(command, shell=True)    
+subprocess.run(command, shell=True)
 
 command = f'python scripts/postcrossingrecap.py'
-subprocess.run(command, shell=True)    
+subprocess.run(command, shell=True)

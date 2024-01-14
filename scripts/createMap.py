@@ -6,7 +6,7 @@ import sqlite3
 import random
 import os
 from multiDownload import MapDataCheck
-from common_tools import readDB,writeDB,compareMD5
+from common_tools import readDB, writeDB, compareMD5
 import sys
 import shutil
 import argparse
@@ -22,32 +22,33 @@ dbpath = data["dbpath"]
 # 创建 ArgumentParser 对象
 parser = argparse.ArgumentParser()
 parser.add_argument("account", help="输入account")
-#parser.add_argument("password", help="输入password")      
-#parser.add_argument("nickName", help="输入nickName")    
-# parser.add_argument("Cookie", help="输入Cookie") 
-#parser.add_argument("repo", help="输入repo")    
+# parser.add_argument("password", help="输入password")
+# parser.add_argument("nickName", help="输入nickName")
+# parser.add_argument("Cookie", help="输入Cookie")
+# parser.add_argument("repo", help="输入repo")
 options = parser.parse_args()
 
 account = options.account
-#password = options.password
-#nickName = options.nickName
+# password = options.password
+# nickName = options.nickName
 # Cookie = options.Cookie
-#repo = options.repo
+# repo = options.repo
 
 
-userUrl = f"https://www.postcrossing.com/user/{account}"  
+userUrl = f"https://www.postcrossing.com/user/{account}"
 galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
-dataUrl = f"{userUrl}/data/sent"  
-types_map = ['sent', 'received']  
+dataUrl = f"{userUrl}/data/sent"
+types_map = ['sent', 'received']
 
 headers = {
     'authority': 'www.postcrossing.com',
     'Cookie': Cookie,
-    
-    }
+
+}
 
 if os.path.exists(dbpath):
     shutil.copyfile(dbpath, f"{dbpath}BAK")
+
 
 def getMapHomeInfo(receivedData):
     addr_count = {}
@@ -58,7 +59,7 @@ def getMapHomeInfo(receivedData):
         if addr in addr_count:
             addr_count[addr] += 1
         else:
-            addr_count[addr] = 1       
+            addr_count[addr] = 1
         coord = tuple(item["ToCoor"])
         if coord not in home_coords:
             home_coords.append(coord)
@@ -68,14 +69,15 @@ def getMapHomeInfo(receivedData):
 
     return most_common_coord, most_common_addr, home_coords, home_addrs
 
+
 def geojson(m):
     footprint = []
-    stats_data=readDB(dbpath, "", "CountryStats")
+    stats_data = readDB(dbpath, "", "CountryStats")
     for data in stats_data:
         sentNum = float(data['sentNum'])
         receivedNum = float(data['receivedNum'])
         countryCode = data['countryCode']
-        
+
         if sentNum > 0 and receivedNum > 0:
             footprint.append({'countryCode': countryCode, 'type': 2})
         elif sentNum > 0 or receivedNum > 0:
@@ -94,32 +96,36 @@ def geojson(m):
     )
     return geojson.add_to(m)
 
-#读取已获取数据生成地图
+# 读取已获取数据生成地图
+
+
 def createMap():
-    sentData =readDB(dbpath, "sent", "Mapinfo")
-    receivedData =readDB(dbpath, "received", "Mapinfo")
-    allData = [sentData,receivedData]
-    most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getMapHomeInfo(receivedData)
+    sentData = readDB(dbpath, "sent", "Mapinfo")
+    receivedData = readDB(dbpath, "received", "Mapinfo")
+    allData = [sentData, receivedData]
+    most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getMapHomeInfo(
+        receivedData)
     m = folium.Map(
         location=most_common_homeCoord,
         zoom_start=2,
-        tiles='https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}',       
-        #tiles='https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+        tiles='https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}',
+        # tiles='https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
         attr='map',
     )
-    geojson(m)    
-    def generate_random_offset(): 
-            return random.uniform(-0.0001, 0.0001)
-    for i,coord in enumerate(homeCoords):
-        #生成home标记(ClusterMap)
-        marker = folium.Marker(
-                location=coord,
-                icon=folium.Icon(color='blue', icon='home'),
-                popup=f'{homeAddrs[i]}'
-            )
-        marker.add_to(m) #设置home的marker固定显示，不被聚合统计
+    geojson(m)
 
-    for i,datas in enumerate(allData):
+    def generate_random_offset():
+        return random.uniform(-0.0001, 0.0001)
+    for i, coord in enumerate(homeCoords):
+        # 生成home标记(ClusterMap)
+        marker = folium.Marker(
+            location=coord,
+            icon=folium.Icon(color='blue', icon='home'),
+            popup=f'{homeAddrs[i]}'
+        )
+        marker.add_to(m)  # 设置home的marker固定显示，不被聚合统计
+
+    for i, datas in enumerate(allData):
         for coords in datas:
             # 解析postcardID、from坐标、to坐标、distance、days、link、user
             postcardID = coords["id"]
@@ -131,74 +137,75 @@ def createMap():
             user = coords["user"]
             sentAddr = f'{coords["sentAddr"]} [{coords["sentCountry"]}]'
             receivedAddr = f'{coords["receivedAddr"]} [{coords["receivedCountry"]}]'
-            if user =='account closed':
-                userInfo ='<b><i>account closed</b></i>'
+            if user == 'account closed':
+                userInfo = '<b><i>account closed</b></i>'
             else:
-                userInfo = f'<a href="https://www.postcrossing.com/user/{user}">{user}</a>' 
+                userInfo = f'<a href="https://www.postcrossing.com/user/{user}">{user}</a>'
 
             if link == "":
-                linkInfo = f'<a href="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" target="_blank"><img src="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" alt="Image"></a>'  #替换图片为空时的logo
+                linkInfo = f'<a href="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" target="_blank"><img src="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" alt="Image"></a>'  # 替换图片为空时的logo
             else:
-                linkInfo =f'<a href="{link}" target="_blank"><img src="{link}" alt="Image"></a>'
-            
-            #生成已寄送明信片的接收地标记(ClusterMap)
-            
-            if i== 0:
-                color='red'
-                icon='stop'
+                linkInfo = f'<a href="{link}" target="_blank"><img src="{link}" alt="Image"></a>'
+
+            # 生成已寄送明信片的接收地标记(ClusterMap)
+
+            if i == 0:
+                color = 'red'
+                icon = 'stop'
                 from_or_to = "To"
                 location = to_coord
-            elif i== 1:
-                color='green'
-                icon='play'
+            elif i == 1:
+                color = 'green'
+                icon = 'play'
                 from_or_to = "From"
                 location = from_coord
             marker = folium.Marker(
-                location=[location[0] + generate_random_offset(), location[1] + generate_random_offset()],
+                location=[location[0] + generate_random_offset(),
+                          location[1] + generate_random_offset()],
                 icon=folium.Icon(color=color, icon=icon),
                 popup=f'{from_or_to} {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} {linkInfo}'
-            ).add_to(m)  
+            ).add_to(m)
 
            # 添加航线
             folium.PolyLine(
-                locations=[from_coord,to_coord],
+                locations=[from_coord, to_coord],
                 color=color,
                 weight=1,
                 opacity=0.7,
-                smooth_factor=10  
+                smooth_factor=10
             ).add_to(m)
     m.save("Map.html")
     replaceJsRef("./Map.html")
 
-    
 
 def createClusterMap():
-    sentData =readDB(dbpath, "sent", "Mapinfo")
-    receivedData =readDB(dbpath, "received", "Mapinfo")
-    allData = [sentData,receivedData]
-    most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getMapHomeInfo(receivedData)
+    sentData = readDB(dbpath, "sent", "Mapinfo")
+    receivedData = readDB(dbpath, "received", "Mapinfo")
+    allData = [sentData, receivedData]
+    most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getMapHomeInfo(
+        receivedData)
     cluster = folium.Map(
         location=most_common_homeCoord,
         zoom_start=2,
-        tiles='https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}',       
-        #tiles='https://mt.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+        tiles='https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}',
+        # tiles='https://mt.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
         attr='map',
     )
     geojson(cluster)
     marker_cluster = MarkerCluster().add_to(cluster)
-    
-    def generate_random_offset():
-            return random.uniform(-0.0005, 0.0005)
-    for i,coord in enumerate(homeCoords):
-        #生成home标记(ClusterMap)
-        marker = folium.Marker(
-                location=coord,
-                icon=folium.Icon(color='blue', icon='home'),
-                popup=f'{homeAddrs[i]}'
-            )
-        marker.add_to(cluster) #设置home的marker固定显示，不被聚合统计
 
-    for i,datas in enumerate(allData):
+    def generate_random_offset():
+        return random.uniform(-0.0005, 0.0005)
+    for i, coord in enumerate(homeCoords):
+        # 生成home标记(ClusterMap)
+        marker = folium.Marker(
+            location=coord,
+            icon=folium.Icon(color='blue', icon='home'),
+            popup=f'{homeAddrs[i]}'
+        )
+        marker.add_to(cluster)  # 设置home的marker固定显示，不被聚合统计
+
+    for i, datas in enumerate(allData):
         for coords in datas:
             # 解析postcardID、from坐标、to坐标、distance、days、link、user
             postcardID = coords["id"]
@@ -210,40 +217,37 @@ def createClusterMap():
             user = coords["user"]
             sentAddr = f'{coords["sentAddr"]} [{coords["sentCountry"]}]'
             receivedAddr = f'{coords["receivedAddr"]} [{coords["receivedCountry"]}]'
-            if user =='account closed':
-                userInfo ='<b><i>account closed</b></i>'
+            if user == 'account closed':
+                userInfo = '<b><i>account closed</b></i>'
             else:
-                userInfo = f'<a href="https://www.postcrossing.com/user/{user}">{user}</a>' 
+                userInfo = f'<a href="https://www.postcrossing.com/user/{user}">{user}</a>'
 
             if link == "":
-                linkInfo = f'<a href="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" target="_blank"><img src="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" alt="Image"></a>'  #替换图片为空时的logo
+                linkInfo = f'<a href="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" target="_blank"><img src="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" alt="Image"></a>'  # 替换图片为空时的logo
             else:
-                linkInfo =f'<a href="{link}" target="_blank"><img src="{link}" alt="Image"></a>'
-            
-            #生成已寄送明信片的接收地标记(ClusterMap)
-            
-            if i== 0:
-                color='red'
-                icon='stop'
+                linkInfo = f'<a href="{link}" target="_blank"><img src="{link}" alt="Image"></a>'
+
+            # 生成已寄送明信片的接收地标记(ClusterMap)
+
+            if i == 0:
+                color = 'red'
+                icon = 'stop'
                 from_or_to = "To"
                 location = to_coord
-            elif i== 1:
-                color='green'
-                icon='play'
+            elif i == 1:
+                color = 'green'
+                icon = 'play'
                 from_or_to = "From"
                 location = from_coord
             marker = folium.Marker(
                 location=location,
                 icon=folium.Icon(color=color, icon=icon),
                 popup=f'{from_or_to} {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} {linkInfo}'
-            ).add_to(marker_cluster)  
+            ).add_to(marker_cluster)
 
-        
     # 保存地图为HTML文件
     cluster.save("ClusterMap.html")
     replaceJsRef("./ClusterMap.html")
-
-
 
 
 def replaceJsRef(fileFullName):
@@ -287,16 +291,17 @@ def replaceJsRef(fileFullName):
     os.remove(fileFullName)
     os.rename(f"{fileFullName}.bak", fileFullName)
 
+
 def createUserLocationMap():
-    content =readDB(dbpath, "","userSummary")
+    content = readDB(dbpath, "", "userSummary")
     for id in content:
-        coors = json.loads(id["coors"]  )
+        coors = json.loads(id["coors"])
     # 创建地图对象
     map = folium.Map(
         location=coors,
         zoom_start=7,
-        tiles='https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}',       
-        #tiles='https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+        tiles='https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}',
+        # tiles='https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
         attr='map',
     )
     # 创建标记对象
@@ -307,23 +312,27 @@ def createUserLocationMap():
     map.save("LocationMap.html")
     replaceJsRef("./LocationMap.html")
 
+
+MapDataCheck(account, Cookie, types_map)
 if not os.path.exists("./LocationMap.html"):
     createUserLocationMap()
 if os.path.exists(f"{dbpath}BAK"):
     dbStat = compareMD5(dbpath, f"{dbpath}BAK")
     if dbStat == "1":
-        print(f"{dbpath} 有更新") 
+        print(f"{dbpath} 有更新")
         createMap()
         print("Map.html已生成!")
-        createClusterMap() 
+        createClusterMap()
         print("ClusterMap.html已生成!")
         os.remove(f"{dbpath}BAK")
     else:
-        print(f"{dbpath} 暂无更新") 
+        print(f"{dbpath} 暂无更新")
         print("Map.html 暂无更新")
         print("ClusterMap.html 暂无更新")
         os.remove(f"{dbpath}BAK")
+
+
 end_time = time.time()
-execution_time = round((end_time - start_time),3)
-print("————————————————————") 
+execution_time = round((end_time - start_time), 3)
+print("————————————————————")
 print(f"scripts/createMap.py脚本执行时间：{execution_time}秒")
