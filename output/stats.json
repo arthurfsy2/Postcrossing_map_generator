@@ -460,5 +460,19 @@
     "receivedMedian": 44,
     "sentHistory": "[]",
     "receivedHistory": "[44]"
+  },
+  {
+    "name": "Poland",
+    "countryCode": "PL",
+    "flagEmoji": "🇵🇱",
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": null,
+    "receivedAvg": 40,
+    "sentMedian": null,
+    "receivedMedian": 40,
+    "sentHistory": "[]",
+    "receivedHistory": "[40]"
   }
 ]
