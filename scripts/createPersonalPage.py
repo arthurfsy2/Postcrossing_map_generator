@@ -447,15 +447,18 @@ def getTravelingID(account, type, Cookie):
     with open("scripts/countryName.json", "r") as file:
         countryList = json.load(file)
     for i, stats in enumerate(data):
+
         baseurl = "https://www.postcrossing.com"
         sentAvg = readDB(dbpath, stats[3], "CountryStats")[0]['sentAvg']
+        traveling_days = f'<span style="color: red;">{stats[7]}</span>' if int(
+            stats[7]) > int(sentAvg) else f'<span style="color: green;">{stats[7]}</span>'
         formatted_item = {
             'ID号': f"<a href='{baseurl}/travelingpostcard/{stats[0]}' target='_blank'>{stats[0]}</a>",
             '收信人': f"<a href='{baseurl}/user/{stats[1]}' target='_blank'>{stats[1]}</a>",
             '国家': f"{countryList[stats[3]]} {flag(stats[3])}",
             '寄出时间(当地)': get_local_date(stats[0][0:2], stats[4]),
             '距离(km)': f'{format(stats[6], ",")}',
-            '天数': stats[7],
+            '天数': traveling_days,
             '历史平均到达(天)': f"{sentAvg}",
         }
         new_data.append(formatted_item)
