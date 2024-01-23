@@ -453,8 +453,12 @@ def getTravelingID(account, type, Cookie):
 
         baseurl = "https://www.postcrossing.com"
         sentAvg = readDB(dbpath, stats[3], "CountryStats")[0]['sentAvg']
-        traveling_days = f'<span style="color: red;">{stats[7]}</span>' if int(
-            stats[7]) > int(sentAvg) else f'<span style="color: green;">{stats[7]}</span>'
+        if int(stats[7]) >= 60:
+            traveling_days = f'<span style="color: red;">{stats[7]}</span>'
+        elif int(stats[7]) > int(sentAvg):
+            traveling_days = f'<span style="color: orange;">{stats[7]}</span>'
+        else:
+            traveling_days = f'<span style="color: green;">{stats[7]}</span>'
         formatted_item = {
             'ID号': f"<a href='{baseurl}/travelingpostcard/{stats[0]}' target='_blank'>{stats[0]}</a>",
             '收信人': f"<a href='{baseurl}/user/{stats[1]}' target='_blank'>{stats[1]}</a>",
