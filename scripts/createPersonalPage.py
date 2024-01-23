@@ -122,7 +122,9 @@ def replaceTemplate():
     stat, content_raw, types = getAccountStat(account, Cookie)
     desc_all = ""
     countryNum = getUserSheet("CountryStats")
-    travelingNum = getTravelingID(account, "traveling", Cookie)
+    countries = f"{countryNum}/248 [{round(countryNum/248*100,2)}%]"
+    travelingNum, expiredNum = getTravelingID(account, "traveling", Cookie)
+    traveling = f"{travelingNum} [过期：{expiredNum}]"
     for type in types:
         if type == "sent" or type == "received":
             distance, num, rounds, registerd_years, registerd_days, register_date, about, coors, logo = getUserHomeInfo(
@@ -149,7 +151,7 @@ def replaceTemplate():
 
         title_final = f"{title_all}"
     createRegisterInfo(registerDate, sent_info,
-                       received_info, countryNum, travelingNum)
+                       received_info, countries, traveling)
     storylist, storyNum = getCardStoryList("received")
     commentlist, commentNum = getCardStoryList("sent")
     calendar, series, height = createCalendar()
@@ -426,6 +428,7 @@ def getTravelingID(account, type, Cookie):
     }
     url = f'https://www.postcrossing.com/user/{account}/data/{type}'
     response = requests.get(url, headers=headers).json()
+    expiredCount = sum(1 for item in response if item[7] > 60)
     travelingCount = len(response)
     data = sorted(response, key=lambda x: x[7])
     new_data = []
@@ -469,7 +472,7 @@ def getTravelingID(account, type, Cookie):
     # 保存HTML表格为网页文件
     with open(f'./output/{type}.html', 'w', encoding="utf-8") as file:
         file.write(html_content)
-    return travelingCount
+    return travelingCount, expiredCount
 
 
 def get_HTML_table(type, tableName):
@@ -636,7 +639,7 @@ def createRegisterInfo(register_date, sent_info, received_info, countries, trave
                 <li class="list-group-item">注册时间：<b>{register_date}</b></li>
                 <li class="list-group-item">寄出：<b>{sent_info}</b></li>
                 <li class="list-group-item">收到：<b>{received_info}</b></li>
-                <li class="list-group-item">涉及国家：<b>{countries}/248 ({round(countries/248*100,2)}%)</b></li>
+                <li class="list-group-item">涉及国家：<b>{countries}</b></li>
                 <li class="list-group-item">待签收：<b>{traveling}</b></li>
             </ul>
         </div>
