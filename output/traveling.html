@@ -1,196 +1,379 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>还在漂泊的明信片</title>
+    <link
+      rel="stylesheet"
+      href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css"
+    />
+    <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
+    <script src="../src/tablesorter-2.31.3/js/jquery.tablesorter.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#dataTable").tablesorter();
+      });
 
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>还在漂泊的明信片</title>
-        <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
-        <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
-        <script src="../src/tablesorter-2.31.3/js/jquery.tablesorter.js"></script>
-        <script>
-            $(document).ready(function() {
-                $("#dataTable").tablesorter();
-            });
-            
-            function searchTable() {
-                var input = document.getElementById("searchInput");
-                var filter = input.value.toUpperCase();
-                var table = document.getElementById("dataTable");
-                var tr = table.getElementsByTagName("tr");
-                for (var i = 1; i < tr.length; i++) {  // Start from index 1 to exclude the table header row
-                    var td = tr[i].getElementsByTagName("td");
-                    var found = false;
-                    for (var j = 0; j < td.length; j++) {
-                        var txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
+      function searchTable() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("dataTable");
+        var tr = table.getElementsByTagName("tr");
+        for (var i = 1; i < tr.length; i++) {
+          // Start from index 1 to exclude the table header row
+          var td = tr[i].getElementsByTagName("td");
+          var found = false;
+          for (var j = 0; j < td.length; j++) {
+            var txtValue = td[j].textContent || td[j].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              found = true;
+              break;
             }
-            </script>
+          }
+          if (found) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    </script>
     <style>
-    .search-input {
+      .search-input {
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 4px;
         font-size: 14px;
         width: 200px;
-    }
+      }
 
-    .search-input:focus {
+      .search-input:focus {
         outline: none;
         border-color: #007bff;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
+      }
     </style>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="mb-3">
-                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索……">
-            </div>
-            <div class="table-responsive">
-                <table border="1" class="dataframe table table-striped table-bordered" id="dataTable">
-  <thead>
-    <tr style="text-align: right;">
-      <th class="text-center"></th>
-      <th class="text-center">ID号</th>
-      <th class="text-center">收信人</th>
-      <th class="text-center">国家</th>
-      <th class="text-center">寄出时间(当地)</th>
-      <th class="text-center">距离(km)</th>
-      <th class="text-center">天数</th>
-      <th class="text-center">历史平均到达(天)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th class="text-center">1</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3660599' target='_blank'>CN-3660599</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/sarmas' target='_blank'>sarmas</a></td>
-      <td class="text-center">Finland 🇫🇮</td>
-      <td class="text-center">2024/01/05 15:19</td>
-      <td class="text-center">7,839</td>
-      <td class="text-center"><span style="color: green;">17</span></td>
-      <td class="text-center">27</td>
-    </tr>
-    <tr>
-      <th class="text-center">2</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3660600' target='_blank'>CN-3660600</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/Micha37' target='_blank'>Micha37</a></td>
-      <td class="text-center">Germany 🇩🇪</td>
-      <td class="text-center">2024/01/05 15:19</td>
-      <td class="text-center">8,904</td>
-      <td class="text-center"><span style="color: green;">17</span></td>
-      <td class="text-center">36</td>
-    </tr>
-    <tr>
-      <th class="text-center">3</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3659000' target='_blank'>CN-3659000</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/BeckyS' target='_blank'>BeckyS</a></td>
-      <td class="text-center">U.S.A. 🇺🇸</td>
-      <td class="text-center">2024/01/03 10:20</td>
-      <td class="text-center">10,373</td>
-      <td class="text-center"><span style="color: green;">19</span></td>
-      <td class="text-center">33</td>
-    </tr>
-    <tr>
-      <th class="text-center">4</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3659001' target='_blank'>CN-3659001</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/Topas' target='_blank'>Topas</a></td>
-      <td class="text-center">Germany 🇩🇪</td>
-      <td class="text-center">2024/01/03 10:20</td>
-      <td class="text-center">9,140</td>
-      <td class="text-center"><span style="color: green;">19</span></td>
-      <td class="text-center">36</td>
-    </tr>
-    <tr>
-      <th class="text-center">5</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3658999' target='_blank'>CN-3658999</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/chacoco2' target='_blank'>chacoco2</a></td>
-      <td class="text-center">France 🇫🇷</td>
-      <td class="text-center">2024/01/03 10:20</td>
-      <td class="text-center">9,869</td>
-      <td class="text-center"><span style="color: green;">19</span></td>
-      <td class="text-center">30</td>
-    </tr>
-    <tr>
-      <th class="text-center">6</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3655425' target='_blank'>CN-3655425</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/volker-55' target='_blank'>volker-55</a></td>
-      <td class="text-center">Germany 🇩🇪</td>
-      <td class="text-center">2023/12/29 16:58</td>
-      <td class="text-center">8,903</td>
-      <td class="text-center"><span style="color: green;">23</span></td>
-      <td class="text-center">36</td>
-    </tr>
-    <tr>
-      <th class="text-center">7</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3655671' target='_blank'>CN-3655671</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/Daniel_and_Tanya' target='_blank'>Daniel_and_Tanya</a></td>
-      <td class="text-center">Russia 🇷🇺</td>
-      <td class="text-center">2023/12/29 22:23</td>
-      <td class="text-center">5,909</td>
-      <td class="text-center"><span style="color: green;">23</span></td>
-      <td class="text-center">44</td>
-    </tr>
-    <tr>
-      <th class="text-center">8</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3651287' target='_blank'>CN-3651287</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/Marisolt' target='_blank'>Marisolt</a></td>
-      <td class="text-center">Ukraine 🇺🇦</td>
-      <td class="text-center">2023/12/23 09:22</td>
-      <td class="text-center">7,659</td>
-      <td class="text-center"><span style="color: green;">30</span></td>
-      <td class="text-center">39</td>
-    </tr>
-    <tr>
-      <th class="text-center">9</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3651286' target='_blank'>CN-3651286</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/NonnieL' target='_blank'>NonnieL</a></td>
-      <td class="text-center">U.S.A. 🇺🇸</td>
-      <td class="text-center">2023/12/23 09:22</td>
-      <td class="text-center">12,917</td>
-      <td class="text-center"><span style="color: green;">30</span></td>
-      <td class="text-center">33</td>
-    </tr>
-    <tr>
-      <th class="text-center">10</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3630892' target='_blank'>CN-3630892</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/Lada_zam06' target='_blank'>Lada_zam06</a></td>
-      <td class="text-center">Russia 🇷🇺</td>
-      <td class="text-center">2023/11/19 09:26</td>
-      <td class="text-center">5,633</td>
-      <td class="text-center"><span style="color: red;">64</span></td>
-      <td class="text-center">44</td>
-    </tr>
-    <tr>
-      <th class="text-center">11</th>
-      <td class="text-center"><a href='https://www.postcrossing.com/travelingpostcard/CN-3627725' target='_blank'>CN-3627725</a></td>
-      <td class="text-center"><a href='https://www.postcrossing.com/user/craftea' target='_blank'>craftea</a></td>
-      <td class="text-center">Canada 🇨🇦</td>
-      <td class="text-center">2023/11/14 09:50</td>
-      <td class="text-center">12,392</td>
-      <td class="text-center"><span style="color: red;">69</span></td>
-      <td class="text-center">30</td>
-    </tr>
-  </tbody>
-</table>
-            </div>
-        </div>
-        <script>
-            // 在页面加载完成后执行搜索表格的函数
-            window.onload = function() {
-                searchTable();
-            };
-        </script>
-    </body>
-    </html>
-    
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="mb-3">
+        <input
+          type="text"
+          id="searchInput"
+          onkeyup="searchTable()"
+          placeholder="搜索……"
+        />
+      </div>
+      <div class="table-responsive">
+        <table
+          border="1"
+          class="dataframe table table-striped table-bordered"
+          id="dataTable"
+        >
+          <thead>
+            <tr style="text-align: right">
+              <th class="text-center"></th>
+              <th class="text-center">ID号</th>
+              <th class="text-center">收信人</th>
+              <th class="text-center">国家</th>
+              <th class="text-center">寄出时间(当地)</th>
+              <th class="text-center">距离(km)</th>
+              <th class="text-center">天数</th>
+              <th class="text-center">历史平均到达(天)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="text-center">1</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3660599"
+                  target="_blank"
+                  >CN-3660599</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/sarmas"
+                  target="_blank"
+                  >sarmas</a
+                >
+              </td>
+              <td class="text-center">Finland 🇫🇮</td>
+              <td class="text-center">2024/01/05 15:19</td>
+              <td class="text-center">7,839</td>
+              <td class="text-center"><span style="color: green">17</span></td>
+              <td class="text-center">27</td>
+            </tr>
+            <tr>
+              <th class="text-center">2</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3660600"
+                  target="_blank"
+                  >CN-3660600</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/Micha37"
+                  target="_blank"
+                  >Micha37</a
+                >
+              </td>
+              <td class="text-center">Germany 🇩🇪</td>
+              <td class="text-center">2024/01/05 15:19</td>
+              <td class="text-center">8,904</td>
+              <<<<<<< HEAD
+              <td class="text-center"><span style="color: green">17</span></td>
+              =======
+              <td class="text-center">17</td>
+              >>>>>>> 5fc1a414a67ce41c318cf43290f3dc092272d4cb
+              <td class="text-center">36</td>
+            </tr>
+            <tr>
+              <th class="text-center">3</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3659000"
+                  target="_blank"
+                  >CN-3659000</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/BeckyS"
+                  target="_blank"
+                  >BeckyS</a
+                >
+              </td>
+              <td class="text-center">U.S.A. 🇺🇸</td>
+              <td class="text-center">2024/01/03 10:20</td>
+              <td class="text-center">10,373</td>
+              <<<<<<< HEAD
+              <td class="text-center"><span style="color: green">19</span></td>
+              =======
+              <td class="text-center">20</td>
+              >>>>>>> 5fc1a414a67ce41c318cf43290f3dc092272d4cb
+              <td class="text-center">33</td>
+            </tr>
+            <tr>
+              <th class="text-center">4</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3659001"
+                  target="_blank"
+                  >CN-3659001</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/Topas"
+                  target="_blank"
+                  >Topas</a
+                >
+              </td>
+              <td class="text-center">Germany 🇩🇪</td>
+              <td class="text-center">2024/01/03 10:20</td>
+              <td class="text-center">9,140</td>
+              <<<<<<< HEAD
+              <td class="text-center"><span style="color: green">19</span></td>
+              =======
+              <td class="text-center">20</td>
+              >>>>>>> 5fc1a414a67ce41c318cf43290f3dc092272d4cb
+              <td class="text-center">36</td>
+            </tr>
+            <tr>
+              <th class="text-center">5</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3658999"
+                  target="_blank"
+                  >CN-3658999</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/chacoco2"
+                  target="_blank"
+                  >chacoco2</a
+                >
+              </td>
+              <td class="text-center">France 🇫🇷</td>
+              <td class="text-center">2024/01/03 10:20</td>
+              <td class="text-center">9,869</td>
+              <<<<<<< HEAD
+              <td class="text-center"><span style="color: green">19</span></td>
+              =======
+              <td class="text-center">20</td>
+              >>>>>>> 5fc1a414a67ce41c318cf43290f3dc092272d4cb
+              <td class="text-center">30</td>
+            </tr>
+            <tr>
+              <th class="text-center">6</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3655425"
+                  target="_blank"
+                  >CN-3655425</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/volker-55"
+                  target="_blank"
+                  >volker-55</a
+                >
+              </td>
+              <td class="text-center">Germany 🇩🇪</td>
+              <td class="text-center">2023/12/29 16:58</td>
+              <td class="text-center">8,903</td>
+              <<<<<<< HEAD
+              <td class="text-center"><span style="color: green">23</span></td>
+              =======
+              <td class="text-center">24</td>
+              >>>>>>> 5fc1a414a67ce41c318cf43290f3dc092272d4cb
+              <td class="text-center">36</td>
+            </tr>
+            <tr>
+              <th class="text-center">7</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3655671"
+                  target="_blank"
+                  >CN-3655671</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/Daniel_and_Tanya"
+                  target="_blank"
+                  >Daniel_and_Tanya</a
+                >
+              </td>
+              <td class="text-center">Russia 🇷🇺</td>
+              <td class="text-center">2023/12/29 22:23</td>
+              <td class="text-center">5,909</td>
+              <<<<<<< HEAD
+              <td class="text-center"><span style="color: green">23</span></td>
+              =======
+              <td class="text-center">24</td>
+              >>>>>>> 5fc1a414a67ce41c318cf43290f3dc092272d4cb
+              <td class="text-center">44</td>
+            </tr>
+            <tr>
+              <th class="text-center">8</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3651287"
+                  target="_blank"
+                  >CN-3651287</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/Marisolt"
+                  target="_blank"
+                  >Marisolt</a
+                >
+              </td>
+              <td class="text-center">Ukraine 🇺🇦</td>
+              <td class="text-center">2023/12/23 09:22</td>
+              <td class="text-center">7,659</td>
+              <<<<<<< HEAD
+              <td class="text-center"><span style="color: green">30</span></td>
+              =======
+              <td class="text-center">31</td>
+              >>>>>>> 5fc1a414a67ce41c318cf43290f3dc092272d4cb
+              <td class="text-center">39</td>
+            </tr>
+            <tr>
+              <th class="text-center">9</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3651286"
+                  target="_blank"
+                  >CN-3651286</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/NonnieL"
+                  target="_blank"
+                  >NonnieL</a
+                >
+              </td>
+              <td class="text-center">U.S.A. 🇺🇸</td>
+              <td class="text-center">2023/12/23 09:22</td>
+              <td class="text-center">12,917</td>
+              <<<<<<< HEAD
+              <td class="text-center"><span style="color: green">30</span></td>
+              =======
+              <td class="text-center">31</td>
+              >>>>>>> 5fc1a414a67ce41c318cf43290f3dc092272d4cb
+              <td class="text-center">33</td>
+            </tr>
+            <tr>
+              <th class="text-center">10</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3630892"
+                  target="_blank"
+                  >CN-3630892</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/Lada_zam06"
+                  target="_blank"
+                  >Lada_zam06</a
+                >
+              </td>
+              <td class="text-center">Russia 🇷🇺</td>
+              <td class="text-center">2023/11/19 09:26</td>
+              <td class="text-center">5,633</td>
+              <<<<<<< HEAD
+              <td class="text-center"><span style="color: red">64</span></td>
+              =======
+              <td class="text-center">65</td>
+              >>>>>>> 5fc1a414a67ce41c318cf43290f3dc092272d4cb
+              <td class="text-center">44</td>
+            </tr>
+            <tr>
+              <th class="text-center">11</th>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/travelingpostcard/CN-3627725"
+                  target="_blank"
+                  >CN-3627725</a
+                >
+              </td>
+              <td class="text-center">
+                <a
+                  href="https://www.postcrossing.com/user/craftea"
+                  target="_blank"
+                  >craftea</a
+                >
+              </td>
+              <td class="text-center">Canada 🇨🇦</td>
+              <td class="text-center">2023/11/14 09:50</td>
+              <td class="text-center">12,392</td>
+              <<<<<<< HEAD
+              <td class="text-center"><span style="color: red">69</span></td>
+              =======
+              <td class="text-center">70</td>
+              >>>>>>> 5fc1a414a67ce41c318cf43290f3dc092272d4cb
+              <td class="text-center">30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      // 在页面加载完成后执行搜索表格的函数
+      window.onload = function () {
+        searchTable();
+      };
+    </script>
+  </body>
+</html>
