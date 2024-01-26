@@ -45,14 +45,14 @@
     "name": "U.S.A.",
     "countryCode": "US",
     "flagEmoji": "🇺🇸",
-    "value": 18,
-    "sentNum": 12,
+    "value": 19,
+    "sentNum": 13,
     "receivedNum": 6,
     "sentAvg": 33,
     "receivedAvg": 30,
-    "sentMedian": 30,
+    "sentMedian": 31,
     "receivedMedian": 28,
-    "sentHistory": "[64, 25, 31, 16, 30, 17, 21, 19, 39, 35, 44, 63]",
+    "sentHistory": "[64, 25, 31, 16, 30, 17, 21, 19, 39, 35, 44, 63, 34]",
     "receivedHistory": "[53, 21, 32, 22, 28, 28]"
   },
   {
