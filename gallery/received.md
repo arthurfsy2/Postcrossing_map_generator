@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：75）
+title: 明信片展示墙（收到：77）
 icon: address-card
 date: 2024-01-26
 category:
@@ -148,16 +148,34 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2024(8)
+
+[US-9960301](https://www.postcrossing.com/postcards/US-9960301) 
+ >来自 [Nicole1313](https://www.postcrossing.com/user/Nicole1313) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=35.43532~-101.17294&lvl=12.0&setlang=zh-Hans) 2023/12/05 10:42 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/01/26 23:12 (当地)
+ 📏 12,565 | ⏱ 52
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/8v3ov8tmzqztv8mcrrrxy0x0sxlwlwq3.jpg)
+
+[IN-569670](https://www.postcrossing.com/postcards/IN-569670) 
+ >来自 [ashokarox](https://www.postcrossing.com/user/ashokarox) 🇮🇳
+> 📤 [India](https://www.bing.com/maps/?cp=14.22262~76.40038&lvl=12.0&setlang=zh-Hans) 2024/01/01 19:41 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/01/26 23:08 (当地)
+ 📏 4,086 | ⏱ 25
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/io1w6erf6ty0da60efye6k0xppjo22rt.jpg)
 
 [DE-13755664](https://www.postcrossing.com/postcards/DE-13755664) 
  >来自 [Akasha78](https://www.postcrossing.com/user/Akasha78) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=48.80537~9.52721&lvl=12.0&setlang=zh-Hans) 2023/12/29 09:58 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/01/26 23:07 (当地)
+ 📏 9,149 | ⏱ 28
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/uu8q81luyj40ilslp5kli03m890t618b.jpg)
-
-### 2024(5)
 
 [PL-1969946](https://www.postcrossing.com/postcards/PL-1969946) 
  >来自 [RobertoK](https://www.postcrossing.com/user/RobertoK) 🇵🇱
