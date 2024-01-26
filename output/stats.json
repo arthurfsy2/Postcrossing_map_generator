@@ -68,7 +68,7 @@
     "receivedHistory": "[53, 21, 32, 22, 28, 28]",
     "sentDateHistory": "[1374355743, 1382797559, 1389304995, 1395768915, 1400424478, 1402536874, 1404331157, 1411207697, 1419759784, 1696258102, 1701309908, 1702988977, 1706231392]",
     "receivedDateHistory": "[1392813159, 1403523857, 1419221806, 1698127096, 1698299633, 1698299766]",
-    "sentDateFirst": "2013/07/21",
+    "sentDateFirst": "2013/07/20",
     "receivedDateFirst": "2014/02/19"
   },
   {
@@ -158,8 +158,8 @@
     "receivedHistory": "[54, 66, 18, 26]",
     "sentDateHistory": "[1408228277]",
     "receivedDateHistory": "[1380669938, 1409549661, 1413801918, 1698126745]",
-    "sentDateFirst": "2014/08/17",
-    "receivedDateFirst": "2013/10/02"
+    "sentDateFirst": "2014/08/16",
+    "receivedDateFirst": "2013/10/01"
   },
   {
     "name": "Japan",
@@ -212,7 +212,7 @@
     "receivedHistory": "[18, 28]",
     "sentDateHistory": "[1412199966, 1696482385]",
     "receivedDateHistory": "[1403854862, 1704172028]",
-    "sentDateFirst": "2014/10/02",
+    "sentDateFirst": "2014/10/01",
     "receivedDateFirst": "2014/06/27"
   },
   {
@@ -302,7 +302,7 @@
     "receivedHistory": "[21, 16]",
     "sentDateHistory": "[1416335723]",
     "receivedDateHistory": "[1411361441, 1703139321]",
-    "sentDateFirst": "2014/11/19",
+    "sentDateFirst": "2014/11/18",
     "receivedDateFirst": "2014/09/22"
   },
   {
@@ -338,7 +338,7 @@
     "receivedHistory": "[]",
     "sentDateHistory": "[1406053885, 1418071585]",
     "receivedDateHistory": "[]",
-    "sentDateFirst": "2014/07/23",
+    "sentDateFirst": "2014/07/22",
     "receivedDateFirst": null
   },
   {
@@ -374,7 +374,7 @@
     "receivedHistory": "[]",
     "sentDateHistory": "[1415118004, 1701524188]",
     "receivedDateHistory": "[]",
-    "sentDateFirst": "2014/11/05",
+    "sentDateFirst": "2014/11/04",
     "receivedDateFirst": null
   },
   {
@@ -518,7 +518,7 @@
     "receivedHistory": "[]",
     "sentDateHistory": "[1418664681]",
     "receivedDateHistory": "[]",
-    "sentDateFirst": "2014/12/16",
+    "sentDateFirst": "2014/12/15",
     "receivedDateFirst": null
   },
   {
