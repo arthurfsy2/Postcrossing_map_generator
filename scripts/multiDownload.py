@@ -387,12 +387,13 @@ def getUpdatePic(type):
     return updatePic
 
 
-def calculateAVGandMedian(a_data):
+def calculateAvgAndMedian(a_data):
     with open('scripts/countryName.json', 'r') as f:
         countryName = json.load(f)
     name_dict = {}
 
     for item in a_data:
+        date = item[0]
         code = item[3]
         country = countryName[code]
         flagEmoji = flag(code)
@@ -401,27 +402,36 @@ def calculateAVGandMedian(a_data):
 
         if code not in name_dict:
             name_dict[code] = {'name': country, 'countryCode': code,
-                               'flagEmoji': flagEmoji, 'sent': [], 'received': []}
+                               'flagEmoji': flagEmoji, 'sent': [], 'received': [], 'sentDate': [], 'receivedDate': []}
 
         if r_or_s == 's':
             name_dict[code]['sent'].append(travel_days)
+            name_dict[code]['sentDate'].append(date)
         elif r_or_s == 'r':
             name_dict[code]['received'].append(travel_days)
-
+            name_dict[code]['receivedDate'].append(date)
     country_stats = []
     for code, data in name_dict.items():
         if data['sent']:
             sent_avg = int(statistics.mean(data['sent']))
             sent_median = int(statistics.median(data['sent']))
+            sentDate_first = datetime.fromtimestamp(
+                min(data['sentDate'])).strftime('%Y/%m/%d')
+            # datetime.fromtimestamp(min(data['sentDate']).strftime('%Y-%m-%d')
+
         else:
             sent_avg = None
             sent_median = None
+            sentDate_first = None
         if data['received']:
             received_avg = int(statistics.mean(data['received']))
             received_median = int(statistics.median(data['received']))
+            receivedDate_first = datetime.fromtimestamp(
+                min(data['receivedDate'])).strftime('%Y/%m/%d')
         else:
             received_avg = None
             received_median = None
+            receivedDate_first = None
         country_stats.append({
             'name': data['name'],
             'countryCode': data['countryCode'],
@@ -435,8 +445,14 @@ def calculateAVGandMedian(a_data):
             'receivedMedian': received_median,
             'sentHistory': json.dumps(name_dict[code]['sent']),
             'receivedHistory': json.dumps(name_dict[code]['received']),
+            'sentDateHistory': json.dumps(name_dict[code]['sentDate']),
+            'receivedDateHistory': json.dumps(name_dict[code]['receivedDate']),
+            'sentDateFirst': sentDate_first,
+            'receivedDateFirst': receivedDate_first,
+
         })
     country_stats.sort(key=lambda x: x['value'], reverse=True)
+    # print(country_stats)
     return country_stats
 
 
@@ -536,7 +552,7 @@ def getUserStat(account):
     with open('./output/calendar.json', 'w') as file:
         json.dump(calendar_result, file, indent=2)
 
-    country_stats = calculateAVGandMedian(a_data)
+    country_stats = calculateAvgAndMedian(a_data)
     # print("country_stats:\n",country_stats)
     # # 将统计结果写入 b.json 文件
     with open('./output/stats.json', 'w', encoding="utf-8") as file:

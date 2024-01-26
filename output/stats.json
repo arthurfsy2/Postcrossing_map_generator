@@ -11,7 +11,11 @@
     "sentMedian": 33,
     "receivedMedian": 27,
     "sentHistory": "[68, 49, 65, 26, 20, 37, 33, 53, 39, 23, 10, 29, 26, 53, 23]",
-    "receivedHistory": "[39, 60, 37, 51, 25, 12, 23, 18, 25, 27, 75, 73, 13, 30, 14]"
+    "receivedHistory": "[39, 60, 37, 51, 25, 12, 23, 18, 25, 27, 75, 73, 13, 30, 14]",
+    "sentDateHistory": "[1374679604, 1384859483, 1393968970, 1400069428, 1402760078, 1406786247, 1412415851, 1420939117, 1696615931, 1699538225, 1699916071, 1703781596, 1703947893, 1704118256, 1704379582]",
+    "receivedDateHistory": "[1377846849, 1388238179, 1392813256, 1397622966, 1399868266, 1404139604, 1409549335, 1413802000, 1416042101, 1418740101, 1425903923, 1425903980, 1697003836, 1698488828, 1704172086]",
+    "sentDateFirst": "2013/07/24",
+    "receivedDateFirst": "2013/08/30"
   },
   {
     "name": "Russia",
@@ -25,7 +29,11 @@
     "sentMedian": 41,
     "receivedMedian": 72,
     "sentHistory": "[83, 45, 32, 34, 29, 31, 51, 48, 28, 40, 53, 43, 78, 41, 34]",
-    "receivedHistory": "[36, 72, 294, 81, 82, 44, 109, 88, 89, 68, 49, 73, 24, 30]"
+    "receivedHistory": "[36, 72, 294, 81, 82, 44, 109, 88, 89, 68, 49, 73, 24, 30]",
+    "sentDateHistory": "[1376006942, 1390470082, 1397152103, 1400769802, 1403538979, 1407561119, 1413987828, 1416342692, 1418807579, 1422898820, 1424018844, 1696953874, 1700057697, 1703104296, 1704288598]",
+    "receivedDateHistory": "[1386588442, 1392813197, 1399868066, 1409648713, 1411361035, 1416042045, 1425827405, 1425903842, 1427088265, 1430355666, 1700390351, 1703854812, 1703855219, 1704365168]",
+    "sentDateFirst": "2013/08/09",
+    "receivedDateFirst": "2013/12/09"
   },
   {
     "name": "Netherlands",
@@ -39,7 +47,11 @@
     "sentMedian": 28,
     "receivedMedian": 31,
     "sentHistory": "[69, 19, 26, 26, 19, 30, 31, 28, 38]",
-    "receivedHistory": "[36, 33, 22, 28, 20, 25, 19, 31, 91, 74, 78, 65, 33, 20, 21]"
+    "receivedHistory": "[36, 33, 22, 28, 20, 25, 19, 31, 91, 74, 78, 65, 33, 20, 21]",
+    "sentDateHistory": "[1374767815, 1388262504, 1396622029, 1400053867, 1402676643, 1406189795, 1412236131, 1418826792, 1422730597]",
+    "receivedDateHistory": "[1377846744, 1386588356, 1395634495, 1399610400, 1411361857, 1411723420, 1413879194, 1419413696, 1425827222, 1425827714, 1426159483, 1430355746, 1700390271, 1703589500, 1704171930]",
+    "sentDateFirst": "2013/07/25",
+    "receivedDateFirst": "2013/08/30"
   },
   {
     "name": "U.S.A.",
@@ -53,7 +65,11 @@
     "sentMedian": 31,
     "receivedMedian": 28,
     "sentHistory": "[64, 25, 31, 16, 30, 17, 21, 19, 39, 35, 44, 63, 34]",
-    "receivedHistory": "[53, 21, 32, 22, 28, 28]"
+    "receivedHistory": "[53, 21, 32, 22, 28, 28]",
+    "sentDateHistory": "[1374355743, 1382797559, 1389304995, 1395768915, 1400424478, 1402536874, 1404331157, 1411207697, 1419759784, 1696258102, 1701309908, 1702988977, 1706231392]",
+    "receivedDateHistory": "[1392813159, 1403523857, 1419221806, 1698127096, 1698299633, 1698299766]",
+    "sentDateFirst": "2013/07/21",
+    "receivedDateFirst": "2014/02/19"
   },
   {
     "name": "Taiwan",
@@ -67,7 +83,11 @@
     "sentMedian": 34,
     "receivedMedian": 19,
     "sentHistory": "[33, 14, 55, 45, 24, 21, 26, 34, 285, 39, 41]",
-    "receivedHistory": "[16, 10, 19, 49, 16, 20, 198]"
+    "receivedHistory": "[16, 10, 19, 49, 16, 20, 198]",
+    "sentDateHistory": "[1383486537, 1387797480, 1393145033, 1398252883, 1401722402, 1404388075, 1411821039, 1422365506, 1436890095, 1696663761, 1701063961]",
+    "receivedDateHistory": "[1389587131, 1396614058, 1397622760, 1409549823, 1417769292, 1418085971, 1419910450]",
+    "sentDateFirst": "2013/11/03",
+    "receivedDateFirst": "2014/01/13"
   },
   {
     "name": "Belarus",
@@ -81,7 +101,11 @@
     "sentMedian": 53,
     "receivedMedian": 42,
     "sentHistory": "[34, 38, 51, 60, 57, 56]",
-    "receivedHistory": "[44, 72, 22, 42, 25, 46, 24]"
+    "receivedHistory": "[44, 72, 22, 42, 25, 46, 24]",
+    "sentDateHistory": "[1383577875, 1397670030, 1402259556, 1407753745, 1414505970, 1702371899]",
+    "receivedDateHistory": "[1386588073, 1392813293, 1400558374, 1409549408, 1411723360, 1420347894, 1703855116]",
+    "sentDateFirst": "2013/11/04",
+    "receivedDateFirst": "2013/12/09"
   },
   {
     "name": "Ukraine",
@@ -95,7 +119,11 @@
     "sentMedian": 36,
     "receivedMedian": 37,
     "sentHistory": "[36, 62, 34, 30, 37]",
-    "receivedHistory": "[42, 45, 26, 33, 120, 30]"
+    "receivedHistory": "[42, 45, 26, 33, 120, 30]",
+    "sentDateHistory": "[1383739210, 1393762809, 1402510044, 1414845594, 1422626613]",
+    "receivedDateHistory": "[1397622889, 1403099575, 1414489591, 1419221972, 1419909859, 1698488859]",
+    "sentDateFirst": "2013/11/06",
+    "receivedDateFirst": "2014/04/16"
   },
   {
     "name": "Finland",
@@ -109,7 +137,11 @@
     "sentMedian": 25,
     "receivedMedian": 22,
     "sentHistory": "[18, 19, 14, 32, 33, 49]",
-    "receivedHistory": "[16, 19, 26, 26]"
+    "receivedHistory": "[16, 19, 26, 26]",
+    "sentDateHistory": "[1388140532, 1396020007, 1399042509, 1405339773, 1422282620, 1701794470]",
+    "receivedDateHistory": "[1399610328, 1413879121, 1698126828, 1704017843]",
+    "sentDateFirst": "2013/12/27",
+    "receivedDateFirst": "2014/05/09"
   },
   {
     "name": "Czechia",
@@ -123,7 +155,11 @@
     "sentMedian": 39,
     "receivedMedian": 40,
     "sentHistory": "[39]",
-    "receivedHistory": "[54, 66, 18, 26]"
+    "receivedHistory": "[54, 66, 18, 26]",
+    "sentDateHistory": "[1408228277]",
+    "receivedDateHistory": "[1380669938, 1409549661, 1413801918, 1698126745]",
+    "sentDateFirst": "2014/08/17",
+    "receivedDateFirst": "2013/10/02"
   },
   {
     "name": "Japan",
@@ -137,7 +173,11 @@
     "sentMedian": 23,
     "receivedMedian": 12,
     "sentHistory": "[13, 30, 25, 22]",
-    "receivedHistory": "[12]"
+    "receivedHistory": "[12]",
+    "sentDateHistory": "[1406008681, 1418972196, 1695430662, 1699424086]",
+    "receivedDateHistory": "[1402906093]",
+    "sentDateFirst": "2014/07/22",
+    "receivedDateFirst": "2014/06/16"
   },
   {
     "name": "Canada",
@@ -151,7 +191,11 @@
     "sentMedian": 30,
     "receivedMedian": 24,
     "sentHistory": "[30, 30]",
-    "receivedHistory": "[21, 30, 24]"
+    "receivedHistory": "[21, 30, 24]",
+    "sentDateHistory": "[1695909443, 1700081795]",
+    "receivedDateHistory": "[1411361185, 1698488780, 1703855346]",
+    "sentDateFirst": "2023/09/28",
+    "receivedDateFirst": "2014/09/22"
   },
   {
     "name": "United Kingdom",
@@ -165,7 +209,11 @@
     "sentMedian": 34,
     "receivedMedian": 23,
     "sentHistory": "[31, 37]",
-    "receivedHistory": "[18, 28]"
+    "receivedHistory": "[18, 28]",
+    "sentDateHistory": "[1412199966, 1696482385]",
+    "receivedDateHistory": "[1403854862, 1704172028]",
+    "sentDateFirst": "2014/10/02",
+    "receivedDateFirst": "2014/06/27"
   },
   {
     "name": "Austria",
@@ -179,7 +227,11 @@
     "sentMedian": 19,
     "receivedMedian": 23,
     "sentHistory": "[19]",
-    "receivedHistory": "[23, 23]"
+    "receivedHistory": "[23, 23]",
+    "sentDateHistory": "[1388229180]",
+    "receivedDateHistory": "[1698126950, 1698127247]",
+    "sentDateFirst": "2013/12/28",
+    "receivedDateFirst": "2023/10/24"
   },
   {
     "name": "Malaysia",
@@ -193,7 +245,11 @@
     "sentMedian": null,
     "receivedMedian": 14,
     "sentHistory": "[]",
-    "receivedHistory": "[14, 12, 16]"
+    "receivedHistory": "[14, 12, 16]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1397214737, 1401456787, 1401456816]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2014/04/11"
   },
   {
     "name": "Korea (South)",
@@ -207,7 +263,11 @@
     "sentMedian": 48,
     "receivedMedian": 27,
     "sentHistory": "[48]",
-    "receivedHistory": "[20, 35]"
+    "receivedHistory": "[20, 35]",
+    "sentDateHistory": "[1403765929]",
+    "receivedDateHistory": "[1409648456, 1419413565]",
+    "sentDateFirst": "2014/06/26",
+    "receivedDateFirst": "2014/09/02"
   },
   {
     "name": "France",
@@ -221,7 +281,11 @@
     "sentMedian": 30,
     "receivedMedian": 21,
     "sentHistory": "[30]",
-    "receivedHistory": "[14, 28]"
+    "receivedHistory": "[14, 28]",
+    "sentDateHistory": "[1695829476]",
+    "receivedDateHistory": "[1410764839, 1698299854]",
+    "sentDateFirst": "2023/09/27",
+    "receivedDateFirst": "2014/09/15"
   },
   {
     "name": "Hong Kong",
@@ -235,7 +299,11 @@
     "sentMedian": 47,
     "receivedMedian": 18,
     "sentHistory": "[47]",
-    "receivedHistory": "[21, 16]"
+    "receivedHistory": "[21, 16]",
+    "sentDateHistory": "[1416335723]",
+    "receivedDateHistory": "[1411361441, 1703139321]",
+    "sentDateFirst": "2014/11/19",
+    "receivedDateFirst": "2014/09/22"
   },
   {
     "name": "Norway",
@@ -249,7 +317,11 @@
     "sentMedian": null,
     "receivedMedian": 40,
     "sentHistory": "[]",
-    "receivedHistory": "[60, 21]"
+    "receivedHistory": "[60, 21]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1383061923, 1411361758]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2013/10/29"
   },
   {
     "name": "Sweden",
@@ -263,7 +335,11 @@
     "sentMedian": 24,
     "receivedMedian": null,
     "sentHistory": "[29, 20]",
-    "receivedHistory": "[]"
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1406053885, 1418071585]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2014/07/23",
+    "receivedDateFirst": null
   },
   {
     "name": "Belgium",
@@ -277,7 +353,11 @@
     "sentMedian": 23,
     "receivedMedian": 40,
     "sentHistory": "[23]",
-    "receivedHistory": "[40]"
+    "receivedHistory": "[40]",
+    "sentDateHistory": "[1703846146]",
+    "receivedDateHistory": "[1409549485]",
+    "sentDateFirst": "2023/12/29",
+    "receivedDateFirst": "2014/09/01"
   },
   {
     "name": "Spain",
@@ -291,7 +371,11 @@
     "sentMedian": 39,
     "receivedMedian": null,
     "sentHistory": "[33, 46]",
-    "receivedHistory": "[]"
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1415118004, 1701524188]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2014/11/05",
+    "receivedDateFirst": null
   },
   {
     "name": "New Zealand",
@@ -305,7 +389,11 @@
     "sentMedian": 19,
     "receivedMedian": null,
     "sentHistory": "[19]",
-    "receivedHistory": "[]"
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1395983480]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2014/03/28",
+    "receivedDateFirst": null
   },
   {
     "name": "Denmark",
@@ -319,7 +407,11 @@
     "sentMedian": 31,
     "receivedMedian": null,
     "sentHistory": "[31]",
-    "receivedHistory": "[]"
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1406281369]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2014/07/25",
+    "receivedDateFirst": null
   },
   {
     "name": "Brazil",
@@ -333,7 +425,11 @@
     "sentMedian": null,
     "receivedMedian": 81,
     "sentHistory": "[]",
-    "receivedHistory": "[81]"
+    "receivedHistory": "[81]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1409549259]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2014/09/01"
   },
   {
     "name": "North Macedonia",
@@ -347,7 +443,11 @@
     "sentMedian": null,
     "receivedMedian": 57,
     "sentHistory": "[]",
-    "receivedHistory": "[57]"
+    "receivedHistory": "[57]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1409549560]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2014/09/01"
   },
   {
     "name": "Thailand",
@@ -361,7 +461,11 @@
     "sentMedian": null,
     "receivedMedian": 21,
     "sentHistory": "[]",
-    "receivedHistory": "[21]"
+    "receivedHistory": "[21]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1411361596]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2014/09/22"
   },
   {
     "name": "Switzerland",
@@ -375,7 +479,11 @@
     "sentMedian": 41,
     "receivedMedian": null,
     "sentHistory": "[41]",
-    "receivedHistory": "[]"
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1413100806]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2014/10/12",
+    "receivedDateFirst": null
   },
   {
     "name": "Mexico",
@@ -389,7 +497,11 @@
     "sentMedian": null,
     "receivedMedian": 54,
     "sentHistory": "[]",
-    "receivedHistory": "[54]"
+    "receivedHistory": "[54]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1416041927]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2014/11/15"
   },
   {
     "name": "Italy",
@@ -403,7 +515,11 @@
     "sentMedian": 26,
     "receivedMedian": null,
     "sentHistory": "[26]",
-    "receivedHistory": "[]"
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1418664681]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2014/12/16",
+    "receivedDateFirst": null
   },
   {
     "name": "Portugal",
@@ -417,7 +533,11 @@
     "sentMedian": null,
     "receivedMedian": 50,
     "sentHistory": "[]",
-    "receivedHistory": "[50]"
+    "receivedHistory": "[50]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1419221868]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2014/12/22"
   },
   {
     "name": "Latvia",
@@ -431,7 +551,11 @@
     "sentMedian": 59,
     "receivedMedian": null,
     "sentHistory": "[59]",
-    "receivedHistory": "[]"
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1421473921]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2015/01/17",
+    "receivedDateFirst": null
   },
   {
     "name": "India",
@@ -445,7 +569,11 @@
     "sentMedian": 36,
     "receivedMedian": null,
     "sentHistory": "[36]",
-    "receivedHistory": "[]"
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1696344310]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2023/10/03",
+    "receivedDateFirst": null
   },
   {
     "name": "Lithuania",
@@ -459,7 +587,11 @@
     "sentMedian": null,
     "receivedMedian": 44,
     "sentHistory": "[]",
-    "receivedHistory": "[44]"
+    "receivedHistory": "[44]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1701320419]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2023/11/30"
   },
   {
     "name": "Poland",
@@ -473,6 +605,10 @@
     "sentMedian": null,
     "receivedMedian": 40,
     "sentHistory": "[]",
-    "receivedHistory": "[40]"
+    "receivedHistory": "[40]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1705219921]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2024/01/14"
   }
 ]

@@ -91,15 +91,19 @@ def getUserSheet(tableName):
         if item['sentMedian']:
             sentMedian = f"{item['sentMedian']}天"
             sentAvg = f"{item['sentAvg']}天"
+            sentDateFirst = item['sentDateFirst']
         else:
             sentMedian = "-"
             sentAvg = "-"
+            sentDateFirst = "-"
         if item['receivedMedian']:
             receivedMedian = f"{item['receivedMedian']}天"
             receivedAvg = f"{item['receivedAvg']}天"
+            receivedDateFirst = item['receivedDateFirst']
         else:
             receivedMedian = "-"
             receivedAvg = "-"
+            receivedDateFirst = "-"
         formatted_item = {
             '国家': f"{item['name']} {flag(item['countryCode'])}",
             '已寄出': item['sentNum'],
@@ -108,6 +112,8 @@ def getUserSheet(tableName):
             '收到-平均': receivedAvg,
             '寄出-中间值': sentMedian,
             '收到-中间值': receivedMedian,
+            '首次寄出': sentDateFirst,
+            '首次收到': receivedDateFirst,
         }
         new_data.append(formatted_item)
     html_content = htmlFormat(tableName, new_data)

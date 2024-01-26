@@ -298,7 +298,7 @@ const option = {
 
 
 
-@tab 各国明信片
+@tab 各国运输时效
 
 <iframe 
 src="$personalPageLink/output/CountryStats.html" 
