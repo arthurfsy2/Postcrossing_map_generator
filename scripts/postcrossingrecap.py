@@ -203,7 +203,7 @@ for type in types:
 
 # 示例调用
 directory_to_clean = './data'
-files_to_keep = ['sent.json', 'received.json', '.gitkeep']
+files_to_keep = ['.gitkeep']
 
 yearlist = getYearList("sent")
 for year in yearlist:
