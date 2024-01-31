@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：77）
+title: 明信片展示墙（收到：78）
 icon: address-card
-date: 2024-01-26
+date: 2024-01-31
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[DE-13743074](https://www.postcrossing.com/postcards/DE-13743074) 
+ >来自 [siobhan](https://www.postcrossing.com/user/siobhan) 🇩🇪
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/v3wxlv2ez5u3hwa67ba06osu5x6kq3ym.jpg)
 
 ### 2024(8)
 
