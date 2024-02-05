@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：67）
+title: 明信片展示墙（寄出：68）
 icon: address-card
 date: 2024-02-05
 category:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3660600](https://www.postcrossing.com/postcards/CN-3660600) 
+ >寄往 [Micha37](https://www.postcrossing.com/user/Micha37) 🇩🇪
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/aryr9eiz0yc0s3h5k5czzf3o0zjjn6sk.jpg)
 
 ### 2024(6)
 
