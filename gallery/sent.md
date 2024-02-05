@@ -157,7 +157,7 @@ const option = {
  📏 9,140 | ⏱ 33
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/nb8869wurzm27blblu5b1bxd4hmdht9p.jpg)
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/oqbxrzqviv11fkgdpw3o0kuzrkw8h4vm.jpg)
 
 [CN-3655425](https://www.postcrossing.com/postcards/CN-3655425) 
  >寄往 [volker-55](https://www.postcrossing.com/user/volker-55) 🇩🇪
