@@ -216,6 +216,24 @@
     "receivedDateFirst": "2014/06/27"
   },
   {
+    "name": "France",
+    "countryCode": "FR",
+    "flagEmoji": "🇫🇷",
+    "value": 4,
+    "sentNum": 2,
+    "receivedNum": 2,
+    "sentAvg": 34,
+    "receivedAvg": 21,
+    "sentMedian": 34,
+    "receivedMedian": 21,
+    "sentHistory": "[30, 38]",
+    "receivedHistory": "[14, 28]",
+    "sentDateHistory": "[1695829476, 1707506295]",
+    "receivedDateHistory": "[1410764839, 1698299854]",
+    "sentDateFirst": "2023/09/27",
+    "receivedDateFirst": "2014/09/15"
+  },
+  {
     "name": "Austria",
     "countryCode": "AT",
     "flagEmoji": "🇦🇹",
@@ -268,24 +286,6 @@
     "receivedDateHistory": "[1409648456, 1419413565]",
     "sentDateFirst": "2014/06/26",
     "receivedDateFirst": "2014/09/02"
-  },
-  {
-    "name": "France",
-    "countryCode": "FR",
-    "flagEmoji": "🇫🇷",
-    "value": 3,
-    "sentNum": 1,
-    "receivedNum": 2,
-    "sentAvg": 30,
-    "receivedAvg": 21,
-    "sentMedian": 30,
-    "receivedMedian": 21,
-    "sentHistory": "[30]",
-    "receivedHistory": "[14, 28]",
-    "sentDateHistory": "[1695829476]",
-    "receivedDateHistory": "[1410764839, 1698299854]",
-    "sentDateFirst": "2023/09/27",
-    "receivedDateFirst": "2014/09/15"
   },
   {
     "name": "Hong Kong",

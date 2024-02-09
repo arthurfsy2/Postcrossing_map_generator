@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：69）
+title: 明信片展示墙（寄出：70）
 icon: address-card
-date: 2024-02-07
+date: 2024-02-09
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3658999](https://www.postcrossing.com/postcards/CN-3658999) 
+ >寄往 [chacoco2](https://www.postcrossing.com/user/chacoco2) 🇫🇷
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/alc8fplc9d9x3x09szx1ximdl37wy9tq.jpg)
 
 ### 2024(8)
 
