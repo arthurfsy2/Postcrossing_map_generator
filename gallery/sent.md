@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：70）
+title: 明信片展示墙（寄出：71）
 icon: address-card
-date: 2024-02-09
+date: 2024-02-10
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3659000](https://www.postcrossing.com/postcards/CN-3659000) 
+ >寄往 [BeckyS](https://www.postcrossing.com/user/BeckyS) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/n88czl5pibik5e7neu59988cxmb4x7kj.jpg)
 
 ### 2024(9)
 
