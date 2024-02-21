@@ -144,6 +144,24 @@
     "receivedDateFirst": "2014/05/09"
   },
   {
+    "name": "Japan",
+    "countryCode": "JP",
+    "flagEmoji": "🇯🇵",
+    "value": 6,
+    "sentNum": 5,
+    "receivedNum": 1,
+    "sentAvg": 22,
+    "receivedAvg": 12,
+    "sentMedian": 24,
+    "receivedMedian": 12,
+    "sentHistory": "[13, 30, 25, 22, 24]",
+    "receivedHistory": "[12]",
+    "sentDateHistory": "[1406008681, 1418972196, 1695430662, 1699424086, 1708518038]",
+    "receivedDateHistory": "[1402906093]",
+    "sentDateFirst": "2014/07/22",
+    "receivedDateFirst": "2014/06/16"
+  },
+  {
     "name": "Canada",
     "countryCode": "CA",
     "flagEmoji": "🇨🇦",
@@ -178,24 +196,6 @@
     "receivedDateHistory": "[1380669938, 1409549661, 1413801918, 1698126745]",
     "sentDateFirst": "2014/08/16",
     "receivedDateFirst": "2013/10/01"
-  },
-  {
-    "name": "Japan",
-    "countryCode": "JP",
-    "flagEmoji": "🇯🇵",
-    "value": 5,
-    "sentNum": 4,
-    "receivedNum": 1,
-    "sentAvg": 22,
-    "receivedAvg": 12,
-    "sentMedian": 23,
-    "receivedMedian": 12,
-    "sentHistory": "[13, 30, 25, 22]",
-    "receivedHistory": "[12]",
-    "sentDateHistory": "[1406008681, 1418972196, 1695430662, 1699424086]",
-    "receivedDateHistory": "[1402906093]",
-    "sentDateFirst": "2014/07/22",
-    "receivedDateFirst": "2014/06/16"
   },
   {
     "name": "United Kingdom",
