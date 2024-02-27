@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：78）
+title: 明信片展示墙（收到：79）
 icon: address-card
-date: 2024-01-31
+date: 2024-02-27
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[NL-5673466](https://www.postcrossing.com/postcards/NL-5673466) 
+ >来自 [Anne-Louise79](https://www.postcrossing.com/user/Anne-Louise79) 🇳🇱
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ix9sfvo9d2yc0erfxg7wtd0d4u8iionc.jpg)
 
 ### 2024(9)
 
