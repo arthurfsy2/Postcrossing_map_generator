@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：79）
+title: 明信片展示墙（收到：80）
 icon: address-card
-date: 2024-02-27
+date: 2024-02-29
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[GB-1729911](https://www.postcrossing.com/postcards/GB-1729911) 
+ >来自 [PattyG](https://www.postcrossing.com/user/PattyG) 🇬🇧
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/utmcwgbonrd64cpzezf72j8sahy7egqh.jpg)
 
 ### 2024(10)
 
