@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：80）
+title: 明信片展示墙（收到：84）
 icon: address-card
-date: 2024-02-29
+date: 2024-03-04
 category:
   - Arthur
 tag:
@@ -148,7 +148,43 @@ const option = {
 
 :::
 
-### 2024(11)
+### 2024(15)
+
+[US-10143953](https://www.postcrossing.com/postcards/US-10143953) 
+ >来自 [mbgris](https://www.postcrossing.com/user/mbgris) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=42.45843~-71.06616&lvl=12.0&setlang=zh-Hans) 2024/02/11 16:59 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/03/04 23:13 (当地)
+ 📏 12,764 | ⏱ 22
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/w82ajeefdvnxtn4huxus9igicuccxkwd.jpg)
+
+[DE-13942438](https://www.postcrossing.com/postcards/DE-13942438) 
+ >来自 [Stiflers-Mom](https://www.postcrossing.com/user/Stiflers-Mom) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=49.06556~8.80306&lvl=12.0&setlang=zh-Hans) 2024/02/22 08:11 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/03/04 22:54 (当地)
+ 📏 9,184 | ⏱ 11
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ngxabnqi7ztlwpdqhywyq65oonsad12s.jpg)
+
+[US-10137660](https://www.postcrossing.com/postcards/US-10137660) 
+ >来自 [trish13](https://www.postcrossing.com/user/trish13) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=38.58157~-121.4944&lvl=12.0&setlang=zh-Hans) 2024/02/09 11:22 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/03/04 22:52 (当地)
+ 📏 11,078 | ⏱ 24
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/kmkr5nwo95vce912l7qls8wspoz4rj3k.jpg)
+
+[NL-5673465](https://www.postcrossing.com/postcards/NL-5673465) 
+ >来自 [Femkuhhhh](https://www.postcrossing.com/user/Femkuhhhh) 🇳🇱
+> 📤 [Netherlands](https://www.bing.com/maps/?cp=53.20139~5.80859&lvl=12.0&setlang=zh-Hans) 2024/02/09 20:20 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/03/04 22:51 (当地)
+ 📏 9,161 | ⏱ 24
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/i59brbowdhb1zgjzlhuqcvl1bpsu9ugr.jpg)
 
 [GB-1729911](https://www.postcrossing.com/postcards/GB-1729911) 
  >来自 [PattyG](https://www.postcrossing.com/user/PattyG) 🇬🇧
