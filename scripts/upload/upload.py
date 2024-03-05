@@ -74,9 +74,6 @@ if __name__ == "__main__":
 
     card_id = options.card_id
     content_original = options.content_original
-    pull_command = ["git", "pull"]
-    subprocess.run(pull_command, cwd=repo_path)
-    print("已检查仓库更新")
 
     append_to_excel(card_id, content_original)
     # # 4. 提交仓库的修改，提交时备注为 tips 变量的值

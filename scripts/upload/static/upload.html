@@ -75,6 +75,25 @@
         });
       };
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#git-pull").click(function () {
+          $.post("/git-pull", function (data) {
+            alert(data);
+          });
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $("#git-push").click(function () {
+          $.post("/git-push", function (data) {
+            alert(data);
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <img
@@ -113,6 +132,8 @@
         </div>
         <div class="text-center">
           <button id="run-script" class="btn btn-primary mt-3">提交</button>
+          <button id="git-pull" class="btn btn-primary mt-3">检查仓库</button>
+          <button id="git-push" class="btn btn-primary mt-3">提交仓库</button>
         </div>
       </form>
     </div>

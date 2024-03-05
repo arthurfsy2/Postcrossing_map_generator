@@ -7,6 +7,8 @@ file_path = os.path.abspath(__file__)
 dir_path = os.path.dirname(file_path)
 pic_path = os.path.abspath(os.path.join(
     dir_path, '..', '..', 'template', 'rawPic'))
+repo_path = os.path.abspath(os.path.join(
+    dir_path, '..', '..'))
 
 
 @app.route('/run-script', methods=['POST'])
@@ -28,6 +30,35 @@ def run_script():
         ['py', upload_script_path, card_id, content_original], capture_output=True, text=True)
     output = file_upload + upload_result.stderr + upload_result.stdout
     return jsonify(success=True, output=output)
+
+
+@app.route('/git-pull', methods=['POST'])
+def git_pull():
+    # 执行 git pull 命令来更新仓库
+    result = subprocess.run(['git', 'pull'], capture_output=True, text=True)
+    output = result.stderr + result.stdout
+    return output
+
+
+@app.route('/git-push', methods=['POST'])
+def git_push():
+    pic_path = os.path.abspath(os.path.join(
+        dir_path, '..', '..', 'template', 'rawPic'))
+
+    # 获取pic_path路径下除了'.gitkeep'文件外的其他文件的文件名前缀
+    files = [f.split('.')[0] for f in os.listdir(pic_path) if f != '.gitkeep']
+
+    # 将文件名前缀组成以逗号隔开的字符串
+    tips = ','.join(files)
+
+    commit_command = ["git", "commit", "-am", f"已更新：{tips}"]
+    subprocess.run(commit_command, cwd=repo_path, check=True)
+
+    # 5. 推送修改到远程仓库
+    push_command = ["git", "push"]
+    result = subprocess.run(push_command, cwd=repo_path, check=True)
+    output = result.stderr + result.stdout
+    return output
 
 
 if __name__ == '__main__':
