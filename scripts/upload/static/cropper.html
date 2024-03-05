@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Cropper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+</head>
+<body>
+    <input type="file" id="inputImage" accept="image/*">
+    <div>
+        <img id="image">
+    </div>
+    <button id="rotateLeft">左转</button>
+    <button id="rotateRight">右转</button>
+    <button id="crop">裁剪</button>
+
+    <script>
+    var URL = window.URL || window.webkitURL;
+    var inputImage = document.getElementById('inputImage');
+    var image = document.getElementById('image');
+    var cropper;
+    var rotateLeft = document.getElementById('rotateLeft');
+    var rotateRight = document.getElementById('rotateRight');
+    var crop = document.getElementById('crop');
+
+    if (URL) {
+        inputImage.onchange = function () {
+            var files = this.files;
+            var file;
+
+            if (image && files && files.length) {
+                file = files[0];
+
+                if (/^image\/\w+/.test(file.type)) {
+                    image.src = URL.createObjectURL(file);
+                    image.onload = function () {
+                        URL.revokeObjectURL(this.src);
+                    };
+
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+
+                    cropper = new Cropper(image, {
+                        aspectRatio: 1,
+                        preview: '.preview',
+                    });
+                } else {
+                    window.alert('请选择一个图片文件！');
+                }
+            }
+        };
+    } else {
+        inputImage.disabled = true;
+        inputImage.parentNode.className += ' disabled';
+    }
+
+    rotateLeft.onclick = function() {
+        cropper.rotate(-90);
+    }
+
+    rotateRight.onclick = function() {
+        cropper.rotate(90);
+    }
+
+    crop.onclick = function() {
+        var canvas = cropper.getCroppedCanvas();
+        var dataUrl = canvas.toDataURL('image/png');
+        // 这里你可以将dataUrl发送到服务器
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>明信片故事上传</title>
+    <link rel="stylesheet" href="./src/bootstrap.min.css" />
+    <style>
+      /* 在这里添加您的CSS样式 */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        text-align: center;
+        font-size: 1.5em;
+        margin: 0;
+        margin-top: 1em;
+      }
+
+      h3 {
+        color: #000000;
+        text-shadow: 0px 0px 16px #ffe476;
+      }
+
+      .margin-top-20px {
+        margin-top: 20px;
+      }
+
+      footer {
+        --mask: radial-gradient(22.36px at 50% 30px, #000 99%, #0000 101%)
+            calc(50% - 20px) 0/40px 100%,
+          radial-gradient(22.36px at 50% -20px, #0000 99%, #000 101%) 50% 10px/40px
+            100% repeat-x;
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+        background-color: #ffe6b1;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        text-align: center;
+        font-size: 0.8em;
+      }
+
+      .language-switcher {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
+      .language-switcher .dropdown-menu {
+        min-width: 5rem;
+      }
+    </style>
+
+    <script>
+      window.onload = function () {
+        var form = document.getElementById("uploadForm");
+        document
+          .getElementById("run-script")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            form.dispatchEvent(new Event("submit"));
+          });
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var formData = new FormData(this);
+          fetch("/run-script", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              alert("提示：\n" + data.output);
+              location.reload();
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <img
+      src="./src/logo.png"
+      alt="Postcrossing logo"
+      style="width: 50%; height: auto"
+    />
+    <div class="container">
+      <h1 class="text-center">上传明信片故事</h1>
+      <form
+        id="uploadForm"
+        method="post"
+        enctype="multipart/form-data"
+        class="form-container"
+      >
+        <div class="form-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="card_id"
+            name="card_id"
+            placeholder="请输入卡片ID"
+          />
+        </div>
+        <div class="form-group mb-3">
+          <textarea
+            class="form-control"
+            id="content_original"
+            name="content_original"
+            placeholder="请输入明信片背面文字（原始内容）"
+            rows="5"
+          ></textarea>
+        </div>
+        <div class="form-group mb-3">
+          <input type="file" id="file" name="file" class="form-control-file" />
+        </div>
+        <div class="text-center">
+          <button id="run-script" class="btn btn-primary mt-3">提交</button>
+        </div>
+      </form>
+    </div>
+    <footer>
+      <p>🛈本项目与postcrossing官方无关！且本网站不会存储你的个人数据。</p>
+      <p>本网站需要自行部署，方可同步个人数据</p>
+      <div class="text-center">
+        本页面由<a
+          class="text-dark fab fa-github"
+          href="https://github.com/arthurfsy2/PostCrossingRecap_cn"
+          target="_blank"
+          >arthurfsy2/Postcrossing_map_generator</a
+        >生成
+      </div>
+    </footer>
+  </body>
+</html>
