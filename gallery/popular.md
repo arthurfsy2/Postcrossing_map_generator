@@ -18,7 +18,7 @@ order: 5
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/02/06 15:52 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=51.93855~8.87318&lvl=12.0&setlang=zh-Hans) 2024/03/06 10:59 (当地)
  📏 9,040 | ⏱ 29
->点赞人数：**1**
+>点赞人数：**2**
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/x8mbc4zuinu9sw43ajcr441nsto0ji94.jpg) 
 
