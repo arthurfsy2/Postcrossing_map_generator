@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：75）
+title: 明信片展示墙（寄出：76）
 icon: address-card
 date: 2024-03-07
 category:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3655671](https://www.postcrossing.com/postcards/CN-3655671) 
+ >寄往 [Daniel_and_Tanya](https://www.postcrossing.com/user/Daniel_and_Tanya) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/b7vw4a69coy80djw7elnf300djzor9es.jpg)
 
 ### 2024(14)
 
