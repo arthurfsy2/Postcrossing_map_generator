@@ -51,6 +51,9 @@ def git_push():
     # 将文件名前缀组成以逗号隔开的字符串
     tips = ','.join(files)
 
+    if not tips:
+        return "无需要上传的图片！"
+
     commit_command = ["git", "commit", "-am", f"已更新：{tips}"]
     subprocess.run(commit_command, cwd=repo_path, check=True)
 
