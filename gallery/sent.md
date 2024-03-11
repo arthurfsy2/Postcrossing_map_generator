@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：76）
+title: 明信片展示墙（寄出：77）
 icon: address-card
-date: 2024-03-07
+date: 2024-03-11
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3673809](https://www.postcrossing.com/postcards/CN-3673809) 
+ >寄往 [Pyrah](https://www.postcrossing.com/user/Pyrah) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/h452vt02fal6gkiknj27ubqh82i8rtm6.jpg)
 
 ### 2024(15)
 
