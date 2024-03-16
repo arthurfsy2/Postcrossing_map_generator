@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：77）
+title: 明信片展示墙（寄出：78）
 icon: address-card
-date: 2024-03-11
+date: 2024-03-16
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3673808](https://www.postcrossing.com/postcards/CN-3673808) 
+ >寄往 [Madhavan_1982](https://www.postcrossing.com/user/Madhavan_1982) 🇮🇳
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/rc4pcxug0pos71skt55ofogyoqqqh7na.jpg)
 
 ### 2024(16)
 
