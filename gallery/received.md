@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：91）
+title: 明信片展示墙（收到：92）
 icon: address-card
 date: 2024-03-18
 category:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[TW-3636606](https://www.postcrossing.com/postcards/TW-3636606) 
+ >来自 [SophieAD](https://www.postcrossing.com/user/SophieAD) 🇹🇼
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/z0fgmt19upgwg6p7vg576mbuvfeg8xf5.jpg)
 
 ### 2024(22)
 
