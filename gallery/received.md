@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：92）
+title: 明信片展示墙（收到：93）
 icon: address-card
-date: 2024-03-18
+date: 2024-03-22
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[US-10173050](https://www.postcrossing.com/postcards/US-10173050) 
+ >来自 [blairwortham20](https://www.postcrossing.com/user/blairwortham20) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/m4x243q6e3xzwsprdsl8vs3scp8ai50t.jpg)
 
 ### 2024(23)
 
