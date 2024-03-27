@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（我收到的赞：38）
 icon: address-card
-date: 2024-03-18
+date: 2024-03-27
 category:
   - Arthur
 tag:
@@ -303,7 +303,7 @@ order: 5
 > 📤 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2014/03/09 22:55 (当地)
 > 📥 [Netherlands](https://www.bing.com/maps/?cp=51.38667~5.44444&lvl=12.0&setlang=zh-Hans) 2014/04/04 16:33 (当地)
  📏 8,163 | ⏱ 26
->点赞人数：**7**
+>点赞人数：**8**
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/b23f5bb79a266ae4b0a9b7fe47983a1b.jpg) 
 
