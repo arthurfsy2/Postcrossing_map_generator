@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：80）
+title: 明信片展示墙（寄出：81）
 icon: address-card
-date: 2024-03-29
+date: 2024-04-01
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3692800](https://www.postcrossing.com/postcards/CN-3692800) 
+ >寄往 [GermanInArabia](https://www.postcrossing.com/user/GermanInArabia) 🇩🇪
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/x469la2o3it4bk0lep5okgozr2w5g82x.jpg)
 
 ### 2024(19)
 
