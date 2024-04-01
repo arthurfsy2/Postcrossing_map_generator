@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（我收到的赞：38）
+title: 明信片展示墙（我收到的赞：39）
 icon: address-card
-date: 2024-03-27
+date: 2024-04-01
 category:
   - Arthur
 tag:
@@ -11,9 +11,18 @@ order: 5
 
 ## [arthurfsy's popular](https://www.postcrossing.com/user/arthurfsy/gallery/popular)
 
-### 2024(11)
+### 2024(12)
 
-[CN-3683277](https://www.postcrossing.com/postcards/CN-3683277) 
+[CN-3692800](https://www.postcrossing.com/postcards/CN-3692800) 
+ >寄往  🇩🇪
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/02/22 11:20 (当地)
+> 📥 [Germany](https://www.bing.com/maps/?cp=50.51545~8.38918&lvl=12.0&setlang=zh-Hans) 2024/04/01 14:46 (当地)
+ 📏 9,139 | ⏱ 39
+>点赞人数：**1**
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/x469la2o3it4bk0lep5okgozr2w5g82x.jpg) 
+
+ [CN-3683277](https://www.postcrossing.com/postcards/CN-3683277) 
  >寄往  🇷🇺
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/02/06 15:52 (当地)
 > 📥 [Russia](https://www.bing.com/maps/?cp=57.62987~39.87368&lvl=12.0&setlang=zh-Hans) 2024/03/18 20:28 (当地)
