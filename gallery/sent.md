@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：81）
+title: 明信片展示墙（寄出：82）
 icon: address-card
-date: 2024-04-01
+date: 2024-04-03
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3692796](https://www.postcrossing.com/postcards/CN-3692796) 
+ >寄往 [ana_solovyova](https://www.postcrossing.com/user/ana_solovyova) 🇯🇵
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/y0pp57u0yyu4n8smvuz15xru8jcf7q8j.jpg)
 
 ### 2024(20)
 
