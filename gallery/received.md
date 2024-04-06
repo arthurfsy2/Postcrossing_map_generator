@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：93）
+title: 明信片展示墙（收到：94）
 icon: address-card
-date: 2024-03-22
+date: 2024-04-06
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[MY-634790](https://www.postcrossing.com/postcards/MY-634790) 
+ >来自 [SerHuy](https://www.postcrossing.com/user/SerHuy) 🇲🇾
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/cb7ft4eyjurh3ncp22d5ktsw3oox5el6.jpg)
 
 ### 2024(24)
 
