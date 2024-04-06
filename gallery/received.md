@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：94）
+title: 明信片展示墙（收到：96）
 icon: address-card
 date: 2024-04-06
 category:
@@ -150,14 +150,32 @@ const option = {
 
 ### 其他(1)
 
-[MY-634790](https://www.postcrossing.com/postcards/MY-634790) 
- >来自 [SerHuy](https://www.postcrossing.com/user/SerHuy) 🇲🇾
+[US-10240079](https://www.postcrossing.com/postcards/US-10240079) 
+ >来自 [waydowneast](https://www.postcrossing.com/user/waydowneast) 🇺🇸
 >
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/cb7ft4eyjurh3ncp22d5ktsw3oox5el6.jpg)
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/c6j8qns0fwqmo1bi5zinj0rjk87oyxsa.jpg)
 
-### 2024(24)
+### 2024(26)
+
+[DE-14019750](https://www.postcrossing.com/postcards/DE-14019750) 
+ >来自 [Havanna](https://www.postcrossing.com/user/Havanna) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=49.47593~10.98856&lvl=12.0&setlang=zh-Hans) 2024/03/16 07:37 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/04/06 12:12 (当地)
+ 📏 9,021 | ⏱ 21
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/sm03ogvybqys253tqskqm7aov92o34t8.jpg)
+
+[MY-634790](https://www.postcrossing.com/postcards/MY-634790) 
+ >来自 [SerHuy](https://www.postcrossing.com/user/SerHuy) 🇲🇾
+> 📤 [Malaysia](https://www.bing.com/maps/?cp=3.21~101.561&lvl=12.0&setlang=zh-Hans) 2024/03/16 14:38 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/04/06 12:01 (当地)
+ 📏 2,548 | ⏱ 21
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/cb7ft4eyjurh3ncp22d5ktsw3oox5el6.jpg)
 
 [US-10173050](https://www.postcrossing.com/postcards/US-10173050) 
  >来自 [blairwortham20](https://www.postcrossing.com/user/blairwortham20) 🇺🇸
