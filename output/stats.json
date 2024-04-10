@@ -90,6 +90,24 @@
     "receivedDateFirst": "2014/01/13"
   },
   {
+    "name": "Finland",
+    "countryCode": "FI",
+    "flagEmoji": "🇫🇮",
+    "value": 14,
+    "sentNum": 8,
+    "receivedNum": 6,
+    "sentAvg": 28,
+    "receivedAvg": 25,
+    "sentMedian": 31,
+    "receivedMedian": 26,
+    "sentHistory": "[18, 19, 14, 32, 33, 49, 33, 31]",
+    "receivedHistory": "[16, 19, 26, 26, 29, 37]",
+    "sentDateHistory": "[1388140532, 1396020007, 1399042509, 1405339773, 1422282620, 1701794470, 1707308165, 1712754179]",
+    "receivedDateHistory": "[1399610328, 1413879121, 1698126828, 1704017843, 1710050181, 1710728443]",
+    "sentDateFirst": "2013/12/27",
+    "receivedDateFirst": "2014/05/09"
+  },
+  {
     "name": "Belarus",
     "countryCode": "BY",
     "flagEmoji": "🇧🇾",
@@ -106,24 +124,6 @@
     "receivedDateHistory": "[1386588073, 1392813293, 1400558374, 1409549408, 1411723360, 1420347894, 1703855116]",
     "sentDateFirst": "2013/11/04",
     "receivedDateFirst": "2013/12/09"
-  },
-  {
-    "name": "Finland",
-    "countryCode": "FI",
-    "flagEmoji": "🇫🇮",
-    "value": 13,
-    "sentNum": 7,
-    "receivedNum": 6,
-    "sentAvg": 28,
-    "receivedAvg": 25,
-    "sentMedian": 32,
-    "receivedMedian": 26,
-    "sentHistory": "[18, 19, 14, 32, 33, 49, 33]",
-    "receivedHistory": "[16, 19, 26, 26, 29, 37]",
-    "sentDateHistory": "[1388140532, 1396020007, 1399042509, 1405339773, 1422282620, 1701794470, 1707308165]",
-    "receivedDateHistory": "[1399610328, 1413879121, 1698126828, 1704017843, 1710050181, 1710728443]",
-    "sentDateFirst": "2013/12/27",
-    "receivedDateFirst": "2014/05/09"
   },
   {
     "name": "Ukraine",
