@@ -169,8 +169,8 @@ def getLocalID(type, dbpath):
             "SELECT name FROM sqlite_master WHERE type='table' AND name='Mapinfo'")
         table_exists = cursor.fetchone()
         if table_exists:
-            # 从Mapinfo表中获取id
-            cursor.execute("SELECT id FROM Mapinfo WHERE type=?", (type,))
+            # 从Mapinfo表中获取已存储数据的ID，其中属于今年，但是本地ID排除掉是今年的，且link=“noPic.png”的ID（以防近期内该ID会上传明信片）
+            cursor.execute("SELECT id FROM Mapinfo WHERE type=?  AND NOT (link = 'gallery/picture/noPic.png' AND CAST(SUBSTR(receivedDate, 1, 4) AS INTEGER) = CAST(strftime('%Y', 'now') AS INTEGER))", (type,))
             rows = cursor.fetchall()
             oldID = [row[0] for row in rows]
         conn.close()
