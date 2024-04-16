@@ -23,11 +23,11 @@ jobs:
       PUSH_TO_GITHUB: ${{ steps.push.outputs.PUSH_TO_GITHUB }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@main
 
       - name: 设置Python版本
         id: setup_python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@main
         with:
           python-version: "3.11"
           cache: pip
