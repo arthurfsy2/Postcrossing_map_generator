@@ -268,8 +268,13 @@ def writeDB(dbpath, content, tablename):
             sentDate_local = item['sentDate_local']
             receivedDate_local = item['receivedDate_local']
             type = item['type']
-
-            cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            existing_data = cursor.fetchone()
+            if existing_data:
+                # 更新已存在的行的其他列数据
+                cursor.execute(f"UPDATE {tablename} SET FromCoor=?, ToCoor=?, distance=?, travel_days=?, sentDate=?, receivedDate=?, link=?, user=?, sentAddr=?, sentCountry=?, receivedAddr=?, receivedCountry=?, sentDate_local=?, receivedDate_local=? WHERE id=? and type = ?", (
+                    FromCoor, ToCoor, distance, travel_days, sentDate, receivedDate, link, user, sentAddr, sentCountry, receivedAddr, receivedCountry, sentDate_local, receivedDate_local, id, type))
+            else:
+                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                            (id, FromCoor, ToCoor, distance, travel_days, sentDate, receivedDate, link, user, sentAddr, sentCountry, receivedAddr, receivedCountry, sentDate_local, receivedDate_local, type))
     # 将列表中的JSON对象写入文件
     elif tablename == 'postcardStory':
@@ -345,12 +350,14 @@ def writeDB(dbpath, content, tablename):
                 # 更新已存在的行的其他列数据
                 cursor.execute(f"UPDATE {tablename} SET about=?, coors=?, sentDistance=?, sentLaps=?, sentPostcardNum=?, receivedDistance=?, receivedLaps=?, receivedPostcardNum=?, registerd_years=?, registerd_days=?, register_date=?, logo=? ", (
                     about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum, registerd_years, registerd_days, register_date, logo))
+                print(f'已更新数据库{dbpath}的{tablename}\n')
             else:
                 # 插入新的行
                 cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                                (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum, registerd_years, registerd_days, register_date, logo))
+                print(f'已新增数据库{dbpath}的{tablename}\n')
 
-    print(f'已更新数据库{dbpath}的{tablename}\n')
+    
     conn.commit()
     conn.close()
 
