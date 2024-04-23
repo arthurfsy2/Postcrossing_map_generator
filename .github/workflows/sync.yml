@@ -55,7 +55,6 @@ jobs:
       
       - name: 提交
         id: push
-        if: steps.check_files.outputs.PUSH_TO_GITHUB == 'true'
         run: |
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_NAME }}"
