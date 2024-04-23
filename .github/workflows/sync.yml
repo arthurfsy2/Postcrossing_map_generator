@@ -52,18 +52,7 @@ jobs:
     
       - name: 删除缓存文件
         run: rm -rf scripts/__pycache__/    
-      # 判断是否只有指定文件有变更
-      - name: Check file changes
-        id: check_files
-        run: |
-          git log --oneline
-          git diff --name-only <commit_hash_of_previous_commit> HEAD > changed_files.txt
-          if grep -Fxq "ClusterMap.html" changed_files.txt && grep -Fxq "Map.html" changed_files.txt && grep -Fxq "template/data.db" changed_files.txt; then
-            echo "Only ClusterMap.html, Map.html, and template/data.db have changed. Skipping commit."
-            echo "PUSH_TO_GITHUB=false" >> "$GITHUB_ENV"
-          else
-            echo "其他文件已更改。 继续提交。"
-          fi
+      
       - name: 提交
         id: push
         if: steps.check_files.outputs.PUSH_TO_GITHUB == 'true'
