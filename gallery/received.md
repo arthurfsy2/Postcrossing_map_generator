@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：97）
+title: 明信片展示墙（收到：98）
 icon: address-card
-date: 2024-04-18
+date: 2024-04-23
 category:
   - Arthur
 tag:
@@ -148,7 +148,16 @@ const option = {
 
 :::
 
-### 2024(28)
+### 2024(29)
+
+[RU-9991674](https://www.postcrossing.com/postcards/RU-9991674) 
+ >来自 [Ledon2015](https://www.postcrossing.com/user/Ledon2015) 🇷🇺
+> 📤 [Russia](https://www.bing.com/maps/?cp=55.75222~37.61556&lvl=12.0&setlang=zh-Hans) 2024/02/09 22:21 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/04/23 19:35 (当地)
+ 📏 7,123 | ⏱ 74
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/78k8s94ftzz9wttc6fq78790o5g6uk3y.jpg)
 
 [RU-9991671](https://www.postcrossing.com/postcards/RU-9991671) 
  >来自 [jul_nov](https://www.postcrossing.com/user/jul_nov) 🇷🇺
