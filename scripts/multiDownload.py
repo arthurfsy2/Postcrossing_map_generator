@@ -7,7 +7,7 @@ import os
 import json
 import pandas as pd
 import math
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import sys
 import sqlite3
 import statistics
@@ -416,8 +416,8 @@ def calculateAvgAndMedian(a_data):
             sent_avg = int(statistics.mean(data['sent']))
             sent_median = int(statistics.median(data['sent']))
             sentDate_first = datetime.fromtimestamp(
-                min(data['sentDate'])).strftime('%Y/%m/%d')
-            # datetime.fromtimestamp(min(data['sentDate']).strftime('%Y-%m-%d')
+                min(data['sentDate']), timezone.utc).strftime('%Y/%m/%d')
+
 
         else:
             sent_avg = None
@@ -427,7 +427,7 @@ def calculateAvgAndMedian(a_data):
             received_avg = int(statistics.mean(data['received']))
             received_median = int(statistics.median(data['received']))
             receivedDate_first = datetime.fromtimestamp(
-                min(data['receivedDate'])).strftime('%Y/%m/%d')
+                min(data['receivedDate']), timezone.utc).strftime('%Y/%m/%d')
         else:
             received_avg = None
             received_median = None
@@ -492,8 +492,8 @@ def getUserStat(account):
     for item in a_data:
         # 将时间戳转换为YYYY-MM的格式
         timestamp = item[0]
-        date = datetime.fromtimestamp(timestamp).strftime('%Y-%m')
-        year = datetime.fromtimestamp(timestamp).strftime('%Y')
+        date = datetime.fromtimestamp(timestamp,timezone.utc).strftime('%Y-%m')
+        year = datetime.fromtimestamp(timestamp,timezone.utc).strftime('%Y')
         # 判断sent还是received
         if item[2] == 's':
             key = 'sent'
@@ -537,7 +537,7 @@ def getUserStat(account):
     for data in a_data:
         # 将时间戳转换为YYYY-MM-DD格式
         timestamp = data[0]
-        date = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
+        date = datetime.fromtimestamp(timestamp, timezone.utc).strftime('%Y-%m-%d')
 
         # 统计每天的总数
         if date in calendar:

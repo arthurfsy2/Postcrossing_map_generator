@@ -268,6 +268,8 @@ def writeDB(dbpath, content, tablename):
             sentDate_local = item['sentDate_local']
             receivedDate_local = item['receivedDate_local']
             type = item['type']
+            cursor.execute(
+                f"SELECT * FROM {tablename} WHERE id=? AND type=?", (id, type))
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
