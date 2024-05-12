@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：86）
+title: 明信片展示墙（寄出：87）
 icon: address-card
-date: 2024-05-07
+date: 2024-05-12
 category:
   - Arthur
 tag:
@@ -148,7 +148,16 @@ const option = {
 
 :::
 
-### 2024(25)
+### 2024(26)
+
+[CN-3723133](https://www.postcrossing.com/postcards/CN-3723133) 
+ >寄往 [CHIHUANCHANG](https://www.postcrossing.com/user/CHIHUANCHANG) 🇹🇼
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/04/04 18:22 (当地)
+> 📥 [Taiwan](https://www.bing.com/maps/?cp=24.95608~121.3507&lvl=12.0&setlang=zh-Hans) 2024/05/11 16:38 (当地)
+ 📏 771 | ⏱ 37
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/yux7rk1t73qrpf2buyetg5sl8i4a3ik0.jpg)
 
 [CN-3713709](https://www.postcrossing.com/postcards/CN-3713709) 
  >寄往 [EGer71](https://www.postcrossing.com/user/EGer71) 🇷🇺
