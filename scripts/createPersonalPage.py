@@ -196,6 +196,8 @@ def replaceTemplate():
 
 
 def StoryXLS2DB(excel_file):
+    import warnings
+    warnings.filterwarnings('ignore', category=FutureWarning)
     df = pd.read_excel(excel_file)
     content_all = []
 
@@ -457,7 +459,10 @@ def getTravelingID(account, type, Cookie):
         countryList = json.load(file)
     for i, stats in enumerate(data):
         baseurl = "https://www.postcrossing.com"
-        sentAvg = readDB(dbpath, stats[3], "CountryStats")[0]['sentAvg'] if readDB(dbpath, stats[3], "CountryStats")[0]['sentAvg'] else 0
+        if readDB(dbpath, stats[3], "CountryStats") and readDB(dbpath, stats[3], "CountryStats")[0]['sentAvg']:
+            sentAvg = readDB(dbpath, stats[3], "CountryStats")[0]['sentAvg']
+        else:
+            sentAvg = 0
         if int(stats[7]) >= 60:
             traveling_days = f'<span style="color: red;">{stats[7]}</span>'
         elif int(stats[7]) > int(sentAvg):
