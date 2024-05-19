@@ -148,16 +148,16 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2024(27)
 
 [CN-3730280](https://www.postcrossing.com/postcards/CN-3730280) 
  >寄往 [Reksa](https://www.postcrossing.com/user/Reksa) 🇫🇮
->
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/04/15 15:55 (当地)
+> 📥 [Finland](https://www.bing.com/maps/?cp=61.67538~21.62092&lvl=12.0&setlang=zh-Hans) 2024/05/19 22:44 (当地)
+ 📏 7,947 | ⏱ 34
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7799a46pjhfbgsl5vb2nupoal58zmspb.jpg)
-
-### 2024(26)
 
 [CN-3723133](https://www.postcrossing.com/postcards/CN-3723133) 
  >寄往 [CHIHUANCHANG](https://www.postcrossing.com/user/CHIHUANCHANG) 🇹🇼
