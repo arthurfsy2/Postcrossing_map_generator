@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：87）
+title: 明信片展示墙（寄出：88）
 icon: address-card
-date: 2024-05-12
+date: 2024-05-19
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3730280](https://www.postcrossing.com/postcards/CN-3730280) 
+ >寄往 [Reksa](https://www.postcrossing.com/user/Reksa) 🇫🇮
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7799a46pjhfbgsl5vb2nupoal58zmspb.jpg)
 
 ### 2024(26)
 
