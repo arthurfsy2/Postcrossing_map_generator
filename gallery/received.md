@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：98）
+title: 明信片展示墙（收到：99）
 icon: address-card
-date: 2024-05-08
+date: 2024-05-21
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[JP-2075151](https://www.postcrossing.com/postcards/JP-2075151) 
+ >来自 [dream3225](https://www.postcrossing.com/user/dream3225) 🇯🇵
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/xdyyhnwy7o5hdlqsyhwy34v4miryawnt.jpg)
 
 ### 2024(29)
 
