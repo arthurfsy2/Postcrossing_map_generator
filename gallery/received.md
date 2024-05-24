@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：99）
+title: 明信片展示墙（收到：100）
 icon: address-card
-date: 2024-05-21
+date: 2024-05-24
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[AT-729734](https://www.postcrossing.com/postcards/AT-729734) 
+ >来自 [Zwiebel123](https://www.postcrossing.com/user/Zwiebel123) 🇦🇹
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/qtgrtx9dizw0ykp1fo2tscsbq6q8dwu8.jpg)
 
 ### 2024(30)
 

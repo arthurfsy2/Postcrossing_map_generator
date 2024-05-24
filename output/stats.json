@@ -216,6 +216,24 @@
     "receivedDateFirst": "2014/06/27"
   },
   {
+    "name": "Austria",
+    "countryCode": "AT",
+    "flagEmoji": "🇦🇹",
+    "value": 4,
+    "sentNum": 1,
+    "receivedNum": 3,
+    "sentAvg": 19,
+    "receivedAvg": 21,
+    "sentMedian": 19,
+    "receivedMedian": 23,
+    "sentHistory": "[19]",
+    "receivedHistory": "[23, 23, 17]",
+    "sentDateHistory": "[1388229180]",
+    "receivedDateHistory": "[1698126950, 1698127247, 1716563566]",
+    "sentDateFirst": "2013/12/28",
+    "receivedDateFirst": "2023/10/24"
+  },
+  {
     "name": "Malaysia",
     "countryCode": "MY",
     "flagEmoji": "🇲🇾",
@@ -268,24 +286,6 @@
     "receivedDateHistory": "[1411361441, 1703139321]",
     "sentDateFirst": "2014/11/18",
     "receivedDateFirst": "2014/09/22"
-  },
-  {
-    "name": "Austria",
-    "countryCode": "AT",
-    "flagEmoji": "🇦🇹",
-    "value": 3,
-    "sentNum": 1,
-    "receivedNum": 2,
-    "sentAvg": 19,
-    "receivedAvg": 23,
-    "sentMedian": 19,
-    "receivedMedian": 23,
-    "sentHistory": "[19]",
-    "receivedHistory": "[23, 23]",
-    "sentDateHistory": "[1388229180]",
-    "receivedDateHistory": "[1698126950, 1698127247]",
-    "sentDateFirst": "2013/12/28",
-    "receivedDateFirst": "2023/10/24"
   },
   {
     "name": "Korea (South)",
