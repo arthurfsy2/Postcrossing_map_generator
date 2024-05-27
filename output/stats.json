@@ -610,5 +610,23 @@
     "receivedDateHistory": "[1701320419]",
     "sentDateFirst": null,
     "receivedDateFirst": "2023/11/30"
+  },
+  {
+    "name": "Croatia",
+    "countryCode": "HR",
+    "flagEmoji": "🇭🇷",
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": null,
+    "receivedAvg": 20,
+    "sentMedian": null,
+    "receivedMedian": 20,
+    "sentHistory": "[]",
+    "receivedHistory": "[20]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1716820760]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2024/05/27"
   }
 ]
