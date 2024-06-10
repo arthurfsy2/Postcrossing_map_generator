@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：89）
+title: 明信片展示墙（寄出：90）
 icon: address-card
-date: 2024-05-21
+date: 2024-06-10
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3692797](https://www.postcrossing.com/postcards/CN-3692797) 
+ >寄往 [Cynt](https://www.postcrossing.com/user/Cynt) 🇨🇦
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5dm6vhkifj9a8nu7rpqsor27s3f0vda8.jpg)
 
 ### 2024(28)
 
