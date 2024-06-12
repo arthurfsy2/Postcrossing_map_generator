@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：91）
+title: 明信片展示墙（寄出：92）
 icon: address-card
-date: 2024-06-11
+date: 2024-06-12
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3749434](https://www.postcrossing.com/postcards/CN-3749434) 
+ >寄往 [Tati888](https://www.postcrossing.com/user/Tati888) 🇩🇪
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/l0wuvic9onniv10v6kfygof4sx4o0o8k.jpg)
 
 ### 2024(30)
 
