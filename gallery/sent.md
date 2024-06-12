@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：92）
+title: 明信片展示墙（寄出：93）
 icon: address-card
 date: 2024-06-12
 category:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3739257](https://www.postcrossing.com/postcards/CN-3739257) 
+ >寄往 [Selena](https://www.postcrossing.com/user/Selena) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/xsmgkq2jqnb7t01bjyzubncgnpam3bhw.jpg)
 
 ### 2024(31)
 

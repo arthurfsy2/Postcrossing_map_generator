@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（我收到的赞：46）
+title: 明信片展示墙（我收到的赞：48）
 icon: address-card
 date: 2024-06-12
 category:
@@ -11,7 +11,16 @@ order: 5
 
 ## [arthurfsy's popular](https://www.postcrossing.com/user/arthurfsy/gallery/popular)
 
-### 2024(19)
+### 其他(1)
+
+[CN-3739257](https://www.postcrossing.com/postcards/CN-3739257) 
+ >寄往  🇺🇸
+>
+>点赞人数：**1**
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/xsmgkq2jqnb7t01bjyzubncgnpam3bhw.jpg) 
+
+ ### 2024(20)
 
 [CN-3749434](https://www.postcrossing.com/postcards/CN-3749434) 
  >寄往  🇩🇪
@@ -40,12 +49,21 @@ order: 5
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/mp5x823kmc733mnzzfjs1gmmhmj3fb7e.jpg) 
 
+ [CN-3713710](https://www.postcrossing.com/postcards/CN-3713710) 
+ >寄往  🇺🇸
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/03/22 11:03 (当地)
+> 📥 [U.S.A.](https://www.bing.com/maps/?cp=37.77493~-122.41942&lvl=12.0&setlang=zh-Hans) 2024/04/22 21:46 (当地)
+ 📏 11,071 | ⏱ 32
+>点赞人数：**1**
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/76arxu1v5nb0nlkkesi1e2y07r70vcks.jpg) 
+
  [CN-3706232](https://www.postcrossing.com/postcards/CN-3706232) 
  >寄往  🇩🇪
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/03/10 15:42 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=49.23262~7.00982&lvl=12.0&setlang=zh-Hans) 2024/04/13 14:51 (当地)
  📏 9,292 | ⏱ 34
->点赞人数：**1**
+>点赞人数：**2**
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/2q8b91wy4k87ltnq9hzx57rckx2wa5ar.jpg) 
 
