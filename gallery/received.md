@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：107）
+title: 明信片展示墙（收到：108）
 icon: address-card
 date: 2024-06-13
 category:
@@ -148,7 +148,7 @@ const option = {
 
 :::
 
-### 2024(38)
+### 2024(39)
 
 [DE-14183085](https://www.postcrossing.com/postcards/DE-14183085) 
  >来自 [marie5](https://www.postcrossing.com/user/marie5) 🇩🇪
@@ -158,6 +158,15 @@ const option = {
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/squbx8q082796z9wmv1m62hswwex6qj0.jpg)
+
+[DE-14228192](https://www.postcrossing.com/postcards/DE-14228192) 
+ >来自 [Rainbow211](https://www.postcrossing.com/user/Rainbow211) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=49.9624~9.24719&lvl=12.0&setlang=zh-Hans) 2024/05/20 18:00 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/06/13 20:34 (当地)
+ 📏 9,112 | ⏱ 24
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/hq5v2fihlqr6b65f23y0pavuv5utr6co.jpg)
 
 [DE-14197980](https://www.postcrossing.com/postcards/DE-14197980) 
  >来自 [Martin-Gittig](https://www.postcrossing.com/user/Martin-Gittig) 🇩🇪
