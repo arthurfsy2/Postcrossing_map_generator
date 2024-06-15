@@ -628,5 +628,23 @@
     "receivedDateHistory": "[1716820760]",
     "sentDateFirst": null,
     "receivedDateFirst": "2024/05/27"
+  },
+  {
+    "name": "Uzbekistan",
+    "countryCode": "UZ",
+    "flagEmoji": "🇺🇿",
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 50,
+    "receivedAvg": null,
+    "sentMedian": 50,
+    "receivedMedian": null,
+    "sentHistory": "[50]",
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1718433816]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2024/06/15",
+    "receivedDateFirst": null
   }
 ]
