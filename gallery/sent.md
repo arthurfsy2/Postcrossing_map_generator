@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：93）
+title: 明信片展示墙（寄出：94）
 icon: address-card
-date: 2024-06-12
+date: 2024-06-16
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3730279](https://www.postcrossing.com/postcards/CN-3730279) 
+ >寄往 [MSFOTINAS](https://www.postcrossing.com/user/MSFOTINAS) 🇧🇾
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/psgzqf5s9nemqhgy1xkmjlfdx4aoqlh4.jpg)
 
 ### 2024(32)
 
