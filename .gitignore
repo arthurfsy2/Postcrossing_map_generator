@@ -1,6 +1,8 @@
+.gitignore
 .github/workflows/*BAK*
 run.sh
 a.py
 .vscode
 scripts/__pycache__/*
 output/html
+scripts/chatgpt_tool.py
