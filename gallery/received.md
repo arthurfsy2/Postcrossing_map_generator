@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：108）
+title: 明信片展示墙（收到：109）
 icon: address-card
-date: 2024-06-13
+date: 2024-06-16
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[RU-10097926](https://www.postcrossing.com/postcards/RU-10097926) 
+ >来自 [mint-pluto](https://www.postcrossing.com/user/mint-pluto) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/gapjrcmytxzo33lke19vb5fqm85f7s6t.jpg)
 
 ### 2024(39)
 
