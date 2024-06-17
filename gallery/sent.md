@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：94）
+title: 明信片展示墙（寄出：95）
 icon: address-card
-date: 2024-06-16
+date: 2024-06-17
 category:
   - Arthur
 tag:
@@ -148,7 +148,7 @@ const option = {
 
 :::
 
-### 2024(33)
+### 2024(34)
 
 [CN-3730279](https://www.postcrossing.com/postcards/CN-3730279) 
  >寄往 [MSFOTINAS](https://www.postcrossing.com/user/MSFOTINAS) 🇧🇾
@@ -158,6 +158,15 @@ const option = {
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/psgzqf5s9nemqhgy1xkmjlfdx4aoqlh4.jpg)
+
+[CN-3737191](https://www.postcrossing.com/postcards/CN-3737191) 
+ >寄往 [Malder](https://www.postcrossing.com/user/Malder) 🇺🇿
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/04/26 10:54 (当地)
+> 📥 [Uzbekistan](https://www.bing.com/maps/?cp=41.26465~69.21627&lvl=12.0&setlang=zh-Hans) 2024/06/15 11:43 (当地)
+ 📏 4,664 | ⏱ 50
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/3qccu6zoylz41yk0c9qjq9q105j0oiqi.jpg)
 
 [CN-3739257](https://www.postcrossing.com/postcards/CN-3739257) 
  >寄往 [Selena](https://www.postcrossing.com/user/Selena) 🇺🇸
