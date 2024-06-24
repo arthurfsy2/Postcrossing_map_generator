@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：97）
+title: 明信片展示墙（寄出：98）
 icon: address-card
-date: 2024-06-20
+date: 2024-06-24
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3747913](https://www.postcrossing.com/postcards/CN-3747913) 
+ >寄往 [PonchikMakoviy](https://www.postcrossing.com/user/PonchikMakoviy) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/s58b65phveo5chwo50hld2i3mwapdntn.jpg)
 
 ### 2024(36)
 
