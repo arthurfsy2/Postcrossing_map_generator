@@ -646,5 +646,23 @@
     "receivedDateHistory": "[]",
     "sentDateFirst": "2024/06/15",
     "receivedDateFirst": null
+  },
+  {
+    "name": "Slovenia",
+    "countryCode": "SI",
+    "flagEmoji": "🇸🇮",
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 41,
+    "receivedAvg": null,
+    "sentMedian": 41,
+    "receivedMedian": null,
+    "sentHistory": "[41]",
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1719836349]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2024/07/01",
+    "receivedDateFirst": null
   }
 ]
