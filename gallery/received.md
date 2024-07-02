@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：112）
+title: 明信片展示墙（收到：113）
 icon: address-card
-date: 2024-06-22
+date: 2024-07-02
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[US-10478110](https://www.postcrossing.com/postcards/US-10478110) 
+ >来自 [mfeda](https://www.postcrossing.com/user/mfeda) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9mbz0n00w2t3x8s9vszvdyqxxnr90x8q.jpg)
 
 ### 2024(43)
 
