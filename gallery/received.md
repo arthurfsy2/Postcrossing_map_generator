@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：113）
+title: 明信片展示墙（收到：114）
 icon: address-card
 date: 2024-07-02
 category:
@@ -148,7 +148,7 @@ const option = {
 
 :::
 
-### 2024(44)
+### 2024(45)
 
 [US-10478110](https://www.postcrossing.com/postcards/US-10478110) 
  >来自 [mfeda](https://www.postcrossing.com/user/mfeda) 🇺🇸
@@ -158,6 +158,15 @@ const option = {
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9mbz0n00w2t3x8s9vszvdyqxxnr90x8q.jpg)
+
+[FI-4633650](https://www.postcrossing.com/postcards/FI-4633650) 
+ >来自 [veverka](https://www.postcrossing.com/user/veverka) 🇫🇮
+> 📤 [Finland](https://www.bing.com/maps/?cp=60.86667~26.7&lvl=12.0&setlang=zh-Hans) 2024/06/17 08:45 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/07/02 20:22 (当地)
+ 📏 7,699 | ⏱ 15
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/4ttbpxkkr9v2qr10jxkkaj3wqof97sdz.jpg)
 
 [US-10415575](https://www.postcrossing.com/postcards/US-10415575) 
  >来自 [vidhyasanjeev](https://www.postcrossing.com/user/vidhyasanjeev) 🇺🇸
