@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（我的点赞：17）
+title: 明信片展示墙（我的点赞：18）
 icon: address-card
-date: 2024-06-13
+date: 2024-07-12
 category:
   - Arthur
 tag:
@@ -20,7 +20,16 @@ order: 4
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/fypwr02syz1w87zf3ak5hovd62c6wnx7.jpg)
 
-### 2024(3)
+### 2024(4)
+
+[IE-259244](https://www.postcrossing.com/postcards/IE-259244) 
+ >来自 [nopecat](https://www.postcrossing.com/user/nopecat) 🇮🇪
+> 📤 [Ireland](https://www.bing.com/maps/?cp=53.45972~-6.21806&lvl=12.0&setlang=zh-Hans) 2024/06/16 16:42 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/07/12 19:04 (当地)
+ 📏 9,819 | ⏱ 26
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/xi5hlo2lz3k166xgj1uom0i29tr3nw95.jpg)
 
 [DE-14228192](https://www.postcrossing.com/postcards/DE-14228192) 
  >来自 [Rainbow211](https://www.postcrossing.com/user/Rainbow211) 🇩🇪
