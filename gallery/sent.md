@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：100）
+title: 明信片展示墙（寄出：101）
 icon: address-card
-date: 2024-07-03
+date: 2024-07-18
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3772289](https://www.postcrossing.com/postcards/CN-3772289) 
+ >寄往 [LMJillian](https://www.postcrossing.com/user/LMJillian) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/iv02faz6htlc1u2ve86e2i7utblfn6su.jpg)
 
 ### 2024(39)
 
