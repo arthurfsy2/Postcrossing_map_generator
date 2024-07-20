@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：102）
+title: 明信片展示墙（寄出：103）
 icon: address-card
-date: 2024-07-19
+date: 2024-07-20
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3770706](https://www.postcrossing.com/postcards/CN-3770706) 
+ >寄往 [Humpelbaer](https://www.postcrossing.com/user/Humpelbaer) 🇩🇪
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9musin8jwzsydr1oj0gx3cjb7defezsh.jpg)
 
 ### 2024(41)
 
