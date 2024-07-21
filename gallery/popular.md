@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（我收到的赞：52）
+title: 明信片展示墙（我收到的赞：51）
 icon: address-card
-date: 2024-07-20
+date: 2024-07-21
 category:
   - Arthur
 tag:
