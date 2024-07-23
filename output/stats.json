@@ -396,6 +396,24 @@
     "receivedDateFirst": null
   },
   {
+    "name": "Italy",
+    "countryCode": "IT",
+    "flagEmoji": "🇮🇹",
+    "value": 2,
+    "sentNum": 2,
+    "receivedNum": 0,
+    "sentAvg": 33,
+    "receivedAvg": null,
+    "sentMedian": 33,
+    "receivedMedian": null,
+    "sentHistory": "[26, 41]",
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1418664681, 1721728982]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2014/12/15",
+    "receivedDateFirst": null
+  },
+  {
     "name": "Poland",
     "countryCode": "PL",
     "flagEmoji": "🇵🇱",
@@ -538,24 +556,6 @@
     "receivedDateHistory": "[1416041927]",
     "sentDateFirst": null,
     "receivedDateFirst": "2014/11/15"
-  },
-  {
-    "name": "Italy",
-    "countryCode": "IT",
-    "flagEmoji": "🇮🇹",
-    "value": 1,
-    "sentNum": 1,
-    "receivedNum": 0,
-    "sentAvg": 26,
-    "receivedAvg": null,
-    "sentMedian": 26,
-    "receivedMedian": null,
-    "sentHistory": "[26]",
-    "receivedHistory": "[]",
-    "sentDateHistory": "[1418664681]",
-    "receivedDateHistory": "[]",
-    "sentDateFirst": "2014/12/15",
-    "receivedDateFirst": null
   },
   {
     "name": "Portugal",
