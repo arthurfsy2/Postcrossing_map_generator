@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：104）
+title: 明信片展示墙（寄出：105）
 icon: address-card
-date: 2024-07-23
+date: 2024-07-25
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3774506](https://www.postcrossing.com/postcards/CN-3774506) 
+ >寄往 [Kosmopilot](https://www.postcrossing.com/user/Kosmopilot) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5c7ikibml8fax0ovf2yse34xfc0fuk3w.jpg)
 
 ### 2024(43)
 
