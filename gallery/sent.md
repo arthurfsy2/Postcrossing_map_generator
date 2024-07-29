@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：105）
+title: 明信片展示墙（寄出：106）
 icon: address-card
-date: 2024-07-25
+date: 2024-07-29
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3772688](https://www.postcrossing.com/postcards/CN-3772688) 
+ >寄往 [JacobTheShuhite](https://www.postcrossing.com/user/JacobTheShuhite) 🇩🇪
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/3144cte43ov5fne5rb4ma12cl2c8vgwf.jpg)
 
 ### 2024(44)
 
