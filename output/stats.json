@@ -700,5 +700,23 @@
     "receivedDateHistory": "[]",
     "sentDateFirst": "2024/08/05",
     "receivedDateFirst": null
+  },
+  {
+    "name": "Australia",
+    "countryCode": "AU",
+    "flagEmoji": "🇦🇺",
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 42,
+    "receivedAvg": null,
+    "sentMedian": 42,
+    "receivedMedian": null,
+    "sentHistory": "[42]",
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1723013751]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2024/08/07",
+    "receivedDateFirst": null
   }
 ]
