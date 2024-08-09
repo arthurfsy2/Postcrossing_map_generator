@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（寄出：108）
 icon: address-card
-date: 2024-08-07
+date: 2024-08-09
 category:
   - Arthur
 tag:
@@ -358,7 +358,7 @@ const option = {
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/k8dsycjx94ucbnjkri50u4s4mpwecb39.jpg)
 
 [CN-3713710](https://www.postcrossing.com/postcards/CN-3713710) 
- >寄往 [hooraybeltran](https://www.postcrossing.com/user/hooraybeltran) 🇺🇸
+ >寄往 [heyheyray](https://www.postcrossing.com/user/heyheyray) 🇺🇸
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/03/22 11:03 (当地)
 > 📥 [U.S.A.](https://www.bing.com/maps/?cp=37.77493~-122.41942&lvl=12.0&setlang=zh-Hans) 2024/04/22 21:46 (当地)
  📏 11,071 | ⏱ 32
