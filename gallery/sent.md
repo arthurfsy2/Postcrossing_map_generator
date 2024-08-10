@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：108）
+title: 明信片展示墙（寄出：109）
 icon: address-card
-date: 2024-08-09
+date: 2024-08-10
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3785191](https://www.postcrossing.com/postcards/CN-3785191) 
+ >寄往 [annaviola](https://www.postcrossing.com/user/annaviola) 🇩🇪
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/fnpk84olal0jn3q69it7xfjysutmo7d1.jpg)
 
 ### 2024(47)
 
