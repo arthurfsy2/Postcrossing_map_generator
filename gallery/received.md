@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：120）
+title: 明信片展示墙（收到：121）
 icon: address-card
-date: 2024-08-04
+date: 2024-08-12
 category:
   - Arthur
 tag:
@@ -148,7 +148,16 @@ const option = {
 
 :::
 
-### 2024(51)
+### 2024(52)
+
+[DE-14374200](https://www.postcrossing.com/postcards/DE-14374200) 
+ >来自 [Boryslawa](https://www.postcrossing.com/user/Boryslawa) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=51.25627~7.14816&lvl=12.0&setlang=zh-Hans) 2024/07/06 10:19 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/08/12 10:08 (当地)
+ 📏 9,180 | ⏱ 37
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/x0jw17jquhxrzxrwfibfor76nwceo766.jpg)
 
 [FI-4642929](https://www.postcrossing.com/postcards/FI-4642929) 
  >来自 [ajoutsenlampi](https://www.postcrossing.com/user/ajoutsenlampi) 🇫🇮
