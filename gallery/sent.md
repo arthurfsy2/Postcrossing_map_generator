@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：109）
+title: 明信片展示墙（寄出：110）
 icon: address-card
-date: 2024-08-10
+date: 2024-08-12
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3776926](https://www.postcrossing.com/postcards/CN-3776926) 
+ >寄往 [katerenok](https://www.postcrossing.com/user/katerenok) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/igu02t8hqwhmhfy6siirihm5argy3u8d.jpg)
 
 ### 2024(48)
 
