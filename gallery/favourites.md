@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（我的点赞：19）
+title: 明信片展示墙（我的点赞：20）
 icon: address-card
-date: 2024-08-04
+date: 2024-08-16
 category:
   - Arthur
 tag:
@@ -20,7 +20,16 @@ order: 4
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/fypwr02syz1w87zf3ak5hovd62c6wnx7.jpg)
 
-### 2024(5)
+### 2024(6)
+
+[FI-4654970](https://www.postcrossing.com/postcards/FI-4654970) 
+ >来自 [Jussi](https://www.postcrossing.com/user/Jussi) 🇫🇮
+> 📤 [Finland](https://www.bing.com/maps/?cp=60.16952~24.93545&lvl=12.0&setlang=zh-Hans) 2024/07/29 11:50 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/08/16 23:27 (当地)
+ 📏 7,807 | ⏱ 18
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/8tty35ec75j6y12o4iyfsvbw3zvh2uma.jpg)
 
 [FI-4642929](https://www.postcrossing.com/postcards/FI-4642929) 
  >来自 [ajoutsenlampi](https://www.postcrossing.com/user/ajoutsenlampi) 🇫🇮
