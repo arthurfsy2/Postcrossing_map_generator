@@ -311,11 +311,10 @@ env:
 
 2. 在 repo Settings > Security > Secrets > secrets and variables > Actions > New repository secret > 增加以下变量:`DEPLOY_PRIVATE_KEY`,这个参数的值是需要本地生成 SSH
 
-> 整体思路（重要）：生成 SSH 密钥-->添加到 A 仓库的 Actions 变量(用来提交）-->添加到 B 仓库的[SSH and GPG keys](https://github.com/settings/keys)（用来验证）
+> 整体思路（重要）：生成 SSH 密钥-->`私钥`添加到 A 仓库的 Actions 变量（用来提交）-->`公钥（文件后缀带.pub`添加到 B 仓库所在账户的[SSH and GPG keys](https://github.com/settings/keys)（用来验证）
 
 具体可参考以下链接。
 [Mac 中 git ssh 配置](https://www.jianshu.com/p/0a41903252a3)
-[用 Github 实现组件自动发布](http://www.manongjc.com/detail/62-vdxpqplyccfhosu.html)
 
 ```
 - name: 推送到博客仓库
