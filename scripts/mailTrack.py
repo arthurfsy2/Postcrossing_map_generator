@@ -1,4 +1,5 @@
 from imap_tools import MailBox, AND
+from imap_tools.errors import *
 import re
 import json
 from urllib import parse, request
@@ -38,37 +39,40 @@ def remove_blank_lines(text):
 def getMailReply(host, user, passwd, filename):
     tablename = "postcardStory"
     oldReplyID = getLocalReplyID(dbpath, tablename)  # 获取本地数据库已保存的ID
-    # print("oldReplyID:\n",oldReplyID)
     content = []
-    with MailBox(host).login(user, passwd) as mailbox:
-        # for f in mailbox.folder.list():
-        #     print(f) #查看当前账号的文件夹列表
-        mailbox.folder.set(filename)
-        for msg in mailbox.fetch(AND(subject="Hurray! Your postcard")):
-            # print("msg:\n",msg.date, msg.subject, len(msg.text or msg.html))
-            id = re.search(r'Hurray! Your postcard (.*?) to',
-                           msg.subject).group(1)
-            match = re.search(r'“([\s\S]*?)”', msg.text)
-            if match:
-                match = match.group(1)
-                if id not in oldReplyID:  # 只翻译新的内容
-                    print("idNEW:", id)
-                    comment_original = remove_blank_lines(match)
-                    comment_cn = translate(
-                        apikey, comment_original, 'auto', 'zh')
-                    data = {
-                        "id": id,
-                        "content_original": "",
-                        "content_cn": "",
-                        "comment_original": f"“{comment_original}”",
-                        "comment_cn": f"“{comment_cn}”",
-                    }
-                    content.append(data)
-        if len(content) > 0:
-            writeDB(dbpath, content, tablename)
-            print("已发现更新内容:", content)
-        else:
-            print("无更新内容")
+    
+    try:
+        with MailBox(host).login(user, passwd) as mailbox:
+            mailbox.folder.set(filename)
+            for msg in mailbox.fetch(AND(subject="Hurray! Your postcard")):
+                id = re.search(r'Hurray! Your postcard (.*?) to', msg.subject).group(1)
+                match = re.search(r'“([\s\S]*?)”', msg.text)
+                if match:
+                    match = match.group(1)
+                    if id not in oldReplyID:  # 只翻译新的内容
+                        print("idNEW:", id)
+                        comment_original = remove_blank_lines(match)
+                        comment_cn = translate(apikey, comment_original, 'auto', 'zh')
+                        data = {
+                            "id": id,
+                            "content_original": "",
+                            "content_cn": "",
+                            "comment_original": f"“{comment_original}”",
+                            "comment_cn": f"“{comment_cn}”",
+                        }
+                        content.append(data)
+            if len(content) > 0:
+                writeDB(dbpath, content, tablename)
+                print("已发现更新内容:", content)
+            else:
+                print("无更新内容")
+    except MailboxLoginError:
+        print("登录失败！请检查邮箱账号/邮箱授权密码是否正确")
+    except MailboxFolderSelectError:
+        print("请检查邮件对应的目录是否正确")
+    except Exception as e:
+        print("请检查邮箱host是否正确")
+
 
 
 def getLocalReplyID(dbpath, tablename):
