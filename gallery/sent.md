@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：114）
+title: 明信片展示墙（寄出：115）
 icon: address-card
 date: 2024-09-09
 category:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3810147](https://www.postcrossing.com/postcards/CN-3810147) 
+ >寄往 [MayaCat](https://www.postcrossing.com/user/MayaCat) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/aea95rgiwypvzntdkys7ijoo1b8qn08g.jpg)
 
 ### 2024(53)
 
