@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：133）
+title: 明信片展示墙（收到：134）
 icon: address-card
-date: 2024-08-30
+date: 2024-09-09
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[ES-808083](https://www.postcrossing.com/postcards/ES-808083) 
+ >来自 [JaimeBilbao](https://www.postcrossing.com/user/JaimeBilbao) 🇪🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/vbvw7ps7vuvk5v2aml5kida50780se7x.jpg)
 
 ### 2024(64)
 
