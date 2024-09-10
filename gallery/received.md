@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：134）
+title: 明信片展示墙（收到：135）
 icon: address-card
-date: 2024-09-09
+date: 2024-09-10
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[ID-431633](https://www.postcrossing.com/postcards/ID-431633) 
+ >来自 [Ireneind](https://www.postcrossing.com/user/Ireneind) 🇮🇩
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/u5qy7segc8dkcwxpzwuei3d7nmf1yb38.jpg)
 
 ### 2024(65)
 

@@ -718,5 +718,23 @@
     "receivedDateHistory": "[]",
     "sentDateFirst": "2024/08/07",
     "receivedDateFirst": null
+  },
+  {
+    "name": "Indonesia",
+    "countryCode": "ID",
+    "flagEmoji": "🇮🇩",
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": null,
+    "receivedAvg": 30,
+    "sentMedian": null,
+    "receivedMedian": 30,
+    "sentHistory": "[]",
+    "receivedHistory": "[30]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1725970156]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2024/09/10"
   }
 ]
