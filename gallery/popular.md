@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（我收到的赞：60）
+title: 明信片展示墙（我收到的赞：61）
 icon: address-card
-date: 2024-09-09
+date: 2024-09-17
 category:
   - Arthur
 tag:
@@ -11,7 +11,16 @@ order: 5
 
 ## [arthurfsy's popular](https://www.postcrossing.com/user/arthurfsy/gallery/popular)
 
-### 2024(34)
+### 其他(1)
+
+[CN-3803179](https://www.postcrossing.com/postcards/CN-3803179) 
+ >寄往  🇺🇸
+>
+>点赞人数：**1**
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/q8t8vwq4q8s60qy2qkrk0cjsu0y9iy29.jpg) 
+
+ ### 2024(34)
 
 [CN-3810147](https://www.postcrossing.com/postcards/CN-3810147) 
  >寄往  🇷🇺

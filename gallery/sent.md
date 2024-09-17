@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：118）
+title: 明信片展示墙（寄出：119）
 icon: address-card
-date: 2024-09-13
+date: 2024-09-17
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3803179](https://www.postcrossing.com/postcards/CN-3803179) 
+ >寄往 [DetroitTigersFan](https://www.postcrossing.com/user/DetroitTigersFan) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/q8t8vwq4q8s60qy2qkrk0cjsu0y9iy29.jpg)
 
 ### 2024(57)
 
