@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：135）
+title: 明信片展示墙（收到：136）
 icon: address-card
-date: 2024-09-10
+date: 2024-09-17
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[RU-10208779](https://www.postcrossing.com/postcards/RU-10208779) 
+ >来自 [red_crocodile](https://www.postcrossing.com/user/red_crocodile) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/f5tbp1yjsd1sct3b9bhy1rvdbwi2ia84.jpg)
 
 ### 2024(66)
 
