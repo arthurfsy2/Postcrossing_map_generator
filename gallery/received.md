@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：136）
+title: 明信片展示墙（收到：137）
 icon: address-card
-date: 2024-09-17
+date: 2024-09-19
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[US-10662757](https://www.postcrossing.com/postcards/US-10662757) 
+ >来自 [ewerannette](https://www.postcrossing.com/user/ewerannette) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/r6o57kxi2rixawis8i3bh0ni34hmh7yt.jpg)
 
 ### 2024(67)
 
