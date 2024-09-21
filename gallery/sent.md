@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：119）
+title: 明信片展示墙（寄出：120）
 icon: address-card
-date: 2024-09-17
+date: 2024-09-21
 category:
   - Arthur
 tag:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3815238](https://www.postcrossing.com/postcards/CN-3815238) 
+ >寄往 [MeMyselfandI](https://www.postcrossing.com/user/MeMyselfandI) 🇳🇱
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/al5mrguzz8ro48j6x0y5qd5s94hrold7.jpg)
 
 ### 2024(58)
 
