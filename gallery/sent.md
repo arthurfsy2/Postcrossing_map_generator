@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：121）
+title: 明信片展示墙（寄出：122）
 icon: address-card
 date: 2024-09-22
 category:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3800374](https://www.postcrossing.com/postcards/CN-3800374) 
+ >寄往 [Limoncello4Me](https://www.postcrossing.com/user/Limoncello4Me) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/8pzdi92tw3f4e6f1ms7n86eg9mzg7xj3.jpg)
 
 ### 2024(60)
 
