@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（寄出：121）
 icon: address-card
-date: 2024-09-21
+date: 2024-09-22
 category:
   - Arthur
 tag:
@@ -148,16 +148,16 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2024(60)
 
 [CN-3800372](https://www.postcrossing.com/postcards/CN-3800372) 
  >寄往 [licinnamon](https://www.postcrossing.com/user/licinnamon) 🇺🇸
->
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/07/22 10:37 (当地)
+> 📥 [U.S.A.](https://www.bing.com/maps/?cp=37.77493~-122.41942&lvl=12.0&setlang=zh-Hans) 2024/09/21 16:09 (当地)
+ 📏 11,071 | ⏱ 62
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6rq6s2h5x32wjwxu34tx0yu4exxjendl.jpg)
-
-### 2024(59)
 
 [CN-3815238](https://www.postcrossing.com/postcards/CN-3815238) 
  >寄往 [MeMyselfandI](https://www.postcrossing.com/user/MeMyselfandI) 🇳🇱
