@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：137）
+title: 明信片展示墙（收到：138）
 icon: address-card
 date: 2024-10-03
 category:
@@ -147,6 +147,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[US-10593683](https://www.postcrossing.com/postcards/US-10593683) 
+ >来自 [tklbridget](https://www.postcrossing.com/user/tklbridget) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/vurz7x69m5bq6x9xienho65cu247baul.jpg)
 
 ### 2024(68)
 
