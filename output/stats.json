@@ -736,5 +736,23 @@
     "receivedDateHistory": "[1725970156]",
     "sentDateFirst": null,
     "receivedDateFirst": "2024/09/10"
+  },
+  {
+    "name": "Bosnia-Herzegovina",
+    "countryCode": "BA",
+    "flagEmoji": "🇧🇦",
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": null,
+    "receivedAvg": 113,
+    "sentMedian": null,
+    "receivedMedian": 113,
+    "sentHistory": "[]",
+    "receivedHistory": "[113]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1728643486]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2024/10/11"
   }
 ]
