@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：123）
+title: 明信片展示墙（寄出：124）
 icon: address-card
-date: 2024-10-06
+date: 2024-10-16
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3836542](https://www.postcrossing.com/postcards/CN-3836542) 
+ >寄往 [Alexandra_moon](https://www.postcrossing.com/user/Alexandra_moon) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/4c32c7v232ovs8xewidmp36kv1b2ki02.jpg)
 
 ### 2024(62)
 
