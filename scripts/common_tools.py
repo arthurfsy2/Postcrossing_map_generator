@@ -213,6 +213,7 @@ def readDB(dbpath, type, tablename):
                         "registerd_days": row[9],
                         "register_date": row[10],
                         "logo": row[11],
+                        "is_supporter": row[12],
 
                     }
                 data_all.append(data)
@@ -332,7 +333,7 @@ def writeDB(dbpath, content, tablename):
                                (name, countryCode, flagEmoji, value, sentNum, receivedNum, sentAvg, receivedAvg, sentMedian, receivedMedian, sentHistory, receivedHistory, sentDateHistory, receivedDateHistory, sentDateFirst, receivedDateFirst))
     elif tablename == 'userSummary':
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-    (about TEXT, coors TEXT, sentDistance TEXT, sentLaps TEXT, sentPostcardNum TEXT, receivedDistance TEXT, receivedLaps TEXT, receivedPostcardNum TEXT, registerd_years TEXT, registerd_days TEXT, register_date TEXT)''')
+    (about TEXT, coors TEXT, sentDistance TEXT, sentLaps TEXT, sentPostcardNum TEXT, receivedDistance TEXT, receivedLaps TEXT, receivedPostcardNum TEXT, registerd_years TEXT, registerd_days TEXT, register_date TEXT, logo TEXT, is_supporter TEXT)''')
         for item in content:
             about = item['about']
             coors = item['coors']
@@ -346,17 +347,18 @@ def writeDB(dbpath, content, tablename):
             registerd_days = item['registerd_days']
             register_date = item['register_date']
             logo = item['logo']
+            is_supporter = item['is_supporter']
             cursor.execute(f"SELECT * FROM {tablename} ")
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET about=?, coors=?, sentDistance=?, sentLaps=?, sentPostcardNum=?, receivedDistance=?, receivedLaps=?, receivedPostcardNum=?, registerd_years=?, registerd_days=?, register_date=?, logo=? ", (
-                    about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum, registerd_years, registerd_days, register_date, logo))
+                cursor.execute(f"UPDATE {tablename} SET about=?, coors=?, sentDistance=?, sentLaps=?, sentPostcardNum=?, receivedDistance=?, receivedLaps=?, receivedPostcardNum=?, registerd_years=?, registerd_days=?, register_date=?, logo=?, is_supporter=? ", (
+                    about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum, registerd_years, registerd_days, register_date, logo, is_supporter))
                 print(f'已更新数据库{dbpath}的{tablename}\n')
             else:
                 # 插入新的行
-                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                               (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum, registerd_years, registerd_days, register_date, logo))
+                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                               (about, coors, sentDistance, sentLaps, sentPostcardNum, receivedDistance, receivedLaps, receivedPostcardNum, registerd_years, registerd_days, register_date, logo, is_supporter))
                 print(f'已新增数据库{dbpath}的{tablename}\n')
 
     

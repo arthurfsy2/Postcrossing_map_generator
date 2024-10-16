@@ -659,6 +659,20 @@ def getUserSummary(account, Cookie):
     userUrl = f"https://www.postcrossing.com/user/{account}"
     userAboutInfo = requests.get(userUrl, headers=headers)
     html_content = userAboutInfo.text
+    is_supporter = "No"
+    match = re.search(r'<strong>(.*?)</strong>', html_content)
+
+    if match:
+        if match:
+            date_str = match.group(1).strip()  # 提取并清洗数据
+            # 移除日期中的后缀（st, nd, rd, th）
+            date_str = re.sub(r'(\d+)(st|nd|rd|th)', r'\1', date_str)
+
+            # 定义日期格式并转换
+            current_year = datetime.now().year
+            date_obj = datetime.strptime(f"{date_str} {current_year}", "%d of %B %Y")
+            is_supporter = date_obj.strftime('%Y/%m/%d')
+       
     soup = BeautifulSoup(html_content, 'html.parser')
     title = soup.find('title')
     if title.get_text() == "Log in":
@@ -734,6 +748,7 @@ def getUserSummary(account, Cookie):
         'registerd_days': registerd_days,
         'register_date': register_date,
         'logo': logo,
+        'is_supporter':is_supporter
     }
     content_all.append(item)
     writeDB(dbpath, content_all, "userSummary")

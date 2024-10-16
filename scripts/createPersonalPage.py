@@ -64,6 +64,7 @@ def replateTitle(type):
 
 def getUserHomeInfo(type):
     content = readDB(dbpath, "", "userSummary")
+    print(content)
     for id in content:
         about = id["about"]
         coors = id["coors"]
@@ -77,10 +78,11 @@ def getUserHomeInfo(type):
         registerd_days = id["registerd_days"]
         register_date = id["register_date"]
         logo = id["logo"]
+        is_supporter = id["is_supporter"]
         if type == "sent":
-            return sentDistance, sentPostcardNum, sentLaps, registerd_years, registerd_days, register_date, about, coors, logo
+            return sentDistance, sentPostcardNum, sentLaps, registerd_years, registerd_days, register_date, about, coors, logo, is_supporter
         if type == "received":
-            return receivedDistance, receivedPostcardNum, receivedLaps, registerd_years, registerd_days, register_date, about, coors, logo
+            return receivedDistance, receivedPostcardNum, receivedLaps, registerd_years, registerd_days, register_date, about, coors, logo, is_supporter
 
 
 def getUserSheet(tableName):
@@ -133,9 +135,11 @@ def replaceTemplate():
     traveling = f"{travelingNum} [过期：{expiredNum}]"
     for type in types:
         if type == "sent" or type == "received":
-            distance, num, rounds, registerd_years, registerd_days, register_date, about, coors, logo = getUserHomeInfo(
+            distance, num, rounds, registerd_years, registerd_days, register_date, about, coors, logo, is_supporter = getUserHomeInfo(
                 type)
             registerDate = f"{register_date} [至今{registerd_years}年（{registerd_days}天）]"
+            
+            supporter_pic = f'<li class="list-group-item">会员<img src="https://static1.postcrossing.com/images/supporter.png" height="25"><b>：{is_supporter}到期</b></li>' if is_supporter !="No" else ""
         distance_all = format(distance, ",")
         summary = f"{num} 📏{distance_all} km 🌏{rounds} 圈]\n\n"
         if type == "sent":
@@ -157,7 +161,7 @@ def replaceTemplate():
 
         title_final = f"{title_all}"
     createRegisterInfo(registerDate, sent_info,
-                       received_info, countries, traveling)
+                       received_info, countries, traveling, supporter_pic)
     storylist, storyNum = getCardStoryList("received")
     commentlist, commentNum = getCardStoryList("sent")
     calendar, series, height = createCalendar()
@@ -634,7 +638,7 @@ def picTowebp(input_dir, output_dir):
                 print(f"文件 {file_name} 转换失败: {str(e)}")
 
 
-def createRegisterInfo(register_date, sent_info, received_info, countries, traveling):
+def createRegisterInfo(register_date, sent_info, received_info, countries, traveling, supporter_pic):
     # 创建HTML内容
     html_content = f"""
     <!DOCTYPE html>
@@ -655,6 +659,7 @@ def createRegisterInfo(register_date, sent_info, received_info, countries, trave
                 <li class="list-group-item">收到：<b>{received_info}</b></li>
                 <li class="list-group-item">涉及国家：<b>{countries}</b></li>
                 <li class="list-group-item">待签收：<b>{traveling}</b></li>
+                {supporter_pic}
             </ul>
         </div>
         <!-- 引入Bootstrap JS 和依赖 -->
