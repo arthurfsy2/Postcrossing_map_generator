@@ -147,16 +147,16 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2024(63)
 
 [CN-3836542](https://www.postcrossing.com/postcards/CN-3836542) 
  >寄往 [Alexandra_moon](https://www.postcrossing.com/user/Alexandra_moon) 🇷🇺
->
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/09/10 08:30 (当地)
+> 📥 [Russia](https://www.bing.com/maps/?cp=55.75222~37.61556&lvl=12.0&setlang=zh-Hans) 2024/10/16 21:05 (当地)
+ 📏 7,123 | ⏱ 37
 
 
 ![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/4c32c7v232ovs8xewidmp36kv1b2ki02.jpg)
-
-### 2024(62)
 
 [CN-3837234](https://www.postcrossing.com/postcards/CN-3837234) 
  >寄往 [Child_of_post-rock](https://www.postcrossing.com/user/Child_of_post-rock) 🇧🇾
