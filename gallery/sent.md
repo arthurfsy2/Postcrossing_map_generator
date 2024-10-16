@@ -12,24 +12,25 @@ order: 2
 ## [arthurfsy's sent](https://www.postcrossing.com/user/arthurfsy/gallery/sent)
 
 ### 收发记录（年度）
-::: echarts 
+
+::: echarts
 
 ```js
 const data = await fetch(
   "https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/year.json"
 ).then((res) => res.json());
 
-const newData = data.map(({ year, sent }) => ({ name: year, value: sent }));
+const newData = data.map(({ year, sent}) => ({ name: year, value: sent}));
 
 const option = {
   title: {
     text: "",
     subtext: "",
-    left: "center"
+    left: "center",
   },
   tooltip: {
-    trigger: 'item',
-    formatter: '{a} <br/>{b} : {c} ({d}%)'
+    trigger: "item",
+    formatter: "{a} <br/>{b} : {c} ({d}%)",
   },
   series: [
     {
@@ -42,32 +43,31 @@ const option = {
         itemStyle: {
           shadowBlur: 10,
           shadowOffsetX: 0,
-          shadowColor: "rgba(0, 0, 0, 0.5)"
-        }
+          shadowColor: "rgba(0, 0, 0, 0.5)",
+        },
       },
       label: {
-        alignTo: 'none',
-        formatter: '{name|{b}}\n{value|{d}%}',
+        alignTo: "none",
+        formatter: "{name|{b}}\n{value|{d}%}",
         minMargin: 1,
-        fontStyle:'italic',
-        fontWeight: 'bold',
+        fontStyle: "italic",
+        fontWeight: "bold",
 
         rich: {
           num: {
             fontSize: 10,
-            color: '#999'
-          }
-        }
+            color: "#999",
+          },
+        },
       },
       labelLine: {
         length: 50,
-
-      }
-
-    }
-  ]
-}
+      },
+    },
+  ],
+};
 ```
+
 :::
 
 ### 收发记录（月度）
@@ -79,71 +79,70 @@ const data = await fetch(
   "https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/month.json"
 ).then((res) => res.json());
 
-
 var date = data.map(function (item) {
-    return item.date
-})
+  return item.date;
+});
 
 var sent = data.map(function (item) {
-    return item.sent
-})
+  return item.sent;
+});
 
-var sentSum = sent.reduce(function(acc, curr) {
+var sentSum = sent.reduce(function (acc, curr) {
   return acc + curr;
 }, 0);
 
 var received = data.map(function (item) {
-    return item.received
-})
+  return item.received;
+});
 
-var receivedSum = received.reduce(function(acc, curr) {
+var receivedSum = received.reduce(function (acc, curr) {
   return acc + curr;
 }, 0);
 
-sentName = sentSum + "张已寄出"
-receivedName = receivedSum + "张已收到"
+sentName = sentSum + "张已寄出";
+receivedName = receivedSum + "张已收到";
 
 const option = {
   title: {
-    text: '',
-     left: 'center',
+    text: "",
+    left: "center",
   },
-    legend: {
-    data: [sentName, receivedName]
+  legend: {
+    data: [sentName, receivedName],
   },
   tooltip: {
-    trigger: 'axis'
+    trigger: "axis",
   },
   xAxis: {
-    type: 'category',
-    data: date
+    type: "category",
+    data: date,
   },
   yAxis: {
-    type: 'value'
+    type: "value",
   },
   dataZoom: [
-  {
-    start: 0
-  },
-  {
-    type: "inside"
-  }
-],
-  series: [
     {
-      name:sentName,
-      data: sent,
-      type: 'line',
-      smooth: true
+      start: 0,
     },
     {
-      name:receivedName,
+      type: "inside",
+    },
+  ],
+  series: [
+    {
+      name: sentName,
+      data: sent,
+      type: "line",
+      smooth: true,
+    },
+    {
+      name: receivedName,
       data: received,
-      type: 'line',
-      smooth: true
-    }
-  ]
-}
+      type: "line",
+      smooth: true,
+    },
+  ],
+};
 ```
 
 :::
@@ -157,7 +156,7 @@ const option = {
  📏 7,822 | ⏱ 26
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/tdhx9b2lpmy05elnqlcwvc0ovaim0f7d.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/tdhx9b2lpmy05elnqlcwvc0ovaim0f7d.jpg)
 
 [CN-3800374](https://www.postcrossing.com/postcards/CN-3800374) 
  >寄往 [Limoncello4Me](https://www.postcrossing.com/user/Limoncello4Me) 🇺🇸
@@ -166,7 +165,7 @@ const option = {
  📏 10,967 | ⏱ 63
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/8pzdi92tw3f4e6f1ms7n86eg9mzg7xj3.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/8pzdi92tw3f4e6f1ms7n86eg9mzg7xj3.jpg)
 
 [CN-3800372](https://www.postcrossing.com/postcards/CN-3800372) 
  >寄往 [licinnamon](https://www.postcrossing.com/user/licinnamon) 🇺🇸
@@ -175,7 +174,7 @@ const option = {
  📏 11,071 | ⏱ 62
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6rq6s2h5x32wjwxu34tx0yu4exxjendl.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/6rq6s2h5x32wjwxu34tx0yu4exxjendl.jpg)
 
 [CN-3815238](https://www.postcrossing.com/postcards/CN-3815238) 
  >寄往 [MeMyselfandI](https://www.postcrossing.com/user/MeMyselfandI) 🇳🇱
@@ -184,7 +183,7 @@ const option = {
  📏 9,122 | ⏱ 40
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/al5mrguzz8ro48j6x0y5qd5s94hrold7.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/al5mrguzz8ro48j6x0y5qd5s94hrold7.jpg)
 
 [CN-3803179](https://www.postcrossing.com/postcards/CN-3803179) 
  >寄往 [DetroitTigersFan](https://www.postcrossing.com/user/DetroitTigersFan) 🇺🇸
@@ -193,7 +192,7 @@ const option = {
  📏 12,558 | ⏱ 53
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/q8t8vwq4q8s60qy2qkrk0cjsu0y9iy29.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/q8t8vwq4q8s60qy2qkrk0cjsu0y9iy29.jpg)
 
 [CN-3816759](https://www.postcrossing.com/postcards/CN-3816759) 
  >寄往 [trkm_el](https://www.postcrossing.com/user/trkm_el) 🇹🇼
@@ -202,7 +201,7 @@ const option = {
  📏 644 | ⏱ 30
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/w5zyw9jck3n0lo45ygpd7mybvoh77681.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/w5zyw9jck3n0lo45ygpd7mybvoh77681.jpg)
 
 [CN-3802608](https://www.postcrossing.com/postcards/CN-3802608) 
  >寄往 [Flicki](https://www.postcrossing.com/user/Flicki) 🇩🇪
@@ -211,7 +210,7 @@ const option = {
  📏 9,230 | ⏱ 48
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/29ui1peo33e0xl8xj13php2i62m4g5fp.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/29ui1peo33e0xl8xj13php2i62m4g5fp.jpg)
 
 [CN-3811647](https://www.postcrossing.com/postcards/CN-3811647) 
  >寄往 [u-j-a](https://www.postcrossing.com/user/u-j-a) 🇩🇪
@@ -220,7 +219,7 @@ const option = {
  📏 8,731 | ⏱ 34
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/eo7n5q166tkwjnal49le3b6emdv326ff.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/eo7n5q166tkwjnal49le3b6emdv326ff.jpg)
 
 [CN-3810147](https://www.postcrossing.com/postcards/CN-3810147) 
  >寄往 [MayaCat](https://www.postcrossing.com/user/MayaCat) 🇷🇺
@@ -229,7 +228,7 @@ const option = {
  📏 7,101 | ⏱ 36
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/aea95rgiwypvzntdkys7ijoo1b8qn08g.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/aea95rgiwypvzntdkys7ijoo1b8qn08g.jpg)
 
 [CN-3806043](https://www.postcrossing.com/postcards/CN-3806043) 
  >寄往 [Yuting1012](https://www.postcrossing.com/user/Yuting1012) 🇹🇼
@@ -238,7 +237,7 @@ const option = {
  📏 641 | ⏱ 41
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/99s1ecw05jt40kfe0ww9160e6di288x9.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/99s1ecw05jt40kfe0ww9160e6di288x9.jpg)
 
 [CN-3800371](https://www.postcrossing.com/postcards/CN-3800371) 
  >寄往 [JennySu](https://www.postcrossing.com/user/JennySu) 🇹🇼
@@ -247,7 +246,7 @@ const option = {
  📏 792 | ⏱ 37
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/rn8cr2mbw52mw19oclci6xuspsc51fai.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/rn8cr2mbw52mw19oclci6xuspsc51fai.jpg)
 
 [CN-3776706](https://www.postcrossing.com/postcards/CN-3776706) 
  >寄往 [brittany7227](https://www.postcrossing.com/user/brittany7227) 🇺🇸
@@ -256,7 +255,7 @@ const option = {
  📏 12,549 | ⏱ 60
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/mk80b33kaeugheur67aaxec8bh4g1147.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/mk80b33kaeugheur67aaxec8bh4g1147.jpg)
 
 [CN-3786550](https://www.postcrossing.com/postcards/CN-3786550) 
  >寄往 [thisisshree](https://www.postcrossing.com/user/thisisshree) 🇺🇸
@@ -265,7 +264,7 @@ const option = {
  📏 13,091 | ⏱ 43
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/n00ja0c3oks0n6lffy9m06dzhyidkf4m.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/n00ja0c3oks0n6lffy9m06dzhyidkf4m.jpg)
 
 [CN-3776926](https://www.postcrossing.com/postcards/CN-3776926) 
  >寄往 [katerenok](https://www.postcrossing.com/user/katerenok) 🇷🇺
@@ -274,7 +273,7 @@ const option = {
  📏 6,405 | ⏱ 53
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/igu02t8hqwhmhfy6siirihm5argy3u8d.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/igu02t8hqwhmhfy6siirihm5argy3u8d.jpg)
 
 [CN-3785191](https://www.postcrossing.com/postcards/CN-3785191) 
  >寄往 [annaviola](https://www.postcrossing.com/user/annaviola) 🇩🇪
@@ -283,7 +282,7 @@ const option = {
  📏 8,989 | ⏱ 39
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/fnpk84olal0jn3q69it7xfjysutmo7d1.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/fnpk84olal0jn3q69it7xfjysutmo7d1.jpg)
 
 [CN-3780693](https://www.postcrossing.com/postcards/CN-3780693) 
  >寄往 [OrianaGirl](https://www.postcrossing.com/user/OrianaGirl) 🇦🇺
@@ -292,7 +291,7 @@ const option = {
  📏 7,079 | ⏱ 42
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/nqlubteg3x26wnygm0jlqoa3ki63lx7i.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/nqlubteg3x26wnygm0jlqoa3ki63lx7i.jpg)
 
 [CN-3800373](https://www.postcrossing.com/postcards/CN-3800373) 
  >寄往 [dcktam](https://www.postcrossing.com/user/dcktam) 🇲🇴
@@ -301,7 +300,7 @@ const option = {
  📏 81 | ⏱ 14
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/h56li9r7tvdsmxu1rbjpwv7z8ztkq19d.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/h56li9r7tvdsmxu1rbjpwv7z8ztkq19d.jpg)
 
 [CN-3772688](https://www.postcrossing.com/postcards/CN-3772688) 
  >寄往 [JacobTheShuhite](https://www.postcrossing.com/user/JacobTheShuhite) 🇩🇪
@@ -310,7 +309,7 @@ const option = {
  📏 9,202 | ⏱ 45
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/3144cte43ov5fne5rb4ma12cl2c8vgwf.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/3144cte43ov5fne5rb4ma12cl2c8vgwf.jpg)
 
 [CN-3774506](https://www.postcrossing.com/postcards/CN-3774506) 
  >寄往 [Kosmopilot](https://www.postcrossing.com/user/Kosmopilot) 🇷🇺
@@ -319,7 +318,7 @@ const option = {
  📏 7,123 | ⏱ 39
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5c7ikibml8fax0ovf2yse34xfc0fuk3w.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/5c7ikibml8fax0ovf2yse34xfc0fuk3w.jpg)
 
 [CN-3771386](https://www.postcrossing.com/postcards/CN-3771386) 
  >寄往 [ccremisii](https://www.postcrossing.com/user/ccremisii) 🇮🇹
@@ -328,7 +327,7 @@ const option = {
  📏 9,172 | ⏱ 41
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/olpt54cowozq3ixme47skuddjrxal6bt.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/olpt54cowozq3ixme47skuddjrxal6bt.jpg)
 
 [CN-3770706](https://www.postcrossing.com/postcards/CN-3770706) 
  >寄往 [Humpelbaer](https://www.postcrossing.com/user/Humpelbaer) 🇩🇪
@@ -337,7 +336,7 @@ const option = {
  📏 9,175 | ⏱ 39
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9musin8jwzsydr1oj0gx3cjb7defezsh.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/9musin8jwzsydr1oj0gx3cjb7defezsh.jpg)
 
 [CN-3771897](https://www.postcrossing.com/postcards/CN-3771897) 
  >寄往 [Doreen74](https://www.postcrossing.com/user/Doreen74) 🇩🇪
@@ -346,7 +345,7 @@ const option = {
  📏 8,977 | ⏱ 36
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/p14vl3slu6rqh7i44iou2pstftom1qcq.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/p14vl3slu6rqh7i44iou2pstftom1qcq.jpg)
 
 [CN-3772289](https://www.postcrossing.com/postcards/CN-3772289) 
  >寄往 [LMJillian](https://www.postcrossing.com/user/LMJillian) 🇺🇸
@@ -355,7 +354,7 @@ const option = {
  📏 11,625 | ⏱ 35
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/iv02faz6htlc1u2ve86e2i7utblfn6su.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/iv02faz6htlc1u2ve86e2i7utblfn6su.jpg)
 
 [CN-3760818](https://www.postcrossing.com/postcards/CN-3760818) 
  >寄往 [JoshC](https://www.postcrossing.com/user/JoshC) 🇺🇸
@@ -364,7 +363,7 @@ const option = {
  📏 12,640 | ⏱ 35
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/n2kfcxwxlcabqiey2c6i2j6v9ris66cu.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/n2kfcxwxlcabqiey2c6i2j6v9ris66cu.jpg)
 
 [CN-3755145](https://www.postcrossing.com/postcards/CN-3755145) 
  >寄往 [vlabor](https://www.postcrossing.com/user/vlabor) 🇸🇮
@@ -373,7 +372,7 @@ const option = {
  📏 8,980 | ⏱ 41
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/jdtyvyyd55g785p0z9z2fckoali0vek3.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/jdtyvyyd55g785p0z9z2fckoali0vek3.jpg)
 
 [CN-3747913](https://www.postcrossing.com/postcards/CN-3747913) 
  >寄往 [PonchikMakoviy](https://www.postcrossing.com/user/PonchikMakoviy) 🇷🇺
@@ -382,7 +381,7 @@ const option = {
  📏 7,123 | ⏱ 45
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/s58b65phveo5chwo50hld2i3mwapdntn.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/s58b65phveo5chwo50hld2i3mwapdntn.jpg)
 
 [CN-3747914](https://www.postcrossing.com/postcards/CN-3747914) 
  >寄往 [onecleverkid](https://www.postcrossing.com/user/onecleverkid) 🇺🇸
@@ -391,7 +390,7 @@ const option = {
  📏 11,976 | ⏱ 40
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/0myoplr0omd58m1j6wganoesmz0q3z2q.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/0myoplr0omd58m1j6wganoesmz0q3z2q.jpg)
 
 [CN-3730279](https://www.postcrossing.com/postcards/CN-3730279) 
  >寄往 [MSFOTINAS](https://www.postcrossing.com/user/MSFOTINAS) 🇧🇾
@@ -400,7 +399,7 @@ const option = {
  📏 7,786 | ⏱ 62
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/psgzqf5s9nemqhgy1xkmjlfdx4aoqlh4.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/psgzqf5s9nemqhgy1xkmjlfdx4aoqlh4.jpg)
 
 [CN-3737191](https://www.postcrossing.com/postcards/CN-3737191) 
  >寄往 [Malder](https://www.postcrossing.com/user/Malder) 🇺🇿
@@ -409,7 +408,7 @@ const option = {
  📏 4,664 | ⏱ 50
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/3qccu6zoylz41yk0c9qjq9q105j0oiqi.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/3qccu6zoylz41yk0c9qjq9q105j0oiqi.jpg)
 
 [CN-3737189](https://www.postcrossing.com/postcards/CN-3737189) 
  >寄往 [CasSaintDenys](https://www.postcrossing.com/user/CasSaintDenys) 🇺🇸
@@ -418,7 +417,7 @@ const option = {
  📏 13,657 | ⏱ 49
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ylmfz1e9bfz3yjz17c8q4pcmre2xik9s.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/ylmfz1e9bfz3yjz17c8q4pcmre2xik9s.jpg)
 
 [CN-3739257](https://www.postcrossing.com/postcards/CN-3739257) 
  >寄往 [Selena](https://www.postcrossing.com/user/Selena) 🇺🇸
@@ -427,7 +426,7 @@ const option = {
  📏 10,514 | ⏱ 45
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/xsmgkq2jqnb7t01bjyzubncgnpam3bhw.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/xsmgkq2jqnb7t01bjyzubncgnpam3bhw.jpg)
 
 [CN-3749434](https://www.postcrossing.com/postcards/CN-3749434) 
  >寄往 [Tati888](https://www.postcrossing.com/user/Tati888) 🇩🇪
@@ -436,7 +435,7 @@ const option = {
  📏 8,806 | ⏱ 30
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/l0wuvic9onniv10v6kfygof4sx4o0o8k.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/l0wuvic9onniv10v6kfygof4sx4o0o8k.jpg)
 
 [CN-3754575](https://www.postcrossing.com/postcards/CN-3754575) 
  >寄往 [DrobinGud](https://www.postcrossing.com/user/DrobinGud) 🇷🇺
@@ -445,7 +444,7 @@ const option = {
  📏 7,052 | ⏱ 22
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/bmb82oigx6lsgpyk8zfu160t7p4snsf3.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/bmb82oigx6lsgpyk8zfu160t7p4snsf3.jpg)
 
 [CN-3692797](https://www.postcrossing.com/postcards/CN-3692797) 
  >寄往 [Cynt](https://www.postcrossing.com/user/Cynt) 🇨🇦
@@ -454,7 +453,7 @@ const option = {
  📏 12,556 | ⏱ 110
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5dm6vhkifj9a8nu7rpqsor27s3f0vda8.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/5dm6vhkifj9a8nu7rpqsor27s3f0vda8.jpg)
 
 [CN-3730278](https://www.postcrossing.com/postcards/CN-3730278) 
  >寄往 [Filip](https://www.postcrossing.com/user/Filip) 🇵🇱
@@ -463,7 +462,7 @@ const option = {
  📏 8,435 | ⏱ 36
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/mp5x823kmc733mnzzfjs1gmmhmj3fb7e.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/mp5x823kmc733mnzzfjs1gmmhmj3fb7e.jpg)
 
 [CN-3730280](https://www.postcrossing.com/postcards/CN-3730280) 
  >寄往 [Reksa](https://www.postcrossing.com/user/Reksa) 🇫🇮
@@ -472,7 +471,7 @@ const option = {
  📏 7,947 | ⏱ 34
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7799a46pjhfbgsl5vb2nupoal58zmspb.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/7799a46pjhfbgsl5vb2nupoal58zmspb.jpg)
 
 [CN-3723133](https://www.postcrossing.com/postcards/CN-3723133) 
  >寄往 [CHIHUANCHANG](https://www.postcrossing.com/user/CHIHUANCHANG) 🇹🇼
@@ -481,7 +480,7 @@ const option = {
  📏 771 | ⏱ 37
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/yux7rk1t73qrpf2buyetg5sl8i4a3ik0.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/yux7rk1t73qrpf2buyetg5sl8i4a3ik0.jpg)
 
 [CN-3713709](https://www.postcrossing.com/postcards/CN-3713709) 
  >寄往 [EGer71](https://www.postcrossing.com/user/EGer71) 🇷🇺
@@ -490,7 +489,7 @@ const option = {
  📏 7,123 | ⏱ 46
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/k8dsycjx94ucbnjkri50u4s4mpwecb39.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/k8dsycjx94ucbnjkri50u4s4mpwecb39.jpg)
 
 [CN-3713710](https://www.postcrossing.com/postcards/CN-3713710) 
  >寄往 [heyheyray](https://www.postcrossing.com/user/heyheyray) 🇺🇸
@@ -499,7 +498,7 @@ const option = {
  📏 11,071 | ⏱ 32
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/76arxu1v5nb0nlkkesi1e2y07r70vcks.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/76arxu1v5nb0nlkkesi1e2y07r70vcks.jpg)
 
 [CN-3706232](https://www.postcrossing.com/postcards/CN-3706232) 
  >寄往 [TimSarah](https://www.postcrossing.com/user/TimSarah) 🇩🇪
@@ -508,7 +507,7 @@ const option = {
  📏 9,292 | ⏱ 34
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/2q8b91wy4k87ltnq9hzx57rckx2wa5ar.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/2q8b91wy4k87ltnq9hzx57rckx2wa5ar.jpg)
 
 [CN-3692799](https://www.postcrossing.com/postcards/CN-3692799) 
  >寄往 [bishop95](https://www.postcrossing.com/user/bishop95) 🇺🇸
@@ -517,7 +516,7 @@ const option = {
  📏 11,862 | ⏱ 47
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/wiy4tsuyaxtpv2lt8q9p2abdx4x0rxkh.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/wiy4tsuyaxtpv2lt8q9p2abdx4x0rxkh.jpg)
 
 [CN-3692796](https://www.postcrossing.com/postcards/CN-3692796) 
  >寄往 [ana_solovyova](https://www.postcrossing.com/user/ana_solovyova) 🇯🇵
@@ -526,7 +525,7 @@ const option = {
  📏 2,843 | ⏱ 41
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/y0pp57u0yyu4n8smvuz15xru8jcf7q8j.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/y0pp57u0yyu4n8smvuz15xru8jcf7q8j.jpg)
 
 [CN-3692800](https://www.postcrossing.com/postcards/CN-3692800) 
  >寄往 [GermanInArabia](https://www.postcrossing.com/user/GermanInArabia) 🇩🇪
@@ -535,7 +534,7 @@ const option = {
  📏 9,139 | ⏱ 39
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/x469la2o3it4bk0lep5okgozr2w5g82x.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/x469la2o3it4bk0lep5okgozr2w5g82x.jpg)
 
 [CN-3683275](https://www.postcrossing.com/postcards/CN-3683275) 
  >寄往 [Cok](https://www.postcrossing.com/user/Cok) 🇳🇱
@@ -544,7 +543,7 @@ const option = {
  📏 9,284 | ⏱ 52
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/smufdl6whop9sbyyhf878giho6kx0xii.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/smufdl6whop9sbyyhf878giho6kx0xii.jpg)
 
 [CN-3683277](https://www.postcrossing.com/postcards/CN-3683277) 
  >寄往 [Irulka](https://www.postcrossing.com/user/Irulka) 🇷🇺
@@ -553,7 +552,7 @@ const option = {
  📏 6,981 | ⏱ 41
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/qsooydm1ak1vt7me77amuxtzrfl445f7.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/qsooydm1ak1vt7me77amuxtzrfl445f7.jpg)
 
 [CN-3673808](https://www.postcrossing.com/postcards/CN-3673808) 
  >寄往 [Madhavan_1982](https://www.postcrossing.com/user/Madhavan_1982) 🇮🇳
@@ -562,7 +561,7 @@ const option = {
  📏 4,089 | ⏱ 53
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/rc4pcxug0pos71skt55ofogyoqqqh7na.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/rc4pcxug0pos71skt55ofogyoqqqh7na.jpg)
 
 [CN-3673809](https://www.postcrossing.com/postcards/CN-3673809) 
  >寄往 [Pyrah](https://www.postcrossing.com/user/Pyrah) 🇺🇸
@@ -571,7 +570,7 @@ const option = {
  📏 11,653 | ⏱ 48
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/h452vt02fal6gkiknj27ubqh82i8rtm6.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/h452vt02fal6gkiknj27ubqh82i8rtm6.jpg)
 
 [CN-3655671](https://www.postcrossing.com/postcards/CN-3655671) 
  >寄往 [Daniel_and_Tanya](https://www.postcrossing.com/user/Daniel_and_Tanya) 🇷🇺
@@ -580,7 +579,7 @@ const option = {
  📏 5,909 | ⏱ 69
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/b7vw4a69coy80djw7elnf300djzor9es.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/b7vw4a69coy80djw7elnf300djzor9es.jpg)
 
 [CN-3692798](https://www.postcrossing.com/postcards/CN-3692798) 
  >寄往 [louisehei](https://www.postcrossing.com/user/louisehei) 🇭🇰
@@ -589,7 +588,7 @@ const option = {
  📏 31 | ⏱ 14
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ep122ew11tql5sbe2qptuny0xc6je6n5.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/ep122ew11tql5sbe2qptuny0xc6je6n5.jpg)
 
 [CN-3683276](https://www.postcrossing.com/postcards/CN-3683276) 
  >寄往 [reepeecheep](https://www.postcrossing.com/user/reepeecheep) 🇩🇪
@@ -598,7 +597,7 @@ const option = {
  📏 9,040 | ⏱ 29
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/x8mbc4zuinu9sw43ajcr441nsto0ji94.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/x8mbc4zuinu9sw43ajcr441nsto0ji94.jpg)
 
 [CN-3651287](https://www.postcrossing.com/postcards/CN-3651287) 
  >寄往 [Marisolt](https://www.postcrossing.com/user/Marisolt) 🇺🇦
@@ -607,7 +606,7 @@ const option = {
  📏 7,659 | ⏱ 73
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/wk4vtr31f4t0cb8ahj2wesqtwahtpm0b.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/wk4vtr31f4t0cb8ahj2wesqtwahtpm0b.jpg)
 
 [CN-3677114](https://www.postcrossing.com/postcards/CN-3677114) 
  >寄往 [sktour](https://www.postcrossing.com/user/sktour) 🇯🇵
@@ -616,7 +615,7 @@ const option = {
  📏 2,620 | ⏱ 24
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ccguoytiuj04yc90o08w4jh1mmrkbbkj.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/ccguoytiuj04yc90o08w4jh1mmrkbbkj.jpg)
 
 [CN-3659000](https://www.postcrossing.com/postcards/CN-3659000) 
  >寄往 [BeckyS](https://www.postcrossing.com/user/BeckyS) 🇺🇸
@@ -625,7 +624,7 @@ const option = {
  📏 10,373 | ⏱ 39
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/n88czl5pibik5e7neu59988cxmb4x7kj.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/n88czl5pibik5e7neu59988cxmb4x7kj.jpg)
 
 [CN-3658999](https://www.postcrossing.com/postcards/CN-3658999) 
  >寄往 [chacoco2](https://www.postcrossing.com/user/chacoco2) 🇫🇷
@@ -634,7 +633,7 @@ const option = {
  📏 9,869 | ⏱ 38
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/alc8fplc9d9x3x09szx1ximdl37wy9tq.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/alc8fplc9d9x3x09szx1ximdl37wy9tq.jpg)
 
 [CN-3660599](https://www.postcrossing.com/postcards/CN-3660599) 
  >寄往 [sarmas](https://www.postcrossing.com/user/sarmas) 🇫🇮
@@ -643,7 +642,7 @@ const option = {
  📏 7,839 | ⏱ 33
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/tk5fio0qx4p35riku7ohuo92b5zoh3q5.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/tk5fio0qx4p35riku7ohuo92b5zoh3q5.jpg)
 
 [CN-3660600](https://www.postcrossing.com/postcards/CN-3660600) 
  >寄往 [Micha37](https://www.postcrossing.com/user/Micha37) 🇩🇪
@@ -652,7 +651,7 @@ const option = {
  📏 8,904 | ⏱ 31
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/aryr9eiz0yc0s3h5k5czzf3o0zjjn6sk.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/aryr9eiz0yc0s3h5k5czzf3o0zjjn6sk.jpg)
 
 [CN-3659001](https://www.postcrossing.com/postcards/CN-3659001) 
  >寄往 [Topas](https://www.postcrossing.com/user/Topas) 🇩🇪
@@ -661,7 +660,7 @@ const option = {
  📏 9,140 | ⏱ 33
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/oqbxrzqviv11fkgdpw3o0kuzrkw8h4vm.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/oqbxrzqviv11fkgdpw3o0kuzrkw8h4vm.jpg)
 
 [CN-3655425](https://www.postcrossing.com/postcards/CN-3655425) 
  >寄往 [volker-55](https://www.postcrossing.com/user/volker-55) 🇩🇪
@@ -670,7 +669,7 @@ const option = {
  📏 8,903 | ⏱ 35
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/a78wugdrvuw8d3sw0inber0258gvrb3c.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/a78wugdrvuw8d3sw0inber0258gvrb3c.jpg)
 
 [CN-3651286](https://www.postcrossing.com/postcards/CN-3651286) 
  >寄往 [NonnieL](https://www.postcrossing.com/user/NonnieL) 🇺🇸
@@ -679,7 +678,7 @@ const option = {
  📏 12,917 | ⏱ 34
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/sci47iqoeuw16b4840eqw9gkyhcu48sj.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/sci47iqoeuw16b4840eqw9gkyhcu48sj.jpg)
 
 [CN-3645301](https://www.postcrossing.com/postcards/CN-3645301) 
  >寄往 [Eckhardt](https://www.postcrossing.com/user/Eckhardt) 🇩🇪
@@ -688,7 +687,7 @@ const option = {
  📏 8,924 | ⏱ 23
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/4qeczvrsqivz8dpgace4co1qbrra3kg4.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/4qeczvrsqivz8dpgace4co1qbrra3kg4.jpg)
 
 [CN-3637956](https://www.postcrossing.com/postcards/CN-3637956) 
  >寄往 [Zodiak](https://www.postcrossing.com/user/Zodiak) 🇷🇺
@@ -697,7 +696,7 @@ const option = {
  📏 5,633 | ⏱ 34
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/pwmfkwvn9j09onpxhlgxz9zrscqwss18.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/pwmfkwvn9j09onpxhlgxz9zrscqwss18.jpg)
 
 [CN-3624713](https://www.postcrossing.com/postcards/CN-3624713) 
  >寄往 [Tonka2505](https://www.postcrossing.com/user/Tonka2505) 🇩🇪
@@ -706,7 +705,7 @@ const option = {
  📏 8,953 | ⏱ 53
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/p08hbdt2tr9vujkev9hue5vcdv2d1yde.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/p08hbdt2tr9vujkev9hue5vcdv2d1yde.jpg)
 
 ### 2023(19)
 
@@ -717,7 +716,7 @@ const option = {
  📏 9,064 | ⏱ 26
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/46hy3aa8nvjf50qinzh36mpbb132twu5.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/46hy3aa8nvjf50qinzh36mpbb132twu5.jpg)
 
 [CN-3641753](https://www.postcrossing.com/postcards/CN-3641753) 
  >寄往 [blauweregen](https://www.postcrossing.com/user/blauweregen) 🇧🇪
@@ -726,7 +725,7 @@ const option = {
  📏 9,312 | ⏱ 23
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/acy5i7qaiin0x199jacwdn8spxzg6pz8.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/acy5i7qaiin0x199jacwdn8spxzg6pz8.jpg)
 
 [CN-3637489](https://www.postcrossing.com/postcards/CN-3637489) 
  >寄往 [Engel76](https://www.postcrossing.com/user/Engel76) 🇩🇪
@@ -735,7 +734,7 @@ const option = {
  📏 8,894 | ⏱ 29
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/82moz0oyr8vks6tnx6v63j34i0p8wj68.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/82moz0oyr8vks6tnx6v63j34i0p8wj68.jpg)
 
 [CN-3624711](https://www.postcrossing.com/postcards/CN-3624711) 
  >寄往 [Pando4ka](https://www.postcrossing.com/user/Pando4ka) 🇷🇺
@@ -744,7 +743,7 @@ const option = {
  📏 7,123 | ⏱ 41
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/qq00j12z4eihspkdmyr9jjr6b0qbgdk0.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/qq00j12z4eihspkdmyr9jjr6b0qbgdk0.jpg)
 
 [CN-3610297](https://www.postcrossing.com/postcards/CN-3610297) 
  >寄往 [adillon](https://www.postcrossing.com/user/adillon) 🇺🇸
@@ -753,7 +752,7 @@ const option = {
  📏 12,780 | ⏱ 63
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/dw9o001glnllx5dtpcxc6s2pv18r7dip.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/dw9o001glnllx5dtpcxc6s2pv18r7dip.jpg)
 
 [CN-3610302](https://www.postcrossing.com/postcards/CN-3610302) 
  >寄往 [Katerina199](https://www.postcrossing.com/user/Katerina199) 🇧🇾
@@ -762,7 +761,7 @@ const option = {
  📏 7,775 | ⏱ 56
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/nbmikzs0ubddlkp1zoqeidvqcx9c1r87.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/nbmikzs0ubddlkp1zoqeidvqcx9c1r87.jpg)
 
 [CN-3610299](https://www.postcrossing.com/postcards/CN-3610299) 
  >寄往 [RailiH](https://www.postcrossing.com/user/RailiH) 🇫🇮
@@ -771,7 +770,7 @@ const option = {
  📏 7,822 | ⏱ 49
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/c44bk4spzg9di3z05l2tpn0bstqwphbm.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/c44bk4spzg9di3z05l2tpn0bstqwphbm.jpg)
 
 [CN-3610300](https://www.postcrossing.com/postcards/CN-3610300) 
  >寄往 [josera](https://www.postcrossing.com/user/josera) 🇪🇸
@@ -780,7 +779,7 @@ const option = {
  📏 10,713 | ⏱ 46
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/x61xyan4pmiu4xg6apttle8izokgt15o.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/x61xyan4pmiu4xg6apttle8izokgt15o.jpg)
 
 [CN-3610305](https://www.postcrossing.com/postcards/CN-3610305) 
  >寄往 [memom](https://www.postcrossing.com/user/memom) 🇺🇸
@@ -789,7 +788,7 @@ const option = {
  📏 12,106 | ⏱ 44
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/jbz5bqc6s4hzqsd9yohpsdnblgmdc4xz.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/jbz5bqc6s4hzqsd9yohpsdnblgmdc4xz.jpg)
 
 [CN-3610298](https://www.postcrossing.com/postcards/CN-3610298) 
  >寄往 [Akaka](https://www.postcrossing.com/user/Akaka) 🇹🇼
@@ -798,7 +797,7 @@ const option = {
  📏 792 | ⏱ 41
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/agm365cpsijgun9rrcn7twaw2e3c48hk.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/agm365cpsijgun9rrcn7twaw2e3c48hk.jpg)
 
 [CN-3610301](https://www.postcrossing.com/postcards/CN-3610301) 
  >寄往 [mcbuchanan](https://www.postcrossing.com/user/mcbuchanan) 🇨🇦
@@ -807,7 +806,7 @@ const option = {
  📏 12,556 | ⏱ 30
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/oohrfavt1t9r94p0rbd0i4tmdr2wj073.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/oohrfavt1t9r94p0rbd0i4tmdr2wj073.jpg)
 
 [CN-3578746](https://www.postcrossing.com/postcards/CN-3578746) 
  >寄往 [Silpion29](https://www.postcrossing.com/user/Silpion29) 🇷🇺
@@ -816,7 +815,7 @@ const option = {
  📏 3,413 | ⏱ 78
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7cgyw5d7vk088mt7ohrq9f6nyvf4177e.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/7cgyw5d7vk088mt7ohrq9f6nyvf4177e.jpg)
 
 [CN-3621313](https://www.postcrossing.com/postcards/CN-3621313) 
  >寄往 [ChrisRe](https://www.postcrossing.com/user/ChrisRe) 🇩🇪
@@ -825,7 +824,7 @@ const option = {
  📏 9,155 | ⏱ 10
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/i09vi7tqj1k2rvmxe9sjpyvd07xzdhjg.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/i09vi7tqj1k2rvmxe9sjpyvd07xzdhjg.jpg)
 
 [CN-3610296](https://www.postcrossing.com/postcards/CN-3610296) 
  >寄往 [juergenvomdeich](https://www.postcrossing.com/user/juergenvomdeich) 🇩🇪
@@ -834,7 +833,7 @@ const option = {
  📏 8,932 | ⏱ 23
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/c49bj2bvagsfwve94liksgrrfwikz1hb.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/c49bj2bvagsfwve94liksgrrfwikz1hb.jpg)
 
 [CN-3610303](https://www.postcrossing.com/postcards/CN-3610303) 
  >寄往 [niku-niku](https://www.postcrossing.com/user/niku-niku) 🇯🇵
@@ -843,7 +842,7 @@ const option = {
  📏 2,430 | ⏱ 22
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/1owavt13j40taanl62523g6qef9d8iwc.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/1owavt13j40taanl62523g6qef9d8iwc.jpg)
 
 [CN-3578753](https://www.postcrossing.com/postcards/CN-3578753) 
  >寄往 [Masha_krb](https://www.postcrossing.com/user/Masha_krb) 🇷🇺
@@ -852,7 +851,7 @@ const option = {
  📏 7,101 | ⏱ 43
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/yoj61d8x1s9puup4jkncrgvtsttbq6k4.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/yoj61d8x1s9puup4jkncrgvtsttbq6k4.jpg)
 
 [CN-3578749](https://www.postcrossing.com/postcards/CN-3578749) 
  >寄往 [shrikantkp](https://www.postcrossing.com/user/shrikantkp) 🇮🇳
@@ -861,7 +860,7 @@ const option = {
  📏 4,254 | ⏱ 36
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/bqzh2e9b8atqorxqj8k9n5trg0r9yvv2.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/bqzh2e9b8atqorxqj8k9n5trg0r9yvv2.jpg)
 
 [CN-3578752](https://www.postcrossing.com/postcards/CN-3578752) 
  >寄往 [Prairiegal](https://www.postcrossing.com/user/Prairiegal) 🇨🇦
@@ -870,7 +869,7 @@ const option = {
  📏 11,010 | ⏱ 30
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/qj9bpbnv88jzskujd240srf7ojtt6atm.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/qj9bpbnv88jzskujd240srf7ojtt6atm.jpg)
 
 [CN-3578747](https://www.postcrossing.com/postcards/CN-3578747) 
  >寄往 [lyo](https://www.postcrossing.com/user/lyo) 🇯🇵
@@ -879,7 +878,7 @@ const option = {
  📏 2,858 | ⏱ 25
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/do9uyzjm74nbtieowaxbposwus90lbz0.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/do9uyzjm74nbtieowaxbposwus90lbz0.jpg)
 
 ### 2015(6)
 
@@ -890,7 +889,7 @@ const option = {
  📏 1,563 | ⏱ 285
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9c42dfa1cdfe8f091cac8826b0993467.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/9c42dfa1cdfe8f091cac8826b0993467.jpg)
 
 [CN-1509462](https://www.postcrossing.com/postcards/CN-1509462) 
  >寄往 [Hannavanoost](https://www.postcrossing.com/user/Hannavanoost) 🇳🇱
@@ -899,7 +898,7 @@ const option = {
  📏 8,175 | ⏱ 38
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/98d7720e8d9abb17388aa2ac4faa1176.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/98d7720e8d9abb17388aa2ac4faa1176.jpg)
 
 [CN-1509460](https://www.postcrossing.com/postcards/CN-1509460) 
  >寄往 [lady_of_sorrows](https://www.postcrossing.com/user/lady_of_sorrows) 🇺🇦
@@ -908,7 +907,7 @@ const option = {
  📏 6,360 | ⏱ 37
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/943ce20ae7bd8ac518c64f0a8f964b41.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/943ce20ae7bd8ac518c64f0a8f964b41.jpg)
 
 [CN-1509464](https://www.postcrossing.com/postcards/CN-1509464) 
  >寄往 [Ting-Ti](https://www.postcrossing.com/user/Ting-Ti) 🇹🇼
@@ -917,7 +916,7 @@ const option = {
  📏 1,544 | ⏱ 34
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/2b99f06a551404ccc649291f5ebbbd27.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/2b99f06a551404ccc649291f5ebbbd27.jpg)
 
 [CN-1480161](https://www.postcrossing.com/postcards/CN-1480161) 
  >寄往 [Ziecha71](https://www.postcrossing.com/user/Ziecha71) 🇱🇻
@@ -926,7 +925,7 @@ const option = {
  📏 6,825 | ⏱ 59
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/2e6fd0ad2d4fe9b12fba48320589c819.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/2e6fd0ad2d4fe9b12fba48320589c819.jpg)
 
 [CN-1480155](https://www.postcrossing.com/postcards/CN-1480155) 
  >寄往 [lothardornau](https://www.postcrossing.com/user/lothardornau) 🇩🇪
@@ -935,7 +934,7 @@ const option = {
  📏 8,068 | ⏱ 53
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/65e6d916f8c2702d65e2de3874e1d4b4.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/65e6d916f8c2702d65e2de3874e1d4b4.jpg)
 
 ### 2014(29)
 
@@ -946,7 +945,7 @@ const option = {
  📏 10,280 | ⏱ 39
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/00290c7eec324c425ed445f6266f8ba4.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/00290c7eec324c425ed445f6266f8ba4.jpg)
 
 [CN-1480158](https://www.postcrossing.com/postcards/CN-1480158) 
  >寄往 [Kotarouchan](https://www.postcrossing.com/user/Kotarouchan) 🇯🇵
@@ -955,7 +954,7 @@ const option = {
  📏 3,128 | ⏱ 30
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/dc03f1af18ef4d10d59648891b82a8d3.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/dc03f1af18ef4d10d59648891b82a8d3.jpg)
 
 [CN-1480157](https://www.postcrossing.com/postcards/CN-1480157) 
  >寄往 [Alize](https://www.postcrossing.com/user/Alize) 🇳🇱
@@ -964,7 +963,7 @@ const option = {
  📏 8,172 | ⏱ 28
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/672f2c134502ea042e3e46da73ef08bf.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/672f2c134502ea042e3e46da73ef08bf.jpg)
 
 [CN-1480160](https://www.postcrossing.com/postcards/CN-1480160) 
  >寄往 ***该用户已关闭*** 🇸🇪
@@ -973,7 +972,7 @@ const option = {
  📏 7,194 | ⏱ 20
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/62408acec9a9fcc9ce5fcd7601155658.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/62408acec9a9fcc9ce5fcd7601155658.jpg)
 
 [CN-1410995](https://www.postcrossing.com/postcards/CN-1410995) 
  >寄往 [Darinchik](https://www.postcrossing.com/user/Darinchik) 🇧🇾
@@ -982,7 +981,7 @@ const option = {
  📏 6,600 | ⏱ 57
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/488d90a923a0608f085143ad2da1c712.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/488d90a923a0608f085143ad2da1c712.jpg)
 
 [CN-1410993](https://www.postcrossing.com/postcards/CN-1410993) 
  >寄往 [Monka_G](https://www.postcrossing.com/user/Monka_G) 🇩🇪
@@ -991,7 +990,7 @@ const option = {
  📏 7,904 | ⏱ 33
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/84a82eca7cc181df54e65265ccb47771.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/84a82eca7cc181df54e65265ccb47771.jpg)
 
 [CN-1411001](https://www.postcrossing.com/postcards/CN-1411001) 
  >寄往 [pioenrosa](https://www.postcrossing.com/user/pioenrosa) 🇳🇱
@@ -1000,7 +999,7 @@ const option = {
  📏 8,075 | ⏱ 31
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/869460af40add2292917a00565e9d693.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/869460af40add2292917a00565e9d693.jpg)
 
 [CN-1410996](https://www.postcrossing.com/postcards/CN-1410996) 
  >寄往 [Antlynny](https://www.postcrossing.com/user/Antlynny) 🇺🇸
@@ -1009,7 +1008,7 @@ const option = {
  📏 11,521 | ⏱ 19
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6d622a4a49783ff352aea9bdb49992b5.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/6d622a4a49783ff352aea9bdb49992b5.jpg)
 
 [CN-1333455](https://www.postcrossing.com/postcards/CN-1333455) 
  >寄往 [Nastya1211](https://www.postcrossing.com/user/Nastya1211) 🇧🇾
@@ -1018,7 +1017,7 @@ const option = {
  📏 6,448 | ⏱ 60
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/59b74dddc3804178f4dfb3d6d3af1cf7.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/59b74dddc3804178f4dfb3d6d3af1cf7.jpg)
 
 [CN-1345019](https://www.postcrossing.com/postcards/CN-1345019) 
  >寄往 [Veritas_Stern](https://www.postcrossing.com/user/Veritas_Stern) 🇩🇪
@@ -1027,7 +1026,7 @@ const option = {
  📏 7,665 | ⏱ 37
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/12eb4e76d57d8e3cf67c97b6c0007aa1.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/12eb4e76d57d8e3cf67c97b6c0007aa1.jpg)
 
 [CN-1345015](https://www.postcrossing.com/postcards/CN-1345015) 
  >寄往 [lorrier](https://www.postcrossing.com/user/lorrier) 🇳🇱
@@ -1036,7 +1035,7 @@ const option = {
  📏 7,979 | ⏱ 30
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5644e8d57ff6b82084231b898847ca8c.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/5644e8d57ff6b82084231b898847ca8c.jpg)
 
 [CN-1345017](https://www.postcrossing.com/postcards/CN-1345017) 
  >寄往 [strawberry_sandra](https://www.postcrossing.com/user/strawberry_sandra) 🇸🇪
@@ -1045,7 +1044,7 @@ const option = {
  📏 7,515 | ⏱ 29
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/fe5404fa762c45bf45a40f371e3e65aa.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/fe5404fa762c45bf45a40f371e3e65aa.jpg)
 
 [CN-1360087](https://www.postcrossing.com/postcards/CN-1360087) 
  >寄往 [Kao02](https://www.postcrossing.com/user/Kao02) 🇯🇵
@@ -1054,7 +1053,7 @@ const option = {
  📏 3,100 | ⏱ 13
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/571d90dafdd3975ab4a4a15f56474e58.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/571d90dafdd3975ab4a4a15f56474e58.jpg)
 
 [CN-1333612](https://www.postcrossing.com/postcards/CN-1333612) 
  >寄往 [__Prenses](https://www.postcrossing.com/user/__Prenses) 🇫🇮
@@ -1063,7 +1062,7 @@ const option = {
  📏 6,761 | ⏱ 32
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/3487aa703d54998d757e77d64c01be2d.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/3487aa703d54998d757e77d64c01be2d.jpg)
 
 [CN-1333452](https://www.postcrossing.com/postcards/CN-1333452) 
  >寄往 [Marlene0911](https://www.postcrossing.com/user/Marlene0911) 🇺🇸
@@ -1072,7 +1071,7 @@ const option = {
  📏 12,397 | ⏱ 21
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/2ab07266398d1b503cb21df76556e0f8.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/2ab07266398d1b503cb21df76556e0f8.jpg)
 
 [CN-1302234](https://www.postcrossing.com/postcards/CN-1302234) 
  >寄往 [Suah](https://www.postcrossing.com/user/Suah) 🇰🇷
@@ -1081,7 +1080,7 @@ const option = {
  📏 2,080 | ⏱ 48
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/f3829ccd5b5dbe98f4b143b3bfa20642.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/f3829ccd5b5dbe98f4b143b3bfa20642.jpg)
 
 [CN-1318206](https://www.postcrossing.com/postcards/CN-1318206) 
  >寄往 [MaikeT](https://www.postcrossing.com/user/MaikeT) 🇩🇪
@@ -1090,7 +1089,7 @@ const option = {
  📏 7,847 | ⏱ 20
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/c43e998b6020e43e7257f0ec03919370.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/c43e998b6020e43e7257f0ec03919370.jpg)
 
 [CN-1318207](https://www.postcrossing.com/postcards/CN-1318207) 
  >寄往 [wjfrijling](https://www.postcrossing.com/user/wjfrijling) 🇳🇱
@@ -1099,7 +1098,7 @@ const option = {
  📏 8,187 | ⏱ 19
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/f6a5fca4cedc75d9a9fa3224311b3fce.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/f6a5fca4cedc75d9a9fa3224311b3fce.jpg)
 
 [CN-1302233](https://www.postcrossing.com/postcards/CN-1302233) 
  >寄往 [kingpeiling](https://www.postcrossing.com/user/kingpeiling) 🇹🇼
@@ -1108,7 +1107,7 @@ const option = {
  📏 1,594 | ⏱ 24
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7ba2448ba687920f15db8667c088dc2f.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/7ba2448ba687920f15db8667c088dc2f.jpg)
 
 [CN-1282652](https://www.postcrossing.com/postcards/CN-1282652) 
  >寄往 [Tikhelangelo](https://www.postcrossing.com/user/Tikhelangelo) 🇷🇺
@@ -1117,7 +1116,7 @@ const option = {
  📏 6,006 | ⏱ 34
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/c8aeeadb907773e90ad2b17b509604db.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/c8aeeadb907773e90ad2b17b509604db.jpg)
 
 [CN-1282656](https://www.postcrossing.com/postcards/CN-1282656) 
  >寄往 [artlover](https://www.postcrossing.com/user/artlover) 🇫🇮
@@ -1126,7 +1125,7 @@ const option = {
  📏 6,709 | ⏱ 14
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7c25c5df87d9ceae35563a8aa99bd6ba.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/7c25c5df87d9ceae35563a8aa99bd6ba.jpg)
 
 [CN-1241230](https://www.postcrossing.com/postcards/CN-1241230) 
  >寄往 [iris723](https://www.postcrossing.com/user/iris723) 🇹🇼
@@ -1135,7 +1134,7 @@ const option = {
  📏 1,573 | ⏱ 45
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/b0988c040f09b7893f92634498c00323.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/b0988c040f09b7893f92634498c00323.jpg)
 
 [CN-1241227](https://www.postcrossing.com/postcards/CN-1241227) 
  >寄往 [Paulinka_96](https://www.postcrossing.com/user/Paulinka_96) 🇧🇾
@@ -1144,7 +1143,7 @@ const option = {
  📏 6,784 | ⏱ 38
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7d655e7b59272187e90070fc9e2df772.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/7d655e7b59272187e90070fc9e2df772.jpg)
 
 [CN-1241224](https://www.postcrossing.com/postcards/CN-1241224) 
  >寄往 [Helga_Hjodd](https://www.postcrossing.com/user/Helga_Hjodd) 🇷🇺
@@ -1153,7 +1152,7 @@ const option = {
  📏 6,412 | ⏱ 32
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/f23b9b1969c6720288e24e626eaba082.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/f23b9b1969c6720288e24e626eaba082.jpg)
 
 [CN-1241226](https://www.postcrossing.com/postcards/CN-1241226) 
  >寄往 [reismeisje](https://www.postcrossing.com/user/reismeisje) 🇳🇱
@@ -1162,7 +1161,7 @@ const option = {
  📏 8,163 | ⏱ 26
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/b23f5bb79a266ae4b0a9b7fe47983a1b.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/b23f5bb79a266ae4b0a9b7fe47983a1b.jpg)
 
 [CN-1170638](https://www.postcrossing.com/postcards/CN-1170638) 
  >寄往 [saarlaender](https://www.postcrossing.com/user/saarlaender) 🇩🇪
@@ -1171,7 +1170,7 @@ const option = {
  📏 8,165 | ⏱ 65
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/98d8474caf46ccd66f2752a1cc51685d.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/98d8474caf46ccd66f2752a1cc51685d.jpg)
 
 [CN-1170641](https://www.postcrossing.com/postcards/CN-1170641) 
  >寄往 [katena1000000](https://www.postcrossing.com/user/katena1000000) 🇺🇦
@@ -1180,7 +1179,7 @@ const option = {
  📏 6,721 | ⏱ 62
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/0da3add01dfb4e47f788478419aee3af.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/0da3add01dfb4e47f788478419aee3af.jpg)
 
 [CN-1152857](https://www.postcrossing.com/postcards/CN-1152857) 
  >寄往 [SpartakGirl](https://www.postcrossing.com/user/SpartakGirl) 🇷🇺
@@ -1189,7 +1188,7 @@ const option = {
  📏 3,409 | ⏱ 45
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6e4756e769b039889c5a89cef233a167.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/6e4756e769b039889c5a89cef233a167.jpg)
 
 [CN-1152859](https://www.postcrossing.com/postcards/CN-1152859) 
  >寄往 [juliaclaire](https://www.postcrossing.com/user/juliaclaire) 🇺🇸
@@ -1198,7 +1197,7 @@ const option = {
  📏 10,952 | ⏱ 31
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/199982bb7e20c17298d3c15a1dcc8051.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/199982bb7e20c17298d3c15a1dcc8051.jpg)
 
 ### 2013(7)
 
@@ -1209,7 +1208,7 @@ const option = {
  📏 7,987 | ⏱ 19
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9b5a2768220eb28163645fbe35e6b079.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/9b5a2768220eb28163645fbe35e6b079.jpg)
 
 [CN-1152864](https://www.postcrossing.com/postcards/CN-1152864) 
  >寄往 [ANP](https://www.postcrossing.com/user/ANP) 🇫🇮
@@ -1218,7 +1217,7 @@ const option = {
  📏 6,730 | ⏱ 18
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/c709974037cd3ec3380edd88bb2e99f4.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/c709974037cd3ec3380edd88bb2e99f4.jpg)
 
 [CN-1085556](https://www.postcrossing.com/postcards/CN-1085556) 
  >寄往 [Podarenok](https://www.postcrossing.com/user/Podarenok) 🇩🇪
@@ -1227,7 +1226,7 @@ const option = {
  📏 7,630 | ⏱ 49
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/8e1d48876fd00e2ba35b5b5799899519.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/8e1d48876fd00e2ba35b5b5799899519.jpg)
 
 [CN-1085558](https://www.postcrossing.com/postcards/CN-1085558) 
  >寄往 ***该用户已关闭*** 🇺🇸
@@ -1236,7 +1235,7 @@ const option = {
  📏 12,004 | ⏱ 25
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/a8fbd2d62f9be48980412dae572add53.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/a8fbd2d62f9be48980412dae572add53.jpg)
 
 [CN-949499](https://www.postcrossing.com/postcards/CN-949499) 
  >寄往 [Happybutterfly](https://www.postcrossing.com/user/Happybutterfly) 🇳🇱
@@ -1245,7 +1244,7 @@ const option = {
  📏 8,167 | ⏱ 69
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7daaecb07d05b6a87efb3b4abc8139d7.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/7daaecb07d05b6a87efb3b4abc8139d7.jpg)
 
 [CN-949486](https://www.postcrossing.com/postcards/CN-949486) 
  >寄往 ***该用户已关闭*** 🇩🇪
@@ -1254,7 +1253,7 @@ const option = {
  📏 7,630 | ⏱ 68
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/a61f5d5fbb292f0ae2f34e8dad5af576.jpg)
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/a61f5d5fbb292f0ae2f34e8dad5af576.jpg)
 
 [CN-949489](https://www.postcrossing.com/postcards/CN-949489) 
  >寄往 [laurelr](https://www.postcrossing.com/user/laurelr) 🇺🇸
@@ -1263,6 +1262,5 @@ const option = {
  📏 11,016 | ⏱ 64
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/023065f841be8fc2ef00308ae793a107.jpg)
-
+![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/023065f841be8fc2ef00308ae793a107.jpg)
 

@@ -8,6 +8,7 @@ tag:
   - Postcrossing
 order: 6
 ---
-:::tabs 
-$link
+
+:::tabs
+{{link}}
 :::

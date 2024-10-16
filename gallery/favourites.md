@@ -198,4 +198,3 @@ order: 4
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/dcb79e94963d086e9b2fd7d60588ae24.jpg)
-

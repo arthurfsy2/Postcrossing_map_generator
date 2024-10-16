@@ -18,6 +18,7 @@ import pytz
 import shutil
 from PIL import Image
 import re
+from jinja2 import Template
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -64,7 +65,6 @@ def replateTitle(type):
 
 def getUserHomeInfo(type):
     content = readDB(dbpath, "", "userSummary")
-    print(content)
     for id in content:
         about = id["about"]
         coors = id["coors"]
@@ -172,27 +172,30 @@ def replaceTemplate():
     commentlist, commentNum = getCardStoryList("sent")
     calendar, series, height = createCalendar()
     with open(f"./template/信息汇总_template.md", "r", encoding="utf-8") as f:
-        data = f.read()
-        dataNew = data.replace('$account', account)
-        print(f"已替换account:{account}")
-        dataNew = dataNew.replace('$about', about).replace(
-            '$coors', coorLink).replace('$personalPageLink', personalPageLink)
-        print("已替换个人汇总信息")
-        dataNew = dataNew.replace('$title', title_final)
-        print("已替换明信片墙title")
-        dataNew = dataNew.replace(
-            '$storylist', storylist).replace('$storyNum', storyNum)
-        print("已替换明信片故事list")
-        dataNew = dataNew.replace('$commentlist', commentlist).replace(
-            '$commentNum', commentNum)
-        print("已替换明信片评论list")
-        dataNew = dataNew.replace('$calendar', calendar)
-        dataNew = dataNew.replace('$series', series)
-        dataNew = dataNew.replace('$height', str(height))
-        print("已替换明信片日历list")
-        dataNew = dataNew.replace('$repo', repo)
-        print(f"已替换仓库名:{repo}")
-        print(f"————————————————————")
+        template = Template(f.read())
+    
+    dataNew = template.render(
+        account = account,
+        about = about,
+        coors=coorLink,
+        personalPageLink = personalPageLink,
+        title = title_final,
+        storylist = storylist,
+        storyNum = storyNum,
+        commentlist = commentlist,
+        calendar = calendar,
+        series = series,
+        height = str(height),
+        repo = repo
+    )    
+    print(f"已替换account:{account}")
+    print("已替换个人汇总信息")
+    print("已替换明信片墙title")
+    print("已替换明信片故事list")
+    print("已替换明信片评论list")
+    print("已替换明信片日历list")
+    print(f"已替换仓库名:{repo}")
+    print(f"————————————————————")
 
     with open(f"./gallery/信息汇总.md", "w", encoding="utf-8") as f:
         f.write(dataNew)
@@ -547,77 +550,12 @@ def htmlFormat(title, data):
                             escape=False, table_id="dataTable", header=True)
     html_table = html_table.replace('<th>', '<th class="text-center">')
     html_table = html_table.replace('<td>', '<td class="text-center">')
-    html_content = f'''
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>{title}</title>
-        <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
-        <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
-        <script src="../src/tablesorter-2.31.3/js/jquery.tablesorter.js"></script>
-        <script>
-            $(document).ready(function() {{
-                $("#dataTable").tablesorter();
-            }});
-            
-            function searchTable() {{
-                var input = document.getElementById("searchInput");
-                var filter = input.value.toUpperCase();
-                var table = document.getElementById("dataTable");
-                var tr = table.getElementsByTagName("tr");
-                for (var i = 1; i < tr.length; i++) {{  // Start from index 1 to exclude the table header row
-                    var td = tr[i].getElementsByTagName("td");
-                    var found = false;
-                    for (var j = 0; j < td.length; j++) {{
-                        var txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {{
-                            found = true;
-                            break;
-                        }}
-                    }}
-                    if (found) {{
-                        tr[i].style.display = "";
-                    }} else {{
-                        tr[i].style.display = "none";
-                    }}
-                }}
-            }}
-            </script>
-    <style>
-    .search-input {{
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 14px;
-        width: 200px;
-    }}
-
-    .search-input:focus {{
-        outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }}
-    </style>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="mb-3">
-                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索……">
-            </div>
-            <div class="table-responsive">
-                {html_table}
-            </div>
-        </div>
-        <script>
-            // 在页面加载完成后执行搜索表格的函数
-            window.onload = function() {{
-                searchTable();
-            }};
-        </script>
-    </body>
-    </html>
-    '''
+    with open("./template/htmlFormat.html", 'r', encoding='utf-8') as f:
+        template = Template(f.read())
+    html_content = template.render(
+        title = title,
+        html_table = html_table
+    ) 
     return html_content
 
 
@@ -646,36 +584,18 @@ def picTowebp(input_dir, output_dir):
 
 def createRegisterInfo(register_date, sent_info, received_info, countries, traveling, supporter_pic):
     # 创建HTML内容
-    html_content = f"""
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Postcrossing Stats</title>
-        <!-- 引入Bootstrap CSS -->
-        <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
-    </head>
-    <body>
-        <div class="container-fluid">
-            <h1 class="text-center mb-4"></h1>
-            <ul class="list-group">
-                <li class="list-group-item">注册时间：<b>{register_date}</b></li>
-                <li class="list-group-item">寄出：<b>{sent_info}</b></li>
-                <li class="list-group-item">收到：<b>{received_info}</b></li>
-                <li class="list-group-item">涉及国家：<b>{countries}</b></li>
-                <li class="list-group-item">待签收：<b>{traveling}</b></li>
-                {supporter_pic}
-            </ul>
-        </div>
-        <!-- 引入Bootstrap JS 和依赖 -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.1/dist/umd/popper.min.js"></script>
-        <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.min.js"></script>
-    </body>
-    </html>
-    """
-
+    with open("./template/registerInfo_template.html", 'r', encoding='utf-8') as f:
+        template = Template(f.read())
+    
+    html_content = template.render(
+        register_date = register_date,
+        sent_info = sent_info,
+        received_info=received_info,
+        countries = countries,
+        traveling = traveling,
+        supporter_pic = supporter_pic
+    )
+    
     # 写入HTML文件
     with open('./output/registerInfo.html', 'w', encoding='utf-8') as file:
         file.write(html_content)

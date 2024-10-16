@@ -7,6 +7,7 @@ import os
 import shutil
 import argparse
 import re
+from jinja2 import Template
 
 start_time = time.time()
 
@@ -148,21 +149,28 @@ def replaceTemplate(type, date, num, title, MDcontent_all, repo):
     filename_md = f"gallery/{type}.md"
     if type == "sent" or type == "received":
         with open(f"./template/type_template.md", "r", encoding="utf-8") as f:
-            data = f.read()
-            dataNew = data.replace('$type', type)
-            print(f"已替换type:{type}")
-            dataNew = dataNew.replace('$num', str(num))
-            print("已替换明信片墙order")
-            dataNew = dataNew.replace('$title', title)
-            print("已替换明信片墙title")
-            dataNew = dataNew.replace('$content', MDcontent_all)
-            print("已替换明信片内容")
-            dataNew = dataNew.replace('$repo', repo)
-            print("已替换明信片内容")
+            template = Template(f.read())
+        dataNew = template.render(
+            type = type,
+            num = str(num),
+            title = title,
+            content = MDcontent_all,
+            repo = repo
+            )
+        
+        print(f"已替换type:{type}")
+        print("已替换明信片墙order")
+        print("已替换明信片墙title")
+        print("已替换明信片内容")
+        print("已替换明信片内容")
     else:
 
-        dataNew = f'---\ntitle: {title}\nicon: address-card\ndate: $date\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
-        dataNew = dataNew.replace('$repo', repo)
+        template_data = f'---\ntitle: {title}\nicon: address-card\ndate: $date\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
+        template = Template(template_data)
+        dataNew = template.render(
+            repo = repo
+            )
+        # dataNew = dataNew.replace('$repo', repo)
     # 换为你的blog的本地链接，可自动同步过去
     blog_path = rf"D:\web\Blog\src\Arthur\Postcrossing"
     if os.path.exists(blog_path):

@@ -8,10 +8,12 @@ tag:
   - Postcrossing
 order: 1
 ---
-:::tabs 
+
+:::tabs
 @tab 基本信息
+
 <iframe 
-src="$personalPageLink/output/registerInfo.html" 
+src="{{personalPageLink}}/output/registerInfo.html" 
 frameborder=0
 height=350
 width=100%
@@ -20,12 +22,12 @@ scrolling=auto
 ></iframe>
 
 @tab 关于我
-$about
+{{about}}
 
 @tab 我的位置
 
 <iframe 
-src="$personalPageLink/LocationMap.html" 
+src="{{personalPageLink}}/LocationMap.html" 
 frameborder=0
 height=500
 width=100%
@@ -34,19 +36,17 @@ scrolling=auto
 ></iframe>
 :::
 
-[我的Postcrossing主页](https://www.postcrossing.com/user/$account)
-
-
+[我的 Postcrossing 主页](https://www.postcrossing.com/user/{{account}})
 
 ## 一.图片墙
 
-$title
+{{title}}
 
 ::: tabs
 @tab 发送列表
 
 <iframe 
-src="$personalPageLink/output/sent.html" 
+src="{{personalPageLink}}/output/sent.html" 
 frameborder=0
 height=500
 width=100%
@@ -57,7 +57,7 @@ scrolling=auto
 @tab 接收列表
 
 <iframe 
-src="$personalPageLink/output/received.html" 
+src="{{personalPageLink}}/output/received.html" 
 frameborder=0
 height=500
 width=100%
@@ -68,7 +68,7 @@ scrolling=auto
 @tab 还在漂泊的明信片
 
 <iframe 
-src="$personalPageLink/output/traveling.html" 
+src="{{personalPageLink}}/output/traveling.html" 
 frameborder=0
 height=500
 width=100%
@@ -79,6 +79,7 @@ scrolling=auto
 :::
 
 ## 二.地图展示
+
 :::tip 地图颜色
 紫色：收发均有的国家
 绿色：仅有收/仅有发的国家
@@ -87,12 +88,13 @@ scrolling=auto
 
 :::tabs
 @tab Map
-### 个人收发Map
 
-网址：$personalPageLink/Map.html
+### 个人收发 Map
+
+网址：{{personalPageLink}}/Map.html
 
 <iframe 
-src="$personalPageLink/Map.html" 
+src="{{personalPageLink}}/Map.html" 
 frameborder=0
 height=500
 width=100%
@@ -101,12 +103,13 @@ scrolling=auto
 ></iframe>
 
 @tab ClusterMap
-### 个人收发ClusterMap
 
-网址：$personalPageLink/ClusterMap.html
+### 个人收发 ClusterMap
+
+网址：{{personalPageLink}}/ClusterMap.html
 
 <iframe 
-src="$personalPageLink/ClusterMap.html" 
+src="{{personalPageLink}}/ClusterMap.html" 
 frameborder=0
 height=500
 width=100%
@@ -115,7 +118,8 @@ scrolling=auto
 ></iframe>
 
 @tab 网址备份
-### 个人收发Map、ClusterMap (Github Page)
+
+### 个人收发 Map、ClusterMap (Github Page)
 
 网址：https://arthurfsy2.github.io/Postcrossing_map_generator/Map.html
 网址：https://arthurfsy2.github.io/Postcrossing_map_generator/ClusterMap.html
@@ -129,31 +133,26 @@ scrolling=auto
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/$repo/main/output/calendar.json"
+  "https://raw.gitmirror.com/{{repo}}/main/output/calendar.json"
 ).then((res) => res.json());
 
 const date = new Date();
-const year = date.getFullYear().toString().padStart(4, '0');
+const year = date.getFullYear().toString().padStart(4, "0");
 
 const option = {
   tooltip: {},
   visualMap: {
     show: false,
-      min: 1,
-      max: 10,
-      inRange: {
-        color: [ "#7bc96f", "#239a3b", "#196127", "#196127"]
-      }
+    min: 1,
+    max: 10,
+    inRange: {
+      color: ["#7bc96f", "#239a3b", "#196127", "#196127"],
+    },
   },
-  calendar: [
-    $calendar
-  ],
-  series: [
-    $series
-  ]
+  calendar: [{{calendar}}],
+  series: [{{series}}],
 };
-const height = $height;
-
+const height = {{height}};
 ```
 
 :::
@@ -164,74 +163,73 @@ const height = $height;
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/$repo/main/output/month.json"
+  "https://raw.gitmirror.com/{{repo}}/main/output/month.json"
 ).then((res) => res.json());
 
-
 var date = data.map(function (item) {
-    return item.date
-})
+  return item.date;
+});
 
 var sent = data.map(function (item) {
-    return item.sent
-})
+  return item.sent;
+});
 
-var sentSum = sent.reduce(function(acc, curr) {
+var sentSum = sent.reduce(function (acc, curr) {
   return acc + curr;
 }, 0);
 
 var received = data.map(function (item) {
-    return item.received
-})
+  return item.received;
+});
 
-var receivedSum = received.reduce(function(acc, curr) {
+var receivedSum = received.reduce(function (acc, curr) {
   return acc + curr;
 }, 0);
 
-sentName = sentSum + "张已寄出"
-receivedName = receivedSum + "张已收到"
+sentName = sentSum + "张已寄出";
+receivedName = receivedSum + "张已收到";
 
 const option = {
   title: {
-    text: '',
-     left: 'center',
+    text: "",
+    left: "center",
   },
-    legend: {
-    data: [sentName, receivedName]
+  legend: {
+    data: [sentName, receivedName],
   },
   tooltip: {
-    trigger: 'axis'
+    trigger: "axis",
   },
   xAxis: {
-    type: 'category',
-    data: date
+    type: "category",
+    data: date,
   },
   yAxis: {
-    type: 'value'
+    type: "value",
   },
   dataZoom: [
-  {
-    start: 0
-  },
-  {
-    type: "inside"
-  }
-],
-  series: [
     {
-      name:sentName,
-      data: sent,
-      type: 'line',
-      smooth: true
+      start: 0,
     },
     {
-      name:receivedName,
+      type: "inside",
+    },
+  ],
+  series: [
+    {
+      name: sentName,
+      data: sent,
+      type: "line",
+      smooth: true,
+    },
+    {
+      name: receivedName,
       data: received,
-      type: 'line',
-      smooth: true
-    }
-  ]
-}
+      type: "line",
+      smooth: true,
+    },
+  ],
+};
 ```
 
 :::
@@ -245,18 +243,18 @@ const option = {
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/$repo/main/output/stats.json"
+  "https://raw.gitmirror.com/{{repo}}/main/output/stats.json"
 ).then((res) => res.json());
 
 const option = {
   title: {
     text: "",
     subtext: "",
-    left: "center"
+    left: "center",
   },
   tooltip: {
-    trigger: 'item',
-    formatter: '{a} <br/>{b} : {c} ({d}%)'
+    trigger: "item",
+    formatter: "{a} <br/>{b} : {c} ({d}%)",
   },
   series: [
     {
@@ -269,39 +267,35 @@ const option = {
         itemStyle: {
           shadowBlur: 10,
           shadowOffsetX: 0,
-          shadowColor: "rgba(0, 0, 0, 0.5)"
-        }
+          shadowColor: "rgba(0, 0, 0, 0.5)",
+        },
       },
       label: {
-        alignTo: 'none',
-        formatter: '{name|{b}}\n{num|{d}%}',
+        alignTo: "none",
+        formatter: "{name|{b}}\n{num|{d}%}",
         minMargin: 1,
-        fontStyle:'italic',
-        fontWeight: 'bold',
+        fontStyle: "italic",
+        fontWeight: "bold",
 
         rich: {
           num: {
             fontSize: 10,
-            color: '#999'
-          }
-        }
+            color: "#999",
+          },
+        },
       },
       labelLine: {
         length: 50,
-
-      }
-
-    }
-  ]
-}
+      },
+    },
+  ],
+};
 ```
-
-
 
 @tab 各国运输时效
 
 <iframe 
-src="$personalPageLink/output/CountryStats.html" 
+src="{{personalPageLink}}/output/CountryStats.html" 
 frameborder=0
 height=500
 width=100%
@@ -311,19 +305,20 @@ scrolling=auto
 
 :::
 
-## 四.明信片故事（$storyNum）
+## 四.明信片故事（{{storyNum}}）
+
 ::: tabs
 @tab 中文词云
-![](https://raw.gitmirror.com/$repo/main/output/postcrossing_cn.svg)
+![](https://raw.gitmirror.com/{{repo}}/main/output/postcrossing_cn.svg)
 @tab 英文词云
-![](https://raw.gitmirror.com/$repo/main/output/postcrossing_en.svg)
+![](https://raw.gitmirror.com/{{repo}}/main/output/postcrossing_en.svg)
 :::
 
-$storylist
+{{storylist}}
 
-## 五.被注册时收到的回复（$commentNum）
+## 五.被注册时收到的回复（{{commentNum}}）
 
-$commentlist
+{{commentlist}}
 
 <style>
   .image-preview {

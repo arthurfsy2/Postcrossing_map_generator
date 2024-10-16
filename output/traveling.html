@@ -1,63 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>还在漂泊的明信片</title>
+    <link
+      rel="stylesheet"
+      href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css"
+    />
+    <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
+    <script src="../src/tablesorter-2.31.3/js/jquery.tablesorter.js"></script>
+    <script>
+      $(document).ready(function () {
+        {
+          $("#dataTable").tablesorter();
+        }
+      });
 
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>还在漂泊的明信片</title>
-        <link rel="stylesheet" href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css">
-        <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
-        <script src="../src/tablesorter-2.31.3/js/jquery.tablesorter.js"></script>
-        <script>
-            $(document).ready(function() {
-                $("#dataTable").tablesorter();
-            });
-            
-            function searchTable() {
-                var input = document.getElementById("searchInput");
-                var filter = input.value.toUpperCase();
-                var table = document.getElementById("dataTable");
-                var tr = table.getElementsByTagName("tr");
-                for (var i = 1; i < tr.length; i++) {  // Start from index 1 to exclude the table header row
-                    var td = tr[i].getElementsByTagName("td");
-                    var found = false;
-                    for (var j = 0; j < td.length; j++) {
-                        var txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            found = true;
-                            break;
-                        }
+      function searchTable() {
+        {
+          var input = document.getElementById("searchInput");
+          var filter = input.value.toUpperCase();
+          var table = document.getElementById("dataTable");
+          var tr = table.getElementsByTagName("tr");
+          for (var i = 1; i < tr.length; i++) {
+            {
+              // Start from index 1 to exclude the table header row
+              var td = tr[i].getElementsByTagName("td");
+              var found = false;
+              for (var j = 0; j < td.length; j++) {
+                {
+                  var txtValue = td[j].textContent || td[j].innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    {
+                      found = true;
+                      break;
                     }
-                    if (found) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
+                  }
                 }
+              }
+              if (found) {
+                {
+                  tr[i].style.display = "";
+                }
+              } else {
+                {
+                  tr[i].style.display = "none";
+                }
+              }
             }
-            </script>
+          }
+        }
+      }
+    </script>
     <style>
-    .search-input {
+      .search-input {
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 4px;
         font-size: 14px;
         width: 200px;
-    }
+      }
 
-    .search-input:focus {
+      .search-input:focus {
         outline: none;
         border-color: #007bff;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
+      }
     </style>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="mb-3">
-                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索……">
-            </div>
-            <div class="table-responsive">
-                <table border="1" class="dataframe table table-striped table-bordered" id="dataTable">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="mb-3">
+        <input
+          type="text"
+          id="searchInput"
+          onkeyup="searchTable()"
+          placeholder="搜索……"
+        />
+      </div>
+      <div class="table-responsive"><table border="1" class="dataframe table table-striped table-bordered" id="dataTable">
   <thead>
     <tr style="text-align: right;">
       <th class="text-center"></th>
@@ -202,15 +223,15 @@
       <td class="text-center">43</td>
     </tr>
   </tbody>
-</table>
-            </div>
-        </div>
-        <script>
-            // 在页面加载完成后执行搜索表格的函数
-            window.onload = function() {
-                searchTable();
-            };
-        </script>
-    </body>
-    </html>
-    
+</table></div>
+    </div>
+    <script>
+      // 在页面加载完成后执行搜索表格的函数
+      window.onload = function () {
+        {
+          searchTable();
+        }
+      };
+    </script>
+  </body>
+</html>

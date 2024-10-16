@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 import time
 import os
 from collections import Counter
+from jinja2 import Template
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -177,11 +178,13 @@ def replaceTemplate(yearlist):
     yearlist = sorted(yearlist, reverse=True)
     link_all = ""
     for year in yearlist:
-        link = f"""@tab {year}\n\n<iframe src="$personalPageLink/recap/{year}_recap_cn.html" frameborder=0 height=500 width=100% seamless=seamless scrolling=auto></iframe>\n\n"""
-        link_all += link.replace('$personalPageLink', personalPageLink)
+        link = f"""@tab {year}\n\n<iframe src="{personalPageLink}/recap/{year}_recap_cn.html" frameborder=0 height=500 width=100% seamless=seamless scrolling=auto></iframe>\n\n"""
+        link_all += link
     with open(f"./template/年度报告_template.md", "r", encoding="utf-8") as f:
-        data = f.read()
-        dataNew = data.replace('$link', link_all)
+        template = Template(f.read())
+    dataNew = template.render(
+        link = link_all
+    )  
 
     with open(f"./gallery/年度报告.md", "w", encoding="utf-8") as f:
         f.write(dataNew)
@@ -193,20 +196,20 @@ def replaceTemplate(yearlist):
         with open(blog_path, "w", encoding="utf-8") as f:
             f.write(dataNew)
 
+if __name__ == "__main__":
+    types = ['received', 'sent']
+    for type in types:
+        yearlist = getYearList(type)
+        for year in yearlist:
+            getYearData(type, year)
+        print(f"————————————————————")
 
-types = ['received', 'sent']
-for type in types:
-    yearlist = getYearList(type)
+    # 示例调用
+    directory_to_clean = './data'
+    files_to_keep = ['.gitkeep']
+
+    yearlist = getYearList("sent")
     for year in yearlist:
-        getYearData(type, year)
-    print(f"————————————————————")
-
-# 示例调用
-directory_to_clean = './data'
-files_to_keep = ['.gitkeep']
-
-yearlist = getYearList("sent")
-for year in yearlist:
-    createYearRecap(year, "cn")
-remove_other_files(directory_to_clean, files_to_keep)
-replaceTemplate(yearlist)
+        createYearRecap(year, "cn")
+    remove_other_files(directory_to_clean, files_to_keep)
+    replaceTemplate(yearlist)
