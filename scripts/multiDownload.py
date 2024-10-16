@@ -660,6 +660,10 @@ def getUserSummary(account, Cookie):
     userAboutInfo = requests.get(userUrl, headers=headers)
     html_content = userAboutInfo.text
     is_supporter = "No"
+    # 未到期只能判断是否是Supporter
+    if "Postcrossing Supporter" in html_content:
+        is_supporter = "YES"
+    # Supporter快到期可获取到期日期
     match = re.search(r'<strong>(.*?)</strong>', html_content)
 
     if match:

@@ -139,7 +139,13 @@ def replaceTemplate():
                 type)
             registerDate = f"{register_date} [至今{registerd_years}年（{registerd_days}天）]"
             
-            supporter_pic = f'<li class="list-group-item">会员<img src="https://static1.postcrossing.com/images/supporter.png" height="25"><b>：{is_supporter}到期</b></li>' if is_supporter !="No" else ""
+            if is_supporter == "YES":
+                supporter_pic = f'<li class="list-group-item">会员<img src="https://static1.postcrossing.com/images/supporter.png" height="25"><b>：{is_supporter}-暂未到期</b></li>'
+            elif is_supporter != "No":
+                supporter_pic = f'<li class="list-group-item">会员<img src="https://static1.postcrossing.com/images/supporter.png" height="25"><b>：{is_supporter}到期</b></li>'
+            else:
+                supporter_pic = ""
+
         distance_all = format(distance, ",")
         summary = f"{num} 📏{distance_all} km 🌏{rounds} 圈]\n\n"
         if type == "sent":
