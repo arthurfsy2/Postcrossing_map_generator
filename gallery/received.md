@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（收到：139）
 icon: address-card
-date: 2024-10-12
+date: 2024-10-17
 category:
   - Arthur
 tag:
@@ -1391,7 +1391,7 @@ const option = {
 ![](https://raw.gitmirror.com/{{repo}}/main/gallery/picture/ybl39ka8m4j3eyrbyhxga685zhad5v3c.jpg)
 
 [DE-2337903](https://www.postcrossing.com/postcards/DE-2337903) 
- >来自 [Amarosi](https://www.postcrossing.com/user/Amarosi) 🇩🇪
+ >来自 ***该用户已关闭*** 🇩🇪
 > 📤 [Germany](https://www.bing.com/maps/?cp=54.9079~8.30326&lvl=12.0&setlang=zh-Hans) 2013/07/22 18:05 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=29.82739~106.43645&lvl=12.0&setlang=zh-Hans) 2013/08/30 15:14 (当地)
  📏 7,835 | ⏱ 39
