@@ -158,7 +158,7 @@ def replaceTemplate():
     coors = json.loads(coors)
     coorLink = f"{coors[0]}~{coors[1]}"
     logoLink = f"![](https://s3.amazonaws.com/static2.postcrossing.com/avatars/140x140/{logo}.jpg)"
-    about = f"{logoLink}\n\n{about}"
+    about = f"{logoLink}\n\n:::info 个人简介\n{about}\n"
 
     title_all = ""
     for type in types:
@@ -183,6 +183,7 @@ def replaceTemplate():
         storylist = storylist,
         storyNum = storyNum,
         commentlist = commentlist,
+        commentNum = commentNum,
         calendar = calendar,
         series = series,
         height = str(height),
@@ -301,7 +302,7 @@ def getCardStoryList(type):
 
             if type == "received":
                 picList = f'<div class="image-preview">  <img src="{picDriverPath}/{picFileName}" />  <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>' if picFileName != 'noPic.png' else f'<div class="image-preview"> <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>'
-
+                
                 list = f'[{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n' \
                     f'> 来自 {userInfo} {countryNameEmoji}\n' \
                     f'{travel_time_local} 📏 {distance} | ⏱ {travel_days}\n\n' \
@@ -312,7 +313,7 @@ def getCardStoryList(type):
                     f'@tab 内容\n' \
                     f'* 卡片文字\n\n> {content_original}\n\n* 翻译：\n\n> {content_cn}\n\n' \
                     f'{comment}\n\n' \
-                    f'---\n'
+                    f'---\n\n'
             else:
                 picList = f'@tab 图片\n![]({picDriverPath}/{picFileName})\n\n' if picFileName != 'noPic.png' else ''
 
@@ -322,12 +323,14 @@ def getCardStoryList(type):
                     f':::tabs\n' \
                     f'{picList}' \
                     f'{comment}\n\n' \
-                    f'---\n'
+                    f'---\n\n'
             list_all += list
             year_all = f"### {year}({num})\n\n{list_all}"
         # print("year_all:\n",year_all)
         # print("————————————————————")
         content_all += year_all
+        template = Template(content_all)
+        content_all = template.render(repo = repo)
     return content_all, total_num
 
 

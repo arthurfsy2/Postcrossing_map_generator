@@ -65,8 +65,8 @@ python 版本 >=3.11.2
 ```
 {
     "Cookie": "auto create",//正常情况下无需修改。通过scripts/login.py或startTask.py来自动赋值
-    "picDriverPath":"https://raw.gitmirror.com/$repo/main/gallery/picture",//展示墙图片默认为Github仓库的文件直链。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取。如果是本地使用，需要改为./gallery/picture
-    "storyPicLink": "https://raw.gitmirror.com/$repo/main/template/content", //存放明信片背面图片的路径。如果是本地使用，需要改为./template/content
+    "picDriverPath":"https://raw.gitmirror.com/{{repo}}/main/gallery/picture",//展示墙图片默认为Github仓库的文件直链。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取。如果是本地使用，需要改为./gallery/picture
+    "storyPicLink": "https://raw.gitmirror.com/{{repo}}/main/template/content", //存放明信片背面图片的路径。如果是本地使用，需要改为./template/content
     "storyPicType": "webp", //存放明信片背面图片的格式
     "dbpath": "./template/data.db", //默认的数据库存放路径
     "personalPageLink":"https://XXXX" //信息汇总页用途，填写你的github page 路径，如“https://XXX/output/sent.html”，则取地址的前半截

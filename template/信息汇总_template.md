@@ -254,15 +254,21 @@ const option = {
   },
   tooltip: {
     trigger: "item",
-    formatter: "{a} <br/>{b} : {c} ({d}%)",
+    formatter: "{b} : {c}",
   },
+  xAxis: {
+    type: "category",
+    data: data.map(item => item.name), // 假设数据项有name属性
+  },
+  yAxis: {
+    type: "value",
+  },
+  dataZoom: [{end:60}],
   series: [
     {
       name: "",
-      clockwise: false,
-      type: "pie",
-      radius: "50%",
-      data: data,
+      type: "bar", // 修改为柱状图
+      data: data.map(item => item.value), // 假设数据项有value属性
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
@@ -271,25 +277,13 @@ const option = {
         },
       },
       label: {
-        alignTo: "none",
-        formatter: "{name|{b}}\n{num|{d}%}",
-        minMargin: 1,
-        fontStyle: "italic",
-        fontWeight: "bold",
-
-        rich: {
-          num: {
-            fontSize: 10,
-            color: "#999",
-          },
-        },
-      },
-      labelLine: {
-        length: 50,
+        show: true,
+        position: "top",
       },
     },
   ],
-};
+}
+;
 ```
 
 @tab 各国运输时效

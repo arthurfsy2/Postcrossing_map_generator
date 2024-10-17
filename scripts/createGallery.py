@@ -170,7 +170,6 @@ def replaceTemplate(type, date, num, title, MDcontent_all, repo):
 
         dataNew = f'---\ntitle: {title}\nicon: address-card\ndate: $date\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
         
-        # dataNew = dataNew.replace('$repo', repo)
     # 换为你的blog的本地链接，可自动同步过去
     blog_path = rf"D:\web\Blog\src\Arthur\Postcrossing"
     if os.path.exists(blog_path):
