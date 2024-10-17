@@ -136,10 +136,13 @@ def createMD(type):
             year_all = f"### {year}({year_num})\n\n{list_all}"
         MDcontent_all += year_all
         # print(f"{account}'{type}展示墙数量:{Num}\n{account}'{type}展示墙页数:{pageNum}\n")
-
+    template = Template(MDcontent_all)
+    MDcontent_all = template.render(
+            repo = repo
+            )
     if type in types:
         num = types.index(type) + 2
-    link = f"## [{account}'s {type}]({baseUrl}user/{account}/gallery/{type})"
+    
     replaceTemplate(type, date, num, title, MDcontent_all, repo)
 
 
@@ -165,11 +168,8 @@ def replaceTemplate(type, date, num, title, MDcontent_all, repo):
         print("已替换明信片内容")
     else:
 
-        template_data = f'---\ntitle: {title}\nicon: address-card\ndate: $date\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
-        template = Template(template_data)
-        dataNew = template.render(
-            repo = repo
-            )
+        dataNew = f'---\ntitle: {title}\nicon: address-card\ndate: $date\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
+        
         # dataNew = dataNew.replace('$repo', repo)
     # 换为你的blog的本地链接，可自动同步过去
     blog_path = rf"D:\web\Blog\src\Arthur\Postcrossing"
