@@ -1,8 +1,8 @@
 {
-  "Cookie": "__Host-postcrossing=unc7l667qqbfmmo9vmf50tq7p6; PostcrossingRemember=dd5xTAwNdLZ041yHQxnUgLQHr97yreZF",
-  "picDriverPath": "https://raw.gitmirror.com/{{repo}}/main/gallery/picture",
-  "storyPicLink": "https://raw.gitmirror.com/{{repo}}/main/template/content",
-  "storyPicType": "webp",
-  "dbpath": "./template/data.db",
-  "personalPageLink": "https://postcrossing.4a1801.life"
+    "Cookie": "__Host-postcrossing=6fsifli65v20ggqfts8iqica3n; PostcrossingRemember=qIk1MJZXNvAYIpcDyGYhZftU3ZihWgrM",
+    "picDriverPath": "https://raw.gitmirror.com/{{repo}}/main/gallery/picture",
+    "storyPicLink": "https://raw.gitmirror.com/{{repo}}/main/template/content",
+    "storyPicType": "webp",
+    "dbpath": "./template/data.db",
+    "personalPageLink": "https://postcrossing.4a1801.life"
 }
