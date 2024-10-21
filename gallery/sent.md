@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：124）
+title: 明信片展示墙（寄出：125）
 icon: address-card
-date: 2024-10-16
+date: 2024-10-21
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3837376](https://www.postcrossing.com/postcards/CN-3837376) 
+ >寄往 [Ich_bin_Berliner](https://www.postcrossing.com/user/Ich_bin_Berliner) 🇩🇪
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/mk7i71svkrd9pfi7omfez1515h928gsu.jpg)
 
 ### 2024(63)
 
