@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（寄出：125）
 icon: address-card
-date: 2024-10-21
+date: 2024-10-22
 category:
   - Arthur
 tag:
@@ -195,7 +195,7 @@ const option = {
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6rq6s2h5x32wjwxu34tx0yu4exxjendl.jpg)
 
 [CN-3815238](https://www.postcrossing.com/postcards/CN-3815238) 
- >寄往 [MeMyselfandI](https://www.postcrossing.com/user/MeMyselfandI) 🇳🇱
+ >寄往 ***该用户已关闭*** 🇳🇱
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/08/12 13:02 (当地)
 > 📥 [Netherlands](https://www.bing.com/maps/?cp=53.07417~6.57778&lvl=12.0&setlang=zh-Hans) 2024/09/21 14:32 (当地)
  📏 9,122 | ⏱ 40
