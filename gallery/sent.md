@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（寄出：125）
 icon: address-card
-date: 2024-10-22
+date: 2024-10-26
 category:
   - Arthur
 tag:
@@ -348,7 +348,7 @@ const option = {
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/olpt54cowozq3ixme47skuddjrxal6bt.jpg)
 
 [CN-3770706](https://www.postcrossing.com/postcards/CN-3770706) 
- >寄往 [Humpelbaer](https://www.postcrossing.com/user/Humpelbaer) 🇩🇪
+ >寄往 ***该用户已关闭*** 🇩🇪
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/06/11 22:53 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=48.62638~9.26315&lvl=12.0&setlang=zh-Hans) 2024/07/20 15:25 (当地)
  📏 9,175 | ⏱ 39
