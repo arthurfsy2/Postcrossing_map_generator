@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：125）
+title: 明信片展示墙（寄出：126）
 icon: address-card
-date: 2024-10-26
+date: 2024-10-29
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3820899](https://www.postcrossing.com/postcards/CN-3820899) 
+ >寄往 [Ksyunya74](https://www.postcrossing.com/user/Ksyunya74) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/e4550m3nmxb6uanrla2nid7at8p4tqwi.jpg)
 
 ### 2024(64)
 
