@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（寄出：126）
 icon: address-card
-date: 2024-10-29
+date: 2024-11-01
 category:
   - Arthur
 tag:
@@ -609,7 +609,7 @@ const option = {
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/b7vw4a69coy80djw7elnf300djzor9es.jpg)
 
 [CN-3692798](https://www.postcrossing.com/postcards/CN-3692798) 
- >寄往 [louisehei](https://www.postcrossing.com/user/louisehei) 🇭🇰
+ >寄往 ***该用户已关闭*** 🇭🇰
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/02/22 11:20 (当地)
 > 📥 [Hong Kong](https://www.bing.com/maps/?cp=22.27832~114.17469&lvl=12.0&setlang=zh-Hans) 2024/03/07 09:46 (当地)
  📏 31 | ⏱ 14
