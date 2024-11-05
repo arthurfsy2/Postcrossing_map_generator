@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：140）
+title: 明信片展示墙（收到：141）
 icon: address-card
 date: 2024-11-05
 category:
@@ -147,7 +147,7 @@ const option = {
 
 :::
 
-### 2024(71)
+### 2024(72)
 
 [JP-2152688](https://www.postcrossing.com/postcards/JP-2152688) 
  >来自 [gurima](https://www.postcrossing.com/user/gurima) 🇯🇵
@@ -157,6 +157,15 @@ const option = {
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/nz30ufrvx9hwj1cecsmtpzgio4xtzbmw.jpg)
+
+[HK-881204](https://www.postcrossing.com/postcards/HK-881204) 
+ >来自 [popopyaya](https://www.postcrossing.com/user/popopyaya) 🇭🇰
+> 📤 [Hong Kong](https://www.bing.com/maps/?cp=22.27832~114.17469&lvl=12.0&setlang=zh-Hans) 2024/10/21 15:08 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/11/05 20:09 (当地)
+ 📏 31 | ⏱ 15
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7qyapacl7egikxkwpfsmcavhrg8kbiv8.jpg)
 
 [BA-14379](https://www.postcrossing.com/postcards/BA-14379) 
  >来自 [Oara](https://www.postcrossing.com/user/Oara) 🇧🇦
