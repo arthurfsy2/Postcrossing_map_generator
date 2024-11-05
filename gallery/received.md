@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：139）
+title: 明信片展示墙（收到：140）
 icon: address-card
-date: 2024-10-17
+date: 2024-11-05
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[JP-2152688](https://www.postcrossing.com/postcards/JP-2152688) 
+ >来自 [gurima](https://www.postcrossing.com/user/gurima) 🇯🇵
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/nz30ufrvx9hwj1cecsmtpzgio4xtzbmw.jpg)
 
 ### 2024(70)
 
