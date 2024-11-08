@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：127）
+title: 明信片展示墙（寄出：128）
 icon: address-card
-date: 2024-11-03
+date: 2024-11-08
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3870498](https://www.postcrossing.com/postcards/CN-3870498) 
+ >寄往 [angusjai](https://www.postcrossing.com/user/angusjai) 🇭🇰
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/lgluh884rel3homhshdfolzfneq6js8t.jpg)
 
 ### 2024(66)
 
