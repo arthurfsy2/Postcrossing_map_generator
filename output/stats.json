@@ -754,5 +754,23 @@
     "receivedDateHistory": "[1728643486]",
     "sentDateFirst": null,
     "receivedDateFirst": "2024/10/11"
+  },
+  {
+    "name": "Slovakia",
+    "countryCode": "SK",
+    "flagEmoji": "🇸🇰",
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 53,
+    "receivedAvg": null,
+    "sentMedian": 53,
+    "receivedMedian": null,
+    "sentHistory": "[53]",
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1731409630]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2024/11/12",
+    "receivedDateFirst": null
   }
 ]
