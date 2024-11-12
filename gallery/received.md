@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：142）
+title: 明信片展示墙（收到：143）
 icon: address-card
 date: 2024-11-12
 category:
@@ -147,16 +147,25 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2024(74)
+
+[DE-14747621](https://www.postcrossing.com/postcards/DE-14747621) 
+ >来自 [LittleWordThrower82](https://www.postcrossing.com/user/LittleWordThrower82) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=48.78232~9.17702&lvl=12.0&setlang=zh-Hans) 2024/10/21 09:09 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/11/12 11:17 (当地)
+ 📏 9,173 | ⏱ 22
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7m3bei9pty0st5psmveifawd1kn6ltdk.jpg)
 
 [DE-14754578](https://www.postcrossing.com/postcards/DE-14754578) 
  >来自 [Giegsegaggse](https://www.postcrossing.com/user/Giegsegaggse) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=51.33962~12.37129&lvl=12.0&setlang=zh-Hans) 2024/10/23 05:34 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/11/12 11:15 (当地)
+ 📏 8,848 | ⏱ 20
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ksps44zkil5uqt3l23cwlvz6abb1ochj.jpg)
-
-### 2024(72)
 
 [JP-2152688](https://www.postcrossing.com/postcards/JP-2152688) 
  >来自 [gurima](https://www.postcrossing.com/user/gurima) 🇯🇵
