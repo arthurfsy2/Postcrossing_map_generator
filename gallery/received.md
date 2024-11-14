@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：143）
+title: 明信片展示墙（收到：144）
 icon: address-card
-date: 2024-11-12
+date: 2024-11-14
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[US-10842005](https://www.postcrossing.com/postcards/US-10842005) 
+ >来自 [xenop](https://www.postcrossing.com/user/xenop) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ohahknsgfsthmrhygnd6weedi5hly9q0.jpg)
 
 ### 2024(74)
 
