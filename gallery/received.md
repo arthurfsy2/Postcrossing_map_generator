@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：144）
+title: 明信片展示墙（收到：145）
 icon: address-card
-date: 2024-11-14
+date: 2024-11-20
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[RU-10292586](https://www.postcrossing.com/postcards/RU-10292586) 
+ >来自 [Trushina_N](https://www.postcrossing.com/user/Trushina_N) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/hqlmkxd9x1tx9jxwtbrrzismst3vra9n.jpg)
 
 ### 2024(75)
 
