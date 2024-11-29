@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：150）
+title: 明信片展示墙（收到：151）
 icon: address-card
 date: 2024-11-29
 category:
@@ -149,14 +149,23 @@ const option = {
 
 ### 其他(1)
 
-[AT-759553](https://www.postcrossing.com/postcards/AT-759553) 
- >来自 [JuKarin888](https://www.postcrossing.com/user/JuKarin888) 🇦🇹
+[LU-115905](https://www.postcrossing.com/postcards/LU-115905) 
+ >来自 [Delol](https://www.postcrossing.com/user/Delol) 🇱🇺
 >
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/o1gh6kicp67jybaadf8xu4vp9cfw8hqe.jpg)
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5j1ameev3u71sr0otvv4pg0gf5rrkip5.jpg)
 
-### 2024(80)
+### 2024(81)
+
+[AT-759553](https://www.postcrossing.com/postcards/AT-759553) 
+ >来自 [JuKarin888](https://www.postcrossing.com/user/JuKarin888) 🇦🇹
+> 📤 [Austria](https://www.bing.com/maps/?cp=48.20849~16.37208&lvl=12.0&setlang=zh-Hans) 2024/10/21 09:08 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/11/29 09:16 (当地)
+ 📏 8,712 | ⏱ 39
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/o1gh6kicp67jybaadf8xu4vp9cfw8hqe.jpg)
 
 [US-10877429](https://www.postcrossing.com/postcards/US-10877429) 
  >来自 [notmychelle](https://www.postcrossing.com/user/notmychelle) 🇺🇸

@@ -790,5 +790,23 @@
     "receivedDateHistory": "[1732531829]",
     "sentDateFirst": null,
     "receivedDateFirst": "2024/11/25"
+  },
+  {
+    "name": "Luxembourg",
+    "countryCode": "LU",
+    "flagEmoji": "🇱🇺",
+    "value": 1,
+    "sentNum": 0,
+    "receivedNum": 1,
+    "sentAvg": null,
+    "receivedAvg": 39,
+    "sentMedian": null,
+    "receivedMedian": 39,
+    "sentHistory": "[]",
+    "receivedHistory": "[39]",
+    "sentDateHistory": "[]",
+    "receivedDateHistory": "[1732844052]",
+    "sentDateFirst": null,
+    "receivedDateFirst": "2024/11/29"
   }
 ]
