@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：149）
+title: 明信片展示墙（收到：150）
 icon: address-card
-date: 2024-11-25
+date: 2024-11-29
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[AT-759553](https://www.postcrossing.com/postcards/AT-759553) 
+ >来自 [JuKarin888](https://www.postcrossing.com/user/JuKarin888) 🇦🇹
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/o1gh6kicp67jybaadf8xu4vp9cfw8hqe.jpg)
 
 ### 2024(80)
 

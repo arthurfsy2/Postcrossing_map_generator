@@ -180,6 +180,24 @@
     "receivedDateFirst": "2014/09/22"
   },
   {
+    "name": "Austria",
+    "countryCode": "AT",
+    "flagEmoji": "🇦🇹",
+    "value": 6,
+    "sentNum": 1,
+    "receivedNum": 5,
+    "sentAvg": 19,
+    "receivedAvg": 33,
+    "sentMedian": 19,
+    "receivedMedian": 23,
+    "sentHistory": "[19]",
+    "receivedHistory": "[23, 23, 17, 66, 39]",
+    "sentDateHistory": "[1388229180]",
+    "receivedDateHistory": "[1698126950, 1698127247, 1716563566, 1720782362, 1732842984]",
+    "sentDateFirst": "2013/12/28",
+    "receivedDateFirst": "2023/10/24"
+  },
+  {
     "name": "United Kingdom",
     "countryCode": "GB",
     "flagEmoji": "🇬🇧",
@@ -232,24 +250,6 @@
     "receivedDateHistory": "[1380669938, 1409549661, 1413801918, 1698126745]",
     "sentDateFirst": "2014/08/16",
     "receivedDateFirst": "2013/10/01"
-  },
-  {
-    "name": "Austria",
-    "countryCode": "AT",
-    "flagEmoji": "🇦🇹",
-    "value": 5,
-    "sentNum": 1,
-    "receivedNum": 4,
-    "sentAvg": 19,
-    "receivedAvg": 32,
-    "sentMedian": 19,
-    "receivedMedian": 23,
-    "sentHistory": "[19]",
-    "receivedHistory": "[23, 23, 17, 66]",
-    "sentDateHistory": "[1388229180]",
-    "receivedDateHistory": "[1698126950, 1698127247, 1716563566, 1720782362]",
-    "sentDateFirst": "2013/12/28",
-    "receivedDateFirst": "2023/10/24"
   },
   {
     "name": "Malaysia",
