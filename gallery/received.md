@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：151）
+title: 明信片展示墙（收到：152）
 icon: address-card
-date: 2024-11-29
+date: 2024-12-02
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[RU-10295172](https://www.postcrossing.com/postcards/RU-10295172) 
+ >来自 [gav23](https://www.postcrossing.com/user/gav23) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9avan79d8gkdztep9tv18pzixrj6tedi.jpg)
 
 ### 2024(82)
 
