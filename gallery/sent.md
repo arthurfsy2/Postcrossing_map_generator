@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：134）
+title: 明信片展示墙（寄出：135）
 icon: address-card
-date: 2024-12-03
+date: 2024-12-09
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3870499](https://www.postcrossing.com/postcards/CN-3870499) 
+ >寄往 [akiko_w](https://www.postcrossing.com/user/akiko_w) 🇯🇵
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6kduka4ymqj9reizlcq6ep2im16tei9x.jpg)
 
 ### 2024(73)
 
