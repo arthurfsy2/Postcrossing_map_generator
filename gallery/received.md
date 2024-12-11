@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：153）
+title: 明信片展示墙（收到：155）
 icon: address-card
-date: 2024-12-05
+date: 2024-12-11
 category:
   - Arthur
 tag:
@@ -147,7 +147,25 @@ const option = {
 
 :::
 
-### 2024(84)
+### 2024(86)
+
+[DE-14747625](https://www.postcrossing.com/postcards/DE-14747625) 
+ >来自 [Mysticfleur](https://www.postcrossing.com/user/Mysticfleur) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=50.87197~9.70891&lvl=12.0&setlang=zh-Hans) 2024/10/21 09:10 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/12/11 21:16 (当地)
+ 📏 9,038 | ⏱ 51
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6qlppbt3na7z0ye7rhkma6od3yuzo23t.jpg)
+
+[RU-10292585](https://www.postcrossing.com/postcards/RU-10292585) 
+ >来自 [Natalka72](https://www.postcrossing.com/user/Natalka72) 🇷🇺
+> 📤 [Russia](https://www.bing.com/maps/?cp=58.19148~60.65492&lvl=12.0&setlang=zh-Hans) 2024/10/21 12:08 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/12/11 21:14 (当地)
+ 📏 5,787 | ⏱ 51
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/t5qgc8csd026uly2sestqlg53ygf8kbj.jpg)
 
 [DE-14747622](https://www.postcrossing.com/postcards/DE-14747622) 
  >来自 [Arhel](https://www.postcrossing.com/user/Arhel) 🇩🇪
