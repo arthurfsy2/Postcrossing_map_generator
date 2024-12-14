@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：155）
+title: 明信片展示墙（收到：156）
 icon: address-card
-date: 2024-12-11
+date: 2024-12-14
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[FI-4719313](https://www.postcrossing.com/postcards/FI-4719313) 
+ >来自 [paulancrossing1suomi](https://www.postcrossing.com/user/paulancrossing1suomi) 🇫🇮
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/tgmli14et9ysxov401l9tbpbpu73vct1.jpg)
 
 ### 2024(86)
 
