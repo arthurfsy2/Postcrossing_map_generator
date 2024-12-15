@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：135）
+title: 明信片展示墙（寄出：136）
 icon: address-card
-date: 2024-12-09
+date: 2024-12-15
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3870501](https://www.postcrossing.com/postcards/CN-3870501) 
+ >寄往 [karlynmeow](https://www.postcrossing.com/user/karlynmeow) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/kop2zdny1ve6zexeaehu1tq6gg7e2vsl.jpg)
 
 ### 2024(74)
 
