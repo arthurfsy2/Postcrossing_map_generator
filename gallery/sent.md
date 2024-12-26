@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：137）
+title: 明信片展示墙（寄出：138）
 icon: address-card
-date: 2024-12-19
+date: 2024-12-26
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3893935](https://www.postcrossing.com/postcards/CN-3893935) 
+ >寄往 [Funyee](https://www.postcrossing.com/user/Funyee) 🇹🇼
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/lk7mk7t9xiq234a7h8txgb4l0z71s9s2.jpg)
 
 ### 2024(76)
 
