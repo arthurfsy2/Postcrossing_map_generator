@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：138）
+title: 明信片展示墙（寄出：139）
 icon: address-card
-date: 2024-12-26
+date: 2024-12-31
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3893934](https://www.postcrossing.com/postcards/CN-3893934) 
+ >寄往 [gitagric](https://www.postcrossing.com/user/gitagric) 🇱🇹
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/0r30aaiso69kzh18kbaxjtl4wdw46zey.jpg)
 
 ### 2024(77)
 
