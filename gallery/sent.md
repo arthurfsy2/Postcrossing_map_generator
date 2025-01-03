@@ -147,11 +147,13 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2025(1)
 
 [CN-3886026](https://www.postcrossing.com/postcards/CN-3886026) 
  >寄往 [tabru](https://www.postcrossing.com/user/tabru) 🇩🇪
->
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/11/12 13:02 (当地)
+> 📥 [Germany](https://www.bing.com/maps/?cp=49.43665~8.8088&lvl=12.0&setlang=zh-Hans) 2025/01/03 17:27 (当地)
+ 📏 9,165 | ⏱ 52
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ye8o9wm4lr108xvvotkgi79nmza01b5s.jpg)
