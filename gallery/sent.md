@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：141）
+title: 明信片展示墙（寄出：142）
 icon: address-card
-date: 2025-01-08
+date: 2025-01-09
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3893936](https://www.postcrossing.com/postcards/CN-3893936) 
+ >寄往 [Metelitsa](https://www.postcrossing.com/user/Metelitsa) 🇷🇺
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ah46sfrc4imco98jq7aal3xpvfxvriaw.jpg)
 
 ### 2025(2)
 
