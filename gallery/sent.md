@@ -147,16 +147,16 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2025(7)
 
 [CN-3914594](https://www.postcrossing.com/postcards/CN-3914594) 
  >寄往 [manu86](https://www.postcrossing.com/user/manu86) 🇩🇪
->
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/12/18 17:35 (当地)
+> 📥 [Germany](https://www.bing.com/maps/?cp=49.56798~10.88565&lvl=12.0&setlang=zh-Hans) 2025/01/31 22:28 (当地)
+ 📏 9,024 | ⏱ 44
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/8jqgqwyqukx95qvq3eg30p0sjo8044yy.jpg)
-
-### 2025(6)
 
 [CN-3914595](https://www.postcrossing.com/postcards/CN-3914595) 
  >寄往 [jukar](https://www.postcrossing.com/user/jukar) 🇫🇮
