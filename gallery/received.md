@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：159）
+title: 明信片展示墙（收到：161）
 icon: address-card
-date: 2024-12-22
+date: 2025-02-09
 category:
   - Arthur
 tag:
@@ -146,6 +146,26 @@ const option = {
 ```
 
 :::
+
+### 2025(2)
+
+[BE-940862](https://www.postcrossing.com/postcards/BE-940862) 
+ >来自 [LowerDecksPOBox](https://www.postcrossing.com/user/LowerDecksPOBox) 🇧🇪
+> 📤 [Belgium](https://www.bing.com/maps/?cp=50.85045~4.34878&lvl=12.0&setlang=zh-Hans) 2025/01/18 09:19 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/09 14:19 (当地)
+ 📏 9,374 | ⏱ 22
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/b7mh0t7dp7807vyobmrnykltmmbbynuw.jpg)
+
+[BY-3194098](https://www.postcrossing.com/postcards/BY-3194098) 
+ >来自 [Famickiy](https://www.postcrossing.com/user/Famickiy) 🇧🇾
+> 📤 [Belarus](https://www.bing.com/maps/?cp=53.1561~24.4513&lvl=12.0&setlang=zh-Hans) 2024/08/19 09:35 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/09 14:15 (当地)
+ 📏 8,005 | ⏱ 174
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/bl98vyt4uczsrvq56k7smw99bh0o5rko.jpg)
 
 ### 2024(90)
 
