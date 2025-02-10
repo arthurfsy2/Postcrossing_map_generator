@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：161）
+title: 明信片展示墙（收到：164）
 icon: address-card
-date: 2025-02-09
+date: 2025-02-10
 category:
   - Arthur
 tag:
@@ -147,7 +147,34 @@ const option = {
 
 :::
 
-### 2025(2)
+### 2025(5)
+
+[DE-15094223](https://www.postcrossing.com/postcards/DE-15094223) 
+ >来自 [siegfried48](https://www.postcrossing.com/user/siegfried48) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=50.8357~12.92922&lvl=12.0&setlang=zh-Hans) 2025/01/18 09:17 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/10 20:17 (当地)
+ 📏 8,834 | ⏱ 23
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/3qsmcg90rqpc2305271i7rs4fwash8bi.jpg)
+
+[DE-15094234](https://www.postcrossing.com/postcards/DE-15094234) 
+ >来自 [eule75](https://www.postcrossing.com/user/eule75) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=53.4~9.96667&lvl=12.0&setlang=zh-Hans) 2025/01/18 09:21 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/10 19:51 (当地)
+ 📏 8,904 | ⏱ 23
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/d60evvcn3juucjpcw5jwe739px3eps96.jpg)
+
+[US-11073689](https://www.postcrossing.com/postcards/US-11073689) 
+ >来自 [marora](https://www.postcrossing.com/user/marora) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=32.71571~-117.16472&lvl=12.0&setlang=zh-Hans) 2025/01/18 00:20 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/10 19:49 (当地)
+ 📏 11,798 | ⏱ 23
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/gpykzgidkgxwde3lezduqrbkxov2i3ay.jpg)
 
 [BE-940862](https://www.postcrossing.com/postcards/BE-940862) 
  >来自 [LowerDecksPOBox](https://www.postcrossing.com/user/LowerDecksPOBox) 🇧🇪
