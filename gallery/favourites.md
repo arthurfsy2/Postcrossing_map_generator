@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（我的点赞：29）
+title: 明信片展示墙（我的点赞：30）
 icon: address-card
 date: 2025-02-13
 category:
@@ -27,7 +27,16 @@ order: 4
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/n1xhrcgrw2uheado60rbb55m6c9sjhq0.jpg)
 
-### 2025(1)
+### 2025(2)
+
+[DE-15094223](https://www.postcrossing.com/postcards/DE-15094223) 
+ >来自 [siegfried48](https://www.postcrossing.com/user/siegfried48) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=50.8357~12.92922&lvl=12.0&setlang=zh-Hans) 2025/01/18 09:17 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/10 20:17 (当地)
+ 📏 8,834 | ⏱ 23
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/3qsmcg90rqpc2305271i7rs4fwash8bi.jpg)
 
 [BE-940862](https://www.postcrossing.com/postcards/BE-940862) 
  >来自 [LowerDecksPOBox](https://www.postcrossing.com/user/LowerDecksPOBox) 🇧🇪
