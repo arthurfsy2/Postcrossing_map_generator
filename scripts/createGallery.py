@@ -43,7 +43,7 @@ current_date = datetime.now().date()
 # 将日期格式化为指定格式
 date = current_date.strftime("%Y-%m-%d")
 
-types = ['sent', 'received', 'favourites', 'popular']
+types = ["sent", "received", "favourites", "popular"]
 
 for type in types:
     galleryPath = f"./gallery/{type}.md"
@@ -51,13 +51,12 @@ for type in types:
         shutil.copyfile(galleryPath, f"{galleryPath}BAK")
         with open(f"{galleryPath}BAK", "r", encoding="utf-8") as f:
             content = f.read()
-        dataNew = re.sub(r'date: \d{4}-\d{2}-\d{2}', 'date: $date', content)
+        dataNew = re.sub(r"date: \d{4}-\d{2}-\d{2}", "date: $date", content)
         with open(f"{galleryPath}BAK", "w", encoding="utf-8") as f:
             f.write(dataNew)
 
 
 def getGalleryListBYyear(type):
-
     list_all = ""
     content = readDB(dbpath, type, "Galleryinfo")
     total_num = str(len(content))
@@ -65,21 +64,25 @@ def getGalleryListBYyear(type):
     content_years = {}
     content_years["其他"] = []
     for item in content:
-        received_date = item['receivedDate']
+        received_date = item["receivedDate"]
         if received_date is None:
             content_years["其他"].append(item)
         else:
-            received_year = received_date.split('/')[0]
+            received_year = received_date.split("/")[0]
             if received_year not in content_years:
                 content_years[received_year] = []
             content_years[received_year].append(item)
+
+    # 对每个年份中的项目按 receivedDate 进行排序，None值将排到最后
     for year in content_years:
         content_years[year] = sorted(
-            content_years[year], key=lambda x: x['receivedDate'], reverse=True)
+            content_years[year],
+            key=lambda x: (x["receivedDate"] is None, x["receivedDate"]),
+            reverse=True,
+        )
 
     total_num = str(len(content_years))
     return content_years, total_num
-    # 其他代码
 
 
 def createMD(type):
@@ -112,9 +115,15 @@ def createMD(type):
             FromCoor = json.loads(id["FromCoor"]) if id["FromCoor"] else ""
             ToCoor = json.loads(id["ToCoor"]) if id["ToCoor"] else ""
 
-            travel_time_local = f'> 📤 [{sentCountry}](https://www.bing.com/maps/?cp={FromCoor[0]}~{FromCoor[1]}&lvl=12.0&setlang=zh-Hans) {sentDate_local} (当地)\n' \
-                                f'> 📥 [{receivedCountry}](https://www.bing.com/maps/?cp={ToCoor[0]}~{ToCoor[1]}&lvl=12.0&setlang=zh-Hans) {receivedDate_local} (当地)\n' if id["FromCoor"] else ""
-            userInfo = f'{from_or_to} {id["userInfo"]}' if id["userInfo"] is not None else ""
+            travel_time_local = (
+                f"> 📤 [{sentCountry}](https://www.bing.com/maps/?cp={FromCoor[0]}~{FromCoor[1]}&lvl=12.0&setlang=zh-Hans) {sentDate_local} (当地)\n"
+                f"> 📥 [{receivedCountry}](https://www.bing.com/maps/?cp={ToCoor[0]}~{ToCoor[1]}&lvl=12.0&setlang=zh-Hans) {receivedDate_local} (当地)\n"
+                if id["FromCoor"]
+                else ""
+            )
+            userInfo = (
+                f'{from_or_to} {id["userInfo"]}' if id["userInfo"] is not None else ""
+            )
             # userInfo}]({baseUrl}/user/{userInfo}
             countryNameEmoji = id["countryNameEmoji"] if id["countryNameEmoji"] else ""
 
@@ -137,12 +146,10 @@ def createMD(type):
         MDcontent_all += year_all
         # print(f"{account}'{type}展示墙数量:{Num}\n{account}'{type}展示墙页数:{pageNum}\n")
     template = Template(MDcontent_all)
-    MDcontent_all = template.render(
-            repo = repo
-            )
+    MDcontent_all = template.render(repo=repo)
     if type in types:
         num = types.index(type) + 2
-    
+
     replaceTemplate(type, date, num, title, MDcontent_all, repo)
 
 
@@ -154,13 +161,9 @@ def replaceTemplate(type, date, num, title, MDcontent_all, repo):
         with open(f"./template/type_template.md", "r", encoding="utf-8") as f:
             template = Template(f.read())
         dataNew = template.render(
-            type = type,
-            num = str(num),
-            title = title,
-            content = MDcontent_all,
-            repo = repo
-            )
-        
+            type=type, num=str(num), title=title, content=MDcontent_all, repo=repo
+        )
+
         print(f"已替换type:{type}")
         print("已替换明信片墙order")
         print("已替换明信片墙title")
@@ -168,8 +171,8 @@ def replaceTemplate(type, date, num, title, MDcontent_all, repo):
         print("已替换明信片内容")
     else:
 
-        dataNew = f'---\ntitle: {title}\nicon: address-card\ndate: $date\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}'
-        
+        dataNew = f"---\ntitle: {title}\nicon: address-card\ndate: $date\ncategory:\n  - {nickName}\ntag:\n  - postcrossing\norder: {num}\n---\n\n{link}\n\n{MDcontent_all}"
+
     # 换为你的blog的本地链接，可自动同步过去
     blog_path = rf"D:\web\Blog\src\Arthur\Postcrossing"
     if os.path.exists(blog_path):
@@ -183,7 +186,7 @@ def replaceTemplate(type, date, num, title, MDcontent_all, repo):
         dbStat = compareMD5(f"{filename_md}BAK", f"{filename_md}NEW")
         if dbStat == "1":
             print(f"{filename_md} 有更新")
-            dataNew = dataNew.replace('$date', date)
+            dataNew = dataNew.replace("$date", date)
             with open(f"{filename_md}", "w", encoding="utf-8") as f:
                 f.write(dataNew)
             print(f"\n{type}.md已成功更新")
