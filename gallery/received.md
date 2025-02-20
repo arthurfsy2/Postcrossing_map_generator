@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：164）
+title: 明信片展示墙（收到：168）
 icon: address-card
-date: 2025-02-10
+date: 2025-02-20
 category:
   - Arthur
 tag:
@@ -147,7 +147,43 @@ const option = {
 
 :::
 
-### 2025(5)
+### 2025(9)
+
+[BY-3270850](https://www.postcrossing.com/postcards/BY-3270850) 
+ >来自 [Chasodeyka](https://www.postcrossing.com/user/Chasodeyka) 🇧🇾
+> 📤 [Belarus](https://www.bing.com/maps/?cp=53.9~27.56667&lvl=12.0&setlang=zh-Hans) 2025/01/18 12:05 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/21 00:18 (当地)
+ 📏 7,786 | ⏱ 33
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/7bsepfdi28q4an1dax7c4ifia3e03u2c.jpg)
+
+[CZ-2181877](https://www.postcrossing.com/postcards/CZ-2181877) 
+ >来自 [Ladikka](https://www.postcrossing.com/user/Ladikka) 🇨🇿
+> 📤 [Czechia](https://www.bing.com/maps/?cp=50.08804~14.42076&lvl=12.0&setlang=zh-Hans) 2025/01/19 16:22 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/21 00:05 (当地)
+ 📏 8,768 | ⏱ 32
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/4e6wr1cxzebqxaph51twp7ny8orfp915.jpg)
+
+[DE-15094225](https://www.postcrossing.com/postcards/DE-15094225) 
+ >来自 [Lutzkrannich](https://www.postcrossing.com/user/Lutzkrannich) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=50.9787~11.03283&lvl=12.0&setlang=zh-Hans) 2025/01/18 09:19 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/21 00:00 (当地)
+ 📏 8,949 | ⏱ 33
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/dtvytmp5saychi0c8vj9bbldaf5ro2md.jpg)
+
+[DE-15094224](https://www.postcrossing.com/postcards/DE-15094224) 
+ >来自 [luciusmetellus](https://www.postcrossing.com/user/luciusmetellus) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=53.56414~13.27532&lvl=12.0&setlang=zh-Hans) 2025/01/18 09:18 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/20 23:53 (当地)
+ 📏 8,696 | ⏱ 33
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/q9unx5fl0dkq22rm0z6xvgfip2ue33r8.jpg)
 
 [DE-15094223](https://www.postcrossing.com/postcards/DE-15094223) 
  >来自 [siegfried48](https://www.postcrossing.com/user/siegfried48) 🇩🇪
