@@ -432,6 +432,24 @@
     "receivedDateFirst": null
   },
   {
+    "name": "Latvia",
+    "countryCode": "LV",
+    "flagEmoji": "🇱🇻",
+    "value": 2,
+    "sentNum": 1,
+    "receivedNum": 1,
+    "sentAvg": 59,
+    "receivedAvg": 36,
+    "sentMedian": 59,
+    "receivedMedian": 36,
+    "sentHistory": "[59]",
+    "receivedHistory": "[36]",
+    "sentDateHistory": "[1421473921]",
+    "receivedDateHistory": "[1740299146]",
+    "sentDateFirst": "2015/01/17",
+    "receivedDateFirst": "2025/02/23"
+  },
+  {
     "name": "Poland",
     "countryCode": "PL",
     "flagEmoji": "🇵🇱",
@@ -610,24 +628,6 @@
     "receivedDateHistory": "[1419221868]",
     "sentDateFirst": null,
     "receivedDateFirst": "2014/12/22"
-  },
-  {
-    "name": "Latvia",
-    "countryCode": "LV",
-    "flagEmoji": "🇱🇻",
-    "value": 1,
-    "sentNum": 1,
-    "receivedNum": 0,
-    "sentAvg": 59,
-    "receivedAvg": null,
-    "sentMedian": 59,
-    "receivedMedian": null,
-    "sentHistory": "[59]",
-    "receivedHistory": "[]",
-    "sentDateHistory": "[1421473921]",
-    "receivedDateHistory": "[]",
-    "sentDateFirst": "2015/01/17",
-    "receivedDateFirst": null
   },
   {
     "name": "Croatia",

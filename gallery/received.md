@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：171）
+title: 明信片展示墙（收到：172）
 icon: address-card
 date: 2025-02-23
 category:
@@ -147,30 +147,43 @@ const option = {
 
 :::
 
-### 其他(3)
+### 其他(1)
+
+[LV-433935](https://www.postcrossing.com/postcards/LV-433935) 
+ >来自 [Semlina](https://www.postcrossing.com/user/Semlina) 🇱🇻
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/pfr65bl6yr8dicezg5a13dc3t3zx12cu.jpg)
+
+### 2025(12)
 
 [DE-15094232](https://www.postcrossing.com/postcards/DE-15094232) 
  >来自 [blnbear](https://www.postcrossing.com/user/blnbear) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=49.97397~8.82816&lvl=12.0&setlang=zh-Hans) 2025/01/18 09:21 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/23 16:20 (当地)
+ 📏 9,138 | ⏱ 36
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6b641d5h6nztzw27w1jgt6zsxstjar5s.jpg)
 
 [RU-10398212](https://www.postcrossing.com/postcards/RU-10398212) 
  >来自 [Sunnydream](https://www.postcrossing.com/user/Sunnydream) 🇷🇺
->
+> 📤 [Russia](https://www.bing.com/maps/?cp=55.42419~37.55472&lvl=12.0&setlang=zh-Hans) 2025/01/18 11:19 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/23 16:17 (当地)
+ 📏 7,128 | ⏱ 36
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/de66jh5td5si4g68ymrgagf680ppvwhz.jpg)
 
 [DE-15094228](https://www.postcrossing.com/postcards/DE-15094228) 
  >来自 [SimiWeidi](https://www.postcrossing.com/user/SimiWeidi) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=51.34669~7.24343&lvl=12.0&setlang=zh-Hans) 2025/01/18 09:21 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/23 16:13 (当地)
+ 📏 9,170 | ⏱ 36
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5jxd0lw2yfx5z8lt2arkkhyxareodt0k.jpg)
-
-### 2025(9)
 
 [BY-3270850](https://www.postcrossing.com/postcards/BY-3270850) 
  >来自 [Chasodeyka](https://www.postcrossing.com/user/Chasodeyka) 🇧🇾

@@ -11,7 +11,7 @@ order: 4
 
 ## [arthurfsy's favourites](https://www.postcrossing.com/user/arthurfsy/gallery/favourites)
 
-### 其他(4)
+### 其他(2)
 
 [US-5713297](https://www.postcrossing.com/postcards/US-5713297) 
  >来自 [BarbSchmidt](https://www.postcrossing.com/user/BarbSchmidt) 
@@ -27,21 +27,25 @@ order: 4
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/n1xhrcgrw2uheado60rbb55m6c9sjhq0.jpg)
 
+### 2025(4)
+
 [RU-10398212](https://www.postcrossing.com/postcards/RU-10398212) 
  >来自 [Sunnydream](https://www.postcrossing.com/user/Sunnydream) 🇷🇺
->
+> 📤 [Russia](https://www.bing.com/maps/?cp=55.42419~37.55472&lvl=12.0&setlang=zh-Hans) 2025/01/18 11:19 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/23 16:17 (当地)
+ 📏 7,128 | ⏱ 36
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/de66jh5td5si4g68ymrgagf680ppvwhz.jpg)
 
 [DE-15094228](https://www.postcrossing.com/postcards/DE-15094228) 
  >来自 [SimiWeidi](https://www.postcrossing.com/user/SimiWeidi) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=51.34669~7.24343&lvl=12.0&setlang=zh-Hans) 2025/01/18 09:21 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/23 16:13 (当地)
+ 📏 9,170 | ⏱ 36
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5jxd0lw2yfx5z8lt2arkkhyxareodt0k.jpg)
-
-### 2025(2)
 
 [DE-15094223](https://www.postcrossing.com/postcards/DE-15094223) 
  >来自 [siegfried48](https://www.postcrossing.com/user/siegfried48) 🇩🇪
