@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：150）
+title: 明信片展示墙（寄出：151）
 icon: address-card
-date: 2025-02-21
+date: 2025-02-28
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3954376](https://www.postcrossing.com/postcards/CN-3954376) 
+ >寄往 [Tiesk](https://www.postcrossing.com/user/Tiesk) 🇳🇱
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/lgvuteqfjtqbqgc7wbh9xc8cgxu3qhje.jpg)
 
 ### 2025(11)
 
