@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：172）
+title: 明信片展示墙（收到：173）
 icon: address-card
-date: 2025-02-23
+date: 2025-03-03
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[US-11115566](https://www.postcrossing.com/postcards/US-11115566) 
+ >来自 [DosRobles](https://www.postcrossing.com/user/DosRobles) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/1f4tycx1tz4goc6foztx7n2j2ntqhs70.jpg)
 
 ### 2025(13)
 
