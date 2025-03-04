@@ -11,18 +11,18 @@ order: 5
 
 ## [arthurfsy's popular](https://www.postcrossing.com/user/arthurfsy/gallery/popular)
 
-### 其他(1)
+### 2025(4)
 
 [CN-3931256](https://www.postcrossing.com/postcards/CN-3931256) 
  >寄往  🇺🇸
->
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/01/09 13:27 (当地)
+> 📥 [U.S.A.](https://www.bing.com/maps/?cp=41.92704~-73.99736&lvl=12.0&setlang=zh-Hans) 2025/03/04 16:16 (当地)
+ 📏 12,794 | ⏱ 55
 >点赞人数：**1**
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/owbjrgmuxy4hurps9chs0fqen9vl2qni.jpg) 
 
- ### 2025(3)
-
-[CN-3944802](https://www.postcrossing.com/postcards/CN-3944802) 
+ [CN-3944802](https://www.postcrossing.com/postcards/CN-3944802) 
  >寄往  🇷🇺
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/01/26 09:11 (当地)
 > 📥 [Russia](https://www.bing.com/maps/?cp=54.5293~36.27542&lvl=12.0&setlang=zh-Hans) 2025/03/04 11:28 (当地)
