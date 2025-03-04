@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：152）
+title: 明信片展示墙（寄出：153）
 icon: address-card
 date: 2025-03-04
 category:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3931256](https://www.postcrossing.com/postcards/CN-3931256) 
+ >寄往 [Trans_Niqabi](https://www.postcrossing.com/user/Trans_Niqabi) 🇺🇸
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/owbjrgmuxy4hurps9chs0fqen9vl2qni.jpg)
 
 ### 2025(13)
 
