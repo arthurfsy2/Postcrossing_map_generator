@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：173）
+title: 明信片展示墙（收到：174）
 icon: address-card
-date: 2025-03-03
+date: 2025-03-06
 category:
   - Arthur
 tag:
@@ -147,7 +147,7 @@ const option = {
 
 :::
 
-### 2025(14)
+### 2025(15)
 
 [US-11115566](https://www.postcrossing.com/postcards/US-11115566) 
  >来自 [DosRobles](https://www.postcrossing.com/user/DosRobles) 🇺🇸
@@ -157,6 +157,15 @@ const option = {
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/1f4tycx1tz4goc6foztx7n2j2ntqhs70.jpg)
+
+[UA-1985093](https://www.postcrossing.com/postcards/UA-1985093) 
+ >来自 [morpheu_12](https://www.postcrossing.com/user/morpheu_12) 🇺🇦
+> 📤 [Ukraine](https://www.bing.com/maps/?cp=50.45466~30.5238&lvl=12.0&setlang=zh-Hans) 2025/01/18 10:19 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/03/03 21:30 (当地)
+ 📏 7,659 | ⏱ 44
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/mgkzhrp8nm3mc8gwpn5lru6kevggu1pj.jpg)
 
 [LV-433935](https://www.postcrossing.com/postcards/LV-433935) 
  >来自 [Semlina](https://www.postcrossing.com/user/Semlina) 🇱🇻
