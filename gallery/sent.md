@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：153）
+title: 明信片展示墙（寄出：154）
 icon: address-card
-date: 2025-03-04
+date: 2025-03-07
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3944801](https://www.postcrossing.com/postcards/CN-3944801) 
+ >寄往 [Konobas](https://www.postcrossing.com/user/Konobas) 🇺🇦
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9818nknsk932ev0gl0cku7umlwoky47e.jpg)
 
 ### 2025(14)
 
