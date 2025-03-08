@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（寄出：154）
 icon: address-card
-date: 2025-03-07
+date: 2025-03-08
 category:
   - Arthur
 tag:
@@ -147,16 +147,16 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2025(15)
 
 [CN-3944801](https://www.postcrossing.com/postcards/CN-3944801) 
  >寄往 [Konobas](https://www.postcrossing.com/user/Konobas) 🇺🇦
->
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/01/26 09:10 (当地)
+> 📥 [Ukraine](https://www.bing.com/maps/?cp=50.45466~30.5238&lvl=12.0&setlang=zh-Hans) 2025/03/08 00:18 (当地)
+ 📏 7,659 | ⏱ 41
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9818nknsk932ev0gl0cku7umlwoky47e.jpg)
-
-### 2025(14)
 
 [CN-3931256](https://www.postcrossing.com/postcards/CN-3931256) 
  >寄往 [Trans_Niqabi](https://www.postcrossing.com/user/Trans_Niqabi) 🇺🇸
