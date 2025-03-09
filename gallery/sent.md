@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：154）
+title: 明信片展示墙（寄出：155）
 icon: address-card
-date: 2025-03-08
+date: 2025-03-09
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3934897](https://www.postcrossing.com/postcards/CN-3934897) 
+ >寄往 [wanderingAkash](https://www.postcrossing.com/user/wanderingAkash) 🇮🇳
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5dj5j08chro7djyf0ccb03pe1as2dvr8.jpg)
 
 ### 2025(15)
 
