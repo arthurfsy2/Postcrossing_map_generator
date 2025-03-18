@@ -150,7 +150,7 @@ const option = {
 ### 2025(17)
 
 [CN-3935240](https://www.postcrossing.com/postcards/CN-3935240) 
- >寄往 [auroraleal](https://www.postcrossing.com/user/auroraleal) 🇷🇺
+ >寄往 ***该用户已关闭*** 🇷🇺
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/01/14 09:44 (当地)
 > 📥 [Russia](https://www.bing.com/maps/?cp=60.04796~30.45204&lvl=12.0&setlang=zh-Hans) 2025/03/18 18:46 (当地)
  📏 7,507 | ⏱ 64
