@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：175）
+title: 明信片展示墙（收到：176）
 icon: address-card
-date: 2025-03-13
+date: 2025-03-24
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[TW-3675643](https://www.postcrossing.com/postcards/TW-3675643) 
+ >来自 [tn058359](https://www.postcrossing.com/user/tn058359) 🇹🇼
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/272bfb6b2lzb5m9n5gxptbvzrl72r0y9.jpg)
 
 ### 2025(16)
 
