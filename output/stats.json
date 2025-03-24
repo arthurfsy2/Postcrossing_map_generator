@@ -252,6 +252,24 @@
     "receivedDateFirst": "2014/09/22"
   },
   {
+    "name": "Belgium",
+    "countryCode": "BE",
+    "flagEmoji": "🇧🇪",
+    "value": 5,
+    "sentNum": 2,
+    "receivedNum": 3,
+    "sentAvg": 39,
+    "receivedAvg": 42,
+    "sentMedian": 39,
+    "receivedMedian": 40,
+    "sentHistory": "[23, 56]",
+    "receivedHistory": "[40, 22, 65]",
+    "sentDateHistory": "[1703846146, 1731678096]",
+    "receivedDateHistory": "[1409549485, 1739081996, 1742783699]",
+    "sentDateFirst": "2023/12/29",
+    "receivedDateFirst": "2014/09/01"
+  },
+  {
     "name": "India",
     "countryCode": "IN",
     "flagEmoji": "🇮🇳",
@@ -286,24 +304,6 @@
     "receivedDateHistory": "[1397214737, 1401456787, 1401456816, 1712376063]",
     "sentDateFirst": null,
     "receivedDateFirst": "2014/04/11"
-  },
-  {
-    "name": "Belgium",
-    "countryCode": "BE",
-    "flagEmoji": "🇧🇪",
-    "value": 4,
-    "sentNum": 2,
-    "receivedNum": 2,
-    "sentAvg": 39,
-    "receivedAvg": 31,
-    "sentMedian": 39,
-    "receivedMedian": 31,
-    "sentHistory": "[23, 56]",
-    "receivedHistory": "[40, 22]",
-    "sentDateHistory": "[1703846146, 1731678096]",
-    "receivedDateHistory": "[1409549485, 1739081996]",
-    "sentDateFirst": "2023/12/29",
-    "receivedDateFirst": "2014/09/01"
   },
   {
     "name": "France",

@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：176）
+title: 明信片展示墙（收到：177）
 icon: address-card
 date: 2025-03-24
 category:
@@ -149,14 +149,23 @@ const option = {
 
 ### 其他(1)
 
-[TW-3675643](https://www.postcrossing.com/postcards/TW-3675643) 
- >来自 [tn058359](https://www.postcrossing.com/user/tn058359) 🇹🇼
+[BE-940863](https://www.postcrossing.com/postcards/BE-940863) 
+ >来自 [loops](https://www.postcrossing.com/user/loops) 🇧🇪
 >
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/272bfb6b2lzb5m9n5gxptbvzrl72r0y9.jpg)
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/b0699nw0symvjc9v3df9ytyxs7cwrunv.jpg)
 
-### 2025(16)
+### 2025(17)
+
+[TW-3675643](https://www.postcrossing.com/postcards/TW-3675643) 
+ >来自 [tn058359](https://www.postcrossing.com/user/tn058359) 🇹🇼
+> 📤 [Taiwan](https://www.bing.com/maps/?cp=22.99083~120.21333&lvl=12.0&setlang=zh-Hans) 2024/05/07 16:18 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/03/24 09:21 (当地)
+ 📏 614 | ⏱ 321
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/272bfb6b2lzb5m9n5gxptbvzrl72r0y9.jpg)
 
 [CA-1548364](https://www.postcrossing.com/postcards/CA-1548364) 
  >来自 [Sc123456](https://www.postcrossing.com/user/Sc123456) 🇨🇦
