@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：156）
+title: 明信片展示墙（寄出：157）
 icon: address-card
-date: 2025-03-18
+date: 2025-04-01
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3963357](https://www.postcrossing.com/postcards/CN-3963357) 
+ >寄往 [Seliad](https://www.postcrossing.com/user/Seliad) 🇩🇪
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/iihmjjid3jxo5jagst9okum1wq2d19zn.jpg)
 
 ### 2025(17)
 
