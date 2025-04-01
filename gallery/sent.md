@@ -147,16 +147,16 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2025(18)
 
 [CN-3963357](https://www.postcrossing.com/postcards/CN-3963357) 
  >寄往 [Seliad](https://www.postcrossing.com/user/Seliad) 🇩🇪
->
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/21 15:27 (当地)
+> 📥 [Germany](https://www.bing.com/maps/?cp=49.59099~11.00783&lvl=12.0&setlang=zh-Hans) 2025/04/01 16:41 (当地)
+ 📏 9,015 | ⏱ 39
 
 
 ![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/iihmjjid3jxo5jagst9okum1wq2d19zn.jpg)
-
-### 2025(17)
 
 [CN-3935240](https://www.postcrossing.com/postcards/CN-3935240) 
  >寄往 ***该用户已关闭*** 🇷🇺
