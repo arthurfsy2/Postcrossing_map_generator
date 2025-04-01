@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：157）
+title: 明信片展示墙（寄出：158）
 icon: address-card
 date: 2025-04-01
 category:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2025(18)
+### 2025(19)
+
+[CN-3930391](https://www.postcrossing.com/postcards/CN-3930391) 
+ >寄往 [Zandy](https://www.postcrossing.com/user/Zandy) 🇩🇪
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/01/08 13:09 (当地)
+> 📥 [Germany](https://www.bing.com/maps/?cp=49.23498~9.33215&lvl=12.0&setlang=zh-Hans) 2025/04/01 22:12 (当地)
+ 📏 9,141 | ⏱ 84
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/c87dkppy2aooigeqo9gc7jddky3gj609.jpg)
 
 [CN-3963357](https://www.postcrossing.com/postcards/CN-3963357) 
  >寄往 [Seliad](https://www.postcrossing.com/user/Seliad) 🇩🇪
