@@ -270,6 +270,24 @@
     "receivedDateFirst": "2014/09/01"
   },
   {
+    "name": "France",
+    "countryCode": "FR",
+    "flagEmoji": "🇫🇷",
+    "value": 5,
+    "sentNum": 3,
+    "receivedNum": 2,
+    "sentAvg": 39,
+    "receivedAvg": 21,
+    "sentMedian": 38,
+    "receivedMedian": 21,
+    "sentHistory": "[30, 38, 50]",
+    "receivedHistory": "[14, 28]",
+    "sentDateHistory": "[1695829476, 1707506295, 1744375159]",
+    "receivedDateHistory": "[1410764839, 1698299854]",
+    "sentDateFirst": "2023/09/27",
+    "receivedDateFirst": "2014/09/15"
+  },
+  {
     "name": "India",
     "countryCode": "IN",
     "flagEmoji": "🇮🇳",
@@ -304,24 +322,6 @@
     "receivedDateHistory": "[1397214737, 1401456787, 1401456816, 1712376063]",
     "sentDateFirst": null,
     "receivedDateFirst": "2014/04/11"
-  },
-  {
-    "name": "France",
-    "countryCode": "FR",
-    "flagEmoji": "🇫🇷",
-    "value": 4,
-    "sentNum": 2,
-    "receivedNum": 2,
-    "sentAvg": 34,
-    "receivedAvg": 21,
-    "sentMedian": 34,
-    "receivedMedian": 21,
-    "sentHistory": "[30, 38]",
-    "receivedHistory": "[14, 28]",
-    "sentDateHistory": "[1695829476, 1707506295]",
-    "receivedDateHistory": "[1410764839, 1698299854]",
-    "sentDateFirst": "2023/09/27",
-    "receivedDateFirst": "2014/09/15"
   },
   {
     "name": "Korea (South)",

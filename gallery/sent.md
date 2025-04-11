@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：160）
+title: 明信片展示墙（寄出：161）
 icon: address-card
-date: 2025-04-07
+date: 2025-04-11
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3962833](https://www.postcrossing.com/postcards/CN-3962833) 
+ >寄往 [contessedelphine](https://www.postcrossing.com/user/contessedelphine) 🇫🇷
+>
+
+
+![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/22pl99b5ezw36ezo481n1y8xdo7a2xo6.jpg)
 
 ### 2025(21)
 
