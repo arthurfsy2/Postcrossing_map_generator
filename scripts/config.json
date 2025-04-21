@@ -1,7 +1,7 @@
 {
     "Cookie": "__Host-postcrossing=vre5a4da2ki0ino1dmf9a2io53; PostcrossingRemember=Zu2EqOxGqgYQuU5lHt5oiGFORcQpMB1C",
-    "picDriverPath": "https://raw.gitmirror.com/{{repo}}/main/gallery/picture",
-    "storyPicLink": "https://raw.gitmirror.com/{{repo}}/main/template/content",
+    "picDriverPath": "https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture",
+    "storyPicLink": "https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/template/content",
     "storyPicType": "webp",
     "dbpath": "./template/data.db",
     "personalPageLink": "https://postcrossing.4a1801.life"
