@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（我的点赞：33）
 icon: address-card
-date: 2025-03-03
+date: 2025-04-21
 category:
   - Arthur
 tag:
@@ -18,14 +18,14 @@ order: 4
 >
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/fypwr02syz1w87zf3ak5hovd62c6wnx7.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/fypwr02syz1w87zf3ak5hovd62c6wnx7.jpg)
 
 [CN-3853790](https://www.postcrossing.com/postcards/CN-3853790) 
  >来自 [zhujiangriver](https://www.postcrossing.com/user/zhujiangriver) 
 >
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/n1xhrcgrw2uheado60rbb55m6c9sjhq0.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/n1xhrcgrw2uheado60rbb55m6c9sjhq0.jpg)
 
 ### 2025(5)
 
@@ -36,7 +36,7 @@ order: 4
  📏 11,798 | ⏱ 29
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/1f4tycx1tz4goc6foztx7n2j2ntqhs70.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/1f4tycx1tz4goc6foztx7n2j2ntqhs70.jpg)
 
 [RU-10398212](https://www.postcrossing.com/postcards/RU-10398212) 
  >来自 [Sunnydream](https://www.postcrossing.com/user/Sunnydream) 🇷🇺
@@ -45,7 +45,7 @@ order: 4
  📏 7,128 | ⏱ 36
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/de66jh5td5si4g68ymrgagf680ppvwhz.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/de66jh5td5si4g68ymrgagf680ppvwhz.jpg)
 
 [DE-15094228](https://www.postcrossing.com/postcards/DE-15094228) 
  >来自 [SimiWeidi](https://www.postcrossing.com/user/SimiWeidi) 🇩🇪
@@ -54,7 +54,7 @@ order: 4
  📏 9,170 | ⏱ 36
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5jxd0lw2yfx5z8lt2arkkhyxareodt0k.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/5jxd0lw2yfx5z8lt2arkkhyxareodt0k.jpg)
 
 [DE-15094223](https://www.postcrossing.com/postcards/DE-15094223) 
  >来自 [siegfried48](https://www.postcrossing.com/user/siegfried48) 🇩🇪
@@ -63,7 +63,7 @@ order: 4
  📏 8,834 | ⏱ 23
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/3qsmcg90rqpc2305271i7rs4fwash8bi.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/3qsmcg90rqpc2305271i7rs4fwash8bi.jpg)
 
 [BE-940862](https://www.postcrossing.com/postcards/BE-940862) 
  >来自 [LowerDecksPOBox](https://www.postcrossing.com/user/LowerDecksPOBox) 🇧🇪
@@ -72,7 +72,7 @@ order: 4
  📏 9,374 | ⏱ 22
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/b7mh0t7dp7807vyobmrnykltmmbbynuw.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/b7mh0t7dp7807vyobmrnykltmmbbynuw.jpg)
 
 ### 2024(13)
 
@@ -83,7 +83,7 @@ order: 4
  📏 9,038 | ⏱ 51
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/6qlppbt3na7z0ye7rhkma6od3yuzo23t.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/6qlppbt3na7z0ye7rhkma6od3yuzo23t.jpg)
 
 [RU-10292585](https://www.postcrossing.com/postcards/RU-10292585) 
  >来自 [Natalka72](https://www.postcrossing.com/user/Natalka72) 🇷🇺
@@ -92,7 +92,7 @@ order: 4
  📏 5,787 | ⏱ 51
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/t5qgc8csd026uly2sestqlg53ygf8kbj.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/t5qgc8csd026uly2sestqlg53ygf8kbj.jpg)
 
 [RU-10295172](https://www.postcrossing.com/postcards/RU-10295172) 
  >来自 [gav23](https://www.postcrossing.com/user/gav23) 🇷🇺
@@ -101,7 +101,7 @@ order: 4
  📏 7,169 | ⏱ 40
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9avan79d8gkdztep9tv18pzixrj6tedi.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/9avan79d8gkdztep9tv18pzixrj6tedi.jpg)
 
 [LU-115905](https://www.postcrossing.com/postcards/LU-115905) 
  >来自 [Delol](https://www.postcrossing.com/user/Delol) 🇱🇺
@@ -110,7 +110,7 @@ order: 4
  📏 9,324 | ⏱ 39
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5j1ameev3u71sr0otvv4pg0gf5rrkip5.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/5j1ameev3u71sr0otvv4pg0gf5rrkip5.jpg)
 
 [AT-759553](https://www.postcrossing.com/postcards/AT-759553) 
  >来自 [JuKarin888](https://www.postcrossing.com/user/JuKarin888) 🇦🇹
@@ -119,7 +119,7 @@ order: 4
  📏 8,712 | ⏱ 39
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/o1gh6kicp67jybaadf8xu4vp9cfw8hqe.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/o1gh6kicp67jybaadf8xu4vp9cfw8hqe.jpg)
 
 [US-10847318](https://www.postcrossing.com/postcards/US-10847318) 
  >来自 [TrvlnMatt](https://www.postcrossing.com/user/TrvlnMatt) 🇺🇸
@@ -128,7 +128,7 @@ order: 4
  📏 12,114 | ⏱ 30
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/k7425q6uvokixuajbekut62fztreqdxb.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/k7425q6uvokixuajbekut62fztreqdxb.jpg)
 
 [RU-10292586](https://www.postcrossing.com/postcards/RU-10292586) 
  >来自 [Trushina_N](https://www.postcrossing.com/user/Trushina_N) 🇷🇺
@@ -137,7 +137,7 @@ order: 4
  📏 7,043 | ⏱ 30
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/hqlmkxd9x1tx9jxwtbrrzismst3vra9n.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/hqlmkxd9x1tx9jxwtbrrzismst3vra9n.jpg)
 
 [FI-4654970](https://www.postcrossing.com/postcards/FI-4654970) 
  >来自 [Jussi](https://www.postcrossing.com/user/Jussi) 🇫🇮
@@ -146,7 +146,7 @@ order: 4
  📏 7,807 | ⏱ 18
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/8tty35ec75j6y12o4iyfsvbw3zvh2uma.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/8tty35ec75j6y12o4iyfsvbw3zvh2uma.jpg)
 
 [FI-4642929](https://www.postcrossing.com/postcards/FI-4642929) 
  >来自 [ajoutsenlampi](https://www.postcrossing.com/user/ajoutsenlampi) 🇫🇮
@@ -155,7 +155,7 @@ order: 4
  📏 7,752 | ⏱ 29
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/n6xqvqvrnwshxc1kadkl3ias2sfbeku4.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/n6xqvqvrnwshxc1kadkl3ias2sfbeku4.jpg)
 
 [IE-259244](https://www.postcrossing.com/postcards/IE-259244) 
  >来自 [nopecat](https://www.postcrossing.com/user/nopecat) 🇮🇪
@@ -164,7 +164,7 @@ order: 4
  📏 9,819 | ⏱ 26
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/xi5hlo2lz3k166xgj1uom0i29tr3nw95.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/xi5hlo2lz3k166xgj1uom0i29tr3nw95.jpg)
 
 [DE-14228192](https://www.postcrossing.com/postcards/DE-14228192) 
  >来自 [Rainbow211](https://www.postcrossing.com/user/Rainbow211) 🇩🇪
@@ -173,7 +173,7 @@ order: 4
  📏 9,112 | ⏱ 24
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/hq5v2fihlqr6b65f23y0pavuv5utr6co.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/hq5v2fihlqr6b65f23y0pavuv5utr6co.jpg)
 
 [JP-2075151](https://www.postcrossing.com/postcards/JP-2075151) 
  >来自 [dream3225](https://www.postcrossing.com/user/dream3225) 🇯🇵
@@ -182,7 +182,7 @@ order: 4
  📏 2,620 | ⏱ 14
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/xdyyhnwy7o5hdlqsyhwy34v4miryawnt.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/xdyyhnwy7o5hdlqsyhwy34v4miryawnt.jpg)
 
 [DE-13942438](https://www.postcrossing.com/postcards/DE-13942438) 
  >来自 [Stiflers-Mom](https://www.postcrossing.com/user/Stiflers-Mom) 🇩🇪
@@ -191,7 +191,7 @@ order: 4
  📏 9,184 | ⏱ 11
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ngxabnqi7ztlwpdqhywyq65oonsad12s.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/ngxabnqi7ztlwpdqhywyq65oonsad12s.jpg)
 
 ### 2023(5)
 
@@ -202,7 +202,7 @@ order: 4
  📏 7,928 | ⏱ 44
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/dfsgfv5r49yok2quiwxlxh25edsrjl37.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/dfsgfv5r49yok2quiwxlxh25edsrjl37.jpg)
 
 [RU-9830214](https://www.postcrossing.com/postcards/RU-9830214) 
  >来自 [EvaS18](https://www.postcrossing.com/user/EvaS18) 🇷🇺
@@ -211,7 +211,7 @@ order: 4
  📏 7,180 | ⏱ 49
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/0mntqe2lc0sfygrisja5uria62de2y7a.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/0mntqe2lc0sfygrisja5uria62de2y7a.jpg)
 
 [NL-5593570](https://www.postcrossing.com/postcards/NL-5593570) 
  >来自 [essie1109](https://www.postcrossing.com/user/essie1109) 🇳🇱
@@ -220,7 +220,7 @@ order: 4
  📏 9,255 | ⏱ 33
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/1fgbz23qvpbsc89bxala10k47jc6a05u.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/1fgbz23qvpbsc89bxala10k47jc6a05u.jpg)
 
 [US-9761471](https://www.postcrossing.com/postcards/US-9761471) 
  >来自 [ilysejohnson](https://www.postcrossing.com/user/ilysejohnson) 🇺🇸
@@ -229,7 +229,7 @@ order: 4
  📏 13,219 | ⏱ 28
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/fe4nng7tl273fn4tq36wtar0ykk1n89r.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/fe4nng7tl273fn4tq36wtar0ykk1n89r.jpg)
 
 [DE-13430236](https://www.postcrossing.com/postcards/DE-13430236) 
  >来自 [annegret](https://www.postcrossing.com/user/annegret) 🇩🇪
@@ -238,7 +238,7 @@ order: 4
  📏 9,178 | ⏱ 13
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/pac25ahehnw47mqqtyrml2khs4q02pyg.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/pac25ahehnw47mqqtyrml2khs4q02pyg.jpg)
 
 ### 2015(1)
 
@@ -249,7 +249,7 @@ order: 4
  📏 6,668 | ⏱ 46
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/2b1ce703735b60462dbd22a0c62b7020.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/2b1ce703735b60462dbd22a0c62b7020.jpg)
 
 ### 2014(7)
 
@@ -260,7 +260,7 @@ order: 4
  📏 6,539 | ⏱ 120
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/66f10b2a5d8fd27da71c75a2307c731e.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/66f10b2a5d8fd27da71c75a2307c731e.jpg)
 
 [KR-112465](https://www.postcrossing.com/postcards/KR-112465) 
  >来自 [minjeomi89](https://www.postcrossing.com/user/minjeomi89) 🇰🇷
@@ -269,7 +269,7 @@ order: 4
  📏 2,193 | ⏱ 35
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/0774ccd1d3ea65b27193547f7df31ec3.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/0774ccd1d3ea65b27193547f7df31ec3.jpg)
 
 [FI-2219730](https://www.postcrossing.com/postcards/FI-2219730) 
  >来自 [Holappa](https://www.postcrossing.com/user/Holappa) 🇫🇮
@@ -278,7 +278,7 @@ order: 4
  📏 6,698 | ⏱ 19
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/5b170a8cf8ecc675cf73e408e1242d3b.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/5b170a8cf8ecc675cf73e408e1242d3b.jpg)
 
 [CZ-524596](https://www.postcrossing.com/postcards/CZ-524596) 
  >来自 [Shalila](https://www.postcrossing.com/user/Shalila) 🇨🇿
@@ -287,7 +287,7 @@ order: 4
  📏 7,744 | ⏱ 18
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/9c9cf76ca55f0503b9de29da15eec701.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/9c9cf76ca55f0503b9de29da15eec701.jpg)
 
 [JP-546807](https://www.postcrossing.com/postcards/JP-546807) 
  >来自 [khitomi](https://www.postcrossing.com/user/khitomi) 🇯🇵
@@ -296,7 +296,7 @@ order: 4
  📏 2,493 | ⏱ 12
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/ccc32e154e8dd8abbcfc3ca6891de7ff.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/ccc32e154e8dd8abbcfc3ca6891de7ff.jpg)
 
 [RU-1876931](https://www.postcrossing.com/postcards/RU-1876931) 
  >来自 [Krasovskii](https://www.postcrossing.com/user/Krasovskii) 🇷🇺
@@ -305,7 +305,7 @@ order: 4
  📏 6,503 | ⏱ 294
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/aa4cde8359c36bf565da6659226cefb0.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/aa4cde8359c36bf565da6659226cefb0.jpg)
 
 [NL-2374423](https://www.postcrossing.com/postcards/NL-2374423) 
  >来自 [Anoushka](https://www.postcrossing.com/user/Anoushka) 🇳🇱
@@ -314,4 +314,4 @@ order: 4
  📏 8,157 | ⏱ 22
 
 
-![](https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/gallery/picture/dcb79e94963d086e9b2fd7d60588ae24.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/dcb79e94963d086e9b2fd7d60588ae24.jpg)
