@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：161）
+title: 明信片展示墙（寄出：162）
 icon: address-card
-date: 2025-04-21
+date: 2025-04-24
 category:
   - Arthur
 tag:
