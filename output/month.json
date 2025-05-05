@@ -208,5 +208,10 @@
     "date": "2025-04",
     "sent": 10,
     "received": 0
+  },
+  {
+    "date": "2025-05",
+    "sent": 0,
+    "received": 1
   }
 ]

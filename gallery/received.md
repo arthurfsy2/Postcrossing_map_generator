@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：177）
+title: 明信片展示墙（收到：178）
 icon: address-card
-date: 2025-04-21
+date: 2025-05-05
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[NL-5733716](https://www.postcrossing.com/postcards/NL-5733716) 
+ >来自 [Arbor](https://www.postcrossing.com/user/Arbor) 🇳🇱
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/z6nq8z240j5v5eb0aq4sy6rw7vop6e73.jpg)
 
 ### 2025(18)
 
