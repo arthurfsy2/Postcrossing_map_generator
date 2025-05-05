@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：166）
+title: 明信片展示墙（寄出：167）
 icon: address-card
-date: 2025-04-30
+date: 2025-05-05
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-4001500](https://www.postcrossing.com/postcards/CN-4001500) 
+ >寄往 [VJacinto](https://www.postcrossing.com/user/VJacinto) 🇵🇹
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/mqaymn693ueghj626ftbfonj9fqqq643.jpg)
 
 ### 2025(27)
 
