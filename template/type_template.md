@@ -17,7 +17,7 @@ order: {{ num }}
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/{{repo}}/main/output/year.json"
+  "https://raw.githubusercontent.com/{{repo}}/main/output/year.json"
 ).then((res) => res.json());
 
 const newData = data.map(({ year, {{type}}}) => ({ name: year, value: {{type}}}));
@@ -76,7 +76,7 @@ const option = {
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/{{repo}}/main/output/month.json"
+  "https://raw.githubusercontent.com/{{repo}}/main/output/month.json"
 ).then((res) => res.json());
 
 var date = data.map(function (item) {
