@@ -133,7 +133,7 @@ scrolling=auto
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/{{repo}}/main/output/calendar.json"
+  "https://raw.githubusercontent.com/{{repo}}/main/output/calendar.json"
 ).then((res) => res.json());
 
 const date = new Date();
@@ -163,7 +163,7 @@ const height = {{height}};
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/{{repo}}/main/output/month.json"
+  "https://raw.githubusercontent.com/{{repo}}/main/output/month.json"
 ).then((res) => res.json());
 
 var date = data.map(function (item) {
@@ -243,7 +243,7 @@ const option = {
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/{{repo}}/main/output/stats.json"
+  "https://raw.githubusercontent.com/{{repo}}/main/output/stats.json"
 ).then((res) => res.json());
 
 const option = {
@@ -303,9 +303,9 @@ scrolling=auto
 
 ::: tabs
 @tab 中文词云
-![](https://raw.gitmirror.com/{{repo}}/main/output/postcrossing_cn.svg)
+![](https://raw.githubusercontent.com/{{repo}}/main/output/postcrossing_cn.svg)
 @tab 英文词云
-![](https://raw.gitmirror.com/{{repo}}/main/output/postcrossing_en.svg)
+![](https://raw.githubusercontent.com/{{repo}}/main/output/postcrossing_en.svg)
 :::
 
 {{storylist}}
