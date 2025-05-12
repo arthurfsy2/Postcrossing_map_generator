@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：178）
+title: 明信片展示墙（收到：180）
 icon: address-card
-date: 2025-05-05
+date: 2025-05-12
 category:
   - Arthur
 tag:
@@ -146,6 +146,22 @@ const option = {
 ```
 
 :::
+
+### 其他(2)
+
+[FR-1798160](https://www.postcrossing.com/postcards/FR-1798160) 
+ >来自 [Claire-Anne](https://www.postcrossing.com/user/Claire-Anne) 🇫🇷
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/knrxt3dxf9ure8u5gqllaya3qihbsz8c.jpg)
+
+[DE-15398865](https://www.postcrossing.com/postcards/DE-15398865) 
+ >来自 [phasin](https://www.postcrossing.com/user/phasin) 🇩🇪
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/g3n63snpw8vegk5oyo7llnejv346naxz.jpg)
 
 ### 2025(19)
 
