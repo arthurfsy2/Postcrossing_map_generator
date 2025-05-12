@@ -147,23 +147,25 @@ const option = {
 
 :::
 
-### 其他(2)
+### 2025(21)
 
 [FR-1798160](https://www.postcrossing.com/postcards/FR-1798160) 
  >来自 [Claire-Anne](https://www.postcrossing.com/user/Claire-Anne) 🇫🇷
->
+> 📤 [France](https://www.bing.com/maps/?cp=45.4177~-0.59466&lvl=12.0&setlang=zh-Hans) 2025/04/24 20:38 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/12 10:44 (当地)
+ 📏 10,000 | ⏱ 17
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/knrxt3dxf9ure8u5gqllaya3qihbsz8c.jpg)
 
 [DE-15398865](https://www.postcrossing.com/postcards/DE-15398865) 
  >来自 [phasin](https://www.postcrossing.com/user/phasin) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=52.56014~13.0927&lvl=12.0&setlang=zh-Hans) 2025/04/24 20:37 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/12 10:38 (当地)
+ 📏 8,749 | ⏱ 17
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/g3n63snpw8vegk5oyo7llnejv346naxz.jpg)
-
-### 2025(19)
 
 [NL-5733716](https://www.postcrossing.com/postcards/NL-5733716) 
  >来自 [Arbor](https://www.postcrossing.com/user/Arbor) 🇳🇱
