@@ -17,7 +17,7 @@ order: 2
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/year.json"
+  "https://raw.githubusercontent.com/arthurfsy2/Postcrossing_map_generator/main/output/year.json"
 ).then((res) => res.json());
 
 const newData = data.map(({ year, sent}) => ({ name: year, value: sent}));
@@ -76,7 +76,7 @@ const option = {
 
 ```js
 const data = await fetch(
-  "https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/month.json"
+  "https://raw.githubusercontent.com/arthurfsy2/Postcrossing_map_generator/main/output/month.json"
 ).then((res) => res.json());
 
 var date = data.map(function (item) {
