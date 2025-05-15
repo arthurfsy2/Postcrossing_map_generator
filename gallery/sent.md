@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：169）
+title: 明信片展示墙（寄出：170）
 icon: address-card
 date: 2025-05-15
 category:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-4001499](https://www.postcrossing.com/postcards/CN-4001499) 
+ >寄往 [Evenstar3896](https://www.postcrossing.com/user/Evenstar3896) 🇳🇱
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/rwddnn08cj8u77w6wkvvtpphb3hc2bfu.jpg)
 
 ### 2025(30)
 
