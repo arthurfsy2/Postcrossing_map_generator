@@ -396,6 +396,24 @@
     "receivedDateFirst": "2023/11/30"
   },
   {
+    "name": "Australia",
+    "countryCode": "AU",
+    "flagEmoji": "🇦🇺",
+    "value": 3,
+    "sentNum": 3,
+    "receivedNum": 0,
+    "sentAvg": 49,
+    "receivedAvg": null,
+    "sentMedian": 44,
+    "receivedMedian": null,
+    "sentHistory": "[42, 44, 63]",
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1723013751, 1740118583, 1747267232]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2024/08/07",
+    "receivedDateFirst": null
+  },
+  {
     "name": "Norway",
     "countryCode": "NO",
     "flagEmoji": "🇳🇴",
@@ -484,24 +502,6 @@
     "receivedDateHistory": "[1705219921]",
     "sentDateFirst": "2024/05/21",
     "receivedDateFirst": "2024/01/14"
-  },
-  {
-    "name": "Australia",
-    "countryCode": "AU",
-    "flagEmoji": "🇦🇺",
-    "value": 2,
-    "sentNum": 2,
-    "receivedNum": 0,
-    "sentAvg": 43,
-    "receivedAvg": null,
-    "sentMedian": 43,
-    "receivedMedian": null,
-    "sentHistory": "[42, 44]",
-    "receivedHistory": "[]",
-    "sentDateHistory": "[1723013751, 1740118583]",
-    "receivedDateHistory": "[]",
-    "sentDateFirst": "2024/08/07",
-    "receivedDateFirst": null
   },
   {
     "name": "New Zealand",
