@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：180）
+title: 明信片展示墙（收到：184）
 icon: address-card
-date: 2025-05-12
+date: 2025-05-19
 category:
   - Arthur
 tag:
@@ -146,6 +146,36 @@ const option = {
 ```
 
 :::
+
+### 其他(4)
+
+[US-11342115](https://www.postcrossing.com/postcards/US-11342115) 
+ >来自 [Jim0819](https://www.postcrossing.com/user/Jim0819) 🇺🇸
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/9vbucxnkwsewvmzjp8cqjnuxkv9kfk5u.jpg)
+
+[US-11342120](https://www.postcrossing.com/postcards/US-11342120) 
+ >来自 [tacogal729](https://www.postcrossing.com/user/tacogal729) 🇺🇸
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/zes6752yz1z6i13mi2q5s7vwxt4wvogl.jpg)
+
+[LU-121426](https://www.postcrossing.com/postcards/LU-121426) 
+ >来自 [nikolenkooo](https://www.postcrossing.com/user/nikolenkooo) 🇱🇺
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/bjv4af02zdh7knaw228glm3062y1c8yw.jpg)
+
+[DE-15398868](https://www.postcrossing.com/postcards/DE-15398868) 
+ >来自 [ghostspider](https://www.postcrossing.com/user/ghostspider) 🇩🇪
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/uzjznheze45absnihosv6c62qep1ql0b.jpg)
 
 ### 2025(21)
 
