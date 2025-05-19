@@ -147,37 +147,43 @@ const option = {
 
 :::
 
-### 其他(4)
+### 2025(25)
 
 [US-11342115](https://www.postcrossing.com/postcards/US-11342115) 
  >来自 [Jim0819](https://www.postcrossing.com/user/Jim0819) 🇺🇸
->
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=35.31762~-82.59429&lvl=12.0&setlang=zh-Hans) 2025/04/24 14:36 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/19 09:20 (当地)
+ 📏 13,339 | ⏱ 24
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/9vbucxnkwsewvmzjp8cqjnuxkv9kfk5u.jpg)
 
 [US-11342120](https://www.postcrossing.com/postcards/US-11342120) 
  >来自 [tacogal729](https://www.postcrossing.com/user/tacogal729) 🇺🇸
->
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=40.68729~-80.27145&lvl=12.0&setlang=zh-Hans) 2025/04/24 14:38 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/19 09:19 (当地)
+ 📏 12,824 | ⏱ 24
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/zes6752yz1z6i13mi2q5s7vwxt4wvogl.jpg)
 
 [LU-121426](https://www.postcrossing.com/postcards/LU-121426) 
  >来自 [nikolenkooo](https://www.postcrossing.com/user/nikolenkooo) 🇱🇺
->
+> 📤 [Luxembourg](https://www.bing.com/maps/?cp=49.61167~6.13&lvl=12.0&setlang=zh-Hans) 2025/04/24 20:38 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/19 09:19 (当地)
+ 📏 9,329 | ⏱ 24
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/bjv4af02zdh7knaw228glm3062y1c8yw.jpg)
 
 [DE-15398868](https://www.postcrossing.com/postcards/DE-15398868) 
  >来自 [ghostspider](https://www.postcrossing.com/user/ghostspider) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=51.22172~6.77616&lvl=12.0&setlang=zh-Hans) 2025/04/24 20:38 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/19 09:18 (当地)
+ 📏 9,205 | ⏱ 24
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/uzjznheze45absnihosv6c62qep1ql0b.jpg)
-
-### 2025(21)
 
 [FR-1798160](https://www.postcrossing.com/postcards/FR-1798160) 
  >来自 [Claire-Anne](https://www.postcrossing.com/user/Claire-Anne) 🇫🇷
