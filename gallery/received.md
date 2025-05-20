@@ -147,23 +147,25 @@ const option = {
 
 :::
 
-### 其他(2)
+### 2025(27)
 
 [DE-15398867](https://www.postcrossing.com/postcards/DE-15398867) 
  >来自 [CraftyHill](https://www.postcrossing.com/user/CraftyHill) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=49.32083~8.43111&lvl=12.0&setlang=zh-Hans) 2025/04/24 20:38 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/20 19:06 (当地)
+ 📏 9,196 | ⏱ 26
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/9fnvzfwwo4vdvpj0z556w0mgada3bnyl.jpg)
 
 [MO-69924](https://www.postcrossing.com/postcards/MO-69924) 
  >来自 [khaki_catia](https://www.postcrossing.com/user/khaki_catia) 🇲🇴
->
+> 📤 [Macao](https://www.bing.com/maps/?cp=22.20056~113.54611&lvl=12.0&setlang=zh-Hans) 2025/04/26 15:52 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/20 19:02 (当地)
+ 📏 81 | ⏱ 24
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/dohcjhkyayh1nmm6x5ele4k8c015iwgf.jpg)
-
-### 2025(25)
 
 [US-11342115](https://www.postcrossing.com/postcards/US-11342115) 
  >来自 [Jim0819](https://www.postcrossing.com/user/Jim0819) 🇺🇸

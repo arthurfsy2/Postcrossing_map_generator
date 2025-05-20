@@ -11,7 +11,7 @@ order: 4
 
 ## [arthurfsy's favourites](https://www.postcrossing.com/user/arthurfsy/gallery/favourites)
 
-### 其他(3)
+### 其他(2)
 
 [US-5713297](https://www.postcrossing.com/postcards/US-5713297) 
  >来自 [BarbSchmidt](https://www.postcrossing.com/user/BarbSchmidt) 
@@ -27,14 +27,16 @@ order: 4
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/n1xhrcgrw2uheado60rbb55m6c9sjhq0.jpg)
 
+### 2025(6)
+
 [DE-15398867](https://www.postcrossing.com/postcards/DE-15398867) 
  >来自 [CraftyHill](https://www.postcrossing.com/user/CraftyHill) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=49.32083~8.43111&lvl=12.0&setlang=zh-Hans) 2025/04/24 20:38 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/20 19:06 (当地)
+ 📏 9,196 | ⏱ 26
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/9fnvzfwwo4vdvpj0z556w0mgada3bnyl.jpg)
-
-### 2025(5)
 
 [US-11115566](https://www.postcrossing.com/postcards/US-11115566) 
  >来自 [DosRobles](https://www.postcrossing.com/user/DosRobles) 🇺🇸
