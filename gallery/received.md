@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：187）
+title: 明信片展示墙（收到：188）
 icon: address-card
-date: 2025-05-22
+date: 2025-05-25
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-4032714](https://www.postcrossing.com/postcards/CN-4032714) 
+ >来自 [JinjinTian](https://www.postcrossing.com/user/JinjinTian) 🇨🇳
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/xyi1hps5dtj2gu05mmulyfhdvjvvw10n.jpg)
 
 ### 2025(28)
 
