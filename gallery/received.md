@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：188）
+title: 明信片展示墙（收到：189）
 icon: address-card
-date: 2025-05-25
+date: 2025-05-30
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[DE-15398863](https://www.postcrossing.com/postcards/DE-15398863) 
+ >来自 [Sommerwiese](https://www.postcrossing.com/user/Sommerwiese) 🇩🇪
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/te4bcqyxld9cauy9fjwcenwdeckjo8ho.jpg)
 
 ### 2025(29)
 
