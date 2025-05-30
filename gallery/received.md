@@ -147,16 +147,16 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2025(30)
 
 [DE-15398863](https://www.postcrossing.com/postcards/DE-15398863) 
  >来自 [Sommerwiese](https://www.postcrossing.com/user/Sommerwiese) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=52.52437~13.41053&lvl=12.0&setlang=zh-Hans) 2025/04/24 20:36 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/30 16:50 (当地)
+ 📏 8,731 | ⏱ 36
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/te4bcqyxld9cauy9fjwcenwdeckjo8ho.jpg)
-
-### 2025(29)
 
 [CN-4032714](https://www.postcrossing.com/postcards/CN-4032714) 
  >来自 [JinjinTian](https://www.postcrossing.com/user/JinjinTian) 🇨🇳
