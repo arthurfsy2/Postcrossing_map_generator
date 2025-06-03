@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：189）
+title: 明信片展示墙（收到：191）
 icon: address-card
-date: 2025-05-30
+date: 2025-06-03
 category:
   - Arthur
 tag:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2025(30)
+### 2025(32)
+
+[US-11345356](https://www.postcrossing.com/postcards/US-11345356) 
+ >来自 [DiannaGrindstaff](https://www.postcrossing.com/user/DiannaGrindstaff) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=44.18582~-88.46261&lvl=12.0&setlang=zh-Hans) 2025/04/25 14:42 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/30 16:59 (当地)
+ 📏 12,241 | ⏱ 35
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/bd9b1ia9uqog051itmvct54ho10u9lzn.jpg)
 
 [DE-15398863](https://www.postcrossing.com/postcards/DE-15398863) 
  >来自 [Sommerwiese](https://www.postcrossing.com/user/Sommerwiese) 🇩🇪
@@ -157,6 +166,15 @@ const option = {
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/te4bcqyxld9cauy9fjwcenwdeckjo8ho.jpg)
+
+[JP-2252269](https://www.postcrossing.com/postcards/JP-2252269) 
+ >来自 [E-MASAKI](https://www.postcrossing.com/user/E-MASAKI) 🇯🇵
+> 📤 [Japan](https://www.bing.com/maps/?cp=35.6895~139.69171&lvl=12.0&setlang=zh-Hans) 2025/05/19 11:13 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/30 16:48 (当地)
+ 📏 2,858 | ⏱ 11
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/ahicku56gsv3c1mqbn9w74ea3bx12g2x.jpg)
 
 [CN-4032714](https://www.postcrossing.com/postcards/CN-4032714) 
  >来自 [JinjinTian](https://www.postcrossing.com/user/JinjinTian) 🇨🇳
