@@ -147,23 +147,25 @@ const option = {
 
 :::
 
-### 其他(2)
+### 2025(34)
 
 [UA-1997314](https://www.postcrossing.com/postcards/UA-1997314) 
  >来自 [prudens_cat](https://www.postcrossing.com/user/prudens_cat) 🇺🇦
->
+> 📤 [Ukraine](https://www.bing.com/maps/?cp=50.45466~30.5238&lvl=12.0&setlang=zh-Hans) 2025/04/24 21:37 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/06/06 09:16 (当地)
+ 📏 7,659 | ⏱ 42
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/7cgh6b014920dra2oazu1cz2tzvxlfsh.jpg)
 
 [TW-3851534](https://www.postcrossing.com/postcards/TW-3851534) 
  >来自 [WingFei](https://www.postcrossing.com/user/WingFei) 🇹🇼
->
+> 📤 [Taiwan](https://www.bing.com/maps/?cp=25.04776~121.53185&lvl=12.0&setlang=zh-Hans) 2025/05/19 11:59 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/06/06 09:13 (当地)
+ 📏 792 | ⏱ 18
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/xcail4om8jpvbzs5srr66fbm03l8ubri.jpg)
-
-### 2025(32)
 
 [US-11345356](https://www.postcrossing.com/postcards/US-11345356) 
  >来自 [DiannaGrindstaff](https://www.postcrossing.com/user/DiannaGrindstaff) 🇺🇸
