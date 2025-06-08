@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：194）
+title: 明信片展示墙（收到：195）
 icon: address-card
-date: 2025-06-06
+date: 2025-06-08
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[AU-1009099](https://www.postcrossing.com/postcards/AU-1009099) 
+ >来自 [leschkerj](https://www.postcrossing.com/user/leschkerj) 🇦🇺
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/115g6cybeqc2v2m6lp1l5lv4hm9p6tbf.jpg)
 
 ### 2025(35)
 
