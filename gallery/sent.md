@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：172）
+title: 明信片展示墙（寄出：173）
 icon: address-card
 date: 2025-06-10
 category:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-4032667](https://www.postcrossing.com/postcards/CN-4032667) 
+ >寄往 [Altalsbach1](https://www.postcrossing.com/user/Altalsbach1) 🇩🇪
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/92h2bdomcyd4hrkxc7zv5271ptpl7ibm.jpg)
 
 ### 2025(33)
 
