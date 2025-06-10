@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：171）
+title: 明信片展示墙（寄出：172）
 icon: address-card
-date: 2025-05-30
+date: 2025-06-10
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-4032660](https://www.postcrossing.com/postcards/CN-4032660) 
+ >寄往 [KITTEmeguri](https://www.postcrossing.com/user/KITTEmeguri) 🇯🇵
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/cmy3xmky1lfo64bv9z8j0x45za738hnj.jpg)
 
 ### 2025(32)
 
