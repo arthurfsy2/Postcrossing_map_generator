@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（收到：195）
 icon: address-card
-date: 2025-06-08
+date: 2025-06-11
 category:
   - Arthur
 tag:
@@ -980,7 +980,7 @@ const option = {
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/jftiw2d8ar5tfj2azgsxumfck1s9f4yg.jpg)
 
 [NL-5735018](https://www.postcrossing.com/postcards/NL-5735018) 
- >来自 [willempie2](https://www.postcrossing.com/user/willempie2) 🇳🇱
+ >来自 [Willempie2](https://www.postcrossing.com/user/Willempie2) 🇳🇱
 > 📤 [Netherlands](https://www.bing.com/maps/?cp=52.46167~5.99861&lvl=12.0&setlang=zh-Hans) 2024/05/09 10:50 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/06/01 23:02 (当地)
  📏 9,188 | ⏱ 23
