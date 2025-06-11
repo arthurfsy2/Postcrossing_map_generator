@@ -82,9 +82,8 @@ jobs:
           
 
       - name: 推送到博客仓库
-        uses: s0/git-publish-subdir-action@develop
+        uses: s0/git-publish-subdir-action@v2.6.0
         env:
-          NODE_OPTIONS: --max-old-space-size=4096  # 增加Node.js可用内存
           REPO: ${{ env.blog_repo }}
           BRANCH: main
           FOLDER: ${{ env.blog_path }}
