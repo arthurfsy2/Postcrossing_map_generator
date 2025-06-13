@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（我的点赞：34）
+title: 明信片展示墙（我的点赞：35）
 icon: address-card
-date: 2025-05-20
+date: 2025-06-13
 category:
   - Arthur
 tag:
@@ -11,7 +11,7 @@ order: 4
 
 ## [arthurfsy's favourites](https://www.postcrossing.com/user/arthurfsy/gallery/favourites)
 
-### 其他(2)
+### 其他(3)
 
 [US-5713297](https://www.postcrossing.com/postcards/US-5713297) 
  >来自 [BarbSchmidt](https://www.postcrossing.com/user/BarbSchmidt) 
@@ -26,6 +26,13 @@ order: 4
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/n1xhrcgrw2uheado60rbb55m6c9sjhq0.jpg)
+
+[JP-2252270](https://www.postcrossing.com/postcards/JP-2252270) 
+ >来自 [azusa](https://www.postcrossing.com/user/azusa) 🇯🇵
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/cg95nyfc9a25bgxy541n8f71xhbu50ta.jpg)
 
 ### 2025(6)
 
