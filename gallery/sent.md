@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：173）
+title: 明信片展示墙（寄出：174）
 icon: address-card
-date: 2025-06-10
+date: 2025-06-14
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3980206](https://www.postcrossing.com/postcards/CN-3980206) 
+ >寄往 [OlafArens](https://www.postcrossing.com/user/OlafArens) 🇩🇪
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/jxx1bp337bo7ejbmfe8hgsngcqbbjw9v.jpg)
 
 ### 2025(34)
 
