@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：175）
+title: 明信片展示墙（寄出：176）
 icon: address-card
-date: 2025-06-21
+date: 2025-06-22
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-4032668](https://www.postcrossing.com/postcards/CN-4032668) 
+ >寄往 [hjbcats](https://www.postcrossing.com/user/hjbcats) 🇺🇸
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/90m6css5jvh2ybtipnkmaad6htmhusje.jpg)
 
 ### 2025(36)
 
