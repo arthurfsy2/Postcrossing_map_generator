@@ -34,20 +34,20 @@ jobs:
           cache: pip
           cache-dependency-path: 'requirements.txt'
       
-      - name: 安装依赖
-        run: |
-          pip install -r requirements.txt
+      # - name: 安装依赖
+      #   run: |
+      #     pip install -r requirements.txt
       
-      - name: 更新邮件回复
-        run: |
-          python scripts/mailTrack.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
+      # - name: 更新邮件回复
+      #   run: |
+      #     python scripts/mailTrack.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
       
-      - name: 运行startTask.py脚本
-        run: |
-          python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY ${{ secrets.APIKEY }}
+      # - name: 运行startTask.py脚本
+      #   run: |
+      #     python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY ${{ secrets.APIKEY }}
     
-      - name: 删除缓存文件
-        run: rm -rf scripts/__pycache__/    
+      # - name: 删除缓存文件
+      #   run: rm -rf scripts/__pycache__/    
       
       - name: 提交
         id: push
@@ -59,28 +59,28 @@ jobs:
           git push || echo "nothing to push"
           echo "PUSH_TO_GITHUB=$PUSH_TO_GITHUB"
 
-      - name: Checkout 博客仓库
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ env.blog_repo }}
-          path: blog_repo
-          token: ${{ secrets.GITHUB_TOKEN }}
-          ref: main
+          - name: Checkout 博客仓库
+            uses: actions/checkout@main
+            with:
+              repository: ${{ env.blog_repo }}
+              path: ${{ env.blog_repo }}
+              token: ${{ secrets.GITHUB_TOKEN }}
+              ref: main
 
-      - name: 复制文件到博客仓库
-        run: |
-          mkdir -p "blog_repo/${{ env.blog_path }}"
-          cp ./gallery/* "blog_repo/${{ env.blog_path }}/"
-          echo "文件已复制到博客仓库"
+          - name: 复制文件到博客仓库
+            run: |
+              mkdir -p "${{ env.blog_repo }}/${{ env.blog_path }}"
+              cp ./gallery/* "${{ env.blog_repo }}/${{ env.blog_path }}/"
+              echo "文件已复制到博客仓库"
 
-      - name: 提交并推送到博客仓库
-        run: |
-          cd blog_repo
-          git config --local user.email "${{ env.GITHUB_EMAIL }}"
-          git config --local user.name "${{ env.GITHUB_NAME }}"
-          git add .
-          git commit -m "已更新/src/Arthur/Postcrossing文件" || echo "nothing to commit"
-          git push || echo "nothing to push"
+          - name: 提交并推送到博客仓库
+            run: |
+              cd ${{ env.blog_repo }}
+              git config --local user.email "${{ env.GITHUB_EMAIL }}"
+              git config --local user.name "${{ env.GITHUB_NAME }}"
+              git add .
+              git commit -m "已更新/src/Arthur/Postcrossing文件" || echo "nothing to commit"
+              git push || echo "nothing to push"
 
       - name: 删除缓存文件
         run: rm -rf ${{ env.blog_path }}
