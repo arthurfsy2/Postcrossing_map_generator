@@ -62,7 +62,7 @@ jobs:
       - name: Checkout 博客仓库
         uses: actions/checkout@main
         with:
-          repository: ${{ env.blog_repo }}
+          repository: arthurfsy2/arthurfsy2.github.io
           path: ${{ env.blog_repo }}
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: main
