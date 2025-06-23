@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：177）
+title: 明信片展示墙（寄出：178）
 icon: address-card
 date: 2025-06-23
 category:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-3980200](https://www.postcrossing.com/postcards/CN-3980200) 
+ >寄往 [Eiju](https://www.postcrossing.com/user/Eiju) 🇫🇮
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/946bujlp2fta6kfw8tzaibyizrrrpdg8.jpg)
 
 ### 2025(38)
 
