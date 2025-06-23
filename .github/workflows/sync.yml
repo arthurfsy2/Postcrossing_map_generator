@@ -64,7 +64,7 @@ jobs:
           repository: ${{ env.blog_repo }}
           path: blog-repo
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
+          fetch-depth: 1
           ref: main
 
       - name: 复制.md文件到博客仓库
