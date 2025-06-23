@@ -34,20 +34,20 @@ jobs:
           cache: pip
           cache-dependency-path: 'requirements.txt'
       
-      # - name: 安装依赖
-      #   run: |
-      #     pip install -r requirements.txt
+      - name: 安装依赖
+        run: |
+          pip install -r requirements.txt
       
-      # - name: 更新邮件回复
-      #   run: |
-      #     python scripts/mailTrack.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
+      - name: 更新邮件回复
+        run: |
+          python scripts/mailTrack.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
       
-      # - name: 运行startTask.py脚本
-      #   run: |
-      #     python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY ${{ secrets.APIKEY }}
+      - name: 运行startTask.py脚本
+        run: |
+          python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY ${{ secrets.APIKEY }}
     
-      # - name: 删除缓存文件
-      #   run: rm -rf scripts/__pycache__/    
+      - name: 删除缓存文件
+        run: rm -rf scripts/__pycache__/    
       
       - name: 提交
         id: push
@@ -55,7 +55,7 @@ jobs:
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
-          git commit -m '已更新数据' || (echo "nothing to commit" && echo "PUSH_TO_GITHUB=false" >> "$GITHUB_OUTPUT")
+          git commit -m '已更新数据' || (echo "暂无更新" && echo "PUSH_TO_GITHUB=false" >> "$GITHUB_OUTPUT")
           git push || echo "nothing to push"
           echo "PUSH_TO_GITHUB=$PUSH_TO_GITHUB"
 
@@ -79,12 +79,8 @@ jobs:
               git config --local user.email "${{ env.GITHUB_EMAIL }}"
               git config --local user.name "${{ env.GITHUB_NAME }}"
               git add .
-              git commit -m "已更新/src/Arthur/Postcrossing文件" || echo "nothing to commit"
+              git commit -m '已更新数据' || (echo "暂无更新" && echo "PUSH_TO_GITHUB=false" >> "$GITHUB_OUTPUT")
               git push || echo "nothing to push"
 
-      - name: 删除缓存文件
-        run: rm -rf ${{ env.blog_path }}
-
-      
-      - name: 删除缓存文件
-        run: rm -rf ${{ env.blog_path }}
+          # - name: 删除缓存文件
+          #   run: rm -rf ${{ env.blog_path }}
