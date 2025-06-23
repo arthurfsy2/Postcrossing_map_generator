@@ -3,7 +3,7 @@ name: 定时检测更新
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */1 * * *'
+    - cron: "0 */1 * * *"
   push:
     branches:
       - main
@@ -12,72 +12,87 @@ env:
   GITHUB_NAME: arthurfsy2
   GITHUB_EMAIL: fsyflh@gmail.com
   blog_path: "./src/Arthur/postcrossing"
-  blog_repo: "git@github.com:arthurfsy2/arthurfsy2.github.io.git"
+  blog_repo: "arthurfsy2/arthurfsy2.github.io"
   PUSH_TO_GITHUB: true
 
 jobs:
   sync:
     name: 同步
     runs-on: ubuntu-latest
-    outputs:
-      PUSH_TO_GITHUB: ${{ steps.push.outputs.PUSH_TO_GITHUB }}
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v3
+
       - name: Set Node.js max memory limit
         run: node --max-old-space-size=4096
+
       - name: 设置Python版本
-        id: setup_python
-        uses: actions/setup-python@main
+        uses: actions/setup-python@v4
         with:
           python-version: "3.11"
           cache: pip
-          cache-dependency-path: 'requirements.txt'
-      
+          cache-dependency-path: "requirements.txt"
+
       - name: 安装依赖
         run: |
           pip install -r requirements.txt
-      
+
       - name: 更新邮件回复
         run: |
           python scripts/mailTrack.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
-      
+
       - name: 运行startTask.py脚本
         run: |
           python scripts/startTask.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY ${{ secrets.APIKEY }}
-    
+
       - name: 删除缓存文件
-        run: rm -rf scripts/__pycache__/    
-      
-      - name: 提交
+        run: rm -rf scripts/__pycache__/
+
+      - name: 提交本仓库更改
         id: push
         run: |
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
-          git commit -m '已更新数据' || (echo "暂无更新" && echo "PUSH_TO_GITHUB=false" >> "$GITHUB_OUTPUT")
+          git diff-index --quiet HEAD || git commit -m '已更新数据'
           git push || echo "nothing to push"
-          
-      # Checkout 博客仓库
+
+      # 处理博客仓库同步
       - name: Checkout 博客仓库
-        uses: actions/checkout@main
+        uses: actions/checkout@v3
         with:
-          repository: arthurfsy2/arthurfsy2.github.io
-          path: ${{ env.blog_repo }}
+          repository: ${{ env.blog_repo }}
+          path: blog-repo
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
           ref: main
 
-      - name: 复制文件到博客仓库
+      - name: 复制.md文件到博客仓库
         run: |
-          mkdir -p "${{ env.blog_repo }}/${{ env.blog_path }}"
-          cp ./gallery/* "${{ env.blog_repo }}/${{ env.blog_path }}/"
-          echo "文件已复制到博客仓库"
+          # 创建目标目录
+          mkdir -p "blog-repo/${{ env.blog_path }}"
+          # 只复制gallery目录下的.md文件
+          cp ./gallery/*.md "blog-repo/${{ env.blog_path }}/"
+          echo "Markdown文件已复制到博客仓库"
+
+      - name: 检查是否有文件变更
+        id: check_changes
+        run: |
+          cd blog-repo
+          if git diff --quiet; then
+            echo "没有文件变更"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "检测到文件变更"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
 
       - name: 提交并推送到博客仓库
+        if: steps.check_changes.outputs.has_changes == 'true'
         run: |
-          cd ${{ env.blog_repo }}
+          cd blog-repo
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
-          git commit -m '已更新数据' || (echo "暂无更新" && echo "PUSH_TO_GITHUB=false" >> "$GITHUB_OUTPUT")
-          git push || echo "nothing to push"
+          git commit -m '自动同步postcrossing数据'
+          git push
