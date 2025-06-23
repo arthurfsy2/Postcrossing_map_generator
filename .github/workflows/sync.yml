@@ -63,7 +63,6 @@ jobs:
         with:
           repository: ${{ env.blog_repo }}
           path: blog-repo
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 1
           ref: main
 
@@ -87,6 +86,14 @@ jobs:
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: 设置 SSH 密钥
+        run: |
+          echo "${{ secrets.DEPLOY_PRIVATE_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
       - name: 提交并推送到博客仓库
         if: steps.check_changes.outputs.has_changes == 'true'
         run: |
@@ -95,4 +102,4 @@ jobs:
           git config --local user.name "${{ env.GITHUB_NAME }}"
           git add .
           git commit -m '自动同步postcrossing数据'
-          git push
+          git push git@github.com:${{ env.blog_repo }} HEAD:main
