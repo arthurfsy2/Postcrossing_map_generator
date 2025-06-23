@@ -57,30 +57,27 @@ jobs:
           git add .
           git commit -m '已更新数据' || (echo "暂无更新" && echo "PUSH_TO_GITHUB=false" >> "$GITHUB_OUTPUT")
           git push || echo "nothing to push"
-          echo "PUSH_TO_GITHUB=$PUSH_TO_GITHUB"
+          
+      # Checkout 博客仓库
+      - name: Checkout 博客仓库
+        uses: actions/checkout@main
+        with:
+          repository: ${{ env.blog_repo }}
+          path: ${{ env.blog_repo }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
 
-          - name: Checkout 博客仓库
-            uses: actions/checkout@main
-            with:
-              repository: ${{ env.blog_repo }}
-              path: ${{ env.blog_repo }}
-              token: ${{ secrets.GITHUB_TOKEN }}
-              ref: main
+      - name: 复制文件到博客仓库
+        run: |
+          mkdir -p "${{ env.blog_repo }}/${{ env.blog_path }}"
+          cp ./gallery/* "${{ env.blog_repo }}/${{ env.blog_path }}/"
+          echo "文件已复制到博客仓库"
 
-          - name: 复制文件到博客仓库
-            run: |
-              mkdir -p "${{ env.blog_repo }}/${{ env.blog_path }}"
-              cp ./gallery/* "${{ env.blog_repo }}/${{ env.blog_path }}/"
-              echo "文件已复制到博客仓库"
-
-          - name: 提交并推送到博客仓库
-            run: |
-              cd ${{ env.blog_repo }}
-              git config --local user.email "${{ env.GITHUB_EMAIL }}"
-              git config --local user.name "${{ env.GITHUB_NAME }}"
-              git add .
-              git commit -m '已更新数据' || (echo "暂无更新" && echo "PUSH_TO_GITHUB=false" >> "$GITHUB_OUTPUT")
-              git push || echo "nothing to push"
-
-          # - name: 删除缓存文件
-          #   run: rm -rf ${{ env.blog_path }}
+      - name: 提交并推送到博客仓库
+        run: |
+          cd ${{ env.blog_repo }}
+          git config --local user.email "${{ env.GITHUB_EMAIL }}"
+          git config --local user.name "${{ env.GITHUB_NAME }}"
+          git add .
+          git commit -m '已更新数据' || (echo "暂无更新" && echo "PUSH_TO_GITHUB=false" >> "$GITHUB_OUTPUT")
+          git push || echo "nothing to push"
