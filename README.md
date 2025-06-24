@@ -304,30 +304,53 @@ env:
   GITHUB_NAME: arthurfsy2 （修改成你的github名称）
   GITHUB_EMAIL: fsyflh@gmail.com （修改为你的github账号邮箱）
   blog_path: "./src/Arthur/postcrossing"  //修改为你的blog仓库需要存放md文件的路径
-  blog_repo: "git@github.com:arthurfsy2/arthurfsy2.github.io.git" //修改为你的blog仓库clone的地址（git开头的，不是https那个）
+  blog_repo: "arthurfsy2/arthurfsy2.github.io" //修改为你的blog仓库名称
   PUSH_TO_GITHUB: true  //初始默认值，不需要改变
 
 ```
 
-2. 在 repo Settings > Security > Secrets > secrets and variables > Actions > New repository secret > 增加以下变量:`DEPLOY_PRIVATE_KEY`,这个参数的值是需要本地生成 SSH
+2. 在 repo Settings > Security > Secrets > secrets and variables > Actions > New repository secret > 增加以下变量:`PERSONAL_GITHUB_TOKEN`,这个参数的值你github生成的个人[Personal access tokens (classic)](https://github.com/settings/tokens)
 
-> 整体思路（重要）：生成 SSH 密钥-->`私钥`添加到 A 仓库的 Actions 变量（用来提交）-->`公钥（文件后缀带.pub`添加到 B 仓库所在账户的[SSH and GPG keys](https://github.com/settings/keys)（用来验证）
+```yml
+# 处理博客仓库同步
+  - name: Checkout 博客仓库
+    uses: actions/checkout@v3
+    with:
+      repository: ${{ env.blog_repo }}
+      path: blog-repo
+      token: ${{ secrets.PERSONAL_GITHUB_TOKEN }} # 新增的access token
+      fetch-depth: 1
+      ref: main
 
-具体可参考以下链接。
-[Mac 中 git ssh 配置](https://www.jianshu.com/p/0a41903252a3)
+  - name: 复制.md文件到博客仓库
+    run: |
+      # 创建目标目录
+      mkdir -p "blog-repo/${{ env.blog_path }}"
+      # 只复制gallery目录下的.md文件
+      cp ./gallery/*.md "blog-repo/${{ env.blog_path }}/"
+      echo "Markdown文件已复制到博客仓库"
 
-```
-- name: 推送到博客仓库
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: ${{ env.blog_repo }}
-          BRANCH: main //推送的分支是main
-          FOLDER: ${{ env.blog_path }} //指定A仓库的推送目录
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}  //读取已添加的SSH密钥
-          TARGET_DIR: ${{ env.blog_path }} //指定B仓库的接收目录
-          MESSAGE: "已更新/src/Arthur/Postcrossing文件"
-          SKIP_EMPTY_COMMITS: true //如果没有变动，则忽略，不提交
-          CLEAR_GLOBS_FILE: "scripts/.clear-target-files" //用于定义清除B仓库目标分支时要删除的文件。（由scripts/.clear-target-files这个文件控制，感叹号前缀为不清理）
+  - name: 检查是否有文件变更
+    id: check_changes
+    run: |
+      cd blog-repo
+      if git diff --quiet; then
+        echo "没有文件变更"
+        echo "has_changes=false" >> $GITHUB_OUTPUT
+      else
+        echo "检测到文件变更"
+        echo "has_changes=true" >> $GITHUB_OUTPUT
+      fi
+
+  - name: 提交并推送到博客仓库
+    if: steps.check_changes.outputs.has_changes == 'true'
+    run: |
+      cd blog-repo
+      git config --local user.email "${{ env.GITHUB_EMAIL }}"
+      git config --local user.name "${{ env.GITHUB_NAME }}"
+      git add .
+      git commit -m '自动同步postcrossing数据'
+      git push
 ```
 
 # 五. 其他说明
