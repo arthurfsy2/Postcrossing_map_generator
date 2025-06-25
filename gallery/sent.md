@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（寄出：178）
 icon: address-card
-date: 2025-06-23
+date: 2025-06-25
 category:
   - Arthur
 tag:
@@ -698,7 +698,7 @@ const option = {
  📏 644 | ⏱ 30
 
 
-![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/w5zyw9jck3n0lo45ygpd7mybvoh77681.jpg)
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/hy9ckfb6gcenoeoo79sj4j0f07od1bix.jpg)
 
 [CN-3802608](https://www.postcrossing.com/postcards/CN-3802608) 
  >寄往 [Flicki](https://www.postcrossing.com/user/Flicki) 🇩🇪
