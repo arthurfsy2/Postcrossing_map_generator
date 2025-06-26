@@ -324,6 +324,24 @@
     "receivedDateFirst": "2024/01/26"
   },
   {
+    "name": "Lithuania",
+    "countryCode": "LT",
+    "flagEmoji": "🇱🇹",
+    "value": 4,
+    "sentNum": 2,
+    "receivedNum": 2,
+    "sentAvg": 39,
+    "receivedAvg": 46,
+    "sentMedian": 39,
+    "receivedMedian": 46,
+    "sentHistory": "[40, 38]",
+    "receivedHistory": "[44, 49]",
+    "sentDateHistory": "[1735668070, 1750916797]",
+    "receivedDateHistory": "[1701320419, 1723522152]",
+    "sentDateFirst": "2024/12/31",
+    "receivedDateFirst": "2023/11/30"
+  },
+  {
     "name": "Australia",
     "countryCode": "AU",
     "flagEmoji": "🇦🇺",
@@ -394,24 +412,6 @@
     "receivedDateHistory": "[1725842170]",
     "sentDateFirst": "2014/11/04",
     "receivedDateFirst": "2024/09/09"
-  },
-  {
-    "name": "Lithuania",
-    "countryCode": "LT",
-    "flagEmoji": "🇱🇹",
-    "value": 3,
-    "sentNum": 1,
-    "receivedNum": 2,
-    "sentAvg": 40,
-    "receivedAvg": 46,
-    "sentMedian": 40,
-    "receivedMedian": 46,
-    "sentHistory": "[40]",
-    "receivedHistory": "[44, 49]",
-    "sentDateHistory": "[1735668070]",
-    "receivedDateHistory": "[1701320419, 1723522152]",
-    "sentDateFirst": "2024/12/31",
-    "receivedDateFirst": "2023/11/30"
   },
   {
     "name": "Norway",
