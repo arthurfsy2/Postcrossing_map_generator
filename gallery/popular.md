@@ -18,7 +18,7 @@ order: 5
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/19 10:12 (当地)
 > 📥 [Lithuania](https://www.bing.com/maps/?cp=54.68916~25.2798&lvl=12.0&setlang=zh-Hans) 2025/06/26 08:46 (当地)
  📏 7,913 | ⏱ 38
->点赞人数：**2**
+>点赞人数：**3**
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/83fgzsdzcuwhsyg8z9pg2w89l5i8yio1.jpg) 
 
