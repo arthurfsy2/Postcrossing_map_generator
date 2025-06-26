@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（我收到的赞：80）
+title: 明信片展示墙（我收到的赞：81）
 icon: address-card
 date: 2025-06-26
 category:
@@ -11,7 +11,16 @@ order: 5
 
 ## [arthurfsy's popular](https://www.postcrossing.com/user/arthurfsy/gallery/popular)
 
-### 2025(12)
+### 其他(1)
+
+[CN-4032662](https://www.postcrossing.com/postcards/CN-4032662) 
+ >寄往  🇨🇦
+>
+>点赞人数：**1**
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/ewg1tz5sqrew7mqeqwhv0lfp5cxolt5q.jpg) 
+
+ ### 2025(12)
 
 [CN-4032666](https://www.postcrossing.com/postcards/CN-4032666) 
  >寄往  🇱🇹
