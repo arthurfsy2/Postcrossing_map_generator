@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：197）
+title: 明信片展示墙（收到：198）
 icon: address-card
-date: 2025-06-13
+date: 2025-07-03
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[US-11408235](https://www.postcrossing.com/postcards/US-11408235) 
+ >来自 [Green_Heron](https://www.postcrossing.com/user/Green_Heron) 🇺🇸
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/fn917zf3j6kcvwq7xuo2lux35gkhuypa.jpg)
 
 ### 2025(38)
 
