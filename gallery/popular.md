@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（我收到的赞：81）
+title: 明信片展示墙（我收到的赞：84）
 icon: address-card
-date: 2025-06-26
+date: 2025-07-03
 category:
   - Arthur
 tag:
@@ -11,7 +11,7 @@ order: 5
 
 ## [arthurfsy's popular](https://www.postcrossing.com/user/arthurfsy/gallery/popular)
 
-### 2025(13)
+### 2025(16)
 
 [CN-4032662](https://www.postcrossing.com/postcards/CN-4032662) 
  >寄往  🇨🇦
@@ -30,6 +30,15 @@ order: 5
 >点赞人数：**3**
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/83fgzsdzcuwhsyg8z9pg2w89l5i8yio1.jpg) 
+
+ [CN-3980200](https://www.postcrossing.com/postcards/CN-3980200) 
+ >寄往  🇫🇮
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/03/13 13:52 (当地)
+> 📥 [Finland](https://www.bing.com/maps/?cp=63.9~23.9&lvl=12.0&setlang=zh-Hans) 2025/06/23 18:48 (当地)
+ 📏 7,782 | ⏱ 102
+>点赞人数：**1**
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/946bujlp2fta6kfw8tzaibyizrrrpdg8.jpg) 
 
  [CN-4032668](https://www.postcrossing.com/postcards/CN-4032668) 
  >寄往  🇺🇸
@@ -81,7 +90,7 @@ order: 5
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/01/08 13:09 (当地)
 > 📥 [U.S.A.](https://www.bing.com/maps/?cp=33.24678~-84.26409&lvl=12.0&setlang=zh-Hans) 2025/05/11 23:10 (当地)
  📏 13,507 | ⏱ 124
->点赞人数：**1**
+>点赞人数：**2**
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/xf7k56nmftkbwvsgqvtv21a71ws6goru.jpg) 
 
@@ -93,6 +102,24 @@ order: 5
 >点赞人数：**1**
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/0plti68m2are73y77vm0m075kebgr7e1.jpg) 
+
+ [CN-3961585](https://www.postcrossing.com/postcards/CN-3961585) 
+ >寄往  🇺🇸
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/02/19 14:30 (当地)
+> 📥 [U.S.A.](https://www.bing.com/maps/?cp=32.67895~-115.49888&lvl=12.0&setlang=zh-Hans) 2025/04/06 17:58 (当地)
+ 📏 11,917 | ⏱ 47
+>点赞人数：**1**
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/nhkzqidfuexp1uj1cgcms9xz0xihcvsy.jpg) 
+
+ [CN-3930391](https://www.postcrossing.com/postcards/CN-3930391) 
+ >寄往  🇩🇪
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/01/08 13:09 (当地)
+> 📥 [Germany](https://www.bing.com/maps/?cp=49.23498~9.33215&lvl=12.0&setlang=zh-Hans) 2025/04/01 22:12 (当地)
+ 📏 9,141 | ⏱ 84
+>点赞人数：**1**
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/c87dkppy2aooigeqo9gc7jddky3gj609.jpg) 
 
  [CN-3931256](https://www.postcrossing.com/postcards/CN-3931256) 
  >寄往  🇺🇸
