@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：198）
+title: 明信片展示墙（收到：199）
 icon: address-card
-date: 2025-07-03
+date: 2025-07-04
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[IN-656658](https://www.postcrossing.com/postcards/IN-656658) 
+ >来自 [visweswaran](https://www.postcrossing.com/user/visweswaran) 🇮🇳
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/udyspvaj2ovoxo0kqwbf71msgd7h1w3g.jpg)
 
 ### 2025(39)
 
