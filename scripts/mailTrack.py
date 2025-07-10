@@ -7,6 +7,8 @@ import sqlite3
 import os
 from common_tools import translate
 import argparse
+import time
+from concurrent.futures import ThreadPoolExecutor
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -21,7 +23,8 @@ parser = argparse.ArgumentParser()
 
 
 parser.add_argument(
-    "input_string", help="输入host//user//passwd//filename,以英文逗号‘,’隔开")
+    "input_string", help="输入host//user//passwd//filename,以英文逗号‘,’隔开"
+)
 parser.add_argument("apikey", help="输入小牛翻译apikey")
 options = parser.parse_args()
 
@@ -36,32 +39,45 @@ def remove_blank_lines(text):
     return text
 
 
+def process_message(msg, oldReplyID):
+    id = re.search(r"Hurray! Your postcard (.*?) to", msg.subject).group(1)
+    match = re.search(r"“([\s\S]*?)”", msg.text)
+    if match:
+        match = match.group(1)
+        if id not in oldReplyID:  # 只翻译新的内容
+            print("idNEW:", id)
+            comment_original = remove_blank_lines(match)
+            comment_cn = translate(apikey, comment_original, "auto", "zh")
+            return {
+                "id": id,
+                "content_original": "",
+                "content_cn": "",
+                "comment_original": f"“{comment_original}”",
+                "comment_cn": f"“{comment_cn}”",
+            }
+    return None
+
+
 def getMailReply(host, user, passwd, filename):
     tablename = "postcardStory"
     oldReplyID = getLocalReplyID(dbpath, tablename)  # 获取本地数据库已保存的ID
     content = []
-    
+
     try:
         with MailBox(host).login(user, passwd) as mailbox:
             mailbox.folder.set(filename)
-            for msg in mailbox.fetch(AND(subject="Hurray! Your postcard")):
-                id = re.search(r'Hurray! Your postcard (.*?) to', msg.subject).group(1)
-                match = re.search(r'“([\s\S]*?)”', msg.text)
-                if match:
-                    match = match.group(1)
-                    if id not in oldReplyID:  # 只翻译新的内容
-                        print("idNEW:", id)
-                        comment_original = remove_blank_lines(match)
-                        comment_cn = translate(apikey, comment_original, 'auto', 'zh')
-                        data = {
-                            "id": id,
-                            "content_original": "",
-                            "content_cn": "",
-                            "comment_original": f"“{comment_original}”",
-                            "comment_cn": f"“{comment_cn}”",
-                        }
-                        content.append(data)
-            if len(content) > 0:
+            with ThreadPoolExecutor() as executor:
+                futures = {
+                    executor.submit(process_message, msg, oldReplyID): msg
+                    for msg in mailbox.fetch(AND(subject="Hurray! Your postcard"))
+                }
+
+                for future in futures:
+                    result = future.result()
+                    if result:
+                        content.append(result)
+
+            if content:
                 writeDB(dbpath, content, tablename)
                 print("已发现更新内容:", content)
             else:
@@ -74,14 +90,14 @@ def getMailReply(host, user, passwd, filename):
         print("请检查邮箱host是否正确")
 
 
-
 def getLocalReplyID(dbpath, tablename):
     oldID = None
     if os.path.exists(dbpath):
         conn = sqlite3.connect(dbpath)
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name=?", (tablename,))
+            "SELECT name FROM sqlite_master WHERE type='table' AND name=?", (tablename,)
+        )
         table_exists = cursor.fetchone()
         if table_exists:
             # 从Mapinfo表中获取id
@@ -96,49 +112,58 @@ def writeDB(dbpath, content, tablename):
     conn = sqlite3.connect(dbpath)
     cursor = conn.cursor()
 
-    if tablename == 'postcardStory':
-        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {tablename}
-                    (id TEXT, content_original TEXT, content_cn TEXT, comment_original TEXT, comment_cn TEXT)''')
+    if tablename == "postcardStory":
+        cursor.execute(
+            f"""CREATE TABLE IF NOT EXISTS {tablename}
+                    (id TEXT, content_original TEXT, content_cn TEXT, comment_original TEXT, comment_cn TEXT)"""
+        )
         for item in content:
-            id = item['id']
-            content_original = item['content_original']
-            content_cn = item['content_cn']
-            comment_original = item['comment_original']
-            comment_cn = item['comment_cn']
-            cursor.execute(f"SELECT * FROM {tablename} WHERE id=? ", (id, ))
+            id = item["id"]
+            content_original = item["content_original"]
+            content_cn = item["content_cn"]
+            comment_original = item["comment_original"]
+            comment_cn = item["comment_cn"]
+            cursor.execute(f"SELECT * FROM {tablename} WHERE id=? ", (id,))
             existing_data = cursor.fetchone()
             if existing_data:
                 # 更新已存在的行的其他列数据
-                cursor.execute(f"UPDATE {tablename} SET content_original=?, content_cn=?,comment_original=?, comment_cn=?  WHERE id=?",
-                               (content_original, content_cn, comment_original, comment_cn, id))
+                cursor.execute(
+                    f"UPDATE {tablename} SET content_original=?, content_cn=?,comment_original=?, comment_cn=?  WHERE id=?",
+                    (content_original, content_cn, comment_original, comment_cn, id),
+                )
             else:
                 # 插入新的行
-                cursor.execute(f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?)",
-                               (id, content_cn, content_original, comment_original, comment_cn))
+                cursor.execute(
+                    f"INSERT OR REPLACE INTO {tablename} VALUES (?, ?, ?, ?, ?)",
+                    (id, content_cn, content_original, comment_original, comment_cn),
+                )
 
-    print(f'已更新数据库{dbpath}的{tablename}\n')
+    print(f"已更新数据库{dbpath}的{tablename}\n")
     conn.commit()
     conn.close()
 
 
 def parse_string(input_string):
     arr = []
-    groups = input_string.split(',')
+    groups = input_string.split(",")
     for group in groups:
-        host, user, passwd, filename = group.split('//')
+        host, user, passwd, filename = group.split("//")
 
         host = host.strip()
         user = user.strip()
         passwd = passwd.strip()
         filename = filename.strip()
-        arr.append({'host': host, 'user': user,
-                   'passwd': passwd, 'filename': filename})
+        arr.append({"host": host, "user": user, "passwd": passwd, "filename": filename})
     return arr
 
 
 if __name__ == "__main__":
+    start_time = time.time()
     parms = parse_string(input_string)
     # print(parms)
     for parm in parms:
-        getMailReply(parm['host'], parm['user'],
-                     parm['passwd'], parm['filename'])
+        getMailReply(parm["host"], parm["user"], parm["passwd"], parm["filename"])
+    end_time = time.time()
+    execution_time = round((end_time - start_time), 3)
+    print("————————————————————")
+    print(f"scripts/mailTrack.py脚本执行时间：{execution_time}秒")
