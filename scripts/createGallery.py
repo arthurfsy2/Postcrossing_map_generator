@@ -9,7 +9,6 @@ import argparse
 import re
 from jinja2 import Template
 
-start_time = time.time()
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -18,42 +17,6 @@ with open("scripts/config.json", "r") as file:
 Cookie = data["Cookie"]
 picDriverPath = data["picDriverPath"]
 dbpath = data["dbpath"]
-
-# 创建 ArgumentParser 对象
-parser = argparse.ArgumentParser()
-parser.add_argument("account", help="输入account")
-# parser.add_argument("password", help="输入password")
-parser.add_argument("nickName", help="输入nickName")
-# parser.add_argument("Cookie", help="输入Cookie")
-parser.add_argument("repo", help="输入repo")
-options = parser.parse_args()
-
-account = options.account
-# password = options.password
-nickName = options.nickName
-# Cookie = options.Cookie
-repo = options.repo
-
-if os.path.exists(dbpath):
-    shutil.copyfile(dbpath, f"{dbpath}BAK")
-
-# 获取当前日期
-current_date = datetime.now().date()
-
-# 将日期格式化为指定格式
-date = current_date.strftime("%Y-%m-%d")
-
-types = ["sent", "received", "favourites", "popular"]
-
-for type in types:
-    galleryPath = f"./gallery/{type}.md"
-    if os.path.exists(galleryPath):
-        shutil.copyfile(galleryPath, f"{galleryPath}BAK")
-        with open(f"{galleryPath}BAK", "r", encoding="utf-8") as f:
-            content = f.read()
-        dataNew = re.sub(r"date: \d{4}-\d{2}-\d{2}", "date: $date", content)
-        with open(f"{galleryPath}BAK", "w", encoding="utf-8") as f:
-            f.write(dataNew)
 
 
 def getGalleryListBYyear(type):
@@ -197,10 +160,48 @@ def replaceTemplate(type, date, num, title, MDcontent_all, repo):
     os.remove(f"{filename_md}NEW")
 
 
-for type in types:
-    createMD(type)
+if __name__ == "__main__":
+    start_time = time.time()
+    # 创建 ArgumentParser 对象
+    parser = argparse.ArgumentParser()
+    parser.add_argument("account", help="输入account")
+    # parser.add_argument("password", help="输入password")
+    parser.add_argument("nickName", help="输入nickName")
+    # parser.add_argument("Cookie", help="输入Cookie")
+    parser.add_argument("repo", help="输入repo")
+    options = parser.parse_args()
 
-os.remove(f"{dbpath}BAK")
-end_time = time.time()
-execution_time = round((end_time - start_time), 3)
-print(f"createGallery.py脚本执行时间：{execution_time}秒\n")
+    account = options.account
+    # password = options.password
+    nickName = options.nickName
+    # Cookie = options.Cookie
+    repo = options.repo
+
+    if os.path.exists(dbpath):
+        shutil.copyfile(dbpath, f"{dbpath}BAK")
+
+    # 获取当前日期
+    current_date = datetime.now().date()
+
+    # 将日期格式化为指定格式
+    date = current_date.strftime("%Y-%m-%d")
+
+    types = ["sent", "received", "favourites", "popular"]
+
+    for type in types:
+        galleryPath = f"./gallery/{type}.md"
+        if os.path.exists(galleryPath):
+            shutil.copyfile(galleryPath, f"{galleryPath}BAK")
+            with open(f"{galleryPath}BAK", "r", encoding="utf-8") as f:
+                content = f.read()
+            dataNew = re.sub(r"date: \d{4}-\d{2}-\d{2}", "date: $date", content)
+            with open(f"{galleryPath}BAK", "w", encoding="utf-8") as f:
+                f.write(dataNew)
+
+    for type in types:
+        createMD(type)
+
+    os.remove(f"{dbpath}BAK")
+    end_time = time.time()
+    execution_time = round((end_time - start_time), 3)
+    print(f"createGallery.py脚本执行时间：{execution_time}秒\n")

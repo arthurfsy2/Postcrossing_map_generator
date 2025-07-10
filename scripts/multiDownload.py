@@ -814,17 +814,17 @@ def getUserSummary(account, Cookie):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("account", help="输入account")
-    parser.add_argument("password", help="输入password")
+    # parser.add_argument("password", help="输入password")
     parser.add_argument("nickName", help="输入nickName")
     # parser.add_argument("Cookie", help="输入Cookie")
-    parser.add_argument("repo", help="输入repo")
+    # parser.add_argument("repo", help="输入repo")
     options = parser.parse_args()
 
     account = options.account
-    password = options.password
+    # password = options.password
     nickName = options.nickName
     # Cookie = options.Cookie
-    repo = options.repo
+    # repo = options.repo
 
     # 获取当前日期
     current_date = datetime.now().date()

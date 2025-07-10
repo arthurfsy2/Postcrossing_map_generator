@@ -29,7 +29,7 @@ apikey = options.apikey
 command = f'python scripts/login.py "{account}" "{password}"'
 subprocess.run(command, shell=True)
 
-command = f'python scripts/multiDownload.py "{account}" "{password}" "{nickName}" "{repo}"'
+command = f'python scripts/multiDownload.py "{account}" "{nickName}"'
 subprocess.run(command, shell=True)
 
 command = f'python scripts/createGallery.py "{account}" "{nickName}" "{repo}"'
@@ -38,8 +38,8 @@ subprocess.run(command, shell=True)
 command = f'python scripts/createMap.py "{account}"'
 subprocess.run(command, shell=True)
 
-command = f'python scripts/createPersonalPage.py "{account}" "{nickName}" "{repo}" "{apikey}"'
+command = f'python scripts/createPersonalPage.py "{account}" "{nickName}" "{repo}"'
 subprocess.run(command, shell=True)
 
-command = f'python scripts/postcrossingrecap.py'
+command = f"python scripts/postcrossingrecap.py"
 subprocess.run(command, shell=True)
