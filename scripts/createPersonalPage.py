@@ -313,7 +313,14 @@ def getCardStoryList(type):
             distance = format(distanceNum, ",")
 
             if type == "received":
+                if content_original:
+                    storyPic_src = f"{storyPicLink}/{postcardID}.{storyPicType}"
+                    story_text = f"* 卡片文字\n\n> {content_original}\n\n* 翻译：\n\n> {content_cn}\n\n"
+                else:
+                    storyPic_src = None
+                    story_text = "暂无内容\n\n"
                 if comment_original:
+                    comment_original = comment_original.replace("`", "\`")
                     comment = (
                         f"@tab 额外消息\n"
                         f"* 消息原文\n\n> {comment_original}\n\n* 翻译：\n\n> {comment_cn}\n\n"
@@ -321,11 +328,13 @@ def getCardStoryList(type):
 
                 else:
                     comment = ""
-                picList = (
-                    f'<div class="image-preview">  <img src="{picDriverPath}/{picFileName}" />  <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>'
-                    if picFileName != "noPic.png"
-                    else f'<div class="image-preview"> <img src="{storyPicLink}/{postcardID}.{storyPicType}" /></div>'
-                )
+
+                if picFileName != "noPic.png" and storyPic_src:
+                    picList = f'<div class="image-preview">  <img src="{picDriverPath}/{picFileName}" />  <img src="{storyPic_src}" /></div>'
+                elif picFileName == "noPic.png" and storyPic_src:
+                    picList = f'<div class="image-preview"> <img src="{storyPic_src}" /></div>'
+                else:
+                    picList = "暂无图片"
 
                 list = (
                     f"[{postcardID}](https://www.postcrossing.com/postcards/{postcardID})\n\n"
@@ -336,7 +345,7 @@ def getCardStoryList(type):
                     f"{picList}"
                     f"\n\n"
                     f"@tab 内容\n"
-                    f"* 卡片文字\n\n> {content_original}\n\n* 翻译：\n\n> {content_cn}\n\n"
+                    f"{story_text}"
                     f"{comment}:::\n\n"
                     f"---\n\n"
                 )
