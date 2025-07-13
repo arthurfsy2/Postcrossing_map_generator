@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：184）
+title: 明信片展示墙（寄出：185）
 icon: address-card
-date: 2025-07-08
+date: 2025-07-13
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-4032659](https://www.postcrossing.com/postcards/CN-4032659) 
+ >寄往 [Shadowflame](https://www.postcrossing.com/user/Shadowflame) 🇩🇪
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/9vfojcwphezhvttokwptncztvwnkv7mu.jpg)
 
 ### 2025(45)
 
