@@ -546,7 +546,7 @@ const option = {
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/ah46sfrc4imco98jq7aal3xpvfxvriaw.jpg)
 
 [CN-3886025](https://www.postcrossing.com/postcards/CN-3886025) 
- >寄往 [Berry_i](https://www.postcrossing.com/user/Berry_i) 🇳🇱
+ >寄往 [Berry_Duck](https://www.postcrossing.com/user/Berry_Duck) 🇳🇱
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/11/12 13:02 (当地)
 > 📥 [Netherlands](https://www.bing.com/maps/?cp=52.2375~4.82639&lvl=12.0&setlang=zh-Hans) 2025/01/08 00:53 (当地)
  📏 9,270 | ⏱ 57
