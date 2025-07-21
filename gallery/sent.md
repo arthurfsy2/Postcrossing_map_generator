@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：186）
+title: 明信片展示墙（寄出：187）
 icon: address-card
 date: 2025-07-21
 category:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-4060782](https://www.postcrossing.com/postcards/CN-4060782) 
+ >寄往 [saher](https://www.postcrossing.com/user/saher) 🇮🇳
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/898fn6rp3b56dokhobv3ix1xz5h3jpvt.jpg)
 
 ### 2025(47)
 
