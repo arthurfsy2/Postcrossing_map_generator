@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：185）
+title: 明信片展示墙（寄出：186）
 icon: address-card
-date: 2025-07-13
+date: 2025-07-21
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-4032664](https://www.postcrossing.com/postcards/CN-4032664) 
+ >寄往 [Tuulukka](https://www.postcrossing.com/user/Tuulukka) 🇫🇮
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/pez7popbcjpxwdssoq11pvot0zxisq3f.jpg)
 
 ### 2025(46)
 
