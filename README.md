@@ -301,8 +301,6 @@ https://raw.gitmirror.com/arthurfsy2/Postcrossing_map_generator/main/output/mont
 
 ```
 env:
-  GITHUB_NAME: arthurfsy2 （修改成你的github名称）
-  GITHUB_EMAIL: fsyflh@gmail.com （修改为你的github账号邮箱）
   blog_path: "./src/Arthur/postcrossing"  //修改为你的blog仓库需要存放md文件的路径
   blog_repo: "arthurfsy2/arthurfsy2.github.io" //修改为你的blog仓库名称
   PUSH_TO_GITHUB: true  //初始默认值，不需要改变

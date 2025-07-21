@@ -9,8 +9,6 @@ on:
       - main
 
 env:
-  GITHUB_NAME: arthurfsy2
-  GITHUB_EMAIL: fsyflh@gmail.com
   blog_path: "./src/Arthur/postcrossing"
   blog_repo: "arthurfsy2/arthurfsy2.github.io"
   PUSH_TO_GITHUB: true
@@ -51,8 +49,8 @@ jobs:
       - name: 提交本仓库更改
         id: push
         run: |
-          git config --local user.email "${{ env.GITHUB_EMAIL }}"
-          git config --local user.name "${{ env.GITHUB_NAME }}"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add .
           git diff-index --quiet HEAD || git commit -m '已更新数据'
           git push || echo "nothing to push"
@@ -91,8 +89,8 @@ jobs:
         if: steps.check_changes.outputs.has_changes == 'true'
         run: |
           cd blog-repo
-          git config --local user.email "${{ env.GITHUB_EMAIL }}"
-          git config --local user.name "${{ env.GITHUB_NAME }}"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add .
           git commit -m '自动同步postcrossing数据'
           git push
