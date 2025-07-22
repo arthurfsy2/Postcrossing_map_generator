@@ -147,23 +147,25 @@ const option = {
 
 :::
 
-### 其他(2)
+### 2025(42)
 
 [JP-2275476](https://www.postcrossing.com/postcards/JP-2275476) 
  >来自 [yoich](https://www.postcrossing.com/user/yoich) 🇯🇵
->
+> 📤 [Japan](https://www.bing.com/maps/?cp=33.6~130.41667&lvl=12.0&setlang=zh-Hans) 2025/07/08 14:11 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/07/22 20:08 (当地)
+ 📏 2,002 | ⏱ 14
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/1j24ta0mp6on222gtgh3mno1frfqnh0r.jpg)
 
 [JP-2275475](https://www.postcrossing.com/postcards/JP-2275475) 
  >来自 [joelc](https://www.postcrossing.com/user/joelc) 🇯🇵
->
+> 📤 [Japan](https://www.bing.com/maps/?cp=34.69379~135.50107&lvl=12.0&setlang=zh-Hans) 2025/07/08 14:11 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/07/22 20:07 (当地)
+ 📏 2,467 | ⏱ 14
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/7fp1jdp09jmgrmpgzdccta7nfa0j37ms.jpg)
-
-### 2025(40)
 
 [IN-656658](https://www.postcrossing.com/postcards/IN-656658) 
  >来自 [visweswaran](https://www.postcrossing.com/user/visweswaran) 🇮🇳
