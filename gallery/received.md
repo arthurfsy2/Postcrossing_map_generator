@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：202）
+title: 明信片展示墙（收到：203）
 icon: address-card
 date: 2025-07-24
 category:
@@ -147,16 +147,25 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2025(44)
 
 [SG-456709](https://www.postcrossing.com/postcards/SG-456709) 
  >来自 [Suki25](https://www.postcrossing.com/user/Suki25) 🇸🇬
->
+> 📤 [Singapore](https://www.bing.com/maps/?cp=1.28967~103.85007&lvl=12.0&setlang=zh-Hans) 2025/07/08 11:30 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/07/24 22:02 (当地)
+ 📏 2,617 | ⏱ 16
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/vd4tze3im6eyssmm3gdlqzcftc99basg.jpg)
 
-### 2025(42)
+[US-11542780](https://www.postcrossing.com/postcards/US-11542780) 
+ >来自 [elizabethkurtz](https://www.postcrossing.com/user/elizabethkurtz) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=36.30477~-86.62&lvl=12.0&setlang=zh-Hans) 2025/07/07 22:26 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/07/24 22:00 (当地)
+ 📏 13,112 | ⏱ 16
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/bytkm06j3opg2mc2n27w33ls666lyayp.jpg)
 
 [JP-2275476](https://www.postcrossing.com/postcards/JP-2275476) 
  >来自 [yoich](https://www.postcrossing.com/user/yoich) 🇯🇵
