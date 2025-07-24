@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：201）
+title: 明信片展示墙（收到：202）
 icon: address-card
-date: 2025-07-22
+date: 2025-07-24
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[SG-456709](https://www.postcrossing.com/postcards/SG-456709) 
+ >来自 [Suki25](https://www.postcrossing.com/user/Suki25) 🇸🇬
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/vd4tze3im6eyssmm3gdlqzcftc99basg.jpg)
 
 ### 2025(42)
 
