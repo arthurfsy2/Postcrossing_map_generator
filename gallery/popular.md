@@ -11,18 +11,18 @@ order: 5
 
 ## [arthurfsy's popular](https://www.postcrossing.com/user/arthurfsy/gallery/popular)
 
-### 其他(1)
+### 2025(19)
 
 [CN-4060194](https://www.postcrossing.com/postcards/CN-4060194) 
  >寄往  🇩🇪
->
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/06/25 13:30 (当地)
+> 📥 [Germany](https://www.bing.com/maps/?cp=48.88791~9.39267&lvl=12.0&setlang=zh-Hans) 2025/07/26 11:45 (当地)
+ 📏 9,154 | ⏱ 31
 >点赞人数：**1**
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/g6eyy6qdsloskg857w2r5e4kuk0a7sdv.jpg) 
 
- ### 2025(18)
-
-[CN-4032664](https://www.postcrossing.com/postcards/CN-4032664) 
+ [CN-4032664](https://www.postcrossing.com/postcards/CN-4032664) 
  >寄往  🇫🇮
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/19 10:12 (当地)
 > 📥 [Finland](https://www.bing.com/maps/?cp=60.16952~24.93545&lvl=12.0&setlang=zh-Hans) 2025/07/21 13:33 (当地)
