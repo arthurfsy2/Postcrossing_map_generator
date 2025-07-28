@@ -147,16 +147,16 @@ const option = {
 
 :::
 
-### 其他(1)
+### 2025(45)
 
 [AU-1018358](https://www.postcrossing.com/postcards/AU-1018358) 
  >来自 [Telopea](https://www.postcrossing.com/user/Telopea) 🇦🇺
->
+> 📤 [Australia](https://www.bing.com/maps/?cp=-33.65982~151.29878&lvl=12.0&setlang=zh-Hans) 2025/07/08 13:26 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/07/28 21:44 (当地)
+ 📏 7,380 | ⏱ 20
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/eam6s8kcjp93y1ybxh71v3b4zb1sgv5n.jpg)
-
-### 2025(44)
 
 [SG-456709](https://www.postcrossing.com/postcards/SG-456709) 
  >来自 [Suki25](https://www.postcrossing.com/user/Suki25) 🇸🇬
