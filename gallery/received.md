@@ -692,7 +692,7 @@ const option = {
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/hqlmkxd9x1tx9jxwtbrrzismst3vra9n.jpg)
 
 [US-10842005](https://www.postcrossing.com/postcards/US-10842005) 
- >来自 [xenop](https://www.postcrossing.com/user/xenop) 🇺🇸
+ >来自 ***该用户已关闭*** 🇺🇸
 > 📤 [U.S.A.](https://www.bing.com/maps/?cp=43.57664~-91.2243&lvl=12.0&setlang=zh-Hans) 2024/10/21 02:11 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/11/14 19:53 (当地)
  📏 12,214 | ⏱ 24
