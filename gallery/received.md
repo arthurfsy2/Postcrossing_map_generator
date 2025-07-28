@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：203）
+title: 明信片展示墙（收到：204）
 icon: address-card
-date: 2025-07-24
+date: 2025-07-28
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[AU-1018358](https://www.postcrossing.com/postcards/AU-1018358) 
+ >来自 [Telopea](https://www.postcrossing.com/user/Telopea) 🇦🇺
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/eam6s8kcjp93y1ybxh71v3b4zb1sgv5n.jpg)
 
 ### 2025(44)
 
