@@ -826,5 +826,23 @@
     "receivedDateHistory": "[1753365742]",
     "sentDateFirst": null,
     "receivedDateFirst": "2025/07/24"
+  },
+  {
+    "name": "Estonia",
+    "countryCode": "EE",
+    "flagEmoji": "🇪🇪",
+    "value": 1,
+    "sentNum": 1,
+    "receivedNum": 0,
+    "sentAvg": 35,
+    "receivedAvg": null,
+    "sentMedian": 35,
+    "receivedMedian": null,
+    "sentHistory": "[35]",
+    "receivedHistory": "[]",
+    "sentDateHistory": "[1753817528]",
+    "receivedDateHistory": "[]",
+    "sentDateFirst": "2025/07/29",
+    "receivedDateFirst": null
   }
 ]

@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：188）
+title: 明信片展示墙（寄出：189）
 icon: address-card
-date: 2025-07-26
+date: 2025-07-29
 category:
   - Arthur
 tag:
@@ -146,6 +146,15 @@ const option = {
 ```
 
 :::
+
+### 其他(1)
+
+[CN-4060193](https://www.postcrossing.com/postcards/CN-4060193) 
+ >寄往 [cerres](https://www.postcrossing.com/user/cerres) 🇪🇪
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/13xye3fikfq7lf8me2uklj2ur4yq1fex.jpg)
 
 ### 2025(49)
 
