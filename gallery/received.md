@@ -147,23 +147,25 @@ const option = {
 
 :::
 
-### 其他(2)
+### 2025(47)
 
 [US-11542779](https://www.postcrossing.com/postcards/US-11542779) 
  >来自 [kburrell](https://www.postcrossing.com/user/kburrell) 🇺🇸
->
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=47.57093~-122.38652&lvl=12.0&setlang=zh-Hans) 2025/07/07 20:26 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/08/02 09:17 (当地)
+ 📏 10,387 | ⏱ 25
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/zvtkjwzz8lkd9h3vi4vgas8kdwke4yji.jpg)
 
 [US-11542794](https://www.postcrossing.com/postcards/US-11542794) 
  >来自 [kruben](https://www.postcrossing.com/user/kruben) 🇺🇸
->
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=37.77493~-122.41942&lvl=12.0&setlang=zh-Hans) 2025/07/07 20:30 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/08/02 09:11 (当地)
+ 📏 11,071 | ⏱ 25
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/c6gubaphehmyxz5c4k9o6032dfjitiwz.jpg)
-
-### 2025(45)
 
 [AU-1018358](https://www.postcrossing.com/postcards/AU-1018358) 
  >来自 [Telopea](https://www.postcrossing.com/user/Telopea) 🇦🇺
