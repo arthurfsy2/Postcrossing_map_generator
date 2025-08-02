@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：206）
+title: 明信片展示墙（收到：207）
 icon: address-card
 date: 2025-08-02
 category:
@@ -147,7 +147,7 @@ const option = {
 
 :::
 
-### 2025(47)
+### 2025(48)
 
 [US-11542779](https://www.postcrossing.com/postcards/US-11542779) 
  >来自 [kburrell](https://www.postcrossing.com/user/kburrell) 🇺🇸
@@ -157,6 +157,15 @@ const option = {
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/zvtkjwzz8lkd9h3vi4vgas8kdwke4yji.jpg)
+
+[US-11542796](https://www.postcrossing.com/postcards/US-11542796) 
+ >来自 [snow_storm_x](https://www.postcrossing.com/user/snow_storm_x) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=34.8348~-97.60253&lvl=12.0&setlang=zh-Hans) 2025/07/07 22:31 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/08/02 09:12 (当地)
+ 📏 12,802 | ⏱ 25
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/u36eusvumb7vgald9hut2ut565egitdf.jpg)
 
 [US-11542794](https://www.postcrossing.com/postcards/US-11542794) 
  >来自 [kruben](https://www.postcrossing.com/user/kruben) 🇺🇸
