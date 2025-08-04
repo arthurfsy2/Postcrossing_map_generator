@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：207）
+title: 明信片展示墙（收到：211）
 icon: address-card
-date: 2025-08-02
+date: 2025-08-04
 category:
   - Arthur
 tag:
@@ -146,6 +146,36 @@ const option = {
 ```
 
 :::
+
+### 其他(4)
+
+[LK-25643](https://www.postcrossing.com/postcards/LK-25643) 
+ >来自 [Portakal_kizi](https://www.postcrossing.com/user/Portakal_kizi) 🇱🇰
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/5sqql6tyvd1yxdsa1xdokrexut8ai7x6.jpg)
+
+[DE-15612819](https://www.postcrossing.com/postcards/DE-15612819) 
+ >来自 [Beckmeier](https://www.postcrossing.com/user/Beckmeier) 🇩🇪
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/wxljacfgmzvyuhmqzozz33kqci5ngmrh.jpg)
+
+[RU-10565516](https://www.postcrossing.com/postcards/RU-10565516) 
+ >来自 [MARINA-ALEX](https://www.postcrossing.com/user/MARINA-ALEX) 🇷🇺
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/pn1zrjfpvec98q12n4ow5809ba2ywrbq.jpg)
+
+[TW-3881180](https://www.postcrossing.com/postcards/TW-3881180) 
+ >来自 [pohantseng](https://www.postcrossing.com/user/pohantseng) 🇹🇼
+>
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/ce2ei9hxoo15cy0i7xi9q36gdocsufkq.jpg)
 
 ### 2025(48)
 
