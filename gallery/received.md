@@ -147,37 +147,43 @@ const option = {
 
 :::
 
-### 其他(4)
+### 2025(52)
 
 [LK-25643](https://www.postcrossing.com/postcards/LK-25643) 
  >来自 [Portakal_kizi](https://www.postcrossing.com/user/Portakal_kizi) 🇱🇰
->
+> 📤 [Sri Lanka](https://www.bing.com/maps/?cp=6.4394~79.9895&lvl=12.0&setlang=zh-Hans) 2025/04/25 00:08 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/08/04 16:08 (当地)
+ 📏 4,082 | ⏱ 102
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/5sqql6tyvd1yxdsa1xdokrexut8ai7x6.jpg)
 
 [DE-15612819](https://www.postcrossing.com/postcards/DE-15612819) 
  >来自 [Beckmeier](https://www.postcrossing.com/user/Beckmeier) 🇩🇪
->
+> 📤 [Germany](https://www.bing.com/maps/?cp=52.37052~9.73322&lvl=12.0&setlang=zh-Hans) 2025/07/08 07:19 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/08/04 16:05 (当地)
+ 📏 8,966 | ⏱ 27
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/wxljacfgmzvyuhmqzozz33kqci5ngmrh.jpg)
 
 [RU-10565516](https://www.postcrossing.com/postcards/RU-10565516) 
  >来自 [MARINA-ALEX](https://www.postcrossing.com/user/MARINA-ALEX) 🇷🇺
->
+> 📤 [Russia](https://www.bing.com/maps/?cp=55.53332~55.96253&lvl=12.0&setlang=zh-Hans) 2025/07/08 10:11 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/08/04 16:04 (当地)
+ 📏 5,978 | ⏱ 27
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/pn1zrjfpvec98q12n4ow5809ba2ywrbq.jpg)
 
 [TW-3881180](https://www.postcrossing.com/postcards/TW-3881180) 
  >来自 [pohantseng](https://www.postcrossing.com/user/pohantseng) 🇹🇼
->
+> 📤 [Taiwan](https://www.bing.com/maps/?cp=24.1469~120.6839&lvl=12.0&setlang=zh-Hans) 2025/07/22 13:46 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/08/04 16:01 (当地)
+ 📏 681 | ⏱ 13
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/ce2ei9hxoo15cy0i7xi9q36gdocsufkq.jpg)
-
-### 2025(48)
 
 [US-11542779](https://www.postcrossing.com/postcards/US-11542779) 
  >来自 [kburrell](https://www.postcrossing.com/user/kburrell) 🇺🇸
