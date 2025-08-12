@@ -1,0 +1,22 @@
+[project]
+name = "postcrossing-map-generator"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4==4.12.3",
+    "emojiflags==0.1.1",
+    "folium==0.16.0",
+    "imap-tools==1.5.0",
+    "jieba==0.42.1",
+    "mechanize==0.4.9",
+    "opencc==1.1.7",
+    "openpyxl==3.1.2",
+    "pandas==2.2.1",
+    "pillow==10.2.0",
+    "pycountry==23.12.11",
+    "pytz==2024.1",
+    "requests==2.31.0",
+    "wordcloud==1.9.3",
+]
