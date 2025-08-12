@@ -11,7 +11,7 @@ order: 4
 
 ## [arthurfsy's favourites](https://www.postcrossing.com/user/arthurfsy/gallery/favourites)
 
-### 其他(3)
+### 其他(2)
 
 [US-5713297](https://www.postcrossing.com/postcards/US-5713297) 
  >来自 [BarbSchmidt](https://www.postcrossing.com/user/BarbSchmidt) 
@@ -27,14 +27,16 @@ order: 4
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/n1xhrcgrw2uheado60rbb55m6c9sjhq0.jpg)
 
+### 2025(9)
+
 [BY-3352451](https://www.postcrossing.com/postcards/BY-3352451) 
  >来自 [Toni_Arashony](https://www.postcrossing.com/user/Toni_Arashony) 🇧🇾
->
+> 📤 [Belarus](https://www.bing.com/maps/?cp=55.1904~30.2049&lvl=12.0&setlang=zh-Hans) 2025/07/13 17:56 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/08/12 09:55 (当地)
+ 📏 7,594 | ⏱ 29
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/ht2nld6nzkkq3nqhwneyaftycxgqda1m.jpg)
-
-### 2025(8)
 
 [AU-1018358](https://www.postcrossing.com/postcards/AU-1018358) 
  >来自 [Telopea](https://www.postcrossing.com/user/Telopea) 🇦🇺
