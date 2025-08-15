@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（我收到的赞：87）
 icon: address-card
-date: 2025-07-26
+date: 2025-08-15
 category:
   - Arthur
 tag:
@@ -470,7 +470,7 @@ order: 5
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/02/22 11:20 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=50.51545~8.38918&lvl=12.0&setlang=zh-Hans) 2024/04/01 14:46 (当地)
  📏 9,139 | ⏱ 39
->点赞人数：**1**
+>点赞人数：**2**
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/x469la2o3it4bk0lep5okgozr2w5g82x.jpg) 
 
