@@ -39,9 +39,25 @@ jobs:
       - name: 更新邮件回复
         run: |
           python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
-      - name: 运行start_task.py脚本
+      - name: 更新login
         run: |
-          python scripts/start_task.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY ${{ secrets.APIKEY }}
+          python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }}
+      - name: 更新数据库和下载新图片
+        run: |
+          python scripts/multi_download.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }}
+      - name: 更新gallery
+        run: |
+          python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }}
+      - name: 更新2个地图数据
+        run: |
+          python scripts/create_map.py ${{ secrets.ACCOUNT }}
+      - name: 更新信息汇总
+        run: |
+          python scripts/create_personal_page.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
+      - name: 更新postcrossing年度汇总
+        run: |
+          python scripts/postcrossing_recap.py
+      
 
       - name: 删除缓存文件
         run: rm -rf scripts/__pycache__/
