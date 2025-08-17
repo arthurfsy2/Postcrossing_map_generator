@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% if card_type !='traveling' %} {{card_type}}{%else%}还在漂泊的明信片{% endif %}</title>
+    <link
+      rel="stylesheet"
+      href="../src/bootstrap-5.2.2/package/dist/css/bootstrap.min.css"
+    />
+    <script src="../src/bootstrap-5.2.2/package/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../src/jquery-1.12.4/package/dist/jquery.min.js"></script>
+    <script src="../src/tablesorter-2.31.3/js/jquery.tablesorter.js"></script>
+    <script>
+      $(document).ready(function () {
+        {
+          $("#dataTable").tablesorter();
+        }
+      });
+
+      function searchTable() {
+        {
+          var input = document.getElementById("searchInput");
+          var filter = input.value.toUpperCase();
+          var table = document.getElementById("dataTable");
+          var tr = table.getElementsByTagName("tr");
+          for (var i = 1; i < tr.length; i++) {
+            {
+              // Start from index 1 to exclude the table header row
+              var td = tr[i].getElementsByTagName("td");
+              var found = false;
+              for (var j = 0; j < td.length; j++) {
+                {
+                  var txtValue = td[j].textContent || td[j].innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    {
+                      found = true;
+                      break;
+                    }
+                  }
+                }
+              }
+              if (found) {
+                {
+                  tr[i].style.display = "";
+                }
+              } else {
+                {
+                  tr[i].style.display = "none";
+                }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      .search-input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 200px;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="mb-3">
+        <input
+          type="text"
+          id="searchInput"
+          onkeyup="searchTable()"
+          placeholder="搜索……"
+        />
+      </div>
+      <div class="table-responsive">
+        <table
+          border="1"
+          class="dataframe table table-striped table-bordered"
+          id="dataTable"
+        >
+          <thead>
+            <tr style="text-align: right">
+              <th class="text-center"></th>
+              {% if card_type in ['sent','received'] %}
+              <th class="text-center">ID号</th>
+              <th class="text-center">
+                {% if card_type =='sent' %}收{%else%}发{% endif %}信人
+              </th>
+              <th class="text-center">{{title_name.from_or_to}}地区</th>
+              <th class="text-center">寄出时间(当地)</th>
+              <th class="text-center">收到时间(当地)</th>
+              <th class="text-center">距离(km)</th>
+              <th class="text-center">天数</th>
+              {% endif %} {% if card_type =='country_stats' %}
+              <th class="text-center">国家</th>
+              <th class="text-center">已寄出</th>
+              <th class="text-center">已收到</th>
+              <th class="text-center">寄出-平均</th>
+              <th class="text-center">收到-平均</th>
+              <th class="text-center">寄出-中间值</th>
+              <th class="text-center">收到-中间值</th>
+              <th class="text-center">首次寄出</th>
+              <th class="text-center">首次收到</th>
+              {% endif %}{% if card_type =='traveling' %}
+              <th class="text-center">ID号</th>
+              <th class="text-center">收信人</th>
+              <th class="text-center">国家</th>
+              <th class="text-center">寄出时间(当地)</th>
+              <th class="text-center">距离(km)</th>
+              <th class="text-center">天数</th>
+              <th class="text-center">历史平均到达(天)</th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% if card_type in ['sent','received'] %} {% for item in content %}
+            <tr>
+              <th class="text-center">{{loop.index}}</th>
+              <td class="text-center">
+                <a href="{{baseurl}}/postcards/{{item.card_id}}" target="_blank"
+                  >{{item.card_id}}</a
+                >
+              </td>
+              <td class="text-center">
+                <a href="{{baseurl}}/user/angierobinson1375" target="_blank"
+                  >{{item.user}}</a
+                >
+              </td>
+              <td class="text-center">
+                {% if card_type =='sent'
+                %}{{item.received_country}}{%else%}{{item.sent_country}}{% endif
+                %} {{item.flag_emoji}}
+              </td>
+              <td class="text-center">{{item.sent_date_local}}</td>
+              <td class="text-center">{{item.received_date_local}}</td>
+              <td class="text-center">{{item.distance}}</td>
+              <td class="text-center">{{item.travel_days}}</td>
+            </tr>
+            {% endfor %} {% endif %} {% if card_type =='country_stats' %} {% for
+            item in content %}
+            <tr>
+              <th class="text-center">{{loop.index}}</th>
+              <td class="text-center">{{item.name}} {{item.flag_emoji}}</td>
+              <td class="text-center">{{item.sent_num}}</td>
+              <td class="text-center">{{item.received_num}}</td>
+              <td class="text-center">
+                {% if item.sent_avg %}{{item.sent_avg}}天{%else%}-{% endif %}
+              </td>
+              <td class="text-center">
+                {% if item.received_avg %}{{item.received_avg}}天{%else%}-{%
+                endif %}
+              </td>
+              <td class="text-center">
+                {% if item.sent_median %}{{item.sent_median}}天{%else%}-{% endif
+                %}
+              </td>
+              <td class="text-center">
+                {% if item.received_median
+                %}{{item.received_median}}天{%else%}-{% endif %}
+              </td>
+              <td class="text-center">
+                {% if item.sent_date_first %}{{item.sent_date_first}}{%else%}-{%
+                endif %}
+              </td>
+              <td class="text-center">
+                {% if item.received_date_first
+                %}{{item.received_date_first}}{%else%}-{% endif %}
+              </td>
+            </tr>
+            {% endfor %} {% endif %}{% if card_type =='traveling' %} {% for item
+            in content %}
+            <tr>
+              <th class="text-center">{{loop.index}}</th>
+              <td class="text-center">{{item.card_id}}</td>
+              <td class="text-center">{{item.sender}}</td>
+              <td class="text-center">{{item.country_name}}</td>
+              <td class="text-center">{{item.sent_local_date}}</td>
+              <td class="text-center">{{item.distance}}</td>
+              <td class="text-center">{{item.traveling_days}}</td>
+              <td class="text-center">{{item.sent_avg}}</td>
+            </tr>
+            {% endfor %} {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      // 在页面加载完成后执行搜索表格的函数
+      window.onload = function () {
+        {
+          searchTable();
+        }
+      };
+    </script>
+  </body>
+</html>

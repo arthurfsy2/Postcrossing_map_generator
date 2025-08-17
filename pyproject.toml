@@ -18,5 +18,9 @@ dependencies = [
     "pycountry==23.12.11",
     "pytz==2024.1",
     "requests==2.31.0",
+    "sqlalchemy>=2.0.43",
     "wordcloud==1.9.3",
 ]
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true

@@ -13,7 +13,7 @@ order: 1
 @tab 基本信息
 
 <iframe 
-src="{{personalPageLink}}/output/registerInfo.html" 
+src="{{personal_page_link}}/output/register_info.html" 
 frameborder=0
 height=350
 width=100%
@@ -22,12 +22,16 @@ scrolling=auto
 ></iframe>
 
 @tab 关于我
-{{about}}
+![](https://s3.amazonaws.com/static2.postcrossing.com/avatars/140x140/{{user_summary.logo}}.jpg)
+
+:::info 个人简介
+{{user_summary.about}} 
+
 
 @tab 我的位置
 
 <iframe 
-src="{{personalPageLink}}/LocationMap.html" 
+src="{{personal_page_link}}/LocationMap.html" 
 frameborder=0
 height=500
 width=100%
@@ -40,13 +44,13 @@ scrolling=auto
 
 ## 一.图片墙
 
-{{title}}
+{{title_final}}
 
 ::: tabs
 @tab 发送列表
 
 <iframe 
-src="{{personalPageLink}}/output/sent.html" 
+src="{{personal_page_link}}/output/sent.html" 
 frameborder=0
 height=500
 width=100%
@@ -57,7 +61,7 @@ scrolling=auto
 @tab 接收列表
 
 <iframe 
-src="{{personalPageLink}}/output/received.html" 
+src="{{personal_page_link}}/output/received.html" 
 frameborder=0
 height=500
 width=100%
@@ -68,7 +72,7 @@ scrolling=auto
 @tab 还在漂泊的明信片
 
 <iframe 
-src="{{personalPageLink}}/output/traveling.html" 
+src="{{personal_page_link}}/output/traveling.html" 
 frameborder=0
 height=500
 width=100%
@@ -91,10 +95,10 @@ scrolling=auto
 
 ### 个人收发 Map
 
-网址：{{personalPageLink}}/Map.html
+网址：{{personal_page_link}}/Map.html
 
 <iframe 
-src="{{personalPageLink}}/Map.html" 
+src="{{personal_page_link}}/Map.html" 
 frameborder=0
 height=500
 width=100%
@@ -106,10 +110,10 @@ scrolling=auto
 
 ### 个人收发 ClusterMap
 
-网址：{{personalPageLink}}/ClusterMap.html
+网址：{{personal_page_link}}/ClusterMap.html
 
 <iframe 
-src="{{personalPageLink}}/ClusterMap.html" 
+src="{{personal_page_link}}/ClusterMap.html" 
 frameborder=0
 height=500
 width=100%
@@ -289,7 +293,7 @@ const option = {
 @tab 各国运输时效
 
 <iframe 
-src="{{personalPageLink}}/output/CountryStats.html" 
+src="{{personal_page_link}}/output/country_stats.html" 
 frameborder=0
 height=500
 width=100%
@@ -299,7 +303,7 @@ scrolling=auto
 
 :::
 
-## 四.明信片故事（{{storyNum}}）
+## 四.明信片故事（{{story_num}}）
 
 ::: tabs
 @tab 中文词云
@@ -307,12 +311,87 @@ scrolling=auto
 @tab 英文词云
 ![](https://raw.githubusercontent.com/{{repo}}/main/output/postcrossing_en.svg)
 :::
+{% for year, year_data in story_list.items() %}
+### {{ year }}({{ year_data|length }})
+{% for item in year_data %}
+[{{item.card_id}}](https://www.postcrossing.com/postcards/{{item.card_id}})
 
-{{storylist}}
+> 来自 {% if item.user !='account closed' %}[{{item.user}}](https://www.postcrossing.com/user/{{item.user}}){%else%}*用户已注销*{%endif%} {{item.flag_emoji}}
+> 📤 [{{item.sent_country}}](https://www.bing.com/maps/?cp={{item.from_coor0}}~{{item.from_coor1}}&lvl=12.0&setlang=zh-Hans) {{item.sent_date_local}} (当地)
+> 📥 [{{item.received_country}}](https://www.bing.com/maps/?cp={{item.to_coor0}}~{{item.to_coor1}}&lvl=12.0&setlang=zh-Hans) {{item.received_date_local}} (当地)
+ 📏 {{item.distance}} | ⏱ {{item.travel_days}}
 
-## 五.被注册时收到的回复（{{commentNum}}）
+:::tabs
+@tab 图片{% if item.content_original %}
+<div class="image-preview">  <img src="{{pic_driver_path}}/{{item.pic_file_name}}" />  <img src="{{story_pic_link}}/{{item.card_id}}.{{story_pic_type}}" /></div>{%else%}
+暂无图片{%endif%}
 
-{{commentlist}}
+@tab 内容{% if item.content_original %}
+* 卡片文字
+
+> {{item.content_original}}
+
+* 翻译：
+
+> {{item.content_cn}}
+{%else%}
+暂无内容{%endif%}
+{% if item.comment_original %}
+@tab 额外消息
+* 消息原文
+
+> {{item.comment_original}}
+
+* 翻译：
+
+> {{item.comment_cn}}
+{%endif%}
+:::
+
+---
+{% endfor %}
+{% endfor %}
+
+
+## 五.被注册时收到的回复（{{comment_num}}）
+
+{% for year, year_data in comment_list.items() %}
+### {{ year }}({{ year_data|length }})
+{% for item in year_data %}
+[{{item.card_id}}](https://www.postcrossing.com/postcards/{{item.card_id}})
+
+> 寄往 [{{item.user}}](https://www.postcrossing.com/user/{{item.user}}) {{item.flag_emoji}}
+> 📤 [{{item.sent_country}}](https://www.bing.com/maps/?cp={{item.from_coor0}}~{{item.from_coor1}}&lvl=12.0&setlang=zh-Hans) {{item.sent_date_local}} (当地)
+> 📥 [{{item.received_country}}](https://www.bing.com/maps/?cp={{item.to_coor0}}~{{item.to_coor1}}&lvl=12.0&setlang=zh-Hans) {{item.received_date_local}} (当地)
+ 📏 {{item.distance}} | ⏱ {{item.travel_days}}
+
+:::tabs{% if 'noPic.png' not in item.link %}
+@tab 图片
+![](https://pan.4a1801.life:11443/d/public/article/{{nick_name}}/Postcrossing_map_generator/{{item.link}})
+{%endif%}
+@tab 回复
+* 回复原文
+
+> {{item.comment_original}}
+
+* 翻译：
+
+> {{item.comment_cn}}{% if item.content_original %}
+@tab 额外消息
+* 消息原文
+
+> {{item.content_original}}
+
+* 翻译：
+
+> {{item.content_cn}}
+{%endif%}
+
+:::
+
+---
+{% endfor %}
+{% endfor %}
 
 <style>
   .image-preview {

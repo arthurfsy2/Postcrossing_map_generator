@@ -5,8 +5,7 @@ import time
 import sqlite3
 import random
 import os
-from multiDownload import MapDataCheck
-from common_tools import readDB, writeDB, compareMD5
+from common_tools import db_path, read_db_table, compareMD5
 import sys
 import shutil
 import argparse
@@ -16,20 +15,20 @@ with open("scripts/config.json", "r") as file:
     data = json.load(file)
 # account = data["account"]
 Cookie = data["Cookie"]
-dbpath = data["dbpath"]
 
 
 def getMapHomeInfo(receivedData):
+    # print("receivedData:",receivedData)
     addr_count = {}
     home_coords = []
     home_addrs = []
     for item in receivedData:
-        addr = f'{item["receivedAddr"]} [{item["receivedCountry"]}]'
+        addr = f'{item["received_addr"]} [{item["received_country"]}]'
         if addr in addr_count:
             addr_count[addr] += 1
         else:
             addr_count[addr] = 1
-        coord = tuple(item["ToCoor"])
+        coord = tuple(json.loads(item["to_coor"]))
         if coord not in home_coords:
             home_coords.append(coord)
             home_addrs.append(addr)
@@ -41,18 +40,18 @@ def getMapHomeInfo(receivedData):
 
 def geojson(m):
     footprint = []
-    stats_data = readDB(dbpath, "", "CountryStats")
+    stats_data = read_db_table(db_path, "country_stats")
     for data in stats_data:
-        sentNum = float(data["sentNum"])
-        receivedNum = float(data["receivedNum"])
-        countryCode = data["countryCode"]
+        sent_num = float(data["sent_num"])
+        received_num = float(data["received_num"])
+        country_code = data["country_code"]
 
-        if sentNum > 0 and receivedNum > 0:
-            footprint.append({"countryCode": countryCode, "type": 2})
-        elif sentNum > 0 or receivedNum > 0:
-            footprint.append({"countryCode": countryCode, "type": 1})
+        if sent_num > 0 and received_num > 0:
+            footprint.append({"country_code": country_code, "type": 2})
+        elif sent_num > 0 or received_num > 0:
+            footprint.append({"country_code": country_code, "type": 1})
         else:
-            footprint.append({"countryCode": countryCode, "type": 0})
+            footprint.append({"country_code": country_code, "type": 0})
     with open("./src/geojson/world.zh.json", "r", encoding="utf-8") as f:
         geojson_data = json.load(f)
     geojson = folium.GeoJson(
@@ -62,11 +61,11 @@ def geojson(m):
             "fillColor": (
                 "blue"
                 if feature["properties"]["iso_a2"]
-                in [d["countryCode"] for d in footprint if d["type"] == 2]
+                in [d["country_code"] for d in footprint if d["type"] == 2]
                 else (
                     "green"
                     if feature["properties"]["iso_a2"]
-                    in [d["countryCode"] for d in footprint if d["type"] == 1]
+                    in [d["country_code"] for d in footprint if d["type"] == 1]
                     else "gray"
                 )
             ),
@@ -79,9 +78,9 @@ def geojson(m):
 # 读取已获取数据生成地图
 
 
-def createMap():
-    sentData = readDB(dbpath, "sent", "Mapinfo")
-    receivedData = readDB(dbpath, "received", "Mapinfo")
+def create_map():
+    sentData = read_db_table(db_path, "map_info", {"card_type": "sent"})
+    receivedData = read_db_table(db_path, "map_info", {"card_type": "received"})
     allData = [sentData, receivedData]
     most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getMapHomeInfo(
         receivedData
@@ -110,15 +109,15 @@ def createMap():
     for i, datas in enumerate(allData):
         for coords in datas:
             # 解析postcardID、from坐标、to坐标、distance、days、link、user
-            postcardID = coords["id"]
-            from_coord = coords["FromCoor"]
-            to_coord = coords["ToCoor"]
+            postcardID = coords["card_id"]
+            from_coord = json.loads(coords["from_coor"])
+            to_coord = json.loads(coords["to_coor"])
             distance = coords["distance"]
             days = coords["travel_days"]
             link = coords["link"]
             user = coords["user"]
-            sentAddr = f'{coords["sentAddr"]} [{coords["sentCountry"]}]'
-            receivedAddr = f'{coords["receivedAddr"]} [{coords["receivedCountry"]}]'
+            sent_addr = f'{coords["sent_addr"]} [{coords["sent_country"]}]'
+            received_addr = f'{coords["received_addr"]} [{coords["received_country"]}]'
             if user == "account closed":
                 userInfo = "<b><i>account closed</b></i>"
             else:
@@ -149,7 +148,7 @@ def createMap():
                     location[1] + generate_random_offset(),
                 ],
                 icon=folium.Icon(color=color, icon=icon),
-                popup=f'{from_or_to} {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} {linkInfo}',
+                popup=f'{from_or_to} {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sent_addr}<br>To: {received_addr} <br>📏 {distance} | ⏱ {days} {linkInfo}',
             ).add_to(m)
 
             # 添加航线
@@ -165,8 +164,8 @@ def createMap():
 
 
 def createClusterMap():
-    sentData = readDB(dbpath, "sent", "Mapinfo")
-    receivedData = readDB(dbpath, "received", "Mapinfo")
+    sentData = read_db_table(db_path, "map_info", {"card_type": "sent"})
+    receivedData = read_db_table(db_path, "map_info", {"card_type": "received"})
     allData = [sentData, receivedData]
     most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getMapHomeInfo(
         receivedData
@@ -196,15 +195,15 @@ def createClusterMap():
     for i, datas in enumerate(allData):
         for coords in datas:
             # 解析postcardID、from坐标、to坐标、distance、days、link、user
-            postcardID = coords["id"]
-            from_coord = coords["FromCoor"]
-            to_coord = coords["ToCoor"]
+            postcardID = coords["card_id"]
+            from_coord = json.loads(coords["from_coor"])
+            to_coord = json.loads(coords["to_coor"])
             distance = coords["distance"]
             days = coords["travel_days"]
             link = coords["link"]
             user = coords["user"]
-            sentAddr = f'{coords["sentAddr"]} [{coords["sentCountry"]}]'
-            receivedAddr = f'{coords["receivedAddr"]} [{coords["receivedCountry"]}]'
+            sent_addr = f'{coords["sent_addr"]} [{coords["sent_country"]}]'
+            received_addr = f'{coords["received_addr"]} [{coords["received_country"]}]'
             if user == "account closed":
                 userInfo = "<b><i>account closed</b></i>"
             else:
@@ -232,7 +231,7 @@ def createClusterMap():
             marker = folium.Marker(
                 location=location,
                 icon=folium.Icon(color=color, icon=icon),
-                popup=f'{from_or_to} {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sentAddr}<br>To: {receivedAddr} <br>📏 {distance} | ⏱ {days} {linkInfo}',
+                popup=f'{from_or_to} {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sent_addr}<br>To: {received_addr} <br>📏 {distance} | ⏱ {days} {linkInfo}',
             ).add_to(marker_cluster)
 
     # 保存地图为HTML文件
@@ -300,9 +299,10 @@ def replaceJsRef(fileFullName):
         ],
     ]
 
-    with open(fileFullName, "r", encoding="utf-8") as f1, open(
-        f"{fileFullName}.bak", "w", encoding="utf-8"
-    ) as f2:
+    with (
+        open(fileFullName, "r", encoding="utf-8") as f1,
+        open(f"{fileFullName}.bak", "w", encoding="utf-8") as f2,
+    ):
         for line in f1:
             for itm in replaceContents:
                 if itm[0] in line:
@@ -314,7 +314,7 @@ def replaceJsRef(fileFullName):
 
 
 def createUserLocationMap():
-    content = readDB(dbpath, "", "userSummary")
+    content = read_db_table(db_path, "", "userSummary")
     for id in content:
         coors = json.loads(id["coors"])
     # 创建地图对象
@@ -340,14 +340,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("account", help="输入account")
     # parser.add_argument("password", help="输入password")
-    # parser.add_argument("nickName", help="输入nickName")
+    # parser.add_argument("nick_name", help="输入nickName")
     # parser.add_argument("Cookie", help="输入Cookie")
     # parser.add_argument("repo", help="输入repo")
     options = parser.parse_args()
 
     account = options.account
     # password = options.password
-    # nickName = options.nickName
+    # nick_name = options.nick_name
     # Cookie = options.Cookie
     # repo = options.repo
 
@@ -361,27 +361,29 @@ if __name__ == "__main__":
         "Cookie": Cookie,
     }
 
-    if os.path.exists(dbpath):
-        shutil.copyfile(dbpath, f"{dbpath}BAK")
-    MapDataCheck(account, Cookie, types_map)
+    if os.path.exists(db_path):
+        shutil.copyfile(db_path, f"{db_path}BAK")
+
     if not os.path.exists("./LocationMap.html"):
         createUserLocationMap()
-    if os.path.exists(f"{dbpath}BAK"):
-        dbStat = compareMD5(dbpath, f"{dbpath}BAK")
-        if dbStat == "1":
-            print(f"{dbpath} 有更新")
-            createMap()
-            print("Map.html已生成!")
-            createClusterMap()
-            print("ClusterMap.html已生成!")
-            os.remove(f"{dbpath}BAK")
-        else:
-            print(f"{dbpath} 暂无更新")
-            print("Map.html 暂无更新")
-            print("ClusterMap.html 暂无更新")
-            os.remove(f"{dbpath}BAK")
+    create_map()
+    createClusterMap()
+    # if os.path.exists(f"{db_path}BAK"):
+    #     dbStat = compareMD5(db_path, f"{db_path}BAK")
+    #     if dbStat == "1":
+    #         print(f"{db_path} 有更新")
+    #         create_map()
+    #         print("Map.html已生成!")
+    #         createClusterMap()
+    #         print("ClusterMap.html已生成!")
+    #         os.remove(f"{db_path}BAK")
+    #     else:
+    #         print(f"{db_path} 暂无更新")
+    #         print("Map.html 暂无更新")
+    #         print("ClusterMap.html 暂无更新")
+    #         os.remove(f"{db_path}BAK")
 
     end_time = time.time()
     execution_time = round((end_time - start_time), 3)
     print("————————————————————")
-    print(f"scripts/createMap.py脚本执行时间：{execution_time}秒")
+    print(f"scripts/create_map.py脚本执行时间：{execution_time}秒")

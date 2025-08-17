@@ -65,11 +65,11 @@ python 版本 >=3.11.2
 ```
 {
     "Cookie": "auto create",//正常情况下无需修改。通过scripts/login.py或startTask.py来自动赋值
-    "picDriverPath":"https://raw.gitmirror.com/{{repo}}/main/gallery/picture",//展示墙图片默认为Github仓库的文件直链。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取。如果是本地使用，需要改为./gallery/picture
-    "storyPicLink": "https://raw.gitmirror.com/{{repo}}/main/template/content", //存放明信片背面图片的路径。如果是本地使用，需要改为./template/content
-    "storyPicType": "webp", //存放明信片背面图片的格式
+    "pic_driver_path":"https://raw.gitmirror.com/{{repo}}/main/gallery/picture",//展示墙图片默认为Github仓库的文件直链。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取。如果是本地使用，需要改为./gallery/picture
+    "story_pic_link": "https://raw.gitmirror.com/{{repo}}/main/template/content", //存放明信片背面图片的路径。如果是本地使用，需要改为./template/content
+    "story_pic_type": "webp", //存放明信片背面图片的格式
     "dbpath": "./template/data.db", //默认的数据库存放路径
-    "personalPageLink":"https://XXXX" //信息汇总页用途，填写你的github page 路径，如“https://XXX/output/sent.html”，则取地址的前半截
+    "personal_page_link":"https://XXXX" //信息汇总页用途，填写你的github page 路径，如“https://XXX/output/sent.html”，则取地址的前半截
 
 }
 ```
@@ -78,13 +78,13 @@ python 版本 >=3.11.2
 
 - **删除./output、./gallery 目录下的所有文件（使用你自己的账号，会自动生成数据）**
 - **删除./template 目录下的 data.db 文件**
-- **（可选）修改**：在./template/postcardStory.xlsx 中填入已收到明信片的文字、信息汇总\_template.md 可修改为你喜欢的文字描述）
+- **（可选）修改**：在./template/postcard_story.xlsx 中填入已收到明信片的文字、信息汇总\_template.md 可修改为你喜欢的文字描述）
 - **（可选）修改**：在 `./template/content/`目录下删除我的数据，然后拍照复制（建议扫描全能王自动切边+自动高清）已收到明信片的文字面图片到`./template/content/rawPic`目录下，可以自动转换为 webp 格式。并将图片名称命名为 ID 名称，如：`CN-XXXXXXX.webp`。
   （本项目图片默认读取 webp 格式，如果需要修改为其他格式，需要修改./scripts/config.json 文件中的“storycontentPicType"的值，改为你需要的格式
 - **（可选）修改/删除**：在 `./template/信息汇总_template.md/`文件的“网址备份”内容，改为你自己生成的文件链接
 
 4. 执行 `pip install -r requirements.txt安装依赖`
-5. 执行 `pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com` 安装 openpyxl （如果你需要填写/template/postcardStory.xlsx 当中的明信片背面文字内容，则需要安装）
+5. 执行 `pip install openpyxl -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com` 安装 openpyxl （如果你需要填写/template/postcard_story.xlsx 当中的明信片背面文字内容，则需要安装）
 
 ## 数据获取
 

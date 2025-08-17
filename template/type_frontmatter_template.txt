@@ -1,7 +1,7 @@
 ---
-title: {{ title }}
+title: {{ title_name }}
 icon: address-card
-date: $date
+date: {{last_date}}
 category:
   - Arthur
 tag:
@@ -9,8 +9,8 @@ tag:
 order: {{ num }}
 ---
 
-## [arthurfsy's {{type}}](https://www.postcrossing.com/user/arthurfsy/gallery/{{type}})
-
+## [arthurfsy's {{card_type}}](https://www.postcrossing.com/user/arthurfsy/gallery/{{card_type}})
+{% if card_type in ['sent', 'received'] %}
 ### 收发记录（年度）
 
 ::: echarts
@@ -20,7 +20,7 @@ const data = await fetch(
   "https://raw.githubusercontent.com/{{repo}}/main/output/year.json"
 ).then((res) => res.json());
 
-const newData = data.map(({ year, {{type}}}) => ({ name: year, value: {{type}}}));
+const newData = data.map(({ year, {{card_type}}}) => ({ name: year, value: {{card_type}}}));
 
 const option = {
   title: {
@@ -145,6 +145,4 @@ const option = {
 };
 ```
 
-:::
-
-{{content}}
+:::{% endif %}

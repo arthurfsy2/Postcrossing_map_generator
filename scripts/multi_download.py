@@ -15,20 +15,28 @@ import pycountry
 from emojiflags.lookup import lookup as flag
 import hashlib
 import argparse
-from common_tools import readDB, writeDB, get_local_date
+from common_tools import (
+    db_path,
+    read_db_table,
+    insert_or_update_db,
+    initialize_database,
+    get_local_date,
+)
 
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
 # account = data["account"]
-# nickName = data["nickName"]
+# nick_name = data["nick_name"]
 Cookie = data["Cookie"]
-picDriverPath = data["picDriverPath"]
-dbpath = data["dbpath"]
+pic_driver_path = data["pic_driver_path"]
+BIN = os.path.dirname(os.path.realpath(__file__))
 
 
-# 获取账号状态
 def getAccountStat(account, Cookie):
+    """
+    获取账号状态
+    """
     headers = {
         "authority": "www.postcrossing.com",
         "Cookie": Cookie,
@@ -62,72 +70,55 @@ def getAccountStat(account, Cookie):
     return totalStat, galleryContent, types
 
 
-def getPageNum(stat, content, types):
-    counts = ()
-    for type in types:
-        if type == "favourites":
+def get_page_num(stat, content, types):
+    if stat == "getPrivate":
+        return
+    for card_type in types:
+        from_or_to = "来自" if card_type in ["received", "favourites"] else "寄往"
+        title_key = {
+            "received": "收到",
+            "sent": "寄出",
+            "favourites": "我的点赞",
+            "popular": "我收到的赞",
+        }
+        if card_type == "favourites":
             pattern = r"Favorites \((\d+)\)"
         else:
             pattern = r"{} \((\d+)\)"
         # 获取数量
-        content_pattern = pattern.format(type.capitalize())
+        content_pattern = pattern.format(card_type.capitalize())
         content_match = re.search(content_pattern, content)
         count = int(content_match.group(1)) if content_match else 0
         # 获取页数
         page_num = math.ceil(count / 60)
-        counts += (count, page_num)
+        item = {
+            "card_type": card_type,
+            "from_or_to": from_or_to,
+            "page_num": page_num,
+            "card_num": count,
+            "title_name": f"明信片展示墙（{title_key.get(card_type)}：{count}）",
+        }
 
-    print("counts:", counts)
-    sentNum, sentPageNum, receivedNum, receivedPageNum = counts[:4]
-    if stat == "getPrivate":
-        favouritesNum, favouritesPageNum, popularNum, popularPageNum = counts[4:8]
-    else:
-        favouritesNum = favouritesPageNum = popularNum = popularPageNum = 0
-
-    data = {
-        "received": (
-            "来自",
-            receivedPageNum,
-            receivedNum,
-            f"明信片展示墙（收到：{receivedNum}）",
-        ),
-        "sent": ("寄往", sentPageNum, sentNum, f"明信片展示墙（寄出：{sentNum}）"),
-        "favourites": (
-            "来自",
-            favouritesPageNum,
-            favouritesNum,
-            f"明信片展示墙（我的点赞：{favouritesNum}）",
-        ),
-        "popular": (
-            "寄往",
-            popularPageNum,
-            popularNum,
-            f"明信片展示墙（我收到的赞：{popularNum}）",
-        ),
-    }
-    with open("./output/title.json", "w", encoding="utf-8") as file:
-        json.dump(data, file, indent=2, ensure_ascii=False)
+        insert_or_update_db(db_path, "title_info", item)
 
 
 # 获取不同类型的展示墙的详细信息，并组装数据
 
 
-def getGalleryInfo(type, account, Cookie):
+def get_gallery_info(type, account, Cookie):
     headers = {
         "authority": "www.postcrossing.com",
         "Cookie": Cookie,
     }
     userUrl = f"https://www.postcrossing.com/user/{account}"
     galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
-    with open("./output/title.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
-    value = data.get(type)
-    from_or_to, pageNum, Num, title = value
+    title_info_data = read_db_table(db_path, "title_info", {"card_type": type})
+    page_num = int(title_info_data[0].get("page_num"))
     i = 1
-    content_all = []
-    while i <= pageNum:
+
+    while i <= page_num:
         all_url = f"{galleryUrl}/{type}/{i}"
-        print(f"正在获取/gallery/{type}({i}/{pageNum})")
+        print(f"正在获取/gallery/{type}({i}/{page_num})")
         response = requests.get(all_url, headers=headers)
 
         content_i = response.text.replace('"//', '"https://')
@@ -142,61 +133,37 @@ def getGalleryInfo(type, account, Cookie):
                 # print(f"href:{href}")
                 postcardID = figcaption.find("a").text
                 baseUrl = "https://www.postcrossing.com/"
-                picFileName = re.search(r"/([^/]+)$", href).group(1)
+                pic_file_name = re.search(r"/([^/]+)$", href).group(1)
+                favorites_num = "0"
                 if type == "popular":
-                    favoritesNum = figcaption.find("div").text
-                    num = re.search(r"\d+", favoritesNum).group()
-                    userInfo = ""
-                    countryNameEmoji = ""
+                    favorites_num = figcaption.find("div").text
+                    favorites_num = re.search(r"\d+", favorites_num).group()
+                    user_info = ""
+                    country_name_emoji = ""
                 else:
                     user = figcaption.find("div").find("a").text
-                    userInfo = f"[{user}]({baseUrl}user/{user})"
+                    user_info = f"[{user}]({baseUrl}user/{user})"
                     if not user:
-                        userInfo = "***该用户已关闭***"
+                        user_info = "***该用户已关闭***"
                     code = re.search(r'href="/country/(.*?)"', str(figcaption)).group(1)
-                    countryNameEmoji = flag(code)
-                    num = ""
+                    country_name_emoji = flag(code)
+
                 item = {
-                    "id": postcardID,
-                    "userInfo": userInfo,
-                    "countryNameEmoji": countryNameEmoji,
-                    "picFileName": picFileName,
-                    "favoritesNum": num,
-                    "type": type,
+                    "card_id": postcardID,
+                    "user_info": user_info,
+                    "country_name_emoji": country_name_emoji,
+                    "pic_file_name": pic_file_name,
+                    "favorites_num": favorites_num,
+                    "card_type": type,
                 }
-                content_all.append(item)
-        # 连接到数据库test.db
-        tablename = "Galleryinfo"
-        writeDB(dbpath, content_all, tablename)
+
+                insert_or_update_db(db_path, "gallery_info", item)
+
         i += 1
     print("————————————————————")
 
 
-# 读取本地数据库的明信片ID
-def getLocalID(type, dbpath):
-    oldID = None
-    if os.path.exists(dbpath):
-        conn = sqlite3.connect(dbpath)
-        cursor = conn.cursor()
-        cursor.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='Mapinfo'"
-        )
-        table_exists = cursor.fetchone()
-        if table_exists:
-            # 从Mapinfo表中获取已存储数据的ID，其中属于今年，但是本地ID排除掉是今年的，且link=“noPic.png”的ID（以防近期内该ID会上传明信片）
-            cursor.execute(
-                "SELECT id FROM Mapinfo WHERE type=?  AND NOT (link = 'gallery/picture/noPic.png' AND CAST(SUBSTR(receivedDate, 1, 4) AS INTEGER) = CAST(strftime('%Y', 'now') AS INTEGER))",
-                (type,),
-            )
-            rows = cursor.fetchall()
-            oldID = [row[0] for row in rows]
-        conn.close()
-    return oldID
-
-
 # 读取本地已下载图片的文件名列表
-
-
 def getLocalPic():
     localPicList = []
     picPath = "./gallery/picture"
@@ -228,17 +195,22 @@ def getUpdateID(account, type, Cookie):
         json.dump(response, f, indent=2)
     onlineID = [item[0] for item in response]
     hasPicID = [item[0] for item in response if item[-1] == 1]
+    # print(f"onlineID({len(onlineID)}):{onlineID}")
     # print(f"hasPicID({len(hasPicID)}):{hasPicID}")
-    if getLocalID(type, dbpath) is not None:
-        oldID = getLocalID(type, dbpath)
+
+    local_data = read_db_table(db_path, "map_info")
+    old_id = [item.get("card_id") for item in local_data]
+
+    if old_id:
+
         newID = []
         # 遍历onlineID中的元素
         for id in onlineID:
             # 如果id不在oldID中，则将其添加到newID中
-            if id not in oldID:
+            if id not in old_id:
                 newID.append(id)
         if len(newID) == 0:
-            print(f"数据库{dbpath}：Mapinfo_{type}暂无更新内容\n")
+            print(f"数据库{db_path}：Mapinfo_{type}暂无更新内容\n")
             updateID = None
         else:
             print(f"{type}_等待更新Mapinfo({len(newID)}个):{newID}\n")
@@ -247,7 +219,7 @@ def getUpdateID(account, type, Cookie):
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
         updateID = onlineID
 
-    return updateID, hasPicID
+    return updateID
 
 
 # 获取日期
@@ -271,9 +243,8 @@ def convert_to_utc(zoneNum, type, time_str):
     return time_utc_str
 
 
-def get_data(postcardID, type):
+def get_map_info_data(postcardID, type):
 
-    content_all = []
     for i, id in enumerate(postcardID):
 
         url = f"https://www.postcrossing.com/postcards/{id}"
@@ -302,9 +273,9 @@ def get_data(postcardID, type):
         if "logo" in link:
             link = "gallery/picture/noPic.png"  # 替换图片为空时的logo
         else:
-            picFileName = re.search(r"/([^/]+)$", link).group(1)
-            # print(f"{id}_picFileName:{picFileName}")
-            link = f"gallery/picture/{picFileName}"
+            pic_file_name = re.search(r"/([^/]+)$", link).group(1)
+            # print(f"{id}_picFileName:{pic_file_name}")
+            link = f"gallery/picture/{pic_file_name}"
 
         # 提取地址信息
         addrPattern = r'<a itemprop="addressCountry" title="(.*?)" href="/country/(.*?)">(.*?)</a>'
@@ -335,32 +306,33 @@ def get_data(postcardID, type):
         for match in matches:
 
             # 将拼接后的坐标字符串转换为浮点数
-            from_coord = (float(match[0]), float(match[1]))
-            to_coord = (float(match[2]), float(match[3]))
-
-        tablename = "Mapinfo"
+            from_coord = json.dumps([float(match[0]), float(match[1])])
+            to_coord = json.dumps([float(match[2]), float(match[3])])
 
         item = {
-            "id": id,
-            "FromCoor": from_coord,
-            "ToCoor": to_coord,
+            "card_id": id,
+            "from_coor": from_coord,
+            "to_coor": to_coord,
             "distance": distance,
             "travel_days": travel_days,
-            "sentDate": sentDate,
-            "receivedDate": receivedDate,
+            "sent_date": sentDate,
+            "received_date": receivedDate,
             "link": link,
             "user": user,
-            "sentAddr": sentAddr,
-            "sentCountry": sentCountry,
-            "receivedAddr": receivedAddr,
-            "receivedCountry": receivedCountry,
-            "type": type,
-            "sentDate_local": get_local_date(from_coord, sentDate),
-            "receivedDate_local": get_local_date(to_coord, receivedDate),
+            "sent_addr": sentAddr,
+            "sent_country": sentCountry,
+            "received_addr": receivedAddr,
+            "received_country": receivedCountry,
+            "sent_date_local": get_local_date(
+                [float(match[0]), float(match[1])], sentDate
+            ),
+            "received_date_local": get_local_date(
+                [float(match[2]), float(match[3])], receivedDate
+            ),
+            "card_type": type,
         }
-        content_all.append(item)
+        insert_or_update_db(db_path, "map_info", item)
         print(f"{type}_List:已提取{round((i+1)/(len(postcardID))*100,2)}%")
-    writeDB(dbpath, content_all, tablename)
 
 
 # 下载展示墙的图片
@@ -368,29 +340,29 @@ def get_data(postcardID, type):
 
 def downloadPic(updatePic, pic_json):
     picFileNameList = []
-    for i, picFileName in enumerate(updatePic):
+    for i, pic_file_name in enumerate(updatePic):
         picDownloadPath = (
-            f"gallery/picture/{picFileName}"  # 替换为你要保存的文件路径和文件名
+            f"gallery/picture/{pic_file_name}"  # 替换为你要保存的文件路径和文件名
         )
         if os.path.exists(picDownloadPath):
-            # print(f"已存在：{picFileName}")
+            # print(f"已存在：{pic_file_name}")
             pass
         else:
-            picDownloadUrl = f"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/{picFileName}"
+            picDownloadUrl = f"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/{pic_file_name}"
             # print(f"picDownloadUrl:{picDownloadUrl}")
             response = requests.get(picDownloadUrl)
-            print(f"正在下载{picFileName}")
+            print(f"正在下载{pic_file_name}")
             with open(picDownloadPath, "wb") as file:
                 file.write(response.content)
-    pic_json.append(picFileName)
+    pic_json.append(pic_file_name)
 
 
 def getUpdatePic(type):
     picFileNameList = []
-    content = readDB(dbpath, type, "Galleryinfo")
+    content = read_db_table(db_path, "gallery_info")
 
     # 提取picFileName字段内容
-    picFileNameList = [item["picFileName"] for item in content]
+    picFileNameList = [item["pic_file_name"] for item in content]
     # print("picFileNameList:",picFileNameList)
     if getLocalPic() is not None:
         oldPic = getLocalPic()
@@ -464,28 +436,26 @@ def calculateAvgAndMedian(a_data):
             received_avg = None
             received_median = None
             receivedDate_first = None
-        country_stats.append(
-            {
-                "name": data["name"],
-                "countryCode": data["countryCode"],
-                "flagEmoji": flag(data["countryCode"]),
-                "value": len(data["sent"]) + len(data["received"]),
-                "sentNum": len(data["sent"]),
-                "receivedNum": len(data["received"]),
-                "sentAvg": sent_avg,
-                "receivedAvg": received_avg,
-                "sentMedian": sent_median,
-                "receivedMedian": received_median,
-                "sentHistory": json.dumps(name_dict[code]["sent"]),
-                "receivedHistory": json.dumps(name_dict[code]["received"]),
-                "sentDateHistory": json.dumps(name_dict[code]["sentDate"]),
-                "receivedDateHistory": json.dumps(name_dict[code]["receivedDate"]),
-                "sentDateFirst": sentDate_first,
-                "receivedDateFirst": receivedDate_first,
-            }
-        )
-    country_stats.sort(key=lambda x: x["value"], reverse=True)
-    # print(country_stats)
+        item = {
+            "name": data["name"],
+            "country_code": data["countryCode"],
+            "flag_emoji": flag(data["countryCode"]),
+            "value": len(data["sent"]) + len(data["received"]),
+            "sent_num": len(data["sent"]),
+            "received_num": len(data["received"]),
+            "sent_avg": sent_avg,
+            "received_avg": received_avg,
+            "sent_median": sent_median,
+            "received_median": received_median,
+            "sent_history": json.dumps(name_dict[code]["sent"]),
+            "received_history": json.dumps(name_dict[code]["received"]),
+            "sent_date_history": json.dumps(name_dict[code]["sentDate"]),
+            "received_date_history": json.dumps(name_dict[code]["receivedDate"]),
+            "sent_date_first": sentDate_first,
+            "received_date_first": receivedDate_first,
+        }
+        country_stats.append(item)
+        insert_or_update_db(db_path, "country_stats", item)
     return country_stats
 
 
@@ -603,13 +573,10 @@ def getUserStat(account):
     with open("./output/stats.json", "w", encoding="utf-8") as file:
         json.dump(country_stats, file, indent=2, ensure_ascii=False)
     print(f"已生成./output/stats.json\n")
-    tablename = "CountryStats"
-    writeDB(dbpath, country_stats, tablename)
 
 
 def multiTask(account, type, Cookie):
-    result = getUpdateID(account, type, Cookie)
-    postcardID = result[0]
+    postcardID = getUpdateID(account, type, Cookie)
     if postcardID is not None:
         Num = round(len(postcardID) / 20)
         if Num < 1:
@@ -626,12 +593,13 @@ def multiTask(account, type, Cookie):
             postcardID[i : i + group_size]
             for i in range(0, len(postcardID), group_size)
         ]
+        # print("postcard_groups:", postcard_groups)
         # 创建线程列表
         threads = []
 
         # 创建并启动线程
         for i, group in enumerate(postcard_groups):
-            thread = threading.Thread(target=get_data, args=(group, type))
+            thread = threading.Thread(target=get_map_info_data, args=(group, type))
             thread.start()
             threads.append(thread)
 
@@ -647,7 +615,7 @@ def multiTask(account, type, Cookie):
 # 设置多线程下载图片
 
 
-def multiDownload(type):
+def multi_download(type):
     updatePic = getUpdatePic(type)
 
     if updatePic is not None:
@@ -683,27 +651,30 @@ def multiDownload(type):
         print("————————————————————")
 
 
-# 定义createMap.py的前置检查条件
+# 定义create_map.py的前置检查条件
 def MapDataCheck(account, Cookie, types_map):
     print("————————————————————")
     for type in types_map:
         multiTask(account, type, Cookie)
 
 
-# 定义createGallery.py的前置检查条件
+# 定义create_gallery.py的前置检查条件
 
 
 def PicDataCheck(account, Cookie):
     print("————————————————————")
-    getPageNum(stat, content_raw, types)
+    get_page_num(stat, content_raw, types)
     getUserStat(account)
     for type in types:
-        getGalleryInfo(type, account, Cookie)  # 获取图库信息
+        get_gallery_info(type, account, Cookie)  # 获取图库信息
     for type in types:
-        multiDownload(type)  # 批量下载图片
+        multi_download(type)  # 批量下载图片
 
 
-def getUserSummary(account, Cookie):
+def getUserSummary(
+    account,
+    Cookie,
+):
 
     headers = {
         "authority": "www.postcrossing.com",
@@ -765,8 +736,10 @@ def getUserSummary(account, Cookie):
             print("未找到数字和小数")
         return distance, laps, postcardnum
 
-    sentDistance, sentLaps, sentPostcardNum = getUserSummaryInfo("sent")
-    receivedDistance, receivedLaps, receivedPostcardNum = getUserSummaryInfo("received")
+    sent_distance, sent_laps, sent_postcard_num = getUserSummaryInfo("sent")
+    received_distance, received_laps, received_postcard_num = getUserSummaryInfo(
+        "received"
+    )
     logo_link_pattern = r"static2.postcrossing.com/avatars/140x140/(.*?).jpg"
     match = re.search(logo_link_pattern, html_content)
     logo = match.group(1)
@@ -775,8 +748,8 @@ def getUserSummary(account, Cookie):
     registerinfo_pattern = r'title="Member for over (.*?) years \((.*?) days\)"'
     matchs = re.search(registerinfo_pattern, html_content)
 
-    registerd_years = matchs.group(1)
-    registerd_days = matchs.group(2).replace(",", "")
+    registered_years = matchs.group(1)
+    registered_days = matchs.group(2).replace(",", "")
     # 获取注册日期
     abbr_tag = soup.select('abbr[title^="Member for"]')
 
@@ -791,38 +764,37 @@ def getUserSummary(account, Cookie):
         return register_date
 
     register_date = parse_date_with_suffix(content)
-    content_all = []
     item = {
+        "account": account,
         "about": str(about),
         "coors": coors,
-        "sentDistance": sentDistance,
-        "sentLaps": sentLaps,
-        "sentPostcardNum": sentPostcardNum,
-        "receivedDistance": receivedDistance,
-        "receivedLaps": receivedLaps,
-        "receivedPostcardNum": receivedPostcardNum,
-        "registerd_years": registerd_years,
-        "registerd_days": registerd_days,
+        "sent_distance": sent_distance,
+        "sent_laps": sent_laps,
+        "sent_postcard_num": sent_postcard_num,
+        "received_distance": received_distance,
+        "received_laps": received_laps,
+        "received_postcard_num": received_postcard_num,
+        "registered_years": registered_years,  # 修改拼写错误并使用下划线
+        "registered_days": registered_days,  # 修改拼写错误并使用下划线
         "register_date": register_date,
         "logo": logo,
         "is_supporter": is_supporter,
     }
-    content_all.append(item)
-    writeDB(dbpath, content_all, "userSummary")
+    insert_or_update_db(db_path, "user_summary", item)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("account", help="输入account")
     # parser.add_argument("password", help="输入password")
-    parser.add_argument("nickName", help="输入nickName")
+    parser.add_argument("nick_name", help="输入nickName")
     # parser.add_argument("Cookie", help="输入Cookie")
     # parser.add_argument("repo", help="输入repo")
     options = parser.parse_args()
 
     account = options.account
     # password = options.password
-    nickName = options.nickName
+    nick_name = options.nick_name
     # Cookie = options.Cookie
     # repo = options.repo
 
@@ -834,5 +806,7 @@ if __name__ == "__main__":
     url = f"https://www.postcrossing.com/user/{account}/gallery"
     types_map = ["sent", "received"]
     stat, content_raw, types = getAccountStat(account, Cookie)
+
     getUserSummary(account, Cookie)
     PicDataCheck(account, Cookie)
+    MapDataCheck(account, Cookie, types_map)

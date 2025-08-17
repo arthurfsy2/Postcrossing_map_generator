@@ -14,6 +14,18 @@
     <div class="container-fluid">
       <h1 class="text-center mb-4"></h1>
       <ul class="list-group">
+        <li class="list-group-item">注册时间：<b>{{item.register_date}} [至今{{item.registered_years}}年（{{item.registered_days}}天）]</b></li>
+        <li class="list-group-item">寄出：<b>[📤{{item.sent_postcard_num}} 📏{{item.sent_distance}} km 🌏{{item.sent_laps}} 圈]</b></li>
+        <li class="list-group-item">收到：<b>[📥{{item.received_postcard_num}} 📏{{item.received_distance}} km 🌏{{item.received_laps}} 圈]</b></li>
+        <li class="list-group-item">涉及国家：<b>{{item.countries}}</b></li>
+        <li class="list-group-item">待签收：<b>{{item.traveling}}</b></li>
+        {% if item.is_supporter =='YES' %}
+        <li class="list-group-item">会员<img src="https://static1.postcrossing.com/images/supporter.png" height="25"><b>：YES-暂未到期</b></li>
+        {% elif item.is_supporter =='No' %}
+        <li class="list-group-item">会员<img src="https://static1.postcrossing.com/images/supporter.png" height="25"><b>：已到期</b></li>
+        {% else%}{% endif %}
+        
+        <!-- <ul class="list-group">
         <li class="list-group-item">注册时间：<b>2013/05/18 [至今12年（4470天）]</b></li>
         <li class="list-group-item">寄出：<b>[📤240 📏1,860,709 km 🌏46.4 圈]
 
@@ -24,6 +36,7 @@
         <li class="list-group-item">涉及国家：<b>48/248 [19.35%]</b></li>
         <li class="list-group-item">待签收：<b>17 [过期：5]</b></li>
         <li class="list-group-item">会员<img src="https://static1.postcrossing.com/images/supporter.png" height="25"><b>：YES-暂未到期</b></li>
+      </ul> -->
       </ul>
     </div>
     <!-- 引入Bootstrap JS 和依赖 -->

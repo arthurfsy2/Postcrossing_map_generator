@@ -1,0 +1,8 @@
+[{{data.card_id}}](https://www.postcrossing.com/postcards/{{data.card_id}}) 
+>{{data.from_or_to}} {{data.user_info}} {{ data.country_name_emoji or data.flag_emoji }}{% if data.sent_country %}
+> 📤 [{{data.sent_country}}](https://www.bing.com/maps/?cp={{from_coor0}}~{{from_coor1}}&lvl=12.0&setlang=zh-Hans) {{data.sent_date_local}} (当地)
+> 📥 [{{data.received_country}}](https://www.bing.com/maps/?cp={{to_coor0}}~{{to_coor1}}&lvl=12.0&setlang=zh-Hans) {{data.received_date_local}} (当地){% endif %}
+{% if data.distance %} 📏 {{data.distance}} | ⏱ {{data.travel_days}}{% endif %}
+{% if card_type in ['popular'] %}>点赞人数：**{{data.favorites_num}}**{% endif %}
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/{{data.link}})

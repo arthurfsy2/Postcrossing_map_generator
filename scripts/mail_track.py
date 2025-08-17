@@ -5,7 +5,7 @@ import json
 from urllib import parse, request
 import sqlite3
 import os
-from common_tools import translate
+from common_tools import translate, db_path, insert_or_update_db, read_db_table
 import argparse
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -13,10 +13,10 @@ from concurrent.futures import ThreadPoolExecutor
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
 # account = data["account"]
-# nickName = data["nickName"]
+# nick_name = data["nick_name"]
 Cookie = data["Cookie"]
-picDriverPath = data["picDriverPath"]
-dbpath = data["dbpath"]
+pic_driver_path = data["pic_driver_path"]
+
 # repo = data["repo"]
 
 parser = argparse.ArgumentParser()
@@ -39,77 +39,52 @@ def remove_blank_lines(text):
     return text
 
 
-def process_message(msg, oldReplyID):
-    id = re.search(r"Hurray! Your postcard (.*?) to", msg.subject).group(1)
-    match = re.search(r"“([\s\S]*?)”", msg.text)
-    if match:
+def process_message(msg):
+
+    online_card_id = re.search(r"Hurray! Your postcard (.*?) to", msg.subject).group(1)
+
+    story_data = read_db_table(db_path, "postcard_story", {"card_id": online_card_id})
+
+    if not story_data:  # 只翻译新的内容
+        match = re.search(r"“([\s\S]*?)”", msg.text)
         match = match.group(1)
-        if id not in oldReplyID:  # 只翻译新的内容
-            print("idNEW:", id)
-            comment_original = remove_blank_lines(match)
-            comment_cn = translate(apikey, comment_original, "auto", "zh")
-            return {
-                "id": id,
-                "content_original": "",
-                "content_cn": "",
-                "comment_original": f"“{comment_original}”",
-                "comment_cn": f"“{comment_cn}”",
-            }
+        print("new card id:", online_card_id)
+        comment_original = remove_blank_lines(match)
+        comment_cn = translate(apikey, comment_original, "auto", "zh")
+        item = {
+            "card_id": online_card_id,
+            "content_original": "",
+            "content_cn": "",
+            "comment_original": f"“{comment_original}”",
+            "comment_cn": f"“{comment_cn}”",
+        }
+        print("已保存更新内容:", item)
+        insert_or_update_db(db_path, "postcard_story", item)
     return None
 
 
 def getMailReply(host, user, passwd, filename):
-    tablename = "postcardStory"
-    oldReplyID = getLocalReplyID(dbpath, tablename)  # 获取本地数据库已保存的ID
-    content = []
 
     try:
         with MailBox(host).login(user, passwd) as mailbox:
             mailbox.folder.set(filename)
             with ThreadPoolExecutor() as executor:
                 futures = {
-                    executor.submit(process_message, msg, oldReplyID): msg
+                    executor.submit(process_message, msg): msg
                     for msg in mailbox.fetch(AND(subject="Hurray! Your postcard"))
                 }
 
-                for future in futures:
-                    result = future.result()
-                    if result:
-                        content.append(result)
-
-            if content:
-                writeDB(dbpath, content, tablename)
-                print("已发现更新内容:", content)
-            else:
-                print("无更新内容")
     except MailboxLoginError:
         print("登录失败！请检查邮箱账号/邮箱授权密码是否正确")
     except MailboxFolderSelectError:
         print("请检查邮件对应的目录是否正确")
     except Exception as e:
+        print(e)
         print("请检查邮箱host是否正确")
 
 
-def getLocalReplyID(dbpath, tablename):
-    oldID = None
-    if os.path.exists(dbpath):
-        conn = sqlite3.connect(dbpath)
-        cursor = conn.cursor()
-        cursor.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name=?", (tablename,)
-        )
-        table_exists = cursor.fetchone()
-        if table_exists:
-            # 从Mapinfo表中获取id
-            cursor.execute(f"SELECT id FROM {tablename} WHERE id LIKE 'CN-%'")
-            rows = cursor.fetchall()
-            oldID = [row[0] for row in rows]
-        conn.close()
-    return oldID
-
-
-def writeDB(dbpath, content, tablename):
-    conn = sqlite3.connect(dbpath)
+def writeDB(db_path, content, tablename):
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     if tablename == "postcardStory":
@@ -138,7 +113,7 @@ def writeDB(dbpath, content, tablename):
                     (id, content_cn, content_original, comment_original, comment_cn),
                 )
 
-    print(f"已更新数据库{dbpath}的{tablename}\n")
+    print(f"已更新数据库{db_path}的{tablename}\n")
     conn.commit()
     conn.close()
 

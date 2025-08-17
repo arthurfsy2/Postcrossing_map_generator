@@ -9,12 +9,12 @@ from jinja2 import Template
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
-personalPageLink = data["personalPageLink"]
+personal_page_link = data["personal_page_link"]
 
 
 def getYearList(type):
     # 读取received.json文件
-    with open(f'data/{type}.json', 'r') as file:
+    with open(f"data/{type}.json", "r") as file:
         data_raw = json.load(file)
     year_list = []
 
@@ -29,7 +29,7 @@ def getYearList(type):
 
 def getYearData(type, year):
     # 读取received.json文件
-    with open(f'data/{type}.json', 'r') as file:
+    with open(f"data/{type}.json", "r") as file:
         data_raw = json.load(file)
     # 创建一个空列表来存储符合条件的子数组
     yearData = []
@@ -51,8 +51,9 @@ def getYearData(type, year):
     #     os.makedirs(output_dir)
 
     # 将筛选后的数据输出到指定的JSON文件中
-    with open(f"./data/{type}_{year}.json", 'w') as outfile:
+    with open(f"./data/{type}_{year}.json", "w") as outfile:
         json.dump(yearData, outfile, indent=2)
+
 
 # 调用函数示例
 
@@ -92,11 +93,11 @@ class CardInfo:
 def createYearRecap(year, lang):
     cards_sent = []
     cards_received = []
-    with open(f'data/sent_{year}.json', 'r') as sent_file:
+    with open(f"data/sent_{year}.json", "r") as sent_file:
         sents = json.load(sent_file)
         for s in sents:
             cards_sent.append(CardInfo(s))
-    with open(f'data/received_{year}.json', 'r') as received_file:
+    with open(f"data/received_{year}.json", "r") as received_file:
         receiveds = json.load(received_file)
         for s in receiveds:
             cards_received.append(CardInfo(s))
@@ -139,11 +140,10 @@ def createYearRecap(year, lang):
     to_best_country = c_best_countries.most_common(1)[0][0]
     to_best_country = country_alpha_to_str(to_best_country)
 
-    with open(f"./recap/template_{lang}.html", 'r', encoding="utf-8") as temp:
+    with open(f"./recap/template_{lang}.html", "r", encoding="utf-8") as temp:
         html = temp.read()
     html = html.replace("$$FROM_NUMBER$$", as_string(from_number))
-    html = html.replace("$$FROM_QUICKEST_DAYS$$",
-                        as_string(from_quickest_days))
+    html = html.replace("$$FROM_QUICKEST_DAYS$$", as_string(from_quickest_days))
     html = html.replace("$$FROM_QUICKEST_COUNTRY$$", from_quickest_country)
     html = html.replace("$$FROM_SLOWEST_DAYS$$", as_string(from_slowest_days))
     html = html.replace("$$FROM_SLOWEST_COUNTRY$$", from_slowest_country)
@@ -158,7 +158,7 @@ def createYearRecap(year, lang):
     html = html.replace("$$TO_BEST_COUNTRY$$", to_best_country)
     html = html.replace("$$TO_KM_TRAVELED$$", as_string(to_km_traveled))
     html = html.replace("$$YEAR$$", year)
-    with open(f"./recap/{year}_recap_{lang}.html", 'w', encoding="utf-8") as recap:
+    with open(f"./recap/{year}_recap_{lang}.html", "w", encoding="utf-8") as recap:
         recap.write(html)
     print(f"已生成 ./recap/{year}_recap_{lang}.html")
 
@@ -178,13 +178,11 @@ def replaceTemplate(yearlist):
     yearlist = sorted(yearlist, reverse=True)
     link_all = ""
     for year in yearlist:
-        link = f"""@tab {year}\n\n<iframe src="{personalPageLink}/recap/{year}_recap_cn.html" frameborder=0 height=500 width=100% seamless=seamless scrolling=auto></iframe>\n\n"""
+        link = f"""@tab {year}\n\n<iframe src="{personal_page_link}/recap/{year}_recap_cn.html" frameborder=0 height=500 width=100% seamless=seamless scrolling=auto></iframe>\n\n"""
         link_all += link
     with open(f"./template/年度报告_template.md", "r", encoding="utf-8") as f:
         template = Template(f.read())
-    dataNew = template.render(
-        link = link_all
-    )  
+    dataNew = template.render(link=link_all)
 
     with open(f"./gallery/年度报告.md", "w", encoding="utf-8") as f:
         f.write(dataNew)
@@ -196,8 +194,9 @@ def replaceTemplate(yearlist):
         with open(blog_path, "w", encoding="utf-8") as f:
             f.write(dataNew)
 
+
 if __name__ == "__main__":
-    types = ['received', 'sent']
+    types = ["received", "sent"]
     for type in types:
         yearlist = getYearList(type)
         for year in yearlist:
@@ -205,8 +204,8 @@ if __name__ == "__main__":
         print(f"————————————————————")
 
     # 示例调用
-    directory_to_clean = './data'
-    files_to_keep = ['.gitkeep']
+    directory_to_clean = "./data"
+    files_to_keep = [".gitkeep"]
 
     yearlist = getYearList("sent")
     for year in yearlist:
