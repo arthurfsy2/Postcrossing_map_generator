@@ -453,9 +453,10 @@ def create_summary_text():
                 content[year], key=lambda x: x["received_date"], reverse=True
             )
         content = dict(sorted(content.items(), key=lambda x: x[0], reverse=True))
-        with open("./year_data.json", "w", encoding="utf-8") as f:
-            json.dump(content, f, ensure_ascii=False, indent=2)
-        return content, len(new_list)
+
+        # with open("./year_data.json", "w", encoding="utf-8") as f:
+        #     json.dump(content, f, ensure_ascii=False, indent=2)
+        # return content, len(new_list)
 
     user_summary = read_db_table(
         db_path,
