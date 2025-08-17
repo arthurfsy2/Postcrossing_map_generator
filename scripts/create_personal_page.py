@@ -456,7 +456,7 @@ def create_summary_text():
 
         # with open("./year_data.json", "w", encoding="utf-8") as f:
         #     json.dump(content, f, ensure_ascii=False, indent=2)
-        # return content, len(new_list)
+        return content, len(new_list)
 
     user_summary = read_db_table(
         db_path,
