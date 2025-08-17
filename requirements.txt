@@ -12,3 +12,4 @@ pycountry==23.12.11
 pytz==2024.1
 Requests==2.31.0
 wordcloud==1.9.3
+sqlalchemy
