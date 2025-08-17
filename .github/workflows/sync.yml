@@ -47,7 +47,7 @@ jobs:
           python scripts/multi_download.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }}
       - name: 更新gallery
         run: |
-          python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }}
+          python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
       - name: 更新2个地图数据
         run: |
           python scripts/create_map.py ${{ secrets.ACCOUNT }}
