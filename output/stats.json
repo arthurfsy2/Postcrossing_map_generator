@@ -862,5 +862,23 @@
     "received_date_history": "[1754294920]",
     "sent_date_first": null,
     "received_date_first": "2025/08/04"
+  },
+  {
+    "name": "Philippines",
+    "country_code": "PH",
+    "flag_emoji": "🇵🇭",
+    "value": 1,
+    "sent_num": 0,
+    "received_num": 1,
+    "sent_avg": null,
+    "received_avg": 28,
+    "sent_median": null,
+    "received_median": 28,
+    "sent_history": "[]",
+    "received_history": "[28]",
+    "sent_date_history": "[]",
+    "received_date_history": "[1755501209]",
+    "sent_date_first": null,
+    "received_date_first": "2025/08/18"
   }
 ]
