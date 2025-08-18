@@ -31,7 +31,7 @@ scrolling=auto
 @tab 我的位置
 
 <iframe 
-src="{{personal_page_link}}/LocationMap.html" 
+src="{{personal_page_link}}/location_map.html" 
 frameborder=0
 height=500
 width=100%
