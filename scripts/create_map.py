@@ -5,7 +5,8 @@ import time
 import sqlite3
 import random
 import os
-from common_tools import db_path, read_db_table, compareMD5
+from common_tools import db_path, read_db_table
+from multi_download import get_update_id
 import sys
 import shutil
 import argparse
@@ -15,14 +16,15 @@ with open("scripts/config.json", "r") as file:
     data = json.load(file)
 # account = data["account"]
 Cookie = data["Cookie"]
+db_update = data["db_update"]
 
 
-def getMapHomeInfo(receivedData):
-    # print("receivedData:",receivedData)
+def get_map_home_info(received_data):
+    # print("received_data:",received_data)
     addr_count = {}
     home_coords = []
     home_addrs = []
-    for item in receivedData:
+    for item in received_data:
         addr = f'{item["received_addr"]} [{item["received_country"]}]'
         if addr in addr_count:
             addr_count[addr] += 1
@@ -75,18 +77,18 @@ def geojson(m):
     return geojson.add_to(m)
 
 
-# 读取已获取数据生成地图
-
-
 def create_map():
-    sentData = read_db_table(db_path, "map_info", {"card_type": "sent"})
-    receivedData = read_db_table(db_path, "map_info", {"card_type": "received"})
-    allData = [sentData, receivedData]
-    most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getMapHomeInfo(
-        receivedData
+    """
+    读取已获取数据生成地图
+    """
+    sent_data = read_db_table(db_path, "map_info", {"card_type": "sent"})
+    received_data = read_db_table(db_path, "map_info", {"card_type": "received"})
+    allData = [sent_data, received_data]
+    most_common_home_coord, most_common_home_addr, home_coords, home_addrs = (
+        get_map_home_info(received_data)
     )
     m = folium.Map(
-        location=most_common_homeCoord,
+        location=most_common_home_coord,
         zoom_start=2,
         tiles="https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
         # tiles='https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
@@ -97,12 +99,12 @@ def create_map():
     def generate_random_offset():
         return random.uniform(-0.0001, 0.0001)
 
-    for i, coord in enumerate(homeCoords):
+    for i, coord in enumerate(home_coords):
         # 生成home标记(ClusterMap)
         marker = folium.Marker(
             location=coord,
             icon=folium.Icon(color="blue", icon="home"),
-            popup=f"{homeAddrs[i]}",
+            popup=f"{home_addrs[i]}",
         )
         marker.add_to(m)  # 设置home的marker固定显示，不被聚合统计
 
@@ -159,19 +161,19 @@ def create_map():
                 opacity=0.7,
                 smooth_factor=10,
             ).add_to(m)
-    m.save("Map.html")
-    replaceJsRef("./Map.html")
+    m.save("map.html")
+    replace_js_ref("./map.html")
 
 
-def createClusterMap():
-    sentData = read_db_table(db_path, "map_info", {"card_type": "sent"})
-    receivedData = read_db_table(db_path, "map_info", {"card_type": "received"})
-    allData = [sentData, receivedData]
-    most_common_homeCoord, most_common_homeAddr, homeCoords, homeAddrs = getMapHomeInfo(
-        receivedData
+def create_cluster_map():
+    sent_data = read_db_table(db_path, "map_info", {"card_type": "sent"})
+    received_data = read_db_table(db_path, "map_info", {"card_type": "received"})
+    allData = [sent_data, received_data]
+    most_common_home_coord, most_common_home_addr, home_coords, home_addrs = (
+        get_map_home_info(received_data)
     )
     cluster = folium.Map(
-        location=most_common_homeCoord,
+        location=most_common_home_coord,
         zoom_start=2,
         tiles="https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
         # tiles='https://mt.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
@@ -183,12 +185,12 @@ def createClusterMap():
     def generate_random_offset():
         return random.uniform(-0.0005, 0.0005)
 
-    for i, coord in enumerate(homeCoords):
+    for i, coord in enumerate(home_coords):
         # 生成home标记(ClusterMap)
         marker = folium.Marker(
             location=coord,
             icon=folium.Icon(color="blue", icon="home"),
-            popup=f"{homeAddrs[i]}",
+            popup=f"{home_addrs[i]}",
         )
         marker.add_to(cluster)  # 设置home的marker固定显示，不被聚合统计
 
@@ -235,11 +237,11 @@ def createClusterMap():
             ).add_to(marker_cluster)
 
     # 保存地图为HTML文件
-    cluster.save("ClusterMap.html")
-    replaceJsRef("./ClusterMap.html")
+    cluster.save("cluster_map.html")
+    replace_js_ref("./cluster_map.html")
 
 
-def replaceJsRef(fileFullName):
+def replace_js_ref(fileFullName):
     replaceContents = [
         [
             """<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>""",
@@ -314,7 +316,7 @@ def replaceJsRef(fileFullName):
 
 
 def createUserLocationMap():
-    content = read_db_table(db_path, "", "userSummary")
+    content = read_db_table(db_path, "user_summary")
     for id in content:
         coors = json.loads(id["coors"])
     # 创建地图对象
@@ -330,8 +332,8 @@ def createUserLocationMap():
     # 将标记添加到地图上
     marker.add_to(map)
     # 保存地图为HTML文件
-    map.save("LocationMap.html")
-    replaceJsRef("./LocationMap.html")
+    map.save("location_map.html")
+    replace_js_ref("./location_map.html")
 
 
 if __name__ == "__main__":
@@ -361,28 +363,28 @@ if __name__ == "__main__":
         "Cookie": Cookie,
     }
 
-    if os.path.exists(db_path):
-        shutil.copyfile(db_path, f"{db_path}BAK")
-
-    if not os.path.exists("./LocationMap.html"):
+    if not os.path.exists("./location_map.html"):
         createUserLocationMap()
-    create_map()
-    createClusterMap()
-    # if os.path.exists(f"{db_path}BAK"):
-    #     dbStat = compareMD5(db_path, f"{db_path}BAK")
-    #     if dbStat == "1":
-    #         print(f"{db_path} 有更新")
-    #         create_map()
-    #         print("Map.html已生成!")
-    #         createClusterMap()
-    #         print("ClusterMap.html已生成!")
-    #         os.remove(f"{db_path}BAK")
-    #     else:
-    #         print(f"{db_path} 暂无更新")
-    #         print("Map.html 暂无更新")
-    #         print("ClusterMap.html 暂无更新")
-    #         os.remove(f"{db_path}BAK")
+    new_sent_id = get_update_id(account, "sent")
+    new_received_id = get_update_id(account, "received")
 
+    if db_update:
+        print(f"{db_path} 有更新")
+        create_map()
+        print("map.html已生成!")
+        create_cluster_map()
+        print("cluster_map.html已生成!")
+    else:
+        print(f"{db_path} 暂无更新")
+        print("map.html 暂无更新")
+        print("cluster_map.html 暂无更新")
+
+    # 重置db_update初始状态
+    with open("scripts/config.json", "r") as f:
+        config_data = json.load(f)
+        config_data["db_update"] = False
+        with open("scripts/config.json", "w") as f:
+            json.dump(config_data, f, indent=2)
     end_time = time.time()
     execution_time = round((end_time - start_time), 3)
     print("————————————————————")

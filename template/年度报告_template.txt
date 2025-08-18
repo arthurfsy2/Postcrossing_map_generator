@@ -1,0 +1,17 @@
+---
+title: 年度报告
+icon: envelope-open-text
+date: 2024-01-10
+category:
+  - Arthur
+tag:
+  - Postcrossing
+order: 6
+---
+
+:::tabs
+{%for year in year_lists%}
+@tab {{year}}
+<iframe src="{{personal_page_link}}/recap/{{year}}_recap_{{lang}}.html" frameborder=0 height=500 width=100% seamless=seamless scrolling=auto></iframe>
+{%endfor%}
+:::

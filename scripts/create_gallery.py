@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 import time
-from multi_download import PicDataCheck
+from multi_download import pic_data_check
 from common_tools import db_path, read_db_table, insert_or_update_db, compareMD5
 import os
 import shutil

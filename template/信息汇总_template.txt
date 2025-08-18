@@ -95,10 +95,10 @@ scrolling=auto
 
 ### 个人收发 Map
 
-网址：{{personal_page_link}}/Map.html
+网址：{{personal_page_link}}/map.html
 
 <iframe 
-src="{{personal_page_link}}/Map.html" 
+src="{{personal_page_link}}/map.html" 
 frameborder=0
 height=500
 width=100%
@@ -110,10 +110,10 @@ scrolling=auto
 
 ### 个人收发 ClusterMap
 
-网址：{{personal_page_link}}/ClusterMap.html
+网址：{{personal_page_link}}/cluster_map.html
 
 <iframe 
-src="{{personal_page_link}}/ClusterMap.html" 
+src="{{personal_page_link}}/cluster_map.html" 
 frameborder=0
 height=500
 width=100%
@@ -125,8 +125,8 @@ scrolling=auto
 
 ### 个人收发 Map、ClusterMap (Github Page)
 
-网址：https://arthurfsy2.github.io/Postcrossing_map_generator/Map.html
-网址：https://arthurfsy2.github.io/Postcrossing_map_generator/ClusterMap.html
+网址：https://arthurfsy2.github.io/Postcrossing_map_generator/map.html
+网址：https://arthurfsy2.github.io/Postcrossing_map_generator/cluster_map.html
 :::
 
 ## 三.统计
@@ -153,10 +153,35 @@ const option = {
       color: ["#7bc96f", "#239a3b", "#196127", "#196127"],
     },
   },
-  calendar: [{{calendar}}],
-  series: [{{series}}],
+  calendar: [
+    {%for year  in calendar_list %}{
+        top: {{(loop.index-1)*150}},
+        cellSize: ["auto", "15"],
+        range: {{year}},
+        itemStyle: {
+            color: '#ccc',
+            borderWidth: 3,
+            borderColor: '#fff'
+        },
+        splitLine: true,
+        yearLabel: {
+            show: true
+        },
+        dayLabel: {
+            firstDay: 1,
+        }
+    },
+    {%endfor%}],
+  series: [
+    {%for year  in calendar_list %}{
+        type: "heatmap",
+        coordinateSystem: "calendar",
+        calendarIndex: {{loop.index-1}},
+        data: data
+        },
+    {%endfor%}],
 };
-const height = {{height}};
+const height = {{(calendar_list | length)*150}};
 ```
 
 :::

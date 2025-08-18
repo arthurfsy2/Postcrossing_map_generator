@@ -13,7 +13,7 @@ import requests
 # import emoji
 import pycountry
 from emojiflags.lookup import lookup as flag
-from multi_download import getAccountStat
+from multi_download import get_account_stat, get_online_stats_data
 from common_tools import (
     db_path,
     read_db_table,
@@ -68,53 +68,17 @@ def update_sheet_data(excel_file):
         insert_or_update_db(db_path, "postcard_story", item)
 
 
-def createCalendar():
-    with open("output/UserStats.json", "r") as file:
-        a_data = json.load(file)
-    year_list = []
+def get_calendar_list():
+    online_stats_data = get_online_stats_data(account)
+    calendar_list = []
 
-    for data in a_data:
+    for data in online_stats_data:
         timestamp = data[0]  # 获取时间戳
         date = datetime.fromtimestamp(timestamp)  # 将时间戳转换为日期格式
         year = date.strftime("%Y")  # 提取年份（YYYY）
-        if year not in year_list:
-            year_list.append(year)
-    calendar_all = ""
-    series_all = ""
-
-    for i, year in enumerate(year_list):
-        calendar = f"""
-        {{
-            top: {i*150},
-            cellSize: ["auto", "15"],
-            range: {year},
-            itemStyle: {{
-                color: '#ccc',
-                borderWidth: 3,
-                borderColor: '#fff'
-            }},
-            splitLine: true,
-            yearLabel: {{
-                show: true
-            }},
-            dayLabel: {{
-                firstDay: 1,
-            }}
-        }},
-        """
-        calendar_all += calendar
-
-        series = f"""
-        {{
-        type: "heatmap",
-        coordinateSystem: "calendar",
-        calendarIndex: {i},
-        data: data
-        }},
-        """
-        series_all += series
-    height = len(year_list) * 150
-    return calendar_all, series_all, height
+        if year not in calendar_list:
+            calendar_list.append(year)
+    return calendar_list
 
 
 def create_word_cloud(type, contents):
@@ -374,7 +338,7 @@ def create_summary_text():
     """
     生成信息汇总.md
     """
-    stat, content_raw, card_types = getAccountStat(account, Cookie)
+    stat, content_raw, card_types = get_account_stat(account, Cookie)
 
     def get_card_type_data(card_type):
 
@@ -472,7 +436,7 @@ def create_summary_text():
 
         title_final = f"{title_all}"
 
-    calendar, series, height = createCalendar()
+    calendar_list = get_calendar_list()
     comment_list, comment_num = get_card_type_data("sent")
     story_list, story_num = get_card_type_data("received")
     dataNew = summary_template.render(
@@ -481,27 +445,17 @@ def create_summary_text():
         story_pic_link=story_pic_link,
         nick_name=nick_name,
         user_summary=user_summary,
-        # coors=coorLink,
         story_pic_type=story_pic_type,
         personal_page_link=personal_page_link,
         title_final=title_final,
         story_list=story_list,
         story_num=story_num,
         comment_list=comment_list,
-        # commentlist=commentlist,
         comment_num=comment_num,
-        calendar=calendar,
-        series=series,
-        height=str(height),
+        calendar_list=calendar_list,
         repo=repo,
     )
-    print(f"已替换account:{account}")
-    print("已替换个人汇总信息")
-    print("已替换明信片墙title")
-    print("已替换明信片故事list")
-    print("已替换明信片评论list")
-    print("已替换明信片日历list")
-    print(f"已替换仓库名:{repo}")
+    print(f"已更新信息汇总.md")
     print(f"————————————————————")
 
     with open(f"./gallery/信息汇总.md", "w", encoding="utf-8") as f:

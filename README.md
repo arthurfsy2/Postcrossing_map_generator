@@ -1,8 +1,8 @@
 **一个可以输入 postcrossing 账号、密码，即可获取展示墙数据、生成个性化地图、各种数据统计的脚本（数据收集癖患者的福音），是官网的 plus 加强版+美化版。**
 
 个人地图展示：
-[收发标记图](https://postcrossing.4a1801.life/ClusterMap.html)
-[聚类图](https://postcrossing.4a1801.life/Map.html)
+[收发标记图](https://postcrossing.4a1801.life/cluster_map.html)
+[聚类图](https://postcrossing.4a1801.life/map.html)
 
 个人博客效果展示：
 [Postcrossing](https://blog.4a1801.life/Arthur/postcrossing/信息汇总.html)
@@ -23,7 +23,7 @@
      ![](./img/summary00.png)
    - 图片墙：对应 4 个展示墙的超链接、收/发/traveling 列表
      ![](./img/summary01.png)
-   - 地图展示：集成 `map.html、clusterMap.html`这 2 个地图的内容
+   - 地图展示：集成 `map.html、cluster_map.html`这 2 个地图的内容
      ![](./img/summary02.png)
    - 统计
 
@@ -101,7 +101,7 @@ scripts/startTask.py //本脚本已整合了所有需要运行的文件，运行
 （2）各步骤脚本
 1) scripts/login.py  //登陆账号获取cookie，可单独使用（配合Github Action定时刷新Cookie），也可以整合到startTask.py中使用
 2) scripts/multiDownload.py //下载/更新内容到数据库
-3) scripts/createMap.py  //在根目录生成ClusterMap.html、Map.html、Location.html文件
+3) scripts/createMap.py  //在根目录生成cluster_map.html、map.html、Location.html文件
 4) scripts/createGallery.py  //在`./gallery`生成4个不同类型的展示墙、已下载的图片
 5) scripts/createPersonalPage.py  //在`./gallery`生成“信息汇总”页面(还包含其他结果文件)
 6) scripts/mailTrack.py  //在`./template/data.db`数据库中插入已抓取到的邮件回复信息
@@ -240,10 +240,10 @@ on:
 1. fork 本项目到你自己的仓库，clone 到本地后按需修改 fork 后仓库内的 scripts/config.json 内容
 2. 参考**一. 步骤（本地模式）**的步骤 1-4（注意要删除掉我的数据），在本地/通过 Github Action 生成文件
 3. 将 HTML 文件 push 到你 fork 的仓库当中/等待 Github Action 自动生成文件
-4. 参考以下截图开通 Github Page，即可访问(需要手动在链接后面增加 ClusterMap.html 或 Map.html)
+4. 参考以下截图开通 Github Page，即可访问(需要手动在链接后面增加 cluster_map.html 或 map.html)
 
-> 如：https://arthurfsy2.github.io/Postcrossing_map_generator/Map.html
-> 也可通过 vercel 生成：https://postcrossingfsy.vercel.app/Map.html
+> 如：https://arthurfsy2.github.io/Postcrossing_map_generator/map.html
+> 也可通过 vercel 生成：https://postcrossingfsy.vercel.app/map.html
 
 ![](img/20231026155131.png)
 

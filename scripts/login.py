@@ -6,7 +6,7 @@ import json
 import os
 import argparse
 from common_tools import db_path
-from multi_download import getAccountStat
+from multi_download import get_account_stat
 
 with open("scripts/config.json", "r") as file:
     data = json.load(file)
@@ -107,6 +107,6 @@ if __name__ == "__main__":
     # Cookie = options.Cookie
     # repo = options.repo
 
-    stat, content_raw, types = getAccountStat(account, Cookie)
-    if stat != "getPrivate":
+    stat, content_raw, types = get_account_stat(account, Cookie)
+    if stat != "get_private":
         login(account, password)
