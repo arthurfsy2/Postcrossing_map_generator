@@ -1,7 +1,7 @@
 ---
 title: 明信片展示墙（寄出：191）
 icon: address-card
-date: 2025-08-13
+date: 2025-08-19
 category:
   - Arthur
 tag:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2025(52)
+### 2025(53)
+
+[CN-4069193](https://www.postcrossing.com/postcards/CN-4069193) 
+>寄往 [reinholdo](https://www.postcrossing.com/user/reinholdo) 🇩🇪
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/07/08 13:10 (当地)
+> 📥 [Germany](https://www.bing.com/maps/?cp=50.10068~11.45032&lvl=12.0&setlang=zh-Hans) 2025/08/19 16:54 (当地)
+ 📏 8,962 | ⏱ 42
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/24o8k77m4j4b3uy9ffd0lieq88nsl1t3.jpg)
 
 [CN-4069192](https://www.postcrossing.com/postcards/CN-4069192) 
 >寄往 [zaza19](https://www.postcrossing.com/user/zaza19) 🇫🇷
