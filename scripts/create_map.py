@@ -77,13 +77,13 @@ def geojson(m):
     return geojson.add_to(m)
 
 
-def create_map():
+def create_map(map_type="map"):
     """
     读取已获取数据生成地图
     """
     sent_data = read_db_table(db_path, "map_info", {"card_type": "sent"})
     received_data = read_db_table(db_path, "map_info", {"card_type": "received"})
-    allData = [sent_data, received_data]
+    all_data = [sent_data, received_data]
     most_common_home_coord, most_common_home_addr, home_coords, home_addrs = (
         get_map_home_info(received_data)
     )
@@ -95,6 +95,8 @@ def create_map():
         attr="map",
     )
     geojson(m)
+    if map_type == "cluster_map":
+        marker_cluster = MarkerCluster().add_to(m)
 
     def generate_random_offset():
         return random.uniform(-0.0001, 0.0001)
@@ -108,10 +110,10 @@ def create_map():
         )
         marker.add_to(m)  # 设置home的marker固定显示，不被聚合统计
 
-    for i, datas in enumerate(allData):
+    for i, datas in enumerate(all_data):
         for coords in datas:
             # 解析postcardID、from坐标、to坐标、distance、days、link、user
-            postcardID = coords["card_id"]
+            card_id = coords["card_id"]
             from_coord = json.loads(coords["from_coor"])
             to_coord = json.loads(coords["to_coor"])
             distance = coords["distance"]
@@ -121,16 +123,16 @@ def create_map():
             sent_addr = f'{coords["sent_addr"]} [{coords["sent_country"]}]'
             received_addr = f'{coords["received_addr"]} [{coords["received_country"]}]'
             if user == "account closed":
-                userInfo = "<b><i>account closed</b></i>"
+                user_info = "<b><i>account closed</b></i>"
             else:
-                userInfo = (
+                user_info = (
                     f'<a href="https://www.postcrossing.com/user/{user}">{user}</a>'
                 )
 
             if link == "":
-                linkInfo = f'<a href="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" target="_blank"><img src="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" alt="Image"></a>'  # 替换图片为空时的logo
+                link_info = f'<a href="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" target="_blank"><img src="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" alt="Image"></a>'  # 替换图片为空时的logo
             else:
-                linkInfo = f'<a href="{link}" target="_blank"><img src="{link}" alt="Image"></a>'
+                link_info = f'<a href="{link}" target="_blank"><img src="{link}" alt="Image"></a>'
 
             # 生成已寄送明信片的接收地标记(ClusterMap)
 
@@ -144,105 +146,37 @@ def create_map():
                 icon = "play"
                 from_or_to = "From"
                 location = from_coord
-            marker = folium.Marker(
-                location=[
-                    location[0] + generate_random_offset(),
-                    location[1] + generate_random_offset(),
-                ],
-                icon=folium.Icon(color=color, icon=icon),
-                popup=f'{from_or_to} {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sent_addr}<br>To: {received_addr} <br>📏 {distance} | ⏱ {days} {linkInfo}',
-            ).add_to(m)
-
-            # 添加航线
-            folium.PolyLine(
-                locations=[from_coord, to_coord],
-                color=color,
-                weight=1,
-                opacity=0.7,
-                smooth_factor=10,
-            ).add_to(m)
-    m.save("map.html")
-    replace_js_ref("./map.html")
-
-
-def create_cluster_map():
-    sent_data = read_db_table(db_path, "map_info", {"card_type": "sent"})
-    received_data = read_db_table(db_path, "map_info", {"card_type": "received"})
-    allData = [sent_data, received_data]
-    most_common_home_coord, most_common_home_addr, home_coords, home_addrs = (
-        get_map_home_info(received_data)
-    )
-    cluster = folium.Map(
-        location=most_common_home_coord,
-        zoom_start=2,
-        tiles="https://webrd02.is.autonavi.com/appmaptile?lang=zh_en&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
-        # tiles='https://mt.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
-        attr="map",
-    )
-    geojson(cluster)
-    marker_cluster = MarkerCluster().add_to(cluster)
-
-    def generate_random_offset():
-        return random.uniform(-0.0005, 0.0005)
-
-    for i, coord in enumerate(home_coords):
-        # 生成home标记(ClusterMap)
-        marker = folium.Marker(
-            location=coord,
-            icon=folium.Icon(color="blue", icon="home"),
-            popup=f"{home_addrs[i]}",
-        )
-        marker.add_to(cluster)  # 设置home的marker固定显示，不被聚合统计
-
-    for i, datas in enumerate(allData):
-        for coords in datas:
-            # 解析postcardID、from坐标、to坐标、distance、days、link、user
-            postcardID = coords["card_id"]
-            from_coord = json.loads(coords["from_coor"])
-            to_coord = json.loads(coords["to_coor"])
-            distance = coords["distance"]
-            days = coords["travel_days"]
-            link = coords["link"]
-            user = coords["user"]
-            sent_addr = f'{coords["sent_addr"]} [{coords["sent_country"]}]'
-            received_addr = f'{coords["received_addr"]} [{coords["received_country"]}]'
-            if user == "account closed":
-                userInfo = "<b><i>account closed</b></i>"
+            if map_type == "cluster_map":
+                marker = folium.Marker(
+                    location=location,
+                    icon=folium.Icon(color=color, icon=icon),
+                    popup=f'{from_or_to} {user_info}</a> <br><a href="https://www.postcrossing.com/postcards/{card_id}">{card_id}</a><br>From: {sent_addr}<br>To: {received_addr} <br>📏 {distance} | ⏱ {days} {link_info}',
+                ).add_to(marker_cluster)
             else:
-                userInfo = (
-                    f'<a href="https://www.postcrossing.com/user/{user}">{user}</a>'
-                )
+                marker = folium.Marker(
+                    location=[
+                        location[0] + generate_random_offset(),
+                        location[1] + generate_random_offset(),
+                    ],
+                    icon=folium.Icon(color=color, icon=icon),
+                    popup=f'{from_or_to} {user_info}</a> <br><a href="https://www.postcrossing.com/postcards/{card_id}">{card_id}</a><br>From: {sent_addr}<br>To: {received_addr} <br>📏 {distance} | ⏱ {days} {link_info}',
+                ).add_to(m)
 
-            if link == "":
-                linkInfo = f'<a href="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" target="_blank"><img src="https://www.postcrossing.com/images/pwa/manifest-icon-192.maskable.png" alt="Image"></a>'  # 替换图片为空时的logo
-            else:
-                linkInfo = f'<a href="{link}" target="_blank"><img src="{link}" alt="Image"></a>'
-
-            # 生成已寄送明信片的接收地标记(ClusterMap)
-
-            if i == 0:
-                color = "red"
-                icon = "stop"
-                from_or_to = "To"
-                location = to_coord
-            elif i == 1:
-                color = "green"
-                icon = "play"
-                from_or_to = "From"
-                location = from_coord
-            marker = folium.Marker(
-                location=location,
-                icon=folium.Icon(color=color, icon=icon),
-                popup=f'{from_or_to} {userInfo}</a> <br><a href="https://www.postcrossing.com/postcards/{postcardID}">{postcardID}</a><br>From: {sent_addr}<br>To: {received_addr} <br>📏 {distance} | ⏱ {days} {linkInfo}',
-            ).add_to(marker_cluster)
-
-    # 保存地图为HTML文件
-    cluster.save("cluster_map.html")
-    replace_js_ref("./cluster_map.html")
+                # 添加航线
+                folium.PolyLine(
+                    locations=[from_coord, to_coord],
+                    color=color,
+                    weight=1,
+                    opacity=0.7,
+                    smooth_factor=10,
+                ).add_to(m)
+    m.save(f"{map_type}.html")
+    replace_js_ref(f"./{map_type}.html")
+    print(f"./{map_type}.html已生成!")
 
 
-def replace_js_ref(fileFullName):
-    replaceContents = [
+def replace_js_ref(file_full_name):
+    replace_contents = [
         [
             """<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>""",
             """<script src="./src/jquery-1.12.4/package/dist/jquery.min.js"></script>""",
@@ -302,20 +236,20 @@ def replace_js_ref(fileFullName):
     ]
 
     with (
-        open(fileFullName, "r", encoding="utf-8") as f1,
-        open(f"{fileFullName}.bak", "w", encoding="utf-8") as f2,
+        open(file_full_name, "r", encoding="utf-8") as f1,
+        open(f"{file_full_name}.bak", "w", encoding="utf-8") as f2,
     ):
         for line in f1:
-            for itm in replaceContents:
+            for itm in replace_contents:
                 if itm[0] in line:
                     line = line.replace(itm[0], itm[1])
-                    replaceContents.remove(itm)
+                    replace_contents.remove(itm)
             f2.write(line)
-    os.remove(fileFullName)
-    os.rename(f"{fileFullName}.bak", fileFullName)
+    os.remove(file_full_name)
+    os.rename(f"{file_full_name}.bak", file_full_name)
 
 
-def createUserLocationMap():
+def create_user_location_map():
     content = read_db_table(db_path, "user_summary")
     for id in content:
         coors = json.loads(id["coors"])
@@ -353,9 +287,9 @@ if __name__ == "__main__":
     # Cookie = options.Cookie
     # repo = options.repo
 
-    userUrl = f"https://www.postcrossing.com/user/{account}"
-    galleryUrl = f"{userUrl}/gallery"  # 设置该账号的展示墙
-    dataUrl = f"{userUrl}/data/sent"
+    user_url = f"https://www.postcrossing.com/user/{account}"
+    gallery_url = f"{user_url}/gallery"  # 设置该账号的展示墙
+    data_url = f"{user_url}/data/sent"
     types_map = ["sent", "received"]
 
     headers = {
@@ -364,16 +298,13 @@ if __name__ == "__main__":
     }
 
     if not os.path.exists("./location_map.html"):
-        createUserLocationMap()
-    new_sent_id = get_update_id(account, "sent")
-    new_received_id = get_update_id(account, "received")
+        create_user_location_map()
 
     if db_update:
         print(f"{db_path} 有更新")
         create_map()
-        print("map.html已生成!")
-        create_cluster_map()
-        print("cluster_map.html已生成!")
+        create_map("cluster_map")
+
     else:
         print(f"{db_path} 暂无更新")
         print("map.html 暂无更新")

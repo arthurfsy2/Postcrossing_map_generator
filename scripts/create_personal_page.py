@@ -18,7 +18,6 @@ from common_tools import (
     db_path,
     read_db_table,
     insert_or_update_db,
-    compareMD5,
     translate,
 )
 import pytz

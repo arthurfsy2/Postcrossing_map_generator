@@ -71,7 +71,7 @@ def get_account_stat(account, Cookie):
 
 
 def get_page_num(stat, content, card_types):
-    if stat == "get_private":
+    if stat != "get_private":
         return
     for card_type in card_types:
         from_or_to = "来自" if card_type in ["received", "favourites"] else "寄往"
@@ -98,7 +98,6 @@ def get_page_num(stat, content, card_types):
             "card_num": count,
             "title_name": f"明信片展示墙（{title_key.get(card_type)}：{count}）",
         }
-
         insert_or_update_db(db_path, "title_info", item)
 
 
@@ -166,8 +165,8 @@ def get_gallery_info(card_type, account, Cookie):
 # 读取本地已下载图片的文件名列表
 def get_local_pic():
     local_pic_list = []
-    picPath = "./gallery/picture"
-    for root, dirs, files in os.walk(picPath):
+    pic_path = "./gallery/picture"
+    for root, dirs, files in os.walk(pic_path):
         for file in files:
             local_pic_list.append(file)
     return local_pic_list
@@ -205,18 +204,18 @@ def get_update_id(account, card_type):
 
     if old_id:
 
-        newID = []
+        new_id = []
         # 遍历onlineID中的元素
         for id in online_id:
             # 如果id不在oldID中，则将其添加到newID中
             if id not in old_id:
-                newID.append(id)
-        if len(newID) == 0:
+                new_id.append(id)
+        if len(new_id) == 0:
             print(f"数据库[map_info]：{card_type}暂无更新内容\n")
             update_id = None
         else:
-            print(f"数据库[map_info]：{card_type}等待更新({len(newID)}个):{newID}\n")
-            update_id = newID
+            print(f"数据库[map_info]：{card_type}等待更新({len(new_id)}个):{new_id}\n")
+            update_id = new_id
     else:
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
         update_id = online_id
@@ -256,14 +255,14 @@ def get_map_info_data(card_id, card_type):
             re.search(r"traveled (.*?) km", response.text).group(1).replace(",", "")
         )
         travel_days = int(re.search(r"in (.*?) days", response.text).group(1))
-        sentDate = convert_to_utc(0, "Sent", response.text)
-        receivedDate = convert_to_utc(0, "Received", response.text)
-        travel_time = f"{travel_days} days [{sentDate}--{receivedDate}]"
+        sent_date = convert_to_utc(0, "Sent", response.text)
+        received_date = convert_to_utc(0, "Received", response.text)
+        travel_time = f"{travel_days} days [{sent_date}--{received_date}]"
         # print(f"{id}_travel_time:{travel_time}")
         # 提取发送者/接受者user
-        userPattern = r'<a itemprop="url" href="/user/(.*?)"'
-        userResults = re.findall(userPattern, response.text)
-        # print(f"{id}_userResults:{userResults}]")
+        user_pattern = r'<a itemprop="url" href="/user/(.*?)"'
+        user_results = re.findall(user_pattern, response.text)
+        # print(f"{id}_userResults:{user_results}]")
 
         # 提取链接link
         link = re.search(
@@ -277,29 +276,29 @@ def get_map_info_data(card_id, card_type):
             link = f"gallery/picture/{pic_file_name}"
 
         # 提取地址信息
-        addrPattern = r'<a itemprop="addressCountry" title="(.*?)" href="/country/(.*?)">(.*?)</a>'
-        addrResults = re.findall(addrPattern, response.text)
-        # print(f"{id}_addrResults:", addrResults)
+        addr_pattern = r'<a itemprop="addressCountry" title="(.*?)" href="/country/(.*?)">(.*?)</a>'
+        addr_results = re.findall(addr_pattern, response.text)
+        # print(f"{id}_addr_results:", addr_results)
 
-        sentAddrInfo = addrResults[0]
-        receivedInfo = addrResults[1]
+        sent_addr_info = addr_results[0]
+        received_info = addr_results[1]
 
-        sentAddr = sentAddrInfo[0]
-        sentCountry = sentAddrInfo[2]
-        receivedAddr = receivedInfo[0]
-        receivedCountry = receivedInfo[2]
+        sent_addr = sent_addr_info[0]
+        sent_country = sent_addr_info[2]
+        received_addr = received_info[0]
+        received_country = received_info[2]
 
         # 提取发送/接收user
-        userPattern = r'<a itemprop="url" href="/user/(.*?)"'
-        userResults = re.findall(userPattern, response.text)
-        # print(f"{id}_userResults:{userResults}")
-        if len(userResults) == 1:
+        user_pattern = r'<a itemprop="url" href="/user/(.*?)"'
+        user_results = re.findall(user_pattern, response.text)
+        # print(f"{id}_userResults:{user_results}")
+        if len(user_results) == 1:
             user = "account closed"
-        elif len(userResults) >= 2 and card_type == "sent":
-            user = userResults[1]
+        elif len(user_results) >= 2 and card_type == "sent":
+            user = user_results[1]
 
-        elif len(userResults) >= 2 and card_type == "received":
-            user = userResults[0]
+        elif len(user_results) >= 2 and card_type == "received":
+            user = user_results[0]
         # print(f"User:{user}")
 
         for match in matches:
@@ -314,19 +313,19 @@ def get_map_info_data(card_id, card_type):
             "to_coor": to_coord,
             "distance": distance,
             "travel_days": travel_days,
-            "sent_date": sentDate,
-            "received_date": receivedDate,
+            "sent_date": sent_date,
+            "received_date": received_date,
             "link": link,
             "user": user,
-            "sent_addr": sentAddr,
-            "sent_country": sentCountry,
-            "received_addr": receivedAddr,
-            "received_country": receivedCountry,
+            "sent_addr": sent_addr,
+            "sent_country": sent_country,
+            "received_addr": received_addr,
+            "received_country": received_country,
             "sent_date_local": get_local_date(
-                [float(match[0]), float(match[1])], sentDate
+                [float(match[0]), float(match[1])], sent_date
             ),
             "received_date_local": get_local_date(
-                [float(match[2]), float(match[3])], receivedDate
+                [float(match[2]), float(match[3])], received_date
             ),
             "card_type": card_type,
         }
@@ -340,18 +339,18 @@ def get_map_info_data(card_id, card_type):
 def download_pic(update_pic, pic_json):
     pic_file_name_list = []
     for i, pic_file_name in enumerate(update_pic):
-        picDownloadPath = (
+        pic_download_path = (
             f"gallery/picture/{pic_file_name}"  # 替换为你要保存的文件路径和文件名
         )
-        if os.path.exists(picDownloadPath):
+        if os.path.exists(pic_download_path):
             # print(f"已存在：{pic_file_name}")
             pass
         else:
-            picDownloadUrl = f"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/{pic_file_name}"
-            # print(f"picDownloadUrl:{picDownloadUrl}")
-            response = requests.get(picDownloadUrl)
+            pic_download_url = f"https://s3.amazonaws.com/static2.postcrossing.com/postcard/medium/{pic_file_name}"
+            # print(f"pic_download_url:{pic_download_url}")
+            response = requests.get(pic_download_url)
             print(f"正在下载{pic_file_name}")
-            with open(picDownloadPath, "wb") as file:
+            with open(pic_download_path, "wb") as file:
                 file.write(response.content)
     pic_json.append(pic_file_name)
 
@@ -398,47 +397,47 @@ def calculate_avg_and_median(online_stats_data):
         if code not in name_dict:
             name_dict[code] = {
                 "name": country,
-                "countryCode": code,
+                "country_code": code,
                 "flagEmoji": flagEmoji,
                 "sent": [],
                 "received": [],
-                "sentDate": [],
-                "receivedDate": [],
+                "sent_date": [],
+                "received_date": [],
             }
 
         if r_or_s == "s":
             name_dict[code]["sent"].append(travel_days)
-            name_dict[code]["sentDate"].append(date)
+            name_dict[code]["sent_date"].append(date)
         elif r_or_s == "r":
             name_dict[code]["received"].append(travel_days)
-            name_dict[code]["receivedDate"].append(date)
+            name_dict[code]["received_date"].append(date)
     country_stats = []
     for code, data in name_dict.items():
         if data["sent"]:
             sent_avg = int(statistics.mean(data["sent"]))
             sent_median = int(statistics.median(data["sent"]))
-            sentDate_first = datetime.fromtimestamp(
-                min(data["sentDate"]), timezone.utc
+            sent_date_first = datetime.fromtimestamp(
+                min(data["sent_date"]), timezone.utc
             ).strftime("%Y/%m/%d")
 
         else:
             sent_avg = None
             sent_median = None
-            sentDate_first = None
+            sent_date_first = None
         if data["received"]:
             received_avg = int(statistics.mean(data["received"]))
             received_median = int(statistics.median(data["received"]))
-            receivedDate_first = datetime.fromtimestamp(
-                min(data["receivedDate"]), timezone.utc
+            received_date_first = datetime.fromtimestamp(
+                min(data["received_date"]), timezone.utc
             ).strftime("%Y/%m/%d")
         else:
             received_avg = None
             received_median = None
-            receivedDate_first = None
+            received_date_first = None
         item = {
             "name": data["name"],
-            "country_code": data["countryCode"],
-            "flag_emoji": flag(data["countryCode"]),
+            "country_code": data["country_code"],
+            "flag_emoji": flag(data["country_code"]),
             "value": len(data["sent"]) + len(data["received"]),
             "sent_num": len(data["sent"]),
             "received_num": len(data["received"]),
@@ -448,10 +447,10 @@ def calculate_avg_and_median(online_stats_data):
             "received_median": received_median,
             "sent_history": json.dumps(name_dict[code]["sent"]),
             "received_history": json.dumps(name_dict[code]["received"]),
-            "sent_date_history": json.dumps(name_dict[code]["sentDate"]),
-            "received_date_history": json.dumps(name_dict[code]["receivedDate"]),
-            "sent_date_first": sentDate_first,
-            "received_date_first": receivedDate_first,
+            "sent_date_history": json.dumps(name_dict[code]["sent_date"]),
+            "received_date_history": json.dumps(name_dict[code]["received_date"]),
+            "sent_date_first": sent_date_first,
+            "received_date_first": received_date_first,
         }
         country_stats.append(item)
         insert_or_update_db(db_path, "country_stats", item)
@@ -638,7 +637,7 @@ def multi_download(card_type):
         print(
             f"将{card_type}的postcardID分为{real_num}个线程并行下载，每个线程下载图片个数：{group_size}\n"
         )
-        picDownload_groups = [
+        pic_download_groups = [
             update_pic[i : i + group_size]
             for i in range(0, len(update_pic), group_size)
         ]
@@ -646,7 +645,7 @@ def multi_download(card_type):
         threads = []
         pic_json = []  # 存储最终的pic_json
         # 创建并启动线程
-        for i, group in enumerate(picDownload_groups):
+        for i, group in enumerate(pic_download_groups):
             thread = threading.Thread(target=download_pic, args=(group, pic_json))
             thread.start()
             threads.append(thread)
