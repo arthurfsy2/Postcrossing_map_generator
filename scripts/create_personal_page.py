@@ -25,8 +25,17 @@ import shutil
 from PIL import Image
 import re
 from jinja2 import Template
+import toml
+import toml
 
 BIN = os.path.dirname(os.path.realpath(__file__))
+
+config = toml.load("scripts/config.toml")
+personal_page_link = config.get("url").get("personal_page_link")
+Cookie = config.get("settings").get("Cookie")
+pic_driver_path = config.get("url").get("pic_driver_path")
+story_pic_link = config.get("url").get("story_pic_link")
+story_pic_type = config.get("settings").get("story_pic_type")
 
 
 def read_template_file():
@@ -470,14 +479,8 @@ def create_summary_text():
 
 if __name__ == "__main__":
     card_type_template, summary_template, register_info_template = read_template_file()
-    with open("scripts/config.json", "r") as file:
-        data = json.load(file)
-    personal_page_link = data["personal_page_link"]
+
     # nick_name = data["nick_name"]
-    Cookie = data["Cookie"]
-    pic_driver_path = data["pic_driver_path"]
-    story_pic_link = data["story_pic_link"]
-    story_pic_type = data["story_pic_type"]
 
     # 创建 ArgumentParser 对象
     parser = argparse.ArgumentParser()

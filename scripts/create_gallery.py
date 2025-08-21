@@ -7,15 +7,13 @@ import shutil
 import argparse
 import re
 from jinja2 import Template
+import toml
 
 BIN = os.path.dirname(os.path.realpath(__file__))
 
-with open("scripts/config.json", "r") as file:
-    data = json.load(file)
-# account = data["account"]
-# nick_name = data["nick_name"]
-Cookie = data["Cookie"]
-pic_driver_path = data["pic_driver_path"]
+config = toml.load("scripts/config.toml")
+Cookie = config.get("settings").get("Cookie")
+pic_driver_path = config.get("url").get("pic_driver_path")
 
 
 def read_template_file():

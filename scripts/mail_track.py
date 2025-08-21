@@ -9,15 +9,11 @@ from common_tools import translate, db_path, insert_or_update_db, read_db_table
 import argparse
 import time
 from concurrent.futures import ThreadPoolExecutor
+import toml
 
-with open("scripts/config.json", "r") as file:
-    data = json.load(file)
-# account = data["account"]
-# nick_name = data["nick_name"]
-Cookie = data["Cookie"]
-pic_driver_path = data["pic_driver_path"]
-
-# repo = data["repo"]
+config = toml.load("scripts/config.toml")
+Cookie = config.get("settings").get("Cookie")
+pic_driver_path = config.get("url").get("pic_driver_path")
 
 parser = argparse.ArgumentParser()
 

@@ -8,11 +8,12 @@ from collections import Counter
 from jinja2 import Template
 from common_tools import db_path, read_db_table
 import argparse
+import toml
 
-with open("scripts/config.json", "r") as file:
-    data = json.load(file)
-personal_page_link = data["personal_page_link"]
 BIN = os.path.dirname(os.path.realpath(__file__))
+config = toml.load("scripts/config.toml")
+pic_driver_path = config.get("url").get("pic_driver_path")
+personal_page_link = config.get("url").get("personal_page_link")
 
 
 def read_template_file(lang="cn"):

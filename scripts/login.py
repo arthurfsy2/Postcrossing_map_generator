@@ -7,11 +7,10 @@ import os
 import argparse
 from common_tools import db_path
 from multi_download import get_account_stat
+import toml
 
-with open("scripts/config.json", "r") as file:
-    data = json.load(file)
-# account = data["account"]
-Cookie = data["Cookie"]
+config = toml.load("scripts/config.toml")
+Cookie = config.get("settings").get("Cookie")
 
 
 def login(account, password):
@@ -79,15 +78,14 @@ def login(account, password):
 
     Cookie = f"__Host-postcrossing={extracted_host}; PostcrossingRemember={extracted_remember}"
     print("Cookie_new:", Cookie)
-    # 读取scripts/config.json文件内容
-    with open("scripts/config.json", "r") as file:
-        config_data = json.load(file)
+    # 读取scripts/config.toml文件内容
+    config = toml.load("scripts/config.toml")
 
     # 更新Cookie变量的值
-    config_data["Cookie"] = Cookie
-    # 将更新后的内容写入scripts/config.json文件
-    with open("scripts/config.json", "w") as file:
-        json.dump(config_data, file, indent=4)
+    config["settings"]["Cookie"] = Cookie
+    # 将更新后的内容写入scripts/config.toml文件
+    with open("scripts/config.toml", "w", encoding="utf-8") as f:
+        toml.dump(config, f)
     os.remove("log.txt")
     return Cookie
 

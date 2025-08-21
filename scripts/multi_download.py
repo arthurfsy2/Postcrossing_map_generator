@@ -22,15 +22,13 @@ from common_tools import (
     initialize_database,
     get_local_date,
 )
+import toml
 
-
-with open("scripts/config.json", "r") as file:
-    data = json.load(file)
-# account = data["account"]
-# nick_name = data["nick_name"]
-Cookie = data["Cookie"]
-pic_driver_path = data["pic_driver_path"]
 BIN = os.path.dirname(os.path.realpath(__file__))
+
+config = toml.load("scripts/config.toml")
+Cookie = config.get("settings").get("Cookie")
+pic_driver_path = config.get("url").get("pic_driver_path")
 
 
 def get_account_stat(account, Cookie):
@@ -580,11 +578,10 @@ def multi_task(card_type):
 
     card_id = get_update_id(account, card_type)
     if card_id:
-        with open("scripts/config.json", "r") as f:
-            config_data = json.load(f)
-            config_data["db_update"] = True
-            with open("scripts/config.json", "w") as f:
-                json.dump(config_data, f, indent=2)
+        config = toml.load("scripts/config.toml")
+        config["notice"]["db_update"] = True
+        with open("scripts/config.toml", "w", encoding="utf-8") as f:
+            toml.dump(config, f)
 
         card_num = round(len(card_id) / 20)
         if card_num < 1:

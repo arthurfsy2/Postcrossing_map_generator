@@ -21,13 +21,11 @@ from sqlalchemy import (
     Date,
     PrimaryKeyConstraint,
 )
+import toml
 
-with open("scripts/config.json", "r") as file:
-    data = json.load(file)
-# account = data["account"]
-# nick_name = data["nick_name"]
-Cookie = data["Cookie"]
-pic_driver_path = data["pic_driver_path"]
+config = toml.load("scripts/config.toml")
+Cookie = config.get("settings").get("Cookie")
+pic_driver_path = config.get("url").get("pic_driver_path")
 
 
 def initialize_database(Base, db_path):

@@ -10,13 +10,12 @@ from multi_download import get_update_id
 import sys
 import shutil
 import argparse
+import toml
 
 
-with open("scripts/config.json", "r") as file:
-    data = json.load(file)
-# account = data["account"]
-Cookie = data["Cookie"]
-db_update = data["db_update"]
+config = toml.load("scripts/config.toml")
+Cookie = config.get("settings").get("Cookie")
+db_update = config.get("notice").get("db_update")
 
 
 def get_map_home_info(received_data):
@@ -311,11 +310,10 @@ if __name__ == "__main__":
         print("cluster_map.html 暂无更新")
 
     # 重置db_update初始状态
-    with open("scripts/config.json", "r") as f:
-        config_data = json.load(f)
-        config_data["db_update"] = False
-        with open("scripts/config.json", "w") as f:
-            json.dump(config_data, f, indent=2)
+    config = toml.load("scripts/config.toml")
+    config["notice"]["db_update"] = False
+    with open("scripts/config.toml", "w", encoding="utf-8") as f:
+        toml.dump(config, f)
     end_time = time.time()
     execution_time = round((end_time - start_time), 3)
     print("————————————————————")

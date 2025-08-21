@@ -60,18 +60,19 @@ python 版本 >=3.11.2
 ## 初始化
 
 1. clone 本项目到本地
-2. 按需修改 scripts/config.json
+2. 按需修改 scripts/config.toml
 
-```
-{
-    "Cookie": "auto create",//正常情况下无需修改。通过scripts/login.py或startTask.py来自动赋值
-    "pic_driver_path":"https://raw.gitmirror.com/{{repo}}/main/gallery/picture",//展示墙图片默认为Github仓库的文件直链。也可以在运行`python scripts/createGallery.py`后改为"./gallery/picture"，进行本地读取。如果是本地使用，需要改为./gallery/picture
-    "story_pic_link": "https://raw.gitmirror.com/{{repo}}/main/template/content", //存放明信片背面图片的路径。如果是本地使用，需要改为./template/content
-    "story_pic_type": "webp", //存放明信片背面图片的格式
-    "dbpath": "./template/data.db", //默认的数据库存放路径
-    "personal_page_link":"https://XXXX" //信息汇总页用途，填写你的github page 路径，如“https://XXX/output/sent.html”，则取地址的前半截
+```toml[settings]
+Cookie = "" # 正常情况下无需修改。通过scripts/login.py或startTask.py来自动赋值
+story_pic_type = "webp"  # 存放明信片背面图片的格式
 
-}
+[url]
+pic_driver_path = "https://raw.gitmirror.com/{{repo}}/main/gallery/picture" # 展示墙图片默认为Github仓库的文件直链。也可以修改为你自己图床的连接。如果是本地使用，需要改为`./gallery/picture`
+story_pic_link = "https://raw.gitmirror.com/{{repo}}/main/template/content" #存放明信片背面图片的路径。也可以修改为你自己图床的连接。如果是本地使用，需要改为./template/content/Postcrossing_map_generator/template/content"
+personal_page_link = "https://XXXX" # 信息汇总页用途，填写你的github page 路径，如“https://XXX/output/sent.html”，则取地址的前半截
+
+[notice]
+db_update = false # 系统默认值，无需手动修改
 ```
 
 3. 进入项目目录
@@ -80,7 +81,7 @@ python 版本 >=3.11.2
 - **删除./template 目录下的 data.db 文件**
 - **（可选）修改**：在./template/postcard_story.xlsx 中填入已收到明信片的文字、信息汇总\_template.md 可修改为你喜欢的文字描述）
 - **（可选）修改**：在 `./template/content/`目录下删除我的数据，然后拍照复制（建议扫描全能王自动切边+自动高清）已收到明信片的文字面图片到`./template/content/rawPic`目录下，可以自动转换为 webp 格式。并将图片名称命名为 ID 名称，如：`CN-XXXXXXX.webp`。
-  （本项目图片默认读取 webp 格式，如果需要修改为其他格式，需要修改./scripts/config.json 文件中的“storycontentPicType"的值，改为你需要的格式
+  （本项目图片默认读取 webp 格式，如果需要修改为其他格式，需要修改./scripts/config.toml 文件中的“story_pic_type"的值，改为你需要的格式
 - **（可选）修改/删除**：在 `./template/信息汇总_template.md/`文件的“网址备份”内容，改为你自己生成的文件链接
 
 4. 执行 `pip install -r requirements.txt安装依赖`
@@ -237,7 +238,7 @@ on:
 
 **如果你想通过 Github Page 来在线展示地图数据，可进行以下步骤**
 
-1. fork 本项目到你自己的仓库，clone 到本地后按需修改 fork 后仓库内的 scripts/config.json 内容
+1. fork 本项目到你自己的仓库，clone 到本地后按需修改 fork 后仓库内的 scripts/config.toml 内容
 2. 参考**一. 步骤（本地模式）**的步骤 1-4（注意要删除掉我的数据），在本地/通过 Github Action 生成文件
 3. 将 HTML 文件 push 到你 fork 的仓库当中/等待 Github Action 自动生成文件
 4. 参考以下截图开通 Github Page，即可访问(需要手动在链接后面增加 cluster_map.html 或 map.html)
