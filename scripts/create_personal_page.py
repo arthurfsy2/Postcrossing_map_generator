@@ -86,6 +86,7 @@ def get_calendar_list():
         year = date.strftime("%Y")  # 提取年份（YYYY）
         if year not in calendar_list:
             calendar_list.append(year)
+    calendar_list = sorted(calendar_list, reverse=True)
     return calendar_list
 
 
