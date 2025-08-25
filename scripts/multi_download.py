@@ -153,7 +153,6 @@ def get_gallery_info(card_type, account, Cookie):
                     "favorites_num": favorites_num,
                     "card_type": card_type,
                 }
-
                 insert_or_update_db(db_path, "gallery_info", item)
 
         i += 1
@@ -383,26 +382,29 @@ def calculate_avg_and_median(online_stats_data):
     with open("scripts/countryName.json", "r") as f:
         countryName = json.load(f)
     name_dict = {}
-
+    # print("online_stats_data:", online_stats_data)
     for item in online_stats_data:
-        date = item[0]
         code = item[3]
-        country = countryName[code]
-        flagEmoji = flag(code)
+        country_list_data = read_db_table(
+            db_path, "country_list", {"country_code": code}
+        )[0]
+
+        date = item[0]
+
         r_or_s = item[2]
         travel_days = item[1]
 
         if code not in name_dict:
             name_dict[code] = {
-                "name": country,
+                "name": country_list_data.get("country_name"),
                 "country_code": code,
-                "flagEmoji": flagEmoji,
+                "flagEmoji": country_list_data.get("country_name_emoji"),
                 "sent": [],
                 "received": [],
                 "sent_date": [],
                 "received_date": [],
             }
-
+            # print("name_dict[code]:", name_dict[code])
         if r_or_s == "s":
             name_dict[code]["sent"].append(travel_days)
             name_dict[code]["sent_date"].append(date)

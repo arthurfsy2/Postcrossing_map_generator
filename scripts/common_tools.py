@@ -40,6 +40,13 @@ db_path = os.path.abspath(os.path.join(BIN, "../template/postcrossing.db"))
 initialize_database(Base, db_path)
 
 
+class countryList(Base):
+    __tablename__ = "country_list"
+    country_code = Column(String, primary_key=True)
+    country_name = Column(String)
+    country_name_emoji = Column(String)
+
+
 class titleInfo(Base):
     __tablename__ = "title_info"
     card_type = Column(String, primary_key=True)
@@ -184,6 +191,14 @@ def insert_or_update_db(db_path, table_name, data):
                     if key in titleInfo.__dict__
                 }
             )
+        elif table_name == "country_list":
+            table_data = countryList(
+                **{
+                    key: value
+                    for key, value in data.items()
+                    if key in countryList.__dict__
+                }
+            )
         return table_data
 
     engine = create_engine(f"sqlite:///{db_path}")
@@ -219,6 +234,8 @@ def read_db_table(db_path, table_name, filters=None):
         query = session.query(postcardStory)
     elif table_name == "title_info":
         query = session.query(titleInfo)
+    elif table_name == "country_list":
+        query = session.query(countryList)
     if filters:
         for key, value in filters.items():
             # 使用like来进行“包含”匹配
