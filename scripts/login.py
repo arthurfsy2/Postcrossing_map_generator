@@ -1,93 +1,69 @@
-import mechanize
-import http.cookiejar
-import sys
 import re
-import json
-import os
 import argparse
 from common_tools import db_path
 from multi_download import get_account_stat
 import toml
+import requests
 
 config = toml.load("scripts/config.toml")
 Cookie = config.get("settings").get("Cookie")
 
 
 def login(account, password):
-    br = mechanize.Browser()
-    cj = http.cookiejar.LWPCookieJar()
-    br.set_cookiejar(cj)  # 关联cookies
+    session = requests.Session()
 
-    # 设置一些参数，因为是模拟客户端请求，所以要支持客户端的一些常用功能，比如gzip,referer等
-    br.set_handle_equiv(True)
-    br.set_handle_gzip(True)
-    br.set_handle_redirect(True)
-    br.set_handle_referer(True)
-    br.set_handle_robots(False)
+    # 请求登录页面以获取 CSRF 令牌
+    login_url = "https://www.postcrossing.com/login"
+    response = session.get(login_url)
 
-    br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+    # 提取 CSRF 令牌
+    csrf_token = re.search(
+        r'name="signin\[_login_csrf_token\]" value="(.*?)"', response.text
+    )
+    csrf_token_value = csrf_token.group(1) if csrf_token else None
+    # print("csrf_token_value:", csrf_token_value)
+    if not csrf_token_value:
 
-    # 这个是degbug##你可以看到他中间的执行过程，对你调试代码有帮助
-    br.set_debug_http(True)
-    # br.set_debug_redirects(True)
-    # br.set_debug_responses(True)
+        print("未找到 CSRF 令牌！")
+        return None
 
-    br.addheaders = [
-        (
-            "User-agent",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36",
-        )
-    ]  # 模拟浏览器头
+    # 设置请求头
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
+    }
 
-    # 设定登陆url
-    response = br.open("https://www.postcrossing.com/login")
-    print("--------------------")
+    # 表单数据，包括 CSRF 令牌
+    payload = {
+        "signin[username]": account,
+        "signin[password]": password,
+        "signin[_login_csrf_token]": csrf_token_value,  # 这里包含 CSRF 令牌
+        "signin[remember]": "on",
+    }
 
-    br.select_form(nr=0)  # 选择表单1，
-    br.form["signin[username]"] = account
-    br.form["signin[password]"] = password
+    # 提交表单
+    response = session.post(login_url, data=payload, headers=headers)
 
-    # 将标准输出重定向到文件
-    sys.stdout = open("log.txt", "w")
-    response = br.submit()  # 提交表单
-    # 恢复标准输出
-    sys.stdout = sys.__stdout__
+    # 检查登录是否成功
+    if response.ok:
+        cookies = session.cookies.get_dict()
+        Cookie = f"__Host-postcrossing={cookies.get('__Host-postcrossing', '')}; PostcrossingRemember={cookies.get('PostcrossingRemember', '')}"
 
-    # 读取文件内容
-    with open("log.txt", "r") as file:
-        content = file.read()
+        print("Cookie_new:", Cookie)
 
-    # 使用正则表达式提取目标字符串中的内容
-    pattern_host = r"Set-Cookie: __Host-postcrossing=(.*?);"
-    pattern_remember = r"Set-Cookie: PostcrossingRemember=(.*?);"
+        # 读取config.toml文件内容
+        config = toml.load("scripts/config.toml")
 
-    match_host = re.search(pattern_host, content)
-    match_remember = re.search(pattern_remember, content)
+        # 更新Cookie变量的值
+        config["settings"]["Cookie"] = Cookie
 
-    # 提取到的内容
-    if match_host:
-        extracted_host = match_host.group(1)
+        # 将更新后的内容写入config.toml文件
+        with open("scripts/config.toml", "w", encoding="utf-8") as f:
+            toml.dump(config, f)
+
+        return Cookie
     else:
-        extracted_host = None
         print("账号/密码错误，已退出")
-        os.remove("log.txt")
-        sys.exit()
-
-    if match_remember:
-        extracted_remember = match_remember.group(1)
-
-    Cookie = f"__Host-postcrossing={extracted_host}; PostcrossingRemember={extracted_remember}"
-    print("Cookie_new:", Cookie)
-    # 读取scripts/config.toml文件内容
-    config = toml.load("scripts/config.toml")
-
-    # 更新Cookie变量的值
-    config["settings"]["Cookie"] = Cookie
-    # 将更新后的内容写入scripts/config.toml文件
-    with open("scripts/config.toml", "w", encoding="utf-8") as f:
-        toml.dump(config, f)
-    os.remove("log.txt")
-    return Cookie
+        return None
 
 
 if __name__ == "__main__":
