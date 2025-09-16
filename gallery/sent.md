@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（寄出：197）
+title: 明信片展示墙（寄出：198）
 icon: address-card
 date: 2025-09-05
 category:
