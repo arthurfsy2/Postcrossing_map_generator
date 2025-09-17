@@ -193,12 +193,17 @@ def get_update_id(account, card_type):
     """
     实时获取该账号所有sent、received的明信片列表，获取每个postcardID的详细数据
     """
+    update_id = []
     online_data = get_online_data(account, card_type)
     online_id = [item[0] for item in online_data]
 
     local_data = read_db_table(db_path, "map_info")
     old_id = [item.get("card_id") for item in local_data]
-
+    latest_n_no_pic_id = [
+        item.get("card_id") for item in local_data if "noPic" in item.get("link")
+    ][-5:]
+    # print("latest_n_no_pic_id:", latest_n_no_pic_id)
+    # print("old_id:", old_id)
     if old_id:
 
         new_id = []
@@ -209,14 +214,19 @@ def get_update_id(account, card_type):
                 new_id.append(id)
         if len(new_id) == 0:
             print(f"数据库[map_info]：{card_type}暂无更新内容\n")
-            update_id = None
+
         else:
             print(f"数据库[map_info]：{card_type}等待更新({len(new_id)}个):{new_id}\n")
             update_id = new_id
+    if latest_n_no_pic_id:
+        print(
+            f"数据库[map_info]：{card_type} 正在检查noPic.png是否有更新 ({len(latest_n_no_pic_id)}个):{latest_n_no_pic_id}\n"
+        )
+        update_id += latest_n_no_pic_id
     else:
         # 当本地文件不存在时，则取online的postcardId作为待下载列表
         update_id = online_id
-
+    # print("update_id:", update_id)
     return update_id
 
 
@@ -326,6 +336,8 @@ def get_map_info_data(card_id, card_type):
             ),
             "card_type": card_type,
         }
+        if card_id == "CN-4049875":
+            print("item:", item)
         insert_or_update_db(db_path, "map_info", item)
         print(f"{card_type}_List:已提取{round((i+1)/(len(card_id))*100,2)}%")
 
@@ -817,3 +829,4 @@ if __name__ == "__main__":
     get_user_summary(account, Cookie)
     pic_data_check(account, Cookie)
     map_data_check(types_map)
+    # get_update_id(account, "sent")
