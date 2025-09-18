@@ -197,7 +197,7 @@ def get_update_id(account, card_type):
     online_data = get_online_data(account, card_type)
     online_id = [item[0] for item in online_data]
 
-    local_data = read_db_table(db_path, "map_info")
+    local_data = read_db_table(db_path, "map_info", {"card_type": card_type})
     old_id = [item.get("card_id") for item in local_data]
     latest_n_no_pic_id = [
         item.get("card_id") for item in local_data if "noPic" in item.get("link")
