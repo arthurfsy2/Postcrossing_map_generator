@@ -201,7 +201,7 @@ def get_update_id(account, card_type):
     old_id = [item.get("card_id") for item in local_data]
     latest_n_no_pic_id = [
         item.get("card_id") for item in local_data if "noPic" in item.get("link")
-    ][-5:]
+    ][-3:]
     # print("latest_n_no_pic_id:", latest_n_no_pic_id)
     # print("old_id:", old_id)
     if old_id:
@@ -213,21 +213,14 @@ def get_update_id(account, card_type):
             if id not in old_id:
                 new_id.append(id)
         if len(new_id) == 0:
-            print(f"数据库[map_info]：{card_type}暂无更新内容\n")
+            print(f"数据库[map_info]：{card_type}暂无新ID\n")
 
         else:
             print(f"数据库[map_info]：{card_type}等待更新({len(new_id)}个):{new_id}\n")
             update_id = new_id
-    if latest_n_no_pic_id:
-        print(
-            f"数据库[map_info]：{card_type} 正在检查noPic.png是否有更新 ({len(latest_n_no_pic_id)}个):{latest_n_no_pic_id}\n"
-        )
-        update_id += latest_n_no_pic_id
-    else:
-        # 当本地文件不存在时，则取online的postcardId作为待下载列表
-        update_id = online_id
-    # print("update_id:", update_id)
-    return update_id
+        print(f"{'-'*50}")
+
+    return update_id, latest_n_no_pic_id
 
 
 def convert_to_utc(zoneNum, card_type, time_str):
@@ -248,10 +241,8 @@ def convert_to_utc(zoneNum, card_type, time_str):
     return time_utc_str
 
 
-def get_map_info_data(card_id, card_type):
-
-    for i, id in enumerate(card_id):
-
+def get_map_info_data(card_id, card_type, mode="normal"):
+    def create_item_data(id):
         url = f"https://www.postcrossing.com/postcards/{id}"
         response = requests.get(url)
         pattern = r"var senderLocation\s+=\s+new L.LatLng\(([-\d.]+), ([-\d.]+)\);\s+var receiverLocation\s+=\s+new L.LatLng\(([-\d.]+), ([-\d.]+)\);"
@@ -336,10 +327,22 @@ def get_map_info_data(card_id, card_type):
             ),
             "card_type": card_type,
         }
-        if card_id == "CN-4049875":
-            print("item:", item)
-        insert_or_update_db(db_path, "map_info", item)
-        print(f"{card_type}_List:已提取{round((i+1)/(len(card_id))*100,2)}%")
+        return item
+
+    for i, id in enumerate(card_id):
+        item = create_item_data(id)
+        if mode == "normal":
+            insert_or_update_db(db_path, "map_info", item)
+            print(f"{card_type}_List:已提取{round((i+1)/(len(card_id))*100,2)}%")
+        elif mode == "update_no_pic":
+            if "noPic" in item.get("link"):
+                print(f"{item.get("card_id")}依然未上传图片")
+            else:
+                config["notice"]["db_update"] = True
+                with open("scripts/config.toml", "w", encoding="utf-8") as f:
+                    toml.dump(config, f)
+                print(f"{item.get("card_id")}新上传图片：", item.get("link"))
+                insert_or_update_db(db_path, "map_info", item)
 
 
 # 下载展示墙的图片
@@ -590,9 +593,9 @@ def get_user_stat(account):
 
 def multi_task(card_type):
 
-    card_id = get_update_id(account, card_type)
+    card_id, latest_n_no_pic_id = get_update_id(account, card_type)
+
     if card_id:
-        config = toml.load("scripts/config.toml")
         config["notice"]["db_update"] = True
         with open("scripts/config.toml", "w", encoding="utf-8") as f:
             toml.dump(config, f)
@@ -626,8 +629,9 @@ def multi_task(card_type):
             thread.join()
 
         print(f"{card_type}的update List已提取完成！\n")
-    else:
-        pass
+    elif latest_n_no_pic_id:
+        print(f"{card_type}尝试检索未上传图片的内容")
+        get_map_info_data(latest_n_no_pic_id, card_type, "update_no_pic")
 
 
 # 设置多线程下载图片
