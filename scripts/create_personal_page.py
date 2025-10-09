@@ -222,6 +222,10 @@ def get_traveling_id(account, card_type, Cookie):
         country_stats_data = read_db_table(
             db_path, "country_stats", {"country_code": stats[3]}
         )
+        country_list = read_db_table(
+            db_path, "country_list", {"country_code": stats[3]}
+        )
+
         if country_stats_data:
             sent_avg = country_stats_data[0].get("sent_avg")
         # print("country_stats_data:", country_stats_data)
@@ -235,7 +239,7 @@ def get_traveling_id(account, card_type, Cookie):
         item = {
             "card_id": f"<a href='{baseurl}/travelingpostcard/{stats[0]}' target='_blank'>{stats[0]}</a>",
             "sender": f"<a href='{baseurl}/user/{stats[1]}' target='_blank'>{stats[1]}</a>",
-            "country_name": f"{country_stats_data[0].get("name")} {country_stats_data[0].get("flag_emoji")}",
+            "country_name": f"{country_list[0].get("country_name")} {country_list[0].get("country_name_emoji")}",
             "sent_local_date": get_local_date(stats[0][0:2], stats[4]),
             "distance": f'{format(stats[6], ",")}',
             "traveling_days": traveling_days,

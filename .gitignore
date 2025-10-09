@@ -6,3 +6,4 @@ a.py
 scripts/__pycache__/*
 output/html
 scripts/chatgpt_tool.py
+debug.log
