@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：199）
+title: 明信片展示墙（寄出：200）
 icon: address-card
-date: 2025-09-20
+date: 2025-09-27
 category:
   - Arthur
 tag:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2025(60)
+### 2025(61)
+
+[CN-4104525](https://www.postcrossing.com/postcards/CN-4104525) 
+>寄往 [Tecsomane](https://www.postcrossing.com/user/Tecsomane) 🇺🇸
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/08/25 11:50 (当地)
+> 📥 [U.S.A.](https://www.bing.com/maps/?cp=46.28569~-119.28446&lvl=12.0&setlang=zh-Hans) 2025/09/27 15:29 (当地)
+ 📏 10,659 | ⏱ 34
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/jxfs5ys2gthf0zoboxcjv8p6shsg93jq.jpg)
 
 [CN-4095547](https://www.postcrossing.com/postcards/CN-4095547) 
 >寄往 [Jentea](https://www.postcrossing.com/user/Jentea) 🇳🇱
