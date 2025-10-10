@@ -298,7 +298,10 @@ def get_country_city(latitude, longitude, timestamp):
     url = f"https://timezones.datasette.io/timezones/by_point.json?longitude={longitude}&latitude={latitude}"
     response = requests.get(url=url)
     if response:
-        country_city = response.json()["rows"][0][0]
+        try:
+            country_city = response.json()["rows"][0][0]
+        except:
+            print("response:", response)
     return country_city
 
 
