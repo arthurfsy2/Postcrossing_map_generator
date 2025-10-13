@@ -2,8 +2,8 @@ card
 Thank
 postcard
 Hello Arthur
-stamp
 much
+stamp
 love
 Hello
 Greeting
@@ -30,28 +30,28 @@ Happy
 cute
 enjoy
 good
-Hi
 lot
+Hi
 Dear Arthur
 China
 one
 Take care
 city
 wonderful
+well
 Hi Arthur
 today
 now
 send
-well
 beautiful postcard
 summer
 world
 coffee
 Xiaoxiao
+lovely
 Arthur Greetings
 work
 life
-lovely
 country
 Russia
 will
@@ -61,11 +61,11 @@ got
 friend
 postcrossing
 bike
+lovely postcard
 know
 Finland
 nice day
 wonderful postcard
-lovely postcard
 Wishing
 see
 Feng
@@ -97,4 +97,4 @@ peace
 called
 long
 small
-sunny
+state
