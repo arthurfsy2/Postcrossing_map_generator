@@ -336,7 +336,7 @@ order: 5
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/07/30 11:37 (当地)
 > 📥 [Taiwan](https://www.bing.com/maps/?cp=22.67135~120.48814&lvl=12.0&setlang=zh-Hans) 2024/09/09 20:21 (当地)
  📏 641 | ⏱ 41
->点赞人数：**3**
+>点赞人数：**2**
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/99s1ecw05jt40kfe0ww9160e6di288x9.jpg)
 
