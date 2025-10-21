@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：221）
+title: 明信片展示墙（收到：224）
 icon: address-card
-date: 2025-08-24
+date: 2025-10-21
 category:
   - Arthur
 tag:
@@ -147,7 +147,34 @@ const option = {
 
 :::
 
-### 2025(62)
+### 2025(65)
+
+[TH-369455](https://www.postcrossing.com/postcards/TH-369455) 
+>来自 [timetoday](https://www.postcrossing.com/user/timetoday) 🇹🇭
+> 📤 [Thailand](https://www.bing.com/maps/?cp=13.75398~100.50144&lvl=12.0&setlang=zh-Hans) 2025/10/09 09:09 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/10/21 21:53 (当地)
+ 📏 1,748 | ⏱ 12
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/y8f2hlndxiiqdthti95skr9tfafzcc7m.jpg)
+
+[JP-2320540](https://www.postcrossing.com/postcards/JP-2320540) 
+>来自 [yukah](https://www.postcrossing.com/user/yukah) 🇯🇵
+> 📤 [Japan](https://www.bing.com/maps/?cp=35.43333~139.65&lvl=12.0&setlang=zh-Hans) 2025/10/09 05:48 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/10/21 21:46 (当地)
+ 📏 2,843 | ⏱ 13
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/z1lussnpth7tqh8x6ukzhcneus4ftmq0.jpg)
+
+[JP-2320820](https://www.postcrossing.com/postcards/JP-2320820) 
+>来自 [hakop](https://www.postcrossing.com/user/hakop) 🇯🇵
+> 📤 [Japan](https://www.bing.com/maps/?cp=35.43333~139.65&lvl=12.0&setlang=zh-Hans) 2025/10/09 18:57 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/10/21 21:45 (当地)
+ 📏 2,843 | ⏱ 12
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/jypj17whnopvuvholjd5wjbna9dehna7.jpg)
 
 [NL-6019290](https://www.postcrossing.com/postcards/NL-6019290) 
 >来自 [LiesenWim](https://www.postcrossing.com/user/LiesenWim) 🇳🇱
