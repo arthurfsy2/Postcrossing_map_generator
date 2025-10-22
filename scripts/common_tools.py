@@ -294,13 +294,13 @@ def translate(apikey, sentence, src_lan, tgt_lan):
 
 
 def get_country_city(latitude, longitude, timestamp):
-
+    country_city = None  # 初始化变量
     url = f"https://timezones.datasette.io/timezones/by_point.json?longitude={longitude}&latitude={latitude}"
     response = requests.get(url=url)
     if response:
         try:
             country_city = response.json()["rows"][0][0]
-        except:
+        except Exception as e:
             print("response:", response)
     return country_city
 
