@@ -4,10 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 */1 * * *"
-  push:
-    branches:
-      - main
-
+  
 env:
   blog_path: "./src/Arthur/postcrossing"
   blog_repo: "arthurfsy2/arthurfsy2.github.io"

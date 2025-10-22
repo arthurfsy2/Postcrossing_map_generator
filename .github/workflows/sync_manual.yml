@@ -1,0 +1,96 @@
+name: 手动更新图片和md文件
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  blog_path: "./src/Arthur/postcrossing"
+  blog_repo: "arthurfsy2/arthurfsy2.github.io"
+  PUSH_TO_GITHUB: true
+
+jobs:
+  sync:
+    name: 同步
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set Node.js max memory limit
+        run: node --max-old-space-size=4096
+
+      - name: 设置Python版本
+        uses: actions/setup-python@main
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: "requirements.txt"
+
+      - name: 安装依赖
+        run: |
+          pip install -r requirements.txt
+      
+      - name: 更新gallery
+        run: |
+          python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
+      
+      - name: 更新信息汇总
+        run: |
+          python scripts/create_personal_page.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
+      
+      - name: 删除缓存文件
+        run: rm -rf scripts/__pycache__/
+
+      - name: 提交本仓库更改
+        id: push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git diff-index --quiet HEAD || git commit -m '已更新数据'
+          git push || echo "nothing to push"
+
+      # 处理博客仓库同步
+      - name: Checkout 博客仓库
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ env.blog_repo }}
+          path: blog-repo
+          token: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          fetch-depth: 1
+          ref: main
+
+      - name: 复制.md文件到博客仓库
+        run: |
+          # 创建目标目录
+          mkdir -p "blog-repo/${{ env.blog_path }}"
+          # 只复制gallery目录下的.md文件
+          cp ./gallery/*.md "blog-repo/${{ env.blog_path }}/"
+          echo "Markdown文件已复制到博客仓库"
+
+      - name: 检查是否有文件变更
+        id: check_changes
+        run: |
+          cd blog-repo
+          if git diff --quiet; then
+            echo "没有文件变更"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "检测到文件变更"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 提交并推送到博客仓库
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          cd blog-repo
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m '自动同步postcrossing数据（手动）'
+          git push
