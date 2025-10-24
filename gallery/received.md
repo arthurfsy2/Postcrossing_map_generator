@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：224）
+title: 明信片展示墙（收到：225）
 icon: address-card
-date: 2025-10-21
+date: 2025-10-24
 category:
   - Arthur
 tag:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2025(65)
+### 2025(66)
+
+[DE-15911339](https://www.postcrossing.com/postcards/DE-15911339) 
+>来自 [CaptUebermorgen](https://www.postcrossing.com/user/CaptUebermorgen) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=52.52437~13.41053&lvl=12.0&setlang=zh-Hans) 2025/10/08 22:49 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/10/24 22:02 (当地)
+ 📏 8,731 | ⏱ 16
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/ketpctb8ui8g01zzz3shbuw46s7adkor.jpg)
 
 [TH-369455](https://www.postcrossing.com/postcards/TH-369455) 
 >来自 [timetoday](https://www.postcrossing.com/user/timetoday) 🇹🇭
