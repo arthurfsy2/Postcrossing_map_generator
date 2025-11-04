@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：228）
+title: 明信片展示墙（收到：231）
 icon: address-card
-date: 2025-10-29
+date: 2025-11-04
 category:
   - Arthur
 tag:
@@ -147,7 +147,34 @@ const option = {
 
 :::
 
-### 2025(69)
+### 2025(72)
+
+[SK-361016](https://www.postcrossing.com/postcards/SK-361016) 
+>来自 [mkubiatko](https://www.postcrossing.com/user/mkubiatko) 🇸🇰
+> 📤 [Slovakia](https://www.bing.com/maps/?cp=49.43503~18.78895&lvl=12.0&setlang=zh-Hans) 2025/10/08 22:47 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/11/04 21:16 (当地)
+ 📏 8,499 | ⏱ 27
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/x554jgqsin2nioqyi57e1u4c2c46suur.jpg)
+
+[DE-15911318](https://www.postcrossing.com/postcards/DE-15911318) 
+>来自 [anke1465](https://www.postcrossing.com/user/anke1465) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=51.05089~13.73832&lvl=12.0&setlang=zh-Hans) 2025/10/08 22:41 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/11/04 21:15 (当地)
+ 📏 8,772 | ⏱ 27
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/k7jgx0ifjlehxap2lruvqgsvtfa0g5p9.jpg)
+
+[US-11813524](https://www.postcrossing.com/postcards/US-11813524) 
+>来自 [saracoulter](https://www.postcrossing.com/user/saracoulter) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=39.82894~-84.89024&lvl=12.0&setlang=zh-Hans) 2025/10/08 16:48 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/11/04 21:13 (当地)
+ 📏 12,799 | ⏱ 27
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/9vs65yd1carn0szlj1h3cpcws7fvrvvg.jpg)
 
 [US-11813520](https://www.postcrossing.com/postcards/US-11813520) 
 >来自 [DixieLou](https://www.postcrossing.com/user/DixieLou) 🇺🇸
