@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（我收到的赞：93）
+title: 明信片展示墙（我收到的赞：92）
 icon: address-card
 date: 2025-09-20
 category:
