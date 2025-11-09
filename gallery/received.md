@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：232）
+title: 明信片展示墙（收到：237）
 icon: address-card
 date: 2025-11-09
 category:
@@ -147,7 +147,43 @@ const option = {
 
 :::
 
-### 2025(73)
+### 2025(77)
+
+[US-11813517](https://www.postcrossing.com/postcards/US-11813517) 
+>来自 [Tundra_dust](https://www.postcrossing.com/user/Tundra_dust) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=47.05606~-93.91607&lvl=12.0&setlang=zh-Hans) 2025/10/08 15:45 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/11/09 22:23 (当地)
+ 📏 11,775 | ⏱ 32
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/mem8b7bn6n202oe25y07c9anm72n2y3e.jpg)
+
+[US-11813515](https://www.postcrossing.com/postcards/US-11813515) 
+>来自 [HeyLittleRobby](https://www.postcrossing.com/user/HeyLittleRobby) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=41.37477~-83.65132&lvl=12.0&setlang=zh-Hans) 2025/10/08 16:44 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/11/09 22:22 (当地)
+ 📏 12,670 | ⏱ 32
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/hrr0mbdvk4xerg0m3cs025p10akgkain.jpg)
+
+[DE-15928128](https://www.postcrossing.com/postcards/DE-15928128) 
+>来自 [moniwo](https://www.postcrossing.com/user/moniwo) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=50.23085~7.58992&lvl=12.0&setlang=zh-Hans) 2025/10/13 18:56 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/11/09 22:21 (当地)
+ 📏 9,204 | ⏱ 27
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/zy87i8ikwngsb35ha0b41go7dino1j8t.jpg)
+
+[TW-3924258](https://www.postcrossing.com/postcards/TW-3924258) 
+>来自 [Milo](https://www.postcrossing.com/user/Milo) 🇹🇼
+> 📤 [Taiwan](https://www.bing.com/maps/?cp=23.91566~120.66387&lvl=12.0&setlang=zh-Hans) 2025/10/22 12:07 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/11/09 22:20 (当地)
+ 📏 673 | ⏱ 18
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/f4supn8zz40axrkbxmv7pop2482zdhqd.jpg)
 
 [MY-702063](https://www.postcrossing.com/postcards/MY-702063) 
 >来自 [carolinechia](https://www.postcrossing.com/user/carolinechia) 🇲🇾
