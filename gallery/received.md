@@ -147,7 +147,7 @@ const option = {
 
 :::
 
-### 2025(77)
+### 2025(78)
 
 [US-11813517](https://www.postcrossing.com/postcards/US-11813517) 
 >来自 [Tundra_dust](https://www.postcrossing.com/user/Tundra_dust) 🇺🇸
@@ -193,6 +193,15 @@ const option = {
 
 
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/um2yim9rmz1v72b6ky2gno85dxdbclt3.jpg)
+
+[TW-3918550](https://www.postcrossing.com/postcards/TW-3918550) 
+>来自 [MacArthur](https://www.postcrossing.com/user/MacArthur) 🇹🇼
+> 📤 [Taiwan](https://www.bing.com/maps/?cp=24.80361~120.96861&lvl=12.0&setlang=zh-Hans) 2025/10/09 10:32 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/11/09 21:26 (当地)
+ 📏 729 | ⏱ 31
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/x37jfyds75999cz402cwga3aktq43tz7.jpg)
 
 [SK-361016](https://www.postcrossing.com/postcards/SK-361016) 
 >来自 [mkubiatko](https://www.postcrossing.com/user/mkubiatko) 🇸🇰
