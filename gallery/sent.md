@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：201）
+title: 明信片展示墙（寄出：202）
 icon: address-card
-date: 2025-11-15
+date: 2025-11-20
 category:
   - Arthur
 tag:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2025(62)
+### 2025(63)
+
+[CN-4124791](https://www.postcrossing.com/postcards/CN-4124791) 
+>寄往 [jokerr22](https://www.postcrossing.com/user/jokerr22) 🇦🇹
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/09/22 13:13 (当地)
+> 📥 [Austria](https://www.bing.com/maps/?cp=46.93848~16.14158&lvl=12.0&setlang=zh-Hans) 2025/11/20 19:25 (当地)
+ 📏 8,779 | ⏱ 60
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/e9x2adddf9xoo9r3qzz3awp1kqcz3gxo.jpg)
 
 [CN-4124797](https://www.postcrossing.com/postcards/CN-4124797) 
 >寄往 [ljbri](https://www.postcrossing.com/user/ljbri) 🇳🇿
