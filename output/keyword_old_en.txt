@@ -7,22 +7,22 @@ stamp
 Greeting
 love
 Hello
-Arthur Thank
 hope
+Arthur Thank
 best
-nice
 wish
+nice
 live
 Best wishes
+Happy Postcrossing
 name
 beautiful
-Happy Postcrossing
 day
 time
-great
 really
-daughter
+great
 many
+daughter
 Germany
 year
 family
@@ -34,26 +34,26 @@ China
 good
 lot
 Dear Arthur
-Take care
 city
 well
+Take care
 Hi Arthur
-send
 Xiaoxiao
 wonderful
+send
 today
-now
 Hi
 beautiful postcard
+lovely
 world
 work
 coffee
 summer
-lovely
-Arthur Greetings
+now
 country
-life
 will
+Arthur Greetings
+life
 Russia
 friend
 May
@@ -62,6 +62,8 @@ years old
 postcrossing
 got
 little
+USA
+cycling
 bike
 nice day
 Hello Siyuan
@@ -70,24 +72,25 @@ see
 know
 Finland
 m
-USA
-cycling
 wonderful postcard
 Wishing
 Feng
 want
 visit
+cat
 look
 interesting
 sent
 sending
-cat
 amazing
 received
+animal
 Happy New
+Good luck
 peace
 Dear
 north
+reading
 south
 long
 mailbox
@@ -95,6 +98,3 @@ small
 trip
 ride
 sunny
-Japan
-animal
-km
