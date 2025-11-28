@@ -8,6 +8,7 @@ import argparse
 from urllib import parse, request
 import pytz
 from datetime import datetime, timedelta
+from timezonefinderL import TimezoneFinder
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy import (
     create_engine,
@@ -293,36 +294,19 @@ def translate(apikey, sentence, src_lan, tgt_lan):
     return result
 
 
-def get_country_city(latitude, longitude, timestamp):
-    country_city = None  # 初始化变量
-    url = f"https://timezones.datasette.io/timezones/by_point.json?longitude={longitude}&latitude={latitude}"
-    response = requests.get(url=url)
-    if response:
-        try:
-            country_city = response.json()["rows"][0][0]
-        except Exception as e:
-            print("response:", response)
-    return country_city
-
-
 def get_local_date(coors, utc_date):
     latitude = coors[0]
     longitude = coors[1]
-    time_utc = datetime.strptime(utc_date, "%Y/%m/%d %H:%M")
-    timestamp = int(time_utc.timestamp())
-    country_city = get_country_city(latitude, longitude, timestamp)
     # 根据国家城市英文名称获取对应的时区
-    try:
-        timezone = pytz.timezone(country_city)
-    except pytz.UnknownTimeZoneError:
-        return "Invalid country city"
-
+    tf = TimezoneFinder()
+    timezone_str = tf.timezone_at(lng=longitude, lat=latitude)
     # 将输入的UTC日期转换为datetime对象
     input_format = "%Y/%m/%d %H:%M"
     utc_datetime = datetime.strptime(utc_date, input_format)
 
     # 将UTC时间转换为指定时区的本地时间
-    local_datetime = pytz.utc.localize(utc_datetime).astimezone(timezone)
+    timezone_obj = pytz.timezone(timezone_str)
+    local_datetime = pytz.utc.localize(utc_datetime).astimezone(timezone_obj)
 
     # 提取本地日期
     local_date = local_datetime.date()
