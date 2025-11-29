@@ -150,7 +150,7 @@ const option = {
 ### 2025(80)
 
 [US-11813528](https://www.postcrossing.com/postcards/US-11813528) 
->来自 [twinsoniclab](https://www.postcrossing.com/user/twinsoniclab) 🇺🇸
+>来自 [LDSN57](https://www.postcrossing.com/user/LDSN57) 🇺🇸
 > 📤 [U.S.A.](https://www.bing.com/maps/?cp=42.32652~-122.87559&lvl=12.0&setlang=zh-Hans) 2025/10/08 13:49 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/11/25 10:23 (当地)
  📏 10,725 | ⏱ 47
