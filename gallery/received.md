@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：239）
+title: 明信片展示墙（收到：240）
 icon: address-card
-date: 2025-11-25
+date: 2025-12-01
 category:
   - Arthur
 tag:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2025(80)
+### 2025(81)
+
+[US-11847931](https://www.postcrossing.com/postcards/US-11847931) 
+>来自 [Moongroovy](https://www.postcrossing.com/user/Moongroovy) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=42.43933~-123.33067&lvl=12.0&setlang=zh-Hans) 2025/10/21 20:17 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/12/01 19:15 (当地)
+ 📏 10,688 | ⏱ 40
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/1kdt986ci5giya5c84fmvxq60s92cbpe.jpg)
 
 [US-11813528](https://www.postcrossing.com/postcards/US-11813528) 
 >来自 [LDSN57](https://www.postcrossing.com/user/LDSN57) 🇺🇸
