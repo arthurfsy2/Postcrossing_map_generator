@@ -681,7 +681,7 @@ const option = {
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/oeh2sle1t8517lrqhcf0ic5j3g834wg7.jpg)
 
 [CN-3914596](https://www.postcrossing.com/postcards/CN-3914596) 
->寄往 [Amillisyn](https://www.postcrossing.com/user/Amillisyn) 🇩🇪
+>寄往 [amillisyn](https://www.postcrossing.com/user/amillisyn) 🇩🇪
 > 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/12/18 17:35 (当地)
 > 📥 [Germany](https://www.bing.com/maps/?cp=52.37052~9.73322&lvl=12.0&setlang=zh-Hans) 2025/01/11 12:04 (当地)
  📏 8,966 | ⏱ 24
