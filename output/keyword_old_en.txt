@@ -14,10 +14,10 @@ wish
 nice
 live
 Best wishes
-Happy Postcrossing
-name
 beautiful
+Happy Postcrossing
 day
+name
 time
 really
 great
@@ -26,12 +26,12 @@ daughter
 Germany
 year
 family
-cute
 Happy
+cute
 enjoy
 one
-China
 good
+China
 lot
 Dear Arthur
 city
@@ -40,11 +40,11 @@ Take care
 Hi Arthur
 Xiaoxiao
 wonderful
-send
 today
+send
 Hi
-beautiful postcard
 lovely
+beautiful postcard
 world
 work
 coffee
@@ -95,6 +95,6 @@ south
 long
 mailbox
 small
+dog
 trip
 ride
-sunny
