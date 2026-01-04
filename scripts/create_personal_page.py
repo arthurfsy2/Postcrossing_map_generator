@@ -178,23 +178,42 @@ def read_story_db(db_path):
 # 实时获取该账号所有sent、received的明信片列表，获取每个postcardID的详细数据
 
 
-def get_traveling_id(account, card_type, Cookie):
+def get_traveling_id(account, Cookie):
+    import brotli  # 需要先安装
+
     headers = {
-        "Host": "www.postcrossing.com",
-        "X-Requested-With": "XMLHttpRequest",
-        "Sec-Fetch-Site": "same-origin",
-        "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-        "Accept-Encoding": "gzip, deflate",
-        "Sec-Fetch-Mode": "cors",
-        "Accept": "application/json, text/javascript, */*; q=0.01",
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0.1 Mobile/15E148 Safari/604.1",
-        "Connection": "keep-alive",
-        "Referer": f"https://www.postcrossing.com/user/{account}/{card_type}",
-        "Cookie": Cookie,
-        "Sec-Fetch-Dest": "empty",
+        "authority": "www.postcrossing.com",
+        "method": "GET",
+        "path": f"/user/{account}/data/traveling",
+        "scheme": "https",
+        "accept": "application/json, text/javascript, */*; q=0.01",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+        "cookie": Cookie,
+        "referer": f"https://www.postcrossing.com/user/{account}/traveling",
+        "sec-ch-ua": '"Microsoft Edge";v="143", "Chromium";v="143", "Not A(Brand";v="24"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Windows"',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0",
+        "x-requested-with": "XMLHttpRequest",
     }
-    url = f"https://www.postcrossing.com/user/{account}/data/{card_type}"
-    response = requests.get(url, headers=headers).json()
+
+    # 使用 Session 来管理请求
+    with requests.Session() as session:
+        session.headers.update(headers)
+        url = f"https://www.postcrossing.com/user/{account}/data/traveling"
+        response = session.get(url)
+
+        if response.status_code == 200:
+            # 检查是否需要手动解压
+            content = response.content
+            json_str = content.decode("utf-8")  # 或者 'latin-1' 如果 utf-8 不行
+            response = json.loads(json_str)
+            # print("response:", response)
+
     expiredCount = sum(1 for item in response if item[7] > 60)
     travelingCount = len(response)
     content = sorted(response, key=lambda x: x[7])
@@ -227,8 +246,9 @@ def get_traveling_id(account, card_type, Cookie):
         )
 
         if country_stats_data:
-            sent_avg = country_stats_data[0].get("sent_avg")
-        # print("country_stats_data:", country_stats_data)
+            sent_avg = country_stats_data[0].get("sent_avg", 0)
+        if not sent_avg:
+            sent_avg = 0
         if int(stats[7]) >= 60:
             traveling_days = f'<span style="color: red;">{stats[7]}</span>'
         elif int(stats[7]) > int(sent_avg):
@@ -248,10 +268,10 @@ def get_traveling_id(account, card_type, Cookie):
         extra_info.append(item)
 
     html_content = card_type_template.render(
-        card_type=card_type, content=extra_info, baseurl=baseurl
+        card_type="traveling", content=extra_info, baseurl=baseurl
     )
 
-    with open(f"./output/{card_type}.html", "w", encoding="utf-8") as file:
+    with open(f"./output/traveling.html", "w", encoding="utf-8") as file:
         file.write(html_content)
     return travelingCount, expiredCount
 
@@ -327,7 +347,7 @@ def create_register_info():
 
     countryNum = get_user_sheet("country_stats")
     countries = f"{countryNum}/248 [{round(countryNum/248*100,2)}%]"
-    travelingNum, expiredNum = get_traveling_id(account, "traveling", Cookie)
+    travelingNum, expiredNum = get_traveling_id(account, Cookie)
     traveling = f"{travelingNum} [过期：{expiredNum}]"
     # 创建HTML内容
     item = read_db_table(db_path, "user_summary")[0]
