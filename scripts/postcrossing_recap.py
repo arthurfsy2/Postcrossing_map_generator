@@ -68,14 +68,31 @@ def get_year_record(year, card_type):
         if item.get(countries_key) is not None
     ]
     counts = Counter(countries)
-    max_count = max(counts.values())
+    max_count = max(counts.values()) if counts else 0
     max_card_countries = [
         country for country, count in counts.items() if count == max_count
     ]
     max_card_country = " | ".join(max_card_countries)
     sum_distance = get_records(year_data, "distance", "sum")
-    if card_type == "received":
-        time_records = sorted(year_data, key=lambda x: int(x["travel_days"]))
+    time_records = sorted(year_data, key=lambda x: int(x["travel_days"]))
+
+    if not time_records:
+
+        item = {
+            "num": 0,
+            "nearest_distance": 0,
+            "longest_distance": 0,
+            "nearest_country": 0,
+            "nearest_country_flag_emoji": 0,
+            "longest_country": 0,
+            "longest_country_flag_emoji": 0,
+            "max_card_country": 0,
+            # "max_card_flag_emoji": max_card_flag_emoji,
+            "sum_distance": 0,
+        }
+        return item
+    elif card_type == "received":
+
         fast_record = time_records[0]
         slowest_record = time_records[-1]
 
@@ -105,7 +122,7 @@ def get_year_record(year, card_type):
             # "max_card_flag_emoji": max_card_flag_emoji,
             "sum_distance": sum_distance,
         }
-    if card_type == "sent":
+    elif card_type == "sent":
         distance_records = sorted(year_data, key=lambda x: int(x["distance"]))
         nearest_record = distance_records[0]
 
