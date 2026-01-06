@@ -276,7 +276,7 @@ def get_traveling_id(account, Cookie):
             "sent_avg": f"{sent_avg}",
         }
         extra_info.append(item)
-    print("extra_info:", extra_info)
+    # print("extra_info:", extra_info)
     html_content = card_type_template.render(
         card_type="traveling", content=extra_info, baseurl=baseurl
     )
