@@ -9,6 +9,8 @@ from jieba import analyse
 from wordcloud import WordCloud
 from opencc import OpenCC
 import requests
+import time
+import math
 
 # import emoji
 import pycountry
@@ -178,6 +180,19 @@ def read_story_db(db_path):
 # 实时获取该账号所有sent、received的明信片列表，获取每个postcardID的详细数据
 
 
+def calculate_days_difference(other_timestamp, sent_avg):
+
+    current_timestamp = int(time.time())  # 当前时间戳
+    traveled_days = math.floor((current_timestamp - other_timestamp) / 86400)
+    if traveled_days >= 60:
+        traveled_days_text = f'<span style="color: red;">{traveled_days}（过期）</span>'
+    elif traveled_days > int(sent_avg):
+        traveled_days_text = f'<span style="color: orange;">{traveled_days}</span>'
+    else:
+        traveled_days_text = f'<span style="color: green;">{traveled_days}</span>'
+    return traveled_days_text
+
+
 def get_traveling_id(account, Cookie):
     import brotli  # 需要先安装
 
@@ -249,12 +264,7 @@ def get_traveling_id(account, Cookie):
             sent_avg = country_stats_data[0].get("sent_avg", 0)
         if not sent_avg:
             sent_avg = 0
-        if int(stats[7]) >= 60:
-            traveling_days = f'<span style="color: red;">{stats[7]}</span>'
-        elif int(stats[7]) > int(sent_avg):
-            traveling_days = f'<span style="color: orange;">{stats[7]}</span>'
-        else:
-            traveling_days = f'<span style="color: green;">{stats[7]}</span>'
+        traveling_days = calculate_days_difference(stats[4], sent_avg)
 
         item = {
             "card_id": f"<a href='{baseurl}/travelingpostcard/{stats[0]}' target='_blank'>{stats[0]}</a>",
@@ -266,7 +276,7 @@ def get_traveling_id(account, Cookie):
             "sent_avg": f"{sent_avg}",
         }
         extra_info.append(item)
-
+    print("extra_info:", extra_info)
     html_content = card_type_template.render(
         card_type="traveling", content=extra_info, baseurl=baseurl
     )
