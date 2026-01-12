@@ -7,16 +7,16 @@ stamp
 Greeting
 love
 Hello
-hope
 Arthur Thank
+hope
 best
 wish
 nice
 live
 Best wishes
 beautiful
-Happy Postcrossing
 day
+Happy Postcrossing
 name
 time
 really
@@ -34,52 +34,54 @@ good
 China
 lot
 Dear Arthur
+Hi Arthur
 city
 well
 Take care
-Hi Arthur
 Xiaoxiao
-wonderful
 today
 send
 Hi
 lovely
 beautiful postcard
 world
+summer
 work
 coffee
-summer
-now
 country
+now
 will
 Arthur Greetings
 life
-Russia
-friend
 May
 New Year
+Russia
+wonderful
+friend
 years old
 postcrossing
 got
+nice day
 little
 USA
 cycling
 bike
-nice day
 Hello Siyuan
 lovely postcard
 see
 know
 Finland
 m
+visit
+look
 wonderful postcard
 Wishing
+interesting
 Feng
 want
-visit
 cat
-look
-interesting
+Peace
+reading
 sent
 sending
 amazing
@@ -87,10 +89,8 @@ received
 animal
 Happy New
 Good luck
-peace
 Dear
 north
-reading
 south
 long
 mailbox
