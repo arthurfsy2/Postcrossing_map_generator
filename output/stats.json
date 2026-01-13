@@ -880,5 +880,23 @@
     "received_date_history": "[1755501209]",
     "sent_date_first": null,
     "received_date_first": "2025/08/18"
+  },
+  {
+    "name": "Serbia",
+    "country_code": "RS",
+    "flag_emoji": "🇷🇸",
+    "value": 1,
+    "sent_num": 0,
+    "received_num": 1,
+    "sent_avg": null,
+    "received_avg": 96,
+    "sent_median": null,
+    "received_median": 96,
+    "sent_history": "[]",
+    "received_history": "[96]",
+    "sent_date_history": "[]",
+    "received_date_history": "[1768288477]",
+    "sent_date_first": null,
+    "received_date_first": "2026/01/13"
   }
 ]
