@@ -1,82 +1,29 @@
-name: 清理 Workflow 历史
+name: 清理 Workflow Runs
 
 on:
   schedule:
-    - cron: '0 0 * * 0'  # 每周日凌晨运行
-  workflow_dispatch:  # 支持手动触发
+    - cron: '0 3 * * 0'  # 每周日凌晨3点
+  workflow_dispatch:
 
 jobs:
-  cleanup:
+  delete-workflow-runs:
     runs-on: ubuntu-latest
     steps:
-      - name: 运行清理脚本
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # 安装依赖
-          pip install requests
+      - name: 删除旧的 workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          # 保留最近的数量
+          retain_days: 7
+          retain_minimum_runs: 20
+          # 或者指定保留数量
+          # keep_last_runs: 50
           
-          # 运行清理脚本
-          python << 'EOF'
-          import requests
-          import os
-          import time
+          # 可选：删除特定 workflow 的 runs
+          # workflow_file_name: main.yml
           
-          token = ${{ secrets.PERSONAL_GITHUB_TOKEN }}
-          owner = "arthurfsy2"
-          repo = "Postcrossing_map_generator"
-          
-          headers = {
-              'Authorization': f'token {token}',
-              'Accept': 'application/vnd.github.v3+json'
-          }
-          
-          # 只保留最近 50 条记录
-          keep_count = 50
-          
-          # 获取所有 workflow runs
-          url = f'https://api.github.com/repos/{owner}/{repo}/actions/runs'
-          params = {'per_page': 100}
-          
-          all_runs = []
-          page = 1
-          
-          while True:
-              params['page'] = page
-              response = requests.get(url, headers=headers, params=params)
-              
-              if response.status_code != 200:
-                  print(f"获取失败: {response.status_code}")
-                  break
-                  
-              data = response.json()
-              runs = data.get('workflow_runs', [])
-              
-              if not runs:
-                  break
-                  
-              all_runs.extend(runs)
-              page += 1
-              time.sleep(0.5)
-          
-          print(f"找到 {len(all_runs)} 条记录")
-          
-          # 按时间排序
-          sorted_runs = sorted(all_runs, key=lambda x: x['created_at'], reverse=True)
-          
-          # 删除旧的
-          for run in sorted_runs[keep_count:]:
-              run_id = run['id']
-              delete_url = f'https://api.github.com/repos/{owner}/{repo}/actions/runs/{run_id}'
-              
-              delete_response = requests.delete(delete_url, headers=headers)
-              
-              if delete_response.status_code == 204:
-                  print(f"✅ 已删除 run #{run_id}")
-              else:
-                  print(f"❌ 删除失败 #{run_id}: {delete_response.status_code}")
-              
-              time.sleep(0.5)
-          
-          print("清理完成！")
-          EOF
+          # 删除状态
+          delete_workflow_runs: true
+          delete_workflow_artifacts: true
+          delete_workflow_logs: true
