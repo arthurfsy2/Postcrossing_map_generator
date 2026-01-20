@@ -1424,7 +1424,7 @@ const option = {
 
 [GB-1757199](https://www.postcrossing.com/postcards/GB-1757199) 
 >来自 [LauraLou](https://www.postcrossing.com/user/LauraLou) 🇬🇧
-> 📤 [United Kingdom](https://www.bing.com/maps/?cp=53.64904~-1.78416&lvl=12.0&setlang=zh-Hans) 2024/05/07 09:18 (当地)
+> 📤 [U.K.](https://www.bing.com/maps/?cp=53.64904~-1.78416&lvl=12.0&setlang=zh-Hans) 2024/05/07 09:18 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/06/01 23:00 (当地)
  📏 9,568 | ⏱ 25
 
@@ -1622,7 +1622,7 @@ const option = {
 
 [GB-1729911](https://www.postcrossing.com/postcards/GB-1729911) 
 >来自 [PattyG](https://www.postcrossing.com/user/PattyG) 🇬🇧
-> 📤 [United Kingdom](https://www.bing.com/maps/?cp=53.48771~-2.29042&lvl=12.0&setlang=zh-Hans) 2024/02/09 19:18 (当地)
+> 📤 [U.K.](https://www.bing.com/maps/?cp=53.48771~-2.29042&lvl=12.0&setlang=zh-Hans) 2024/02/09 19:18 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/02/29 13:45 (当地)
  📏 9,606 | ⏱ 19
 
@@ -1703,7 +1703,7 @@ const option = {
 
 [GB-1710416](https://www.postcrossing.com/postcards/GB-1710416) 
 >来自 [gordonf](https://www.postcrossing.com/user/gordonf) 🇬🇧
-> 📤 [United Kingdom](https://www.bing.com/maps/?cp=54.42302~-6.44434&lvl=12.0&setlang=zh-Hans) 2023/12/05 16:42 (当地)
+> 📤 [U.K.](https://www.bing.com/maps/?cp=54.42302~-6.44434&lvl=12.0&setlang=zh-Hans) 2023/12/05 16:42 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2024/01/02 13:07 (当地)
  📏 9,766 | ⏱ 28
 
