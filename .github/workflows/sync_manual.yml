@@ -27,13 +27,14 @@ jobs:
           version: "latest"
           enable-cache: true  # 启用内置缓存
 
-      - name: 缓存 UV 依赖
+      - name: 缓存 UV 环境
         uses: actions/cache@v3
         id: uv-cache
         with:
           path: |
             ~/.cache/uv
             .venv
+            ~/.local/share/uv/python
           key: ${{ runner.os }}-uv-${{ hashFiles('pyproject.toml', 'uv.lock', 'requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-uv-
@@ -43,13 +44,20 @@ jobs:
 
       - name: 安装依赖
         run: |
-          # 如果有缓存，使用缓存安装
           if [ -f "pyproject.toml" ]; then
             uv sync --frozen
           elif [ -f "requirements.txt" ]; then
             uv pip install -r requirements.txt
           else
             echo "未找到依赖文件"
+          fi
+          
+      - name: 显示缓存状态
+        run: |
+          if [ "${{ steps.uv-cache.outputs.cache-hit }}" == 'true' ]; then
+            echo "🎉 UV 缓存命中！依赖安装非常快"
+          else
+            echo "🔄 未命中缓存，首次安装依赖..."
           fi
 
       - name: 更新gallery
