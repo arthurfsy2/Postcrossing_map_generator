@@ -18,40 +18,74 @@ jobs:
       TZ: Asia/Shanghai
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: 设置Python版本
-        uses: actions/setup-python@main
+      - name: 安装 UV
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: "3.13"
-          cache: pip
-          cache-dependency-path: "requirements.txt"
+          version: "latest"
+          enable-cache: true
+
+      - name: 缓存 UV 环境
+        uses: actions/cache@v3
+        id: uv-cache
+        with:
+          path: |
+            ~/.cache/uv
+            .venv
+            ~/.local/share/uv/python
+          key: ${{ runner.os }}-uv-${{ hashFiles('pyproject.toml', 'uv.lock', 'requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-
+
+      - name: 设置 Python
+        run: uv python install 3.13
 
       - name: 安装依赖
         run: |
-          pip install -r requirements.txt
+          if [ -f "pyproject.toml" ]; then
+            uv sync --frozen
+          elif [ -f "requirements.txt" ]; then
+            uv pip install -r requirements.txt
+          else
+            echo "未找到依赖文件"
+          fi
+
+      - name: 显示缓存状态
+        run: |
+          if [ "${{ steps.uv-cache.outputs.cache-hit }}" == 'true' ]; then
+            echo "🎉 UV 缓存命中！依赖安装非常快"
+          else
+            echo "🔄 未命中缓存，首次安装依赖..."
+          fi
+
       - name: 更新邮件回复
         run: |
-          python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
+          uv run python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
+      
       - name: 更新login
         run: |
-          python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }}
+          uv run python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }}
+      
       - name: 更新数据库和下载新图片
         run: |
-          python scripts/multi_download.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }}
+          uv run python scripts/multi_download.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }}
+      
       - name: 更新gallery
         run: |
-          python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
+          uv run python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
+      
       - name: 更新2个地图数据
         run: |
-          python scripts/create_map.py ${{ secrets.ACCOUNT }}
+          uv run python scripts/create_map.py ${{ secrets.ACCOUNT }}
+      
       - name: 更新信息汇总
         run: |
-          python scripts/create_personal_page.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
+          uv run python scripts/create_personal_page.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
+      
       - name: 更新postcrossing年度汇总
         run: |
-          python scripts/postcrossing_recap.py
-      
+          uv run python scripts/postcrossing_recap.py
 
       - name: 删除缓存文件
         run: rm -rf scripts/__pycache__/
@@ -67,7 +101,7 @@ jobs:
 
       # 处理博客仓库同步
       - name: Checkout 博客仓库
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: ${{ env.blog_repo }}
           path: blog-repo

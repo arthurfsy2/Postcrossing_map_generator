@@ -19,26 +19,46 @@ jobs:
       TZ: Asia/Shanghai
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: 设置Python版本
-        uses: actions/setup-python@main
+      - name: 安装 UV
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: "3.13"
-          cache: pip
-          cache-dependency-path: "requirements.txt"
+          version: "latest"
+          enable-cache: true  # 启用内置缓存
+
+      - name: 缓存 UV 依赖
+        uses: actions/cache@v3
+        id: uv-cache
+        with:
+          path: |
+            ~/.cache/uv
+            .venv
+          key: ${{ runner.os }}-uv-${{ hashFiles('pyproject.toml', 'uv.lock', 'requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-
+
+      - name: 设置 Python
+        run: uv python install 3.13
 
       - name: 安装依赖
         run: |
-          pip install -r requirements.txt
-      
+          # 如果有缓存，使用缓存安装
+          if [ -f "pyproject.toml" ]; then
+            uv sync --frozen
+          elif [ -f "requirements.txt" ]; then
+            uv pip install -r requirements.txt
+          else
+            echo "未找到依赖文件"
+          fi
+
       - name: 更新gallery
         run: |
-          python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
+          uv run python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
       
       - name: 更新信息汇总
         run: |
-          python scripts/create_personal_page.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
+          uv run python scripts/create_personal_page.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
       
       - name: 删除缓存文件
         run: rm -rf scripts/__pycache__/
@@ -54,7 +74,7 @@ jobs:
 
       # 处理博客仓库同步
       - name: Checkout 博客仓库
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: ${{ env.blog_repo }}
           path: blog-repo
