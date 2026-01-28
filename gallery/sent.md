@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：205）
+title: 明信片展示墙（寄出：206）
 icon: address-card
-date: 2026-01-23
+date: 2026-01-28
 category:
   - Arthur
 tag:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2026(2)
+### 2026(3)
+
+[CN-4196535](https://www.postcrossing.com/postcards/CN-4196535) 
+>寄往 [PizzaCat](https://www.postcrossing.com/user/PizzaCat) 🇸🇬
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/12/24 14:39 (当地)
+> 📥 [Singapore](https://www.bing.com/maps/?cp=1.363~103.729&lvl=12.0&setlang=zh-Hans) 2026/01/28 21:17 (当地)
+ 📏 2,616 | ⏱ 35
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/mlrkgw526iqzviu6han7gzb6qabmfjzm.jpg)
 
 [CN-4196529](https://www.postcrossing.com/postcards/CN-4196529) 
 >寄往 [yunzhen-0112](https://www.postcrossing.com/user/yunzhen-0112) 🇹🇼
