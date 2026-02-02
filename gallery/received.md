@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：243）
+title: 明信片展示墙（收到：244）
 icon: address-card
-date: 2026-01-17
+date: 2026-02-02
 category:
   - Arthur
 tag:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2026(2)
+### 2026(3)
+
+[UA-2019769](https://www.postcrossing.com/postcards/UA-2019769) 
+>来自 [V_N](https://www.postcrossing.com/user/V_N) 🇺🇦
+> 📤 [Ukraine](https://www.bing.com/maps/?cp=50.45466~30.5238&lvl=12.0&setlang=zh-Hans) 2025/10/22 06:21 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/02/02 13:29 (当地)
+ 📏 7,659 | ⏱ 103
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/j2y3befyhvipmpoazfh12zse8plzzqka.jpg)
 
 [IT-802392](https://www.postcrossing.com/postcards/IT-802392) 
 >来自 [Pino246](https://www.postcrossing.com/user/Pino246) 🇮🇹
