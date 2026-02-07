@@ -728,7 +728,7 @@ const option = {
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/uzjznheze45absnihosv6c62qep1ql0b.jpg)
 
 [FR-1798160](https://www.postcrossing.com/postcards/FR-1798160) 
->来自 [Claire-Anne](https://www.postcrossing.com/user/Claire-Anne) 🇫🇷
+>来自 ***该用户已关闭*** 🇫🇷
 > 📤 [France](https://www.bing.com/maps/?cp=45.4177~-0.59466&lvl=12.0&setlang=zh-Hans) 2025/04/24 20:38 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/05/12 10:44 (当地)
  📏 10,000 | ⏱ 17
