@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：244）
+title: 明信片展示墙（收到：246）
 icon: address-card
-date: 2026-02-02
+date: 2026-02-12
 category:
   - Arthur
 tag:
@@ -147,7 +147,25 @@ const option = {
 
 :::
 
-### 2026(3)
+### 2026(5)
+
+[JP-2376124](https://www.postcrossing.com/postcards/JP-2376124) 
+>来自 [aliya98](https://www.postcrossing.com/user/aliya98) 🇯🇵
+> 📤 [Japan](https://www.bing.com/maps/?cp=35.74893~139.71497&lvl=12.0&setlang=zh-Hans) 2026/01/29 14:58 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/02/12 12:22 (当地)
+ 📏 2,862 | ⏱ 14
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/8lyxz5ip8oy0zcn50e2vnc7mpvbf1vi2.jpg)
+
+[CH-846101](https://www.postcrossing.com/postcards/CH-846101) 
+>来自 [Guny](https://www.postcrossing.com/user/Guny) 🇨🇭
+> 📤 [Switzerland](https://www.bing.com/maps/?cp=46.68473~7.69111&lvl=12.0&setlang=zh-Hans) 2026/01/29 06:59 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/02/12 12:19 (当地)
+ 📏 9,377 | ⏱ 14
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/oc6lok9dyzef9j765v4dufb34ops0jax.jpg)
 
 [UA-2019769](https://www.postcrossing.com/postcards/UA-2019769) 
 >来自 [V_N](https://www.postcrossing.com/user/V_N) 🇺🇦
