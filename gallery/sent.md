@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：206）
+title: 明信片展示墙（寄出：207）
 icon: address-card
-date: 2026-01-28
+date: 2026-02-22
 category:
   - Arthur
 tag:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2026(3)
+### 2026(4)
+
+[CN-4196530](https://www.postcrossing.com/postcards/CN-4196530) 
+>寄往 [DaryaElkina](https://www.postcrossing.com/user/DaryaElkina) 🇷🇺
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2025/12/24 14:39 (当地)
+> 📥 [Russia](https://www.bing.com/maps/?cp=59.4091~56.8204&lvl=12.0&setlang=zh-Hans) 2026/02/22 16:13 (当地)
+ 📏 6,039 | ⏱ 60
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/kosfotwfulp2ys9zerowu8hu6cxwc67m.jpg)
 
 [CN-4196535](https://www.postcrossing.com/postcards/CN-4196535) 
 >寄往 [PizzaCat](https://www.postcrossing.com/user/PizzaCat) 🇸🇬
