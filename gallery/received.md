@@ -1,5 +1,5 @@
 ---
-title: 明信片展示墙（收到：247）
+title: 明信片展示墙（收到：250）
 icon: address-card
 date: 2026-02-24
 category:
@@ -147,7 +147,34 @@ const option = {
 
 :::
 
-### 2026(6)
+### 2026(9)
+
+[FR-1867589](https://www.postcrossing.com/postcards/FR-1867589) 
+>来自 [claudiaNes](https://www.postcrossing.com/user/claudiaNes) 🇫🇷
+> 📤 [France](https://www.bing.com/maps/?cp=48.80359~2.13424&lvl=12.0&setlang=zh-Hans) 2026/01/29 06:58 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/02/24 15:36 (当地)
+ 📏 9,626 | ⏱ 26
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/1c4mp5vt5bdveck7nzb72h5odcj5vemt.jpg)
+
+[KR-386201](https://www.postcrossing.com/postcards/KR-386201) 
+>来自 [cina](https://www.postcrossing.com/user/cina) 🇰🇷
+> 📤 [Korea (South)](https://www.bing.com/maps/?cp=35.10168~129.03004&lvl=12.0&setlang=zh-Hans) 2026/01/29 14:59 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/02/24 15:30 (当地)
+ 📏 2,000 | ⏱ 26
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/onjuwfmx0q45wwm8rl5xn2sm0jefzgoe.jpg)
+
+[DE-16304639](https://www.postcrossing.com/postcards/DE-16304639) 
+>来自 [catjojo](https://www.postcrossing.com/user/catjojo) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=51.63388~13.70662&lvl=12.0&setlang=zh-Hans) 2026/01/28 15:23 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/02/24 15:03 (当地)
+ 📏 8,750 | ⏱ 27
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/8s9pl7wwyqfxvu428x3d9miwesxgqnc7.jpg)
 
 [DE-16306788](https://www.postcrossing.com/postcards/DE-16306788) 
 >来自 [pyroschreck](https://www.postcrossing.com/user/pyroschreck) 🇩🇪
