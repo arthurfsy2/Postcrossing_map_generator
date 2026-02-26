@@ -159,7 +159,7 @@ const option = {
 ![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/1c4mp5vt5bdveck7nzb72h5odcj5vemt.jpg)
 
 [KR-386201](https://www.postcrossing.com/postcards/KR-386201) 
->来自 [cina](https://www.postcrossing.com/user/cina) 🇰🇷
+>来自 [nikolet](https://www.postcrossing.com/user/nikolet) 🇰🇷
 > 📤 [Korea (South)](https://www.bing.com/maps/?cp=35.10168~129.03004&lvl=12.0&setlang=zh-Hans) 2026/01/29 14:59 (当地)
 > 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/02/24 15:30 (当地)
  📏 2,000 | ⏱ 26
