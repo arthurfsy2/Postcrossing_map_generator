@@ -16,7 +16,7 @@ BIN = os.path.dirname(os.path.realpath(__file__))
 
 
 def get_mime_type(card_id):
-    image_path = rf"{content_path}\{card_id}.webp"
+    image_path = os.path.abspath(os.path.join(content_path, f"{card_id}.webp"))
     mime_type, _ = mimetypes.guess_type(image_path)
     return mime_type or "image/jpeg"  # 默认返回 jpeg
 
@@ -181,7 +181,7 @@ def encode_image_to_base64(card_id):
     :param image_path: 图片文件的路径
     :return: base64 编码的图片字符串
     """
-    image_path = rf"{content_path}\{card_id}.webp"
+    image_path = os.path.abspath(os.path.join(content_path, f"{card_id}.webp"))
     with open(image_path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode("utf-8")
     return encoded_string
