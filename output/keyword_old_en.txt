@@ -3,14 +3,15 @@ gemini flash
 flash lite
 lite preview
 preview 识别
-Thank
 postcard
 card
 Hello Arthur
 much
+Thank
 stamp
 love
 hope
+由imap_tools提取 Hello
 Arthur Thank
 Greeting
 best
@@ -23,6 +24,7 @@ day
 name
 nice
 time
+由imap_tools提取
 beautiful
 really
 great
@@ -30,6 +32,7 @@ family
 daughter
 year
 Germany
+由imap_tools提取 Thank
 many
 Happy
 cute
@@ -38,6 +41,7 @@ good
 enjoy
 lot
 Hi Arthur
+由imap_tools提取 Hi
 China
 city
 well
@@ -69,6 +73,7 @@ little
 nice day
 USA
 bike
+由imap_tools提取 Dear
 wonderful postcard
 lovely postcard
 know
@@ -93,8 +98,3 @@ animal
 long
 sending
 amazing
-trip
-received
-north
-small
-识别 Dear

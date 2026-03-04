@@ -317,21 +317,85 @@ def test_by_single_id(card_id):
         traceback.print_exc()
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("account", help="输入account")
-    parser.add_argument("gemini_api_key", help="输入Gemini API Key")
-    # parser.add_argument("nick_name", help="输入nickName")
-    # parser.add_argument("Cookie", help="输入Cookie")
-    # parser.add_argument("repo", help="输入repo")
-    options = parser.parse_args()
+# ... existing code ...
 
-    account = options.account
-    gemini_api_key = options.gemini_api_key
+
+def translate_by_gemini(gemini_api_key, text_to_translate):
+    """
+    使用 Gemini API 翻译文本为中文。
+
+    :param gemini_api_key: Gemini API 密钥
+    :param text_to_translate: 需要翻译的文本字符串
+    :return: 翻译后的中文文本
+    """
+
+    translate_prompt = """【重要指令】请严格按照以下要求执行翻译任务：
+
+⚠️ 绝对禁止事项：
+- 不要输出任何 Markdown 格式标记（如 ```、```json 等）
+- 不要添加任何解释性文字、前言、后语或备注
+- 不要输出"翻译："、"中文："等前缀
+- 不要改变原文的段落结构
+
+✅ 必须遵守的规则：
+1. 直接输出翻译结果，不要有任何多余内容
+2. 保留原文的所有符号（包括标点符号、特殊符号）
+3. 保留原文的 emoji 表情符号
+4. “happy postcrossing” 统一翻译为：“祝你明信片交换快乐”
+5. 人名保留原文不翻译
+6. 翻译要准确、自然流畅，符合中文表达习惯
+7. 如果原文包含其他语言（如德语、日语等），翻译成中文并保留原文语气
+
+📝 示例：
+输入：Hi Xiaoxiao 😊! It's sunny 🌞 today. I'm writing from Berlin, Germany.
+输出：嗨笑笑 😊！今天天气晴朗 🌞！我来自德国柏林。
+
+输入：Hello! How are you? I hope this postcard finds you well. ❤️
+输出：你好！最近怎么样？希望这张明信片能带给你好心情。❤️
+
+请翻译以下内容："""
+
+    BASE_URL = ai_settings["gemini"]["base_url"]
+    MODEL_NAME = ai_settings["gemini"]["model"]
+
+    model_url = (
+        f"{BASE_URL}/v1beta/models/{MODEL_NAME}:generateContent?key={gemini_api_key}"
+    )
+
+    data = build_gemini_request(translate_prompt + "\n\n" + text_to_translate)
+
+    try:
+        response = requests.post(model_url, headers=headers, json=data)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print(f"翻译请求失败，终止程序：{e}")
+        sys.exit(1)
+
+    result = response.json()
+
+    if not "candidates" in result:
+        print(f"翻译 API 响应错误：{result}")
+        sys.exit(1)
+
+    translated_text = result["candidates"][0]["content"]["parts"][0]["text"]
+
+    # 清理可能的 Markdown 标记
+    translated_text = remove_markdown_code_blocks(translated_text)
+    # 将连续的多个换行符替换为单个换行符
+    translated_text = re.sub(r"\n+", "\n", translated_text)
+
+    text_to_translate = re.sub(r"\n+", "\n", text_to_translate)
+    # print("text_to_translate:", text_to_translate)
+    # print("translated_text:", translated_text)
+
+    return translated_text
+
+
+def main_gemini():
     content_path = os.path.abspath(os.path.join(BIN, "../template/content"))
     raw_pic_path = os.path.abspath(os.path.join(BIN, "../template/rawPic"))
-    print("content_path:", content_path)
-    print("raw_pic_path:", raw_pic_path)
+    # print("content_path:", content_path)
+    # print("raw_pic_path:", raw_pic_path)
     # main_chatgpt()
     pic_to_webp(raw_pic_path, content_path)
     response = get_online_data(account, "received")
@@ -370,6 +434,61 @@ if __name__ == "__main__":
         except:
             traceback.print_exc()
     print("已完成所有明信片的内容解析！")
-    # card_id = "US-12113195"
-    # image_path = rf"D:\web\Postcrossing_map_generator\template\content\{card_id}.webp"
-    # test_by_single_id(card_id)
+
+
+def main_translate(ai_name="gemini"):
+    """
+    使用指定的 AI 模型进行内容重新翻译。"""
+    print(f"[开始使用{ai_name}进行内容翻译！]")
+    MODEL_NAME = ai_settings[ai_name]["model"]
+    exist_data = read_db_table(db_path, "postcard_story")
+    need_update_list = [
+        item["card_id"]
+        for item in exist_data
+        if (item["content_original"] == "" or item["content_original"] == None)
+        and (item["content_cn"] == "" or item["content_cn"] == None)
+    ]
+    print(f"检测到数据库记录: {len(need_update_list)}条")
+    need_to_translate_ids = []
+    for card_id in need_update_list:
+
+        item_old = read_db_table(db_path, "postcard_story", {"card_id": card_id})[0]
+        text_to_translate = item_old.get("comment_original")
+
+        if "[由imap_tools提取]" not in text_to_translate:
+            need_to_translate_ids.append(card_id)
+            # print("item:", item_old)
+    print(f"以下ID回复翻译待API润色: {need_to_translate_ids}")
+
+    for card_id in need_to_translate_ids:
+        item_old = read_db_table(db_path, "postcard_story", {"card_id": card_id})[0]
+        text_to_translate = item_old.get("comment_original")
+        translated_text = translate_by_gemini(gemini_api_key, text_to_translate)
+        item_old["comment_original"] = (
+            f"`[由imap_tools提取]`\n" + item_old["comment_original"]
+        )
+        item_old["comment_cn"] = f"`[由Gemini {MODEL_NAME} 翻译]`\n" + translated_text
+        # print("item_old:", item_old)
+        insert_or_update_db(db_path, "postcard_story", item_old)
+
+        stop_seconds = 4
+        print(f"【{card_id}已保存更新内容，API等待{stop_seconds}秒...】")
+        time.sleep(stop_seconds)
+
+        translate_by_gemini(gemini_api_key, text_to_translate)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("account", help="输入account")
+    parser.add_argument("gemini_api_key", help="输入Gemini API Key")
+    # parser.add_argument("nick_name", help="输入nickName")
+    # parser.add_argument("Cookie", help="输入Cookie")
+    # parser.add_argument("repo", help="输入repo")
+    options = parser.parse_args()
+
+    account = options.account
+    gemini_api_key = options.gemini_api_key
+    main_gemini()
+
+    # main_translate()

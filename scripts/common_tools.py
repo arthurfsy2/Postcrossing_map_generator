@@ -276,7 +276,7 @@ def compareMD5(pathA, pathB):
     return stat
 
 
-def translate(apikey, sentence, src_lan, tgt_lan):
+def translate(apikey, sentence, src_lan="auto", tgt_lan="zh"):
     url = "http://api.niutrans.com/NiuTransServer/translation?"
     data = {
         "from": src_lan,

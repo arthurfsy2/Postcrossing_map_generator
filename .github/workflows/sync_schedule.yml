@@ -61,7 +61,10 @@ jobs:
 
       - name: 更新邮件回复
         run: |
-          uv run python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
+          # 使用小牛翻译API
+          # uv run python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
+          # 使用Gemini API
+          uv run python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.GEMINI_APIKEY }}
       
       - name: 更新login
         run: |

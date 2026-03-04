@@ -6,6 +6,7 @@ from urllib import parse, request
 import sqlite3
 import os
 from common_tools import translate, db_path, insert_or_update_db, read_db_table
+from ai_tool import translate_by_gemini
 import argparse
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -30,8 +31,7 @@ apikey = options.apikey
 
 
 def remove_blank_lines(text):
-    if text:
-        return "\n".join(line for line in text.splitlines() if line.strip())
+    text = re.sub(r"\n+", "\n", text)
     return text
 
 
@@ -46,13 +46,17 @@ def process_message(msg):
         match = match.group(1)
         print("new card id:", online_card_id)
         comment_original = remove_blank_lines(match)
-        comment_cn = translate(apikey, comment_original, "auto", "zh")
+        # 以下是使用小牛翻译api
+        # comment_cn = translate(apikey, comment_original)
+        # 以下是使用Gemini api
+        comment_cn = translate_by_gemini(apikey, comment_original)
         item = {
             "card_id": online_card_id,
             "content_original": "",
             "content_cn": "",
-            "comment_original": f"“{comment_original}”",
-            "comment_cn": f"“{comment_cn}”",
+            "comment_original": f"`[由imap_tools提取]`\n“{comment_original}”",
+            # "comment_cn": f"`[由小牛API进行翻译]`\n“{comment_cn}”",
+            "comment_cn": f"`[由Gemini {MODEL_NAME} 翻译]`\n“{comment_cn}”",
         }
         print("已保存更新内容:", item)
         insert_or_update_db(db_path, "postcard_story", item)
@@ -95,6 +99,8 @@ def parse_string(input_string):
 
 if __name__ == "__main__":
     start_time = time.time()
+    ai_settings = toml.load("scripts/config.toml")
+    MODEL_NAME = ai_settings["gemini"]["model"]
     parms = parse_string(input_string)
     # print(parms)
     for parm in parms:
