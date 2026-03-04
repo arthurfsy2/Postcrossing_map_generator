@@ -8,6 +8,7 @@ import argparse
 from urllib import parse, request
 import pytz
 from datetime import datetime, timedelta
+from PIL import Image
 from timezonefinderL import TimezoneFinder
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy import (
@@ -314,6 +315,32 @@ def get_local_date(coors, utc_date):
     output_format = "%Y/%m/%d %H:%M"
     local_datetime_str = local_datetime.strftime(output_format)
     return local_datetime_str
+
+
+def pic_to_webp(input_dir, output_dir):
+    """
+    获取input_dir目录下的所有文件名
+    """
+    file_names = os.listdir(input_dir)
+    for file_name in file_names:
+        # 获取文件的完整路径
+        file_path = os.path.join(input_dir, file_name)
+        # 检查文件后缀名是否为.jpg、.jpeg或.png
+        if file_name.lower().endswith((".jpg", ".jpeg", ".png")):
+            try:
+                # 打开图片文件
+                image = Image.open(file_path)
+                # 构建输出文件的路径和文件名
+                output_file_path = os.path.join(
+                    output_dir, os.path.splitext(file_name)[0] + ".webp"
+                )
+                # 转换为webp格式并保存
+                image.save(output_file_path, "webp")
+                # 删除原有文件
+                os.remove(file_path)
+                print(f"文件 {file_name} 转换成功并已删除原有文件")
+            except Exception as e:
+                print(f"文件 {file_name} 转换失败: {str(e)}")
 
 
 if __name__ == "__main__":

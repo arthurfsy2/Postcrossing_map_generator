@@ -20,11 +20,11 @@ from common_tools import (
     db_path,
     read_db_table,
     insert_or_update_db,
-    translate,
+    pic_to_webp,
 )
 import pytz
 import shutil
-from PIL import Image
+
 import re
 from jinja2 import Template
 import toml
@@ -66,16 +66,38 @@ def update_sheet_data(excel_file):
     import warnings
 
     warnings.filterwarnings("ignore", category=FutureWarning)
-    df = pd.read_excel(excel_file)
-    for index, row in df.iterrows():
-        item = {
-            "card_id": row[0],
-            "content_original": row[1],
-            "content_cn": row[2],
-            "comment_original": row[3],
-            "comment_cn": row[4],
+    df = pd.read_excel(excel_file, na_filter=False, keep_default_na=False)
+    df_json = df.to_dict(orient="records")
+
+    def update_story_safe(key, item, existed_story):
+        data = item.get(key) if item.get(key) else existed_story.get(key)
+        return data
+
+    default_item = {
+        "card_id": "",
+        "content_original": "",
+        "content_cn": "",
+        "comment_original": "",
+        "comment_cn": "",
+    }
+    for item in df_json:
+        existed_story = read_db_table(
+            db_path, "postcard_story", {"card_id": item.get("id")}
+        )
+        if existed_story:
+            default_item = existed_story[0]
+        item_new = {
+            "card_id": item.get("id"),
+            "content_original": update_story_safe(
+                "content_original", item, default_item
+            ),
+            "content_cn": update_story_safe("content_cn", item, default_item),
+            "comment_original": update_story_safe(
+                "comment_original", item, default_item
+            ),
+            "comment_cn": update_story_safe("comment_cn", item, default_item),
         }
-        insert_or_update_db(db_path, "postcard_story", item)
+        insert_or_update_db(db_path, "postcard_story", item_new)
 
 
 def get_calendar_list():
@@ -190,11 +212,10 @@ def calculate_days_difference(other_timestamp, sent_avg):
         traveled_days_text = f'<span style="color: orange;">{traveled_days}</span>'
     else:
         traveled_days_text = f'<span style="color: green;">{traveled_days}</span>'
-    return traveled_days_text
+    return traveled_days, traveled_days_text
 
 
 def get_traveling_id(account, Cookie):
-    import brotli  # 需要先安装
 
     headers = {
         "authority": "www.postcrossing.com",
@@ -221,6 +242,7 @@ def get_traveling_id(account, Cookie):
         session.headers.update(headers)
         url = f"https://www.postcrossing.com/user/{account}/data/traveling"
         response = session.get(url)
+        response.raise_for_status()  # 如果状态码不是 200，会抛出 HTTPError
 
         if response.status_code == 200:
             # 检查是否需要手动解压
@@ -229,8 +251,7 @@ def get_traveling_id(account, Cookie):
             response = json.loads(json_str)
             # print("response:", response)
 
-    expiredCount = sum(1 for item in response if item[7] > 60)
-    travelingCount = len(response)
+    traveling_count = len(response)
     content = sorted(response, key=lambda x: x[7])
     new_data = []
 
@@ -264,7 +285,9 @@ def get_traveling_id(account, Cookie):
             sent_avg = country_stats_data[0].get("sent_avg", 0)
         if not sent_avg:
             sent_avg = 0
-        traveling_days = calculate_days_difference(stats[4], sent_avg)
+        traveled_days, traveled_days_text = calculate_days_difference(
+            stats[4], sent_avg
+        )
 
         item = {
             "card_id": f"<a href='{baseurl}/travelingpostcard/{stats[0]}' target='_blank'>{stats[0]}</a>",
@@ -272,18 +295,20 @@ def get_traveling_id(account, Cookie):
             "country_name": f"{country_list[0].get("country_name")} {country_list[0].get("country_name_emoji")}",
             "sent_local_date": get_local_date(stats[0][0:2], stats[4]),
             "distance": f'{format(stats[6], ",")}',
-            "traveling_days": traveling_days,
+            "traveled_days": traveled_days,
+            "traveled_days_text": traveled_days_text,
             "sent_avg": f"{sent_avg}",
         }
         extra_info.append(item)
-    # print("extra_info:", extra_info)
+    # expired_count = sum(1 for item in extra_info if "过期" in item["traveling_days"])
+    expired_count = sum(1 for item in extra_info if int(item["traveled_days"]) > 60)
     html_content = card_type_template.render(
         card_type="traveling", content=extra_info, baseurl=baseurl
     )
 
     with open(f"./output/traveling.html", "w", encoding="utf-8") as file:
         file.write(html_content)
-    return travelingCount, expiredCount
+    return traveling_count, expired_count
 
 
 def get_HTML_table(card_type, table_name):
@@ -310,30 +335,20 @@ def get_HTML_table(card_type, table_name):
         file.write(html_content)
 
 
-def pic_to_webp(input_dir, output_dir):
+def get_postcard_limit(sent_num):
     """
-    获取input_dir目录下的所有文件名
+    https://www.postcrossing.com/help
     """
-    file_names = os.listdir(input_dir)
-    for file_name in file_names:
-        # 获取文件的完整路径
-        file_path = os.path.join(input_dir, file_name)
-        # 检查文件后缀名是否为.jpg、.jpeg或.png
-        if file_name.lower().endswith((".jpg", ".jpeg", ".png")):
-            try:
-                # 打开图片文件
-                image = Image.open(file_path)
-                # 构建输出文件的路径和文件名
-                output_file_path = os.path.join(
-                    output_dir, os.path.splitext(file_name)[0] + ".webp"
-                )
-                # 转换为webp格式并保存
-                image.save(output_file_path, "webp")
-                # 删除原有文件
-                os.remove(file_path)
-                print(f"文件 {file_name} 转换成功并已删除原有文件")
-            except Exception as e:
-                print(f"文件 {file_name} 转换失败: {str(e)}")
+    if sent_num < 5:
+        limit = 5
+    elif sent_num < 35:
+        limit = 6 + (sent_num - 5) // 10
+    elif sent_num < 50:
+        limit = 9
+    else:
+        limit = 10 + (sent_num - 50) // 50
+
+    return min(limit, 100)
 
 
 def create_register_info():
@@ -343,8 +358,7 @@ def create_register_info():
 
     def get_user_sheet(table_name):
         content = read_db_table(db_path, table_name)
-
-        countryCount = len(content)
+        country_count = len(content)
         content = sorted(content, key=lambda x: x["name"])
         html_content = card_type_template.render(
             card_type=table_name,
@@ -352,24 +366,26 @@ def create_register_info():
         )
         with open(f"./output/{table_name}.html", "w", encoding="utf-8") as file:
             file.write(html_content)
-
-        return countryCount
+        return country_count
 
     countryNum = get_user_sheet("country_stats")
     countries = f"{countryNum}/248 [{round(countryNum/248*100,2)}%]"
-    travelingNum, expiredNum = get_traveling_id(account, Cookie)
-    traveling = f"{travelingNum} [过期：{expiredNum}]"
+    traveling_num, expired_num = get_traveling_id(account, Cookie)
+
     # 创建HTML内容
     item = read_db_table(db_path, "user_summary")[0]
     item["sent_distance"] = format(int(item.get("sent_distance")), ",")
     item["received_distance"] = format(int(item.get("received_distance")), ",")
+
+    limit_num = get_postcard_limit(int(item.get("sent_postcard_num")))
+
+    traveling = f"{traveling_num} [在途：{traveling_num-expired_num} | 过期：{expired_num} | 还可寄：{limit_num-traveling_num+expired_num}]"
     item.update(
         {
             "countries": countries,
             "traveling": traveling,
         }
     )
-
     html_content = register_info_template.render(item=item)
 
     # 写入HTML文件
