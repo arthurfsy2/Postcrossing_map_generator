@@ -16,7 +16,7 @@ BIN = os.path.dirname(os.path.realpath(__file__))
 
 
 def get_mime_type(card_id):
-    image_path = rf"{pic_base_path}\{card_id}.webp"
+    image_path = rf"{content_path}\{card_id}.webp"
     mime_type, _ = mimetypes.guess_type(image_path)
     return mime_type or "image/jpeg"  # 默认返回 jpeg
 
@@ -181,7 +181,7 @@ def encode_image_to_base64(card_id):
     :param image_path: 图片文件的路径
     :return: base64 编码的图片字符串
     """
-    image_path = rf"{pic_base_path}\{card_id}.webp"
+    image_path = rf"{content_path}\{card_id}.webp"
     with open(image_path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode("utf-8")
     return encoded_string
@@ -328,9 +328,11 @@ if __name__ == "__main__":
 
     account = options.account
     gemini_api_key = options.gemini_api_key
-    pic_base_path = r"D:\web\Postcrossing_map_generator\template\content"
+    content_path = os.path.abspath(os.path.join(BIN, "../template/content"))
+    raw_pic_path = os.path.abspath(os.path.join(BIN, "../template/rawPic"))
+    # print("content_path:", content_path)
     # main_chatgpt()
-    pic_to_webp("./template/rawPic", "./template/content")
+    pic_to_webp(raw_pic_path, content_path)
     response = get_online_data(account, "received")
     card_ids = [item[0] for item in response]
     print(f"共收到{len(card_ids)}张明信片\n\n")
@@ -346,7 +348,7 @@ if __name__ == "__main__":
         f"以下明信片未存在识别内容（{len(need_update_list)}）：{need_update_list}\n\n"
     )
     for card_id in need_update_list:
-        image_path = rf"{pic_base_path}\{card_id}.webp"
+        image_path = rf"{content_path}\{card_id}.webp"
         if not os.path.exists(image_path):
             # print(f"{card_id}图片不存在，请检查图片路径是否正确！")
             not_upload_content_ids.append(card_id)
