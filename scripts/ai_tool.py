@@ -330,7 +330,8 @@ if __name__ == "__main__":
     gemini_api_key = options.gemini_api_key
     content_path = os.path.abspath(os.path.join(BIN, "../template/content"))
     raw_pic_path = os.path.abspath(os.path.join(BIN, "../template/rawPic"))
-    # print("content_path:", content_path)
+    print("content_path:", content_path)
+    print("raw_pic_path:", raw_pic_path)
     # main_chatgpt()
     pic_to_webp(raw_pic_path, content_path)
     response = get_online_data(account, "received")
@@ -348,7 +349,9 @@ if __name__ == "__main__":
         f"以下明信片未存在识别内容（{len(need_update_list)}）：{need_update_list}\n\n"
     )
     for card_id in need_update_list:
-        image_path = rf"{content_path}\{card_id}.webp"
+
+        image_path = os.path.abspath(os.path.join(content_path, f"{card_id}.webp"))
+        # print("image_path:", image_path)
         if not os.path.exists(image_path):
             # print(f"{card_id}图片不存在，请检查图片路径是否正确！")
             not_upload_content_ids.append(card_id)
