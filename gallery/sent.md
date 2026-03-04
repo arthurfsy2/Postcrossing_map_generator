@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（寄出：208）
+title: 明信片展示墙（寄出：209）
 icon: address-card
-date: 2026-02-23
+date: 2026-03-04
 category:
   - Arthur
 tag:
@@ -147,7 +147,16 @@ const option = {
 
 :::
 
-### 2026(5)
+### 2026(6)
+
+[CN-4222992](https://www.postcrossing.com/postcards/CN-4222992) 
+>寄往 [tyn1971](https://www.postcrossing.com/user/tyn1971) 🇳🇱
+> 📤 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/01/29 13:58 (当地)
+> 📥 [Netherlands](https://www.bing.com/maps/?cp=52.37403~4.88969&lvl=12.0&setlang=zh-Hans) 2026/03/04 21:29 (当地)
+ 📏 9,259 | ⏱ 35
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/d8g0ue5jnt6uukspn07966z6qhu82slh.jpg)
 
 [CN-4222991](https://www.postcrossing.com/postcards/CN-4222991) 
 >寄往 [postlad](https://www.postcrossing.com/user/postlad) 🇬🇧
