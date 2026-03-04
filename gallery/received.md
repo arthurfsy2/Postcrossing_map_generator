@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：250）
+title: 明信片展示墙（收到：259）
 icon: address-card
-date: 2026-02-24
+date: 2026-03-04
 category:
   - Arthur
 tag:
@@ -147,7 +147,88 @@ const option = {
 
 :::
 
-### 2026(9)
+### 2026(18)
+
+[DE-16306421](https://www.postcrossing.com/postcards/DE-16306421) 
+>来自 [flowersfrommars](https://www.postcrossing.com/user/flowersfrommars) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=50.93032~12.01005&lvl=12.0&setlang=zh-Hans) 2026/01/29 06:57 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/04 09:57 (当地)
+ 📏 8,889 | ⏱ 34
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/peo7ulihnk2du7onhermeh6fk9209txi.jpg)
+
+[DE-16304640](https://www.postcrossing.com/postcards/DE-16304640) 
+>来自 [bstb](https://www.postcrossing.com/user/bstb) 🇩🇪
+> 📤 [Germany](https://www.bing.com/maps/?cp=54.46854~9.83824&lvl=12.0&setlang=zh-Hans) 2026/01/28 15:23 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/04 09:53 (当地)
+ 📏 8,862 | ⏱ 34
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/7eprcoy8t2eonl8bfnxqtsrck5y3f182.jpg)
+
+[FR-1867591](https://www.postcrossing.com/postcards/FR-1867591) 
+>来自 [marie70](https://www.postcrossing.com/user/marie70) 🇫🇷
+> 📤 [France](https://www.bing.com/maps/?cp=48.44984~6.73946&lvl=12.0&setlang=zh-Hans) 2026/01/29 07:01 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/04 09:48 (当地)
+ 📏 9,350 | ⏱ 34
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/sk03nkbgc2ji1abb4y9mhcgx9w6cz94v.jpg)
+
+[BY-3438094](https://www.postcrossing.com/postcards/BY-3438094) 
+>来自 [Karinaleshchevich](https://www.postcrossing.com/user/Karinaleshchevich) 🇧🇾
+> 📤 [Belarus](https://www.bing.com/maps/?cp=53.7817~27.4346&lvl=12.0&setlang=zh-Hans) 2026/01/29 08:58 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/04 09:45 (当地)
+ 📏 7,797 | ⏱ 34
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/3ocmyezr7idpgt66ra7sh90lwtyvotj3.jpg)
+
+[IN-709997](https://www.postcrossing.com/postcards/IN-709997) 
+>来自 [muthu](https://www.postcrossing.com/user/muthu) 🇮🇳
+> 📤 [India](https://www.bing.com/maps/?cp=13.08784~80.27847&lvl=12.0&setlang=zh-Hans) 2026/01/29 12:06 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/04 09:37 (当地)
+ 📏 3,735 | ⏱ 34
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/ccy26078d1tkmmc9am1v5kx6h7vx92zw.jpg)
+
+[MY-714966](https://www.postcrossing.com/postcards/MY-714966) 
+>来自 [Jayordean94](https://www.postcrossing.com/user/Jayordean94) 🇲🇾
+> 📤 [Malaysia](https://www.bing.com/maps/?cp=3.1412~101.68653&lvl=12.0&setlang=zh-Hans) 2026/01/29 13:58 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/04 09:33 (当地)
+ 📏 2,547 | ⏱ 34
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/2jp8v3sqtb4ps8u1sz2wzcr2y4e24j3v.jpg)
+
+[US-12113195](https://www.postcrossing.com/postcards/US-12113195) 
+>来自 [kristinlee3](https://www.postcrossing.com/user/kristinlee3) 🇺🇸
+> 📤 [U.S.A.](https://www.bing.com/maps/?cp=42.58474~-87.82119&lvl=12.0&setlang=zh-Hans) 2026/01/28 08:24 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/04 09:28 (当地)
+ 📏 12,426 | ⏱ 34
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/jhkt3ulu1zr6rw2kha5x3v9h97gxrlcr.jpg)
+
+[BY-3437884](https://www.postcrossing.com/postcards/BY-3437884) 
+>来自 [NataKlv](https://www.postcrossing.com/user/NataKlv) 🇧🇾
+> 📤 [Belarus](https://www.bing.com/maps/?cp=52.6329~29.7389&lvl=12.0&setlang=zh-Hans) 2026/01/28 17:22 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/04 09:24 (当地)
+ 📏 7,670 | ⏱ 34
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/png6ffeczfl4evk3owzkpzg30cp6cmej.jpg)
+
+[IE-283039](https://www.postcrossing.com/postcards/IE-283039) 
+>来自 [sloth98](https://www.postcrossing.com/user/sloth98) 🇮🇪
+> 📤 [Ireland](https://www.bing.com/maps/?cp=53.75977~-9.11719&lvl=12.0&setlang=zh-Hans) 2026/01/28 14:40 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/04 09:20 (当地)
+ 📏 9,948 | ⏱ 34
+
+
+![](https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture/7i1c4q68q84sesovz7h9iv6gw5jri3yr.jpg)
 
 [FR-1867589](https://www.postcrossing.com/postcards/FR-1867589) 
 >来自 [claudiaNes](https://www.postcrossing.com/user/claudiaNes) 🇫🇷
