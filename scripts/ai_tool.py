@@ -15,7 +15,8 @@ import sys
 BIN = os.path.dirname(os.path.realpath(__file__))
 
 
-def get_mime_type(image_path):
+def get_mime_type(card_id):
+    image_path = rf"{pic_base_path}\{card_id}.webp"
     mime_type, _ = mimetypes.guess_type(image_path)
     return mime_type or "image/jpeg"  # 默认返回 jpeg
 
@@ -173,13 +174,14 @@ def build_chatgpt_request(
     return data
 
 
-def encode_image_to_base64(image_path):
+def encode_image_to_base64(card_id):
     """
     将图片文件转换为 base64 编码字符串。
 
     :param image_path: 图片文件的路径
     :return: base64 编码的图片字符串
     """
+    image_path = rf"{pic_base_path}\{card_id}.webp"
     with open(image_path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode("utf-8")
     return encoded_string
@@ -201,7 +203,7 @@ def recognize_by_gemini(card_id, ai_name="gemini"):
     model_url = (
         f"{BASE_URL}/v1beta/models/{MODEL_NAME}:generateContent?key={gemini_api_key}"
     )
-    image_base64 = encode_image_to_base64(image_path)  # 转换为 base64
+    image_base64 = encode_image_to_base64(card_id)  # 转换为 base64
     mime_type = get_mime_type(image_path)
     data = build_gemini_request(prompt, image_base64, mime_type)
 
@@ -221,8 +223,6 @@ def recognize_by_gemini(card_id, ai_name="gemini"):
     # 提取并打印生成的文本
     def extract_text(result):
         generated_text = result["candidates"][0]["content"]["parts"][0]["text"]
-        print(generated_text)
-
         # 解析 JSON 响应
         try:
             final_text = parse_gemini_response(generated_text)
@@ -240,15 +240,18 @@ def recognize_by_gemini(card_id, ai_name="gemini"):
     return final_text, MODEL_NAME
 
 
-def read_and_update_db(card_id):
+def read_existed_data(card_id):
     """
-    读取数据库，如果该内容未进行过识别，则调用AI进行识别并更新数据库
+    == 读取数据库并更新数据库
     """
     exist_data = read_db_table(db_path, "postcard_story", {"card_id": card_id})
 
     if exist_data:
-        print(f"{card_id}已跳过")
-        return
+        # print(f"{card_id}已跳过")
+        return card_id
+
+
+def read_and_update_db(card_id):
     print(f"{card_id}内容未进行识别，正在通过AI进行识别……")
     regonized_text, MODEL_NAME = recognize_by_gemini(card_id)
     if not regonized_text:
@@ -325,23 +328,40 @@ if __name__ == "__main__":
 
     account = options.account
     gemini_api_key = options.gemini_api_key
-
+    pic_base_path = r"D:\web\Postcrossing_map_generator\template\content"
     # main_chatgpt()
     pic_to_webp("./template/rawPic", "./template/content")
     response = get_online_data(account, "received")
     card_ids = [item[0] for item in response]
+    print(f"共收到{len(card_ids)}张明信片\n\n")
+    existed_card_content_ids = []
+    not_upload_content_ids = []
     for card_id in card_ids:
-        # card_id = "KR-386201"
-        image_path = (
-            rf"D:\web\Postcrossing_map_generator\template\content\{card_id}.webp"
-        )
+        existed_card_content_id = read_existed_data(card_id)
+        if existed_card_content_id:
+            existed_card_content_ids.append(existed_card_content_id)
+    print(f"已过滤完成内容识别的明信片：{len(existed_card_content_ids)}张\n\n")
+    need_update_list = [cid for cid in card_ids if cid not in existed_card_content_ids]
+    print(
+        f"以下明信片未存在识别内容（{len(need_update_list)}）：{need_update_list}\n\n"
+    )
+    for card_id in need_update_list:
+        image_path = rf"{pic_base_path}\{card_id}.webp"
         if not os.path.exists(image_path):
             # print(f"{card_id}图片不存在，请检查图片路径是否正确！")
-            continue
-        # recognize_by_gemini(card_id)
+            not_upload_content_ids.append(card_id)
+
+    print(
+        f"以下ID的明信片未上传内容图片（{len(not_upload_content_ids)}）：{not_upload_content_ids}\n\n"
+    )
+
+    can_update_list = [
+        cid for cid in need_update_list if cid not in not_upload_content_ids
+    ]
+    print(f"以下ID的明信片可识别内容（{len(can_update_list)}）：{can_update_list}\n\n")
+    for card_id in can_update_list:
         try:
             read_and_update_db(card_id)
-
         except:
             traceback.print_exc()
     print("已完成所有明信片的内容解析！")
