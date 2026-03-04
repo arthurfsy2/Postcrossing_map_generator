@@ -1,5 +1,5 @@
 [settings]
-Cookie = "__Host-postcrossing=3ca8dfa5a2d8bbbb2996cabfd5b9bda3; PostcrossingRemember=7MCbK1QMXvNt4X9B7MjJ4yJFQ082pjzb"
+Cookie = "__Host-postcrossing=708f7bbbae0165c7d5449c03f54d88da; PostcrossingRemember=LfZxWjhwgXvwu8g9pPm5F7E96D79joCe"
 story_pic_type = "webp"
 
 [url]
@@ -8,12 +8,9 @@ story_pic_link = "https://pan.4a1801.life:11443/d/public/article/Arthur/Postcros
 personal_page_link = "https://postcrossing.4a1801.life"
 
 [notice]
-db_update = true
-
+db_update = false
 
 [gemini]
-# Gemini API配置
-api_key = ""           # 在这里设置Gemini API密钥
-# model = "gemini-3-flash-preview"
+api_key = ""
 model = "gemini-3.1-flash-lite-preview"
-base_url = "http://192.227.229.182:3000/gemini"  # Gemini基础URL
+base_url = "http://192.227.229.182:3000/gemini"
