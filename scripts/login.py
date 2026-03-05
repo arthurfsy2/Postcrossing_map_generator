@@ -7,13 +7,6 @@ import toml
 import requests
 
 BIN = os.path.dirname(os.path.realpath(__file__))
-config = toml.load("scripts/config.toml")
-# 优先从环境变量读取 Cookie，其次从缓存文件，最后从配置文件
-Cookie = (
-    os.environ.get("POSTCROSSING_COOKIE", "") or
-    load_cookie_from_cache() or
-    config.get("settings").get("Cookie", "")
-)
 
 
 def load_cookie_from_cache():
@@ -31,6 +24,15 @@ def save_cookie_to_cache(cookie):
     with open(cookie_file, "w", encoding="utf-8") as f:
         f.write(cookie)
     return cookie_file
+
+
+config = toml.load("scripts/config.toml")
+# 优先从环境变量读取 Cookie，其次从缓存文件，最后从配置文件
+Cookie = (
+    os.environ.get("POSTCROSSING_COOKIE", "") or
+    load_cookie_from_cache() or
+    config.get("settings").get("Cookie", "")
+)
 
 
 def login(account, password):
