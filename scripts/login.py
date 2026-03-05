@@ -78,12 +78,12 @@ def login(account, password):
         cookie_file = save_cookie_to_cache(Cookie)
         print(f"📁 Cookie 已保存到：{cookie_file}")
 
-        # 同时更新 config.toml（本地开发使用，请勿提交到 Git）
-        config = toml.load("scripts/config.toml")
-        config["settings"]["Cookie"] = Cookie
-        with open("scripts/config.toml", "w", encoding="utf-8") as f:
-            toml.dump(config, f)
-        print(f"📝 Cookie 已更新到 config.toml（请勿提交到 Git！）")
+        # 注释掉导出 Cookie 到 config.toml 的逻辑（避免敏感信息泄露）
+        # config = toml.load("scripts/config.toml")
+        # config["settings"]["Cookie"] = Cookie
+        # with open("scripts/config.toml", "w", encoding="utf-8") as f:
+        #     toml.dump(config, f)
+        # print(f"📝 Cookie 已更新到 config.toml（请勿提交到 Git！）")
 
         return Cookie
     else:

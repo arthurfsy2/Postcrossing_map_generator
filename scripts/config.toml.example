@@ -18,7 +18,7 @@ pic_driver_path = "https://raw.gitmirror.com/{{repo}}/main/gallery/picture"
 # 明信片背面图片存储路径
 story_pic_link = "https://raw.gitmirror.com/{{repo}}/main/template/content"
 # 个人页面链接，填写你的 GitHub Pages 路径
-personal_page_link = "https://XXXX"
+personal_page_link = "https://postcrossing.4a1801.life"
 
 [notice]
 # 系统自动管理，无需手动修改
