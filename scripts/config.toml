@@ -1,16 +1,20 @@
 [settings]
-Cookie = "__Host-postcrossing=be3090f36d629ed9bb923e7c8d3fec00; PostcrossingRemember=PuE5QHY9n8ciZHBAucaPymJtigNr7I4c"
+# Cookie 从环境变量 POSTCROSSING_COOKIE 读取，此处留空
+# GitHub Actions 中通过 Secrets 设置：POSTCROSSING_COOKIE
+Cookie = ""
 story_pic_type = "webp"
 
 [url]
-pic_driver_path = "https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture"
-story_pic_link = "https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/template/content"
-personal_page_link = "https://postcrossing.4a1801.life"
+pic_driver_path = "https://raw.gitmirror.com/{{repo}}/main/gallery/picture"
+story_pic_link = "https://raw.gitmirror.com/{{repo}}/main/template/content"
+personal_page_link = "https://XXXX"
 
 [notice]
 db_update = false
 
 [gemini]
+# API Key 从环境变量 GEMINI_APIKEY 读取
 api_key = ""
 model = "gemini-3.1-flash-lite-preview"
-base_url = "http://192.227.229.182:3000/gemini"
+# base_url 从环境变量 GEMINI_BASE_URL 读取，留空则使用默认值
+base_url = ""

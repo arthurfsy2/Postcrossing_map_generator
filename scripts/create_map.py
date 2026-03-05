@@ -13,8 +13,11 @@ import argparse
 import toml
 
 
+import os
+
 config = toml.load("scripts/config.toml")
-Cookie = config.get("settings").get("Cookie")
+# 优先从环境变量读取 Cookie
+Cookie = os.environ.get("POSTCROSSING_COOKIE", "") or config.get("settings").get("Cookie", "")
 db_update = config.get("notice").get("db_update")
 
 

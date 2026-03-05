@@ -1,12 +1,14 @@
 import re
 import argparse
+import os
 from common_tools import db_path
 from multi_download import get_account_stat
 import toml
 import requests
 
 config = toml.load("scripts/config.toml")
-Cookie = config.get("settings").get("Cookie")
+# 优先从环境变量读取 Cookie
+Cookie = os.environ.get("POSTCROSSING_COOKIE", "") or config.get("settings").get("Cookie", "")
 
 
 def login(account, password):

@@ -3,12 +3,18 @@ name: 定时检测更新
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */1 * * *"
+    # 每天凌晨 2 点和下午 2 点执行，避免频率过高
+    - cron: "0 2 * * *"
+    - cron: "0 14 * * *"
   
 env:
   blog_path: "./src/Arthur/postcrossing"
   blog_repo: "arthurfsy2/arthurfsy2.github.io"
   PUSH_TO_GITHUB: true
+  # 从 Secrets 读取敏感信息
+  POSTCROSSING_COOKIE: ${{ secrets.POSTCROSSING_COOKIE }}
+  GEMINI_APIKEY: ${{ secrets.GEMINI_APIKEY }}
+  GEMINI_BASE_URL: ${{ secrets.GEMINI_BASE_URL }}
 
 jobs:
   sync:

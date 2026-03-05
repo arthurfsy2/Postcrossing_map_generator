@@ -26,8 +26,11 @@ import toml
 
 BIN = os.path.dirname(os.path.realpath(__file__))
 
+import os
+
 config = toml.load("scripts/config.toml")
-Cookie = config.get("settings").get("Cookie")
+# 优先从环境变量读取 Cookie
+Cookie = os.environ.get("POSTCROSSING_COOKIE", "") or config.get("settings").get("Cookie", "")
 pic_driver_path = config.get("url").get("pic_driver_path")
 
 

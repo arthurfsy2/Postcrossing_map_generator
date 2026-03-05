@@ -25,9 +25,15 @@ from sqlalchemy import (
 )
 import toml
 
+import os
+
 config = toml.load("scripts/config.toml")
-Cookie = config.get("settings").get("Cookie")
+# 优先从环境变量读取 Cookie，如果环境变量为空则使用配置文件
+Cookie = os.environ.get("POSTCROSSING_COOKIE", "") or config.get("settings").get("Cookie", "")
 pic_driver_path = config.get("url").get("pic_driver_path")
+# 从环境变量读取 Gemini 配置
+gemini_api_key = os.environ.get("GEMINI_APIKEY", "") or config.get("gemini").get("api_key", "")
+gemini_base_url = os.environ.get("GEMINI_BASE_URL", "") or config.get("gemini").get("base_url", "")
 
 
 def initialize_database(Base, db_path):
