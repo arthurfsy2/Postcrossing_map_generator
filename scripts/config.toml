@@ -3,8 +3,8 @@ Cookie = "__Host-postcrossing=3baaf4d49f4ed8dadbbe99156b2ea298; PostcrossingReme
 story_pic_type = "webp"
 
 [url]
-pic_driver_path = "https://raw.gitmirror.com/{{repo}}/main/gallery/picture"
-story_pic_link = "https://raw.gitmirror.com/{{repo}}/main/template/content"
+pic_driver_path = "https://cdn.jsdelivr.net/gh/{{repo}}@main/gallery/picture"
+story_pic_link = "https://cdn.jsdelivr.net/gh/{{repo}}@main/template/content"
 personal_page_link = "https://postcrossing.4a1801.life"
 
 [notice]
