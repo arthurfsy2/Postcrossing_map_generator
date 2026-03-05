@@ -77,6 +77,20 @@ jobs:
             echo "🍪 未命中 Cookie 缓存，需要重新登录..."
           fi
 
+      - name: 更新 login（仅在 Cookie 缓存未命中时执行）
+        if: steps.cookie-cache.outputs.cache-hit != 'true'
+        run: |
+          uv run python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }}
+      
+      - name: 显示 Cookie 缓存状态
+        run: |
+          if [ -f "scripts/.cookie_cache" ]; then
+            echo "✅ Cookie 文件已生成"
+          else
+            echo "❌ Cookie 文件未生成，检查登录是否成功"
+            exit 1
+          fi
+
       - name: 更新 gallery
         run: |
           uv run python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY

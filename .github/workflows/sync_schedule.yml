@@ -78,11 +78,6 @@ jobs:
             echo "🍪 未命中 Cookie 缓存，需要重新登录..."
           fi
 
-      - name: 更新邮件回复
-        run: |
-          # 使用 Gemini API
-          uv run python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.GEMINI_APIKEY }}
-      
       - name: 更新 login（仅在 Cookie 缓存未命中时执行）
         if: steps.cookie-cache.outputs.cache-hit != 'true'
         run: |
@@ -96,6 +91,11 @@ jobs:
             echo "❌ Cookie 文件未生成，检查登录是否成功"
             exit 1
           fi
+      
+      - name: 更新邮件回复
+        run: |
+          # 使用 Gemini API
+          uv run python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.GEMINI_APIKEY }}
       
       - name: 更新数据库和下载新图片
         run: |
