@@ -6,9 +6,31 @@ from multi_download import get_account_stat
 import toml
 import requests
 
+BIN = os.path.dirname(os.path.realpath(__file__))
 config = toml.load("scripts/config.toml")
-# 优先从环境变量读取 Cookie
-Cookie = os.environ.get("POSTCROSSING_COOKIE", "") or config.get("settings").get("Cookie", "")
+# 优先从环境变量读取 Cookie，其次从缓存文件，最后从配置文件
+Cookie = (
+    os.environ.get("POSTCROSSING_COOKIE", "") or
+    load_cookie_from_cache() or
+    config.get("settings").get("Cookie", "")
+)
+
+
+def load_cookie_from_cache():
+    """从缓存文件读取 Cookie"""
+    cookie_file = os.path.join(BIN, ".cookie_cache")
+    if os.path.exists(cookie_file):
+        with open(cookie_file, "r", encoding="utf-8") as f:
+            return f.read().strip()
+    return None
+
+
+def save_cookie_to_cache(cookie):
+    """保存 Cookie 到缓存文件"""
+    cookie_file = os.path.join(BIN, ".cookie_cache")
+    with open(cookie_file, "w", encoding="utf-8") as f:
+        f.write(cookie)
+    return cookie_file
 
 
 def login(account, password):
@@ -23,10 +45,8 @@ def login(account, password):
         r'name="signin\[_login_csrf_token\]" value="(.*?)"', response.text
     )
     csrf_token_value = csrf_token.group(1) if csrf_token else None
-    # print("csrf_token_value:", csrf_token_value)
     if not csrf_token_value:
-
-        print("未找到 CSRF 令牌！")
+        print("❌ 未找到 CSRF 令牌！")
         return None
 
     # 设置请求头
@@ -38,7 +58,7 @@ def login(account, password):
     payload = {
         "signin[username]": account,
         "signin[password]": password,
-        "signin[_login_csrf_token]": csrf_token_value,  # 这里包含 CSRF 令牌
+        "signin[_login_csrf_token]": csrf_token_value,
         "signin[remember]": "on",
     }
 
@@ -50,38 +70,33 @@ def login(account, password):
         cookies = session.cookies.get_dict()
         Cookie = f"__Host-postcrossing={cookies.get('__Host-postcrossing', '')}; PostcrossingRemember={cookies.get('PostcrossingRemember', '')}"
 
-        print("Cookie_new:", Cookie)
+        print("✅ Cookie 获取成功")
 
-        # 读取config.toml文件内容
+        # 保存 Cookie 到缓存文件
+        cookie_file = save_cookie_to_cache(Cookie)
+        print(f"📁 Cookie 已保存到：{cookie_file}")
+
+        # 同时更新 config.toml（本地开发使用，请勿提交到 Git）
         config = toml.load("scripts/config.toml")
-
-        # 更新Cookie变量的值
         config["settings"]["Cookie"] = Cookie
-
-        # 将更新后的内容写入config.toml文件
         with open("scripts/config.toml", "w", encoding="utf-8") as f:
             toml.dump(config, f)
+        print(f"📝 Cookie 已更新到 config.toml（请勿提交到 Git！）")
 
         return Cookie
     else:
-        print("账号/密码错误，已退出")
+        print("❌ 账号/密码错误，已退出")
         return None
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("account", help="输入account")
-    parser.add_argument("password", help="输入password")
-    # parser.add_argument("nick_name", help="输入nickName")
-    # parser.add_argument("Cookie", help="输入Cookie")
-    # parser.add_argument("repo", help="输入repo")
+    parser.add_argument("account", help="输入 account")
+    parser.add_argument("password", help="输入 password")
     options = parser.parse_args()
 
     account = options.account
     password = options.password
-    # nick_name = options.nick_name
-    # Cookie = options.Cookie
-    # repo = options.repo
 
     stat, content_raw, types = get_account_stat(account, Cookie)
     if stat != "get_private":

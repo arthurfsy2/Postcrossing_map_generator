@@ -1,4 +1,4 @@
-name: 手动更新图片和md文件
+name: 手动更新图片和 md 文件
 
 on:
   workflow_dispatch:
@@ -10,8 +10,7 @@ env:
   blog_path: "./src/Arthur/postcrossing"
   blog_repo: "arthurfsy2/arthurfsy2.github.io"
   PUSH_TO_GITHUB: true
-  # 从 Secrets 读取敏感信息
-  POSTCROSSING_COOKIE: ${{ secrets.POSTCROSSING_COOKIE }}
+  # 从 Secrets 读取敏感信息（Cookie 不再需要，改为缓存机制）
   GEMINI_APIKEY: ${{ secrets.GEMINI_APIKEY }}
   GEMINI_BASE_URL: ${{ secrets.GEMINI_BASE_URL }}
 
@@ -29,7 +28,7 @@ jobs:
         uses: astral-sh/setup-uv@v3
         with:
           version: "latest"
-          enable-cache: true  # 启用内置缓存
+          enable-cache: true
 
       - name: 缓存 UV 环境
         uses: actions/cache@v3
@@ -43,6 +42,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-uv-
 
+      - name: 缓存 Postcrossing Cookie
+        uses: actions/cache@v3
+        id: cookie-cache
+        with:
+          path: scripts/.cookie_cache
+          key: ${{ runner.os }}-postcrossing-cookie-${{ secrets.ACCOUNT }}-${{ hashFiles('scripts/.cookie_cache') }}
+          restore-keys: |
+            ${{ runner.os }}-postcrossing-cookie-${{ secrets.ACCOUNT }}-
+
       - name: 设置 Python
         run: uv python install 3.13
 
@@ -55,7 +63,7 @@ jobs:
           else
             echo "未找到依赖文件"
           fi
-          
+
       - name: 显示缓存状态
         run: |
           if [ "${{ steps.uv-cache.outputs.cache-hit }}" == 'true' ]; then
@@ -63,14 +71,20 @@ jobs:
           else
             echo "🔄 未命中缓存，首次安装依赖..."
           fi
+          if [ "${{ steps.cookie-cache.outputs.cache-hit }}" == 'true' ]; then
+            echo "🍪 Cookie 缓存命中！跳过登录步骤"
+          else
+            echo "🍪 未命中 Cookie 缓存，需要重新登录..."
+          fi
 
-      - name: 更新gallery
+      - name: 更新 gallery
         run: |
           uv run python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
       
       - name: Gemini 识别已上传的明信片内容
         run: |
           uv run python scripts/ai_tool.py ${{ secrets.ACCOUNT }} ${{ secrets.GEMINI_APIKEY }}
+      
       - name: 更新信息汇总
         run: |
           uv run python scripts/create_personal_page.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
@@ -97,13 +111,13 @@ jobs:
           fetch-depth: 1
           ref: main
 
-      - name: 复制.md文件到博客仓库
+      - name: 复制.md 文件到博客仓库
         run: |
           # 创建目标目录
           mkdir -p "blog-repo/${{ env.blog_path }}"
-          # 只复制gallery目录下的.md文件
+          # 只复制 gallery 目录下的.md 文件
           cp ./gallery/*.md "blog-repo/${{ env.blog_path }}/"
-          echo "Markdown文件已复制到博客仓库"
+          echo "Markdown 文件已复制到博客仓库"
 
       - name: 检查是否有文件变更
         id: check_changes
@@ -124,5 +138,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git commit -m '自动同步postcrossing数据（手动）'
+          git commit -m '自动同步 postcrossing 数据（手动）'
           git push
