@@ -505,10 +505,13 @@ def create_summary_text():
     calendar_list = get_calendar_list()
     comment_list, comment_num = get_card_type_data("sent")
     story_list, story_num = get_card_type_data("received")
+    # 替换 URL 中的 {{repo}} 占位符
+    story_pic_link_replaced = story_pic_link.replace("{{repo}}", repo)
+    pic_driver_path_replaced = pic_driver_path.replace("{{repo}}", repo)
     dataNew = summary_template.render(
         account=account,
-        pic_driver_path=pic_driver_path,
-        story_pic_link=story_pic_link,
+        pic_driver_path=pic_driver_path_replaced,
+        story_pic_link=story_pic_link_replaced,
         nick_name=nick_name,
         user_summary=user_summary,
         story_pic_type=story_pic_type,

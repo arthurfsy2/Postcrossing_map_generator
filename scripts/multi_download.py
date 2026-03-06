@@ -66,7 +66,6 @@ def get_account_stat(account, Cookie):
     elif gallery_status == 200 and cookie_stat == 404:
         total_stat = "get_public"
         card_types = ["sent", "received"]
-        print(f"{account}的Cookies无效，正在尝试重新登陆……\n")
     elif gallery_status != 200:
         total_stat = "unaccessible"
         print(f"用户:{account}已注销/设置为非公开，无法获取！\n")
