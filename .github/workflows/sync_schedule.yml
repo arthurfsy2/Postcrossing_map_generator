@@ -85,10 +85,10 @@ jobs:
       
       - name: 显示 Cookie 缓存状态
         run: |
-          if [ -f "scripts/.cookie_cache" ]; then
-            echo "✅ Cookie 文件已生成"
+          if [ -f "scripts/.cookie_config.toml" ]; then
+            echo "✅ Cookie 配置文件已生成"
           else
-            echo "❌ Cookie 文件未生成，检查登录是否成功"
+            echo "❌ Cookie 配置文件未生成，检查登录是否成功"
             exit 1
           fi
       
