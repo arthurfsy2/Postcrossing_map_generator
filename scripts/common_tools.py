@@ -28,22 +28,21 @@ import toml
 import os
 
 BIN = os.path.dirname(os.path.realpath(__file__))
+COOKIE_CONFIG_FILE = os.path.join(BIN, ".cookie_config.toml")
 config = toml.load("scripts/config.toml")
 
-def load_cookie_from_cache():
-    """从缓存文件读取 Cookie"""
-    cookie_file = os.path.join(BIN, ".cookie_cache")
-    if os.path.exists(cookie_file):
-        with open(cookie_file, "r", encoding="utf-8") as f:
-            return f.read().strip()
-    return None
+def load_cookie_from_config():
+    """从 Cookie 配置文件读取 Cookie"""
+    if os.path.exists(COOKIE_CONFIG_FILE):
+        try:
+            cookie_config = toml.load(COOKIE_CONFIG_FILE)
+            return cookie_config.get("auth", {}).get("cookie", "")
+        except Exception:
+            return ""
+    return ""
 
-# Cookie 读取优先级：环境变量 > 缓存文件 > 配置文件
-Cookie = (
-    os.environ.get("POSTCROSSING_COOKIE", "") or
-    load_cookie_from_cache() or
-    config.get("settings").get("Cookie", "")
-)
+# Cookie 读取优先级：环境变量 > Cookie 配置文件
+Cookie = os.environ.get("POSTCROSSING_COOKIE", "") or load_cookie_from_config()
 
 pic_driver_path = config.get("url").get("pic_driver_path")
 # 从环境变量读取 Gemini 配置

@@ -1,38 +1,43 @@
 import re
 import argparse
 import os
+from datetime import datetime
 from common_tools import db_path
 from multi_download import get_account_stat
 import toml
 import requests
 
 BIN = os.path.dirname(os.path.realpath(__file__))
+COOKIE_CONFIG_FILE = os.path.join(BIN, ".cookie_config.toml")
 
 
-def load_cookie_from_cache():
-    """从缓存文件读取 Cookie"""
-    cookie_file = os.path.join(BIN, ".cookie_cache")
-    if os.path.exists(cookie_file):
-        with open(cookie_file, "r", encoding="utf-8") as f:
-            return f.read().strip()
-    return None
+def load_cookie_from_config():
+    """从 Cookie 配置文件读取 Cookie"""
+    if os.path.exists(COOKIE_CONFIG_FILE):
+        try:
+            cookie_config = toml.load(COOKIE_CONFIG_FILE)
+            return cookie_config.get("auth", {}).get("cookie", "")
+        except Exception:
+            return ""
+    return ""
 
 
-def save_cookie_to_cache(cookie):
-    """保存 Cookie 到缓存文件"""
-    cookie_file = os.path.join(BIN, ".cookie_cache")
-    with open(cookie_file, "w", encoding="utf-8") as f:
-        f.write(cookie)
-    return cookie_file
+def save_cookie_to_config(cookie, account):
+    """保存 Cookie 到配置文件"""
+    cookie_config = {
+        "auth": {
+            "cookie": cookie,
+            "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "account": account
+        }
+    }
+    with open(COOKIE_CONFIG_FILE, "w", encoding="utf-8") as f:
+        toml.dump(cookie_config, f)
+    return COOKIE_CONFIG_FILE
 
 
-config = toml.load("scripts/config.toml")
-# 优先从环境变量读取 Cookie，其次从缓存文件，最后从配置文件
-Cookie = (
-    os.environ.get("POSTCROSSING_COOKIE", "") or
-    load_cookie_from_cache() or
-    config.get("settings").get("Cookie", "")
-)
+# 优先从环境变量读取 Cookie，其次从配置文件
+Cookie = os.environ.get("POSTCROSSING_COOKIE", "") or load_cookie_from_config()
 
 
 def login(account, password):
@@ -74,16 +79,9 @@ def login(account, password):
 
         print("✅ Cookie 获取成功")
 
-        # 保存 Cookie 到缓存文件
-        cookie_file = save_cookie_to_cache(Cookie)
+        # 保存 Cookie 到配置文件
+        cookie_file = save_cookie_to_config(Cookie, account)
         print(f"📁 Cookie 已保存到：{cookie_file}")
-
-        # 注释掉导出 Cookie 到 config.toml 的逻辑（避免敏感信息泄露）
-        # config = toml.load("scripts/config.toml")
-        # config["settings"]["Cookie"] = Cookie
-        # with open("scripts/config.toml", "w", encoding="utf-8") as f:
-        #     toml.dump(config, f)
-        # print(f"📝 Cookie 已更新到 config.toml（请勿提交到 Git！）")
 
         return Cookie
     else:
@@ -100,6 +98,19 @@ if __name__ == "__main__":
     account = options.account
     password = options.password
 
+    # 优先从环境变量读取 Cookie（GitHub Actions 场景）
+    env_cookie = os.environ.get("POSTCROSSING_COOKIE", "")
+    if env_cookie:
+        print("📥 从环境变量读取 Cookie")
+        save_cookie_to_config(env_cookie, account)
+        Cookie = env_cookie
+    else:
+        # 从配置文件读取
+        Cookie = load_cookie_from_config()
+    
     stat, content_raw, types = get_account_stat(account, Cookie)
     if stat != "get_private":
-        login(account, password)
+        print("🔄 Cookie 无效或不存在，正在重新登录...")
+        Cookie = login(account, password)
+    else:
+        print("✅ Cookie 有效")

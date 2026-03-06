@@ -12,7 +12,7 @@ debug.log
 
 # 敏感配置文件（包含 Cookie、API Key 等）
 scripts/config.toml
-scripts/.cookie_cache
+scripts/.cookie_config.toml
 
 # 数据库文件
 template/*.db

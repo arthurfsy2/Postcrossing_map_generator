@@ -7,7 +7,8 @@ env:
   blog_path: "./src/Arthur/postcrossing"
   blog_repo: "arthurfsy2/arthurfsy2.github.io"
   PUSH_TO_GITHUB: true
-  # 从 Secrets 读取敏感信息（Cookie 不再需要，改为缓存机制）
+  # 从 Secrets 读取敏感信息
+  POSTCROSSING_COOKIE: ${{ secrets.POSTCROSSING_COOKIE }}
   GEMINI_APIKEY: ${{ secrets.GEMINI_APIKEY }}
   GEMINI_BASE_URL: ${{ secrets.GEMINI_BASE_URL }}
 
@@ -39,11 +40,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-uv-
 
-      - name: 缓存 Postcrossing Cookie
+      - name: 缓存 Postcrossing Cookie 配置
         uses: actions/cache@v3
         id: cookie-cache
         with:
-          path: scripts/.cookie_cache
+          path: scripts/.cookie_config.toml
           key: ${{ runner.os }}-postcrossing-cookie-${{ secrets.ACCOUNT }}-${{ hashFiles('scripts/login.py') }}
           restore-keys: |
             ${{ runner.os }}-postcrossing-cookie-${{ secrets.ACCOUNT }}-

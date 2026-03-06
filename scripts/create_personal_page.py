@@ -31,10 +31,17 @@ import toml
 import toml
 
 BIN = os.path.dirname(os.path.realpath(__file__))
+COOKIE_CONFIG_FILE = os.path.join(BIN, ".cookie_config.toml")
+
+import os
 
 config = toml.load("scripts/config.toml")
 personal_page_link = config.get("url").get("personal_page_link")
-Cookie = config.get("settings").get("Cookie")
+# 优先从环境变量读取 Cookie，其次从 Cookie 配置文件
+Cookie = os.environ.get("POSTCROSSING_COOKIE", "")
+if not Cookie and os.path.exists(COOKIE_CONFIG_FILE):
+    cookie_config = toml.load(COOKIE_CONFIG_FILE)
+    Cookie = cookie_config.get("auth", {}).get("cookie", "")
 pic_driver_path = config.get("url").get("pic_driver_path")
 story_pic_link = config.get("url").get("story_pic_link")
 story_pic_type = config.get("settings").get("story_pic_type")
