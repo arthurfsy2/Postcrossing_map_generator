@@ -48,7 +48,7 @@ jobs:
         id: cookie-cache
         with:
           path: scripts/.cookie_cache
-          key: ${{ runner.os }}-postcrossing-cookie-${{ secrets.ACCOUNT }}-${{ hashFiles('scripts/.cookie_cache') }}
+          key: ${{ runner.os }}-postcrossing-cookie-${{ secrets.ACCOUNT }}-${{ hashFiles('scripts/login.py') }}
           restore-keys: |
             ${{ runner.os }}-postcrossing-cookie-${{ secrets.ACCOUNT }}-
 
@@ -78,8 +78,7 @@ jobs:
             echo "🍪 未命中 Cookie 缓存，需要重新登录..."
           fi
 
-      - name: 更新 login（仅在 Cookie 缓存未命中时执行）
-        if: steps.cookie-cache.outputs.cache-hit != 'true'
+      - name: 检查Cookie状态
         run: |
           uv run python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }}
       
