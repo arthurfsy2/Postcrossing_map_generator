@@ -3,12 +3,18 @@ name: 定时检测更新
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */1 * * *"
+    # 每天凌晨 2 点和下午 2 点执行，避免频率过高
+    - cron: "0 2 * * *"
+    - cron: "0 14 * * *"
   
 env:
   blog_path: "./src/Arthur/postcrossing"
   blog_repo: "arthurfsy2/arthurfsy2.github.io"
   PUSH_TO_GITHUB: true
+  # 从 Secrets 读取敏感信息
+  POSTCROSSING_COOKIE: ${{ secrets.POSTCROSSING_COOKIE }}
+  GEMINI_APIKEY: ${{ secrets.GEMINI_APIKEY }}
+  GEMINI_BASE_URL: ${{ secrets.GEMINI_BASE_URL }}
 
 jobs:
   sync:
@@ -38,6 +44,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-uv-
 
+      - name: 缓存 Postcrossing Cookie 配置
+        uses: actions/cache@v3
+        id: cookie-cache
+        with:
+          path: scripts/.cookie_config.toml
+          key: ${{ runner.os }}-postcrossing-cookie-${{ secrets.ACCOUNT }}-${{ hashFiles('scripts/login.py') }}
+          restore-keys: |
+            ${{ runner.os }}-postcrossing-cookie-${{ secrets.ACCOUNT }}-
+
       - name: 设置 Python
         run: uv python install 3.13
 
@@ -58,27 +73,39 @@ jobs:
           else
             echo "🔄 未命中缓存，首次安装依赖..."
           fi
+          if [ "${{ steps.cookie-cache.outputs.cache-hit }}" == 'true' ]; then
+            echo "🍪 Cookie 缓存命中！跳过登录步骤"
+          else
+            echo "🍪 未命中 Cookie 缓存，需要重新登录..."
+          fi
 
-      - name: 更新邮件回复
-        run: |
-          # 使用小牛翻译API
-          # uv run python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.APIKEY }}
-          # 使用Gemini API
-          uv run python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.GEMINI_APIKEY }}
-      
-      - name: 更新login
+      - name: 检查Cookie状态
         run: |
           uv run python scripts/login.py ${{ secrets.ACCOUNT }} ${{ secrets.PASSWORD }}
+      
+      - name: 显示 Cookie 缓存状态
+        run: |
+          if [ -f "scripts/.cookie_config.toml" ]; then
+            echo "✅ Cookie 配置文件已生成"
+          else
+            echo "❌ Cookie 配置文件未生成，检查登录是否成功"
+            exit 1
+          fi
+      
+      - name: 更新邮件回复
+        run: |
+          # 使用 Gemini API
+          uv run python scripts/mail_track.py ${{ secrets.PARMS }} ${{ secrets.GEMINI_APIKEY }}
       
       - name: 更新数据库和下载新图片
         run: |
           uv run python scripts/multi_download.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }}
       
-      - name: 更新gallery
+      - name: 更新 gallery
         run: |
           uv run python scripts/create_gallery.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
       
-      - name: 更新2个地图数据
+      - name: 更新 2 个地图数据
         run: |
           uv run python scripts/create_map.py ${{ secrets.ACCOUNT }}
       
@@ -90,7 +117,7 @@ jobs:
         run: |
           uv run python scripts/create_personal_page.py ${{ secrets.ACCOUNT }} ${{ secrets.NICKNAME }} $GITHUB_REPOSITORY
       
-      - name: 更新postcrossing年度汇总
+      - name: 更新 postcrossing 年度汇总
         run: |
           uv run python scripts/postcrossing_recap.py
 
@@ -116,13 +143,13 @@ jobs:
           fetch-depth: 1
           ref: main
 
-      - name: 复制.md文件到博客仓库
+      - name: 复制.md 文件到博客仓库
         run: |
           # 创建目标目录
           mkdir -p "blog-repo/${{ env.blog_path }}"
-          # 只复制gallery目录下的.md文件
+          # 只复制 gallery 目录下的.md 文件
           cp ./gallery/*.md "blog-repo/${{ env.blog_path }}/"
-          echo "Markdown文件已复制到博客仓库"
+          echo "Markdown 文件已复制到博客仓库"
 
       - name: 检查是否有文件变更
         id: check_changes
@@ -143,5 +170,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git commit -m '自动同步postcrossing数据'
+          git commit -m '自动同步 postcrossing 数据'
           git push

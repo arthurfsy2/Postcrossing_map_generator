@@ -25,9 +25,16 @@ from common_tools import (
 import toml
 
 BIN = os.path.dirname(os.path.realpath(__file__))
+COOKIE_CONFIG_FILE = os.path.join(BIN, ".cookie_config.toml")
+
+import os
 
 config = toml.load("scripts/config.toml")
-Cookie = config.get("settings").get("Cookie")
+# 优先从环境变量读取 Cookie，其次从 Cookie 配置文件
+Cookie = os.environ.get("POSTCROSSING_COOKIE", "")
+if not Cookie and os.path.exists(COOKIE_CONFIG_FILE):
+    cookie_config = toml.load(COOKIE_CONFIG_FILE)
+    Cookie = cookie_config.get("auth", {}).get("cookie", "")
 pic_driver_path = config.get("url").get("pic_driver_path")
 
 
@@ -59,7 +66,6 @@ def get_account_stat(account, Cookie):
     elif gallery_status == 200 and cookie_stat == 404:
         total_stat = "get_public"
         card_types = ["sent", "received"]
-        print(f"{account}的Cookies无效，正在尝试重新登陆……\n")
     elif gallery_status != 200:
         total_stat = "unaccessible"
         print(f"用户:{account}已注销/设置为非公开，无法获取！\n")

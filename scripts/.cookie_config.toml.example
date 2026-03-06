@@ -1,0 +1,13 @@
+# Postcrossing Cookie 配置文件模板
+# 复制此文件为 .cookie_config.toml 并填写实际值
+# 注意：此文件不应提交到 Git 仓库！
+
+[auth]
+# Cookie 从环境变量 POSTCROSSING_COOKIE 读取，此处留空
+# 本地开发时可临时填写，但请勿提交到 Git
+# GitHub Actions 中通过 Secrets 设置：POSTCROSSING_COOKIE
+cookie = ""
+# 最后更新时间（由脚本自动记录）
+last_updated = ""
+# 关联的账号（由脚本自动记录）
+account = ""

@@ -12,8 +12,17 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 import toml
 
+import os
+
+BIN = os.path.dirname(os.path.realpath(__file__))
+COOKIE_CONFIG_FILE = os.path.join(BIN, ".cookie_config.toml")
+
 config = toml.load("scripts/config.toml")
-Cookie = config.get("settings").get("Cookie")
+# 优先从环境变量读取 Cookie，其次从 Cookie 配置文件
+Cookie = os.environ.get("POSTCROSSING_COOKIE", "")
+if not Cookie and os.path.exists(COOKIE_CONFIG_FILE):
+    cookie_config = toml.load(COOKIE_CONFIG_FILE)
+    Cookie = cookie_config.get("auth", {}).get("cookie", "")
 pic_driver_path = config.get("url").get("pic_driver_path")
 
 parser = argparse.ArgumentParser()
@@ -100,7 +109,9 @@ def parse_string(input_string):
 if __name__ == "__main__":
     start_time = time.time()
     ai_settings = toml.load("scripts/config.toml")
+    # 优先从环境变量读取 Gemini API Key
     MODEL_NAME = ai_settings["gemini"]["model"]
+    GEMINI_APIKEY = os.environ.get("GEMINI_APIKEY", "") or ai_settings["gemini"].get("api_key", "")
     parms = parse_string(input_string)
     # print(parms)
     for parm in parms:

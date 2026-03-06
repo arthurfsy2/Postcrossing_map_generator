@@ -1,10 +1,10 @@
 [settings]
-Cookie = "__Host-postcrossing=0e51ca437d8dcc7ce71f0e762158679a; PostcrossingRemember=DU2RkQYvdLBOiblX54CPSHxa7iiLdwD3"
+Cookie = ""
 story_pic_type = "webp"
 
 [url]
-pic_driver_path = "https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/gallery/picture"
-story_pic_link = "https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator/template/content"
+pic_driver_path = "https://cdn.jsdelivr.net/gh/{{repo}}@main/gallery/picture"
+story_pic_link = "https://cdn.jsdelivr.net/gh/{{repo}}@main/template/content"
 personal_page_link = "https://postcrossing.4a1801.life"
 
 [notice]
@@ -13,4 +13,4 @@ db_update = false
 [gemini]
 api_key = ""
 model = "gemini-3.1-flash-lite-preview"
-base_url = "http://192.227.229.182:3000/gemini"
+base_url = ""

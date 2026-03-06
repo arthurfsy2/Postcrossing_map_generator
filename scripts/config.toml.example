@@ -1,0 +1,35 @@
+# Postcrossing Map Generator 配置文件模板
+# 复制此文件为 config.toml 并填写实际值
+# 注意：config.toml 不应提交到 Git 仓库！
+
+[settings]
+# Cookie 从环境变量 POSTCROSSING_COOKIE 读取，此处留空
+# 本地开发时可临时填写，但请勿提交到 Git
+# GitHub Actions 中通过 Secrets 设置：POSTCROSSING_COOKIE
+Cookie = ""
+# 明信片背面图片格式
+story_pic_type = "webp"
+
+[url]
+# 展示墙图片存储路径
+# GitHub Actions 默认使用：https://raw.gitmirror.com/{{repo}}/main/gallery/picture
+# 本地使用可改为：./gallery/picture
+pic_driver_path = "https://raw.gitmirror.com/{{repo}}/main/gallery/picture"
+# 明信片背面图片存储路径
+story_pic_link = "https://raw.gitmirror.com/{{repo}}/main/template/content"
+# 个人页面链接，填写你的 GitHub Pages 路径
+personal_page_link = "https://postcrossing.4a1801.life"
+
+[notice]
+# 系统自动管理，无需手动修改
+db_update = false
+
+[gemini]
+# Gemini API Key，从环境变量 GEMINI_APIKEY 读取
+# 本地开发时可临时填写，但请勿提交到 Git
+api_key = ""
+# 模型名称
+model = "gemini-3.1-flash-lite-preview"
+# API 基础 URL，从环境变量 GEMINI_BASE_URL 读取
+# 留空则使用官方 API，自定义 API 可填写如：http://192.168.1.100:3000/gemini
+base_url = ""
