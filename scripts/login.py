@@ -36,10 +36,6 @@ def save_cookie_to_config(cookie, account):
     return COOKIE_CONFIG_FILE
 
 
-# 优先从环境变量读取 Cookie，其次从配置文件
-Cookie = os.environ.get("POSTCROSSING_COOKIE", "") or load_cookie_from_config()
-
-
 def login(account, password):
     session = requests.Session()
 
@@ -98,15 +94,7 @@ if __name__ == "__main__":
     account = options.account
     password = options.password
 
-    # 优先从环境变量读取 Cookie（GitHub Actions 场景）
-    env_cookie = os.environ.get("POSTCROSSING_COOKIE", "")
-    if env_cookie:
-        print("📥 从环境变量读取 Cookie")
-        save_cookie_to_config(env_cookie, account)
-        Cookie = env_cookie
-    else:
-        # 从配置文件读取
-        Cookie = load_cookie_from_config()
+    Cookie = load_cookie_from_config()
 
     stat, content_raw, types = get_account_stat(account, Cookie)
     if stat != "get_private":
