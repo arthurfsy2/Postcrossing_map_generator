@@ -5,4 +5,4 @@
 {% if data.distance %} 📏 {{data.distance}} | ⏱ {{data.travel_days}}{% endif %}
 {% if card_type in ['popular'] %}>点赞人数：**{{data.favorites_num}}**{% endif %}
 
-![]({{https://pan.4a1801.life:11443/d/public/article/Arthur/Postcrossing_map_generator}}/{{data.link}})
+![]({{pic_driver_path}}/{{data.link}})
