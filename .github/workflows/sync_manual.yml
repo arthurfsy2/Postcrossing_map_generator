@@ -7,10 +7,7 @@ env:
   blog_path: "./src/Arthur/postcrossing"
   blog_repo: "arthurfsy2/arthurfsy2.github.io"
   PUSH_TO_GITHUB: true
-  # 从 Secrets 读取敏感信息
-  POSTCROSSING_COOKIE: ${{ secrets.POSTCROSSING_COOKIE }}
   GEMINI_APIKEY: ${{ secrets.GEMINI_APIKEY }}
-  GEMINI_BASE_URL: ${{ secrets.GEMINI_BASE_URL }}
 
 jobs:
   sync:
