@@ -392,7 +392,7 @@ scrolling=auto
 
 :::tabs{% if 'noPic.png' not in item.link %}
 @tab 图片
-![](https://pan.4a1801.life:11443/d/public/article/{{nick_name}}/Postcrossing_map_generator/{{item.link}})
+![]({{pic_driver_path}}/{{item.link}})
 {%endif%}
 @tab 回复
 * 回复原文
