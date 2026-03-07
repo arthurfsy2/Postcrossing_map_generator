@@ -373,11 +373,11 @@ order: 4
 
 
 
-![](/)
+![](https://cdn.jsdelivr.net/gh/{{repo}}@main/gallery/picture/)
 
 [CN-3853790](https://www.postcrossing.com/postcards/CN-3853790) 
 >来自 [zhujiangriver](https://www.postcrossing.com/user/zhujiangriver) 🇨🇳
 
 
 
-![](/)
+![](https://cdn.jsdelivr.net/gh/{{repo}}@main/gallery/picture/)
