@@ -62,13 +62,12 @@ def get_account_stat(account, Cookie):
     if gallery_status == 200 and cookie_stat == 200:
         total_stat = "get_private"
         card_types = ["sent", "received", "favourites", "popular"]
-        print(f"{account}的Cookies有效，可访问个人账号内容……\n")
     elif gallery_status == 200 and cookie_stat == 404:
         total_stat = "get_public"
         card_types = ["sent", "received"]
     elif gallery_status != 200:
         total_stat = "unaccessible"
-        print(f"用户:{account}已注销/设置为非公开，无法获取！\n")
+        print(f"❌ 用户:{account}已注销/设置为非公开，无法获取！\n")
         sys.exit()
 
     return total_stat, gallery_content, card_types
