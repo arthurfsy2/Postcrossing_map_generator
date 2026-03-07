@@ -2,6 +2,9 @@ name: 手动更新图片和 md 文件
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 env:
   blog_path: "./src/Arthur/postcrossing"
