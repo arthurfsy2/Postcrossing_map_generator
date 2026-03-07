@@ -490,5 +490,7 @@ if __name__ == "__main__":
     account = options.account
     gemini_api_key = options.gemini_api_key
     main_gemini()
+    # text_to_translate = "Hello! How are you? I hope this postcard finds you well. ❤️"
+    # print(translate_by_gemini(gemini_api_key, text_to_translate))
 
     # main_translate()

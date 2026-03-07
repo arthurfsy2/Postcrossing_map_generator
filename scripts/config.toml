@@ -13,4 +13,4 @@ db_update = false
 [gemini]
 api_key = ""
 model = "gemini-3.1-flash-lite-preview"
-base_url = ""
+base_url = "http://192.227.229.182:3000/gemini"
