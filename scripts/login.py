@@ -28,7 +28,7 @@ def save_cookie_to_config(cookie, account):
         "auth": {
             "cookie": cookie,
             "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "account": account
+            "account": account,
         }
     }
     with open(COOKIE_CONFIG_FILE, "w", encoding="utf-8") as f:
@@ -107,10 +107,11 @@ if __name__ == "__main__":
     else:
         # 从配置文件读取
         Cookie = load_cookie_from_config()
-    
+
     stat, content_raw, types = get_account_stat(account, Cookie)
     if stat != "get_private":
         print("🔄 Cookie 无效或不存在，正在重新登录...")
+        print("Cookie_old:", Cookie)
         Cookie = login(account, password)
     else:
         print("✅ Cookie 有效")
