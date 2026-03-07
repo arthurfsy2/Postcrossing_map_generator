@@ -50,6 +50,7 @@ def create_summary_text(data_list, frontmatter, card_type):
             data.update(gallery_info_data[0])
         # start_date = data.get("received_date").split(" ")[0]
         # print("正在合并md数据：", start_date)
+
         if data.get("distance"):
             data["distance"] = format(data.get("distance"), ",")
             # if data.get("from_coor"):
@@ -70,12 +71,15 @@ def create_summary_text(data_list, frontmatter, card_type):
                 from_coor1=from_coor1,
                 to_coor0=to_coor0,
                 to_coor1=to_coor1,
+                pic_driver_path=pic_driver_path_replaced,
             )
         else:
+            # 替换 URL 中的 {{repo}} 占位符
+
             summary_output = gallery_template.render(
                 card_type=card_type,
                 data=data,
-                pic_driver_path=pic_driver_path,
+                pic_driver_path=pic_driver_path_replaced,
                 # from_or_to=from_or_to,
             )
         return summary_output
@@ -138,7 +142,10 @@ if __name__ == "__main__":
     nick_name = options.nick_name
     # Cookie = options.Cookie
     repo = options.repo
-
+    pic_driver_path_replaced = pic_driver_path.replace("{{repo}}", repo)
+    print(f"已替换图片路径：{pic_driver_path_replaced}")
+    pic_driver_path_replaced = pic_driver_path_replaced.replace("/gallery/picture", "")
+    print(f"已替换图片路径：{pic_driver_path_replaced}")
     gallery_types = ["sent", "received", "favourites", "popular"]
     gallery_template, frontmatter_template = read_template_file()
     sort_key = {
