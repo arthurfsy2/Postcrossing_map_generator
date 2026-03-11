@@ -4,10 +4,7 @@ run.sh
 a.py
 .vscode
 scripts/__pycache__/*
-output/html
-scripts/chatgpt_tool.py
-scripts/gemini_tool.py
-scripts/ai_settings.toml
+
 debug.log
 
 # 敏感配置文件（包含 Cookie、API Key 等）
