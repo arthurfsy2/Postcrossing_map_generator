@@ -188,6 +188,7 @@ def encode_image_to_base64(card_id):
 
 
 def recognize_by_gemini(card_id, ai_name="gemini"):
+    image_path = os.path.abspath(os.path.join(content_path, f"{card_id}.webp"))
     # --- 配置参数 ---
     # 替换为你的Gemini API密钥
     # API_KEY = ai_settings[ai_name]["api_key"]
@@ -392,8 +393,7 @@ def translate_by_gemini(gemini_api_key, text_to_translate):
 
 
 def main_gemini():
-    content_path = os.path.abspath(os.path.join(BIN, "../template/content"))
-    raw_pic_path = os.path.abspath(os.path.join(BIN, "../template/rawPic"))
+
     # print("content_path:", content_path)
     # print("raw_pic_path:", raw_pic_path)
     # main_chatgpt()
@@ -489,6 +489,8 @@ if __name__ == "__main__":
 
     account = options.account
     gemini_api_key = options.gemini_api_key
+    content_path = os.path.abspath(os.path.join(BIN, "../template/content"))
+    raw_pic_path = os.path.abspath(os.path.join(BIN, "../template/rawPic"))
     main_gemini()
     # text_to_translate = "Hello! How are you? I hope this postcard finds you well. ❤️"
     # print(translate_by_gemini(gemini_api_key, text_to_translate))
