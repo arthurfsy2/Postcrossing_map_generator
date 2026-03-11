@@ -18,10 +18,6 @@ scripts/.cookie_config.toml
 template/*.db
 template/data.db
 
-# 生成的图片文件
-gallery/picture/*
-template/content/*
-
 # Python 缓存
 *.pyc
 __pycache__/

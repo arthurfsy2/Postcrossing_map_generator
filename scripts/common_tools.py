@@ -31,6 +31,7 @@ BIN = os.path.dirname(os.path.realpath(__file__))
 COOKIE_CONFIG_FILE = os.path.join(BIN, ".cookie_config.toml")
 config = toml.load("scripts/config.toml")
 
+
 def load_cookie_from_config():
     """从 Cookie 配置文件读取 Cookie"""
     if os.path.exists(COOKIE_CONFIG_FILE):
@@ -41,13 +42,18 @@ def load_cookie_from_config():
             return ""
     return ""
 
+
 # Cookie 读取优先级：环境变量 > Cookie 配置文件
 Cookie = os.environ.get("POSTCROSSING_COOKIE", "") or load_cookie_from_config()
 
 pic_driver_path = config.get("url").get("pic_driver_path")
 # 从环境变量读取 Gemini 配置
-gemini_api_key = os.environ.get("GEMINI_APIKEY", "") or config.get("gemini").get("api_key", "")
-gemini_base_url = os.environ.get("GEMINI_BASE_URL", "") or config.get("gemini").get("base_url", "")
+gemini_api_key = os.environ.get("GEMINI_APIKEY", "") or config.get("gemini").get(
+    "api_key", ""
+)
+gemini_base_url = os.environ.get("GEMINI_BASE_URL", "") or config.get("gemini").get(
+    "base_url", ""
+)
 
 
 def initialize_database(Base, db_path):
