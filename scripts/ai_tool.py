@@ -227,7 +227,7 @@ def recognize_by_gemini(card_id, ai_name="gemini"):
         # 解析 JSON 响应
         try:
             final_text = parse_gemini_response(generated_text)
-            print(f"\n✅ {card_id}内容解析成功:")
+            print(f"\n✅ {card_id}内容解析成功")
             # print(json.dumps(final_text, indent=2, ensure_ascii=False))
 
             # 后续可以使用 parsed_json["original_text"] 和 parsed_json["chinese_translation"]
@@ -269,7 +269,7 @@ def read_and_update_db(card_id):
         "comment_cn": "",
     }
     insert_or_update_db(db_path, "postcard_story", item)
-    print(f"{card_id}明信片的内容已保存到数据库")
+    print(f"\n✅ {card_id}明信片的内容已保存到数据库")
     print(f"{'-'*100}")
     stop_seconds = 5
     print(f"【API暂停{stop_seconds}秒】")

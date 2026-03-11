@@ -14,10 +14,6 @@ debug.log
 scripts/config.toml
 scripts/.cookie_config.toml
 
-# 数据库文件
-template/*.db
-template/data.db
-
 # Python 缓存
 *.pyc
 __pycache__/

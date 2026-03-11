@@ -174,12 +174,12 @@ def create_word_cloud(type, contents):
     with open(old_key_word_path, "w", encoding="utf-8") as f:
         for keyword in keywords:
             f.write(f"{keyword}\n")
-        print(f"已更新：{old_key_word_path}")
+        print(f"\n✅ 已更新：{old_key_word_path}")
     svg_image = wordcloud.to_svg(embed_font=True)
 
     with open(path, "w+", encoding="UTF8") as f:
         f.write(svg_image)
-        print(f"已保存至{path}")
+        print(f"\n✅ 已保存至{path}")
 
 
 def read_story_db(db_path):
