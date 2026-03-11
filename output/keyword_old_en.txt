@@ -10,27 +10,27 @@ much
 Thank
 stamp
 love
-hope
 由imap_tools提取 Hello
+hope
 Arthur Thank
 Greeting
 best
 识别 Hello
-wish
 live
-Best wishes
+wish
 Happy Postcrossing
+Best wishes
 day
 name
 nice
 time
+great
 由imap_tools提取
 beautiful
 really
-great
 family
-daughter
 year
+daughter
 Germany
 由imap_tools提取 Thank
 many
@@ -52,41 +52,40 @@ send
 world
 today
 May
+work
+country
 will
 now
 beautiful postcard
 life
-work
-country
+coffee
 summer
 New Year
-coffee
 Arthur Greetings
 Russia
-wonderful
 friend
+got
+wonderful
 识别 Hi
 postcrossing
-got
 years old
 little
 nice day
+lovely
 USA
+cycling
 bike
 由imap_tools提取 Dear
 wonderful postcard
 lovely postcard
 know
-lovely
 Finland
 Wishing
 see
 cat
-cycling
 dog
 Feng
 interesting
-reading
 visit
 look
 Hello Siyuan
@@ -98,3 +97,4 @@ animal
 long
 sending
 amazing
+trip
