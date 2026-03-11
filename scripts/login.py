@@ -99,7 +99,7 @@ if __name__ == "__main__":
     stat, content_raw, types = get_account_stat(account, Cookie)
     if stat != "get_private":
         print("🔄 Cookie 无效或不存在，正在重新登录...")
-        print("Cookie_old:", Cookie)
+        # print("Cookie_old:", Cookie)
         Cookie = login(account, password)
     else:
         print("✅ Cookie 有效")
