@@ -1,7 +1,7 @@
 ---
-title: 明信片展示墙（收到：259）
+title: 明信片展示墙（收到：262）
 icon: address-card
-date: 2026-03-04
+date: 2026-03-11
 category:
   - Arthur
 tag:
@@ -147,7 +147,34 @@ const option = {
 
 :::
 
-### 2026(18)
+### 2026(21)
+
+[NL-6193515](https://www.postcrossing.com/postcards/NL-6193515) 
+>来自 [Zwollywood](https://www.postcrossing.com/user/Zwollywood) 🇳🇱
+> 📤 [Netherlands](https://www.bing.com/maps/?cp=52.5125~6.09444&lvl=12.0&setlang=zh-Hans) 2026/01/29 06:58 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/11 11:18 (当地)
+ 📏 9,180 | ⏱ 41
+
+
+![](https://cdn.jsdelivr.net/gh/arthurfsy2/Postcrossing_map_generator@main/gallery/picture/zunyqiam6hgs50ztyf21edpnv4ruwlr9.jpg)
+
+[NL-6193514](https://www.postcrossing.com/postcards/NL-6193514) 
+>来自 [gitana77](https://www.postcrossing.com/user/gitana77) 🇳🇱
+> 📤 [Netherlands](https://www.bing.com/maps/?cp=51.845~4.32917&lvl=12.0&setlang=zh-Hans) 2026/01/29 06:58 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/11 11:17 (当地)
+ 📏 9,321 | ⏱ 41
+
+
+![](https://cdn.jsdelivr.net/gh/arthurfsy2/Postcrossing_map_generator@main/gallery/picture/x2bzvfosm2pssw1qewql1jwsnydytf38.jpg)
+
+[RU-10727800](https://www.postcrossing.com/postcards/RU-10727800) 
+>来自 [Elena_75](https://www.postcrossing.com/user/Elena_75) 🇷🇺
+> 📤 [Russia](https://www.bing.com/maps/?cp=59.5606~56.6516&lvl=12.0&setlang=zh-Hans) 2026/01/28 20:02 (当地)
+> 📥 [China](https://www.bing.com/maps/?cp=22.56004~114.23477&lvl=12.0&setlang=zh-Hans) 2026/03/11 11:15 (当地)
+ 📏 6,053 | ⏱ 42
+
+
+![](https://cdn.jsdelivr.net/gh/arthurfsy2/Postcrossing_map_generator@main/gallery/picture/ulmww1eh3m0qov4wtbmvrwuj3ill6wv6.jpg)
 
 [DE-16306421](https://www.postcrossing.com/postcards/DE-16306421) 
 >来自 [flowersfrommars](https://www.postcrossing.com/user/flowersfrommars) 🇩🇪
