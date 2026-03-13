@@ -21,6 +21,7 @@ from common_tools import (
     read_db_table,
     insert_or_update_db,
     pic_to_webp,
+    remove_blank_lines,
 )
 import pytz
 import shutil

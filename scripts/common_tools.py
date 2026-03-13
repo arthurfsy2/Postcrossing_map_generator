@@ -3,7 +3,7 @@ import json
 import sqlite3
 import os
 import hashlib
-import sys
+import re
 import argparse
 from urllib import parse, request
 import pytz
@@ -206,7 +206,7 @@ def insert_or_update_db(db_path, table_name, data):
         elif table_name == "postcard_story":
             table_data = postcardStory(
                 **{
-                    key: value
+                    key: remove_blank_lines(value)
                     for key, value in data.items()
                     if key in postcardStory.__dict__
                 }
@@ -367,6 +367,13 @@ def pic_to_webp(input_dir, output_dir):
                 print(f"文件 {file_name} 转换成功并已删除原有文件")
             except Exception as e:
                 print(f"文件 {file_name} 转换失败: {str(e)}")
+
+
+def remove_blank_lines(text):
+    if text is None:
+        return ""
+    text = re.sub(r"\n+", "\n", text)
+    return text
 
 
 if __name__ == "__main__":

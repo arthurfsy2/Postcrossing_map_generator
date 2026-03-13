@@ -384,8 +384,6 @@ def translate_by_gemini(gemini_api_key, text_to_translate):
     translated_text = remove_markdown_code_blocks(translated_text)
     # 将连续的多个换行符替换为单个换行符
     translated_text = re.sub(r"\n+", "\n", translated_text)
-
-    text_to_translate = re.sub(r"\n+", "\n", text_to_translate)
     # print("text_to_translate:", text_to_translate)
     # print("translated_text:", translated_text)
 

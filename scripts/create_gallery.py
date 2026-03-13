@@ -143,9 +143,7 @@ if __name__ == "__main__":
     # Cookie = options.Cookie
     repo = options.repo
     pic_driver_path_replaced = pic_driver_path.replace("{{repo}}", repo)
-    print(f"已替换图片路径：{pic_driver_path_replaced}")
     pic_driver_path_replaced = pic_driver_path_replaced.replace("/gallery/picture", "")
-    print(f"已替换图片路径：{pic_driver_path_replaced}")
     gallery_types = ["sent", "received", "favourites", "popular"]
     gallery_template, frontmatter_template = read_template_file()
     sort_key = {

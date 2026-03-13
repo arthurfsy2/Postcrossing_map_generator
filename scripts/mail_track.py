@@ -5,7 +5,13 @@ import json
 from urllib import parse, request
 import sqlite3
 import os
-from common_tools import translate, db_path, insert_or_update_db, read_db_table
+from common_tools import (
+    translate,
+    db_path,
+    insert_or_update_db,
+    read_db_table,
+    remove_blank_lines,
+)
 from ai_tool import translate_by_gemini
 import argparse
 import time
@@ -37,11 +43,6 @@ options = parser.parse_args()
 
 input_string = options.input_string
 apikey = options.apikey
-
-
-def remove_blank_lines(text):
-    text = re.sub(r"\n+", "\n", text)
-    return text
 
 
 def process_message(msg):
@@ -111,7 +112,9 @@ if __name__ == "__main__":
     ai_settings = toml.load("scripts/config.toml")
     # 优先从环境变量读取 Gemini API Key
     MODEL_NAME = ai_settings["gemini"]["model"]
-    GEMINI_APIKEY = os.environ.get("GEMINI_APIKEY", "") or ai_settings["gemini"].get("api_key", "")
+    GEMINI_APIKEY = os.environ.get("GEMINI_APIKEY", "") or ai_settings["gemini"].get(
+        "api_key", ""
+    )
     parms = parse_string(input_string)
     # print(parms)
     for parm in parms:
@@ -119,4 +122,4 @@ if __name__ == "__main__":
     end_time = time.time()
     execution_time = round((end_time - start_time), 3)
     print("————————————————————")
-    print(f"scripts/mailTrack.py脚本执行时间：{execution_time}秒")
+    print(f"scripts/mail_track.py脚本执行时间：{execution_time}秒")
